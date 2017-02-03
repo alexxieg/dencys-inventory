@@ -17,7 +17,7 @@
 		  }
 	}
 		else {
-			$_SESSION['message'] = "invalid";
+			$_SESSION['message'] = "invalid username or password";
 		}
 		
 ?>
