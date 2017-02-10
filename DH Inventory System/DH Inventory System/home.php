@@ -8,6 +8,7 @@
 	}
 	
 	// This is a comment
+	// haha
 
 ?>
 
