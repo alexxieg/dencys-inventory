@@ -6,6 +6,8 @@
 	if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == false) {
 		header('Location: Login.php');
 	}
+	
+	// This is a comment
 
 ?>
 
