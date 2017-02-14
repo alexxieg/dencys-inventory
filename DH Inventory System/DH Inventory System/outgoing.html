@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Outgoing</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="logo.jpg">
     <link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
@@ -41,8 +41,17 @@
 			</div>
 		</nav>
 	</div>	
-		<h2>Outgoing</h1>
-			<table border="2" id="alertTable">
+		<div class="product">
+			<h2>Outgoing</h1>
+		
+			<select id="outSort">
+			  <option value="" disabled selected hidden>Sort By</option>
+			  <option value="searchby">Sample 1</option>
+			  <option value="searchby">Sample 2</option>
+			  <option value="searchby">Sample 3</option>
+			</select>
+		
+			<table border="2" id="table">
 				<tr>
 				<th style="text-align:center">The Following Have been deducted from the Inventory</th>
 				</tr>
@@ -67,7 +76,7 @@
 				<td>1/31/2017</td>
 				</tr>
 			</table>
-		
+		</div>
 	<nav class="navbar navbar-inverse navbar-fixed-bottom">
 		<div class="container">
 			<div class="navbar-header">
