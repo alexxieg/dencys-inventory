@@ -44,40 +44,59 @@
 		<div class="product">
 			<h2>Incoming</h1>
 		
-			<select id="incSort">
+			<select id="prodSort">
 			  <option value="" disabled selected hidden>Sort By</option>
 			  <option value="searchby">Sample 1</option>
 			  <option value="searchby">Sample 2</option>
 			  <option value="searchby">Sample 3</option>
 			</select>
 			
-			<table border="2" id="table">
-				<tr>
-				<th style="text-align:center">The Following Have been added to the Inventory</th>
-				</tr>
+		<div class="prodTable">
+			<br>
+			<table border="1" id="table">
 				<tr>
 				<th style="text-align:center">Item</th>
+				<th style="text-align:center">Brand</th>
+				<th style="text-align:center">Serial Code</th>
 				<th style="text-align:center">Quantity</th>
-				<th style="text-align:center">Date</th>
+				<th style="text-align:center">Quantity Threshold</th>
+
 				</tr>
 				<tr>
 				<td>Item 1</td>
-				<td>1</td>
-				<td>1/26/2017</td>
+				<td>Brand X</td>
+				<td>SE10234</td>
+				<td>5</td>
+				<td>2</td>
 				</tr>
 				<tr>
-				<td>Item 2</td>
+				<td>Item 1</td>
+				<td>Brand X</td>
+				<td>SE10234</td>
+				<td>5</td>
 				<td>2</td>
-				<td>1/30/2017</td>
 				</tr>
 				<tr>
-				<td>Item 3</td>
+				<td>Item 1</td>
+				<td>Brand X</td>
+				<td>SE10234</td>
+				<td>5</td>
 				<td>2</td>
-				<td>1/31/2017</td>
+				</tr>
+				<tr>
+				<td>Item 1</td>
+				<td>Brand X</td>
+				<td>SE10234</td>
+				<td>5</td>
+				<td>2</td>
 				</tr>
 			</table>
 		</div>	
 		
+		<form action="alert.html" target="_blank">
+			<input type="submit" value="Check for Understocked Products" class="btn btn-default btnAlign">
+		</form>
+	</div>
 	<nav class="navbar navbar-inverse navbar-fixed-bottom">
 		<div class="container">
 			<div class="navbar-header">
@@ -100,4 +119,3 @@
 	</nav>
   </body>
 </html>
-
