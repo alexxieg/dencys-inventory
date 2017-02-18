@@ -41,56 +41,66 @@
 			</div>
 		</nav>
 	</div>	
+	<div class="pages">
 		<h1 id="headers">Incoming</h1>
-			<table border="2" id="alertTable">
-				<tr>
+		<table class="table table-bordered" id="tables">
+			<tr>
 				<th style="text-align:center">The Following Have been added to the Inventory</th>
-				</tr>
-				<tr>
-				<th style="text-align:center">Item</th>
-				<th style="text-align:center">Quantity</th>
-				<th style="text-align:center">Date</th>
-				<th style="text-align:center">Supplier</th>
-				<th style="text-align:center">Receipt No.</th>
-				<th style="text-align:center">Receipt Date</th>
+			</tr>				
+			<tr>
+				<th>Item</th>
+				<th>Quantity</th>
+				<th>Date</th>
+				<th>Supplier</th>
+				<th>Receipt No.</th>
+				<th>Receipt Date</th>
+				<th>Remarks</th>
 				<th></th>
 				<th></th>
-				</tr>
-				<tr>
+			</tr>
+				
+			<tr>
 				<td>Item 1</td>
 				<td>1</td>
 				<td>1/26/2017</td>
 				<td>Bosch</td>
 				<td>0192345</td>
 				<td>02/15/17</td>
+				<td>None</td>
 				<td><button type="button" class="btn btn-default">Edit</button></td>
 				<td><button type="button" class="btn btn-default">Remove</button></td>				
-				</tr>
-				<tr>
+			</tr>
+				
+			<tr>
 				<td>Item 2</td>
 				<td>2</td>
 				<td>1/30/2017</td>
 				<td>Bosch</td>
 				<td>0192345</td>
-				<td>02/15/17</td>		
+				<td>02/15/17</td>	
+				<td>None</td>				
 				<td><button type="button" class="btn btn-default">Edit</button></td>
 				<td><button type="button" class="btn btn-default">Remove</button></td>
-				</tr>
+			</tr>
+				
 				<tr>
-				<td>Item 3</td>
-				<td>2</td>
-				<td>1/31/2017</td>
-				<td>Bosch</td>
-				<td>0192345</td>
-				<td>02/15/17</td>
-				<td><button type="button" class="btn btn-default">Edit</button></td>
-				<td><button type="button" class="btn btn-default">Remove</button></td>
+					<td>Item 3</td>
+					<td>2</td>
+					<td>1/31/2017</td>
+					<td>Bosch</td>
+					<td>0192345</td>
+					<td>02/15/17</td>
+					<td>None</td>
+					<td><button type="button" class="btn btn-default">Edit</button></td>
+					<td><button type="button" class="btn btn-default">Remove</button></td>
 				</tr>
 			</table>
 			
 		<form action="addIncoming.html" target="_blank">
 			<input id="myBtn" type="submit" value="Add Incoming Product" class="btn btn-default btnAlign">
 		</form>
+		
+	</div>
 		
 	<nav class="navbar navbar-inverse navbar-fixed-bottom">
 		<div class="container">
