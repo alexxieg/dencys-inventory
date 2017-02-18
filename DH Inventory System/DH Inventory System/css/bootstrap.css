@@ -6846,17 +6846,10 @@ button.close {
 
 .addInv {
   position: relative;
-  margin: 10% 30% 0% 30%;
+  margin: 3% 30% 0% 30%;
   text-align: center;
-  padding: 10px 0% 10px 0%;
+  padding: 20px 20px 20px 20px ;
   border: rgb(0,0,53) solid 5px;
-  border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-}
-
-.invInput {
-  width: 60%;
 }
 
 #bg {
@@ -6927,4 +6920,13 @@ button.close {
 #alertBtn {
   float: right;
   margin-right: 330px;
+}
+
+#addEntry{
+	width: 85%;
+}
+
+h3{
+	font-size:20px;
+	text-align: left;
 }

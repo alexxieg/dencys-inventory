@@ -31,17 +31,17 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="categories">
-						<li><a href="product.html">Products</a></li>
 						<li><a href="inventory.html">Inventory</a></li>
-						<li><a href="returns.html">Returns</a></li>
+						<li><a href="product.html">Products</a></li>
 						<li><a href="incoming.html">Incoming</a></li>
 						<li><a href="outgoing.html">Outgoing</a></li>
+						<li><a href="returns.html">Returns</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</div>	
-		<h2>Incoming</h1>
+		<h1 id="headers">Incoming</h1>
 			<table border="2" id="alertTable">
 				<tr>
 				<th style="text-align:center">The Following Have been added to the Inventory</th>
@@ -87,6 +87,10 @@
 				<td><button type="button" class="btn btn-default">Remove</button></td>
 				</tr>
 			</table>
+			
+		<form action="addIncoming.html" target="_blank">
+			<input id="myBtn" type="submit" value="Add Incoming Product" class="btn btn-default btnAlign">
+		</form>
 		
 	<nav class="navbar navbar-inverse navbar-fixed-bottom">
 		<div class="container">
