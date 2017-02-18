@@ -32,7 +32,6 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="categories">
 						<li><a href="inventory.html">Inventory</a></li>
-						<li><a href="product.html">Products</a></li>
 						<li><a href="incoming.html">Incoming</a></li>
 						<li><a href="outgoing.html">Outgoing</a></li>
 						<li><a href="returns.html">Returns</a></li>
@@ -66,34 +65,92 @@
 			<br>
 			<table class="table table-bordered" id="tables">
 				<tr>
+					<th>Item Code</th>
 					<th>Item</th>
+					<th>Type</th>
+					<th>Brand</th>
+					<th>Item Price</th>
 					<th>Quantity</th>
-					<th>Quantity Threshold</th>
+					<th>Reorder Level</th>
+					<th>EDIT</th>
+					<th>REMOVE</th>
+					<th>LEDGER</th>
 				</tr>
 				
 				<tr>
 					<td>Item 1</td>
 					<td>5</td>
 					<td>2</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<form action="ledger.html" target="_blank">
+						<input id="myBtn" type="submit" value="Ledger">
+						</form>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Item 2</td>
+					<td>5</td>
+					<td>2</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<form action="ledger.html" target="_blank">
+						<input id="myBtn" type="submit" value="Ledger">
+						</form>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Item 3</td>
+					<td>5</td>
+					<td>2</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<form action="ledger.html" target="_blank">
+						<input id="myBtn" type="submit" value="Ledger">
+						</form>
+					</td>				
 				</tr>
 				
 				<tr>
 				<td>Item 1</td>
 				<td>5</td>
 				<td>2</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<form action="ledger.html" target="_blank">
+					<input id="myBtn" type="submit" value="Ledger">
+					</form>
+				</td>				
 				</tr>
-				<tr>
-				<td>Item 1</td>
-				<td>5</td>
-				<td>2</td>
-				</tr>
-				<tr>
-				<td>Item 1</td>
-				<td>5</td>
-				<td>2</td>
-				</tr>
+				
 			</table>
 		</div>	
+		
+		<form action="addProduct.html" target="_blank">
+			<input id="myBtn" type="submit" value="Add Product" class="btn btn-default btnAlign">
+		</form>
 
 	</div>
 	<nav class="navbar navbar-inverse navbar-fixed-bottom">
