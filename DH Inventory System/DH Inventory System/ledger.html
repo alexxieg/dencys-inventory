@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Incoming</title>
+    <title>Item Ledger</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="logo.jpg">
     <link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
@@ -39,86 +39,45 @@
 				</div>
 			</div>
 		</nav>
-	</div>	
-	<div class="pages">
-		<h1 id="headers">Incoming</h1>
+	</div>
+		<div class="pages">
+			<h1 id="headers">Ledger</h1>
 		
-		<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			
-			<select class="form-control" id="dropdown" name="searchby">
-			  <option>1</option>
-			  <option>2</option>
-			  <option>3</option>
-			  <option>4</option>
-			  <option>5</option>
-			</select>
-			
-			<select class="form-control" id="dropdown" name="sortby">
-			  <option>1</option>
-			  <option>2</option>
-			  <option>3</option>
-			  <option>4</option>
-			  <option>5</option>
-			</select>
-		<table class="table table-bordered" id="tables">
-			<tr>
-				<th colspan="9" style="text-align:center">The Following Have been added to the Inventory</th>
-			</tr>				
-			<tr>
-				<th>Item</th>
-				<th>Quantity</th>
-				<th>Date</th>
-				<th>Supplier</th>
-				<th>Receipt No.</th>
-				<th>Receipt Date</th>
-				<th>Remarks</th>
-				<th></th>
-				<th></th>
-			</tr>
-				
-			<tr>
-				<td>Item 1</td>
-				<td>1</td>
-				<td>1/26/2017</td>
-				<td>Bosch</td>
-				<td>0192345</td>
-				<td>02/15/17</td>
-				<td>None</td>
-				<td><button type="button" class="btn btn-default">Edit</button></td>
-				<td><button type="button" class="btn btn-default">Remove</button></td>				
-			</tr>
-				
-			<tr>
-				<td>Item 2</td>
-				<td>2</td>
-				<td>1/30/2017</td>
-				<td>Bosch</td>
-				<td>0192345</td>
-				<td>02/15/17</td>	
-				<td>None</td>				
-				<td><button type="button" class="btn btn-default">Edit</button></td>
-				<td><button type="button" class="btn btn-default">Remove</button></td>
-			</tr>
+		<div class="prodTable">
+			<br>
+			<table class="table table-bordered" id="tables">
+				<tr>
+					<th colspan="7">Product Name</th>
+				</tr>
+				<tr>
+					<td>Date</td>
+					<td>In</td>
+					<td>Out</td>
+					<td>Current QTY</td>
+					<td>Corrections</td>
+					<td>Remarks for Incoming</td>
+					<td>Remarks for Outgoing</td>
+				</tr>
 				
 				<tr>
-					<td>Item 3</td>
-					<td>2</td>
-					<td>1/31/2017</td>
-					<td>Bosch</td>
-					<td>0192345</td>
-					<td>02/15/17</td>
-					<td>None</td>
-					<td><button type="button" class="btn btn-default">Edit</button></td>
-					<td><button type="button" class="btn btn-default">Remove</button></td>
+				<td>Date 1</td>
+				<td>5</td>
+				<td>2</td>
+				</tr>
+				<tr>
+				<td>Date 2</td>
+				<td>5</td>
+				<td>2</td>
+				</tr>
+				<tr>
+				<td>Date 3</td>
+				<td>5</td>
+				<td>2</td>
 				</tr>
 			</table>
-			
-		<form action="addIncoming.html" target="_blank">
-			<input id="myBtn" type="submit" value="Add Incoming Product" class="btn btn-default btnAlign">
-		</form>
-		
+		</div>	
+
 	</div>
-		
 	<nav class="navbar navbar-inverse navbar-fixed-bottom">
 		<div class="container">
 			<div class="navbar-header">
@@ -141,4 +100,3 @@
 	</nav>
   </body>
 </html>
-
