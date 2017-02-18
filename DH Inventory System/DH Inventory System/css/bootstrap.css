@@ -6935,3 +6935,14 @@ h3{
 	font-size:20px;
 	text-align: left;
 }
+
+#dropdown{
+width: 20%;
+float:left ;
+margin-bottom: 2%;
+}
+
+#searchBar{
+width: 55%;
+float:right;
+}
