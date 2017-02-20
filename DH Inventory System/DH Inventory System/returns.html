@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Products</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
-	<script src="js/bootstrap.js"></script>
-	<link rel="shortcut icon" href="logo.jpg">
-
-  </head>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Products</title>
+		<?php include('dbcon.php'); ?>
+			
+		<?php 
+			session_start();
+			if (isset($_SESSION['id'])){
+				header('Location: inventory.php');
+				$session_id = $_SESSION['id'];
+				$session_query = $conn->query("select * from users where userName = '$session_id'");
+				$user_row = $session_query->fetch();
+				if (!isset($_SESSION['id']) || $_SESSION['id'] == false) {
+					session_destroy();
+					header('Location: index.php');
+				}
+			}
+		?>
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<script src="js/bootstrap.js"></script>
+		<link rel="shortcut icon" href="logo.jpg">
+	</head>
   
-  <body>
+	<body>
+		<?php
+			$query = $conn->prepare("SELECT product.prodName, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID ORDER BY outID DESC;");
+			$query->execute();
+			$result = $query->fetchAll();
+		?>
+		
 		<div class="productHolder">
 			<nav class="navbar navbar-inverse navbar-static-top">
 				<div class="container">
@@ -29,9 +49,9 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right" id="categories">
 							<li><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.html">Incoming</a></li>
-							<li><a href="outgoing.html">Outgoing</a></li>
-							<li><a href="returns.html">Returns</a></li>
+							<li><a href="incoming.php">Incoming</a></li>
+							<li><a href="outgoing.php">Outgoing</a></li>
+							<li><a href="returns.php">Returns</a></li>
 						</ul>
 					</div>
 				</div>
@@ -63,45 +83,24 @@
 				<br>
 				<table class="table table-bordered" id="tables">
 					<tr>
-					<th>Item</th>
-					<th>Quantity</th>
-					<th>Status</th>
-					<th>Remarks</th>
-					<th></th>
-					<th></th>
+						<th>Item</th>
+						<th>Quantity</th>
+						<th>Date</th>
+						<th>Status</th>
+						<th>Remarks</th>
+						<th></th>
+						<th></th>
 					</tr>
 					<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><button type="button" class="btn btn-default">Edit</button></td>
-					<td><button type="button" class="btn btn-default">Remove</button></td>
+						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["returnQty"]; ?></td>
+						<td><?php echo $item["returnDate"]; ?></td>
+						<td><?php echo $item["status"]; ?></td>
+						<td><?php echo $item["returnRemark"]; ?></td>
+						<td><button type="button" class="btn btn-default">Edit</button></td>
+						<td><button type="button" class="btn btn-default">Remove</button></td>
 					</tr>
-					<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><button type="button" class="btn btn-default">Edit</button></td>
-					<td><button type="button" class="btn btn-default">Remove</button></td>
-					</tr>
-					<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><button type="button" class="btn btn-default">Edit</button></td>
-					<td><button type="button" class="btn btn-default">Remove</button></td>
-					</tr>
-					<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><button type="button" class="btn btn-default">Edit</button></td>
-					<td><button type="button" class="btn btn-default">Remove</button></td>
-					</tr>
+					
 				</table>
 			</div>	
 			<form action="addReturn.html" target="_blank">
