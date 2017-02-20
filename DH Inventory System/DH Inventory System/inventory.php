@@ -48,7 +48,6 @@ $user_row = $session_query->fetch();
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="categories">
 						<li><a href="inventory.php">Inventory</a></li>
-						<li><a href="product.html">Products</a></li>
 						<li><a href="incoming.html">Incoming</a></li>
 						<li><a href="outgoing.html">Outgoing</a></li>
 						<li><a href="returns.html">Returns</a></li>
@@ -57,61 +56,118 @@ $user_row = $session_query->fetch();
 			</div>
 		</nav>
 	</div>
-		<div class="product">
+		<div class="pages">
 			<h1 id="headers">Inventory</h1>
 		
-			<select id="prodSort">
-			  <option value="" disabled selected hidden>Sort By</option>
-			  <option value="searchby">Sample 1</option>
-			  <option value="searchby">Sample 2</option>
-			  <option value="searchby">Sample 3</option>
+			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			
+			<select class="form-control" id="dropdown" name="searchby">
+			  <option>1</option>
+			  <option>2</option>
+			  <option>3</option>
+			  <option>4</option>
+			  <option>5</option>
+			</select>
+			
+			<select class="form-control" id="dropdown" name="sortby">
+			  <option>1</option>
+			  <option>2</option>
+			  <option>3</option>
+			  <option>4</option>
+			  <option>5</option>
 			</select>
 			
 		<div class="prodTable">
 			<br>
-			<table border="1" id="table">
+			<table class="table table-bordered" id="tables">
 				<tr>
-				<th style="text-align:center">Item</th>
-				<th style="text-align:center">Brand</th>
-				<th style="text-align:center">Serial Code</th>
-				<th style="text-align:center">Quantity</th>
-				<th style="text-align:center">Quantity Threshold</th>
-
+					<th>Item Code</th>
+					<th>Item</th>
+					<th>Type</th>
+					<th>Brand</th>
+					<th>Item Price</th>
+					<th>Quantity</th>
+					<th>Reorder Level</th>
+					<th>EDIT</th>
+					<th>REMOVE</th>
+					<th>LEDGER</th>
 				</tr>
+				
+				<tr>
+					<td>Item 1</td>
+					<td>5</td>
+					<td>2</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<form action="ledger.html" target="_blank">
+						<input id="myBtn" type="submit" value="Ledger">
+						</form>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Item 2</td>
+					<td>5</td>
+					<td>2</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<form action="ledger.html" target="_blank">
+						<input id="myBtn" type="submit" value="Ledger">
+						</form>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Item 3</td>
+					<td>5</td>
+					<td>2</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<form action="ledger.html" target="_blank">
+						<input id="myBtn" type="submit" value="Ledger">
+						</form>
+					</td>				
+				</tr>
+				
 				<tr>
 				<td>Item 1</td>
-				<td>Brand X</td>
-				<td>SE10234</td>
 				<td>5</td>
 				<td>2</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<form action="ledger.html" target="_blank">
+					<input id="myBtn" type="submit" value="Ledger">
+					</form>
+				</td>				
 				</tr>
-				<tr>
-				<td>Item 1</td>
-				<td>Brand X</td>
-				<td>SE10234</td>
-				<td>5</td>
-				<td>2</td>
-				</tr>
-				<tr>
-				<td>Item 1</td>
-				<td>Brand X</td>
-				<td>SE10234</td>
-				<td>5</td>
-				<td>2</td>
-				</tr>
-				<tr>
-				<td>Item 1</td>
-				<td>Brand X</td>
-				<td>SE10234</td>
-				<td>5</td>
-				<td>2</td>
-				</tr>
+				
 			</table>
 		</div>	
 		
-		<form action="inventory.html" target="_blank">
-			<input type="submit" value="Check for Understocked Products" class="btn btn-default btnAlign">
+		<form action="addProduct.html" target="_blank">
+			<input id="myBtn" type="submit" value="Add Product" class="btn btn-default btnAlign">
 		</form>
+
 	</div>
 	<nav class="navbar navbar-inverse navbar-fixed-bottom">
 		<div class="container">
@@ -125,7 +181,7 @@ $user_row = $session_query->fetch();
 			</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right" id="logout">
-				<li><a href="Logout.php">Logout</a></li>
+				<li><a href="login.html">Logout</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-left" id="report">
 				<li><a href="report.html">Print Report</a></li>
