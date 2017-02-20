@@ -118,7 +118,7 @@
 				?>
 			</table>
 				
-			<form action="addOutgoing.html" target="_blank">
+			<form action="addOutgoing.php" target="_blank">
 				<input id="myBtn" type="submit" value="Add Outgoing Product" class="btn btn-default btnAlign">
 			</form>
 			

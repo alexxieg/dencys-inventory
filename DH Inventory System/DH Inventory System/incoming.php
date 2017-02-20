@@ -34,9 +34,9 @@
   
 	<body>
 		<?php
-		$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID ORDER BY inID DESC;");
-		$query->execute();
-		$result = $query->fetchAll();
+			$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID ORDER BY inID DESC;");
+			$query->execute();
+			$result = $query->fetchAll();
 		?>
 		
 		<div class="productHolder">
@@ -119,7 +119,7 @@
 				?>
 				</table>
 				
-			<form action="addIncoming.html" target="_blank">
+			<form action="addIncoming.php" target="_blank">
 				<input id="myBtn" type="submit" value="Add Incoming Product" class="btn btn-default btnAlign">
 			</form>
 			

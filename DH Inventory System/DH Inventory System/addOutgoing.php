@@ -40,9 +40,9 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="categories">
 						<li><a href="inventory.php">Inventory</a></li>
-						<li><a href="incoming.html">Incoming</a></li>
-						<li><a href="outgoing.html">Outgoing</a></li>
-						<li><a href="returns.html">Returns</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
 					</ul>
 				</div>
 			</div>
@@ -64,14 +64,37 @@
 					<?php endforeach ?>
 				</select> 
 				<br>
+				
 				<h3>Quantity</h3>
 				<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="outQty"> <br>
 				
 				<h3>Employee</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Employee Name" name="outEmp"> <br>
-							
+				<?php
+					$query = $conn->prepare("SELECT empName FROM employee ");
+					$query->execute();
+					$res = $query->fetchAll();
+				?>
+			
+				<select class="form-control" id="addEntry" name="searchby">
+					<?php foreach ($res as $row): ?>
+						<option><?=$row["empName"]?></option>
+					<?php endforeach ?>
+				</select> 
+				<br>
+				
 				<h3>Branch</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="outBranch"> <br>
+				<?php
+					$query = $conn->prepare("SELECT location FROM branch");
+					$query->execute();
+					$res = $query->fetchAll();
+				?>
+			
+				<select class="form-control" id="addEntry" name="searchby">
+					<?php foreach ($res as $row): ?>
+						<option><?=$row["location"]?></option>
+					<?php endforeach ?>
+				</select> 
+				<br>
 				
 				<h3>Remarks</h3>
 				<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
