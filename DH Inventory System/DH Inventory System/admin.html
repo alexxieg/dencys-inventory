@@ -18,13 +18,28 @@
   
   <body>
 	
-	<nav class="navbar navbar-inverse navbar-static-top">
+	<nav class="navbar navbar-inverse navbar-static-top" >
 			<div class="container">
 				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 					<h1>Dency's Hardware and General Merchandise</h1>
 				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" id="categories">
+						<li><a href="inventory.php">Inventory</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+						<li><a href="admin.html">Admin</a></li>
+					</ul>
+				</div>
 			</div>
-	</nav>
+		</nav>
 		<center><img src="logo.jpg" alt="logo" id="logo"/></center>
 	<div class="company">
 		<h3 id="is">Manage</h3>
@@ -32,25 +47,25 @@
 
 	<div class="jumbotron" id="login">
 		<div class="container" id="form">
-			<form class="form-horizontal">	  
+			  
 			  <div class="form-group">
-			    	<form action="addAccount.html" target="_blank">
-					<input id="myBtn" type="submit" value="Add Account" class="btn btn-default btnAlign">
+			    <form action="addAccount.php" target="_blank">
+					<input id="myBtn" type="submit" value="Add Account">
 				</form>
 			  </div>
 
 			  <div class="form-group">
-			    	<form action="addProduct.html" target="_blank">
-					<input id="myBtn" type="submit" value="Add Product" class="btn btn-default btnAlign">
+			   	<form action="addProduct.php" target="_blank">
+					<input id="myBtn" type="submit" value="Add Product">
 				</form>
 			</div>
-			  </div>
-			 </form>
+			 
+			 
 
-			 </div>
- 			</form>
 		</div>
+ 			
 	</div>
+	
 
 	<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">

@@ -61,6 +61,7 @@
 							<li><a href="incoming.php">Incoming</a></li>
 							<li><a href="outgoing.php">Outgoing</a></li>
 							<li><a href="returns.php">Returns</a></li>
+							<li><a href="admin.html">Admin</a></li>
 						</ul>
 					</div>
 				</div>
@@ -149,7 +150,7 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="logout">
-						<li><a href="login.html">Logout</a></li>
+						<li><a href="logout.php">Logout</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-left" id="report">
 						<li><a href="report.html">Print Report</a></li>
