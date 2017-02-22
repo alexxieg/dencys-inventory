@@ -111,7 +111,7 @@
 					
 				</table>
 			</div>	
-			<form action="addReturn.html" target="_blank">
+			<form action="addReturn.php" target="_blank">
 				<input id="myBtn" type="submit" value="Add Returns" class="btn btn-default btnAlign">
 			</form>
 		</div>

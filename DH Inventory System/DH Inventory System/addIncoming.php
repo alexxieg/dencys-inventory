@@ -6,6 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Incoming Product</title>
+	
+	<?php include('dbcon.php'); ?>
+		
+	<?php 
+		session_start();
+		if (isset($_SESSION['id'])){
+			header('Location: inventory.php');
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+			if (!isset($_SESSION['id']) || $_SESSION['id'] == false) {
+				session_destroy();
+				header('Location: index.php');
+			}
+		}
+	?>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="logo.jpg">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -27,9 +43,9 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="categories">
 						<li><a href="inventory.php">Inventory</a></li>
-						<li><a href="incoming.html">Incoming</a></li>
-						<li><a href="outgoing.html">Outgoing</a></li>
-						<li><a href="returns.html">Returns</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
 					</ul>
 				</div>
 			</div>
@@ -41,27 +57,49 @@
 		<div>
 			<form action="incoming.html">
 				<h3>Item</h3>
-			<?php
-				$query = $conn->prepare("SELECT prodName FROM product ");
-				$query->execute();
-				$res = $query->fetchAll();
-			?>
+				<?php
+					$query = $conn->prepare("SELECT prodName FROM product ");
+					$query->execute();
+					$res = $query->fetchAll();
+				?>
 			
-			<select class="form-control" id="dropdown" name="searchby">
-				<?php foreach ($res as $row): ?>
-				<option><?=$row["prodName"]?></option>
-				<?php endforeach ?>
-			</select> 
-			<br>
+				<select class="form-control" id="addEntry" name="searchby">
+					<?php foreach ($res as $row): ?>
+						<option><?=$row["prodName"]?></option>
+					<?php endforeach ?>
+				</select> 
+				<br>
 				
 				<h3>Quantity</h3>
 				<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="incQty"> <br>
 				
 				<h3>Employee</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Employee Name" name="incEmp"> <br>
+				<?php
+					$query = $conn->prepare("SELECT empName FROM employee ");
+					$query->execute();
+					$res = $query->fetchAll();
+				?>
+			
+				<select class="form-control" id="addEntry" name="searchby">
+					<?php foreach ($res as $row): ?>
+						<option><?=$row["empName"]?></option>
+					<?php endforeach ?>
+				</select> 
+				<br>
 				
 				<h3>Supplier</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Supplier Name" name="incSup"> <br>
+				<?php
+					$query = $conn->prepare("SELECT supplier_name FROM suppliers ");
+					$query->execute();
+					$res = $query->fetchAll();
+				?>
+			
+				<select class="form-control" id="addEntry" name="searchby">
+					<?php foreach ($res as $row): ?>
+						<option><?=$row["supplier_name"]?></option>
+					<?php endforeach ?>
+				</select> 
+				<br>
 				
 				<h3>Receipt Number</h3>
 				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="incRecN"> <br>

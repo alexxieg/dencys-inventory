@@ -37,6 +37,12 @@
 	</head>
   
 	<body >
+		<?php
+			$query = $conn->prepare("SELECT product.prodID, product.prodName, product.type, product.brand, product.price, inventory.qty, product.reorderLevel FROM product INNER JOIN inventory ON product.prodID = inventory.prodID;");
+			$query->execute();
+			$result = $query->fetchAll();
+		?>
+	
 		<div class="productHolder" >
 			<nav class="navbar navbar-inverse navbar-static-top" >
 				<div class="container">
@@ -66,13 +72,14 @@
 			
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 				
-			<select class="form-control" id="dropdown" name="searchby">
+			<select class="form-control" id="dropdown" name="sortby">
 				<option>1</option>
 				<option>2</option>
 				<option>3</option>
 				<option>4</option>
 				<option>5</option>
 			</select>
+			
 				
 			<select class="form-control" id="dropdown" name="sortby">
 				<option>1</option>
@@ -98,73 +105,30 @@
 						<th>LEDGER</th>
 					</tr>
 					
+					<?php
+						foreach ($result as $item):
+					?>
+
 					<tr>
-						<td>Item 1</td>
-						<td>5</td>
-						<td>2</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><?php echo $item["prodID"]; ?></td>
+						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["type"]; ?></td>
+						<td><?php echo $item["brand"]; ?></td>
+						<td><?php echo $item["price"]; ?></td>
+						<td><?php echo $item["qty"]; ?></td>
+						<td><?php echo $item["reorderLevel"]; ?></td>
+						<td><button type="button" class="btn btn-default">Edit</button></td>
+						<td><button type="button" class="btn btn-default">Remove</button></td>		
 						<td>
 							<form action="ledger.html" target="_blank">
 								<input id="myBtn" type="submit" value="Ledger">
 							</form>
-						</td>
+						</td>					
 					</tr>
 					
-					<tr>
-						<td>Item 2</td>
-						<td>5</td>
-						<td>2</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
-							<form action="ledger.html" target="_blank">
-								<input id="myBtn" type="submit" value="Ledger">
-							</form>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>Item 3</td>
-						<td>5</td>
-						<td>2</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
-							<form action="ledger.html" target="_blank">
-								<input id="myBtn" type="submit" value="Ledger">
-							</form>
-						</td>				
-					</tr>
-					
-					<tr>
-						<td>Item 1</td>
-						<td>5</td>
-						<td>2</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
-							<form action="ledger.html" target="_blank">
-								<input id="myBtn" type="submit" value="Ledger">
-							</form>
-						</td>				
-					</tr>
+					<?php
+						endforeach;
+					?>
 				</table>
 			</div>	
 			

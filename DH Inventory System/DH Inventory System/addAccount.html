@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add Incoming Product</title>
+    <title>Add Account</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="logo.jpg">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   </head>
   
   <body>
-
+  
   <nav class="navbar navbar-inverse navbar-static-top" >
 			<div class="container">
 				<div class="navbar-header">
@@ -34,45 +34,23 @@
 				</div>
 			</div>
 		</nav>
+
 	<div class="addInv">
 	
 	
-		<h1 id="headers">Add Incoming</h1>
-		<div>
-			<form action="incoming.html">
-				<h3>Item</h3>
-			<?php
-				$query = $conn->prepare("SELECT prodName FROM product ");
-				$query->execute();
-				$res = $query->fetchAll();
-			?>
-			
-			<select class="form-control" id="dropdown" name="searchby">
-				<?php foreach ($res as $row): ?>
-				<option><?=$row["prodName"]?></option>
-				<?php endforeach ?>
-			</select> 
-			<br>
+		<h1 id="headers">Add New Account</h1>
+		<div >
+			<form action="product.html">
+				<h3>Username</h3>
+				<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>
 				
-				<h3>Quantity</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="incQty"> <br>
+				<h3>Password</h3>
+				<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
 				
-				<h3>Employee</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Employee Name" name="incEmp"> <br>
+				<h3>Confirm Password</h3>
+				<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="conpsw"> <br>
 				
-				<h3>Supplier</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Supplier Name" name="incSup"> <br>
-				
-				<h3>Receipt Number</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="incRecN"> <br>
-				
-				<h3>Receipt Date</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="incRecD"> <br>
-				
-				<h3>Remarks</h3>
-				<textarea class="form-control" id="addEntry" rows="3" name="incRemarks"></textarea> <br>
-
-			<br>
+				<br>
 			<input type="submit" value="Add" class="btn btn-default" style="width: 100px">
 			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 			</form> 
