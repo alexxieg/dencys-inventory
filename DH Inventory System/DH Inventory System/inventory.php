@@ -38,7 +38,7 @@
   
 	<body >
 		<?php
-			$query = $conn->prepare("SELECT product.prodID, product.prodName, product.type, product.brand, product.price, inventory.qty, product.reorderLevel FROM product INNER JOIN inventory ON product.prodID = inventory.prodID;");
+			$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty,  product.price FROM product INNER JOIN inventory ON product.prodID = inventory.prodID;");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -95,15 +95,9 @@
 				<table class="table table-bordered" id="tables">
 					<tr>
 						<th>Item Code</th>
-						<th>Item</th>
-						<th>Type</th>
-						<th>Brand</th>
-						<th>Item Price</th>
+						<th>Item</th>	
 						<th>Quantity</th>
-						<th>Reorder Level</th>
-						<th>EDIT</th>
-						<th>REMOVE</th>
-						<th>LEDGER</th>
+						<th>Item Price</th>
 					</tr>
 					
 					<?php
@@ -113,18 +107,9 @@
 					<tr>
 						<td><?php echo $item["prodID"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["type"]; ?></td>
-						<td><?php echo $item["brand"]; ?></td>
-						<td><?php echo $item["price"]; ?></td>
 						<td><?php echo $item["qty"]; ?></td>
-						<td><?php echo $item["reorderLevel"]; ?></td>
-						<td><button type="button" class="btn btn-default">Edit</button></td>
-						<td><button type="button" class="btn btn-default">Remove</button></td>		
-						<td>
-							<form action="ledger.html" target="_blank">
-								<input id="myBtn" type="submit" value="Ledger">
-							</form>
-						</td>					
+						<td><?php echo $item["price"]; ?></td>
+								
 					</tr>
 					
 					<?php
@@ -132,10 +117,6 @@
 					?>
 				</table>
 			</div>	
-			
-			<form action="addProduct.html" target="_blank">
-				<input id="myBtn" type="submit" value="Add Product" class="btn btn-default btnAlign">
-			</form>
 		</div>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
