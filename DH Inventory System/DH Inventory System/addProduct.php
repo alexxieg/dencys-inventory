@@ -80,7 +80,7 @@
 					<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodRO"> <br>
 						
 					<br>
-				<input type="submit" value="Add" class="btn btn-success" name="addProd">
+				<input type="submit" value="Add" class="btn btn-success" name="addProd" onclick="alert('New Product Successfully Added');">
 				<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 				</form> 
 			</div>
