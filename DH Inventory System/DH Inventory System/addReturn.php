@@ -83,7 +83,7 @@
 					<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 			
 					<br>
-					<input type="submit" value="Add" class="btn btn-default" name="addRet">
+					<input type="submit" value="Add" class="btn btn-success" name="addRet">
 					<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 				</form> 
 			</div>

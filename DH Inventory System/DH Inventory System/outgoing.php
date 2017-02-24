@@ -84,7 +84,7 @@
 				<option>5</option>
 			</select>
 				
-			<table class="table table-bordered" id="tables">
+			<table class="table table-striped table-bordered">
 				<tr>
 					<th style="text-align:center">The following have been deducted from the Inventory:</th>
 				</tr>
@@ -96,7 +96,7 @@
 					<th>Branch</th>	
 					<th>Remarks</th>				
 					<th></th>
-					<th></th>
+
 				</tr>
 				
 				<?php
@@ -110,8 +110,14 @@
 					<td><?php echo $item["empName"]; ?></td>
 					<td><?php echo $item["location"]; ?></td>
 					<td><?php echo $item["outRemarks"]; ?></td>
-					<td><button type="button" class="btn btn-default">Edit</button></td>
-					<td><button type="button" class="btn btn-default">Remove</button></td>				
+					<td>
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						</button>
+					</td>		
 				</tr>
 					
 				<?php

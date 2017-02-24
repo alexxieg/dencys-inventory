@@ -100,7 +100,7 @@
 				<h3>Remarks</h3>
 				<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
 				
-			<input type="submit" value="Add" class="btn btn-default" name="addOut">
+			<input type="submit" value="Add" class="btn btn-success" name="addOut">
 			<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
 			</form> 
 		</div>
@@ -132,19 +132,7 @@
 				VALUES ('".$_POST['outQty']."',CURDATE(),'".$_POST['outRemarks']."','$branch3','$emp3','$prod3')";
 				$conn->exec($sql);
 				
-/*				$emp1 = $conn->prepare("SELECT empID AS emp FROM employee WHERE empName = '$emp'");
-				$emp1->execute();
-						
-				$prod1 = $conn->prepare("SELECT prodID AS prod FROM product WHERE prodName = '$prod'");
-				$prod1->execute();
-				
-				$sup1 = $conn->prepare("SELECT supID AS sup from suppliers WHERE supplier_name = '$sup'");
-				$sup1->execute();
-				
-				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
-				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."',$emp1,$prod1,$sup1)";
-				$conn->exec($sql);
-*/
+
 			}    
 
 	?>

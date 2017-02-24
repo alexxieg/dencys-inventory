@@ -92,7 +92,8 @@
 				
 			<div class="prodTable">
 				<br>
-				<table class="table table-bordered" id="tables">
+				
+				<table class="table table-striped table-bordered">
 					<tr>
 						<th>Item Code</th>
 						<th>Item</th>	
@@ -116,6 +117,7 @@
 						endforeach;
 					?>
 				</table>
+		
 			</div>	
 		</div>
 		

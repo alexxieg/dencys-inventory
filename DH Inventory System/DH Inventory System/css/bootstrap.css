@@ -6807,20 +6807,6 @@ button.close {
 }
 
 
-#tables {
-border-width: 2px;
-border-color: black;
-}
-
-td{
-    border: black solid 1px !important;
-}
-
-th{
-    border: black solid 1px !important;
-	text-align: center;
-
-}
 .alertHolder {
   padding-left: 25%;
   padding-right: 25%;
@@ -6940,4 +6926,8 @@ margin-bottom: 2%;
 #searchBar{
 width: 55%;
 float:right;
+}
+
+.tables  > tr > td{
+border: none;
 }
