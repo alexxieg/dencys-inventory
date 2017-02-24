@@ -29,7 +29,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT product.prodName, returns.returnQty, returns.returnDate, returns.status, returns.returnRemark FROM returns INNER JOIN product ON returns.prodID = product.prodID ORDER BY returnID DESC;");
+			$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemarks FROM returns INNER JOIN product ON returns.prodID = product.prodID ORDER BY returnID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -84,9 +84,9 @@
 				<br>
 				<table class="table table-bordered" id="tables">
 					<tr>
+						<th>Date</th>
 						<th>Item</th>
 						<th>Quantity</th>
-						<th>Date</th>
 						<th>Status</th>
 						<th>Remarks</th>
 						<th></th>
@@ -97,11 +97,11 @@
 						foreach ($result as $item):
 					?>
 					<tr>
+						<td><?php echo $item["returnDate"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
 						<td><?php echo $item["returnQty"]; ?></td>
-						<td><?php echo $item["returnDate"]; ?></td>
 						<td><?php echo $item["status"]; ?></td>
-						<td><?php echo $item["returnRemark"]; ?></td>
+						<td><?php echo $item["returnRemarks"]; ?></td>
 						<td><button type="button" class="btn btn-default">Edit</button></td>
 						<td><button type="button" class="btn btn-default">Remove</button></td>
 					</tr>
