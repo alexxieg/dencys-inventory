@@ -51,7 +51,7 @@
 	<div class="addInv">
 	<h1 id="headers">Add Outgoing Products</h1>
 		<div>
-			<form action="inventory.html">
+			<form action="" method="POST">
 				<h3>Item</h3>
 				<?php
 				$query = $conn->prepare("SELECT prodName FROM product ");
@@ -59,7 +59,7 @@
 				$res = $query->fetchAll();
 				?>
 			
-				<select class="form-control" id="addEntry" name="searchby">
+				<select class="form-control" id="addEntry" name="prodItem">
 					<?php foreach ($res as $row): ?>
 						<option><?=$row["prodName"]?></option>
 					<?php endforeach ?>
@@ -76,7 +76,7 @@
 					$res = $query->fetchAll();
 				?>
 			
-				<select class="form-control" id="addEntry" name="searchby">
+				<select class="form-control" id="addEntry" name="emp">
 					<?php foreach ($res as $row): ?>
 						<option><?=$row["empName"]?></option>
 					<?php endforeach ?>
@@ -90,7 +90,7 @@
 					$res = $query->fetchAll();
 				?>
 			
-				<select class="form-control" id="addEntry" name="searchby">
+				<select class="form-control" id="addEntry" name="branch">
 					<?php foreach ($res as $row): ?>
 						<option><?=$row["location"]?></option>
 					<?php endforeach ?>
@@ -100,10 +100,54 @@
 				<h3>Remarks</h3>
 				<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
 				
-			<input type="submit" value="Add" class="btn btn-default" style="width: 100px">
+			<input type="submit" value="Add" class="btn btn-default" name="addOut">
 			<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
 			</form> 
 		</div>
 	</div>
+	
+	<?php
+		
+			if (isset($_POST["addOut"])){
+			
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 			
+				$prod = $_POST['prodItem'];
+				$emp = $_POST['emp'];
+				$branch = $_POST['branch'];
+								
+				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
+				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+				$emp3 = $emp2['empA'];
+						
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
+				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+				$prod3 = $prod2['prodA'];
+				
+				$branch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch'");
+				$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
+				$branch3 = $branch2['branchA'];
+				
+				$sql = "INSERT INTO outgoing (outQty, outDate, outRemarks, branchID, empID, prodID)
+				VALUES ('".$_POST['outQty']."',CURDATE(),'".$_POST['outRemarks']."','$branch3','$emp3','$prod3')";
+				$conn->exec($sql);
+				
+/*				$emp1 = $conn->prepare("SELECT empID AS emp FROM employee WHERE empName = '$emp'");
+				$emp1->execute();
+						
+				$prod1 = $conn->prepare("SELECT prodID AS prod FROM product WHERE prodName = '$prod'");
+				$prod1->execute();
+				
+				$sup1 = $conn->prepare("SELECT supID AS sup from suppliers WHERE supplier_name = '$sup'");
+				$sup1->execute();
+				
+				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
+				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."',$emp1,$prod1,$sup1)";
+				$conn->exec($sql);
+*/
+			}    
+
+	?>
+	
   </body>
 </html>
