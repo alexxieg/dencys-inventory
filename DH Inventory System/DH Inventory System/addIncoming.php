@@ -41,13 +41,14 @@
 					<h1>Dency's Hardware and General Merchandise</h1>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right" id="categories">
-						<li><a href="inventory.php">Inventory</a></li>
-						<li><a href="incoming.php">Incoming</a></li>
-						<li><a href="outgoing.php">Outgoing</a></li>
-						<li><a href="returns.php">Returns</a></li>
-					</ul>
-				</div>
+						<ul class="nav navbar-nav navbar-right" id="categories">
+							<li><a href="inventory.php">Inventory</a></li>
+							<li><a href="incoming.php">Incoming</a></li>
+							<li><a href="outgoing.php">Outgoing</a></li>
+							<li><a href="returns.php">Returns</a></li>
+							<li><a href="admin.html">Admin</a></li>
+						</ul>
+					</div>
 			</div>
 		</nav>
 	<div class="addInv">
@@ -55,7 +56,7 @@
 	
 		<h1 id="headers">Add Incoming</h1>
 		<div>
-			<form action="incoming.html">
+			<form action="" method="POST">
 				<h3>Item</h3>
 				<?php
 					$query = $conn->prepare("SELECT prodName FROM product ");
@@ -63,7 +64,7 @@
 					$res = $query->fetchAll();
 				?>
 			
-				<select class="form-control" id="addEntry" name="searchby">
+				<select class="form-control" id="addEntry" name="prodItem">
 					<?php foreach ($res as $row): ?>
 						<option><?=$row["prodName"]?></option>
 					<?php endforeach ?>
@@ -80,7 +81,7 @@
 					$res = $query->fetchAll();
 				?>
 			
-				<select class="form-control" id="addEntry" name="searchby">
+				<select class="form-control" id="addEntry" name="emp">
 					<?php foreach ($res as $row): ?>
 						<option><?=$row["empName"]?></option>
 					<?php endforeach ?>
@@ -94,7 +95,7 @@
 					$res = $query->fetchAll();
 				?>
 			
-				<select class="form-control" id="addEntry" name="searchby">
+				<select class="form-control" id="addEntry" name="sup">
 					<?php foreach ($res as $row): ?>
 						<option><?=$row["supplier_name"]?></option>
 					<?php endforeach ?>
@@ -102,19 +103,37 @@
 				<br>
 				
 				<h3>Receipt Number</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="incRecN"> <br>
+				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="inRecN"> <br>
 				
-				<h3>Receipt Date</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="incRecD"> <br>
+				
 				
 				<h3>Remarks</h3>
-				<textarea class="form-control" id="addEntry" rows="3" name="incRemarks"></textarea> <br>
+				<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
 
 			<br>
-			<input type="submit" value="Add" class="btn btn-default" style="width: 100px">
+			<input type="submit" value="Add" class="btn btn-default" name="addInc">
 			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 			</form> 
 		</div>
 	</div>
+	<?php
+		
+			if (isset($_POST["addInc"])){
+			
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 			
+				$prod = $_POST['prodItem'];
+				$emp = $_POST['emp'];
+					$sup = $_POST['sup'];
+					
+				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
+				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."','SELECT 'empID' FROM 'employee' WHERE empName = '$emp'','SELECT 'prodID' FROM 'product' WHERE prodName = '$prod'','SELECT 'supID' from 'suppliers' WHERE supplier_name = '$sup')";
+				$conn->exec($sql);
+				
+	
+			}    
+
+		?>
+	
   </body>
 </html>

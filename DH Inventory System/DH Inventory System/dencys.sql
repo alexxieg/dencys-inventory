@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2017 at 04:23 PM
+-- Generation Time: Feb 23, 2017 at 06:19 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -366,6 +366,11 @@ ALTER TABLE `users`
 ALTER TABLE `incoming`
   MODIFY `inID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `invID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
 -- AUTO_INCREMENT for table `outgoing`
 --
 ALTER TABLE `outgoing`
@@ -375,6 +380,11 @@ ALTER TABLE `outgoing`
 --
 ALTER TABLE `returns`
   MODIFY `returnID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
