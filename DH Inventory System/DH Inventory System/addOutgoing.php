@@ -100,7 +100,7 @@
 				<h3>Remarks</h3>
 				<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
 				
-			<input type="submit" value="Add" class="btn btn-success" name="addOut">
+			<input type="submit" value="Add" class="btn btn-success" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
 			<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
 			</form> 
 		</div>
