@@ -6764,6 +6764,17 @@ button.close {
   margin-top: -10px;
 }
 
+#manageAcc{
+  margin-left: -225px;
+  margin-right: 225px;
+}
+
+#manageProd {
+  margin-right: -225px;
+  margin-left: 225px;
+  margin-top: -292px;
+}
+
 #form {
   margin-left: 0px;
   font-size: 16px;
