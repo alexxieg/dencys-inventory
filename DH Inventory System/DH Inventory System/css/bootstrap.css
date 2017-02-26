@@ -6764,6 +6764,17 @@ button.close {
   margin-top: -10px;
 }
 
+#manageAcc{
+  margin-left: -225px;
+  margin-right: 225px;
+}
+
+#manageProd {
+  margin-right: -225px;
+  margin-left: 225px;
+  margin-top: -292px;
+}
+
 #form {
   margin-left: 0px;
   font-size: 16px;
@@ -6807,20 +6818,6 @@ button.close {
 }
 
 
-#tables {
-border-width: 2px;
-border-color: black;
-}
-
-td{
-    border: black solid 1px !important;
-}
-
-th{
-    border: black solid 1px !important;
-	text-align: center;
-
-}
 .alertHolder {
   padding-left: 25%;
   padding-right: 25%;
@@ -6940,4 +6937,8 @@ margin-bottom: 2%;
 #searchBar{
 width: 55%;
 float:right;
+}
+
+.tables  > tr > td{
+border: none;
 }

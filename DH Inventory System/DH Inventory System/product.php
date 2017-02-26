@@ -89,7 +89,7 @@
 					
 			<div class="prodTable">
 				<br>
-				<table class="table table-bordered" id="tables">
+				<table class="table table-striped table-bordered">
 					<tr>
 						<th>Item Code</th>
 							<th>Item</th>
@@ -97,6 +97,7 @@
 							<th>Type</th>
 							<th>Item Price</th>
 							<th>Reorder Level</th>
+							<th></th>
 						</tr>
 						
 						<?php
@@ -110,6 +111,15 @@
 							<td><?php echo $item["type"]; ?></td>
 							<td><?php echo $item["price"]; ?></td>
 							<td><?php echo $item["reorderLevel"]; ?></td>
+							<td>
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+				
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+						</td>
 									
 					</tr>
 						

@@ -64,7 +64,7 @@
 				<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
 					
 				<br>
-			<input type="submit" value="Add" class="btn btn-default" name="addAccnt">
+			<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
 			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 			</form> 
 		</div>

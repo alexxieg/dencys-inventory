@@ -41,13 +41,13 @@
 					<h1>Dency's Hardware and General Merchandise</h1>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.php">Incoming</a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.html">Admin</a></li>
-						</ul>
+					<ul class="nav navbar-nav navbar-right" id="categories">
+						<li><a href="inventory.php">Inventory</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+						<li><a href="admin.html">Admin</a></li>
+					</ul>
 				</div>
 			</div>
 		</nav>
@@ -66,8 +66,7 @@
 					
 					<h3>Quantity</h3>
 					<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodQty"> <br>
-					
-					
+						
 					<h3>Product Type</h3>
 					<input type="text" class="form-control" id ="addEntry" placeholder="Item Type" name="prodType"> <br>
 				
@@ -79,10 +78,9 @@
 					
 					<h3>Reorder Level</h3>
 					<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodRO"> <br>
-					
-					
+						
 					<br>
-				<input type="submit" value="Add" class="btn btn-success" name="addProd">
+				<input type="submit" value="Add" class="btn btn-success" name="addProd" onclick="alert('New Product Successfully Added');">
 				<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 				</form> 
 			</div>
