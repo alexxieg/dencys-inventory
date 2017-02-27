@@ -37,8 +37,17 @@
 	</head>
   
 	<body >
+
 		<?php
-			$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty,  product.price FROM product INNER JOIN inventory ON product.prodID = inventory.prodID;");
+			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			if (!empty($sort)) { 
+				$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
+				FROM product INNER JOIN inventory ON product.prodID = inventory.prodID ORDER BY $sort ASC;");
+			} else { 
+				$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
+								FROM product INNER JOIN inventory ON product.prodID = inventory.prodID
+								ORDER BY prodID ASC;");
+			}	
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -71,17 +80,17 @@
 		<div class="pages">
 			<h1 id="headers">Inventory</h1>
 			
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-				
-			<select class="form-control" id="dropdown" name="sortby">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
+			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">			
 			
-				
+			<select class="form-control" id="dropdown" name="sortBy" onchange="location = this.value;">
+				<option value="" disabled selected hidden>--SELECTA--</option>
+				<option value="?orderBy=prodID">Item Code</option>
+				<option value="?orderBy=prodName">Item</option>
+				<option value="?orderBy=qty">Quantity</option>
+				<option value="?orderBy=price">Item Price</option>
+			</select>
+					
+			
 			<select class="form-control" id="dropdown" name="sortby">
 				<option>1</option>
 				<option>2</option>
@@ -95,10 +104,10 @@
 				
 				<table class="table table-striped table-bordered">
 					<tr>
-						<th>Item Code</th>
-						<th>Item</th>	
-						<th>Quantity</th>
-						<th>Item Price</th>
+						<th><a href="?orderBy=prodID">Item Code</a></th>
+						<th><a href="?orderBy=prodName">Item</a></th>	
+						<th><a href="?orderBy=qty">Quantity</a></th>
+						<th><a href="?orderBy=price">Item Price</a></th>
 					</tr>
 					
 					<?php

@@ -29,7 +29,19 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemark FROM returns INNER JOIN product ON returns.prodID = product.prodID ORDER BY returnID DESC;");
+		
+			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			if (!empty($sort)) {
+				$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+				ORDER BY $sort ASC;");
+			
+			} else {
+				$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+				ORDER BY returnID ASC;");
+				
+			}
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -64,12 +76,12 @@
 			
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 			
-			<select class="form-control" id="dropdown" name="searchby">
-			  <option>1</option>
-			  <option>2</option>
-			  <option>3</option>
-			  <option>4</option>
-			  <option>5</option>
+			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
+			  <option value="" disabled selected hidden>--SELECTA--</option>
+			  <option value="?orderBy=returnDate">Date</option>
+			  <option value="?orderBy=prodName">Item</option>
+			  <option value="?orderBy=returnQty">Quantity</option>
+			  <option value="?orderBy=status">Status</option>
 			</select>
 			
 			<select class="form-control" id="dropdown" name="sortby">
@@ -137,7 +149,7 @@
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="logout">
-						<li><a href="logout.php">Logout</a></li>
+						<li><a href="login.html">Logout</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-left" id="report">
 						<li><a href="report.html">Print Report</a></li>

@@ -26,8 +26,8 @@
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
-		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -36,7 +36,17 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID ORDER BY inID DESC;");
+			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			if (!empty($sort)) {
+				$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+				ORDER BY $sort ASC;");
+			} else {
+				$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+				ORDER BY inID ASC;");
+			}
+			
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -67,24 +77,25 @@
 		</div>	
 		<div class="pages">
 			<h1 id="headers">Incoming</h1>
-
 			
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 				
-				<select class="form-control" id="dropdown" name="searchby">
-				  <option>1</option>
-				  <option>2</option>
-				  <option>3</option>
-				  <option>4</option>
-				  <option>5</option>
+				<select class="form-control" id="dropdown" name="sortBy" onchange="location = this.value;">
+					<option value="" disabled selected hidden>--SELECTA--</option>
+					<option value="?orderBy=prodName">Item</option>
+					<option value="?orderBy=inQty">Quantity</option>
+					<option value="?orderBy=inDate">Date</option>
+					<option value="?orderBy=supplier_name">Supplier</option>
+					<option value="?orderBy=receiptNo">Receipt No.</option>
+					<option value="?orderBy=receiptDate">Receipt Date</option>
 				</select>
 				
 				<select class="form-control" id="dropdown" name="sortby">
-				  <option>1</option>
-				  <option>2</option>
-				  <option>3</option>
-				  <option>4</option>
-				  <option>5</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
 				</select>
 			<table class="table table-striped table-bordered">
 				<tr>
@@ -132,11 +143,86 @@
 			<form action="addIncoming.php" target="_blank">
 				<input id="myBtn" type="submit" value="Add Incoming Product" class="btn btn-default btnAlign">
 			</form>
+			
+			
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button>
+
+			
+			<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+        <form action="" method="POST">
+				<h3>Item</h3>
+				<?php
+					$query = $conn->prepare("SELECT prodName FROM product ");
+					$query->execute();
+					$res = $query->fetchAll();
+				?>
+			
+				<select class="form-control" id="addEntry" name="prodItem">
+					<?php foreach ($res as $row): ?>
+						<option><?=$row["prodName"]?></option>
+					<?php endforeach ?>
+				</select> 
+				<br>
+				
+				<h3>Quantity</h3>
+				<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="incQty"> <br>
+				
+				<h3>Employee</h3>
+				<?php
+					$query = $conn->prepare("SELECT empName FROM employee ");
+					$query->execute();
+					$res = $query->fetchAll();
+				?>
+			
+				<select class="form-control" id="addEntry" name="emp">
+					<?php foreach ($res as $row): ?>
+						<option><?=$row["empName"]?></option>
+					<?php endforeach ?>
+				</select> 
+				<br>
+				
+				<h3>Supplier</h3>
+				<?php
+					$query = $conn->prepare("SELECT supplier_name FROM suppliers ");
+					$query->execute();
+					$res = $query->fetchAll();
+				?>
+			
+				<select class="form-control" id="addEntry" name="sup">
+					<?php foreach ($res as $row): ?>
+						<option><?=$row["supplier_name"]?></option>
+					<?php endforeach ?>
+				</select> 
+				<br>
+				
+				<h3>Receipt Number</h3>
+				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="inRecN"> <br>
 	
-    
+				<h3>Remarks</h3>
+				<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
+
+			<br>
+			<input type="submit" value="Add" class="btn btn-default" name="addInc">
+			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+			</form> 
+			
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+			
 		</div>
 			
-	
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<div class="navbar-header">
@@ -149,7 +235,7 @@
 				</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right" id="logout">
-					<li><a href="logout.php">Logout</a></li>
+					<li><a href="login.html">Logout</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-left" id="report">
 					<li><a href="report.html">Print Report</a></li>
@@ -158,8 +244,48 @@
 			</div>
 		</nav>
 		
-	
-	
+		<?php
+		
+			if (isset($_POST["addInc"])){
+			
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 			
+				$prod = $_POST['prodItem'];
+				$emp = $_POST['emp'];
+				$sup = $_POST['sup'];
+				
+				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
+				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+				$emp3 = $emp2['empA'];
+						
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
+				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+				$prod3 = $prod2['prodA'];
+				
+				$sup1 = $conn->query("SELECT supID AS supA from suppliers WHERE supplier_name = '$sup'");
+				$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+				$sup3 = $sup2['supA'];
+				
+				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
+				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."','$emp3','$prod3','$sup3')";
+				$conn->exec($sql);
+				
+/*				$emp1 = $conn->prepare("SELECT empID AS emp FROM employee WHERE empName = '$emp'");
+				$emp1->execute();
+						
+				$prod1 = $conn->prepare("SELECT prodID AS prod FROM product WHERE prodName = '$prod'");
+				$prod1->execute();
+				
+				$sup1 = $conn->prepare("SELECT supID AS sup from suppliers WHERE supplier_name = '$sup'");
+				$sup1->execute();
+				
+				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
+				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."',$emp1,$prod1,$sup1)";
+				$conn->exec($sql);
+*/
+			}    
+			
+	?>
   </body>
 </html>
 

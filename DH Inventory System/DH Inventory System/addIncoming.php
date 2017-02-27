@@ -25,6 +25,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="logo.jpg">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   
   <body>

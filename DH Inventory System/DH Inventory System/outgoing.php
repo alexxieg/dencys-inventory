@@ -34,7 +34,16 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT product.prodName, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID ORDER BY outID DESC;");
+			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			if (!empty($sort)) {
+				$query = $conn->prepare("SELECT product.prodName, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
+				ORDER BY $sort ASC;");
+			} else {
+				$query = $conn->prepare("SELECT product.prodName, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
+				ORDER BY outID ASC;");
+			}
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -68,12 +77,13 @@
 			<h1 id="headers">Outgoing</h1>
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 				
-			<select class="form-control" id="dropdown" name="searchby">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
+			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
+				<option value="" disabled selected hidden>--SELECTA--</option>
+				<option value="?orderBy=prodName">Item</option>
+				<option value="?orderBy=outQty">Quantity</option>
+				<option value="?orderBy=outDate">Date</option>
+				<option value="?orderBy=empName">Employee Name</option>
+				<option value="?orderBy=location">Location</option>		
 			</select>
 				
 			<select class="form-control" id="dropdown" name="sortby">
@@ -140,8 +150,8 @@
 					</button>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<<ul class="nav navbar-nav navbar-right" id="logout">
-						<li><a href="logout.php">Logout</a></li>
+					<ul class="nav navbar-nav navbar-right" id="logout">
+						<li><a href="login.html">Logout</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-left" id="report">
 						<li><a href="report.html">Print Report</a></li>
