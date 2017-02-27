@@ -100,7 +100,7 @@
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
-				$sql = "INSERT INTO returns (returnDate, returnQty, status, returnRemarks, prodID)
+				$sql = "INSERT INTO returns (returnDate, returnQty, status, returnRemark, prodID)
 				VALUES (CURDATE(),'".$_POST['retQty']."','".$_POST['status']."','".$_POST['retRemarks']."','$prod3')";
 				$conn->exec($sql);
 			}    

@@ -29,7 +29,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemarks FROM returns INNER JOIN product ON returns.prodID = product.prodID ORDER BY returnID DESC;");
+			$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemark FROM returns INNER JOIN product ON returns.prodID = product.prodID ORDER BY returnID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -101,7 +101,7 @@
 						<td><?php echo $item["prodName"]; ?></td>
 						<td><?php echo $item["returnQty"]; ?></td>
 						<td><?php echo $item["status"]; ?></td>
-						<td><?php echo $item["returnRemarks"]; ?></td>
+						<td><?php echo $item["returnRemark"]; ?></td>
 						<td>
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -137,7 +137,7 @@
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="logout">
-						<li><a href="login.html">Logout</a></li>
+						<li><a href="logout.php">Logout</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-left" id="report">
 						<li><a href="report.html">Print Report</a></li>
