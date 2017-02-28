@@ -26,6 +26,8 @@
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -76,7 +78,8 @@
 		<div class="pages">
 			<h1 id="headers">Outgoing</h1>
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-				
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Outgoing Product</button>
+			
 			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
 				<option value="" disabled selected hidden>--SELECTA--</option>
 				<option value="?orderBy=prodName">Item</option>
@@ -134,10 +137,77 @@
 					endforeach;
 				?>
 			</table>
+			
+	<div class="modal fade" id="myModal" role="dialog" id="modbutt">
+	    <div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Modal Header</h4>
+	        </div>
+	        <div class="modal-body">
+	        <form action="" method="POST">
+				<h3>Item</h3>
+					<?php
+					$query = $conn->prepare("SELECT prodName FROM product ");
+					$query->execute();
+					$res = $query->fetchAll();
+					?>
 				
-			<form action="addOutgoing.php" target="_blank">
-				<input id="myBtn" type="submit" value="Add Outgoing Product" class="btn btn-default btnAlign">
-			</form>
+					<select class="form-control" id="addEntry" name="prodItem">
+						<?php foreach ($res as $row): ?>
+							<option><?=$row["prodName"]?></option>
+						<?php endforeach ?>
+					</select> 
+					<br>
+					
+					<h3>Quantity</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="outQty"> <br>
+					
+					<h3>Employee</h3>
+					<?php
+						$query = $conn->prepare("SELECT empName FROM employee ");
+						$query->execute();
+						$res = $query->fetchAll();
+					?>
+				
+					<select class="form-control" id="addEntry" name="emp">
+						<?php foreach ($res as $row): ?>
+							<option><?=$row["empName"]?></option>
+						<?php endforeach ?>
+					</select> 
+					<br>
+					
+					<h3>Branch</h3>
+					<?php
+						$query = $conn->prepare("SELECT location FROM branch");
+						$query->execute();
+						$res = $query->fetchAll();
+					?>
+				
+					<select class="form-control" id="addEntry" name="branch">
+						<?php foreach ($res as $row): ?>
+							<option><?=$row["location"]?></option>
+						<?php endforeach ?>
+					</select> 
+					<br>
+					
+					<h3>Remarks</h3>
+				<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
+				
+			<input type="submit" value="Add" class="btn btn-success" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
+			<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
+			</form> 
+			
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -159,6 +229,37 @@
 				</div>
 			</div>
 		</nav>
+
+	<?php
+		
+			if (isset($_POST["addOut"])){
+			
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 			
+				$prod = $_POST['prodItem'];
+				$emp = $_POST['emp'];
+				$branch = $_POST['branch'];
+								
+				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
+				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+				$emp3 = $emp2['empA'];
+						
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
+				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+				$prod3 = $prod2['prodA'];
+				
+				$branch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch'");
+				$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
+				$branch3 = $branch2['branchA'];
+				
+				$sql = "INSERT INTO outgoing (outQty, outDate, outRemarks, branchID, empID, prodID)
+				VALUES ('".$_POST['outQty']."',CURDATE(),'".$_POST['outRemarks']."','$branch3','$emp3','$prod3')";
+				$conn->exec($sql);
+				
+
+			}    
+
+	?>
 	</body>
 </html>
 
