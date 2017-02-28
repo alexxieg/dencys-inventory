@@ -78,8 +78,13 @@
 		<div class="pages">
 			<h1 id="headers">Incoming</h1>
 			
+		
+			<br><button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Incoming Product</button>
+			
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-				
+	
+			
+			
 				<select class="form-control" id="dropdown" name="sortBy" onchange="location = this.value;">
 					<option value="" disabled selected hidden>--SELECTA--</option>
 					<option value="?orderBy=prodName">Item</option>
@@ -97,6 +102,7 @@
 					<option>4</option>
 					<option>5</option>
 				</select>
+				
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th style="text-align:center">The Following Have been added to the Inventory</th>
@@ -140,12 +146,10 @@
 				?>
 				</table>
 				
-			<form action="addIncoming.php" target="_blank">
-				<input id="myBtn" type="submit" value="Add Incoming Product" class="btn btn-default btnAlign">
-			</form>
 			
 			
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button>
+			
+			
 
 			
 			<div class="modal fade" id="myModal" role="dialog">
@@ -153,7 +157,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Add Incoming Product</h4>
         </div>
         <div class="modal-body">
         <form action="" method="POST">
