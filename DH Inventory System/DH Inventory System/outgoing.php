@@ -74,13 +74,16 @@
 				</div>
 			</nav>
 		</div>
-		
+	
+	<div id="tableHeader">
+	<table class="table table-striped table-bordered">	
 		<div class="pages">
+			<tr>
 			<h1 id="headers">Outgoing</h1>
-			<br>		
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search" >
-			
+			</tr>
+					
+		<tr>
+			<td>
 			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
 				<option value="" disabled selected hidden>--SELECTA--</option>
 				<option value="?orderBy=prodName">Item</option>
@@ -89,7 +92,9 @@
 				<option value="?orderBy=empName">Employee Name</option>
 				<option value="?orderBy=location">Location</option>		
 			</select>
-				
+			</td>
+
+			<td>
 			<select class="form-control" id="dropdown" name="sortby">
 				<option>1</option>
 				<option>2</option>
@@ -97,7 +102,18 @@
 				<option>4</option>
 				<option>5</option>
 			</select>
-				
+			</td>
+			
+			<td>			
+			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search" >
+			</td>
+
+			<td>
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
+			</td>
+		</tr>
+	</table>
+	</div>
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th style="text-align:center">The following have been deducted from the Inventory:</th>

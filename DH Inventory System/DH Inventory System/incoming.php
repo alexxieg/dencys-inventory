@@ -75,17 +75,15 @@
 				</div>
 			</nav>
 		</div>	
+	<div id="tableHeader">
+	<table class="table table-striped table-bordered">
 		<div class="pages">
+		<tr>
 			<h1 id="headers">Incoming</h1>
-			
-		
-			<br><button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Incoming Product</button>
-			
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-	
-			
-			
-				<select class="form-control" id="dropdown" name="sortBy" onchange="location = this.value;">
+		</tr>	
+
+		<tr>
+			<td><select class="form-control" id="dropdown" name="sortBy" onchange="location = this.value;">
 					<option value="" disabled selected hidden>--SELECTA--</option>
 					<option value="?orderBy=prodName">Item</option>
 					<option value="?orderBy=inQty">Quantity</option>
@@ -94,15 +92,28 @@
 					<option value="?orderBy=receiptNo">Receipt No.</option>
 					<option value="?orderBy=receiptDate">Receipt Date</option>
 				</select>
+			</td>
 				
-				<select class="form-control" id="dropdown" name="sortby">
+			<td><select class="form-control" id="dropdown" name="sortby">
 					<option>1</option>
 					<option>2</option>
 					<option>3</option>
 					<option>4</option>
 					<option>5</option>
 				</select>
-				
+			</td>
+			
+			<td>
+			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			</td>
+
+			<td>
+			<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Incoming Product</button>
+			</td>
+		</tr>
+		</table>
+	</div>
+
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th style="text-align:center">The Following Have been added to the Inventory</th>
@@ -145,12 +156,6 @@
 					endforeach;
 				?>
 				</table>
-				
-			
-			
-			
-			
-
 			
 		<div class="modal fade" id="myModal" role="dialog">
 		 <div class="modal-dialog modal-lg">
