@@ -153,7 +153,6 @@
 
 			
 			<div class="modal fade" id="myModal" role="dialog">
-<<<<<<< HEAD
 			    <div class="modal-dialog modal-lg">
 			      <div class="modal-content">
 			        <div class="modal-header">
@@ -161,7 +160,6 @@
 			          <h4 class="modal-title">Modal Header</h4>
 			        </div>
 			        <div class="modal-body">
-=======
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -169,7 +167,6 @@
           <h4 class="modal-title">Add Incoming Product</h4>
         </div>
         <div class="modal-body">
->>>>>>> f4c33dc56af441ab0400d166cc1ec4c83096235a
         <form action="" method="POST">
 				<h3>Item</h3>
 				<?php
