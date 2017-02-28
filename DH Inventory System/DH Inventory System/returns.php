@@ -124,21 +124,25 @@
 
 					</tr>
 					
+					
+					
 					<?php
 						foreach ($result as $item):
 					?>
+				
 					<tr>
 						<td><?php echo $item["returnDate"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
 						<td><?php echo $item["returnQty"]; ?></td>
 						<td><?php echo $item["status"]; ?></td>
 						<td><?php echo $item["returnRemark"]; ?></td>
+						
 						<td>
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
 				
-							<button type="button" class="btn btn-default">
+							<button type="button" class="btn btn-default" name="delete">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</button>
 						</td>
@@ -225,6 +229,7 @@
 			</div>
 		</nav>
 
+<<<<<<< HEAD
 
 		<?php
 			if (isset($_POST["addRet"])){
@@ -243,5 +248,8 @@
 			}    
 		?>
 
+=======
+		
+>>>>>>> 25bd77cddf991f5094b0f24ac3bdacfdb7add84d
 	</body>
 </html>
