@@ -75,45 +75,46 @@
 			</nav>
 		</div>
 	
-	<div id="tableHeader">
-	<table class="table table-striped table-bordered">	
 		<div class="pages">
-			<tr>
-			<h1 id="headers">Outgoing</h1>
-			</tr>
-					
-		<tr>
-			<td>
-			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
-				<option value="" disabled selected hidden>--SELECTA--</option>
-				<option value="?orderBy=prodName">Item</option>
-				<option value="?orderBy=outQty">Quantity</option>
-				<option value="?orderBy=outDate">Date</option>
-				<option value="?orderBy=empName">Employee Name</option>
-				<option value="?orderBy=location">Location</option>		
-			</select>
-			</td>
+			<div id="tableHeader">
+				<table class="table table-striped table-bordered">	
+					<tr>
+						<h1 id="headers">Outgoing</h1>
+					</tr>
+							
+					<tr>
+						<td>
+							<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
+								<option value="" disabled selected hidden>--SELECTA--</option>
+								<option value="?orderBy=prodName">Item</option>
+								<option value="?orderBy=outQty">Quantity</option>
+								<option value="?orderBy=outDate">Date</option>
+								<option value="?orderBy=empName">Employee Name</option>
+								<option value="?orderBy=location">Location</option>		
+							</select>
+						</td>
 
-			<td>
-			<select class="form-control" id="dropdown" name="sortby">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-			</td>
+						<td>
+							<select class="form-control" id="dropdown" name="sortby">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</td>
+						
+						<td>			
+							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search" >
+						</td>
+
+						<td>
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
+						</td>
+					</tr>
+				</table>
+			</div>
 			
-			<td>			
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search" >
-			</td>
-
-			<td>
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
-			</td>
-		</tr>
-	</table>
-	</div>
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th style="text-align:center">The following have been deducted from the Inventory:</th>
@@ -158,76 +159,75 @@
 				?>
 			</table>
 			
-	<div class="modal fade" id="myModal" role="dialog">
-	    <div class="modal-dialog modal-lg">
-	      <div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Add Outgoing Product</h4>
-	        </div>
-	        <div class="modal-body">
-	        <form action="" method="POST">
-				<h3>Item</h3>
-					<?php
-					$query = $conn->prepare("SELECT prodName FROM product ");
-					$query->execute();
-					$res = $query->fetchAll();
-					?>
-				
-					<select class="form-control" id="addEntry" name="prodItem">
-						<?php foreach ($res as $row): ?>
-							<option><?=$row["prodName"]?></option>
-						<?php endforeach ?>
-					</select> 
-					<br>
-					
-					<h3>Quantity</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="outQty"> <br>
-					
-					<h3>Employee</h3>
-					<?php
-						$query = $conn->prepare("SELECT empName FROM employee ");
-						$query->execute();
-						$res = $query->fetchAll();
-					?>
-				
-					<select class="form-control" id="addEntry" name="emp">
-						<?php foreach ($res as $row): ?>
-							<option><?=$row["empName"]?></option>
-						<?php endforeach ?>
-					</select> 
-					<br>
-					
-					<h3>Branch</h3>
-					<?php
-						$query = $conn->prepare("SELECT location FROM branch");
-						$query->execute();
-						$res = $query->fetchAll();
-					?>
-				
-					<select class="form-control" id="addEntry" name="branch">
-						<?php foreach ($res as $row): ?>
-							<option><?=$row["location"]?></option>
-						<?php endforeach ?>
-					</select> 
-					<br>
-					
-					<h3>Remarks</h3>
-				<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
-				
-			<input type="submit" value="Add" class="btn btn-success" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
-			<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
-			</form> 
-			
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Add Outgoing Product</h4>
+						</div>
+						<div class="modal-body">
+							<form action="" method="POST">
+								<h3>Item</h3>
+									<?php
+									$query = $conn->prepare("SELECT prodName FROM product ");
+									$query->execute();
+									$res = $query->fetchAll();
+									?>
+								
+									<select class="form-control" id="addEntry" name="prodItem">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["prodName"]?></option>
+										<?php endforeach ?>
+									</select> 
+									<br>
+									
+									<h3>Quantity</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="outQty"> <br>
+									
+									<h3>Employee</h3>
+									<?php
+										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+								
+									<select class="form-control" id="addEntry" name="emp">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["empName"]?></option>
+										<?php endforeach ?>
+									</select> 
+									<br>
+									
+									<h3>Branch</h3>
+									<?php
+										$query = $conn->prepare("SELECT location FROM branch");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+								
+									<select class="form-control" id="addEntry" name="branch">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["location"]?></option>
+										<?php endforeach ?>
+									</select> 
+									<br>
+									
+									<h3>Remarks</h3>
+								<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
+								
+								<input type="submit" value="Add" class="btn btn-success" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
+								<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
+							</form> 
+						</div>
+						
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -250,8 +250,7 @@
 			</div>
 		</nav>
 
-	<?php
-		
+		<?php
 			if (isset($_POST["addOut"])){
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -275,11 +274,8 @@
 				$sql = "INSERT INTO outgoing (outQty, outDate, outRemarks, branchID, empID, prodID)
 				VALUES ('".$_POST['outQty']."',CURDATE(),'".$_POST['outRemarks']."','$branch3','$emp3','$prod3')";
 				$conn->exec($sql);
-				
-
 			}    
-
-	?>
+		?>
 	</body>
 </html>
 

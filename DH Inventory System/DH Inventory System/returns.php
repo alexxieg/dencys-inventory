@@ -31,7 +31,6 @@
   
 	<body>
 		<?php
-		
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			if (!empty($sort)) {
 				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
@@ -72,45 +71,45 @@
 				</div>
 			</nav>
 		</div>	
-	<div id="tableHeader">
-	<table class="table table-striped table-bordered">	
 		<div class="pages">
-			<tr>
-			<h1 id="headers">Returns</h1>	
-			</tr>
+			<div id="tableHeader">
+				<table class="table table-striped table-bordered">	
+					<tr>
+						<h1 id="headers">Returns</h1>	
+					</tr>
 
-		<tr>
-			<td>			
-			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
-			  <option value="" disabled selected hidden>--SELECTA--</option>
-			  <option value="?orderBy=returnDate">Date</option>
-			  <option value="?orderBy=prodName">Item</option>
-			  <option value="?orderBy=returnQty">Quantity</option>
-			  <option value="?orderBy=status">Status</option>
-			</select>
-			</td>
+					<tr>
+						<td>			
+							<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
+							  <option value="" disabled selected hidden>--SELECTA--</option>
+							  <option value="?orderBy=returnDate">Date</option>
+							  <option value="?orderBy=prodName">Item</option>
+							  <option value="?orderBy=returnQty">Quantity</option>
+							  <option value="?orderBy=status">Status</option>
+							</select>
+						</td>
 
-			<td>
-			<select class="form-control" id="dropdown" name="sortby">
-			  <option>1</option>
-			  <option>2</option>
-			  <option>3</option>
-			  <option>4</option>
-			  <option>5</option>
-			</select>
-			</td>
+						<td>
+							<select class="form-control" id="dropdown" name="sortby">
+							  <option>1</option>
+							  <option>2</option>
+							  <option>3</option>
+							  <option>4</option>
+							  <option>5</option>
+							</select>
+						</td>
 
-			<td>
-				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</td>
+						<td>
+							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						</td>
+						
+						<td>
+						<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Returns</button>
+						</td>
+					</tr>
+				</table>
+			</div>
 			
-			<td>
-			<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Returns</button>
-			</td>
-
-		</tr>
-	</table>
-	</div>
 			<div class="prodTable">
 				<br>
 				<table class="table table-striped table-bordered">
@@ -121,10 +120,7 @@
 						<th>Status</th>
 						<th>Remarks</th>
 						<th></th>
-
 					</tr>
-					
-					
 					
 					<?php
 						foreach ($result as $item):
@@ -153,62 +149,58 @@
 					<?php
 						endforeach;
 					?>
-					
 				</table>
 
-		
-			<div class="modal fade" id="myModal" role="dialog">
-		 <div class="modal-dialog modal-lg">
-			 <div class="modal-content">
-			 <div class="modal-header">
-			   <button type="button" class="close" data-dismiss="modal">&times;</button>
-			      <h4 class="modal-title">Add Returns</h4>
-			    </div>
-		<div class="modal-body">
-        <form action="" method="POST">
-				
-				<h3>Item</h3>
-					<?php
-						$query = $conn->prepare("SELECT prodName FROM product ");
-						$query->execute();
-						$res = $query->fetchAll();
-					?>
-				
-					<select class="form-control" id="addEntry" name="prodItem">
-						<?php foreach ($res as $row): ?>
-							<option><?=$row["prodName"]?></option>
-						<?php endforeach ?>
-					</select> 
-					<br>
-					
-					<h3>Quantity</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="retQty"> <br>
-					
-					<div class="form-group">
-					 <h3>Status</h3>
-					  <select class="form-control" id="addEntry" name="status">
-						<option>Returned</option>
-						<option>Pending</option>
-					  </select>
+				<div class="modal fade" id="myModal" role="dialog">
+					 <div class="modal-dialog modal-lg">
+						 <div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add Returns</h4>
+							</div>
+							<div class="modal-body">
+								<form action="" method="POST">
+									<h3>Item</h3>
+									<?php
+										$query = $conn->prepare("SELECT prodName FROM product ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+										
+									<select class="form-control" id="addEntry" name="prodItem">
+										<?php foreach ($res as $row): ?>
+										<option><?=$row["prodName"]?></option>
+										<?php endforeach ?>
+									</select> 
+									<br>
+											
+									<h3>Quantity</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="retQty"> <br>
+									
+									<div class="form-group">
+										<h3>Status</h3>
+										<select class="form-control" id="addEntry" name="status">
+											<option>Returned</option>
+											<option>Pending</option>
+										</select>
+									</div>
+											
+									<h3>Remarks</h3>
+									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
+
+									<br>
+									<input type="submit" value="Add" class="btn btn-default" name="addInc">
+									<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+								</form> 		
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
 					</div>
-					
-					<h3>Remarks</h3>
-					<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
-
-			<br>
-			<input type="submit" value="Add" class="btn btn-default" name="addInc">
-			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
-			</form> 
-			
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-		
+				</div>
+			</div>
+	
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<div class="navbar-header">
@@ -231,8 +223,6 @@
 			</div>
 		</nav>
 
-<<<<<<< HEAD
-
 		<?php
 			if (isset($_POST["addRet"])){
 				
@@ -250,8 +240,5 @@
 			}    
 		?>
 
-=======
-		
->>>>>>> 25bd77cddf991f5094b0f24ac3bdacfdb7add84d
 	</body>
 </html>

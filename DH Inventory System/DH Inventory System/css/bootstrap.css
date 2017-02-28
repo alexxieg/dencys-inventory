@@ -6814,7 +6814,7 @@ button.close {
 .pages {
   margin-top: -18px;
   background-color: white;
-  padding: 0px 20px 100% 20px;
+padding: 0 5% 10% 5%;
 }
 
 
@@ -6929,13 +6929,13 @@ h3{
 }
 
 #dropdown{
-width: 50%;
+width: 25%;
 float:left ;
 margin-bottom: 2%;
 }
 
 #searchBar{
-width:100%;
+width:25%;
 float:right;
 }
 
@@ -6948,6 +6948,3 @@ float: right;
 margin-left: 30px;
 }
 
-#tableHeader{
- margin-top: -2000px;
-}

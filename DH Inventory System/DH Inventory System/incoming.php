@@ -38,11 +38,11 @@
 		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
 				ORDER BY $sort ASC;");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
 				ORDER BY inID ASC;");
 			}
@@ -75,164 +75,163 @@
 				</div>
 			</nav>
 		</div>	
-	<div id="tableHeader">
-	<table class="table table-striped table-bordered">
 		<div class="pages">
-		<tr>
-			<h1 id="headers">Incoming</h1>
-		</tr>	
-
-		<tr>
-			<td><select class="form-control" id="dropdown" name="sortBy" onchange="location = this.value;">
-					<option value="" disabled selected hidden>--SELECTA--</option>
-					<option value="?orderBy=prodName">Item</option>
-					<option value="?orderBy=inQty">Quantity</option>
-					<option value="?orderBy=inDate">Date</option>
-					<option value="?orderBy=supplier_name">Supplier</option>
-					<option value="?orderBy=receiptNo">Receipt No.</option>
-					<option value="?orderBy=receiptDate">Receipt Date</option>
-				</select>
-			</td>
-				
-			<td><select class="form-control" id="dropdown" name="sortby">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-				</select>
-			</td>
-			
-			<td>
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</td>
-
-			<td>
-			<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Incoming Product</button>
-			</td>
-		</tr>
-		</table>
-	</div>
-
+		<div id="tableHeader">
 			<table class="table table-striped table-bordered">
 				<tr>
-					<th style="text-align:center">The Following Have been added to the Inventory</th>
-				</tr>				
-				<tr>
-					<th>Item</th>
-					<th>Quantity</th>
-					<th>Date</th>
-					<th>Supplier</th>
-					<th>Receipt No.</th>
-					<th>Receipt Date</th>
-					<th>Remarks</th>
-					<th></th>
-				</tr>
-					
-				<?php
-					foreach ($result as $item):
-					$incID = $item["inID"];
-				?>
+					<h1 id="headers">Incoming</h1>
+				</tr>	
 
 				<tr>
-					<td><?php echo $item["prodName"]; ?></td>
-					<td><?php echo $item["inQty"]; ?></td>
-					<td><?php echo $item["inDate"]; ?></td>
-					<td><?php echo $item["supplier_name"]; ?></td>
-					<td><?php echo $item["receiptNo"]; ?></td>
-					<td><?php echo $item["receiptDate"]; ?></td>
-					<td><?php echo $item["inRemarks"]; ?></td>
 					<td>
-						<button type="button" class="btn btn-default">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<a href="deleteInc.php?incId=<?php echo $incID; ?>">
-						<button type="button" class="btn btn-default">
-							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-						</button>
-						</a>
-					</td>				
+						<select class="form-control" id="dropdown" name="sortBy" onchange="location = this.value;">
+							<option value="" disabled selected hidden>--SELECTA--</option>
+							<option value="?orderBy=prodName">Item</option>
+							<option value="?orderBy=inQty">Quantity</option>
+							<option value="?orderBy=inDate">Date</option>
+							<option value="?orderBy=supplier_name">Supplier</option>
+							<option value="?orderBy=receiptNo">Receipt No.</option>
+							<option value="?orderBy=receiptDate">Receipt Date</option>
+						</select>
+					</td>
+							
+					<td>
+						<select class="form-control" id="dropdown" name="sortby">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+					</td>
+						
+					<td>
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+					</td>
+					<td>
+						<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Incoming Product</button>
+					</td>
 				</tr>
-					
-				<?php
-					endforeach;
-				?>
-				</table>
-			
-		<div class="modal fade" id="myModal" role="dialog">
-		 <div class="modal-dialog modal-lg">
-			 <div class="modal-content">
-			 <div class="modal-header">
-			   <button type="button" class="close" data-dismiss="modal">&times;</button>
-			      <h4 class="modal-title">Add Incoming Product</h4>
-			    </div>
-		<div class="modal-body">
-        <form action="" method="POST">
-				<h3>Item</h3>
-				<?php
-					$query = $conn->prepare("SELECT prodName FROM product ");
-					$query->execute();
-					$res = $query->fetchAll();
-				?>
-			
-				<select class="form-control" id="addEntry" name="prodItem">
-					<?php foreach ($res as $row): ?>
-						<option><?=$row["prodName"]?></option>
-					<?php endforeach ?>
-				</select> 
-				<br>
-				
-				<h3>Quantity</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="incQty"> <br>
-				
-				<h3>Employee</h3>
-				<?php
-					$query = $conn->prepare("SELECT empName FROM employee ");
-					$query->execute();
-					$res = $query->fetchAll();
-				?>
-			
-				<select class="form-control" id="addEntry" name="emp">
-					<?php foreach ($res as $row): ?>
-						<option><?=$row["empName"]?></option>
-					<?php endforeach ?>
-				</select> 
-				<br>
-				
-				<h3>Supplier</h3>
-				<?php
-					$query = $conn->prepare("SELECT supplier_name FROM suppliers ");
-					$query->execute();
-					$res = $query->fetchAll();
-				?>
-			
-				<select class="form-control" id="addEntry" name="sup">
-					<?php foreach ($res as $row): ?>
-						<option><?=$row["supplier_name"]?></option>
-					<?php endforeach ?>
-				</select> 
-				<br>
-				
-				<h3>Receipt Number</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="inRecN"> <br>
-	
-				<h3>Remarks</h3>
-				<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
-
-			<br>
-			<input type="submit" value="Add" class="btn btn-default" name="addInc">
-			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
-			</form> 
-			
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-			
+			</table>
 		</div>
+			
+		<table class="table table-striped table-bordered">
+			<tr>
+				<th style="text-align:center">The Following Have been added to the Inventory</th>
+			</tr>				
+			<tr>
+				<th>Item</th>
+				<th>Quantity</th>
+				<th>Date</th>
+				<th>Supplier</th>
+				<th>Receipt No.</th>
+				<th>Receipt Date</th>
+				<th>Remarks</th>
+				<th></th>
+			</tr>
+					
+			<?php
+				foreach ($result as $item):
+			?>
+
+			<tr>
+				<td><?php echo $item["prodName"]; ?></td>
+				<td><?php echo $item["inQty"]; ?></td>
+				<td><?php echo $item["inDate"]; ?></td>
+				<td><?php echo $item["supplier_name"]; ?></td>
+				<td><?php echo $item["receiptNo"]; ?></td>
+				<td><?php echo $item["receiptDate"]; ?></td>
+				<td><?php echo $item["inRemarks"]; ?></td>
+				<td>
+					<button type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					</button>
+				
+					<button type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					</button>
+				</td>				
+			</tr>
+					
+			<?php
+				endforeach;
+			?>
+		</table>
+		
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Modal Header</h4>
+					</div>
+					<div class="modal-body">
+						<form action="" method="POST">
+							<h3>Item</h3>
+							<?php
+								$query = $conn->prepare("SELECT prodName FROM product ");
+								$query->execute();
+								$res = $query->fetchAll();
+							?>
+						
+							<select class="form-control" id="addEntry" name="prodItem">
+								<?php foreach ($res as $row): ?>
+									<option><?=$row["prodName"]?></option>
+								<?php endforeach ?>
+							</select> 
+							<br>
+							
+							<h3>Quantity</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="incQty"> <br>
+							
+							<h3>Employee</h3>
+							<?php
+								$query = $conn->prepare("SELECT empName FROM employee ");
+								$query->execute();
+								$res = $query->fetchAll();
+							?>
+						
+							<select class="form-control" id="addEntry" name="emp">
+								<?php foreach ($res as $row): ?>
+									<option><?=$row["empName"]?></option>
+								<?php endforeach ?>
+							</select> 
+							<br>
+							
+							<h3>Supplier</h3>
+							<?php
+								$query = $conn->prepare("SELECT supplier_name FROM suppliers ");
+								$query->execute();
+								$res = $query->fetchAll();
+							?>
+						
+							<select class="form-control" id="addEntry" name="sup">
+								<?php foreach ($res as $row): ?>
+									<option><?=$row["supplier_name"]?></option>
+								<?php endforeach ?>
+							</select> 
+							<br>
+							
+							<h3>Receipt Number</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="inRecN"> <br>
+				
+							<h3>Remarks</h3>
+							<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
+
+							<br>
+							<input type="submit" value="Add" class="btn btn-default" name="addInc">
+							<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+						</form> 			
+					</div>
+				
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+	
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -299,4 +298,3 @@
 	?>
   </body>
 </html>
-

@@ -68,9 +68,9 @@
 				</div>
 			</nav>
 		</div>	
+		<div class="pages">
 	<div id="tableHeader">
 	<table class="table table-striped table-bordered">	
-		<div class="pages">
 		<tr>
 			<h1 id="headers">Products</h1>
 		</tr>
