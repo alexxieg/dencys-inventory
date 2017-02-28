@@ -38,11 +38,11 @@
 		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
 				ORDER BY $sort ASC;");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
 				ORDER BY inID ASC;");
 			}
@@ -131,6 +131,7 @@
 					
 				<?php
 					foreach ($result as $item):
+					$incID = $item["inID"];
 				?>
 
 				<tr>
@@ -145,10 +146,11 @@
 						<button type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
-				
+						<a href="deleteInc.php?incId=<?php echo $incID; ?>">
 						<button type="button" class="btn btn-default">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 						</button>
+						</a>
 					</td>				
 				</tr>
 					
