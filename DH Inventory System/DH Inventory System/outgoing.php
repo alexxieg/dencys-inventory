@@ -77,8 +77,9 @@
 		
 		<div class="pages">
 			<h1 id="headers">Outgoing</h1>
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Outgoing Product</button>
+			<br>		
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
+			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search" >
 			
 			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
 				<option value="" disabled selected hidden>--SELECTA--</option>
@@ -138,7 +139,7 @@
 				?>
 			</table>
 			
-	<div class="modal fade" id="myModal" role="dialog" id="modbutt">
+	<div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog modal-lg">
 	      <div class="modal-content">
 	        <div class="modal-header">
