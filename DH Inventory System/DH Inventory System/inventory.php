@@ -107,6 +107,11 @@
 						<td>
 						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 						</td>
+						<td>
+						<form action="ledger.php">
+						<input id="myBtn" type="submit" value="Ledger">
+					</form>
+						</td>
 					</tr>
 				</table>
 			</div>
