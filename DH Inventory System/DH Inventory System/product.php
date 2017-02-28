@@ -27,6 +27,9 @@
     <link rel="shortcut icon" href="logo.jpg">
     <link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 	<script src="js/bootstrap.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -127,6 +130,62 @@
 						endforeach;
 					?>
 				</table>
+			
+			<form action="addProduct.php" target="_blank">
+				<input id="myBtn" type="submit" value="Add Product" class="btn btn-default btnAlign">
+			</form>
+			
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button>
+
+			
+			<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+		
+   <form action="" method="POST">
+					<h3>Product ID</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodCode"> <br>
+					
+					<h3>Product Name</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodItem"> <br>
+					
+					<h3>Quantity</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodQty"> <br>
+						
+					<h3>Product Type</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Item Type" name="prodType"> <br>
+				
+					<h3>Brand</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Brand" name="prodBrand"> <br>
+					
+					<h3>Price</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodPrice"> <br>
+					
+					<h3>Reorder Level</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodRO"> <br>
+						
+					<br>
+				<input type="submit" value="Add" class="btn btn-success" name="addProd" onclick="alert('New Product Successfully Added');">
+				<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+				</form> 
+				
+						<br>
+			
+			</form> 
+			
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+			
 			</div>	
 		</div>
 			
