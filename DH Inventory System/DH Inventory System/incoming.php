@@ -108,7 +108,7 @@
 			</td>
 
 			<td>
-			<br><button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Incoming Product</button>
+			<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Incoming Product</button>
 			</td>
 		</tr>
 		</table>
