@@ -70,12 +70,15 @@
 				</div>
 			</nav>
 		</div>	
-		
+	<div id="tableHeader">
+	<table class="table table-striped table-bordered">	
 		<div class="pages">
+			<tr>
 			<h1 id="headers">Returns</h1>	
-			
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			
+			</tr>
+
+		<tr>
+			<td>			
 			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
 			  <option value="" disabled selected hidden>--SELECTA--</option>
 			  <option value="?orderBy=returnDate">Date</option>
@@ -83,7 +86,9 @@
 			  <option value="?orderBy=returnQty">Quantity</option>
 			  <option value="?orderBy=status">Status</option>
 			</select>
-			
+			</td>
+
+			<td>
 			<select class="form-control" id="dropdown" name="sortby">
 			  <option>1</option>
 			  <option>2</option>
@@ -91,7 +96,14 @@
 			  <option>4</option>
 			  <option>5</option>
 			</select>
-			
+			</td>
+
+			<td>
+				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			</td>
+		</tr>
+	</table>
+	</div>
 			<div class="prodTable">
 				<br>
 				<table class="table table-striped table-bordered">
