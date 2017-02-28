@@ -6935,10 +6935,16 @@ margin-bottom: 2%;
 }
 
 #searchBar{
-width: 55%;
+width:30%;
 float:right;
 }
 
 .tables  > tr > td{
 border: none;
+}
+
+#modbutt{
+float: right;
+margin-left: 30px;
+
 }
