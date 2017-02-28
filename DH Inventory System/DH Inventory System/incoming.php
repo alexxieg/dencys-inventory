@@ -153,18 +153,8 @@
 
 			
 			<div class="modal fade" id="myModal" role="dialog">
-<<<<<<< HEAD
 
 
-=======
-			    <div class="modal-dialog modal-lg">
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">Modal Header</h4>
-			        </div>
-			        <div class="modal-body">
->>>>>>> bdf359a8032e0ea397bb86f849c69464932147f4
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -172,10 +162,7 @@
           <h4 class="modal-title">Add Incoming Product</h4>
         </div>
         <div class="modal-body">
-<<<<<<< HEAD
 
-=======
->>>>>>> bdf359a8032e0ea397bb86f849c69464932147f4
         <form action="" method="POST">
 				<h3>Item</h3>
 				<?php
