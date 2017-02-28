@@ -34,12 +34,12 @@
 		
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY $sort ASC;");
 			
 			} else {
-				$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY returnID ASC;");
 				
@@ -128,6 +128,7 @@
 					
 					<?php
 						foreach ($result as $item):
+						$retID = $item["returnID"];
 					?>
 				
 					<tr>
@@ -141,10 +142,11 @@
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
-				
+							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
 							<button type="button" class="btn btn-default" name="delete">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</button>
+							</a>
 						</td>
 					</tr>
 					

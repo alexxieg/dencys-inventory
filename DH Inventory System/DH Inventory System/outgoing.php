@@ -38,11 +38,11 @@
 		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY $sort ASC;");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY outID ASC;");
 			}
@@ -131,6 +131,7 @@
 				
 				<?php
 					foreach ($result as $item):
+					$outid = $item["outID"];
 				?>
 
 				<tr>
@@ -144,9 +145,11 @@
 						<button type="button" class="btn btn-default">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
+						<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
 						<button type="button" class="btn btn-default">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 						</button>
+						</a>
 					</td>		
 				</tr>
 					

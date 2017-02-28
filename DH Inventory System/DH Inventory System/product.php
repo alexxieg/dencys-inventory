@@ -121,6 +121,7 @@
 						
 						<?php
 							foreach ($result as $item):
+							$proID = $item["prodID"];
 						?>
 
 						<tr>
@@ -134,10 +135,11 @@
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
-				
-							<button type="button" class="btn btn-default">
-								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</button>
+							<a href="deletePro.php?proId=<?php echo $proID; ?>">
+								<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</a>
 						</td>
 									
 					</tr>
