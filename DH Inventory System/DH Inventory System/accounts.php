@@ -35,7 +35,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel FROM product");
+			$query = $conn->prepare("SELECT userName, password FROM users");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -70,15 +70,16 @@
 			<h1 id="headers">View Accounts</h1>
 					
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			
+			<br>
 				
 			<div class="prodTable">
 				<br>
 				<table class="table table-bordered" id="tables">
 					<tr>
-						<th>Item Code</th>
-						<th>Item</th>
-						<th>Brand</th>
-						<th></th>
+						<th>Username</th>
+						<th>Password</th>
+	
 						<th></th>
 					</tr>
 						
@@ -87,16 +88,20 @@
 						?>
 
 						<tr>
-							<td><?php echo $item["prodID"]; ?></td>
-							<td><?php echo $item["prodName"]; ?></td>
-							<td><?php echo $item["brand"]; ?></td>
-							<td><?php echo $item["type"]; ?></td>
-							<td><?php echo $item["price"]; ?></td>
-							<td><?php echo $item["reorderLevel"]; ?></td>
-							<td><button type="button" class="btn btn-default">Edit</button></td>
-					<td><button type="button" class="btn btn-default">Remove</button></td>				
+							<td><?php echo $item["userName"]; ?></td>
+							<td><?php echo $item["password"]; ?></td>
+					
+							<td>
+								<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								</button>
+						
+								<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</td>		
 									
-					</tr>
+						</tr>
 						
 					<?php
 						endforeach;
