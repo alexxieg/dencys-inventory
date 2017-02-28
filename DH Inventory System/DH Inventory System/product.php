@@ -68,28 +68,44 @@
 				</div>
 			</nav>
 		</div>	
-
+	<div id="tableHeader">
+	<table class="table table-striped table-bordered">	
 		<div class="pages">
+		<tr>
 			<h1 id="headers">Products</h1>
-					
+		</tr>
+		<tr>
+			<td>
+			<select class="form-control" id="dropdown" name="sortby">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			</td>
+
+			<td>		
+			<select class="form-control" id="dropdown" name="sortby">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			</td>
+
+			<td>
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-				
-			<select class="form-control" id="dropdown" name="sortby">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-					
-			<select class="form-control" id="dropdown" name="sortby">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-					
+			</td>
+			
+			<td>
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Product</button>
+			</td>
+		</tr>
+	</table>
+	</div>
+
 			<div class="prodTable">
 				<br>
 				<table class="table table-striped table-bordered">
@@ -130,20 +146,14 @@
 						endforeach;
 					?>
 				</table>
-			
-			<form action="addProduct.php" target="_blank">
-				<input id="myBtn" type="submit" value="Add Product" class="btn btn-default btnAlign">
-			</form>
-			
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button>
 
 			
-			<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Add Product</h4>
         </div>
         <div class="modal-body">
 		
@@ -174,7 +184,7 @@
 				<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 				</form> 
 				
-						<br>
+					<br>
 			
 			</form> 
 			
