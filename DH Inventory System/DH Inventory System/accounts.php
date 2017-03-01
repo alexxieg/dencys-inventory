@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Products</title>
+	<title>Accounts</title>
 	<?php include('dbcon.php'); ?>
 		
 	<?php 
@@ -27,6 +27,10 @@
     <link rel="shortcut icon" href="logo.jpg">
     <link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 	<script src="js/bootstrap.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -35,7 +39,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel FROM product");
+			$query = $conn->prepare("SELECT userName, password FROM users");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -66,19 +70,30 @@
 			</nav>
 		</div>	
 
+	<div id="tableHeader">
+	<table class="table table-striped table-bordered">	
 		<div class="pages">
+		<tr>
 			<h1 id="headers">View Accounts</h1>
-					
+		</tr>
+		<tr>
+			<td>
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			</td>
+
+			<td>
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modButt">Add Account</button>		
+			</td>
+		</tr>
+			<br>
 				
 			<div class="prodTable">
 				<br>
 				<table class="table table-bordered" id="tables">
 					<tr>
-						<th>Item Code</th>
-						<th>Item</th>
-						<th>Brand</th>
-						<th></th>
+						<th>Username</th>
+						<th>Password</th>
+	
 						<th></th>
 					</tr>
 						
@@ -87,23 +102,55 @@
 						?>
 
 						<tr>
-							<td><?php echo $item["prodID"]; ?></td>
-							<td><?php echo $item["prodName"]; ?></td>
-							<td><?php echo $item["brand"]; ?></td>
-							<td><?php echo $item["type"]; ?></td>
-							<td><?php echo $item["price"]; ?></td>
-							<td><?php echo $item["reorderLevel"]; ?></td>
-							<td><button type="button" class="btn btn-default">Edit</button></td>
-					<td><button type="button" class="btn btn-default">Remove</button></td>				
+							<td><?php echo $item["userName"]; ?></td>
+							<td><?php echo $item["password"]; ?></td>
+					
+							<td>
+								<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								</button>
+						
+								<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</td>		
 									
-					</tr>
+						</tr>
 						
 					<?php
 						endforeach;
 					?>
 				</table>
-			</div>	
-		</div>
+
+
+			
+	<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Account</h4>
+        </div>
+        <div class="modal-body">
+        <form action="" method="POST">
+				<h3>Username</h3>
+				<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>
+				
+				<h3>Password</h3>
+				<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
+					
+				<br>
+			<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
+			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+			</form> 
+			
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -116,9 +163,9 @@
 					</button>
 				</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right" id="logout">
-					<li><a href="login.html">Logout</a></li>
-				</ul>
+			<ul class="nav navbar-nav navbar-right" id="logout">
+						<li><a href="logout.php">Logout</a></li>
+					</ul>
 			</div>
 			</div>
 		</nav>

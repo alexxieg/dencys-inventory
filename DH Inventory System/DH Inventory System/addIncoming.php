@@ -25,6 +25,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="logo.jpg">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   
   <body>
@@ -109,7 +111,7 @@
 				<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
 
 			<br>
-			<input type="submit" value="Add" class="btn btn-success" name="addInc" onclick="alert('Incoming Product Successfully Added');">
+			<input type="submit" value="Add" class="btn btn-default" name="addInc">
 			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 			</form> 
 		</div>
@@ -154,7 +156,6 @@
 				$conn->exec($sql);
 */
 			}    
-
 	?>
 	
   </body>

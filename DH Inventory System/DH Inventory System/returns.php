@@ -24,12 +24,26 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="shortcut icon" href="logo.jpg">
 	</head>
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT returns.returnDate, product.prodName, returns.returnQty, returns.status, returns.returnRemarks FROM returns INNER JOIN product ON returns.prodID = product.prodID ORDER BY returnID DESC;");
+		
+			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			if (!empty($sort)) {
+				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+				ORDER BY $sort ASC;");
+			
+			} else {
+				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+				ORDER BY returnID ASC;");
+				
+			}
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -58,20 +72,25 @@
 				</div>
 			</nav>
 		</div>	
-		
+	<div id="tableHeader">
+	<table class="table table-striped table-bordered">	
 		<div class="pages">
+			<tr>
 			<h1 id="headers">Returns</h1>	
-			
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			
-			<select class="form-control" id="dropdown" name="searchby">
-			  <option>1</option>
-			  <option>2</option>
-			  <option>3</option>
-			  <option>4</option>
-			  <option>5</option>
+			</tr>
+
+		<tr>
+			<td>			
+			<select class="form-control" id="dropdown" name="searchby" onchange="location = this.value;">
+			  <option value="" disabled selected hidden>--SELECTA--</option>
+			  <option value="?orderBy=returnDate">Date</option>
+			  <option value="?orderBy=prodName">Item</option>
+			  <option value="?orderBy=returnQty">Quantity</option>
+			  <option value="?orderBy=status">Status</option>
 			</select>
-			
+			</td>
+
+			<td>
 			<select class="form-control" id="dropdown" name="sortby">
 			  <option>1</option>
 			  <option>2</option>
@@ -79,7 +98,19 @@
 			  <option>4</option>
 			  <option>5</option>
 			</select>
+			</td>
+
+			<td>
+				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			</td>
 			
+			<td>
+			<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Returns</button>
+			</td>
+
+		</tr>
+	</table>
+	</div>
 			<div class="prodTable">
 				<br>
 				<table class="table table-striped table-bordered">
@@ -93,23 +124,29 @@
 
 					</tr>
 					
+					
+					
 					<?php
 						foreach ($result as $item):
+						$retID = $item["returnID"];
 					?>
+				
 					<tr>
 						<td><?php echo $item["returnDate"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
 						<td><?php echo $item["returnQty"]; ?></td>
 						<td><?php echo $item["status"]; ?></td>
-						<td><?php echo $item["returnRemarks"]; ?></td>
+						<td><?php echo $item["returnRemark"]; ?></td>
+						
 						<td>
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
-				
-							<button type="button" class="btn btn-default">
+							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
+							<button type="button" class="btn btn-default" name="delete">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</button>
+							</a>
 						</td>
 					</tr>
 					
@@ -118,11 +155,59 @@
 					?>
 					
 				</table>
-			</div>	
-			<form action="addReturn.php" target="_blank">
-				<input id="myBtn" type="submit" value="Add Returns" class="btn btn-default btnAlign">
-			</form>
-		</div>
+
+		
+			<div class="modal fade" id="myModal" role="dialog">
+		 <div class="modal-dialog modal-lg">
+			 <div class="modal-content">
+			 <div class="modal-header">
+			   <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      <h4 class="modal-title">Add Returns</h4>
+			    </div>
+		<div class="modal-body">
+        <form action="" method="POST">
+				
+				<h3>Item</h3>
+					<?php
+						$query = $conn->prepare("SELECT prodName FROM product ");
+						$query->execute();
+						$res = $query->fetchAll();
+					?>
+				
+					<select class="form-control" id="addEntry" name="prodItem">
+						<?php foreach ($res as $row): ?>
+							<option><?=$row["prodName"]?></option>
+						<?php endforeach ?>
+					</select> 
+					<br>
+					
+					<h3>Quantity</h3>
+					<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="retQty"> <br>
+					
+					<div class="form-group">
+					 <h3>Status</h3>
+					  <select class="form-control" id="addEntry" name="status">
+						<option>Returned</option>
+						<option>Pending</option>
+					  </select>
+					</div>
+					
+					<h3>Remarks</h3>
+					<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
+
+			<br>
+			<input type="submit" value="Add" class="btn btn-default" name="addInc">
+			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+			</form> 
+			
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -145,5 +230,28 @@
 				</div>
 			</div>
 		</nav>
+
+<<<<<<< HEAD
+
+		<?php
+			if (isset($_POST["addRet"])){
+				
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+							
+				$prod = $_POST['prodItem'];
+						
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
+				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+				$prod3 = $prod2['prodA'];
+				
+				$sql = "INSERT INTO returns (returnDate, returnQty, status, returnRemark, prodID)
+				VALUES (CURDATE(),'".$_POST['retQty']."','".$_POST['status']."','".$_POST['retRemarks']."','$prod3')";
+				$conn->exec($sql);
+			}    
+		?>
+
+=======
+		
+>>>>>>> 25bd77cddf991f5094b0f24ac3bdacfdb7add84d
 	</body>
 </html>
