@@ -40,7 +40,7 @@
 			if (!empty($sort)) {
 				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
-				ORDER BY $sort ASC;");
+				ORDER BY $sort");
 			} else {
 				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
@@ -120,12 +120,54 @@
 					<th style="text-align:center">The following have been deducted from the Inventory:</th>
 				</tr>
 				<tr>
-					<th>Item</th>
-					<th>Quantity</th>
-					<th>Date</th>
-					<th>Employee</th>
-					<th>Branch</th>	
-					<th>Remarks</th>				
+					<th>
+						Item
+						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						</button>						
+					</th>
+					<th>
+						Quantity
+						<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						</button>
+					</th>
+					<th>
+						Date
+						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						</button>
+					</th>
+					<th>
+						Employee
+						<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						</button>
+					</th>
+					<th>
+						Branch
+						<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						</button>
+					</th>	
+					<th>
+						Remarks
+					</th>					
 					<th></th>
 
 				</tr>
