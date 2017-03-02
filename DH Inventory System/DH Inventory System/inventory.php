@@ -41,7 +41,8 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			if (!empty($sort)) { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
-				FROM product INNER JOIN inventory ON product.prodID = inventory.prodID ORDER BY $sort ASC;");
+				FROM product INNER JOIN inventory ON product.prodID = inventory.prodID 
+				ORDER BY $sort");
 			} else { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
 								FROM product INNER JOIN inventory ON product.prodID = inventory.prodID
@@ -120,10 +121,42 @@
 				
 				<table class="table table-striped table-bordered">
 					<tr>
-						<th><a href="?orderBy=prodID">Item Code</a></th>
-						<th><a href="?orderBy=prodName">Item</a></th>	
-						<th><a href="?orderBy=qty">Quantity</a></th>
-						<th><a href="?orderBy=price">Item Price</a></th>
+						<th>
+							<a href="?orderBy=prodID">Item Code</a>
+							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>
+						</th>
+						<th>
+							<a href="?orderBy=prodName">Item</a>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>
+						</th>	
+						<th>
+							<a href="?orderBy=qty">Quantity</a>
+							<button type="button" class="btn btn-default" value="?orderBy=qty DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=qty ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>
+						</th>
+						<th>
+							<a href="?orderBy=price">Item Price</a>
+							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>
+						</th>
 					</tr>
 					
 					<?php
