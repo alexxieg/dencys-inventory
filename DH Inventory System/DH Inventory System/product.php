@@ -38,7 +38,16 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel FROM product");
+			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			if (!empty($sort)) {
+				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				FROM product
+				ORDER BY $sort");
+			} else {
+				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				FROM product
+				ORDER BY prodID");
+			}
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -111,11 +120,54 @@
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>Item Code</th>
-							<th>Item</th>
-							<th>Brand</th>
-							<th>Type</th>
-							<th>Item Price</th>
-							<th>Reorder Level</th>
+							<th>
+							Item Code
+							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>							
+						</th>
+						<th>
+							Item
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>
+						</th>
+						<th>
+							Brand
+							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>
+						</th>
+						<th>
+							Type
+							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>
+						</th>
+						<th>
+							Item Price
+							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							</button>
+						</th>
+						<th>
+							Reorder Level
+						</th>
 							<th></th>
 						</tr>
 						
