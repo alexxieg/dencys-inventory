@@ -42,10 +42,10 @@
 				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
 				ORDER BY $sort");
-			} else if {
+			} else if (!empty($searching)) {
 				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
-				WHERE ProdName LIKE '%".$searching."%'");
+				WHERE prodName LIKE '%".$searching."%'");
 			} else {
 				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
