@@ -78,83 +78,73 @@
 		</div>
 
 		<div class="pages">
-			<div id="tableHeader">
-				<table class="table table-striped table-bordered">		
-						<tr>
-						<h1 id="headers">Inventory</h1>
-						</tr>
-						
-					<tr>
-						<td>
-						<select class="form-control" id="dropdown" name="sortBy" onchange="location = this.value;">
-							<option value="" disabled selected hidden>--SELECTA--</option>
-							<option value="?orderBy=prodID">Item Code</option>
-							<option value="?orderBy=prodName">Item</option>
-							<option value="?orderBy=qty">Quantity</option>
-							<option value="?orderBy=price">Item Price</option>
-						</select>
-						</td>
-
-						<td>
-						<select class="form-control" id="dropdown" name="sortby">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-						</select>
-						</tD>
-
-						<td>
-						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-						</td>
-						<td>
-						<form action="ledger.php">
-						<input id="myBtn" type="submit" value="Ledger">
-					</form>
-						</td>
-					</tr>
-				</table>
-			</div>
+			
+			<h1 id="headers">INVENTORY</h1>
+					
+					
+			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			<br>
+			<br>
+		
+			
 			<div class="prodTable">
 				<br>
 				
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>
-							<a href="?orderBy=prodID">Item Code</a>
+							<a href="?orderBy=prodID">Product ID</a>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>
 						</th>
+						
 						<th>
-							<a href="?orderBy=prodName">Item</a>
+							<a href="?orderBy=prodName">Product Description</a>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-							</button>
-						</th>	
-						<th>
-							<a href="?orderBy=qty">Quantity</a>
-							<button type="button" class="btn btn-default" value="?orderBy=qty DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=qty ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>
 						</th>
+						
+						<th>
+							IN
+						</th>
+						
+						<th>
+							OUT
+						</th>
+						
+						<th>
+							<a href="?orderBy=qty">Current Quantity</a>
+							<button type="button" class="btn btn-default" value="?orderBy=qty DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=qty ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							</button>
+						</th>
+						
+						<th>
+							Physical Count
+						</th>
+						
+						<th>
+							Unit Type
+						</th>
+						
 						<th>
 							<a href="?orderBy=price">Item Price</a>
 							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>
 						</th>
 					</tr>
@@ -166,16 +156,18 @@
 					<tr>
 						<td><?php echo $item["prodID"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
+						<td></td>
+						<td></td>
 						<td><?php echo $item["qty"]; ?></td>
-						<td><?php echo $item["price"]; ?></td>
-								
+						<td></td>
+						<td></td>
+						<td><?php echo $item["price"]; ?></td>							
 					</tr>
 					
 					<?php
 						endforeach;
 					?>
 				</table>
-		
 			</div>	
 		</div>
 		
