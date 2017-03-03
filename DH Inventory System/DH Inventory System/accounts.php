@@ -70,22 +70,21 @@
 			</nav>
 		</div>	
 
-	<div id="tableHeader">
-	<table class="table table-striped table-bordered">	
 		<div class="pages">
-		
+<<<<<<< HEAD
 			<h1 id="headers">View Accounts</h1>
-		
-		
-			
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			
-
-			
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>		
-			
-		
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>			
 	</table>		
+=======
+			<div id="tableHeader">
+				<table class="table table-striped table-bordered">		
+					<h1 id="headers">View Accounts</h1>
+					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">	
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>							
+				</table>
+			</div>
+>>>>>>> 0b6ee8afa14d3ec5c93cfe8b065cd97f6fc822f5
 				
 			<div class="prodTable">
 				<br>
@@ -121,36 +120,35 @@
 						endforeach;
 					?>
 				</table>
-
-
 			
-	<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Account</h4>
-        </div>
-        <div class="modal-body">
-        <form action="" method="POST">
-				<h3>Username</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>
-				
-				<h3>Password</h3>
-				<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
-					
-				<br>
-			<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
-			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
-			</form> 
-			
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4 class="modal-title">Add Account</h4>
+							</div>
+							<div class="modal-body">
+								<form action="" method="POST">
+										<h3>Username</h3>
+										<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>
+										
+										<h3>Password</h3>
+										<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
+											
+										<br>
+									<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
+									<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+								</form> 
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -162,11 +160,11 @@
 						<span class="icon-bar"></span>
 					</button>
 				</div>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right" id="logout">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" id="logout">
 						<li><a href="logout.php">Logout</a></li>
 					</ul>
-			</div>
+				</div>
 			</div>
 		</nav>
   </body>

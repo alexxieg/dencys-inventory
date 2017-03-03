@@ -101,55 +101,55 @@
 				<th>
 					Item
 					<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
 					<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 					</button>
 				</th>
 				<th>
 					Quantity
 					<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
 					<button type="button" class="btn btn-default" value="?orderBy=inQty ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 					</button>
 				</th>
 				<th>
 					Date
 					<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
 					<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 					</button>
 				</th>
 				<th>
 					Supplier
 					<button type="button" class="btn btn-default" value="?orderBy=supplier_name DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
 					<button type="button" class="btn btn-default" value="?orderBy=supplier_name ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 					</button>
 				</th>
 				<th>
 					Receipt No.
 					<button type="button" class="btn btn-default" value="?orderBy=receiptNo DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
 					<button type="button" class="btn btn-default" value="?orderBy=receiptNo ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 					</button>
 				</th>
 				<th>
 					Receipt Date
 					<button type="button" class="btn btn-default" value="?orderBy=receiptDate DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
 					<button type="button" class="btn btn-default" value="?orderBy=receiptDate ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-top" aria-hidden="true"></span>
 					</button>
 				</th>
 				<th>

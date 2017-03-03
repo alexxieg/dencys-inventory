@@ -108,19 +108,19 @@
 					<th>
 						Item
 						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-top" aria-hidden="true"></span>
 						</button>						
 					</th>
 					<th>
 						Quantity
 						<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-top" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
