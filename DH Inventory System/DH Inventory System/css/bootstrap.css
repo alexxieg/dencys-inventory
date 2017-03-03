@@ -6758,11 +6758,18 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-#login {
+#adminView {
   margin-left: 26%;
   margin-right: 26%;
   margin-top: -10px;
   margin-bottom: 20%;
+}
+
+#adminBtn {
+  margin-left: 0px;
+  font-size: 16px;
+  padding-left: 30px;
+  margin-bottom: -30px;
 }
 
 #manageAcc{
@@ -6770,17 +6777,22 @@ button.close {
   margin-left: 25%;
 }
 
+#login {
+  margin-left: 26%;
+  margin-right: 26%;
+  margin-top: -10px;
+  margin-bottom: 20%;
+}
+
+#form {
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
 #manageProd {
   margin-right: -225px;
   margin-left: 225px;
   margin-top: -292px;
-}
-
-#form {
-  margin-left: 0px;
-  font-size: 16px;
-  padding-left: 30px;
-  margin-bottom: -30px;
 }
 
 #input {
@@ -6793,6 +6805,16 @@ button.close {
 }
 
 .company {
+  background-color: #3b5998;
+  color: #FFFAF0;
+  margin-right: 26%;
+  margin-left: 26%;
+  margin-top: 100px;
+  height: 65px;
+  padding: 10px 15px;
+}
+
+.manageHeader {
   background-color: #3b5998;
   color: #FFFAF0;
   margin-right: 2%;
