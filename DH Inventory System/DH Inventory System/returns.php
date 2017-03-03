@@ -116,7 +116,7 @@
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
 							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
-							<button type="button" class="btn btn-default" name="delete">
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</button>
 							</a>
@@ -214,7 +214,8 @@
 				$sql = "INSERT INTO returns (returnDate, returnQty, status, returnRemark, prodID)
 				VALUES (CURDATE(),'".$_POST['retQty']."','".$_POST['status']."','".$_POST['retRemarks']."','$prod3')";
 				$conn->exec($sql);
-			}    
+				echo "<meta http-equiv='refresh' content='0'>";
+			}   
 		?>
 
 	</body>

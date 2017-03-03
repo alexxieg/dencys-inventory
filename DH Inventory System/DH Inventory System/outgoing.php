@@ -291,6 +291,7 @@
 				$sql = "INSERT INTO outgoing (outQty, outDate, outRemarks, branchID, empID, prodID)
 				VALUES ('".$_POST['outQty']."',CURDATE(),'".$_POST['outRemarks']."','$branch3','$emp3','$prod3')";
 				$conn->exec($sql);
+				echo "<meta http-equiv='refresh' content='0'>";
 			}    
 		?>
 	</body>
