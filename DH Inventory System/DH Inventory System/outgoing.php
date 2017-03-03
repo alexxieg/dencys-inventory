@@ -189,7 +189,7 @@
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
 						<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
-						<button type="button" class="btn btn-default">
+						<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 						</button>
 						</a>
