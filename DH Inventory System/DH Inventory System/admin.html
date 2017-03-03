@@ -39,28 +39,42 @@
 		</nav>
 		
 		<center><img src="logo.jpg" alt="logo" id="logo"/></center>
-		<div align="center">
-		<div id="manageAcc">
-		<div class="company">
-			<h3 id="is">Manage</h3>
-		</div>
-		<div class="jumbotron" id="login">
-			<div class="container" id="form">							  
-				<div class="form-group">
-					<form action="accounts.php">
-						<input id="myBtn" type="submit" value="View Accounts">
-					</form>
-					<form action="product.php">
-						<input id="myBtn" type="submit" value="View Products">
-					</form>
+		<div>
+			<div id="manageAcc">
+				<div class="company">
+					<h3 id="is">Manage</h3>
 				</div>
-			</div>				
-		</div>
-		</div>
+			</div>
+			<div class="jumbotron" id="login">
+				<div class="container" id="form">							  
+					<div class="form-group">
+						<form action="accounts.php">
+							<input id="myBtn" type="submit" value="View Accounts">
+						</form>
+						<form action="product.php">
+							<input id="myBtn" type="submit" value="View Products">
+						</form>
+					</div>
+				</div>				
+			</div>
 		</div>
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" id="logout">
+						<li><a href="logout.php">Logout</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-left" id="report">
+						<li><a href="report.html">Print Report</a></li>
+					</ul>
 				</div>
 			</div>
 		</nav>

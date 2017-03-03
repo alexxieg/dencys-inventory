@@ -6759,14 +6759,15 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 #login {
-  margin-left: 460px;
-  margin-right: 460px;
+  margin-left: 26%;
+  margin-right: 26%;
   margin-top: -10px;
+  margin-bottom: 20%;
 }
 
 #manageAcc{
-  margin-left: -225px;
-  margin-right: 225px;
+  margin-right: 25%;
+  margin-left: 25%;
 }
 
 #manageProd {
@@ -6794,8 +6795,8 @@ button.close {
 .company {
   background-color: #3b5998;
   color: #FFFAF0;
-  margin-right: 460px;
-  margin-left: 460px;
+  margin-right: 2%;
+  margin-left: 2%;
   margin-top: 100px;
   height: 65px;
   padding: 10px 15px;
@@ -6946,5 +6947,9 @@ border: none;
 #modbutt{
 float: right;
 margin-left: 30px;
+}
+
+#myBtn {
+  width: 15%;
 }
 
