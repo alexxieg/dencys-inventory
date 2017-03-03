@@ -39,12 +39,16 @@
 	<body >
 		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
 				FROM product INNER JOIN inventory ON product.prodID = inventory.prodID 
 				ORDER BY $sort");
-			} else { 
+			} else if (!empty($searching)) { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
+				FROM product INNER JOIN inventory ON product.prodID = inventory.prodID 
+				WHERE prodName LIKE '%".$searching."%'");
+			} else {$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
 								FROM product INNER JOIN inventory ON product.prodID = inventory.prodID
 								ORDER BY prodID ASC;");
 			}	
@@ -82,7 +86,12 @@
 			<h1 id="headers">INVENTORY</h1>
 					
 					
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			<form action="?" method="post">
+				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				<button type="submit" name="submit">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</form>
 			<br>
 			<br>
 		

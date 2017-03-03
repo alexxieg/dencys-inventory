@@ -37,10 +37,15 @@
 	<body>
 		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
 				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY $sort");
+			} else if (!empty($searching)) {
+				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
+				WHERE prodName LIKE '%".$searching."%'");
 			} else {
 				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
@@ -83,7 +88,12 @@
 
 
 					
-							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search" >
+							<form action="?" method="post">
+								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+								<button type="submit" name="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</form>
 						
 							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
 						

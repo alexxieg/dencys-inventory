@@ -32,11 +32,16 @@
 	<body>
 		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
 				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY $sort ASC;");
 			
+			} else if (!empty($searching)) {
+				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+				WHERE prodName LIKE '%".$searching."%'");
 			} else {
 				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
@@ -77,9 +82,12 @@
 					
 						<h1 id="headers">Returns</h1>	
 					
-							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-						
-						
+							<form action="?" method="post">
+								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+								<button type="submit" name="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</form>
 						
 						<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Returned Product</button>
 						

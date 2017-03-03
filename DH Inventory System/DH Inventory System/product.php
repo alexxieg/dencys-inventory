@@ -39,10 +39,15 @@
 	<body>
 		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
 				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
 				FROM product
 				ORDER BY $sort");
+			} else if (!empty($searching)) {
+				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				FROM product
+				WHERE prodName LIKE '%".$searching."%'");
 			} else {
 				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
 				FROM product
@@ -83,7 +88,12 @@
 		
 			<h1 id="headers">Products</h1>
 		
-			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			<form action="?" method="post">
+				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				<button type="submit" name="submit">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</form>
 			
 			
 			
