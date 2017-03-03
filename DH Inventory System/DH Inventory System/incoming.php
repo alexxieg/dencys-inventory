@@ -331,6 +331,7 @@
 				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
 				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."','$emp3','$prod3','$sup3')";
 				$conn->exec($sql);
+				echo "<meta http-equiv='refresh' content='0'>";
 				
 /*				$emp1 = $conn->prepare("SELECT empID AS emp FROM employee WHERE empName = '$emp'");
 				$emp1->execute();
