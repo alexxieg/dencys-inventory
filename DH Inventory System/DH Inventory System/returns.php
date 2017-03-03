@@ -80,7 +80,7 @@
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
 					
-						<h1 id="headers">Returns</h1>	
+						<h1 id="headers">RETURNED PRODUCTS</h1>	
 					
 							<form action="?" method="post">
 								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
