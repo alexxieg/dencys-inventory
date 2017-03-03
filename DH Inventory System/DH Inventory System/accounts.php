@@ -73,18 +73,9 @@
 	<div id="tableHeader">
 	<table class="table table-striped table-bordered">	
 		<div class="pages">
-		
 			<h1 id="headers">View Accounts</h1>
-		
-		
-			
 			<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			
-
-			
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>		
-			
-		
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>			
 	</table>		
 				
 			<div class="prodTable">
