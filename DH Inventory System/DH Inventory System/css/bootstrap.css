@@ -6895,7 +6895,7 @@ padding: 0 5% 10% 5%;
 
 #headers{
   color: #000000;
-  margin-top: 5%;
+  margin: 5% 0 2% 0;
 }
 
 .loginbtn {
@@ -6935,8 +6935,8 @@ margin-bottom: 2%;
 }
 
 #searchBar{
-width:50%;
-float:right;
+width:25%;
+float: right;
 }
 
 .tables  > tr > td{
