@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2017 at 05:31 AM
+-- Generation Time: Mar 03, 2017 at 09:57 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -129,6 +129,7 @@ INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `receiptNo`, `receiptDate`, `
 CREATE TABLE `inventory` (
   `invID` int(11) NOT NULL,
   `qty` int(11) DEFAULT NULL,
+  `phyCount` int(5) DEFAULT NULL,
   `prodID` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -136,27 +137,27 @@ CREATE TABLE `inventory` (
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`invID`, `qty`, `prodID`) VALUES
-(1, 15, 'AGPPT001'),
-(2, 20, 'AGPPT002'),
-(3, 20, 'AGPPT003'),
-(4, 10, 'AGPPT004'),
-(5, 25, 'AGPPT005'),
-(6, 5, 'AGPPT006'),
-(7, 15, 'AGPPT007'),
-(8, 15, 'AGPPT008'),
-(9, 15, 'AGPPT009'),
-(10, 10, 'AGPPT010'),
-(11, 10, 'AGPPT011'),
-(12, 10, 'AGPPT012'),
-(13, 15, 'HTCPT001'),
-(14, 15, 'HTCPT002'),
-(15, 25, 'HTCPT003'),
-(16, 10, 'HTCPT004'),
-(17, 15, 'HTCPT005'),
-(18, 15, 'HTCPT006'),
-(19, 15, 'HTCPT007'),
-(20, 15, 'HTCPT008');
+INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `prodID`) VALUES
+(1, 15, NULL, 'AGPPT001'),
+(2, 20, NULL, 'AGPPT002'),
+(3, 20, NULL, 'AGPPT003'),
+(4, 10, NULL, 'AGPPT004'),
+(5, 25, NULL, 'AGPPT005'),
+(6, 5, NULL, 'AGPPT006'),
+(7, 15, NULL, 'AGPPT007'),
+(8, 15, NULL, 'AGPPT008'),
+(9, 15, NULL, 'AGPPT009'),
+(10, 10, NULL, 'AGPPT010'),
+(11, 10, NULL, 'AGPPT011'),
+(12, 10, NULL, 'AGPPT012'),
+(13, 15, NULL, 'HTCPT001'),
+(14, 15, NULL, 'HTCPT002'),
+(15, 25, NULL, 'HTCPT003'),
+(16, 10, NULL, 'HTCPT004'),
+(17, 15, NULL, 'HTCPT005'),
+(18, 15, NULL, 'HTCPT006'),
+(19, 15, NULL, 'HTCPT007'),
+(20, 15, NULL, 'HTCPT008');
 
 -- --------------------------------------------------------
 
@@ -201,6 +202,7 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `branchID`, 
 CREATE TABLE `product` (
   `prodID` varchar(10) NOT NULL,
   `prodName` varchar(100) NOT NULL,
+  `model` varchar(45) DEFAULT NULL,
   `type` varchar(25) NOT NULL,
   `brand` varchar(25) NOT NULL,
   `price` decimal(11,0) NOT NULL,
@@ -211,27 +213,81 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`prodID`, `prodName`, `type`, `brand`, `price`, `reorderLevel`) VALUES
-('AGPPT001', 'AGP AM5000 Bucket Mixer 1000W', 'Powertools', 'AGP', '60000', 5),
-('AGPPT002', 'T328 Turbine Paint 1400W', 'Powertools', 'AGP', '45150', 5),
-('AGPPT003', 'VR600 Concrete Vibrator', 'Powertools', 'AGP', '35150', 5),
-('AGPPT004', 'VRN1400 Concrete Vibrator', 'Powertools', 'AGP', '48800', 5),
-('AGPPT005', 'CS180 Wall Chaser 1800W', 'Powertools', 'AGP', '41750', 5),
-('AGPPT006', 'D65 Drain Cleaning Machine 800W', 'Powertools', 'AGP', '97600', 5),
-('AGPPT007', 'DE25 Wet/Dry Vacuum Dust Extractor 1200W', 'Powertools', 'AGP', '46250', 5),
-('AGPPT008', 'DG50L Die Grinder (Low Speed Mode) 1200W', 'Powertools', 'AGP', '18500', 5),
-('AGPPT009', 'EP5LFB Stone Grinder 1200W', 'Powertools', 'AGP', '42200', 5),
-('AGPPT010', 'EV21 Electric Mixer/Drill 1100W', 'Powertools', 'AGP', '11800', 5),
-('AGPPT011', 'PM021 Airless Sprayer Elect Piston Pump', 'Powertools', 'AGP', '137500', 5),
-('AGPPT012', 'SG6 Straight Grinder 1600W', 'Powetools', 'AGP', '20950', 5),
-('HTCPT001', 'DH38SS Rotary Hammer Hex 2-Mode 38MM 950W', 'Powertools', 'Hitachi', '15000', 5),
-('HTCPT002', 'B16RM Drill Press', 'Powertools', 'Hitachi', '22500', 5),
-('HTCPT003', 'C10FCE2 Compound Miter Saw 10" 255MM 1520W', 'Powertools', 'Hitachi', '10200', 5),
-('HTCPT004', 'C12RSH Slide Compound Miter Saw 1600W', 'Powertools', 'Hitachi', '38500', 5),
-('HTCPT005', 'CG40EAS Brushcutter Bike Type Handle 1.31KW', 'Powertools', 'Hitachi', '10500', 25),
-('HTCPT006', 'CJ110MV Jigsaw Variable Speed w/ Pendulum 720W 110MM', 'Powertools', 'Hitachi', '5400', 5),
-('HTCPT007', 'D10MV Drill Variable Speed Reversible 3/8" 10MM', 'Powertools', 'Hitachi', '2500', 25),
-('HTCPT008', 'D10VST Drill Variable Speed Reversible 10MM 3/8"', 'Powertools', 'Hitachi', '1700', 25);
+INSERT INTO `product` (`prodID`, `prodName`, `model`, `type`, `brand`, `price`, `reorderLevel`) VALUES
+('AGPPT001', 'Bucket Mixer 1000W', 'AM5000 ', 'Powertools', 'AGP', '60000', 5),
+('AGPPT002', 'Turbine Paint 1400W', 'T328 ', 'Powertools', 'AGP', '45150', 5),
+('AGPPT003', 'Concrete Vibrator', 'VR600 ', 'Powertools', 'AGP', '35150', 5),
+('AGPPT004', 'Concrete Vibrator', 'VRN1400 ', 'Powertools', 'AGP', '48800', 5),
+('AGPPT005', 'Wall Chaser 1800W', 'CS180 ', 'Powertools', 'AGP', '41750', 5),
+('AGPPT006', 'Drain Cleaning Machine 800W', 'D65', 'Powertools', 'AGP', '97600', 5),
+('AGPPT007', 'Wet/Dry Vacuum Dust Extractor 1200W', 'DE25 ', 'Powertools', 'AGP', '46250', 5),
+('AGPPT008', 'Die Grinder (Low Speed Mode) 1200W', 'DG50L ', 'Powertools', 'AGP', '18500', 5),
+('AGPPT009', 'Stone Grinder 1200W', 'EP5LFB ', 'Powertools', 'AGP', '42200', 5),
+('AGPPT010', 'Electric Mixer/Drill 1100W', 'EV21 ', 'Powertools', 'AGP', '11800', 5),
+('AGPPT011', 'Airless Sprayer Elect Piston Pump', 'PM021 ', 'Powertools', 'AGP', '137500', 5),
+('AGPPT012', 'Straight Grinder 1600W', 'SG6 ', 'Powetools', 'AGP', '20950', 5),
+('HTCPT001', 'Rotary Hammer Hex 2-Mode 38MM 950W', 'DH38SS ', 'Powertools', 'Hitachi', '15000', 5),
+('HTCPT002', 'Drill Press', 'B16RM ', 'Powertools', 'Hitachi', '22500', 5),
+('HTCPT003', 'Compound Miter Saw 10" 255MM 1520W', 'C10FCE2', 'Powertools', 'Hitachi', '10200', 5),
+('HTCPT004', 'Slide Compound Miter Saw 1600W', 'C12RSH ', 'Powertools', 'Hitachi', '38500', 5),
+('HTCPT005', 'Brushcutter Bike Type Handle 1.31KW', 'CG40EAS ', 'Powertools', 'Hitachi', '10500', 25),
+('HTCPT006', 'Jigsaw Variable Speed w/ Pendulum 720W 110MM', 'CJ110MV ', 'Powertools', 'Hitachi', '5400', 5),
+('HTCPT007', 'Drill Variable Speed Reversible 3/8" 10MM', 'D10MV ', 'Powertools', 'Hitachi', '2500', 25),
+('HTCPT008', 'Drill Variable Speed Reversible 10MM 3/8"', 'D10VST ', 'Powertools', 'Hitachi', '1700', 25),
+('LTSAC001', 'Masonry Drill Bit 3MM 1/8"', 'LMDB030', 'Accessories', 'Lotus', '20', 25),
+('LTSAC002', 'Masonry Drill Bit 4MM 5/32"', 'LMDB040', 'Accessories', 'Lotus', '30', 50),
+('LTSAC003', 'Masonry Drill Bit 5MM 3/16"', 'LMDB050', 'Accessories', 'Lotus', '40', 50),
+('LTSAC004', 'Masonry Drill Bit  6MM 1/4"', 'LMDB060', 'Accessories', 'Lotus', '50', 50),
+('LTSAC005', 'Masonry Drill Bit 6.5MM 1/4"', 'LMDB065', 'Accessories', 'Lotus', '50', 25),
+('LTSAC006', 'Masonry Drill Bit 7MM 9/32"', 'LMDB070', 'Accessories', 'Lotus', '50', 25),
+('LTSAC007', 'Masonry Drill Bit 8MM 5/16"', 'LMDB080', 'Accessories', 'Lotus', '60', 25),
+('LTSAC008', 'Masonry Drill Bit 9MM 11/32"', 'LMDB090', 'Accessories', 'Lotus', '70', 25),
+('LTSAC009', 'Masonry Drill Bit 10MM 3/8"', 'LMDB100', 'Accessories', 'Lotus', '80', 25),
+('LTSAC010', 'Masonry Drill Bit 11MM 7/16"', 'LMDB110', 'Accessories', 'Lotus', '80', 25),
+('LTSAC011', 'Masonry Drill Bit 13MM 1/2"', 'LMDB130', 'Accessories', 'Lotus', '90', 25),
+('LTSAC012', 'Masonry Drill Bit 16MM 5/8"', 'LMDB160', 'Accessories', 'Lotus', '140', 25),
+('LTSAC013', 'Masonry drill bit 19MM 3/4"', 'LMDB190', 'Accessories', 'Lotus', '190', 25),
+('LTSAC014', 'Hss-Cobalt Drill Bit Tube 3MM 7/64"', 'LCDB030B', 'Accessories', 'Lotus', '380', 20),
+('LTSAC015', 'Hss-Cobalt Drill Bit Tube 3.2MM 1/8"', 'LCDB032B', 'Accessories', 'Lotus', '420', 20),
+('LTSAC016', 'Hss-Cobalt Drill Bit Tube 3.5MM 9/64"', 'LCDB035B', 'Accessories', 'Lotus', '460', 20),
+('LTSAC017', 'Hss-Cobalt Drill Bit Tube 4MM 5/32"', 'LCDB040B', 'Accessories', 'Lotus', '400', 20),
+('LTSAC018', 'Hss-Cobalt Drill Bit Tube 5MM 3/16"', 'LCDB050B', 'Accessories', 'Lotus', '900', 20),
+('LTSAC019', 'Hss-Cobalt Drill Bit Tube 5.5MM 7/32"', 'LCDB055B', 'Accessories', 'Lotus', '950', 20),
+('LTSAC020', 'Hss-Cobalt Drill Bit Tube 6MM 15/64"', 'LCDB060B', 'Accessories', 'Lotus', '1500', 20),
+('LTSAC021', 'Hss-Cobalt Drill Bit 7/64"', 'LCDB030', 'Accessories', 'Lotus', '45', 10),
+('LTSAC022', 'Hss-Cobalt Drill Bit 1/8"', 'LCDB032', 'Accessories', 'Lotus', '50', 10),
+('LTSAC023', 'Hss-Cobalt Drill Bit 5/32"', 'LCDB040', 'Accessories', 'Lotus', '60', 10),
+('LTSAC024', 'Hss-Cobalt Drill Bit 3/16"', 'LCDB050', 'Accessories', 'Lotus', '90', 10),
+('LTSAC025', 'Hss-Cobalt Drill Bit 7/32"', 'LCDB055', 'Accessories', 'Lotus', '110', 10),
+('LTSAC026', 'Hss-Cobalt Drill Bit 15/16"', 'LCDB060', 'Accessories', 'Lotus', '100', 10),
+('LTSAC027', 'Hss-Cobalt Drill Bit 5/16"', 'LCDB080', 'Accessories', 'Lotus', '230', 10),
+('LTSAC028', 'Hss-Cobalt Drill Bit 11/32"', 'LCDB090', 'Accessories', 'Lotus', '270', 10),
+('LTSAC029', 'Hss-Cobalt Drill Bit 23/64"', 'LCDB095', 'Accessories', 'Lotus', '250', 10),
+('LTSAC030', 'Hss-Cobalt Drill Bit 3/8"', 'LCDB0100', 'Accessories', 'Lotus', '390', 10),
+('LTSAC031', 'Hss-Cobalt Drill Bit 1/2"', 'LCDB0130', 'Accessories', 'Lotus', '620', 10),
+('LTSAC032', 'Hss-g(Grounded) Drill Bit 1.5MM 3/64"', 'LHDB015', 'Accessories', 'Lotus', '35', 40),
+('LTSAC033', 'Hss-g(Grounded) Drill Bit 2MM 5/64"', 'LHDB020', 'Accessories', 'Lotus', '40', 40),
+('LTSAC034', 'Hss-g(Grounded) Drill Bit 2.5MM 3/32"', 'LHDB025', 'Accessories', 'Lotus', '40', 40),
+('LTSAC035', 'Hss-g(Grounded) Drill Bit 3MM 7/64"', 'LHDB030', 'Accessories', 'Lotus', '40', 40),
+('LTSAC036', 'Hss-g(Grounded) Drill Bit 3.2MM 1/18"', 'LHDB032', 'Accessories', 'Lotus', '40', 40),
+('LTSAC037', 'Hss-g(Grounded) Drill Bit 3.5MM 9/64"', 'LHDB035', 'Accessories', 'Lotus', '45', 40),
+('LTSAC038', 'Hss-g(Grounded) Drill Bit 4MM 5/32"', 'LHDB040', 'Accessories', 'Lotus', '50', 50),
+('LTSAC039', 'Hss-g(Grounded) Drill Bit 5MM 3/16"', 'LHDB050', 'Accessories', 'Lotus', '55', 50),
+('LTSAC040', 'Hss-g(Grounded) Drill Bit 6MM 15/64"', 'LHDB060', 'Accessories', 'Lotus', '65', 50),
+('LTSAC041', 'Hss-g(Grounded) Drill Bit 6.5MM 1/4"', 'LHDB065', 'Accessories', 'Lotus', '100', 50),
+('LTSAC042', 'Hss-g(Grounded) Drill Bit 7MM 17/64"', 'LHDB070', 'Accessories', 'Lotus', '130', 25),
+('LTSAC043', 'Hss-g(Grounded) Drill Bit 8MM 5/16"', 'LHDB080', 'Accessories', 'Lotus', '90', 25),
+('LTSAC044', 'Hss-g(Grounded) Drill Bit 9.5MM 23/64"', 'LHDB095', 'Accessories', 'Lotus', '110', 25),
+('LTSAC045', 'Hss-g(Grounded) Drill Bit 10MM 3/8"', 'LHDB100', 'Accessories', 'Lotus', '250', 25),
+('LTSAC046', 'Hss-g(Grounded) Drill Bit 11mm 7/16"', 'LHDB110', 'Accessories', 'Lotus', '220', 20),
+('LTSAC047', 'Hss-g(Grounded) Drill Bit 13MM 1/2"', 'LHDB130', 'Accessories', 'Lotus', '420', 20),
+('LTSAC048', 'Carbon Brush', 'LAG115N38', 'Accessories', 'Lotus', '90', 20),
+('LTSAC049', 'Carbon Brush', 'LID10REN22', 'Accessories', 'Lotus', '90', 20),
+('LTSAC050', 'Carbon Brush', 'LID13REN23', 'Accessories', 'Lotus', '90', 20),
+('LTSAC051', 'Carbon Brush', 'LPK180N32', 'Accessories', 'Lotus', '150', 20),
+('LTSAC052', 'Carbon Brush', 'LID13REP21', 'Accessories', 'Lotus', '20', 20),
+('LTSAC053', 'Carbon Brush', 'LAG115CH-45', 'Accessories', 'Lotus', '110', 20),
+('LTSAC054', 'Carbon Brush', 'LAG115SSN29', 'Accessories', 'Lotus', '90', 20);
 
 -- --------------------------------------------------------
 
