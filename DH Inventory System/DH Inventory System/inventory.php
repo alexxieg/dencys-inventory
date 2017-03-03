@@ -41,7 +41,6 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
-<<<<<<< HEAD
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
 										FROM product INNER JOIN inventory ON product.prodID = inventory.prodID INNER JOIN incoming ON product.prodID = incoming.prodID INNER JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, qty
@@ -49,19 +48,7 @@
 			} else { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
 										FROM product INNER JOIN inventory ON product.prodID = inventory.prodID INNER JOIN incoming ON product.prodID = incoming.prodID INNER JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, qty
-=======
-				$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
-				FROM product INNER JOIN inventory ON product.prodID = inventory.prodID 
-				ORDER BY $sort");
-			} else if (!empty($searching)) { 
-				$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
-				FROM product INNER JOIN inventory ON product.prodID = inventory.prodID 
-				WHERE prodName LIKE '%".$searching."%'");
-			} else {$query = $conn->prepare("SELECT product.prodID, product.prodName,inventory.qty, product.price 
-								FROM product INNER JOIN inventory ON product.prodID = inventory.prodID
->>>>>>> 30b8fb54ee648e84e13a326ddbe0521b09a1c21b
-								ORDER BY prodID ASC;");
+										GROUP BY prodID, qty");
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
