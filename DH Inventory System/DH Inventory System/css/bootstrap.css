@@ -6937,7 +6937,7 @@ margin-bottom: 2%;
 
 #searchBar{
 width:25%;
-float: right;
+float: left;
 }
 
 .tables  > tr > td{
@@ -6947,6 +6947,8 @@ border: none;
 #modbutt{
 float: right;
 margin-left: 30px;
+
+
 }
 
 #myBtn {
