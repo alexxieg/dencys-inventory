@@ -84,7 +84,7 @@
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
 
-							<h1 id="headers">Outgoing</h1>
+							<h1 id="headers">OUTGOING PRODUCTS</h1>
 
 
 					
@@ -102,16 +102,19 @@
 			
 			<table class="table table-striped table-bordered">
 				<tr>
-					<th style="text-align:center">The following have been deducted from the Inventory:</th>
+					<th style="text-align:center" colspan="8">THE FOLLOWING HAVE BEEN DEDUCTED FROM THE INVENTORY</th>
 				</tr>
 				<tr>
 					<th>
-						Item
+						Product ID
+					</th>
+					<th>
+						Product Description
 						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
 							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>						
 					</th>
 					<th>
@@ -120,34 +123,34 @@
 							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Date
 						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Employee
 						<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Branch
 						<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>	
 					<th>
@@ -163,6 +166,7 @@
 				?>
 
 				<tr>
+					<td></td>
 					<td><?php echo $item["prodName"]; ?></td>
 					<td><?php echo $item["outQty"]; ?></td>
 					<td><?php echo $item["outDate"]; ?></td>

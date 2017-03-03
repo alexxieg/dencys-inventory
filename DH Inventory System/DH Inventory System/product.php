@@ -86,7 +86,7 @@
 	<div id="tableHeader">
 	<table class="table table-striped table-bordered">	
 		
-			<h1 id="headers">Products</h1>
+			<h1 id="headers">PRODUCTS</h1>
 		
 			<form action="?" method="post">
 				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
@@ -107,16 +107,19 @@
 				<br>
 				<table class="table table-striped table-bordered">
 					<tr>
-						<th>Product Code</th>
+						<th>Product ID</th>
 						
 						<th>
-							Item Description
+							Product Description
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
 							</button>							
+						</th>
+						<th>
+							Model
 						</th>
 						<th>
 							Brand
@@ -166,6 +169,7 @@
 						<tr>
 							<td><?php echo $item["prodID"]; ?></td>
 							<td><?php echo $item["prodName"]; ?></td>
+							<td></td>
 							<td><?php echo $item["brand"]; ?></td>
 							<td><?php echo $item["type"]; ?></td>
 							<td><?php echo $item["price"]; ?></td>

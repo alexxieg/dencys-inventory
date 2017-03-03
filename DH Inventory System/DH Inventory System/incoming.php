@@ -84,7 +84,7 @@
 		<div id="tableHeader">
 			<table class="table table-striped table-bordered">
 				
-					<h1 id="headers">Incoming</h1>
+					<h1 id="headers">INCOMING PRODUCTS</h1>
 				
 
 				
@@ -98,7 +98,7 @@
 					
 					
 						
-					
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 			
 			</table>
 		</div>
