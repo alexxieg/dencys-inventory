@@ -91,13 +91,13 @@
 						
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-							<button type="submit" name="submit">
+							<button type="submit" class="btn btn-default" name="submit">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</form>
 					
 					
-						<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Incoming Product</button>
+						
 					
 			
 			</table>
@@ -105,17 +105,23 @@
 			
 		<table class="table table-striped table-bordered">
 			<tr>
-				<th style="text-align:center">The Following Have been added to the Inventory</th>
+				<th style="text-align:center" colspan="10">THE FOLLOWING HAVE BEEN ADDED TO THE INVENTORY</th>
 			</tr>				
 			<tr>
 				<th>
-					Item
+					Product ID
+				</th>
+				<th>
+					Product Description
 					<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
 						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
 					<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
 						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 					</button>
+				</th>
+				<th>
+					Model
 				</th>
 				<th>
 					Quantity
@@ -136,15 +142,6 @@
 					</button>
 				</th>
 				<th>
-					Supplier
-					<button type="button" class="btn btn-default" value="?orderBy=supplier_name DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=supplier_name ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-					</button>
-				</th>
-				<th>
 					Receipt No.
 					<button type="button" class="btn btn-default" value="?orderBy=receiptNo DESC" onclick="location = this.value;">
 						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
@@ -159,7 +156,7 @@
 						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
 					<button type="button" class="btn btn-default" value="?orderBy=receiptDate ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-top" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 					</button>
 				</th>
 				<th>
@@ -174,10 +171,11 @@
 			?>
 
 			<tr>
+				<td></td>
 				<td><?php echo $item["prodName"]; ?></td>
+				<td></td>
 				<td><?php echo $item["inQty"]; ?></td>
 				<td><?php echo $item["inDate"]; ?></td>
-				<td><?php echo $item["supplier_name"]; ?></td>
 				<td><?php echo $item["receiptNo"]; ?></td>
 				<td><?php echo $item["receiptDate"]; ?></td>
 				<td><?php echo $item["inRemarks"]; ?></td>
