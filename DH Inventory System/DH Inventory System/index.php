@@ -27,7 +27,7 @@
 	</nav>
 		<center><img src="logo.jpg" alt="logo" id="logo"/></center>
 	<div class="company">
-		<h3 id="is">Inventory System</h3>
+		<h3 id="is">Login</h3>
 	</div>
 
 	<div class="jumbotron" id="login">
