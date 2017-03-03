@@ -111,7 +111,7 @@
 							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>						
 					</th>
 					<th>
@@ -120,34 +120,34 @@
 							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Date
 						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Employee
 						<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Branch
 						<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>	
 					<th>
