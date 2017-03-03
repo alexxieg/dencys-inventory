@@ -119,9 +119,10 @@
 				<br>
 				<table class="table table-striped table-bordered">
 					<tr>
-						<th>Item Code</th>
-							<th>
-							Item Code
+						<th>Product Code</th>
+						
+						<th>
+							Item Description
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
 							</button>
@@ -130,7 +131,7 @@
 							</button>							
 						</th>
 						<th>
-							Item
+							Brand
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
 							</button>
@@ -139,7 +140,7 @@
 							</button>
 						</th>
 						<th>
-							Brand
+							Type
 							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
 							</button>
@@ -148,7 +149,7 @@
 							</button>
 						</th>
 						<th>
-							Type
+							Product Price
 							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
 							</button>
@@ -157,7 +158,7 @@
 							</button>
 						</th>
 						<th>
-							Item Price
+							Reorder Level
 							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
 							</button>
@@ -165,10 +166,8 @@
 								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
 							</button>
 						</th>
-						<th>
-							Reorder Level
-						</th>
-							<th></th>
+				
+						<th></th>
 						</tr>
 						
 						<?php
