@@ -112,10 +112,10 @@
 						<th>
 							Product Description
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
@@ -124,37 +124,37 @@
 						<th>
 							Brand
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>
 						</th>
 						<th>
 							Type
 							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>
 						</th>
 						<th>
 							Product Price
 							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>
 						</th>
 						<th>
 							Reorder Level
 							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>
 						</th>
 				

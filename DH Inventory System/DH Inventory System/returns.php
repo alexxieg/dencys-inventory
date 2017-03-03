@@ -36,7 +36,7 @@
 			if (!empty($sort)) {
 				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-				ORDER BY $sort ASC;");
+				ORDER BY $sort");
 			
 			} else if (!empty($searching)) {
 				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
@@ -99,11 +99,45 @@
 				<br>
 				<table class="table table-striped table-bordered">
 					<tr>
-						<th>Date</th>
-						<th>Item</th>
-						<th>Quantity</th>
-						<th>Status</th>
-						<th>Remarks</th>
+						<th>
+							Date
+							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							</button>							
+						</th>
+						<th>
+							Item
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							</button>							
+						</th>
+						<th>
+							Quantity
+							<button type="button" class="btn btn-default" value="?orderBy=returnQty DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							</button>							
+						</th>
+						<th>
+							Status
+							<button type="button" class="btn btn-default" value="?orderBy=status DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=status ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							</button>							
+						</th>
+						<th>
+							Remarks
+						</th>
 						<th></th>
 					</tr>
 					
