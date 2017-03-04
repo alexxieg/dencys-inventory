@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.1.14
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2017 at 09:57 AM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Generation Time: Mar 05, 2017 at 06:45 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `dencys`
@@ -28,9 +28,10 @@ USE `dencys`;
 -- Table structure for table `branch`
 --
 
-CREATE TABLE `branch` (
+CREATE TABLE IF NOT EXISTS `branch` (
   `branchID` int(5) NOT NULL,
-  `location` varchar(50) CHARACTER SET latin1 NOT NULL
+  `location` varchar(50) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`branchID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
 --
@@ -50,9 +51,10 @@ INSERT INTO `branch` (`branchID`, `location`) VALUES
 -- Table structure for table `employee`
 --
 
-CREATE TABLE `employee` (
+CREATE TABLE IF NOT EXISTS `employee` (
   `empID` int(5) NOT NULL,
-  `empName` varchar(50) NOT NULL
+  `empName` varchar(50) NOT NULL,
+  PRIMARY KEY (`empID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -92,8 +94,8 @@ INSERT INTO `employee` (`empID`, `empName`) VALUES
 -- Table structure for table `incoming`
 --
 
-CREATE TABLE `incoming` (
-  `inID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `incoming` (
+  `inID` int(5) NOT NULL AUTO_INCREMENT,
   `inQty` int(5) NOT NULL,
   `inDate` date NOT NULL,
   `receiptNo` varchar(25) NOT NULL,
@@ -101,8 +103,13 @@ CREATE TABLE `incoming` (
   `inRemarks` text NOT NULL,
   `empID` int(5) NOT NULL,
   `prodID` varchar(10) NOT NULL,
-  `supID` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `supID` int(5) NOT NULL,
+  PRIMARY KEY (`inID`),
+  KEY `FKINPROD_idx` (`prodID`),
+  KEY `FKINPROD` (`prodID`),
+  KEY `FKINEMP_idx` (`empID`),
+  KEY `FKINSUP_idx` (`supID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `incoming`
@@ -126,12 +133,14 @@ INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `receiptNo`, `receiptDate`, `
 -- Table structure for table `inventory`
 --
 
-CREATE TABLE `inventory` (
-  `invID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `inventory` (
+  `invID` int(11) NOT NULL AUTO_INCREMENT,
   `qty` int(11) DEFAULT NULL,
   `phyCount` int(5) DEFAULT NULL,
-  `prodID` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `prodID` varchar(10) NOT NULL,
+  PRIMARY KEY (`invID`),
+  KEY `FKINVPROD_idx` (`prodID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `inventory`
@@ -165,15 +174,19 @@ INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `prodID`) VALUES
 -- Table structure for table `outgoing`
 --
 
-CREATE TABLE `outgoing` (
-  `outID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `outgoing` (
+  `outID` int(5) NOT NULL AUTO_INCREMENT,
   `outQty` int(5) NOT NULL,
   `outDate` date NOT NULL,
   `outRemarks` text NOT NULL,
   `branchID` int(5) NOT NULL,
   `empID` int(5) NOT NULL,
-  `prodID` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `prodID` varchar(10) NOT NULL,
+  PRIMARY KEY (`outID`),
+  KEY `FKOUTPROD_idx` (`prodID`),
+  KEY `FKOUTEMP_idx` (`empID`),
+  KEY `FKOUTBR_idx` (`branchID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `outgoing`
@@ -199,14 +212,15 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `branchID`, 
 -- Table structure for table `product`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `product` (
   `prodID` varchar(10) NOT NULL,
   `prodName` varchar(100) NOT NULL,
   `model` varchar(45) DEFAULT NULL,
   `type` varchar(25) NOT NULL,
   `brand` varchar(25) NOT NULL,
   `price` decimal(11,0) NOT NULL,
-  `reorderLevel` int(5) NOT NULL
+  `reorderLevel` int(5) NOT NULL,
+  PRIMARY KEY (`prodID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -247,13 +261,13 @@ INSERT INTO `product` (`prodID`, `prodName`, `model`, `type`, `brand`, `price`, 
 ('LTSAC011', 'Masonry Drill Bit 13MM 1/2"', 'LMDB130', 'Accessories', 'Lotus', '90', 25),
 ('LTSAC012', 'Masonry Drill Bit 16MM 5/8"', 'LMDB160', 'Accessories', 'Lotus', '140', 25),
 ('LTSAC013', 'Masonry drill bit 19MM 3/4"', 'LMDB190', 'Accessories', 'Lotus', '190', 25),
-('LTSAC014', 'Hss-Cobalt Drill Bit Tube 3MM 7/64"', 'LCDB030B', 'Accessories', 'Lotus', '380', 20),
-('LTSAC015', 'Hss-Cobalt Drill Bit Tube 3.2MM 1/8"', 'LCDB032B', 'Accessories', 'Lotus', '420', 20),
-('LTSAC016', 'Hss-Cobalt Drill Bit Tube 3.5MM 9/64"', 'LCDB035B', 'Accessories', 'Lotus', '460', 20),
-('LTSAC017', 'Hss-Cobalt Drill Bit Tube 4MM 5/32"', 'LCDB040B', 'Accessories', 'Lotus', '400', 20),
-('LTSAC018', 'Hss-Cobalt Drill Bit Tube 5MM 3/16"', 'LCDB050B', 'Accessories', 'Lotus', '900', 20),
-('LTSAC019', 'Hss-Cobalt Drill Bit Tube 5.5MM 7/32"', 'LCDB055B', 'Accessories', 'Lotus', '950', 20),
-('LTSAC020', 'Hss-Cobalt Drill Bit Tube 6MM 15/64"', 'LCDB060B', 'Accessories', 'Lotus', '1500', 20),
+('LTSAC014', 'Hss-Cobalt Drill Bit Tube 3mm 7/64"', 'LCDB030B', 'Accessories', 'Lotus', '380', 20),
+('LTSAC015', 'Hss-Cobalt Drill Bit Tube 3.2mm 1/8"', 'LCDB032B', 'Accessories', 'Lotus', '420', 20),
+('LTSAC016', 'Hss-Cobalt Drill Bit Tube 3.5mm 9/64"', 'LCDB035B', 'Accessories', 'Lotus', '460', 20),
+('LTSAC017', 'Hss-Cobalt Drill Bit Tube 4mm 5/32"', 'LCDB040B', 'Accessories', 'Lotus', '400', 20),
+('LTSAC018', 'Hss-Cobalt Drill Bit Tube 5mm 3/16"', 'LCDB050B', 'Accessories', 'Lotus', '900', 20),
+('LTSAC019', 'Hss-Cobalt Drill Bit Tube 5.5mm 7/32"', 'LCDB055B', 'Accessories', 'Lotus', '950', 20),
+('LTSAC020', 'Hss-Cobalt Drill Bit Tube 6mm 15/64"', 'LCDB060B', 'Accessories', 'Lotus', '1500', 20),
 ('LTSAC021', 'Hss-Cobalt Drill Bit 7/64"', 'LCDB030', 'Accessories', 'Lotus', '45', 10),
 ('LTSAC022', 'Hss-Cobalt Drill Bit 1/8"', 'LCDB032', 'Accessories', 'Lotus', '50', 10),
 ('LTSAC023', 'Hss-Cobalt Drill Bit 5/32"', 'LCDB040', 'Accessories', 'Lotus', '60', 10),
@@ -265,29 +279,204 @@ INSERT INTO `product` (`prodID`, `prodName`, `model`, `type`, `brand`, `price`, 
 ('LTSAC029', 'Hss-Cobalt Drill Bit 23/64"', 'LCDB095', 'Accessories', 'Lotus', '250', 10),
 ('LTSAC030', 'Hss-Cobalt Drill Bit 3/8"', 'LCDB0100', 'Accessories', 'Lotus', '390', 10),
 ('LTSAC031', 'Hss-Cobalt Drill Bit 1/2"', 'LCDB0130', 'Accessories', 'Lotus', '620', 10),
-('LTSAC032', 'Hss-g(Grounded) Drill Bit 1.5MM 3/64"', 'LHDB015', 'Accessories', 'Lotus', '35', 40),
-('LTSAC033', 'Hss-g(Grounded) Drill Bit 2MM 5/64"', 'LHDB020', 'Accessories', 'Lotus', '40', 40),
-('LTSAC034', 'Hss-g(Grounded) Drill Bit 2.5MM 3/32"', 'LHDB025', 'Accessories', 'Lotus', '40', 40),
-('LTSAC035', 'Hss-g(Grounded) Drill Bit 3MM 7/64"', 'LHDB030', 'Accessories', 'Lotus', '40', 40),
-('LTSAC036', 'Hss-g(Grounded) Drill Bit 3.2MM 1/18"', 'LHDB032', 'Accessories', 'Lotus', '40', 40),
-('LTSAC037', 'Hss-g(Grounded) Drill Bit 3.5MM 9/64"', 'LHDB035', 'Accessories', 'Lotus', '45', 40),
-('LTSAC038', 'Hss-g(Grounded) Drill Bit 4MM 5/32"', 'LHDB040', 'Accessories', 'Lotus', '50', 50),
-('LTSAC039', 'Hss-g(Grounded) Drill Bit 5MM 3/16"', 'LHDB050', 'Accessories', 'Lotus', '55', 50),
-('LTSAC040', 'Hss-g(Grounded) Drill Bit 6MM 15/64"', 'LHDB060', 'Accessories', 'Lotus', '65', 50),
-('LTSAC041', 'Hss-g(Grounded) Drill Bit 6.5MM 1/4"', 'LHDB065', 'Accessories', 'Lotus', '100', 50),
-('LTSAC042', 'Hss-g(Grounded) Drill Bit 7MM 17/64"', 'LHDB070', 'Accessories', 'Lotus', '130', 25),
-('LTSAC043', 'Hss-g(Grounded) Drill Bit 8MM 5/16"', 'LHDB080', 'Accessories', 'Lotus', '90', 25),
-('LTSAC044', 'Hss-g(Grounded) Drill Bit 9.5MM 23/64"', 'LHDB095', 'Accessories', 'Lotus', '110', 25),
-('LTSAC045', 'Hss-g(Grounded) Drill Bit 10MM 3/8"', 'LHDB100', 'Accessories', 'Lotus', '250', 25),
+('LTSAC032', 'Hss-g(Grounded) Drill Bit 1.mm 3/64"', 'LHDB015', 'Accessories', 'Lotus', '35', 40),
+('LTSAC033', 'Hss-g(Grounded) Drill Bit 2mm 5/64"', 'LHDB020', 'Accessories', 'Lotus', '40', 40),
+('LTSAC034', 'Hss-g(Grounded) Drill Bit 2.5mm 3/32"', 'LHDB025', 'Accessories', 'Lotus', '40', 40),
+('LTSAC035', 'Hss-g(Grounded) Drill Bit 3mm 7/64"', 'LHDB030', 'Accessories', 'Lotus', '40', 40),
+('LTSAC036', 'Hss-g(Grounded) Drill Bit 3.2mm 1/18"', 'LHDB032', 'Accessories', 'Lotus', '40', 40),
+('LTSAC037', 'Hss-g(Grounded) Drill Bit 3.5mm 9/64"', 'LHDB035', 'Accessories', 'Lotus', '45', 40),
+('LTSAC038', 'Hss-g(Grounded) Drill Bit 4mm 5/32"', 'LHDB040', 'Accessories', 'Lotus', '50', 50),
+('LTSAC039', 'Hss-g(Grounded) Drill Bit 5mm 3/16"', 'LHDB050', 'Accessories', 'Lotus', '55', 50),
+('LTSAC040', 'Hss-g(Grounded) Drill Bit 6mm 15/64"', 'LHDB060', 'Accessories', 'Lotus', '65', 50),
+('LTSAC041', 'Hss-g(Grounded) Drill Bit 6.5mm 1/4"', 'LHDB065', 'Accessories', 'Lotus', '100', 50),
+('LTSAC042', 'Hss-g(Grounded) Drill Bit 7mm 17/64"', 'LHDB070', 'Accessories', 'Lotus', '130', 25),
+('LTSAC043', 'Hss-g(Grounded) Drill Bit 8mm 5/16"', 'LHDB080', 'Accessories', 'Lotus', '90', 25),
+('LTSAC044', 'Hss-g(Grounded) Drill Bit 9.5mm 23/64"', 'LHDB095', 'Accessories', 'Lotus', '110', 25),
+('LTSAC045', 'Hss-g(Grounded) Drill Bit 10mm 3/8"', 'LHDB100', 'Accessories', 'Lotus', '250', 25),
 ('LTSAC046', 'Hss-g(Grounded) Drill Bit 11mm 7/16"', 'LHDB110', 'Accessories', 'Lotus', '220', 20),
-('LTSAC047', 'Hss-g(Grounded) Drill Bit 13MM 1/2"', 'LHDB130', 'Accessories', 'Lotus', '420', 20),
-('LTSAC048', 'Carbon Brush', 'LAG115N38', 'Accessories', 'Lotus', '90', 20),
-('LTSAC049', 'Carbon Brush', 'LID10REN22', 'Accessories', 'Lotus', '90', 20),
-('LTSAC050', 'Carbon Brush', 'LID13REN23', 'Accessories', 'Lotus', '90', 20),
-('LTSAC051', 'Carbon Brush', 'LPK180N32', 'Accessories', 'Lotus', '150', 20),
+('LTSAC047', 'Hss-g(Grounded) Drill Bit 13mm 1/2"', 'LHDB130', 'Accessories', 'Lotus', '420', 20),
+('LTSAC048', 'Carbon Brush 3.25x0.8x0.5mm', 'LAG115N38', 'Accessories', 'Lotus', '90', 20),
+('LTSAC049', 'Carbon Brush 3.75x0.75x0.5mm', 'LID10REN22', 'Accessories', 'Lotus', '90', 20),
+('LTSAC050', 'Carbon Brush 3.25x0.90x0.5mm', 'LID13REN23', 'Accessories', 'Lotus', '90', 20),
+('LTSAC051', 'Carbon Brush 2x1x0.75mm', 'LPK180N32', 'Accessories', 'Lotus', '150', 20),
 ('LTSAC052', 'Carbon Brush', 'LID13REP21', 'Accessories', 'Lotus', '20', 20),
 ('LTSAC053', 'Carbon Brush', 'LAG115CH-45', 'Accessories', 'Lotus', '110', 20),
-('LTSAC054', 'Carbon Brush', 'LAG115SSN29', 'Accessories', 'Lotus', '90', 20);
+('LTSAC054', 'Carbon Brush 3.25x0.80x0.5', 'LAG115SSN29', 'Accessories', 'Lotus', '90', 20),
+('LTSAC055', 'Carbon Brush', 'LAG115Z1.38', 'Accessories', 'Lotus', '50', 40),
+('LTSAC056', 'Carbon Brush 3.25x0.55x0.5mm', 'LAT2026.2.32', 'Accessories', 'Lotus', '90', 40),
+('LTSAC057', 'Carbon Brush', 'LCOM355H.43', 'Accessories', 'Lotus', '235', 40),
+('LTSAC058', 'Carbon Brush', 'LCS185.70', 'Accessories', 'Lotus', '120', 40),
+('LTSAC059', 'Carbon Brush 4x0.75x0.50mm', 'LJS65JD.2.3', 'Accessories', 'Lotus', '60', 40),
+('LTSAC060', 'Carbon Brush 3.5x0.90x0.5mm', 'LPB600.2.23', 'Accessories', 'Lotus', '160', 40),
+('LTSAC061', 'Carbon Brush 3.5x1x0.5mm', 'LPL822.2.26', 'Accessories', 'Lotus', '90', 40),
+('LTSAC062', 'Carbon Brush 3x0.5x0.6mm', 'LRT170C.11', 'Accessories', 'Lotus', '110', 40),
+('LTSAC063', 'Diamond Cutter Dry 4"X20/16mm', 'LDD105DS', 'Accessories', 'Lotus', '290', 30),
+('LTSAC064', 'Diamond Cutter Dry 7"X25/22mm', 'LDD180DS', 'Accessories', 'Lotus', '840', 25),
+('LTSAC065', 'Diamond Cutter Dry 14''X26/27mm', 'LDD350DS', 'Accessories', 'Lotus', '4000', 20),
+('LTSAC066', 'Diamond Cutter Segmented 4"X20/16mm', 'LDD4DECO', 'Accessories', 'Lotus', '150', 30),
+('LTSAC067', 'Diamond Cutter Segmented 7"X25/22mm', 'LDD7DECO', 'Accessories', 'Lotus', '380', 35),
+('LTSAC068', 'Diamond Cutter Turbo Rim 4"X20/16mm', 'LDD4TECO', 'Accessories', 'Lotus', '160', 50),
+('LTSAC069', 'Diamond Cutter Wet/Continous Rim 4"X20/16mm', 'LDD105WS', 'Accessories', 'Lotus', '280', 50),
+('LTSAC070', 'Diamond Cutter Wet/Continous Rim 7"X25/22mm', 'LDD180WS', 'Accessories', 'Lotus', '750', 15),
+('LTSAC071', 'Diamond Cutter Turbo(Ultra Thin) 4"X20/16mm', 'LDT105DT', 'Accessories', 'Lotus', '400', 20),
+('LTSAC072', 'Diamond Cutter Turbo Rim 4"X20/16mm', 'LDT105DS', 'Accessories', 'Lotus', '300', 20),
+('LTSAC073', 'Diamond Cutter Turbo Rim 7"X25/22mm', 'LDT180DS', 'Accessories', 'Lotus', '760', 10),
+('LTSAC074', 'Tct Saw Blades 10"X30T', 'LTCT1030', 'Accessories', 'Lotus', '1200', 20),
+('LTSAC075', 'Tct Saw Blades 12"X30T', 'LTCT1230', 'Accessories', 'Lotus', '1880', 20),
+('LTSAC076', 'Tct Saw Blades 14"X30T', 'LTCT1430', 'Accessories', 'Lotus', '1980', 20),
+('LTSAC077', 'Tct Saw Blades 16"X30T', 'LTCT1630', 'Accessories', 'Lotus', '2675', 15),
+('LTSAC078', 'Tct Saw Blades 18"X30T', 'LTCT1830', 'Accessories', 'Lotus', '3375', 15),
+('LTSAC079', 'Tct Saw Blades 4"X40T', 'LWC100', 'Accessories', 'Lotus', '300', 50),
+('LTSAC080', 'Tct Saw Blades 7"X40T', 'LTCT740', 'Accessories', 'Lotus', '500', 40),
+('LTSAC081', 'Tct Saw Blades 10"X40T', 'LTCT1040', 'Accessories', 'Lotus', '1300', 20),
+('LTSAC082', 'Tct Saw Blades 12"X40T', 'LTCT1240', 'Accessories', 'Lotus', '2000', 20),
+('LTSAC083', 'Tct Saw Blades 14"X40T', 'LTCT1440', 'Accessories', 'Lotus', '2200', 20),
+('LTSAC084', 'Tct Saw Blades 16"X40T', 'LTCT1640', 'Accessories', 'Lotus', '2895', 20),
+('LTSAC085', 'Tct Saw Blades 18"X40T', 'LTCT1840', 'Accessories', 'Lotus', '3595', 25),
+('LTSAC086', 'Tct Saw Blades 10"X100T', 'LTCT10100', 'Accessories', 'Lotus', '2200', 25),
+('LTSHT001', 'Flashlight+Key Chain 2.25"', 'LTFL500', 'Hand Tools', 'Lotus', '70', 15),
+('LTSHT002', 'Flashlight 3 LED 5.5"', 'LTFL1400', 'Hand Tools', 'Lotus', '120', 15),
+('LTSHT003', ' Flashlight 7 LED 28 LM 7.5"', 'LTFL2000D', 'Hand Tools', 'Lotus', '170', 15),
+('LTSHT004', 'Flashlight 9 LED 4"', 'LFL3131', 'Hand Tools', 'Lotus', '200', 15),
+('LTSHT005', 'Adjustable Wrench 6"', 'LAW006S', 'Hand Tools', 'Lotus', '190', 15),
+('LTSHT006', 'Adjustable Wrench 8"', 'LAW008S', 'Hand Tools', 'Lotus', '270', 15),
+('LTSHT007', 'Adjustable Wrench 10"', 'LAW010S', 'Hand Tools', 'Lotus', '390', 15),
+('LTSHT008', 'Adjustable Wrench 12"', 'LAW012S', 'Hand Tools', 'Lotus', '530', 15),
+('LTSHT009', 'Aluminum Level 12"/300MM', 'LAL3001M', 'Hand Tools', 'Lotus', '250', 15),
+('LTSHT010', 'Aluminum Level 18"/450MM', 'LAL4501M', 'Hand Tools', 'Lotus', '340', 15),
+('LTSHT011', 'Aluminum Level 24"/600MM', 'LAL6001M', 'Hand Tools', 'Lotus', '380', 15),
+('LTSHT012', 'Aluminum Level 36"/900MM', 'LAL9001M', 'Hand Tools', 'Lotus', '480', 15),
+('LTSHT013', 'Aviation Snip 10"', 'LAS250L', 'Hand Tools', 'Lotus', '400', 15),
+('LTSHT014', 'Aviation Snip 10"', 'LAS250R', 'Hand Tools', 'Lotus', '400', 15),
+('LTSHT015', 'Aviation Snip 10"', 'LAS250S', 'Hand Tools', 'Lotus', '400', 15),
+('LTSHT016', 'Box Wrench Economy 8X9mm', 'LBW089DF', 'Hand Tools', 'Lotus', '120', 10),
+('LTSHT017', 'Box Wrench Economy 10X11mm', 'LBW1011DF', 'Hand Tools', 'Lotus', '130', 10),
+('LTSHT018', 'Box Wrench Economy 10X12mm', 'LBW1012DF', 'Hand Tools', 'Lotus', '140', 10),
+('LTSHT019', 'Box Wrench Economy 11X13mm', 'LBW1113DF', 'Hand Tools', 'Lotus', '160', 10),
+('LTSHT020', 'Box Wrench Economy 12X13mm', 'LBW1213DF', 'Hand Tools', 'Lotus', '170', 10),
+('LTSHT021', 'Box Wrench Economy 12X14mm', 'LBW1214DF', 'Hand Tools', 'Lotus', '180', 10),
+('LTSHT022', 'Box Wrench Economy 14X15mm', 'LBW1415DF', 'Hand Tools', 'Lotus', '190', 10),
+('LTSHT023', 'Box Wrench Economy 16X17mm', 'LBW1617DF', 'Hand Tools', 'Lotus', '200', 10),
+('LTSHT024', 'Box Wrench Economy 17X19mm', 'LBW1719DF', 'Hand Tools', 'Lotus', '250', 10),
+('LTSHT025', 'Box Wrench Economy 18X19mm', 'LBW1819DF', 'Hand Tools', 'Lotus', '260', 10),
+('LTSHT026', 'Box Wrench Economy 20X22mm', 'LBW2022DF', 'Hand Tools', 'Lotus', '270', 10),
+('LTSHT027', 'Box Wrench Economy 21X23mm', 'LBW2123DF', 'Hand Tools', 'Lotus', '300', 10),
+('LTSHT028', 'Combination Wrench Economy 8mm', 'LCW008DF', 'Hand Tools', 'Lotus', '90', 10),
+('LTSHT029', 'Combination Wrench Economy 10mm', 'LCW010DF', 'Hand Tools', 'Lotus', '100', 10),
+('LTSHT030', 'Combination Wrench Economy 12mm', 'LCW012DF', 'Hand Tools', 'Lotus', '110', 10),
+('LTSHT031', 'Combination Wrench Economy 14mm', 'LCW014DF', 'Hand Tools', 'Lotus', '130', 10),
+('LTSHT032', 'Combination Wrench Economy 17mm', 'LCW017DF', 'Hand Tools', 'Lotus', '180', 10),
+('LTSHT033', 'Combination Wrench Economy 19mm', 'LCW019DF', 'Hand Tools', 'Lotus', '200', 10),
+('LTSHT034', 'Open Wrench Economy 6X7mm', 'LOW067DF', 'Hand Tools', 'Lotus', '65', 10),
+('LTSHT035', 'Open Wrench Economy 8X9mm', 'LOW089DF', 'Hand Tools', 'Lotus', '70', 10),
+('LTSHT036', 'Open Wrench Economy 10X11mm', 'LOW1011DF', 'Hand Tools', 'Lotus', '75', 10),
+('LTSHT037', 'Open Wrench Economy 10X12mm', 'LOW1012DF', 'Hand Tools', 'Lotus', '90', 10),
+('LTSHT038', 'Open Wrench Economy 11X13mm', 'LOW1113DF', 'Hand Tools', 'Lotus', '85', 10),
+('LTSHT039', 'Open Wrench Economy 12X13mm', 'LOW1213DF', 'Hand Tools', 'Lotus', '90', 10),
+('LTSHT040', 'Open Wrench Economy 12X14mm', 'LOW1214DF', 'Hand Tools', 'Lotus', '95', 10),
+('LTSHT041', 'Open Wrench Economy 14X15mm', 'LOW1415DF', 'Hand Tools', 'Lotus', '120', 10),
+('LTSHT042', 'Open Wrench Economy 16X17mm', 'LOW1617DF', 'Hand Tools', 'Lotus', '120', 10),
+('LTSHT043', 'Open Wrench Economy 18X19mm', 'LOW1819DF', 'Hand Tools', 'Lotus', '130', 10),
+('LTSHT044', 'Open Wrench Economy 20X22mm', 'LOW2022DF', 'Hand Tools', 'Lotus', '150', 10),
+('LTSHT045', 'Open Wrench Economy 21X23mm', 'LOW2123DF', 'Hand Tools', 'Lotus', '190', 10),
+('LTSHT046', 'Box Wrench Set Economy 6-22mm', 'LBW622DF', 'Hand Tools', 'Lotus', '1350', 5),
+('LTSHT047', 'Box Wrench Set Economy 6-32mm', 'LBW632DF', 'Hand Tools', 'Lotus', '3380', 5),
+('LTSHT048', 'Box Wrench Set Professional 6-22mm', 'LBW622P', 'Hand Tools', 'Lotus', '1850', 5),
+('LTSHT049', 'Combination Wrench Set Economy 8-22mm', 'LCW819SS-8', 'Hand Tools', 'Lotus', '1400', 5),
+('LTSHT050', 'Combination Wrench Set Economy 8-24mm', 'LCW011DF', 'Hand Tools', 'Lotus', '2000', 5),
+('LTSHT051', 'Combination Wrench Set Economy 8-24mm', 'LCW824SS', 'Hand Tools', 'Lotus', '2000', 5),
+('LTSHT052', 'Combination Wrench Set Professional ', 'LCW011P', 'Hand Tools', 'Lotus', '2100', 5),
+('LTSHT053', 'Combination Wrench Set Economy 8-19mm', 'LCW819SS', 'Hand Tools', 'Lotus', '750', 5),
+('LTSHT054', 'Combination Wrench Set Professional', 'LCW014PS', 'Hand Tools', 'Lotus', '4000', 5),
+('LTSHT055', 'Open Wrench Set Economy 6-17mm', 'LOW617DF', 'Hand Tools', 'Lotus', '770', 5),
+('LTSHT056', 'Open Wrench Set Economy 6-22mm', 'LOW622DF', 'Hand Tools', 'Lotus', '1100', 5),
+('LTSHT057', 'Open Wrench Set Professional 6-22mm', 'LOW622P', 'Hand Tools', 'Lotus', '1180', 5),
+('LTSHT058', 'Claw Hammer Fiber Glass 21mm/28oz', 'LCH008E', 'Hand Tools', 'Lotus', '180', 10),
+('LTSHT059', 'Claw Hammer Fiber Glass 27mm/8oz', 'LCH016E', 'Hand Tools', 'Lotus', '270', 10),
+('LTSHT060', 'Claw Hammer Wood 21mm/8oz', 'LCH008W', 'Hand Tools', 'Lotus', '180', 10),
+('LTSHT061', 'Claw Hammer Wood 27mm/16oz', 'LCH016W', 'Hand Tools', 'Lotus', '230', 10),
+('LTSHT062', 'Claw Hammer Wood Plain 27mm/16oz', 'LCH016WP', 'Hand Tools', 'Lotus', '200', 10),
+('LTSHT063', 'Bent Nose Plier(External) 7"', 'LBEP175', 'Hand Tools', 'Lotus', '420', 10),
+('LTSHT064', 'Bent Nose Plier(Internal) 7"', 'LBIP175', 'Hand Tools', 'Lotus', '420', 10),
+('LTSHT065', 'Bent Tip Plier Mini 4"', 'LEBP100M', 'Hand Tools', 'Lotus', '140', 10),
+('LTSHT066', 'Combination Plier 6"', 'LCP150DF', 'Hand Tools', 'Lotus', '150', 10),
+('LTSHT067', 'Combination Plier 7"', 'LCP175DF', 'Hand Tools', 'Lotus', '180', 10),
+('LTSHT068', 'Combination Plier 8"', 'LCP200DF', 'Hand Tools', 'Lotus', '200', 10),
+('LTSHT069', 'Combination Plier Professional 6"', 'LCP150P', 'Hand Tools', 'Lotus', '190', 10),
+('LTSHT070', 'Combination Plier Professional 7" ', 'LCP175P', 'Hand Tools', 'Lotus', '210', 10),
+('LTSHT071', 'Combination Plier Professional 8"', 'LCP200P', 'Hand Tools', 'Lotus', '250', 10),
+('LTSHT072', 'Computer Plier', 'LCT800', 'Hand Tools', 'Lotus', '300', 10),
+('LTSHT073', 'Diagonal Plier 5"', 'LDCP125DF', 'Hand Tools', 'Lotus', '130', 10),
+('LTSHT074', 'Diagonal Plier 6"', 'LDCP150DF', 'Hand Tools', 'Lotus', '150', 10),
+('LTSHT075', 'Diagonal Plier 7"', 'LDCP175DF', 'Hand Tools', 'Lotus', '160', 10),
+('LTSHT076', 'Diagonal Plier 8"', 'LDCP200DF', 'Hand Tools', 'Lotus', '190', 10),
+('LTSHT077', 'Diagonal Plier Mini 4"', 'LEDP100M', 'Hand Tools', 'Lotus', '140', 10),
+('LTSHT078', 'Diagonal Plier Professional 5"', 'LDCP125P', 'Hand Tools', 'Lotus', '190', 10),
+('LTSHT079', 'Diagonal Plier Professional 6"', 'LDCP150P', 'Hand Tools', 'Lotus', '200', 10),
+('LTSHT080', 'Diagonal Plier Professional 7"', 'LDCP175P', 'Hand Tools', 'Lotus', '230', 10),
+('LTSHT081', ' Long Nose Plier 5"', 'LLNP125DF', 'Hand Tools', 'Lotus', '140', 10),
+('LTSHT082', 'Long Nose Plier 6"', 'LLNP150DF', 'Hand Tools', 'Lotus', '150', 10),
+('LTSHT083', 'Long Nose Plier 7"', 'LLNP175DF', 'Hand Tools', 'Lotus', '170', 10),
+('LTSHT084', 'Long Nose Plier 8"', 'LLNP200DF', 'Hand Tools', 'Lotus', '180', 10),
+('LTSHT085', 'Long Nose Plier Mini 5"', 'LELNP100M', 'Hand Tools', 'Lotus', '140', 10),
+('LTSHT086', ' Long Nose Plier Professional 5"', 'LLNP125P', 'Hand Tools', 'Lotus', '200', 10),
+('LTSHT087', 'Long Nose Plier Professional 6"', 'LLNP150P', 'Hand Tools', 'Lotus', '210', 10),
+('LTSHT088', ' Long Nose Plier Professional 7"', 'LLNP175P', 'Hand Tools', 'Lotus', '220', 10),
+('LTSHT089', 'Long Nose Plier Professional 8"', 'LLNP200P', 'Hand Tools', 'Lotus', '230', 10),
+('LTSHT090', ' Slip Joint Plier 6"', 'LSJP150', 'Hand Tools', 'Lotus', '130', 10),
+('LTSHT091', 'Slip Joint Plier 8"', 'LSJP200', 'Hand Tools', 'Lotus', '170', 10),
+('LTSHT092', 'Slip Joint Plier 10"', 'LSJP250', 'Hand Tools', 'Lotus', '230', 10),
+('LTSHT093', 'Snap Ring Plier Set 8 in 1', 'LRP811', 'Hand Tools', 'Lotus', '600', 10),
+('LTSHT094', 'Water Pump Plier 10"', 'LWPP250', 'Hand Tools', 'Lotus', '340', 10),
+('LTSHT095', 'Water Pump Plier 12"', 'LWPP300', 'Hand Tools', 'Lotus', '395', 10),
+('LTSHT096', 'Glue Gun', 'LGG301E', 'Hand Tools', 'Lotus', '320', 10),
+('LTSHT097', 'Glue Gun', 'LGG160E', 'Hand Tools', 'Lotus', '200', 10),
+('LTSHT098', 'Hacksaw Frame Mini 10"', 'LHF100', 'Hand Tools', 'Lotus', '110', 10),
+('LTSHT099', 'Hacksaw Frame(High Tension) 12"', 'LHF300', 'Hand Tools', 'Lotus', '500', 5),
+('LTSHT100', 'Hacksaw Frame(Square) 12"', 'LHF302', 'Hand Tools', 'Lotus', '300', 5),
+('LTSHT101', 'Hacksaw Frame(Tubular) 12"', 'LHF304', 'Hand Tools', 'Lotus', '200', 5),
+('LTSHT102', 'Hacksaw Frame(Economy) 12"', 'LHF308', 'Hand Tools', 'Lotus', '160', 5),
+('LTSHT103', 'Hand Saw FastCut 6 TPI 16"', 'LHS016W', 'Hand Tools', 'Lotus', '320', 5),
+('LTSHT104', 'Hand Saw FastCut 6 TPI 18"', 'LHS018W', 'Hand Tools', 'Lotus', '340', 5),
+('LTSHT105', 'Hand Saw FastCut 6 TPI 20"', 'LHS020W', 'Hand Tools', 'Lotus', '400', 5),
+('LTSHT106', 'Hand Saw FineCut 7TPI 16"', 'LHS400-16', 'Hand Tools', 'Lotus', '260', 10),
+('LTSHT107', 'Hand Saw FineCut 7TPI 18"', 'LHS450-18', 'Hand Tools', 'Lotus', '280', 10),
+('LTSHT108', 'Hand Saw FineCut 7TPI 20"', 'LHS500-20', 'Hand Tools', 'Lotus', '290', 10),
+('LTSHT109', 'Hand Saw FineCut 7TPI 22"', 'LHS550-22', 'Hand Tools', 'Lotus', '320', 10),
+('LTSHT110', 'Hand Saw JetCut 7TPI 18"', 'LHS4040-18', 'Hand Tools', 'Lotus', '330', 10),
+('LTSHT111', 'Hand Saw JetCut 7TPI 20"', 'LHS4040-20', 'Hand Tools', 'Lotus', '410', 10),
+('LTSHT112', 'Hand Saw FineCut (PVC) 7TPI 16"', 'LHS016', 'Hand Tools', 'Lotus', '300', 10),
+('LTSHT113', 'Hand Saw FineCut (PVC) 7TPI 18"', 'LHS018', 'Hand Tools', 'Lotus', '350', 10),
+('LTSHT114', 'Hand Saw FineCut (PVC) 7TPI 20"', 'LHS020', 'Hand Tools', 'Lotus', '400', 10),
+('LTSHT115', 'Hand Saw FineCut (PVC) 7TPI 22"', 'LHS022', 'Hand Tools', 'Lotus', '430', 10),
+('LTSHT116', 'Snap Off Knife(Basic) 6"', 'LUC870', 'Hand Tools', 'Lotus', '40', 10),
+('LTSHT117', 'Snap Off Knife(Standard) 6.5"', 'LCK004', 'Hand Tools', 'Lotus', '100', 10),
+('LTSHT118', 'Snap Off Knife 6.5"', 'LCK009', 'Hand Tools', 'Lotus', '160', 15),
+('LTSHT119', 'Snap Off Knife 7"', 'LUC331', 'Hand Tools', 'Lotus', '150', 15),
+('LTSHT120', 'Snap Off Knife 7"', 'LUC332', 'Hand Tools', 'Lotus', '150', 15),
+('LTSHT121', 'Locking Plier(Vise Grip) Straight Jaw 7"', 'LVG007S', 'Hand Tools', 'Lotus', '295', 10),
+('LTSHT122', 'Locking Plier(Vise Grip) Straight Jaw 10"', 'LVG010S', 'Hand Tools', 'Lotus', '350', 10),
+('LTSHT123', 'Locking Plier(Vise Grip) Curved Jaw 7"', 'LVG007', 'Hand Tools', 'Lotus', '220', 10),
+('LTSHT124', 'Locking Plier(Vise Grip) Curved Jaw 10"', 'LVG010', 'Hand Tools', 'Lotus', '300', 10),
+('LTSHT125', 'Gun Tacker 2 Way Economic', 'LGT2707', 'Hand Tools', 'Lotus', '400', 10),
+('LTSHT126', 'Gun Tacker 3 Way Professional ', 'LGT3716', 'Hand Tools', 'Lotus', '800', 10),
+('LTSHT127', 'Gun Tacker 4 Way Professional ', 'LGT055', 'Hand Tools', 'Lotus', '1100', 10),
+('LTSHT128', 'Hand Riveter(Swivel Head) 360 11"', 'LHR901', 'Hand Tools', 'Lotus', '650', 10),
+('LTSHT129', 'Hand Riveter 10"', 'LHR708', 'Hand Tools', 'Lotus', '300', 10),
+('LTSHT130', 'Hand Riveter 9"', 'LHR709', 'Hand Tools', 'Lotus', '350', 10),
+('LTSHT131', 'Air Duster Heavy Duty', 'LDG102', 'Hand Tools', 'Lotus', '250', 10),
+('LTSHT132', 'Air Duster', 'LDG101', 'Hand Tools', 'Lotus', '260', 10),
+('LTSHT133', 'Air Duster', 'LDG101AD', 'Hand Tools', 'Lotus', '290', 10),
+('LTSHT134', 'Screwdriver Professional(Positive) 7"', 'LSGP3163P', 'Hand Tools', 'Lotus', '70', 5),
+('LTSHT135', 'Screwdriver Professional(Positive) 7.5"', 'LSGP184P', 'Hand Tools', 'Lotus', '60', 5),
+('LTSHT136', 'Screwdriver Professional(Positive) 8"', 'LSGP3164P', 'Hand Tools', 'Lotus', '75', 5),
+('LTSHT137', 'Screwdriver Professional(Positive) 9.5"', 'LSGP186P', 'Hand Tools', 'Lotus', '65', 5),
+('LTSHT138', 'Screwdriver Professional(Positive) 9.75"', 'LSGP3166P', 'Hand Tools', 'Lotus', '80', 5),
+('LTSHT139', 'Screwdriver Professional(Positive) 4.25"', 'LSGP1411P', 'Hand Tools', 'Lotus', '70', 5),
+('LTSHT140', 'Screwdriver Professional(Positive) 8.25"', 'LSGP144P', 'Hand Tools', 'Lotus', '90', 5),
+('LTSHT141', 'Screwdriver Professional(Positive) 9.5"', 'LSGP145P', 'Hand Tools', 'Lotus', '95', 5),
+('LTSHT142', 'Screwdriver Professional(Positive) 10"', 'LSGP146P', 'Hand Tools', 'Lotus', '100', 5),
+('LTSHT143', 'Screwdriver Professional(Positive) 12.5"', 'LSGP5168P', 'Hand Tools', 'Lotus', '140', 5);
 
 -- --------------------------------------------------------
 
@@ -295,14 +484,16 @@ INSERT INTO `product` (`prodID`, `prodName`, `model`, `type`, `brand`, `price`, 
 -- Table structure for table `returns`
 --
 
-CREATE TABLE `returns` (
-  `returnID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `returns` (
+  `returnID` int(5) NOT NULL AUTO_INCREMENT,
   `returnDate` date NOT NULL,
   `returnQty` int(5) NOT NULL,
   `status` varchar(25) NOT NULL,
   `returnRemark` text NOT NULL,
-  `prodID` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `prodID` varchar(10) NOT NULL,
+  PRIMARY KEY (`returnID`),
+  KEY `FKRETPROD_idx` (`prodID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `returns`
@@ -326,9 +517,10 @@ INSERT INTO `returns` (`returnID`, `returnDate`, `returnQty`, `status`, `returnR
 -- Table structure for table `suppliers`
 --
 
-CREATE TABLE `suppliers` (
+CREATE TABLE IF NOT EXISTS `suppliers` (
   `supID` int(5) NOT NULL,
-  `supplier_name` varchar(50) NOT NULL
+  `supplier_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`supID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -353,11 +545,12 @@ INSERT INTO `suppliers` (`supID`, `supplier_name`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `userID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `userID` int(5) NOT NULL AUTO_INCREMENT,
   `userName` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(25) NOT NULL,
+  PRIMARY KEY (`userID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users`
@@ -369,102 +562,6 @@ INSERT INTO `users` (`userID`, `userName`, `password`) VALUES
 (3, 'user1', 'dewatt123'),
 (4, 'user2', 'agp123');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `branch`
---
-ALTER TABLE `branch`
-  ADD PRIMARY KEY (`branchID`);
-
---
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
-  ADD PRIMARY KEY (`empID`);
-
---
--- Indexes for table `incoming`
---
-ALTER TABLE `incoming`
-  ADD PRIMARY KEY (`inID`),
-  ADD KEY `FKINPROD_idx` (`prodID`),
-  ADD KEY `FKINPROD` (`prodID`),
-  ADD KEY `FKINEMP_idx` (`empID`),
-  ADD KEY `FKINSUP_idx` (`supID`);
-
---
--- Indexes for table `inventory`
---
-ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`invID`),
-  ADD KEY `FKINVPROD_idx` (`prodID`);
-
---
--- Indexes for table `outgoing`
---
-ALTER TABLE `outgoing`
-  ADD PRIMARY KEY (`outID`),
-  ADD KEY `FKOUTPROD_idx` (`prodID`),
-  ADD KEY `FKOUTEMP_idx` (`empID`),
-  ADD KEY `FKOUTBR_idx` (`branchID`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`prodID`);
-
---
--- Indexes for table `returns`
---
-ALTER TABLE `returns`
-  ADD PRIMARY KEY (`returnID`),
-  ADD KEY `FKRETPROD_idx` (`prodID`);
-
---
--- Indexes for table `suppliers`
---
-ALTER TABLE `suppliers`
-  ADD PRIMARY KEY (`supID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `incoming`
---
-ALTER TABLE `incoming`
-  MODIFY `inID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `inventory`
---
-ALTER TABLE `inventory`
-  MODIFY `invID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
---
--- AUTO_INCREMENT for table `outgoing`
---
-ALTER TABLE `outgoing`
-  MODIFY `outID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `returns`
---
-ALTER TABLE `returns`
-  MODIFY `returnID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
