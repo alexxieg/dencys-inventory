@@ -257,7 +257,7 @@
 							<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
 
 							<br>
-							<input type="submit" value="Add" class="btn btn-default" name="addInc">
+							<input type="submit" value="Add" class="btn btn-default" name="addInc" onclick="alert('Incoming Product Successfully Added');">
 							<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 						</form> 			
 					</div>
