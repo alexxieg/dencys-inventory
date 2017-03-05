@@ -39,15 +39,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
 				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
 				ORDER BY inID ASC;");
 			}
@@ -85,20 +85,15 @@
 			<table class="table table-striped table-bordered">
 				
 					<h1 id="headers">INCOMING PRODUCTS</h1>
-				
-
-				
-						
+			
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 							<button type="submit" class="btn btn-default" name="submit">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</form>
-					
-					
-						
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+
+						<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 			
 			</table>
 		</div>
@@ -108,6 +103,15 @@
 				<th style="text-align:center" colspan="10">THE FOLLOWING HAVE BEEN ADDED TO THE INVENTORY</th>
 			</tr>				
 			<tr>
+				<th>
+					Date
+					<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+					</button>
+					<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					</button>
+				</th>
 				<th>
 					Product ID
 				</th>
@@ -132,15 +136,7 @@
 						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 					</button>
 				</th>
-				<th>
-					Date
-					<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-					</button>
-				</th>
+				
 				<th>
 					Receipt No.
 					<button type="button" class="btn btn-default" value="?orderBy=receiptNo DESC" onclick="location = this.value;">
@@ -171,11 +167,11 @@
 			?>
 
 			<tr>
-				<td></td>
+				<td><?php echo $item["inDate"]; ?></td>	
+				<td><?php echo $item["prodID"];?></td>
 				<td><?php echo $item["prodName"]; ?></td>
-				<td></td>
+				<td><?php echo $item["model"]; ?></td>
 				<td><?php echo $item["inQty"]; ?></td>
-				<td><?php echo $item["inDate"]; ?></td>
 				<td><?php echo $item["receiptNo"]; ?></td>
 				<td><?php echo $item["receiptDate"]; ?></td>
 				<td><?php echo $item["inRemarks"]; ?></td>

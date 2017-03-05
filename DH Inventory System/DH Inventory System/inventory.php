@@ -42,12 +42,12 @@
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
-										FROM product INNER JOIN inventory ON product.prodID = inventory.prodID INNER JOIN incoming ON product.prodID = incoming.prodID INNER JOIN outgoing ON product.prodID = outgoing.prodID
+										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, qty
 										ORDER BY $sort");
 			} else { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
-										FROM product INNER JOIN inventory ON product.prodID = inventory.prodID INNER JOIN incoming ON product.prodID = incoming.prodID INNER JOIN outgoing ON product.prodID = outgoing.prodID
+										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, qty");
 			}	
 			$query->execute();
