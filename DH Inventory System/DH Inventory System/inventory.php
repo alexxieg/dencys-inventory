@@ -100,7 +100,7 @@
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>
-							<a href="?orderBy=prodID">Product ID</a>
+							Product ID
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
@@ -110,13 +110,17 @@
 						</th>
 						
 						<th>
-							<a href="?orderBy=prodName">Product Description</a>
+							Product Description
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>
+						</th>
+						
+						<th>
+						Initial Quantity
 						</th>
 						
 						<th>
@@ -128,7 +132,7 @@
 						</th>
 						
 						<th>
-							<a href="?orderBy=qty">Current Quantity</a>
+							Current Quantity
 							<button type="button" class="btn btn-default" value="?orderBy=qty DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
@@ -146,7 +150,7 @@
 						</th>
 						
 						<th>
-							<a href="?orderBy=price">Item Price</a>
+							Item Price
 							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
@@ -163,6 +167,7 @@
 					<tr>
 						<td><?php echo $item["prodID"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
+						<td></td>
 						<td><?php echo $item["inQty"]; ?></td>
 						<td><?php echo $item["outQty"]; ?></td>
 						<td><?php echo $item["qty"]; ?></td>
