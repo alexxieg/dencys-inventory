@@ -30,26 +30,61 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		<style>
+#pagination {
+    display: inline-block;
+	font-size: 50px;
+}
+
+#pagination a {
+    color: blue;
+    float: left;
+    padding: 20px 16px;
+    text-decoration: ;
+}
+
+#pagination a#selected {
+	font-weight: 900;
+	
+}
+
+
+</style>
 		
 	</head>
   
 	<body >
 		<?php
+		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+		$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
+	    $start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, qty
-										ORDER BY $sort");
+										ORDER BY $sort LIMIT {$start}, {$perPage}");
 			} else { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, qty");
+										GROUP BY prodID, qty LIMIT {$start}, {$perPage}");
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
-		?>
+			$total = $conn->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
+			$pages = ceil($total / $perPage);
+		?>	
+			<?php foreach($query as $queri): ?>
+			<div class="queri">
+			<p><?php echo $queri['title']; ?></p>
+			</div>
+			<?php endforeach; ?>
+			<div id="pagination">
+			<?php for ($x = 1; $x <= $pages; $x++): ?>
+			<a href="?page=<?php echo $x; ?>$per-page=<?php echo $perPage; ?>"<?php if($page === $x){echo ' id="selected"';}?>><?php echo $x; ?></a>
+			<?php endfor; ?>
+		    </div>
 	
 	<div id="contents">
 		<div class="productHolder" >
