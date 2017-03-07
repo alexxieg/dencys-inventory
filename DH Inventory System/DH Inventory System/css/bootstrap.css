@@ -7005,10 +7005,10 @@ border: none;
 }
 
 #tableHeader .btnclr{
-  background-color: transparent;
-  color: black;
+  background-color: #3b5998;
+  color: white;
   border-width: 1px;
-  border-color: gray;
+  border-color: black;
   font-size: 15px;
 }
 
