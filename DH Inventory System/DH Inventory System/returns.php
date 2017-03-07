@@ -27,9 +27,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="shortcut icon" href="logo.jpg">
-
 	</head>
-	
   
 	<body>
 		<?php
@@ -53,9 +51,9 @@
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
-	
+		
 		<div class="productHolder">
-			<nav class="navbar navbar-inverse navbar-fixed-top">
+			<nav class="navbar navbar-inverse navbar-static-top">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -78,8 +76,6 @@
 				</div>
 			</nav>
 		</div>	
-	
-	<div id="contents">	
 		<div class="pages">
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
@@ -87,95 +83,81 @@
 						<h1 id="headers">RETURNED PRODUCTS</h1>	
 					
 							<form action="?" method="post">
-									<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
+								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+								<button type="submit" name="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
 							</form>
 						
-						<button id="modbutt" type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal">Add Returned Product</button>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Returned Product</button>
 						
 					
 				</table>
 			</div>
-	
+			
 			<div class="prodTable">
+				<br>
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>
 							Date
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
 							Item
-							<button type="button" class="btn btn-default" value="?orderBy=returnID DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnID ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>							
-						</th>
-
-						<th>
-							Item
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
 							Quantity
-							<button type="button" class="btn btn-default" value="?orderBy=returnQty DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnQty DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn" ></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
 							Status
-							<button type="button" class="btn btn-default" value="?orderBy=status DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=status DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=status ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=status ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
 							Remarks
 						</th>
 						<th></th>
-					</tr>			
-				
+					</tr>
+					
 					<?php
 						foreach ($result as $item):
 						$retID = $item["returnID"];
 					?>
 				
 					<tr>
-						<td class="td_returnDate"><?php echo $item["returnDate"]; ?></td>
-						<td class="td_returnID"><?php echo $item["returnID"]; ?></td>
-						<td class="td_prodName"><?php echo $item["prodName"]; ?></td>
-						<td class="td_returnQty"><?php echo $item["returnQty"]; ?></td>
-						<td class="td_status"><?php echo $item["status"]; ?></td>
-						<td class="td_returnRemark"><?php echo $item["returnRemark"]; ?></td>
+						<td><?php echo $item["returnDate"]; ?></td>
+						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["returnQty"]; ?></td>
+						<td><?php echo $item["status"]; ?></td>
+						<td><?php echo $item["returnRemark"]; ?></td>
 						
 						<td>
-							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#editModal" value ="<?php echo $item["returnID"]; ?>">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
-			
-
-				<a href="deleteRet.php?retId=<?php echo $retID; ?>">
+							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
 							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</button>
@@ -183,9 +165,11 @@
 						</td>
 					</tr>
 					
-					<?php endforeach; ?>
+					<?php
+						endforeach;
+					?>
 				</table>
-					
+
 				<div class="modal fade" id="myModal" role="dialog">
 					 <div class="modal-dialog modal-lg">
 						 <div class="modal-content">
@@ -197,7 +181,7 @@
 								<form action="" method="POST">
 									<h3>Item</h3>
 									<?php
-										$query = $conn->prepare("SELECT prodName FROM product");
+										$query = $conn->prepare("SELECT prodName FROM product ");
 										$query->execute();
 										$res = $query->fetchAll();
 									?>
@@ -224,93 +208,17 @@
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 
 									<br>
-									<input type="submit" value="Add" class="btn btn-default btnclr" name="addRet" onclick="alert('Returned Product Successfully Added');">
-									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+									<input type="submit" value="Add" class="btn btn-default" name="addRet" onclick="alert('Returned Product Successfully Added');">
+									<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 								</form> 		
 							</div>
 							<div class="modal-footer">
-							  <button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			<!---START script to pass value to modal form -->
-			<script type="text/javascript">
-				$('.btn').click(function(){
-				var $row = $(this).closest('tr');
-				var prodName=  $row.find('.td_prodName').text();
-				var returnDate=  $row.find('.td_returnDate').text();
-				var returnQty=  $row.find('.td_returnQty').text();
-				var returnRemark=  $row.find('.td_returnRemark').text();
-				var status=  $row.find('.td_status').text();	
-					
-				$('#prodItem').val(prodName);
-				$('#retDate').val(returnDate);
-				$('#retQty').val(returnQty);
-				$('#retRemarks').val(returnRemark);
-				$('#status').val(status);
-
-					});
-			</script>
-			<!---END script to pass value to modal form -->
-			
-			
-				<!--- EDIT DIALOG START -->
-				<div class="modal fade" id="editModal" role="dialog">
-					 <div class="modal-dialog modal-lg">
-						 <div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Edit Returned Product</h4>
-								<h5></h5>
-							</div>
-							<div class="modal-body">
-								<form action="" method="POST">
-									<h3>Item</h3>
-									<?php
-										$query2 = $conn->prepare("SELECT prodName FROM product");
-										$query2->execute();
-										$res = $query2->fetchAll();																
-									?>
-										
-									<select class="form-control" id="prodItem" name="prodItem">
-										<?php foreach ($res as $row): ?>
-											<option><?php echo $row["prodName"]?></option>
-										<?php endforeach ?>
-
-									</select>
-									<br>
-											
-									<h3>Quantity</h3>
-									<input type="text" class="form-control" id ="retQty" placeholder="Item Quantity" name="retQty"><br>
-									
-									<div class="form-group">
-										<h3>Status</h3>
-										<select class="form-control" id="status" name="status">
-											<option>In Storage</option>
-											<option>Returned</option>
-											<option>Pending</option>
-										</select>
-									</div>
-											
-									<h3>Remarks</h3>
-									<textarea class="form-control" id="retRemarks" rows="3" name="retRemarks"></textarea> <br>
-
-									<br>
-									<input type="submit" value="Add" class="btn btn-default btnclr" name="addRet" onclick="alert('Returned Product Successfully Added');">
-									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
-								</form> 		
-							</div>
-							<div class="modal-footer">
-							  <button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-				<!--- EDIT DIALOG END -->
 	
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -333,8 +241,7 @@
 				</div>
 			</div>
 		</nav>
-		
-	
+
 		<?php
 			if (isset($_POST["addRet"])){
 				
@@ -352,7 +259,6 @@
 				echo "<meta http-equiv='refresh' content='0'>";
 			}   
 		?>
-		
 
 	</body>
 </html>
