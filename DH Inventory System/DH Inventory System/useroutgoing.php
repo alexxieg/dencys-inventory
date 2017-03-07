@@ -11,7 +11,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) && $role!="user") {
 				header('Location: index.php');
 			}
 				$session_id = $_SESSION['id'];
@@ -53,7 +53,7 @@
 		?>
 		
 		<div class="productHolder" >
-			<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<nav class="navbar navbar-inverse navbar-static-top" >
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -66,34 +66,33 @@
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.php">Incoming</a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.html">Admin</a></li>
+							<li><a href="userinventory.php">Inventory</a></li>
+							<li><a href="userincoming.php">Incoming</a></li>
+							<li><a href="useroutgoing.php">Outgoing</a></li>
+							<li><a href="userreturns.php">Returns</a></li>
+							<li><a href="userproduct.php">Product</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>
 	
-	<div id="contents">
 		<div class="pages">
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
 
 							<h1 id="headers">OUTGOING PRODUCTS</h1>
 
-								<form action="?" method="post">
-										<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
-											<span class="glyphicon glyphicon-search"></span>
-										</button>
-									</span>
-								</form>
 
-							<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
+					
+							<form action="?" method="post">
+								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+								<button type="submit" name="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</form>
+						
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
 						
 				</table>
 			</div>
@@ -108,47 +107,47 @@
 					</th>
 					<th>
 						Product Description
-						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>						
 					</th>
 					<th>
 						Quantity
-						<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Date
-						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Employee
-						<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>
 					<th>
 						Branch
-						<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 						</button>
 					</th>	
 					<th>
@@ -175,7 +174,7 @@
 						<button type="button" class="btn btn-default">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
-						<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
+						<a href="userdeleteOut.php?outsId=<?php echo $outid; ?>">
 						<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 						</button>
@@ -245,20 +244,19 @@
 									<h3>Remarks</h3>
 								<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
 								
-								<input type="submit" value="Add" class="btn btn-success btnclr" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
-								<input type="submit" value="Cancel"class="btn btn-default btnclr" style="width: 100px;">
+								<input type="submit" value="Add" class="btn btn-success" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
+								<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
 							</form> 
 						</div>
 						
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
+			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<div class="navbar-header">
