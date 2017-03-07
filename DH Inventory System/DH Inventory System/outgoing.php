@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Outgoing</title>
+		<title>Outgoing Products</title>
 		
 		<?php include('dbcon.php'); ?>
 			
@@ -36,15 +36,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY outID ASC;");
 			}
@@ -82,18 +82,18 @@
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
 
-							<h1 id="headers">OUTGOING PRODUCTS</h1>
+					<h1 id="headers">OUTGOING PRODUCTS</h1>
 
-								<form action="?" method="post">
-										<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
-											<span class="glyphicon glyphicon-search"></span>
-										</button>
-									</span>
-								</form>
+					<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
 
-							<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
 						
 				</table>
 			</div>
@@ -103,6 +103,15 @@
 					<th style="text-align:center" colspan="8">THE FOLLOWING HAVE BEEN DEDUCTED FROM THE INVENTORY</th>
 				</tr>
 				<tr>
+					<th>
+						Date
+						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+					</th>
 					<th>
 						Product ID
 					</th>
@@ -125,13 +134,7 @@
 						</button>
 					</th>
 					<th>
-						Date
-						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-						</button>
+						Unit
 					</th>
 					<th>
 						Employee
@@ -164,10 +167,11 @@
 				?>
 
 				<tr>
-					<td></td>
+					<td><?php echo $item["outDate"]; ?></td>
+					<td><?php echo $item["prodID"]; ?></td>
 					<td><?php echo $item["prodName"]; ?></td>
 					<td><?php echo $item["outQty"]; ?></td>
-					<td><?php echo $item["outDate"]; ?></td>
+					<td><?php echo $item["unitType"]; ?></td>
 					<td><?php echo $item["empName"]; ?></td>
 					<td><?php echo $item["location"]; ?></td>
 					<td><?php echo $item["outRemarks"]; ?></td>

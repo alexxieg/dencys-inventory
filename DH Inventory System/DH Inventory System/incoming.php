@@ -36,16 +36,16 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
 				ORDER BY inID ASC;");
 			}
 			
@@ -83,17 +83,17 @@
 		<div id="tableHeader">
 			<table class="table table-striped table-bordered">
 				
-			<h1 id="headers">INCOMING PRODUCTS</h1>
-						<form action="?" method="post">
-								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
-						</form>
+				<h1 id="headers">INCOMING PRODUCTS</h1>
+				<form action="?" method="post">
+					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
 
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+				<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 
 			</table>
 		</div>
@@ -124,9 +124,7 @@
 						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
-				<th>
-					Model
-				</th>
+	
 				<th>
 					Quantity
 					<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;" id="sortBtn">
@@ -136,25 +134,23 @@
 						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
-				
 				<th>
-					Receipt No.
-					<button type="button" class="btn btn-default" value="?orderBy=receiptNo DESC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=receiptNo ASC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-					</button>
+					Unit
 				</th>
 				<th>
-					Receipt Date
-					<button type="button" class="btn btn-default" value="?orderBy=receiptDate DESC" onclick="location = this.value;" id="sortBtn">
+					Employee
+					<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
 						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=receiptDate ASC" onclick="location = this.value;" id="sortBtn">
+					<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
 						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
+				<th>
+					Receipt No.
+					
+				</th>
+				
 				<th>
 					Remarks
 				</th>
@@ -170,10 +166,12 @@
 				<td><?php echo $item["inDate"]; ?></td>	
 				<td><?php echo $item["prodID"];?></td>
 				<td><?php echo $item["prodName"]; ?></td>
-				<td><?php echo $item["model"]; ?></td>
+
 				<td><?php echo $item["inQty"]; ?></td>
+				<td><?php echo $item["unitType"]; ?></td>
+				<td><?php echo $item["empName"]; ?></td>
 				<td><?php echo $item["receiptNo"]; ?></td>
-				<td><?php echo $item["receiptDate"]; ?></td>
+
 				<td><?php echo $item["inRemarks"]; ?></td>
 				<td>
 					<button type="button" class="btn btn-default">
@@ -231,21 +229,8 @@
 								<?php endforeach ?>
 							</select> 
 							<br>
-							
-							<h3>Supplier</h3>
-							<?php
-								$query = $conn->prepare("SELECT supplier_name FROM suppliers ");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-						
-							<select class="form-control" id="addEntry" name="sup">
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["supplier_name"]?></option>
-								<?php endforeach ?>
-							</select> 
-							<br>
-							
+		
+												
 							<h3>Receipt Number</h3>
 							<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="inRecN"> <br>
 				

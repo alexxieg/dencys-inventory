@@ -40,15 +40,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel 
 				FROM product
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel
 				FROM product
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel
 				FROM product
 				ORDER BY prodID");
 			}
@@ -137,6 +137,9 @@
 							</button>
 						</th>
 						<th>
+							Unit Type
+						</th>
+						<th>
 							Product Price
 							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
@@ -145,16 +148,7 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
-						<th>
-							Reorder Level
-							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-				
+						
 						<th></th>
 						</tr>
 						
@@ -166,11 +160,11 @@
 						<tr>
 							<td><?php echo $item["prodID"]; ?></td>
 							<td><?php echo $item["prodName"]; ?></td>
-							<td></td>
+							<td><?php echo $item["model"];?></td>
 							<td><?php echo $item["brand"]; ?></td>
 							<td><?php echo $item["type"]; ?></td>
+							<td><?php echo $item["unitType"];?></td>
 							<td><?php echo $item["price"]; ?></td>
-							<td><?php echo $item["reorderLevel"]; ?></td>
 							<td>
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
