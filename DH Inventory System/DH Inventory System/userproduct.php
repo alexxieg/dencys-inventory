@@ -38,15 +38,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel 
 				FROM product
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel
 				FROM product
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT prodID, prodName, brand, type, price, reorderLevel 
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel
 				FROM product
 				ORDER BY prodID");
 			}
@@ -96,17 +96,16 @@
 	</div>
 
 			<div class="prodTable">
-				<br>
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>Product ID</th>
 						
 						<th>
 							Product Description
-							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
+							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;">
+							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
@@ -115,41 +114,36 @@
 						</th>
 						<th>
 							Brand
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 						<th>
 							Type
-							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
+						</th>
+						<th>
+							Unit Type
 						</th>
 						<th>
 							Product Price
-							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-							</button>
-						</th>
-						<th>
-							Reorder Level
-							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
-				
+						
+			
 						</tr>
 						
 						<?php
@@ -160,18 +154,19 @@
 						<tr>
 							<td><?php echo $item["prodID"]; ?></td>
 							<td><?php echo $item["prodName"]; ?></td>
-							<td></td>
+							<td><?php echo $item["model"];?></td>
 							<td><?php echo $item["brand"]; ?></td>
 							<td><?php echo $item["type"]; ?></td>
+							<td><?php echo $item["unitType"];?></td>
 							<td><?php echo $item["price"]; ?></td>
-							<td><?php echo $item["reorderLevel"]; ?></td>								
+							
+									
 					</tr>
 						
 					<?php
 						endforeach;
 					?>
 				</table>
-
 			
 	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">

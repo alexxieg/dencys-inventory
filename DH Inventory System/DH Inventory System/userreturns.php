@@ -31,16 +31,16 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY $sort");
 			
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY returnID ASC;");
 				
@@ -76,19 +76,19 @@
 		<div class="pages">
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
+					<h1 id="headers">RETURNED PRODUCTS</h1>	
 					
-						<h1 id="headers">RETURNED PRODUCTS</h1>	
-					
-							<form action="?" method="post">
-								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-								<button type="submit" name="submit">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</form>
+					<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
 						
-						<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Returned Product</button>
-						
-					
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Returned Product</button>
+										
 				</table>
 			</div>
 			
@@ -106,7 +106,10 @@
 							</button>							
 						</th>
 						<th>
-							Item
+							Product ID
+						</th>
+						<th>
+							Product Description
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
@@ -122,6 +125,9 @@
 							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
+						</th>
+						<th>
+							Unit
 						</th>
 						<th>
 							Status
@@ -145,8 +151,10 @@
 				
 					<tr>
 						<td><?php echo $item["returnDate"]; ?></td>
+						<td><?php echo $item["prodID"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
 						<td><?php echo $item["returnQty"]; ?></td>
+						<td><?php echo $item["unitType"];?></td>
 						<td><?php echo $item["status"]; ?></td>
 						<td><?php echo $item["returnRemark"]; ?></td>
 						
@@ -154,7 +162,7 @@
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
-							<a href="userdeleteRet.php?retId=<?php echo $retID; ?>">
+							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
 							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</button>

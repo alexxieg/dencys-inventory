@@ -80,23 +80,23 @@
 
 	<div id="contents">
 		<div class="pages">
-		<div id="tableHeader">
-			<table class="table table-striped table-bordered">
-				
-				<h1 id="headers">INCOMING PRODUCTS</h1>
-				<form action="?" method="post">
-					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</form>
+			<div id="tableHeader">
+				<table class="table table-striped table-bordered">
+					
+					<h1 id="headers">INCOMING PRODUCTS</h1>
+					<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
 
-				<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 
-			</table>
-		</div>
+				</table>
+			</div>
 			
 		<table class="table table-striped table-bordered">
 			<tr>

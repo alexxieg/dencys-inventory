@@ -36,22 +36,23 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
 				ORDER BY inID ASC;");
 			}
 			
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
+		
 		
 		<div class="productHolder">
 			<nav class="navbar navbar-inverse navbar-static-top">
@@ -83,9 +84,6 @@
 				
 					<h1 id="headers">INCOMING PRODUCTS</h1>
 				
-
-				
-						
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 							<button type="submit" class="btn btn-default" name="submit">
@@ -106,56 +104,53 @@
 			</tr>				
 			<tr>
 				<th>
+					Date
+					<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+					</button>
+					<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+					</button>
+				</th>
+				<th>
 					Product ID
 				</th>
 				<th>
 					Product Description
-					<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
-				<th>
-					Model
-				</th>
+	
 				<th>
 					Quantity
-					<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=inQty ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=inQty ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
 				<th>
-					Date
-					<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+					Unit
+				</th>
+				<th>
+					Employee
+					<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
 				<th>
 					Receipt No.
-					<button type="button" class="btn btn-default" value="?orderBy=receiptNo DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=receiptNo ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-					</button>
+					
 				</th>
-				<th>
-					Receipt Date
-					<button type="button" class="btn btn-default" value="?orderBy=receiptDate DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=receiptDate ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-					</button>
-				</th>
+				
 				<th>
 					Remarks
 				</th>
@@ -168,19 +163,21 @@
 			?>
 
 			<tr>
-				<td></td>
+				<td><?php echo $item["inDate"]; ?></td>	
+				<td><?php echo $item["prodID"];?></td>
 				<td><?php echo $item["prodName"]; ?></td>
-				<td></td>
+
 				<td><?php echo $item["inQty"]; ?></td>
-				<td><?php echo $item["inDate"]; ?></td>
+				<td><?php echo $item["unitType"]; ?></td>
+				<td><?php echo $item["empName"]; ?></td>
 				<td><?php echo $item["receiptNo"]; ?></td>
-				<td><?php echo $item["receiptDate"]; ?></td>
+
 				<td><?php echo $item["inRemarks"]; ?></td>
 				<td>
 					<button type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 					</button>
-					<a href="userdeletein.php?incId=<?php echo $incID; ?>"> 
+					<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
 					<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 					</button>

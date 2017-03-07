@@ -35,21 +35,26 @@
   
 	<body >
 		<?php
+			$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+			$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
+			$start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
-				$query = $conn->prepare("SELECT product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
-										FROM product INNER JOIN inventory ON product.prodID = inventory.prodID INNER JOIN incoming ON product.prodID = incoming.prodID INNER JOIN outgoing ON product.prodID = outgoing.prodID
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
+										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, qty
-										ORDER BY $sort");
+										ORDER BY $sort LIMIT {$start}, {$perPage}");
 			} else { 
-				$query = $conn->prepare("SELECT product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
-										FROM product INNER JOIN inventory ON product.prodID = inventory.prodID INNER JOIN incoming ON product.prodID = incoming.prodID INNER JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, qty");
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
+										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+										GROUP BY prodID, qty LIMIT {$start}, {$perPage}");
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
-		?>
+			$total = $conn->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
+			$pages = ceil($total / $perPage);
+		?>	
 	
 		<div class="productHolder" >
 			<nav class="navbar navbar-inverse navbar-static-top" >
@@ -80,16 +85,16 @@
 			
 			<h1 id="headers">INVENTORY</h1>
 					
-					
 			<form action="?" method="post">
 				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-				<button type="submit" name="submit">
-					<span class="glyphicon glyphicon-search"></span>
-				</button>
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
 			</form>
 			<br>
 			<br>
-		
 			
 			<div class="prodTable">
 				<br>
@@ -97,23 +102,27 @@
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>
-							<a href="?orderBy=prodID">Product ID</a>
-							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							Product ID
+							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 						
 						<th>
-							<a href="?orderBy=prodName">Product Description</a>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							Product Description
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
+						</th>
+						
+						<th>
+						Initial Quantity
 						</th>
 						
 						<th>
@@ -125,12 +134,12 @@
 						</th>
 						
 						<th>
-							<a href="?orderBy=qty">Current Quantity</a>
-							<button type="button" class="btn btn-default" value="?orderBy=qty DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							Current Quantity
+							<button type="button" class="btn btn-default" value="?orderBy=qty DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=qty ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=qty ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 						
@@ -139,16 +148,16 @@
 						</th>
 						
 						<th>
-							Unit Type
+							Unit
 						</th>
 						
 						<th>
-							<a href="?orderBy=price">Item Price</a>
-							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							Item Price
+							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 					</tr>
@@ -160,11 +169,12 @@
 					<tr>
 						<td><?php echo $item["prodID"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
+						<td></td>
 						<td><?php echo $item["inQty"]; ?></td>
 						<td><?php echo $item["outQty"]; ?></td>
 						<td><?php echo $item["qty"]; ?></td>
 						<td></td>
-						<td></td>
+						<td><?php echo $item["unitType"];?></td>
 						<td><?php echo $item["price"]; ?></td>							
 					</tr>
 					

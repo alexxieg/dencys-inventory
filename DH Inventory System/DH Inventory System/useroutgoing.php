@@ -36,15 +36,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY outID ASC;");
 			}
@@ -81,18 +81,18 @@
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
 
-							<h1 id="headers">OUTGOING PRODUCTS</h1>
+					<h1 id="headers">OUTGOING PRODUCTS</h1>
 
+					<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
 
-					
-							<form action="?" method="post">
-								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-								<button type="submit" name="submit">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</form>
-						
-							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
 						
 				</table>
 			</div>
@@ -103,51 +103,54 @@
 				</tr>
 				<tr>
 					<th>
+						Date
+						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+					</th>
+					<th>
 						Product ID
 					</th>
 					<th>
 						Product Description
-						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 						</button>						
 					</th>
 					<th>
 						Quantity
-						<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 						</button>
 					</th>
 					<th>
-						Date
-						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-						</button>
+						Unit
 					</th>
 					<th>
 						Employee
-						<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 						</button>
 					</th>
 					<th>
 						Branch
-						<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+						<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 						</button>
 					</th>	
 					<th>
@@ -163,10 +166,11 @@
 				?>
 
 				<tr>
-					<td></td>
+					<td><?php echo $item["outDate"]; ?></td>
+					<td><?php echo $item["prodID"]; ?></td>
 					<td><?php echo $item["prodName"]; ?></td>
 					<td><?php echo $item["outQty"]; ?></td>
-					<td><?php echo $item["outDate"]; ?></td>
+					<td><?php echo $item["unitType"]; ?></td>
 					<td><?php echo $item["empName"]; ?></td>
 					<td><?php echo $item["location"]; ?></td>
 					<td><?php echo $item["outRemarks"]; ?></td>
@@ -174,7 +178,7 @@
 						<button type="button" class="btn btn-default">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
-						<a href="userdeleteOut.php?outsId=<?php echo $outid; ?>">
+						<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
 						<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 						</button>
