@@ -33,21 +33,53 @@
 
 		
 	</head>
+    <style>
+#pagination {
+	float: left;
+	font-size: 50px;
+	text-indent: 5px;
+	border: 1px solid #1B88E4;
+	background-color: #4C97AF;
+    left: 1250px;
+    top: 1380px;
+	position: absolute;
+	display: inline-block;
+    padding-left: 0; 
+	
+
+}
+
+#pagination a {
+    float: left;
+	text-align: center;
+	color: white;
+	border: 3px solid white;
+
+}
+
+#pagination a#selected {
+	font-weight: 500;
+	background-color: black;
+
+	
+}
+
+</style>		
   
-	<body >
+	<body>
 		<?php
-			$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-			$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
-			$start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
+		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+		$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
+	    $start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
-				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
+				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, qty
 										ORDER BY $sort LIMIT {$start}, {$perPage}");
 			} else { 
-				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
+				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, qty LIMIT {$start}, {$perPage}");
 			}	
