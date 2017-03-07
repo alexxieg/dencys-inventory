@@ -58,7 +58,7 @@
 		?>
 	
 		<div class="productHolder" >
-			<nav class="navbar navbar-inverse navbar-static-top" >
+			<nav class="navbar navbar-inverse navbar-fixed-top" >
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -82,39 +82,37 @@
 				</div>
 			</nav>
 		</div>	
+	<div id="contents">
 		<div class="pages">
-	<div id="tableHeader">
-	<table class="table table-striped table-bordered">	
+			<div id="tableHeader">
+			<table class="table table-striped table-bordered">	
 		
 			<h1 id="headers">PRODUCTS</h1>
-		
-			<form action="?" method="post">
-				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-				<button type="submit" name="submit">
-					<span class="glyphicon glyphicon-search"></span>
-				</button>
-			</form>
-			
-			
-			
-				<button id="modbutt" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Product</button>
+				<form action="?" method="post">
+					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						<span class="input-group-btn">
+						<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+						<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
+				<button id="modbutt" type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal">Add Product</button>
 			
 		
 	</table>
 	</div>
 
 			<div class="prodTable">
-				<br>
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>Product ID</th>
 						
 						<th>
 							Product Description
-							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;">
+							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;">
+							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
@@ -123,38 +121,38 @@
 						</th>
 						<th>
 							Brand
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 						<th>
 							Type
-							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 						<th>
 							Product Price
-							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 						<th>
 							Reorder Level
-							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 				
@@ -193,16 +191,16 @@
 				</table>
 
 			
-	<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Product</h4>
-        </div>
-        <div class="modal-body">
-		
-   <form action="" method="POST">
+			<div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Add Product</h4>
+		        </div>
+		        <div class="modal-body">
+				
+		   <form action="" method="POST">
 					<h3>Product ID</h3>
 					<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodCode"> <br>
 					
@@ -225,8 +223,8 @@
 					<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodRO"> <br>
 						
 					<br>
-				<input type="submit" value="Add" class="btn btn-success" name="addProd" onclick="alert('New Product Successfully Added');">
-				<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+				<input type="submit" value="Add" class="btn btn-success btnclr" name="addProd" onclick="alert('New Product Successfully Added');">
+				<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
 				</form> 
 				
 					<br>
@@ -234,16 +232,15 @@
 			</form> 
 			
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-			
-			</div>	
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+		</div>	
 		</div>
-			
+	</div>			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<div class="navbar-header">

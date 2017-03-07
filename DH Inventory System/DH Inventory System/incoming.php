@@ -57,7 +57,7 @@
 		?>
 		
 		<div class="productHolder">
-			<nav class="navbar navbar-inverse navbar-static-top">
+			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -80,21 +80,24 @@
 				</div>
 			</nav>
 		</div>	
+
+	<div id="contents">
 		<div class="pages">
 		<div id="tableHeader">
 			<table class="table table-striped table-bordered">
 				
-					<h1 id="headers">INCOMING PRODUCTS</h1>
-			
+			<h1 id="headers">INCOMING PRODUCTS</h1>
 						<form action="?" method="post">
-							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-							<button type="submit" class="btn btn-default" name="submit">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
+								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
 						</form>
 
-						<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
-			
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+
 			</table>
 		</div>
 			
@@ -105,11 +108,11 @@
 			<tr>
 				<th>
 					Date
-					<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
 				<th>
@@ -117,11 +120,11 @@
 				</th>
 				<th>
 					Product Description
-					<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
 				<th>
@@ -129,30 +132,30 @@
 				</th>
 				<th>
 					Quantity
-					<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=inQty ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=inQty ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
 				
 				<th>
 					Receipt No.
-					<button type="button" class="btn btn-default" value="?orderBy=receiptNo DESC" onclick="location = this.value;">
+					<button type="button" class="btn btn-default" value="?orderBy=receiptNo DESC" onclick="location = this.value;" id="sortBtn">
 						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=receiptNo ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=receiptNo ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
 				<th>
 					Receipt Date
-					<button type="button" class="btn btn-default" value="?orderBy=receiptDate DESC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=receiptDate DESC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=receiptDate ASC" onclick="location = this.value;">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<button type="button" class="btn btn-default" value="?orderBy=receiptDate ASC" onclick="location = this.value;" id="sortBtn">
+						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 					</button>
 				</th>
 				<th>
@@ -197,7 +200,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
+						<h4 class="modal-title">Add Incoming Product</h4>
 					</div>
 					<div class="modal-body">
 						<form action="" method="POST">
@@ -253,18 +256,18 @@
 							<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
 
 							<br>
-							<input type="submit" value="Add" class="btn btn-default" name="addInc" onclick="alert('Incoming Product Successfully Added');">
-							<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+							<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc" onclick="alert('Incoming Product Successfully Added');">
+							<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
 						</form> 			
 					</div>
 				
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
 		</div>
-			
+	</div>		
 	
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">

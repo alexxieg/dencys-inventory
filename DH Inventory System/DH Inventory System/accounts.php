@@ -43,9 +43,9 @@
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
-	
+
 		<div class="productHolder" >
-			<nav class="navbar navbar-inverse navbar-static-top" >
+			<nav class="navbar navbar-inverse navbar-fixed-top" >
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -70,19 +70,25 @@
 			</nav>
 		</div>	
 
+	<div id="contents">
 		<div class="pages">
-
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">		
 					<h1 id="headers">ACCOUNTS</h1>
-					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">	
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>							
+						<form action="?" method="post">
+							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+									<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+						</form>
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>							
 				</table>
 			</div>
 
 				
 			<div class="prodTable">
-				<br>
 				<table class="table table-bordered" id="tables">
 					<tr>
 						<th>Username</th>
@@ -132,19 +138,20 @@
 										<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
 											
 										<br>
-									<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
-									<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+									<input type="submit" value="Add" class="btn btn-success btnclr" name="addAccnt" onclick="alert('New Account Successfully Added');">
+									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
 								</form> 
 							</div>
 							<div class="modal-footer">
-							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							  <button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-			
+	</div>
+
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<div class="navbar-header">

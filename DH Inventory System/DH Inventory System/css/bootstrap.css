@@ -6958,8 +6958,16 @@ margin-bottom: 2%;
 }
 
 #searchBar{
-width:25%;
-float: left;
+  width: 26%;
+  float: left;
+  margin-top: .3%;
+  height: 40px;
+}
+
+#searchIcon{
+  margin-left: -1%;
+  margin-bottom: -5.4%;
+  height: 40px;
 }
 
 .tables  > tr > td{
@@ -6967,13 +6975,49 @@ border: none;
 }
 
 #modbutt{
-float: right;
-margin-left: 30px;
-
-
+  float: right;
+  margin-left: 30px;
+  height: 20%;
 }
 
 #myBtn {
-  width: 15%;
+  width: 25%;
+  color: black;
+  margin-top: -2%;
 }
 
+#sortBtn {
+  width: 1%;
+}
+
+#arrowBtn {
+    display:block;
+    text-align:center;
+    margin-left: -6px;
+}
+
+#adminContent {
+  margin-top: 7%;
+}
+
+#contents {
+  margin-top: 10%;
+}
+
+#tableHeader .btnclr{
+  background-color: transparent;
+  color: black;
+  border-width: 1px;
+  border-color: gray;
+  font-size: 15px;
+}
+
+.modal-body .btnclr{
+  background-color: #3b5998;
+  color: white;
+}
+
+.modal-footer .btnclr{
+  background-color: #3b5998;
+  color: white;
+}
