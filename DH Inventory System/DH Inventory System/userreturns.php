@@ -142,7 +142,6 @@
 						<th>
 							Remarks
 						</th>
-						<th></th>
 					</tr>
 					
 					<?php
@@ -158,17 +157,6 @@
 						<td><?php echo $item["unitType"];?></td>
 						<td><?php echo $item["status"]; ?></td>
 						<td><?php echo $item["returnRemark"]; ?></td>
-						
-						<td>
-							<button type="button" class="btn btn-default">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							</button>
-							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</button>
-							</a>
-						</td>
 					</tr>
 					
 					<?php
