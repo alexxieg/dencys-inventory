@@ -125,9 +125,7 @@
 								</button>
 							</span>
 						</form>
-			<br>
-			<br>
-		
+			
 			
 			<div class="prodTable">
 				<br>
