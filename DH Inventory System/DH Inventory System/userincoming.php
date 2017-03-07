@@ -53,9 +53,9 @@
 			$result = $query->fetchAll();
 		?>
 		
-		
+	<div id="contents">
 		<div class="productHolder">
-			<nav class="navbar navbar-inverse navbar-static-top">
+			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -86,14 +86,15 @@
 				
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-							<button type="submit" class="btn btn-default" name="submit">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
 						</form>
 					
 					
-						
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 			
 			</table>
 		</div>
@@ -251,18 +252,18 @@
 							<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
 
 							<br>
-							<input type="submit" value="Add" class="btn btn-default" name="addInc" onclick="alert('Incoming Product Successfully Added');">
-							<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+							<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc" onclick="alert('Incoming Product Successfully Added');">
+							<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
 						</form> 			
 					</div>
 				
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
 		</div>
-			
+	</div>		
 	
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">

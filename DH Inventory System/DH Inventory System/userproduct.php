@@ -54,8 +54,9 @@
 			$result = $query->fetchAll();
 		?>
 	
+	<div id="contents">
 		<div class="productHolder" >
-			<nav class="navbar navbar-inverse navbar-static-top" >
+			<nav class="navbar navbar-inverse navbar-fixed-top" >
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -79,18 +80,21 @@
 				</div>
 			</nav>
 		</div>	
-		<div class="pages">
+
+	<div class="pages">
 	<div id="tableHeader">
 	<table class="table table-striped table-bordered">	
 		
 			<h1 id="headers">PRODUCTS</h1>
 		
-			<form action="?" method="post">
-				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-				<button type="submit" name="submit">
-					<span class="glyphicon glyphicon-search"></span>
-				</button>
-			</form>	
+					<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
 		
 	</table>
 	</div>
@@ -103,10 +107,10 @@
 						<th>
 							Product Description
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>							
 						</th>
 						<th>
@@ -211,13 +215,13 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-			
-			</div>	
-		</div>
+	       	 </div>
+	      	 </div>
+	    	</div>
+	  		</div>
+		   </div>	
+		   </div>
+		  </div>
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">

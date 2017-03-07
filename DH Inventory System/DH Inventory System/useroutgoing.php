@@ -51,9 +51,10 @@
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
-		
+	
+	<div id="contents">	
 		<div class="productHolder" >
-			<nav class="navbar navbar-inverse navbar-static-top" >
+			<nav class="navbar navbar-inverse navbar-fixed-top" >
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -248,19 +249,20 @@
 									<h3>Remarks</h3>
 								<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
 								
-								<input type="submit" value="Add" class="btn btn-success" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
-								<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
+								<input type="submit" value="Add" class="btn btn-success btnclr" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
+								<input type="submit" value="Cancel"class="btn btn-default btnclr" style="width: 100px;">
 							</form> 
 						</div>
 						
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-			
+	</div>	
+
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<div class="navbar-header">
