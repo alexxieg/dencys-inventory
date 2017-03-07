@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Accounts</title>
+	<title>Employees</title>
 	<?php include('dbcon.php'); ?>
 		
 	<?php 
@@ -39,7 +39,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT userName, password FROM users");
+			$query = $conn->prepare("SELECT empID, empName FROM employee");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -74,7 +74,7 @@
 		<div class="pages">
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">		
-					<h1 id="headers">ACCOUNTS</h1>
+					<h1 id="headers">EMPLOYEES</h1>
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 								<span class="input-group-btn">
@@ -90,8 +90,8 @@
 			<div class="prodTable">
 				<table class="table table-bordered" id="tables">
 					<tr>
-						<th>Username</th>
-						<th>Password</th>
+						<th>Employee ID</th>
+						<th>Name</th>
 	
 						<th></th>
 					</tr>
@@ -101,8 +101,8 @@
 						?>
 
 						<tr>
-							<td><?php echo $item["userName"]; ?></td>
-							<td><?php echo $item["password"]; ?></td>
+							<td><?php echo $item["empID"]; ?></td>
+							<td><?php echo $item["empName"]; ?></td>
 					
 							<td>
 								<button type="button" class="btn btn-default">
@@ -126,14 +126,12 @@
 						<div class="modal-content">
 							<div class="modal-header">
 							  <button type="button" class="close" data-dismiss="modal">&times;</button>
-							  <h4 class="modal-title">Add Account</h4>
+							  <h4 class="modal-title">Add New Employee</h4>
 							</div>
 							<div class="modal-body">
 								<form action="" method="POST">
-										<h3>Username</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>
-										
-										<h3>Password</h3>
+																			
+										<h3>Name</h3>
 										<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
 											
 										<br>
