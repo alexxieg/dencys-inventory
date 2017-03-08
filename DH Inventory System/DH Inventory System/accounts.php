@@ -103,7 +103,7 @@
 							<td><?php echo $item["password"]; ?></td>
 					
 							<td>
-								<a href="editAccounts.php?useID=<?php echo $useThisID; ?>">
+								<a href="editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
 								<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
