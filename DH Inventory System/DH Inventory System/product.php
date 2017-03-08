@@ -104,13 +104,14 @@
 			<div class="prodTable">
 				<table class="table table-striped table-bordered">
 					<tr>
-						<th>Product ID</th>
+						<th>Product ID
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-							</button>	
+							</button>
+						</th>
 						<th>
 							Product Description
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
