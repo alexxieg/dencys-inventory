@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Outgoing</title>
+    <title>Edit Incoming</title>
 	<?php include('dbcon.php'); ?>
 		
 	<?php 
@@ -33,11 +33,10 @@
 				
 				<h3>Item</h3>
 				<?php
-					$outid= $_GET['outsId'];
-					$query = $conn->prepare("SELECT product.prodName, product.model, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
-					FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID 
-					INNER JOIN employee ON outgoing.empID = employee.empID 
-					WHERE outID = $outid");
+					$incID= $_GET['incId'];
+					$query = $conn->prepare("SELECT product.prodName, product.model, incoming.inID, incoming.inQty, incoming.inDate, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+					FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID 
+					WHERE inID = $incID");
 					$query->execute();
 					$res = $query->fetchAll();
 				?>
@@ -51,7 +50,7 @@
 				
 				<h3>Quantity</h3>
 				
-				<input type="text" class="form-control" id ="addEntry" placeholder="" name="outgoQty"> 
+				<input type="text" class="form-control" id ="addEntry" placeholder="" name="incoQty"> 
 				<br>
 				
 				<h3>Employee</h3>
@@ -82,17 +81,20 @@
 				</select> 
 				<br>
 				
+				<h3>Receipt Number</h3>
+				<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="inRecN"> <br>
+				
 				<h3>Remarks</h3>
 				<?php
-					$outid= $_GET['outsId'];
-					$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
-					FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID 
-					INNER JOIN employee ON outgoing.empID = employee.empID");
+					$incID= $_GET['incId'];
+					$query = $conn->prepare("SELECT product.prodName, product.model, incoming.outID, incoming.outQty, incoming.outDate, employee.empName, branch.location, incoming.outRemarks 
+					FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN branch ON incoming.branchID = branch.branchID 
+					INNER JOIN employee ON incoming.empID = employee.empID");
 					$query->execute();
 					$res = $query->fetchAll();
 				?>
 				
-				<textarea class="form-control" id="addEntry" rows="3" name="outRem"></textarea> <br>
+				<textarea class="form-control" id="addEntry" rows="3" name="inRem"></textarea> <br>
 				
 			<input type="submit" value="Update" class="btn btn-success" name="addOut" onclick="alert('Outgoing Entry Successfully Edited');">
 			<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
@@ -101,19 +103,15 @@
 	</div>
 	
 	<?php
-			$outid= $_GET['outsId'];
-			$quant=(isset($_REQUEST['outgoQty']) ? $_REQUEST['outgoQty'] : null);
-			$rem=(isset($_REQUEST['outRem']) ? $_REQUEST['outRem'] : null);
+			$incID= $_GET['incId'];
+			$quant=(isset($_REQUEST['incoQty']) ? $_REQUEST['incoQty'] : null);
+			$recip=(isset($_REQUEST['inRecN']) ? $_REQUEST['inRecN'] : null);
+			$rem=(isset($_REQUEST['inRem']) ? $_REQUEST['inRem'] : null);
 			$prod=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
 			
 			if (isset($_POST["addOut"])){
 					
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-				$branch = $_POST['branch'];
-				$branch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch'");
-				$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
-				$branch3 = $branch2['branchA'];
 				
 				$emp = $_POST['emp'];
 				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
@@ -134,8 +132,7 @@
 				
 				*/
 				
-				/*$sql = "UPDATE outgoing SET outQty=$quant, outDate=CURDATE(), outRemarks='$rem', branchID='$branch3', empID='$emp3' WHERE OutID=$outid";*/
-				$sql = "UPDATE outgoing SET outQty=$quant, outDate=CURDATE(), outRemarks='$rem', branchID='$branch3', empID='$emp3' WHERE OutID=$outid";
+				$sql = "UPDATE incoming SET inQty=$quant, inDate=CURDATE(), receiptNo='$recip', inRemarks='$rem', empID='$emp3' WHERE inID=$incID";
 				$conn->exec($sql);				
 				
 				/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
