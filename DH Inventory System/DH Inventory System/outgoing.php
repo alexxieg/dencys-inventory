@@ -176,7 +176,7 @@
 					<td><?php echo $item["location"]; ?></td>
 					<td><?php echo $item["outRemarks"]; ?></td>
 					<td>
-						<a href="editOut.php?outsId=<?php echo $outid; ?>">
+						<a href="editOut.php?outsId=<?php echo $outid; ?>" target="_blank">
 						<button type="button" class="btn btn-default">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
