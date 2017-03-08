@@ -36,7 +36,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT userName, password FROM users");
+			$query = $conn->prepare("SELECT userID, userName, password FROM users");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -128,25 +128,26 @@
 							  <h4 class="modal-title">Add Account</h4>
 							</div>
 							<div class="modal-body">
-								<form action="" method="POST">
-										<h3>Username</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>
-										
-										<h3>Password</h3>
-										<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
-										
-										<div class="form-group">
-											 <h3>User Role</h3>
-											  <select class="form-control" id="addEntry" name="user_role">
-												<option>admin</option>
-												<option>user</option>
-											  </select>
-										</div>
-									
-										<br>
-									<input type="submit" value="Add" class="btn btn-success btnclr" name="addAccnt" onclick="alert('New Account Successfully Added');">
-									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
-								</form> 
+								<<form action="" method="POST">
+				<h3>Username</h3>
+				<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>
+				
+				<h3>Password</h3>
+				<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
+				
+				<div class="form-group">
+					 <h3>User Role</h3>
+					  <select class="form-control" id="addEntry" name="user_role">
+						<option>admin</option>
+						<option>user</option>
+					  </select>
+				</div>
+			
+				 <br>
+					
+				<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
+			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+			</form> 
 							</div>
 							<div class="modal-footer">
 							  <button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
@@ -175,6 +176,20 @@
 				</div>
 			</div>
 		</nav>
+		
+		<?php
+    
+    if (isset($_POST["addAccnt"])){
+    
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	 
+		$sql = "INSERT INTO users (userName, password, user_role)
+		VALUES ('".$_POST['userName']."','".$_POST['psw']."','".$_POST['user_role']."')";
+    
+		$conn->exec($sql);
+	}    
+
+	?>
   </body>
 </html>
 
