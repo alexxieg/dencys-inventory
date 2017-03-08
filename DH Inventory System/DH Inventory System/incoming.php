@@ -174,7 +174,7 @@
 
 				<td><?php echo $item["inRemarks"]; ?></td>
 				<td>
-					<a href="editIn.php?incId=<?php echo $incID; ?>"> 
+					<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
 					<button type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 					</button>
