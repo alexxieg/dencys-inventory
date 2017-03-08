@@ -159,9 +159,11 @@
 						<td><?php echo $item["returnRemark"]; ?></td>
 						
 						<td>
+							<a href="editRet.php?retId=<?php echo $retID; ?>">
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
+							</a>
 							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
 							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
