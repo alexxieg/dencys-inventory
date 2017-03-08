@@ -95,6 +95,7 @@
 						
 						<?php
 							foreach ($result as $item):
+							$useThisID = $item["userID"];
 						?>
 
 						<tr>
