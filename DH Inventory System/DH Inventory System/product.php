@@ -166,7 +166,7 @@
 							<td><?php echo $item["unitType"];?></td>
 							<td><?php echo $item["price"]; ?></td>
 							<td>
-							<a href="editProd.php?proId=<?php echo $proID; ?>">	
+							<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
