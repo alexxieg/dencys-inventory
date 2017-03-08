@@ -74,19 +74,19 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
-				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
+				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.unitType, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, qty
+										GROUP BY prodID, initialQty,  qty
 										ORDER BY $sort LIMIT {$start}, {$perPage}");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.unitType, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										WHERE prodName LIKE '%".$searching."%'
-										GROUP BY prodID, qty ");
+										GROUP BY prodID, initialQty, qty ");
 			} else { 
-				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.qty, product.price 
+				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.unitType, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, qty LIMIT {$start}, {$perPage}");
+										GROUP BY prodID, initialQty, qty LIMIT {$start}, {$perPage}");
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
@@ -185,12 +185,7 @@
 						
 						<th>
 							Current Quantity
-							<button type="button" class="btn btn-default" value="?orderBy=qty DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=qty ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
+							
 						</th>
 						
 						<th>
@@ -214,15 +209,43 @@
 					
 					<?php
 						foreach ($result as $item):
-					?>
-
-					<tr>
+						$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+						if ($currQty <= $item["reorderLevel"]){
+					?><tr  style='background-color: #ff9999;>
 						<td><?php echo $item["prodID"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
-						<td></td>
+						<td><?php echo $item["initialQty"]; ?></td>
 						<td><?php echo $item["inQty"]; ?></td>
 						<td><?php echo $item["outQty"]; ?></td>
-						<td><?php echo $item["qty"]; ?></td>
+						<td><?php echo $currQty; ?></td>
+						<td></td>
+						<td><?php echo $item["unitType"];?></td>
+						<td><?php echo $item["price"]; ?></td>							
+					</tr>
+					<?php	}else{
+						?>
+						<tr>
+						<td><?php echo $item["prodID"]; ?></td>
+						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["initialQty"]; ?></td>
+						<td><?php echo $item["inQty"]; ?></td>
+						<td><?php echo $item["outQty"]; ?></td>
+						<td><?php echo $currQty; ?></td>
+						<td></td>
+						<td><?php echo $item["unitType"];?></td>
+						<td><?php echo $item["price"]; ?></td>							
+					</tr>
+					<?php
+					}	
+					?>
+
+					<tr  style='background-color: #ff9999;>
+						<td><?php echo $item["prodID"]; ?></td>
+						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["initialQty"]; ?></td>
+						<td><?php echo $item["inQty"]; ?></td>
+						<td><?php echo $item["outQty"]; ?></td>
+						<td><?php echo $currQty; ?></td>
 						<td></td>
 						<td><?php echo $item["unitType"];?></td>
 						<td><?php echo $item["price"]; ?></td>							
