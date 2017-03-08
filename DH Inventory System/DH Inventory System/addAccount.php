@@ -62,9 +62,18 @@
 				
 				<h3>Password</h3>
 				<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
+				
+				<div class="form-group">
+					 <h3>User Role</h3>
+					  <select class="form-control" id="addEntry" name="user_role">
+						<option>admin</option>
+						<option>user</option>
+					  </select>
+				</div>
+			
+				 <br>
 					
-				<br>
-			<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
+				<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
 			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 			</form> 
 		</div>
@@ -76,8 +85,8 @@
     
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	 
-		$sql = "INSERT INTO users (userName, password)
-		VALUES ('".$_POST['userName']."','".$_POST['psw']."')";
+		$sql = "INSERT INTO users (userName, password, user_role)
+		VALUES ('".$_POST['userName']."','".$_POST['psw']."','".$_POST['user_role']."')";
     
 		$conn->exec($sql);
 	}    
