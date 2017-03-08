@@ -102,10 +102,11 @@
 							<td><?php echo $item["password"]; ?></td>
 					
 							<td>
+								<a href="editAccounts.php?useID=<?php echo $useThisID; ?>">
 								<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
-						
+								</a>
 								<button type="button" class="btn btn-default">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 								</button>
@@ -132,7 +133,15 @@
 										
 										<h3>Password</h3>
 										<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
-											
+										
+										<div class="form-group">
+											 <h3>User Role</h3>
+											  <select class="form-control" id="addEntry" name="user_role">
+												<option>admin</option>
+												<option>user</option>
+											  </select>
+										</div>
+									
 										<br>
 									<input type="submit" value="Add" class="btn btn-success btnclr" name="addAccnt" onclick="alert('New Account Successfully Added');">
 									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
