@@ -159,7 +159,7 @@
 						<td><?php echo $item["returnRemark"]; ?></td>
 						
 						<td>
-							<a href="editRet.php?retId=<?php echo $retID; ?>">
+							<a href="editRet.php?retId=<?php echo $retID; ?>" target="_blank">
 							<button type="button" class="btn btn-default">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
