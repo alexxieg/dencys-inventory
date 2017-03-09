@@ -99,9 +99,7 @@
 			</div>
 			
 		<table class="table table-striped table-bordered">
-			<tr>
-				<th style="text-align:center" colspan="10">THE FOLLOWING HAVE BEEN ADDED TO THE INVENTORY</th>
-			</tr>				
+			
 			<tr>
 				<th>
 					Date
@@ -200,35 +198,6 @@
 						<h4 class="modal-title">Add Incoming Product</h4>
 					</div>
 					<div class="modal-body">
-						<form action="/action_page.php">
-						  Receipt No. 
-						  <input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="rcno"><br>
-						</form>
-			          <table class="table table-striped" id="tblGrid">
-			            <thead id="tblHead">
-			              <tr>
-			                <th>Item</th>
-			                <th>Quantity</th>
-			                <th class="text-right">Employee</th>
-			              </tr>
-			            </thead>
-			            <tbody>
-			              <tr>
-			              	<td></td>
-			                <td></td>
-			                <td class="text-right"></td>
-			              </tr>
-			              <tr><td></td>
-			                <td></td>
-			                <td class="text-right"></td>
-			              </tr>
-			              <tr>
-			              	<td></td>
-			                <td></td>
-			                <td class="text-right"></td>
-			              </tr>
-			            </tbody>
-			          </table>
 						<form action="" method="POST">
 							<h3>Item</h3>
 							<?php
@@ -260,7 +229,11 @@
 								<?php endforeach ?>
 							</select> 
 							<br>
-
+		
+												
+							<h3>Receipt Number</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="inRecN"> <br>
+				
 							<h3>Remarks</h3>
 							<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
 
@@ -271,11 +244,10 @@
 					</div>
 				
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary btnclr" onclick="alert('Saved changes successful!');">Save Changes</button>
+						<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
-			         	
 		</div>
 	</div>		
 	

@@ -31,16 +31,16 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY $sort");
 			
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY returnID ASC;");
 				
@@ -87,7 +87,7 @@
 						</span>
 					</form>
 						
-					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Returned Product</button>
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 										
 				</table>
 			</div>
@@ -116,6 +116,9 @@
 							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
+						</th>
+						<th>
+							Model
 						</th>
 						<th>
 							Quantity
@@ -153,6 +156,7 @@
 						<td><?php echo $item["returnDate"]; ?></td>
 						<td><?php echo $item["prodID"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["model"]; ?></td>
 						<td><?php echo $item["returnQty"]; ?></td>
 						<td><?php echo $item["unitType"];?></td>
 						<td><?php echo $item["status"]; ?></td>

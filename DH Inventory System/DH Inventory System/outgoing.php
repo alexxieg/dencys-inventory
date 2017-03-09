@@ -100,9 +100,6 @@
 			
 			<table class="table table-striped table-bordered">
 				<tr>
-					<th style="text-align:center" colspan="8">THE FOLLOWING HAVE BEEN DEDUCTED FROM THE INVENTORY</th>
-				</tr>
-				<tr>
 					<th>
 						Date
 						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
@@ -204,53 +201,52 @@
 						<div class="modal-body">
 							<form action="" method="POST">
 								<h3>Item</h3>
-									<?php
-									$query = $conn->prepare("SELECT prodName FROM product ");
+								<?php
+								$query = $conn->prepare("SELECT prodName FROM product ");
+								$query->execute();
+								$res = $query->fetchAll();
+								?>
+								
+								<select class="form-control" id="addEntry" name="prodItem">
+									<?php foreach ($res as $row): ?>
+										<option><?=$row["prodName"]?></option>
+									<?php endforeach ?>
+								</select> 
+								<br>
+								
+								<h3>Quantity</h3>
+								<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="outQty"> <br>
+								
+								<h3>Employee</h3>
+								<?php
+									$query = $conn->prepare("SELECT empName FROM employee ");
 									$query->execute();
 									$res = $query->fetchAll();
-									?>
+								?>
 								
-									<select class="form-control" id="addEntry" name="prodItem">
-										<?php foreach ($res as $row): ?>
-											<option><?=$row["prodName"]?></option>
-										<?php endforeach ?>
-									</select> 
+								<select class="form-control" id="addEntry" name="emp">
+									<?php foreach ($res as $row): ?>
+										<option><?=$row["empName"]?></option>
+									<?php endforeach ?>
+								</select> 
 									<br>
 									
-									<h3>Quantity</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="outQty"> <br>
-									
-									<h3>Employee</h3>
-									<?php
-										$query = $conn->prepare("SELECT empName FROM employee ");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
+								<h3>Branch</h3>
+								<?php
+									$query = $conn->prepare("SELECT location FROM branch");
+									$query->execute();
+									$res = $query->fetchAll();
+								?>
 								
-									<select class="form-control" id="addEntry" name="emp">
-										<?php foreach ($res as $row): ?>
-											<option><?=$row["empName"]?></option>
-										<?php endforeach ?>
-									</select> 
-									<br>
-									
-									<h3>Branch</h3>
-									<?php
-										$query = $conn->prepare("SELECT location FROM branch");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
+								<select class="form-control" id="addEntry" name="branch">
+									<?php foreach ($res as $row): ?>
+										<option><?=$row["location"]?></option>
+									<?php endforeach ?>
+								</select> 
+								<br>
 								
-									<select class="form-control" id="addEntry" name="branch">
-										<?php foreach ($res as $row): ?>
-											<option><?=$row["location"]?></option>
-										<?php endforeach ?>
-									</select> 
-									<br>
-									
-									<h3>Remarks</h3>
+								<h3>Remarks</h3>
 								<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
-								
 								<input type="submit" value="Add" class="btn btn-success btnclr" name="addOut" onclick="alert('Outgoing Product Successfully Added');">
 								<input type="submit" value="Cancel"class="btn btn-default btnclr" style="width: 100px;">
 							</form> 

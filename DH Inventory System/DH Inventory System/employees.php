@@ -80,7 +80,7 @@
 									</button>
 								</span>
 						</form>
-					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>							
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
 				</table>
 			</div>
 				
@@ -129,10 +129,10 @@
 								<form action="" method="POST">
 																			
 										<h3>Name</h3>
-										<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
+										<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="empName"> <br>
 											
 										<br>
-									<input type="submit" value="Add" class="btn btn-success btnclr" name="addAccnt" onclick="alert('New Account Successfully Added');">
+									<input type="submit" value="Add" class="btn btn-success btnclr" name="addEmp" onclick="alert('New Employee Successfully Added');">
 									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
 								</form> 
 							</div>
@@ -163,6 +163,21 @@
 				</div>
 			</div>
 		</nav>
+		
+		<?php
+		
+			if (isset($_POST["addEmp"])){
+			
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 
+					 
+				$sql = "INSERT INTO employee (empName)
+				VALUES ('".$_POST['empName']."')";
+				$conn->exec($sql);
+				
+			}    
+
+		?>
   </body>
 </html>
 
