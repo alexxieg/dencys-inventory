@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2017 at 05:17 PM
+-- Generation Time: Mar 10, 2017 at 09:08 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -43,6 +43,90 @@ INSERT INTO `branch` (`branchID`, `location`) VALUES
 (3, 'KM 4'),
 (4, 'KM 5'),
 (5, 'San Fernando');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
+
+CREATE TABLE `brand` (
+  `brandID` int(5) NOT NULL,
+  `brandName` varchar(45) NOT NULL,
+  `brandCode` varchar(45) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`brandID`, `brandName`, `brandCode`) VALUES
+(1, 'AGP', 'AGP'),
+(2, 'Bosch', 'BSH'),
+(3, 'DCA', 'DCA'),
+(4, 'Dewalt', 'DWT'),
+(5, 'Hitachi', 'HTC'),
+(6, 'Lotus', 'LTS'),
+(7, 'Benz Werks', 'BZW'),
+(8, 'Bernmann', 'BNM'),
+(9, 'Black and Decker', 'BND'),
+(10, 'Greenfield', 'GFD'),
+(11, 'Irwin', 'IWN'),
+(12, 'Milwaukee', 'MWK'),
+(13, 'Stihl', 'STL'),
+(14, 'Tatara', 'TTR'),
+(15, 'Unistar', 'UNS'),
+(16, 'Vorex', 'VRX'),
+(17, 'Johnson Elektik', 'JSE'),
+(18, 'Ken', 'KEN'),
+(19, 'Rexon', 'RXN'),
+(20, 'Zekoki', 'ZKK'),
+(21, 'Skil', 'SKL'),
+(22, 'Stanley', 'SLY');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `categoryID` int(5) NOT NULL,
+  `categoryName` varchar(45) NOT NULL,
+  `categoryCode` varchar(45) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`categoryID`, `categoryName`, `categoryCode`) VALUES
+(1, 'Hand Tools', 'HTL'),
+(2, 'Power Tools', 'PTL'),
+(3, 'Measuring Tools', 'MTL'),
+(4, 'Tool Organizers', 'TOR'),
+(5, 'Paints', 'PNT'),
+(6, 'Brushes and Roller', 'BNR'),
+(7, 'Caulks and Sealants', 'CNS'),
+(8, 'Adhesive and Tapes', 'ANT'),
+(9, 'Ladders', 'LDR'),
+(10, 'Bulbs and Flourescent Lights ', 'BFL'),
+(11, 'Flashlights', 'FLT'),
+(12, 'Batteries', 'BTY'),
+(13, 'Rechargeables', 'RCG'),
+(14, 'Power Supply', 'PSY'),
+(15, 'Extension Cords, Wires, and Cables', 'EWC'),
+(16, 'Wiring Devices', 'WDS'),
+(17, 'Air Purifier', 'APF'),
+(18, 'Faucets', 'FCT'),
+(19, 'Fittings', 'FTN'),
+(20, 'Water Filtration', 'WTF'),
+(21, 'Water Heaters', 'WTH'),
+(22, 'Water Storage', 'WTS'),
+(23, 'Pumps', 'PMS'),
+(24, 'Safety Gear', 'SGR'),
+(25, 'Power Tool Accessories', 'PTA'),
+(26, 'Hand Tool Accessories', 'HTA');
 
 -- --------------------------------------------------------
 
@@ -203,7 +287,7 @@ CREATE TABLE `product` (
   `prodID` varchar(25) NOT NULL,
   `prodName` varchar(100) NOT NULL,
   `model` varchar(45) DEFAULT NULL,
-  `type` varchar(25) NOT NULL,
+  `category` varchar(25) NOT NULL,
   `brand` varchar(25) NOT NULL,
   `price` decimal(11,0) NOT NULL,
   `reorderLevel` int(5) NOT NULL,
@@ -214,7 +298,25 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`prodID`, `prodName`, `model`, `type`, `brand`, `price`, `reorderLevel`, `unitType`) VALUES
+INSERT INTO `product` (`prodID`, `prodName`, `model`, `category`, `brand`, `price`, `reorderLevel`, `unitType`) VALUES
+('DCA-CC-001', 'Cordless Cleaner 12V/1.5Ah 1.2  m/min 1.8 Kpa 20 min 0.9kg', 'ADXC12B', 'Powertools', 'DCA', '13000', 10, 'Piece/s'),
+('DCA-CDD-001', 'Cordless Driver Drill 12V/1.5Ah 10 mm 0-700 r/min 10 mm 1.0kg', 'ADJZ09-10A', 'Powertools', 'DCA', '8600', 10, 'Piece/s'),
+('DCA-CDHD-001', 'Cordless Driver Hammer Drill 18V/3Ahx2 13 mm 36000BPM 400 r/min 2000 r/min 13 mm 38 mm 25+2 70N.m 2.', 'ADJZ13A', 'Powertools', 'DCA', '21250', 10, 'Piece/s'),
+('DCA-CID-001', 'Cordless Impact Driver 12V/1.5Ahx2 0-2400 r/min 0-3000 /min 100N.m 1.0kg', 'ADPL02-8A', 'Powertools', 'DCA', '9500', 10, 'Piece/s'),
+('DCA-CIW-001', 'Cordless Impact Wrench 18V/3Ahx2 0-2200r/min 3200/min 230N.m 1.75kg', 'ADPB16A', 'Powertools', 'DCA', '19500', 10, 'Piece/s'),
+('DCA-CMT-001', 'Cordless Multi-tool12V/1.5Ahx2 5000-20000/min 2-4-6-8-10-12 3 3 0.95kg', 'ADMD12', 'Powertools', 'DCA', '13650', 10, 'Piece/s'),
+('DCA-ECOM-001', 'Electric Cut Off Machine 355x3x25.4mm 2000W 3800r/min 14kg', 'AJG04-355', 'Powertools', 'DCA', '12450', 10, 'Piece/s'),
+('DCA-ECS-001', 'Electric Circular Saw 1100W 5600r/min 64mm 45 3.6kg', 'AMY02-185', 'Powertools', 'DCA', '5950', 10, 'Piece/s'),
+('DCA-ECS-002', 'Electric Circular Saw 1520W 4100r/min 84mm 45 7.5kg', 'AMY235', 'Powertools', 'DCA', '9850', 10, 'Piece/s'),
+('DCA-EMS-001', 'Electric Mitre Saw 1650W 4600r/min 255mm 12kg', 'AJX255', 'Powertools', 'DCA', '19500', 10, 'Piece/s'),
+('DCA-EN-001', 'Electric Nibbler620W 1300/min 3.2mm 2.5mm 120mm 128mm 3.8kg', 'AJH32', 'Powertools', 'DCA', '12375', 10, 'Piece/s'),
+('DCA-EW-001', 'Electric Wrench 620W 1700r/min 1600/min M16-M22mm 19x19mm 588N.m  5kg', 'APB22C', 'Powertools', 'DCA', '12000', 10, 'Piece/s'),
+('DCA-HG-001', 'Heat Gun 2000W 50-480C 50-600 C 210-250L/min 340-380L/min 0.8kg', 'AQB2000', 'Powertools', 'DCA', '2500', 10, 'Piece/s'),
+('DCA-JS-001', 'Jig Saw 580W 500-3100/min 0-45 10mm 85mm 2.7kg', 'AMQ85', 'Powertools', 'DCA', '7500', 10, 'Piece/s'),
+('DCA-T-001', 'Trimmer350W 30000r/min 6.35mm 1.8kg', 'AMP02-6', 'Powertools', 'DCA', '2900', 10, 'Piece/s'),
+('DCA-WR-001', 'Wood Router 1240W 12.7mm 24000r/min 4.6kg', 'AMR05-12', 'Powertools', 'DCA', '8200', 10, 'Piece/s'),
+('DCA-WR-002', 'Wood Router 1050W 12.7mm 23000r/min 3.5kg', 'AMR03-12', 'Powertools', 'DCA', '7800', 10, 'Piece/s'),
+('DCA-WR-003', 'Wood Router1650W 12.7mm 22000r/min 6.0kg', 'AMR04-12', 'Powertools', 'DCA', '11500', 10, 'Piece/s'),
 ('LTS-AD-001', 'Air Duster', 'LDG101', 'Hand Tools', 'Lotus', '260', 10, 'Piece/s'),
 ('LTS-AD-002', 'Air Duster', 'LDG101AD', 'Hand Tools', 'Lotus', '290', 10, 'Piece/s'),
 ('LTS-AD-003', 'Air Duster Heavy Duty', 'LDG102', 'Hand Tools', 'Lotus', '250', 10, 'Piece/s'),
@@ -532,6 +634,19 @@ ALTER TABLE `branch`
   ADD PRIMARY KEY (`branchID`);
 
 --
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`brandID`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`categoryID`),
+  ADD UNIQUE KEY `categoryCode_UNIQUE` (`categoryCode`);
+
+--
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
@@ -591,6 +706,11 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `brandID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `incoming`
 --
