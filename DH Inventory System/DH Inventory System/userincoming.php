@@ -155,6 +155,7 @@
 				<th>
 					Remarks
 				</th>
+				<th></th>
 			</tr>
 					
 			<?php
@@ -173,7 +174,18 @@
 				<td><?php echo $item["receiptNo"]; ?></td>
 
 				<td><?php echo $item["inRemarks"]; ?></td>
-			
+				<td>
+					<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
+					<button type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					</button>
+					</a>
+					<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
+					<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					</button>
+					</a>
+				</td>				
 			</tr>
 					
 			<?php
@@ -186,9 +198,38 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
+						<h4 class="modal-title">Add Incoming Product</h4>
 					</div>
 					<div class="modal-body">
+						<form action="/action_page.php">
+						  Receipt No. 
+						  <input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="rcno"><br>
+						</form>
+			          <table class="table table-striped" id="tblGrid">
+			            <thead id="tblHead">
+			              <tr>
+			                <th>Item</th>
+			                <th>Quantity</th>
+			                <th class="text-right">Employee</th>
+			              </tr>
+			            </thead>
+			            <tbody>
+			              <tr>
+			              	<td></td>
+			                <td></td>
+			                <td class="text-right"></td>
+			              </tr>
+			              <tr><td></td>
+			                <td></td>
+			                <td class="text-right"></td>
+			              </tr>
+			              <tr>
+			              	<td></td>
+			                <td></td>
+			                <td class="text-right"></td>
+			              </tr>
+			            </tbody>
+			          </table>
 						<form action="" method="POST">
 							<h3>Item</h3>
 							<?php
@@ -220,24 +261,7 @@
 								<?php endforeach ?>
 							</select> 
 							<br>
-							
-							<h3>Supplier</h3>
-							<?php
-								$query = $conn->prepare("SELECT supplier_name FROM suppliers ");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-						
-							<select class="form-control" id="addEntry" name="sup">
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["supplier_name"]?></option>
-								<?php endforeach ?>
-							</select> 
-							<br>
-							
-							<h3>Receipt Number</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="inRecN"> <br>
-				
+
 							<h3>Remarks</h3>
 							<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
 
@@ -248,10 +272,11 @@
 					</div>
 				
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary btnclr" onclick="alert('Saved changes successful!');">Save Changes</button>
 					</div>
 				</div>
 			</div>
+			         	
 		</div>
 	</div>		
 	

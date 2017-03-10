@@ -31,16 +31,16 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY $sort");
 			
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY returnID ASC;");
 				
@@ -99,11 +99,11 @@
 					<tr>
 						<th>
 							Date
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
@@ -111,20 +111,23 @@
 						</th>
 						<th>
 							Product Description
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
+							Model
+						</th>
+						<th>
 							Quantity
-							<button type="button" class="btn btn-default" value="?orderBy=returnQty DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnQty DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
@@ -132,16 +135,17 @@
 						</th>
 						<th>
 							Status
-							<button type="button" class="btn btn-default" value="?orderBy=status DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=status DESC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=status ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=status ASC" onclick="location = this.value;">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
 							Remarks
 						</th>
+						<th></th>
 					</tr>
 					
 					<?php
@@ -153,10 +157,24 @@
 						<td><?php echo $item["returnDate"]; ?></td>
 						<td><?php echo $item["prodID"]; ?></td>
 						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["model"]; ?></td>
 						<td><?php echo $item["returnQty"]; ?></td>
 						<td><?php echo $item["unitType"];?></td>
 						<td><?php echo $item["status"]; ?></td>
 						<td><?php echo $item["returnRemark"]; ?></td>
+						
+						<td>
+							<a href="editRet.php?retId=<?php echo $retID; ?>" target="_blank">
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+							</a>
+							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+							</a>
+						</td>
 					</tr>
 					
 					<?php
@@ -202,18 +220,17 @@
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 
 									<br>
-									<input type="submit" value="Add" class="btn btn-default btnclr" name="addRet" onclick="alert('Returned Product Successfully Added');">
-									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+									<input type="submit" value="Add" class="btn btn-default" name="addRet" onclick="alert('Returned Product Successfully Added');">
+									<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
 								</form> 		
 							</div>
 							<div class="modal-footer">
-							  <button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">

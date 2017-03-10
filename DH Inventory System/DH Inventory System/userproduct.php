@@ -38,15 +38,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel 
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, category, price, unitType, reorderLevel 
 				FROM product
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, category, price, unitType, reorderLevel
 				FROM product
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT prodID, prodName, model, brand, type, price, unitType, reorderLevel
+				$query = $conn->prepare("SELECT prodID, prodName, model, brand, category, price, unitType, reorderLevel
 				FROM product
 				ORDER BY prodID");
 			}
@@ -102,15 +102,21 @@
 			<div class="prodTable">
 				<table class="table table-striped table-bordered">
 					<tr>
-						<th>Product ID</th>
-						
-						<th>
-							Product Description
+						<th>Product ID
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							</button>
+						</th>
+						<th>
+							Product Description
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 							</button>							
 						</th>
 						<th>
@@ -118,15 +124,6 @@
 						</th>
 						<th>
 							Brand
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						<th>
-							Type
 							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -135,10 +132,7 @@
 							</button>
 						</th>
 						<th>
-							Unit Type
-						</th>
-						<th>
-							Product Price
+							Category
 							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -146,8 +140,20 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
+						<th>
+							Unit
+						</th>
+						<th>
+							Product Price
+							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
 						
-			
+						<th></th>
 						</tr>
 						
 						<?php
@@ -160,10 +166,21 @@
 							<td><?php echo $item["prodName"]; ?></td>
 							<td><?php echo $item["model"];?></td>
 							<td><?php echo $item["brand"]; ?></td>
-							<td><?php echo $item["type"]; ?></td>
+							<td><?php echo $item["category"]; ?></td>
 							<td><?php echo $item["unitType"];?></td>
 							<td><?php echo $item["price"]; ?></td>
-							
+							<td>
+							<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+							</a>	
+							<a href="deletePro.php?proId=<?php echo $proID; ?>">
+								<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</a>
+						</td>
 									
 					</tr>
 						
@@ -171,57 +188,62 @@
 						endforeach;
 					?>
 				</table>
+
 			
-	<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Product</h4>
-        </div>
-        <div class="modal-body">
-		
-   <form action="" method="POST">
-					<h3>Product ID</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodCode"> <br>
-					
-					<h3>Product Name</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodItem"> <br>
-					
-					<h3>Quantity</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodQty"> <br>
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+					<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Add New Product</h4>
+					</div>
+					<div class="modal-body">
 						
-					<h3>Product Type</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Item Type" name="prodType"> <br>
-				
-					<h3>Brand</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Brand" name="prodBrand"> <br>
-					
-					<h3>Price</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodPrice"> <br>
-					
-					<h3>Reorder Level</h3>
-					<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodRO"> <br>
+					<form action="" method="POST">
+							<h3>Product ID</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Product ID" name="prodCode"> <br>
+							
+							<h3>Product Name</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodItem"> <br>
+							
+							<h3>Model</h3>
+							<input type="text" class="form-control" id="addEntry" placeholder="Model" name="prodModel"> <br>
+							
+							<h3>Quantity</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodQty"> <br>
+								
+							<h3>Category</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Category" name="prodType"> <br>
 						
-					<br>
-				<input type="submit" value="Add" class="btn btn-success" name="addProd" onclick="alert('New Product Successfully Added');">
-				<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
-				</form> 
+							<h3>Brand</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Brand" name="prodBrand"> <br>
+							
+							<h3>Unit Type</h3>
+							<input type="text" class="form-control" id="addEntry" placeholder="Unit Type" name="prodUnit"> <br>
+							
+							<h3>Price</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodPrice"> <br>
+							
+							<h3>Reorder Level</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="Reorder Level" name="prodRO"> <br>
+								
+							<br>
+						<input type="submit" value="Add" class="btn btn-success btnclr" name="addProd" onclick="alert('New Product Successfully Added');">
+						<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+						</form> 
+					
+						<br>
 				
-					<br>
-			
-			</form> 
-			
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	       	 </div>
-	      	 </div>
-	    	</div>
-	  		</div>
-		   </div>	
-		   </div>
-		  </div>
+			</div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+		</div>	
+		</div>
+	</div>
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -240,6 +262,26 @@
 			</div>
 			</div>
 		</nav>
+
+		<?php
+		
+			if (isset($_POST["addProd"])){
+			
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 
+				$prod = $_POST['prodCode'];
+			 
+				$sql = "INSERT INTO product (prodID, prodName, model, category, brand, price, reorderLevel, unitType)
+				VALUES ('$prod','".$_POST['prodItem']."','".$_POST['prodModel']."','".$_POST['prodType']."','".$_POST['prodBrand']."','".$_POST['prodPrice']."','".$_POST['prodRO']."','".$_POST['prodUnit']."')";
+				$conn->exec($sql);
+				
+				$sql1 = "INSERT INTO inventory (initialQty, qty, phyCount, prodID)
+				VALUES (NULL,'".$_POST['prodQty']."',NULL,'$prod')";
+				$conn->exec($sql1);	
+			}    
+
+		?>
+
   </body>
 </html>
 
