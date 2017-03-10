@@ -36,15 +36,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, product.model, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, product.model, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, product.model, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empName, branch.location, outgoing.outRemarks 
 				FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 				ORDER BY outID ASC;");
 			}
@@ -122,6 +122,9 @@
 						</button>						
 					</th>
 					<th>
+						Model
+					</th>
+					<th>
 						Quantity
 						<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;" id="sortBtn">
 							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
@@ -167,6 +170,7 @@
 					<td><?php echo $item["outDate"]; ?></td>
 					<td><?php echo $item["prodID"]; ?></td>
 					<td><?php echo $item["prodName"]; ?></td>
+					<td><?php echo $item["model"]; ?></td>
 					<td><?php echo $item["outQty"]; ?></td>
 					<td><?php echo $item["unitType"]; ?></td>
 					<td><?php echo $item["empName"]; ?></td>
