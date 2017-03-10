@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2017 at 09:08 AM
+-- Generation Time: Mar 10, 2017 at 09:51 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -54,7 +54,7 @@ CREATE TABLE `brand` (
   `brandID` int(5) NOT NULL,
   `brandName` varchar(45) NOT NULL,
   `brandCode` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `brand`
@@ -94,7 +94,7 @@ CREATE TABLE `category` (
   `categoryID` int(5) NOT NULL,
   `categoryName` varchar(45) NOT NULL,
   `categoryCode` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
