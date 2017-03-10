@@ -150,7 +150,6 @@
 				<th>
 					Remarks
 				</th>
-				<th></th>
 			</tr>
 					
 			<?php
@@ -168,19 +167,7 @@
 				<td><?php echo $item["empName"]; ?></td>
 				<td><?php echo $item["receiptNo"]; ?></td>
 
-				<td><?php echo $item["inRemarks"]; ?></td>
-				<td>
-					<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
-					<button type="button" class="btn btn-default">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					</button>
-					</a>
-					<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
-					<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-					</button>
-					</a>
-				</td>				
+				<td><?php echo $item["inRemarks"]; ?></td>			
 			</tr>
 					
 			<?php
