@@ -81,11 +81,6 @@
 					
 					<form action="?" method="post">
 						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
 					</form>
 						
 					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Returned Product</button>
@@ -99,11 +94,11 @@
 					<tr>
 						<th>
 							Date
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>							
 						</th>
 						<th>
@@ -111,11 +106,11 @@
 						</th>
 						<th>
 							Product Description
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>							
 						</th>
 						<th>
@@ -123,11 +118,11 @@
 						</th>
 						<th>
 							Quantity
-							<button type="button" class="btn btn-default" value="?orderBy=returnQty DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnQty DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>							
 						</th>
 						<th>
@@ -135,11 +130,11 @@
 						</th>
 						<th>
 							Status
-							<button type="button" class="btn btn-default" value="?orderBy=status DESC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=status DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=status ASC" onclick="location = this.value;">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+							<button type="button" class="btn btn-default" value="?orderBy=status ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>							
 						</th>
 						<th>

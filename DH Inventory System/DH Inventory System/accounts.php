@@ -74,11 +74,6 @@
 					<h1 id="headers">ACCOUNTS</h1>
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
-									<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
 						</form>
 					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>							
 				</table>

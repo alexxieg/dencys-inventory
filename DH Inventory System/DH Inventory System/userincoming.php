@@ -86,11 +86,6 @@
 				
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit" name="submit" id="searchIcon">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
 						</form>
 					
 					
