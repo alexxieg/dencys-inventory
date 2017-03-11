@@ -38,31 +38,34 @@
 			</div>
 		</nav>
 		
-	<div id="adminContent">
-		<center><img src="logo.jpg" alt="logo" id="logo"/></center>
-		<div>
-			<div id="manageAcc">
-				<div class="manageHeader">
-					<h3 id="is">Manage</h3>
+		<div id="adminContent">
+			<center><img src="logo.jpg" alt="logo" id="logo"/></center>
+			<div>
+				<div id="manageAcc">
+					<div class="manageHeader">
+						<h3 id="is">Manage</h3>
+					</div>
+				</div>
+				<div class="jumbotron" id="adminView">
+					<div class="container" id="adminBtn">							  
+						<div class="form-group">
+							<form action="accounts.php">
+								<button type="submit" class="btn btn-default" id="myBtn">View Accounts</button>
+							</form><br>
+							<form action="product.php">
+								<button type="submit" class="btn btn-default" id="myBtn">View Products</button>
+							</form></br>
+							<form action="brands.php">
+								<button type="submit" class="btn btn-default" id="myBtn">View Product Brands</button>
+							</form></br>
+							<form action="employees.php">
+								<button type="submit" class="btn btn-default" id="myBtn">View Employees</button>
+							</form>
+						</div>
+					</div>				
 				</div>
 			</div>
-			<div class="jumbotron" id="adminView">
-				<div class="container" id="adminBtn">							  
-					<div class="form-group">
-						<form action="accounts.php">
-							<button type="submit" class="btn btn-default" id="myBtn">View Accounts</button>
-						</form><br>
-						<form action="product.php">
-							<button type="submit" class="btn btn-default" id="myBtn">View Products</button>
-						</form></br>
-						<form action="employees.php">
-							<button type="submit" class="btn btn-default" id="myBtn">View Employees</button>
-						</form>
-					</div>
-				</div>				
-			</div>
 		</div>
-	</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -84,7 +87,5 @@
 				</div>
 			</div>
 		</nav>
-
-
 	</body>
 </html>

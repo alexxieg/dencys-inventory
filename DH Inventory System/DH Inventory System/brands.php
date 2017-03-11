@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Employees</title>
+		<title>Product Brands</title>
 		<?php include('dbcon.php'); ?>
 		<?php 
 			session_start();
@@ -33,7 +33,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT empID, empName FROM employee");
+			$query = $conn->prepare("SELECT brandID, brandName FROM brand");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -68,19 +68,19 @@
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
-						<h1 id="headers">EMPLOYEES</h1>
+						<h1 id="headers">PRODUCT BRANDS</h1>
 							<form action="?" method="post">
 								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 							</form>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Brand</button>							
 					</table>
 				</div>
 					
 				<div class="prodTable">
 					<table class="table table-bordered" id="tables">
 						<tr>
-							<th>Employee ID</th>
-							<th>Name</th>
+							<th>Brand ID</th>
+							<th>Brand Name</th>
 							<th></th>
 						</tr>
 							
@@ -89,8 +89,8 @@
 						?>
 
 						<tr>
-							<td><?php echo $item["empID"]; ?></td>
-							<td><?php echo $item["empName"]; ?></td>
+							<td><?php echo $item["brandID"]; ?></td>
+							<td><?php echo $item["brandName"]; ?></td>
 							<td>
 								<button type="button" class="btn btn-default">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -112,14 +112,16 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Add New Employee</h4>
+									<h4 class="modal-title">Add New Brand</h4>
 								</div>
 								<div class="modal-body">
-									<form action="" method="POST">									
-										<h3>Name</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="empName"> <br>
+									<form action="" method="POST">		
+										<h3>Brand ID</h3>
+										<input type="text" class="form-control" id="addEntry" placeholder="Brand ID" name="brandID"> <br>
+										<h3>Brand Name</h3>
+										<input type="text" class="form-control" id ="addEntry" placeholder="Brand Name" name="brandName"> <br>
 										<br>
-										<input type="submit" value="Add" class="btn btn-success btnclr" name="addEmp" onclick="alert('New Employee Successfully Added');">
+										<input type="submit" value="Add" class="btn btn-success btnclr" name="addBrand" onclick="alert('New Employee Successfully Added');">
 										<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
 									</form> 
 								</div>
@@ -152,12 +154,12 @@
 		</nav>
 		
 		<?php
-			if (isset($_POST["addEmp"])){
+			if (isset($_POST["addBrand"])){
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				 
-				$sql = "INSERT INTO employee (empName)
-				VALUES ('".$_POST['empName']."')";
+				$sql = "INSERT INTO brand (brandID, brandName)
+				VALUES ('".$_POST['brandID']."','".$_POST['brandName']."')";
 				$conn->exec($sql);
 			}    
 		?>
