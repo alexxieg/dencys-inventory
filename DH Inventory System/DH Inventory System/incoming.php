@@ -4,6 +4,28 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script>
+		function validateForm() {
+			if(document.getElementById('addReceip').value == "") {
+				alert('Please Enter Receipt Number');
+				document.getElementById('addReceip').style.borderColor = "red";
+				return false;
+			}
+			if (document.getElementById('addQnty').value == "") {
+				alert('Please Enter Quantity');
+				document.getElementById('addQnty').style.borderColor = "red";
+				return false;
+			}
+			if(confirm('Are you sure you want to add this entry?')) {
+				alert("Incoming Product Successfully Added");
+				return true;
+				
+			}
+			else {
+				return false;		
+			}
+		}
+		</script>
 		<title>Incoming</title>
 		
 		<?php include('dbcon.php'); ?>
@@ -197,10 +219,9 @@
 								<h4 class="modal-title">Add Incoming Product</h4>
 							</div>
 							<div class="modal-body">
-								<form action="/action_page.php">
+								<form action="" method="POST" onsubmit="return validateForm()">
 								  Receipt No. 
-								  <input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="rcno"><br>
-								</form>
+								  <input type="text" class="form-control" id ="addReceip" placeholder="Receipt Number" name="rcno"><br>
 							  <table class="table table-striped" id="tblGrid">
 								<thead id="tblHead">
 								  <tr>
@@ -226,7 +247,6 @@
 								  </tr>
 								</tbody>
 							  </table>
-								<form action="" method="POST">
 									<h3>Item</h3>
 									<?php
 										$query = $conn->prepare("SELECT prodName FROM product ");
@@ -242,7 +262,7 @@
 									<br>
 									
 									<h3>Quantity</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="incQty"> <br>
+									<input type="number" min="1" class="form-control" id ="addQnty" placeholder="Item Quantity" name="incQty"> <br>
 									
 									<h3>Employee</h3>
 									<?php
@@ -262,8 +282,8 @@
 									<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
 
 									<br>
-									<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc" onclick="alert('Incoming Product Successfully Added');">
-									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+									<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc">
+									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
 								</form> 			
 							</div>
 						
