@@ -16,9 +16,9 @@
 			if (!isset($_SESSION['id']) && $role!="user") {
 				header('Location: index.php');
 			}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
 		
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -33,17 +33,17 @@
 		
 	</head>
   
-	<body >
+	<body>
 		<?php
-		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-		$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
-	    $start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
+			$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+			$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
+			$start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
 				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, initialQty,  qty
+										GROUP BY prodID, initialQty, qty
 										ORDER BY $sort LIMIT {$start}, {$perPage}");
 			} else if (!empty($searching)) {
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
@@ -60,170 +60,173 @@
 			$total = $conn->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
 			$pages = ceil($total / $perPage);
 		?>	
-			<?php foreach($query as $queri): ?>
-			<div class="queri">
+		
+		<?php foreach($query as $queri): ?>
+		<div class="queri">
 			<p><?php echo $queri['title']; ?></p>
-			</div>
-			<?php endforeach; ?>
-			<div id="pagination">
+		</div>
+		<?php endforeach; ?>
+		<div id="pagination">
 			<?php for ($x = 1; $x <= $pages; $x++): ?>
 			<a href="?page=<?php echo $x; ?>$per-page=<?php echo $perPage; ?>"<?php if($page === $x){echo ' id="selected"';}?>><?php echo $x; ?></a>
 			<?php endfor; ?>
-		    </div>
+	    </div>
 	
-	<div id="contents">
-		<div class="productHolder" >
-			<nav class="navbar navbar-inverse navbar-fixed-top" >
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<h1>Dency's Hardware and General Merchandise</h1>
+		<div id="contents">
+			<div class="productHolder" >
+				<nav class="navbar navbar-inverse navbar-fixed-top" >
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<h1>Dency's Hardware and General Merchandise</h1>
+						</div>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right" id="categories">
+								<li><a href="userinventory.php">Inventory</a></li>
+								<li><a href="userincoming.php">Incoming</a></li>
+								<li><a href="useroutgoing.php">Outgoing</a></li>
+								<li><a href="userreturns.php">Returns</a></li>
+								<li><a href="userproduct.php">Product</a></li>
+							</ul>
+						</div>
 					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li><a href="userinventory.php">Inventory</a></li>
-							<li><a href="userincoming.php">Incoming</a></li>
-							<li><a href="useroutgoing.php">Outgoing</a></li>
-							<li><a href="userreturns.php">Returns</a></li>
-							<li><a href="userproduct.php">Product</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
+				</nav>
+			</div>
 
-		<div class="pages">
+			<div class="pages">
 			
-			<h1 id="headers">INVENTORY</h1>
-					
-			<form action="?" method="post">
-				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</form>
-			<br>
-			<br>
-			
-			<div class="prodTable">
+				<h1 id="headers">INVENTORY</h1>
+						
+				<form action="?" method="post">
+					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				</form>
+				<br>
 				<br>
 				
-				<table class="table table-striped table-bordered">
-					<tr>
-						<th>
-							Product ID
-							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						
-						<th>
-							Product Description
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						
-						<th>
-							Model
-						</th>
-						
-						<th>
-							Beginning Quantity
-						</th>
-						
-						<th>
-							IN
-						</th>
-						
-						<th>
-							OUT
-						</th>
-						
-						<th>
-							Current Quantity
-							
-						</th>
-						
-						<th>
-							Physical Count
-						</th>
-						
-						<th>
-							Reorder Level
-						</th>
-						
-						<th>
-							Unit
-						</th>
-						
-						<th>
-							Item Price
-							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						<th>
-							Remarks
-						</th>
-						
-					</tr>
-					
-					<?php
-						foreach ($result as $item):
-						$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
-						if ($currQty <= $item["reorderLevel"]){
-					?> 
-					<tr style='background-color: #ff9999'>
-						<td><?php echo $item["prodID"]; ?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?> </td>
-						<td><?php echo $item["initialQty"]; ?></td>
-						<td><?php echo $item["inQty"]; ?></td>
-						<td><?php echo $item["outQty"]; ?></td>
-						<td><?php echo $currQty; ?></td>
-						<td></td>
-						<td><?php echo $item["reorderLevel"]?></td>
-						<td><?php echo $item["unitType"];?></td>
-						<td><?php echo $item["price"]; ?></td>	
-						<td></td>
-					</tr>
-					<?php	}else if ($currQty > $item["reorderLevel"]){
-						?>
+				<div class="prodTable">
+					<br>				
+					<table class="table table-striped table-bordered">
 						<tr>
-						<td><?php echo $item["prodID"]; ?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?> </td>
-						<td><?php echo $item["initialQty"]; ?></td>
-						<td><?php echo $item["inQty"]; ?></td>
-						<td><?php echo $item["outQty"]; ?></td>
-						<td><?php echo $currQty; ?></td>
-						<td></td>
-						<td><?php echo $item["reorderLevel"]?></td>
-						<td><?php echo $item["unitType"];?></td>
-						<td><?php echo $item["price"]; ?></td>	
-						<td></td>
-					</tr>
-					<?php
-					}	
-					?>
-					
-					<?php
-						endforeach;
-					?>
-				</table>
-			</div>	
+							<th>
+								Product ID
+								<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
+									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+								</button>
+								<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
+									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+								</button>
+							</th>
+							
+							<th>
+								Product Description
+								<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+								</button>
+								<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+								</button>
+							</th>
+							
+							<th>
+								Model
+							</th>
+							
+							<th>
+								Beginning Quantity
+							</th>
+							
+							<th>
+								IN
+							</th>
+							
+							<th>
+								OUT
+							</th>
+							
+							<th>
+								Current Quantity
+								
+							</th>
+							
+							<th>
+								Physical Count
+							</th>
+							
+							<th>
+								Reorder Level
+							</th>
+							
+							<th>
+								Unit
+							</th>
+							
+							<th>
+								Item Price
+								<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
+									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+								</button>
+								<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
+									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+								</button>
+							</th>
+							<th>
+								Remarks
+							</th>
+						</tr>
+						
+						<?php
+							foreach ($result as $item):
+							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+							if ($currQty <= $item["reorderLevel"]){
+						?> 
+						
+						<tr style='background-color: #ff9999'>
+							<td><?php echo $item["prodID"]; ?></td>
+							<td><?php echo $item["prodName"]; ?></td>
+							<td><?php echo $item["model"]; ?> </td>
+							<td><?php echo $item["initialQty"]; ?></td>
+							<td><?php echo $item["inQty"]; ?></td>
+							<td><?php echo $item["outQty"]; ?></td>
+							<td><?php echo $currQty; ?></td>
+							<td></td>
+							<td><?php echo $item["reorderLevel"]?></td>
+							<td><?php echo $item["unitType"];?></td>
+							<td><?php echo $item["price"]; ?></td>	
+							<td></td>
+						</tr>
+						
+						<?php	
+							}else if ($currQty > $item["reorderLevel"]){
+						?>
+						
+						<tr>
+							<td><?php echo $item["prodID"]; ?></td>
+							<td><?php echo $item["prodName"]; ?></td>
+							<td><?php echo $item["model"]; ?> </td>
+							<td><?php echo $item["initialQty"]; ?></td>
+							<td><?php echo $item["inQty"]; ?></td>
+							<td><?php echo $item["outQty"]; ?></td>
+							<td><?php echo $currQty; ?></td>
+							<td></td>
+							<td><?php echo $item["reorderLevel"]?></td>
+							<td><?php echo $item["unitType"];?></td>
+							<td><?php echo $item["price"]; ?></td>	
+							<td></td>
+						</tr>
+						<?php
+							}	
+						?>
+						<?php
+							endforeach;
+						?>
+					</table>
+				</div>	
+			</div>
 		</div>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
