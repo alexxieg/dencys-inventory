@@ -5,26 +5,26 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script>
-		function validateForm() {
-			if(document.getElementById('addReceip').value == "") {
-				alert('Please Enter Receipt Number');
-				document.getElementById('addReceip').style.borderColor = "red";
-				return false;
+			function validateForm() {
+				if(document.getElementById('addReceip').value == "") {
+					alert('Please Enter Receipt Number');
+					document.getElementById('addReceip').style.borderColor = "red";
+					return false;
+				}
+				if (document.getElementById('addQnty').value == "") {
+					alert('Please Enter Quantity');
+					document.getElementById('addQnty').style.borderColor = "red";
+					return false;
+				}
+				if(confirm('Are you sure you want to add this entry?')) {
+					alert("Incoming Product Successfully Added");
+					return true;
+					
+				}
+				else {
+					return false;		
+				}
 			}
-			if (document.getElementById('addQnty').value == "") {
-				alert('Please Enter Quantity');
-				document.getElementById('addQnty').style.borderColor = "red";
-				return false;
-			}
-			if(confirm('Are you sure you want to add this entry?')) {
-				alert("Incoming Product Successfully Added");
-				return true;
-				
-			}
-			else {
-				return false;		
-			}
-		}
 		</script>
 		<title>Incoming</title>
 		
@@ -45,8 +45,8 @@
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -59,16 +59,16 @@
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
 				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType,product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-				ORDER BY $sort");
+										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+										ORDER BY $sort");
 			} else if (!empty($searching)) {
 				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-				WHERE prodName LIKE '%".$searching."%'");
+										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+										WHERE prodName LIKE '%".$searching."%'");
 			} else {
 				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-				ORDER BY inID ASC;");
+										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+										ORDER BY inID ASC;");
 			}
 			
 			$query->execute();
@@ -115,10 +115,7 @@
 					</table>
 				</div>
 				
-				<table class="table table-striped table-bordered">
-					<tr>
-						<th style="text-align:center" colspan="10">THE FOLLOWING HAVE BEEN ADDED TO THE INVENTORY</th>
-					</tr>				
+				<table class="table table-striped table-bordered">	
 					<tr>
 						<th>
 							Date
@@ -353,8 +350,7 @@
 				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."',$emp1,$prod1,$sup1)";
 				$conn->exec($sql);
 */
-			}    
-			
+			}    		
 	?>
   </body>
 </html>
