@@ -40,15 +40,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT prodID, prodName, model, brand, category, price, unitType, reorderLevel 
+				$query = $conn->prepare("SELECT prodID, prodName, model, brandID, categoryID, price, unitType, reorderLevel 
 				FROM product
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT prodID, prodName, model, brand, category, price, unitType, reorderLevel
+				$query = $conn->prepare("SELECT prodID, prodName, model, brandID, categoryID, price, unitType, reorderLevel
 				FROM product
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT prodID, prodName, model, brand, category, price, unitType, reorderLevel
+				$query = $conn->prepare("SELECT prodID, prodName, model, brandID, categoryID, price, unitType, reorderLevel
 				FROM product
 				ORDER BY prodID");
 			}
@@ -162,8 +162,8 @@
 							<td><?php echo $item["prodID"]; ?></td>
 							<td><?php echo $item["prodName"]; ?></td>
 							<td><?php echo $item["model"];?></td>
-							<td><?php echo $item["brand"]; ?></td>
-							<td><?php echo $item["category"]; ?></td>
+							<td><?php echo $item["brandID"]; ?></td>
+							<td><?php echo $item["categoryID"]; ?></td>
 							<td><?php echo $item["unitType"];?></td>
 							<td><?php echo $item["price"]; ?></td>
 							<td>
@@ -210,13 +210,41 @@
 							<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodQty"> <br>
 								
 							<h3>Category</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="Category" name="prodType"> <br>
+								<?php
+									$query = $conn->prepare("SELECT categoryName FROM category ");
+									$query->execute();
+									$res = $query->fetchAll();
+								?>
+								
+								<select class="form-control" id="addEntry" name="prodCateg">
+									<?php foreach ($res as $row): ?>
+										<option><?=$row["categoryName"]?></option>
+									<?php endforeach ?>
+								</select> 
+								<br>
 						
 							<h3>Brand</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="Brand" name="prodBrand"> <br>
-							
-							<h3>Unit Type</h3>
-							<input type="text" class="form-control" id="addEntry" placeholder="Unit Type" name="prodUnit"> <br>
+								<?php
+									$query = $conn->prepare("SELECT brandName FROM brand ");
+									$query->execute();
+									$res = $query->fetchAll();
+								?>
+								
+								<select class="form-control" id="addEntry" name="prodBrand">
+									<?php foreach ($res as $row): ?>
+										<option><?=$row["brandName"]?></option>
+									<?php endforeach ?>
+								</select> 
+								<br>
+								
+							<h3>Unit</h3>
+								<select class="form-control" id="addEntry" name="prodBrand">
+									<option>Box/es</option>
+									<option>Kilogram/s</option>
+									<option>Piece/s</option>
+									<option>Set/s</option>
+									<option>Yard/</option>
+								</select> 
 							
 							<h3>Price</h3>
 							<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodPrice"> <br>
@@ -267,8 +295,8 @@
 			 
 				$prod = $_POST['prodCode'];
 			 
-				$sql = "INSERT INTO product (prodID, prodName, model, category, brand, price, reorderLevel, unitType)
-				VALUES ('$prod','".$_POST['prodItem']."','".$_POST['prodModel']."','".$_POST['prodType']."','".$_POST['prodBrand']."','".$_POST['prodPrice']."','".$_POST['prodRO']."','".$_POST['prodUnit']."')";
+				$sql = "INSERT INTO product (prodID, prodName, model, categoryID, brandID, price, reorderLevel, unitType)
+				VALUES ('$prod','".$_POST['prodItem']."','".$_POST['prodModel']."','".$_POST['prodCateg']."','".$_POST['prodBrand']."','".$_POST['prodPrice']."','".$_POST['prodRO']."','".$_POST['prodUnit']."')";
 				$conn->exec($sql);
 				
 				$sql1 = "INSERT INTO inventory (initialQty, qty, phyCount, prodID)

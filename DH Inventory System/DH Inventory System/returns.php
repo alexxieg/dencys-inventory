@@ -31,16 +31,16 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY $sort");
 			
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.status, returns.returnRemark 
+				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 				ORDER BY returnID ASC;");
 				
@@ -154,7 +154,6 @@
 						<td><?php echo $item["model"]; ?></td>
 						<td><?php echo $item["returnQty"]; ?></td>
 						<td><?php echo $item["unitType"];?></td>
-						<td><?php echo $item["status"]; ?></td>
 						<td><?php echo $item["returnRemark"]; ?></td>
 						
 						<td>
@@ -201,15 +200,7 @@
 											
 									<h3>Quantity</h3>
 									<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="retQty"> <br>
-									
-									<div class="form-group">
-										<h3>Status</h3>
-										<select class="form-control" id="addEntry" name="status">
-											<option>Returned</option>
-											<option>Pending</option>
-										</select>
-									</div>
-											
+																			
 									<h3>Remarks</h3>
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 
@@ -259,8 +250,8 @@
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
-				$sql = "INSERT INTO returns (returnDate, returnQty, status, returnRemark, prodID)
-				VALUES (CURDATE(),'".$_POST['retQty']."','".$_POST['status']."','".$_POST['retRemarks']."','$prod3')";
+				$sql = "INSERT INTO returns (returnDate, returnQty, returnRemark, prodID)
+				VALUES (CURDATE(),'".$_POST['retQty']."','".$_POST['retRemarks']."','$prod3')";
 				$conn->exec($sql);
 				echo "<meta http-equiv='refresh' content='0'>";
 			}   

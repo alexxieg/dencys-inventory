@@ -36,16 +36,16 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType,product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType,product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 				ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 				WHERE prodName LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, suppliers.supplier_name, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
-				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN employee ON incoming.empID = employee.empID
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 				ORDER BY inID ASC;");
 			}
 			
@@ -78,206 +78,204 @@
 			</nav>
 		</div>	
 
-	<div id="contents">
-		<div class="pages">
-			<div id="tableHeader">
-				<table class="table table-striped table-bordered">
-					
-					<h1 id="headers">INCOMING PRODUCTS</h1>
-					<form action="?" method="post">
-						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-					</form>
-
-					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
-
-				</table>
-			</div>
-			
-		<table class="table table-striped table-bordered">
-			<tr>
-				<th style="text-align:center" colspan="10">THE FOLLOWING HAVE BEEN ADDED TO THE INVENTORY</th>
-			</tr>				
-			<tr>
-				<th>
-					Date
-					<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-					</button>
-				</th>
-				<th>
-					Product ID
-				</th>
-				<th>
-					Product Description
-					<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-					</button>
-				</th>
-				<th>
-					Model
-				</th>
-	
-				<th>
-					Quantity
-					<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=inQty ASC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-					</button>
-				</th>
-				<th>
-					Unit
-				</th>
-				<th>
-					Employee
-					<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-					</button>
-					<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
-						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-					</button>
-				</th>
-				<th>
-					Receipt No.
-					
-				</th>
-				
-				<th>
-					Remarks
-				</th>
-				<th></th>
-			</tr>
-					
-			<?php
-				foreach ($result as $item):
-				$incID = $item["inID"];
-			?>
-
-			<tr>
-				<td><?php echo $item["inDate"]; ?></td>	
-				<td><?php echo $item["prodID"];?></td>
-				<td><?php echo $item["prodName"]; ?></td>
-				<td><?php echo $item["model"]; ?></td>
-
-				<td><?php echo $item["inQty"]; ?></td>
-				<td><?php echo $item["unitType"]; ?></td>
-				<td><?php echo $item["empName"]; ?></td>
-				<td><?php echo $item["receiptNo"]; ?></td>
-
-				<td><?php echo $item["inRemarks"]; ?></td>
-				<td>
-					<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
-					<button type="button" class="btn btn-default">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					</button>
-					</a>
-					<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
-					<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-					</button>
-					</a>
-				</td>				
-			</tr>
-					
-			<?php
-				endforeach;
-			?>
-		</table>
-		
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add Incoming Product</h4>
-					</div>
-					<div class="modal-body">
-						<form action="/action_page.php">
-						  Receipt No. 
-						  <input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="rcno"><br>
+		<div id="contents">
+			<div class="pages">
+				<div id="tableHeader">
+					<table class="table table-striped table-bordered">
+						
+						<h1 id="headers">INCOMING PRODUCTS</h1>
+						<form action="?" method="post">
+							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 						</form>
-			          <table class="table table-striped" id="tblGrid">
-			            <thead id="tblHead">
-			              <tr>
-			                <th>Item</th>
-			                <th>Quantity</th>
-			                <th class="text-right">Employee</th>
-			              </tr>
-			            </thead>
-			            <tbody>
-			              <tr>
-			              	<td></td>
-			                <td></td>
-			                <td class="text-right"></td>
-			              </tr>
-			              <tr><td></td>
-			                <td></td>
-			                <td class="text-right"></td>
-			              </tr>
-			              <tr>
-			              	<td></td>
-			                <td></td>
-			                <td class="text-right"></td>
-			              </tr>
-			            </tbody>
-			          </table>
-						<form action="" method="POST">
-							<h3>Item</h3>
-							<?php
-								$query = $conn->prepare("SELECT prodName FROM product ");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-						
-							<select class="form-control" id="addEntry" name="prodItem">
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["prodName"]?></option>
-								<?php endforeach ?>
-							</select> 
-							<br>
-							
-							<h3>Quantity</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="incQty"> <br>
-							
-							<h3>Employee</h3>
-							<?php
-								$query = $conn->prepare("SELECT empName FROM employee ");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-						
-							<select class="form-control" id="addEntry" name="emp">
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["empName"]?></option>
-								<?php endforeach ?>
-							</select> 
-							<br>
 
-							<h3>Remarks</h3>
-							<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 
-							<br>
-							<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc" onclick="alert('Incoming Product Successfully Added');">
-							<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
-						</form> 			
-					</div>
-				
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary btnclr" onclick="alert('Saved changes successful!');">Save Changes</button>
-					</div>
+					</table>
 				</div>
+				
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th style="text-align:center" colspan="10">THE FOLLOWING HAVE BEEN ADDED TO THE INVENTORY</th>
+					</tr>				
+					<tr>
+						<th>
+							Date
+							<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Product ID
+						</th>
+						<th>
+							Product Description
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Model
+						</th>
+			
+						<th>
+							Quantity
+							<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=inQty ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Unit
+						</th>
+						<th>
+							Employee
+							<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Receipt No.
+							
+						</th>
+						
+						<th>
+							Remarks
+						</th>
+						<th></th>
+					</tr>
+							
+					<?php
+						foreach ($result as $item):
+						$incID = $item["inID"];
+					?>
+
+					<tr>
+						<td><?php echo $item["inDate"]; ?></td>	
+						<td><?php echo $item["prodID"];?></td>
+						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["model"]; ?></td>
+						<td><?php echo $item["inQty"]; ?></td>
+						<td><?php echo $item["unitType"]; ?></td>
+						<td><?php echo $item["empName"]; ?></td>
+						<td><?php echo $item["receiptNo"]; ?></td>
+						<td><?php echo $item["inRemarks"]; ?></td>
+						<td>
+							<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+							</a>
+							<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+							</a>
+						</td>				
+					</tr>
+							
+					<?php
+						endforeach;
+					?>
+				</table>
+			
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add Incoming Product</h4>
+							</div>
+							<div class="modal-body">
+								<form action="/action_page.php">
+								  Receipt No. 
+								  <input type="text" class="form-control" id ="addEntry" placeholder="Receipt Number" name="rcno"><br>
+								</form>
+							  <table class="table table-striped" id="tblGrid">
+								<thead id="tblHead">
+								  <tr>
+									<th>Item</th>
+									<th>Quantity</th>
+									<th class="text-right">Employee</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td></td>
+									<td class="text-right"></td>
+								  </tr>
+								  <tr><td></td>
+									<td></td>
+									<td class="text-right"></td>
+								  </tr>
+								  <tr>
+									<td></td>
+									<td></td>
+									<td class="text-right"></td>
+								  </tr>
+								</tbody>
+							  </table>
+								<form action="" method="POST">
+									<h3>Item</h3>
+									<?php
+										$query = $conn->prepare("SELECT prodName FROM product ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+								
+									<select class="form-control" id="addEntry" name="prodItem">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["prodName"]?></option>
+										<?php endforeach ?>
+									</select> 
+									<br>
+									
+									<h3>Quantity</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="incQty"> <br>
+									
+									<h3>Employee</h3>
+									<?php
+										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+								
+									<select class="form-control" id="addEntry" name="emp">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["empName"]?></option>
+										<?php endforeach ?>
+									</select> 
+									<br>
+
+									<h3>Remarks</h3>
+									<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
+
+									<br>
+									<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc" onclick="alert('Incoming Product Successfully Added');">
+									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+								</form> 			
+							</div>
+						
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary btnclr" onclick="alert('Saved changes successful!');">Save Changes</button>
+							</div>
+						</div>
+					</div>
+				</div>      	
 			</div>
-			         	
-		</div>
-	</div>		
-	
+		</div>		
+		
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -308,7 +306,6 @@
 			 			
 				$prod = $_POST['prodItem'];
 				$emp = $_POST['emp'];
-				$sup = $_POST['sup'];
 				
 				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
 				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -318,12 +315,8 @@
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
-				$sup1 = $conn->query("SELECT supID AS supA from suppliers WHERE supplier_name = '$sup'");
-				$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
-				$sup3 = $sup2['supA'];
-				
-				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
-				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."','$emp3','$prod3','$sup3')";
+				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID)
+				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."','$emp3','$prod3')";
 				$conn->exec($sql);
 				echo "<meta http-equiv='refresh' content='0'>";
 				
