@@ -7021,3 +7021,13 @@ border: none;
   background-color: #3b5998;
   color: white;
 }
+
+#printBtn {
+  background-color: transparent;
+  border-color: transparent;
+  color: grey;
+}
+
+#prodTable {
+  overflow-x:auto;
+}

@@ -275,7 +275,13 @@
 						<li><a href="logout.php">Logout</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-left" id="report">
-						<li><a href="report.html">Print Report</a></li>
+						<li>
+						      <button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+						      	<span class="glyphicon glyphicon-print">
+						      	</span>
+						      		Print
+						      </button> 
+						</li>
 					</ul>
 				</div>
 			</div>
