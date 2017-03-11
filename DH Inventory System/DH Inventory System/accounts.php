@@ -6,6 +6,28 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>
+		function validateForm() {
+			if(document.getElementById('adduser').value == "") {
+				alert('Please Enter Username');
+				document.getElementById('adduser').style.borderColor = "red";
+				return false;
+			}
+			if (document.getElementById('addpass').value == "") {
+				alert('Please Enter Password');
+				document.getElementById('addpass').style.borderColor = "red";
+				return false;
+			}
+			if(confirm('Are you sure you want to add this account?')) {
+				alert("New Account Successfully Added");
+				return true;
+				
+			}
+			else {
+				return false;		
+			}
+		}
+		</script>
 	<title>Accounts</title>
 	<?php include('dbcon.php'); ?>
 		
@@ -103,7 +125,8 @@
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
 								</a>
-								<button type="button" class="btn btn-default">
+								<a href="deleteAcc.php?useId=<?php echo $useThisID; ?>"> 
+								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 								</button>
 							</td>		
@@ -123,12 +146,12 @@
 							  <h4 class="modal-title">Add Account</h4>
 							</div>
 							<div class="modal-body">
-								<<form action="" method="POST">
+								<form action="" method="POST" onsubmit="return validateForm()">
 				<h3>Username</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>
+				<input type="text" class="form-control" id ="adduser" placeholder="Name" name="userName"> <br>
 				
 				<h3>Password</h3>
-				<input type="password" class="form-control" id ="addEntry" placeholder="User Password" name="psw"> <br>
+				<input type="password" class="form-control" id ="addpass" placeholder="User Password" name="psw"> <br>
 				
 				<div class="form-group">
 					 <h3>User Role</h3>
@@ -140,8 +163,8 @@
 			
 				 <br>
 					
-				<input type="submit" value="Add" class="btn btn-success" name="addAccnt" onclick="alert('New Account Successfully Added');">
-			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+				<input type="submit" value="Add" class="btn btn-success" name="addAccnt">
+			<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
 			</form> 
 							</div>
 							<div class="modal-footer">
@@ -182,6 +205,7 @@
 		VALUES ('".$_POST['userName']."','".$_POST['psw']."','".$_POST['user_role']."')";
     
 		$conn->exec($sql);
+		echo "<meta http-equiv='refresh' content='0'>";
 	}    
 
 	?>
