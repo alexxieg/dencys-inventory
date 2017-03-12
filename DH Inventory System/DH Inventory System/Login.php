@@ -16,7 +16,7 @@ if (isset($_POST['username'])) {
      if( $_SESSION['sess_role'] == "admin"){
 			header('Location: inventory.php');
    } elseif ( $_SESSION['sess_role'] == "user"){
-			header('Location: userinventory.php');
+			header('Location: userInventory.php');
 	} } else {
 ?>
 <script>

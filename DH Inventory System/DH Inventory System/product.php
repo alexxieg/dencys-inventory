@@ -234,7 +234,7 @@
 										<br>
 												
 										<h3>Unit</h3>
-										<select class="form-control" id="addEntry" name="prodBrand">
+										<select class="form-control" id="addEntry" name="prodUnit">
 											<option>Box/es</option>
 											<option>Kilogram/s</option>
 											<option>Piece/s</option>

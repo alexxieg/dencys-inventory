@@ -5,6 +5,6 @@
     $retid= $_GET['retId'];
     $result = $conn->prepare("DELETE FROM returns WHERE returnID = '$retid'");
     $result->execute();
-    header("location: userreturns.php");
+    header("location: userReturns.php");
 
 ?>
