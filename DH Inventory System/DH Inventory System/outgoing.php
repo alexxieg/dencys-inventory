@@ -96,22 +96,21 @@
 		</div>
 	
 
-		<div id="contents">
-			<div class="pages">
-				<div id="tableHeader">
-					<table class="table table-striped table-bordered">	
-
-						<h1 id="headers">OUTGOING PRODUCTS</h1>
-
-						<form action="?" method="post">
-							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-						</form>
-
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
-							
-					</table>
-				</div>
-				
+		<div class="pages no-more-tables">
+			<div id="tableHeader">
+				<table class="table table-striped table-bordered">	
+					<h1 id="headers">OUTGOING PRODUCTS</h1>
+					<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+					</form>
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
+						Add Outgoing Product
+					</button>
+				</table>
+			</div>
+			
+			<div class="prodTable">
+				<br>
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>
@@ -172,10 +171,8 @@
 							Remarks
 						</th>					
 						<th></th>
-
-					</tr>
-
-					
+						</tr>
+						
 					<?php
 						foreach ($result as $item):
 						$outid = $item["outID"];
@@ -204,7 +201,6 @@
 							</a>
 						</td>		
 					</tr>
-
 					<?php
 						endforeach;
 					?>

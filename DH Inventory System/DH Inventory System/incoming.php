@@ -76,31 +76,31 @@
 			$result = $query->fetchAll();
 		?>
 		<div class="header">
-		<div class="productHolder">
-			<nav class="navbar navbar-inverse navbar-fixed-top">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
+			<div class="productHolder">
+				<nav class="navbar navbar-inverse navbar-fixed-top">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
+						</div>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right" id="categories">
+								<li><a href="inventory.php">Inventory</a></li>
+								<li><a href="incoming.php">Incoming</a></li>
+								<li><a href="outgoing.php">Outgoing</a></li>
+								<li><a href="returns.php">Returns</a></li>
+								<li><a href="admin.html">Admin</a></li>
+								<li><a href="logout.php">Logout</a></li>
+							</ul>
+						</div>
 					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.php">Incoming</a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.html">Admin</a></li>
-							<li><a href="logout.php">Logout</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>	
+				</nav>
+			</div>	
 		</div>
 		<div id="contents">
 			<div class="pages no-more-tables">

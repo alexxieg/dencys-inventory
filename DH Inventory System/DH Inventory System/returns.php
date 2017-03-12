@@ -90,6 +90,7 @@
 				</div>
 			</nav>
 		</div>	
+		
 		<div class="pages no-more-tables">
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
