@@ -6840,7 +6840,6 @@ button.close {
 	
 }
 
-
 .alertHolder {
   padding-left: 25%;
   padding-right: 25%;
@@ -7039,7 +7038,7 @@ border: none;
 
 
 @media only screen and (max-width: 800px) {
-
+	
     .no-more-tables{
       margin-top: 5%;
     }

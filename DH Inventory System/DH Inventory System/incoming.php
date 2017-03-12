@@ -28,7 +28,7 @@
 			}
 		</script>
 		
-		<title>Incoming</title>
+		<title>Incoming Products</title>
 		
 		<?php include('dbcon.php'); ?>
 			
