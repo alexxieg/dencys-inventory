@@ -4,6 +4,22 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script>
+			function validateForm() {
+				if (document.getElementById('addEmpl').value == "") {
+					alert('Please Enter Employee Name');
+					document.getElementById('addEmpl').style.borderColor = "red";
+					return false;
+				}
+				if(confirm('Are you sure you want to add this entry?')) {
+					alert("New Employee Successfully Added");
+					return true;			
+				}
+				else {
+					return false;		
+				}
+			}
+		</script>
 		<title>Employees</title>
 		<?php include('dbcon.php'); ?>
 		<?php 
@@ -70,7 +86,7 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
 						<h1 id="headers">EMPLOYEES</h1>
-							<form action="?" method="post">
+							<form action="" method="post">
 								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 							</form>
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
@@ -116,12 +132,12 @@
 									<h4 class="modal-title">Add New Employee</h4>
 								</div>
 								<div class="modal-body">
-									<form action="" method="POST">									
+									<form action="" method="POST" onsubmit="return validateForm()">									
 										<h3>Name</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="empName"> <br>
+										<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empName"> <br>
 										<br>
-										<input type="submit" value="Add" class="btn btn-success btnclr" name="addEmp" onclick="alert('New Employee Successfully Added');">
-										<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+										<input type="submit" value="Add" class="btn btn-success btnclr" name="addEmp">
+										<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
 									</form> 
 								</div>
 								<div class="modal-footer">
@@ -155,6 +171,7 @@
 				$sql = "INSERT INTO employee (empName)
 				VALUES ('".$_POST['empName']."')";
 				$conn->exec($sql);
+			echo "<meta http-equiv='refresh' content='0'>";
 			}    
 		?>
 	</body>
