@@ -141,7 +141,7 @@
 				<br>
 				<br>
 			</div>
-			
+			<br>
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th>
