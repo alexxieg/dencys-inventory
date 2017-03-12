@@ -23,7 +23,7 @@
 		
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
 		<?php require('dbcon.php'); ?>
 		<!--[if lt IE 9]>
@@ -131,8 +131,8 @@
 		</div>
 	</div>
 
-		<div class="pages">
-			
+		<div class="pages no-more-tables">
+			<div id="tableHeader">			
 			<h1 id="headers">INVENTORY</h1>
 					
 			<form action="?" method="post">
@@ -140,7 +140,7 @@
 			</form>
 			<br>
 			<br>
-			
+			</div>
 			<div class="prodTable">
 				<br>
 				
@@ -219,35 +219,35 @@
 						$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
 						if ($currQty <= $item["reorderLevel"]){
 					?> 
-					<tr style='background-color: #ff9999'>
-						<td><?php echo $item["prodID"]; ?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?> </td>
-						<td><?php echo $item["initialQty"]; ?></td>
-						<td><?php echo $item["inQty"]; ?></td>
-						<td><?php echo $item["outQty"]; ?></td>
-						<td><?php echo $currQty; ?></td>
-						<td></td>
-						<td><?php echo $item["reorderLevel"]?></td>
-						<td><?php echo $item["unitType"];?></td>
-						<td><?php echo $item["price"]; ?></td>	
-						<td></td>
+					<tr style='background-color: #ff9999' id="centerData">
+						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?> </td>
+						<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
+						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+						<td data-title="Current Quantity"><?php echo $currQty; ?></td>
+						<td data-title="Physical Count"></td>
+						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+						<td data-title="Unit"><?php echo $item["unitType"];?></td>
+						<td data-title="Price"><?php echo $item["price"]; ?></td>	
+						<td data-title="Remarks"></td>
 					</tr>
 					<?php	}else if ($currQty > $item["reorderLevel"]){
 						?>
-						<tr>
-						<td><?php echo $item["prodID"]; ?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?> </td>
-						<td><?php echo $item["initialQty"]; ?></td>
-						<td><?php echo $item["inQty"]; ?></td>
-						<td><?php echo $item["outQty"]; ?></td>
-						<td><?php echo $currQty; ?></td>
-						<td></td>
-						<td><?php echo $item["reorderLevel"]?></td>
-						<td><?php echo $item["unitType"];?></td>
-						<td><?php echo $item["price"]; ?></td>	
-						<td></td>
+						<tr id="centerData">
+						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?> </td>
+						<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
+						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+						<td data-title="Current Quantity"><?php echo $currQty; ?></td>
+						<td data-title="Physical Count"></td>
+						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+						<td data-title="Unit"><?php echo $item["unitType"];?></td>
+						<td data-title="Price"><?php echo $item["price"]; ?></td>	
+						<td data-title="Remarks"></td>
 					</tr>
 					<?php
 					}	

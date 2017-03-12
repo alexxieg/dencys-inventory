@@ -35,7 +35,7 @@
 		?>
 		
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -89,7 +89,7 @@
 				</div>
 			</nav>
 		</div>	
-		<div class="pages">
+		<div class="pages no-more-tables">
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
 					<h1 id="headers">RETURNED PRODUCTS</h1>	
@@ -163,14 +163,14 @@
 						$retID = $item["returnID"];
 					?>
 				
-					<tr>
-						<td><?php echo $item["returnDate"]; ?></td>
-						<td><?php echo $item["prodID"]; ?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?></td>
-						<td><?php echo $item["returnQty"]; ?></td>
-						<td><?php echo $item["unitType"];?></td>
-						<td><?php echo $item["returnRemark"]; ?></td>
+					<tr id="centerData">
+						<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
+						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?></td>
+						<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"];?></td>
+						<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
 						
 						<td>
 							<a href="editRet.php?retId=<?php echo $retID; ?>" target="_blank">

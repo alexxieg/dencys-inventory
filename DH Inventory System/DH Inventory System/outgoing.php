@@ -37,7 +37,7 @@
 			
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -94,7 +94,7 @@
 		</div>
 	
 	<div id="contents">
-		<div class="pages">
+		<div class="pages no-more-tables">
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
 
@@ -177,16 +177,16 @@
 					$outid = $item["outID"];
 				?>
 
-				<tr>
-					<td><?php echo $item["outDate"]; ?></td>
-					<td><?php echo $item["prodID"]; ?></td>
-					<td><?php echo $item["prodName"]; ?></td>
-					<td><?php echo $item["model"]; ?></td>
-					<td><?php echo $item["outQty"]; ?></td>
-					<td><?php echo $item["unitType"]; ?></td>
-					<td><?php echo $item["empName"]; ?></td>
-					<td><?php echo $item["location"]; ?></td>
-					<td><?php echo $item["outRemarks"]; ?></td>
+				<tr id="centerData">
+					<td data-title="Date"><?php echo $item["outDate"]; ?></td>
+					<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+					<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+					<td data-title="Model"><?php echo $item["model"]; ?></td>
+					<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
+					<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+					<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+					<td data-title="Branch"><?php echo $item["location"]; ?></td>
+					<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 					<td>
 						<a href="editOut.php?outsId=<?php echo $outid; ?>" target="_blank">
 						<button type="button" class="btn btn-default">

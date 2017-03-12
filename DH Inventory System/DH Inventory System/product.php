@@ -24,7 +24,7 @@
 		
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="logo.jpg">
-    <link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 	<script src="js/bootstrap.js"></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
@@ -83,7 +83,7 @@
 		</div>	
 		
 		<div id="contents">
-			<div class="pages">
+			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">PRODUCTS</h1>
@@ -157,14 +157,14 @@
 							$proID = $item["prodID"];
 						?>
 
-						<tr>
-							<td><?php echo $item["prodID"]; ?></td>
-							<td><?php echo $item["prodName"]; ?></td>
-							<td><?php echo $item["model"];?></td>
-							<td><?php echo $item["brandName"]; ?></td>
-							<td><?php echo $item["categoryName"]; ?></td>
-							<td><?php echo $item["unitType"];?></td>
-							<td><?php echo $item["price"]; ?></td>
+						<tr id="centerData">
+							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Model"><?php echo $item["model"];?></td>
+							<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+							<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+							<td data-title="Unit"><?php echo $item["unitType"];?></td>
+							<td data-title="Price"><?php echo $item["price"]; ?></td>
 							<td>
 								<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
 									<button type="button" class="btn btn-default">

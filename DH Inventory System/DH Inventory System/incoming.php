@@ -43,7 +43,7 @@
 	
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -101,7 +101,7 @@
 		</div>	
 
 		<div id="contents">
-			<div class="pages">
+			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">
 						
@@ -115,7 +115,7 @@
 					</table>
 				</div>
 				
-				<table class="table table-striped table-bordered table-responsive">	
+				<table class="table table-striped table-bordered">	
 					<tr>
 						<th>
 							Date
@@ -179,16 +179,16 @@
 						$incID = $item["inID"];
 					?>
 
-					<tr>
-						<td><?php echo $item["inDate"]; ?></td>	
-						<td><?php echo $item["prodID"];?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?></td>
-						<td><?php echo $item["inQty"]; ?></td>
-						<td><?php echo $item["unitType"]; ?></td>
-						<td><?php echo $item["empName"]; ?></td>
-						<td><?php echo $item["receiptNo"]; ?></td>
-						<td><?php echo $item["inRemarks"]; ?></td>
+					<tr id="centerData">
+						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?></td>
+						<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 						<td>
 							<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
 							<button type="button" class="btn btn-default">
@@ -210,7 +210,7 @@
 			
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
-						<div class="modal-content table-responsive">
+						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">Add Incoming Product</h4>
@@ -222,7 +222,7 @@
 							  <table class="table table-striped" id="tblGrid">
 								<thead id="tblHead">
 								  <tr>
-								  	<th class="hide-on-mobile">#</th>
+								  	<th>
 									<th>Item</th>
 									<th>Quantity</th>
 									<th class="text-right">Employee</th>

@@ -44,7 +44,7 @@
 		
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="logo.jpg">
-    <link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 	<script src="js/bootstrap.js"></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
