@@ -215,7 +215,7 @@
 									<br>
 											
 									<h3>Quantity</h3>
-									<input type="number" min = "1" class="form-control" id ="addQnty" placeholder="Item Quantity" name="retQty"> <br>
+									<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="retQty"> <br>
 																			
 									<h3>Remarks</h3>
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>

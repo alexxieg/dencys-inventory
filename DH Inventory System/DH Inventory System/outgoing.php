@@ -230,7 +230,7 @@
 								<br>
 								
 								<h3>Quantity</h3>
-								<input type="number" min = "1" class="form-control" id ="addQnty" placeholder="Item Quantity" name="outQty"> <br>
+								<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty"> <br>
 								
 								<h3>Employee</h3>
 								<?php

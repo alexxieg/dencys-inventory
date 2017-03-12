@@ -115,7 +115,7 @@
 					</table>
 				</div>
 				
-				<table class="table table-striped table-bordered">	
+				<table class="table table-striped table-bordered table-responsive">	
 					<tr>
 						<th>
 							Date
@@ -210,7 +210,7 @@
 			
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
+						<div class="modal-content table-responsive">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">Add Incoming Product</h4>
@@ -218,10 +218,11 @@
 							<div class="modal-body">
 								<form action="" method="POST" onsubmit="return validateForm()">
 								  Receipt No. 
-								  <input type="text" class="form-control" id ="addReceip" placeholder="Receipt Number" name="rcno"><br>
+								  <input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
 							  <table class="table table-striped" id="tblGrid">
 								<thead id="tblHead">
 								  <tr>
+								  	<th class="hide-on-mobile">#</th>
 									<th>Item</th>
 									<th>Quantity</th>
 									<th class="text-right">Employee</th>
@@ -259,7 +260,7 @@
 									<br>
 									
 									<h3>Quantity</h3>
-									<input type="number" min="1" class="form-control" id ="addQnty" placeholder="Item Quantity" name="incQty"> <br>
+									<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty"> <br>
 									
 									<h3>Employee</h3>
 									<?php
