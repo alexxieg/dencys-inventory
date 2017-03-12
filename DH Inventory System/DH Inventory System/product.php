@@ -56,32 +56,30 @@
 			$result = $query->fetchAll();
 		?>
 	
-		<div class="productHolder" >
-			<nav class="navbar navbar-inverse navbar-fixed-top" >
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
-					</div>
-					
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.php">Incoming</a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.html">Admin</a></li>
-							<li><a href="logout.php">Logout</a></li>
-						</ul>
-					</div>
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
 				</div>
-			</nav>
-		</div>	
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" id="categories">
+						<li><a href="inventory.php">Inventory</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+						<li><a href="admin.html">Admin</a></li>
+						<li><a href="logout.php">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 		
 		<div id="contents">
 			<div class="pages no-more-tables">
@@ -97,92 +95,91 @@
 					</table>
 				</div>
 
-				<div class="prodTable">
-					<table class="table table-striped table-bordered">
-						<tr>
-							<th>Product ID
-								<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn" ></span>
-								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th>Product ID
+							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn" ></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true " id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Product Description
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>							
+						</th>
+						<th>
+							Model
+						</th>
+						<th>
+							Brand
+							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Category
+							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Unit
+						</th>
+						<th>
+							Product Price
+							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>					
+						<th></th>
+					</tr>
+						
+					<?php
+						foreach ($result as $item):
+						$proID = $item["prodID"];
+					?>
+					
+					<tr id="centerData">
+						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"];?></td>
+						<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+						<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"];?></td>
+						<td data-title="Price"><?php echo $item["price"]; ?></td>
+						<td>
+							<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
+								<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
-							</th>
-							<th>
-								Product Description
-								<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</a>	
+							<a href="deletePro.php?proId=<?php echo $proID; ?>">
+								<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-								</button>							
-							</th>
-							<th>
-								Model
-							</th>
-							<th>
-								Brand
-								<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-								</button>
-							</th>
-							<th>
-								Category
-								<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-								</button>
-							</th>
-							<th>
-								Unit
-							</th>
-							<th>
-								Product Price
-								<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-								</button>
-							</th>					
-							<th></th>
-						</tr>
-							
-						<?php
-							foreach ($result as $item):
-							$proID = $item["prodID"];
-						?>
-
-						<tr id="centerData">
-							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Model"><?php echo $item["model"];?></td>
-							<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-							<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-							<td data-title="Unit"><?php echo $item["unitType"];?></td>
-							<td data-title="Price"><?php echo $item["price"]; ?></td>
-							<td>
-								<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
-									<button type="button" class="btn btn-default">
-										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									</button>
-								</a>	
-								<a href="deletePro.php?proId=<?php echo $proID; ?>">
-									<button type="button" class="btn btn-default">
-										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-									</button>
-								</a>
-							</td>				
-						</tr>	
-						<?php
-							endforeach;
-						?>
-					</table>
+							</a>
+						</td>				
+					</tr>	
+					<?php
+						endforeach;
+					?>
+				</table>
 				
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog modal-lg">

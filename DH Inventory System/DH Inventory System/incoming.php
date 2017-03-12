@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 		<script>
 			function validateForm() {
 				if(document.getElementById('addReceip').value == "") {
@@ -27,6 +27,7 @@
 				}
 			}
 		</script>
+		
 		<title>Incoming</title>
 		
 		<?php include('dbcon.php'); ?>
@@ -71,42 +72,39 @@
 										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 										ORDER BY inID ASC;");
 			}
-			
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
-		<div class="header">
-			<div class="productHolder">
-				<nav class="navbar navbar-inverse navbar-fixed-top">
-					<div class="container">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
-						</div>
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav navbar-right" id="categories">
-								<li><a href="inventory.php">Inventory</a></li>
-								<li><a href="incoming.php">Incoming</a></li>
-								<li><a href="outgoing.php">Outgoing</a></li>
-								<li><a href="returns.php">Returns</a></li>
-								<li><a href="admin.html">Admin</a></li>
-								<li><a href="logout.php">Logout</a></li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>	
-		</div>
+		
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" id="categories">
+						<li><a href="inventory.php">Inventory</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+						<li><a href="admin.html">Admin</a></li>
+						<li><a href="logout.php">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">
-						
 						<h1 id="headers">INCOMING PRODUCTS</h1>
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
@@ -209,7 +207,7 @@
 						endforeach;
 					?>
 				</table>
-			
+
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">

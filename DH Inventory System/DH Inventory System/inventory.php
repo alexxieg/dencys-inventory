@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		
 		<title>Inventory</title>
 		
@@ -25,13 +26,12 @@
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
-		<?php require('dbcon.php'); ?>
+
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-		
 	</head>
     <style>
 		#pagination {
@@ -105,7 +105,7 @@
 		</div>
 	
 		<div id="contents">
-			<div class="productHolder" >
+			<div class="productHolder">
 				<nav class="navbar navbar-inverse navbar-fixed-top" >
 					<div class="container">
 						<div class="navbar-header">
@@ -134,60 +134,57 @@
 
 		<div class="pages no-more-tables">
 			<div id="tableHeader">			
-			<h1 id="headers">INVENTORY</h1>
-					
-			<form action="?" method="post">
-				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</form>
-			<br>
-			<br>
-			</div>
-			<div class="prodTable">
+				<h1 id="headers">INVENTORY</h1>	
+				<form action="?" method="post">
+					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				</form>
 				<br>
-				
-				<table class="table table-striped table-bordered">
-					<tr>
-						<th>
-							Product ID
-							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
+				<br>
+			</div>
+			
+			<table class="table table-striped table-bordered">
+				<tr>
+					<th>
+						Product ID
+						<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=prodID ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+					</th>
 						
-						<th>
-							Product Description
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
+					<th>
+						Product Description
+						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+					</th>
+					
+					<th>
+						Model
+					</th>
+					
+					<th>
+						Beginning Quantity
+					</th>
+					
+					<th>
+						IN
+					</th>
+					
+					<th>
+						OUT
+					</th>
+					
+					<th>
+						Current Quantity
 						
-						<th>
-							Model
-						</th>
-						
-						<th>
-							Beginning Quantity
-						</th>
-						
-						<th>
-							IN
-						</th>
-						
-						<th>
-							OUT
-						</th>
-						
-						<th>
-							Current Quantity
-							
-						</th>
-						
+					</th>
+					
 						<th>
 							Physical Count
 						</th>
@@ -234,9 +231,10 @@
 						<td data-title="Price"><?php echo $item["price"]; ?></td>	
 						<td data-title="Remarks"></td>
 					</tr>
-					<?php	}else if ($currQty > $item["reorderLevel"]){
-						?>
-						<tr id="centerData">
+					<?php	
+						}else if ($currQty > $item["reorderLevel"]){
+					?>
+					<tr id="centerData">
 						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 						<td data-title="Model"><?php echo $item["model"]; ?> </td>

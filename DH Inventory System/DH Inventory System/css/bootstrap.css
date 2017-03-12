@@ -6835,9 +6835,9 @@ button.close {
 }
 
 .pages {
-  margin-top: -18px;
-  background-color: white;
-padding: 0 5% 10% 5%;
+	background-color: white;
+	padding: 0 5% 10% 5%;
+	
 }
 
 
@@ -7036,7 +7036,7 @@ border: none;
 @media only screen and (max-width: 800px) {
 
     .no-more-tables{
-      margin-top: 150px;
+      margin-top: 5%;
     }
 
     #tableHeader{
@@ -7048,7 +7048,6 @@ border: none;
       text-align: right;
     }
 
-<<<<<<< HEAD
     .form-group #myBtn{
         text-align: center;
         width: auto;
