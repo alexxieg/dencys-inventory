@@ -7028,6 +7028,11 @@ border: none;
   color: grey;
 }
 
+#addQty, #addRcpt, #adduser, #addpass,
+  #addBrandName, #addBrandID, #addEmpl {
+  width: 85%; 
+}
+
 #prodTable {
   overflow-x:auto;
 }

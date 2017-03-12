@@ -51,7 +51,6 @@
 			$result = $query->fetchAll();
 		?>
 		
-		<div id="contents">
 			<div class="productHolder">
 				<nav class="navbar navbar-inverse navbar-fixed-top">
 					<div class="container">
@@ -77,7 +76,10 @@
 					</div>
 				</nav>
 			</div>	
-			<div class="pages">
+
+	<div id="contents">
+		<div class="pages">
+			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">INCOMING PRODUCTS</h1>
@@ -150,16 +152,16 @@
 						$incID = $item["inID"];
 					?>
 
-					<tr>
-						<td><?php echo $item["inDate"]; ?></td>	
-						<td><?php echo $item["prodID"];?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?></td>
-						<td><?php echo $item["inQty"]; ?></td>
-						<td><?php echo $item["unitType"]; ?></td>
-						<td><?php echo $item["empName"]; ?></td>
-						<td><?php echo $item["receiptNo"]; ?></td>
-						<td><?php echo $item["inRemarks"]; ?></td>			
+					<tr id="centerData">
+						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?></td>
+						<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>			
 					</tr>
 							
 					<?php
@@ -253,6 +255,7 @@
 				</div>
 			</div>	
 		</div>
+	</div>
 			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">

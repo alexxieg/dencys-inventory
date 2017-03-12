@@ -54,7 +54,6 @@
 			$result = $query->fetchAll();
 		?>
 	
-		<div id="contents">
 			<div class="productHolder" >
 				<nav class="navbar navbar-inverse navbar-fixed-top" >
 					<div class="container">
@@ -82,7 +81,8 @@
 				</nav>
 			</div>	
 
-			<div class="pages">
+		<div id="contents">
+			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">PRODUCTS</h1>
@@ -150,14 +150,14 @@
 							foreach ($result as $item):
 							$proID = $item["prodID"];
 						?>
-						<tr>
-							<td><?php echo $item["prodID"]; ?></td>
-							<td><?php echo $item["prodName"]; ?></td>
-							<td><?php echo $item["model"];?></td>
-							<td><?php echo $item["brandName"]; ?></td>
-							<td><?php echo $item["categoryName"]; ?></td>
-							<td><?php echo $item["unitType"];?></td>
-							<td><?php echo $item["price"]; ?></td>	
+						<tr id="centerData">
+							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Model"><?php echo $item["model"];?></td>
+							<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+							<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+							<td data-title="Unit"><?php echo $item["unitType"];?></td>
+							<td data-title="Price"><?php echo $item["price"]; ?></td>
 						</tr>				
 						<?php
 							endforeach;
