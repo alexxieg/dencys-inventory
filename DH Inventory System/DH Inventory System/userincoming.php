@@ -267,32 +267,6 @@
 			</div>
 		</nav>
 		
-		<?php
-			if (isset($_POST["addInc"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			 			
-				$prod = $_POST['prodItem'];
-				$emp = $_POST['emp'];
-				$sup = $_POST['sup'];
-				
-				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
-				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-				$emp3 = $emp2['empA'];
-						
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-				$prod3 = $prod2['prodA'];
-				
-				$sup1 = $conn->query("SELECT supID AS supA from suppliers WHERE supplier_name = '$sup'");
-				$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
-				$sup3 = $sup2['supA'];
-				
-				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
-				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."','$emp3','$prod3','$sup3')";
-				$conn->exec($sql);
-				echo "<meta http-equiv='refresh' content='0'>";
-			}    
-		?>
+		<?php include('addIncoming.php'); ?>
 	</body>
 </html>
