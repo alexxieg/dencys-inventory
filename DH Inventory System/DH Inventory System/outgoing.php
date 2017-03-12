@@ -38,7 +38,7 @@
 			
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -95,10 +95,17 @@
 			</nav>
 		</div>
 	
+<<<<<<< HEAD
+	<div id="contents">
+		<div class="pages no-more-tables">
+			<div id="tableHeader">
+				<table class="table table-striped table-bordered">	
+=======
 		<div id="contents">
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
+>>>>>>> 583648110727ff7a68e2b47aa10ee7ca7a32a092
 
 						<h1 id="headers">OUTGOING PRODUCTS</h1>
 
@@ -172,7 +179,33 @@
 						</th>					
 						<th></th>
 
+<<<<<<< HEAD
+				<tr id="centerData">
+					<td data-title="Date"><?php echo $item["outDate"]; ?></td>
+					<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+					<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+					<td data-title="Model"><?php echo $item["model"]; ?></td>
+					<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
+					<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+					<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+					<td data-title="Branch"><?php echo $item["location"]; ?></td>
+					<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
+					<td>
+						<a href="editOut.php?outsId=<?php echo $outid; ?>" target="_blank">
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
+						</a>
+						<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
+						<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						</button>
+						</a>
+					</td>		
+				</tr>
+=======
 					</tr>
+>>>>>>> 583648110727ff7a68e2b47aa10ee7ca7a32a092
 					
 					<?php
 						foreach ($result as $item):
@@ -292,34 +325,9 @@
 				</ul>
 			</div>
 		</nav>
-
-		<?php
-			if (isset($_POST["addOut"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			 			
-				$prod = $_POST['prodItem'];
-				$emp = $_POST['emp'];
-				$branch = $_POST['branch'];
-								
-				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
-				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-				$emp3 = $emp2['empA'];
-						
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-				$prod3 = $prod2['prodA'];
-				
-				$branch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch'");
-				$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
-				$branch3 = $branch2['branchA'];
-				
-				$sql = "INSERT INTO outgoing (outQty, outDate, outRemarks, branchID, empID, prodID)
-				VALUES ('".$_POST['outQty']."',CURDATE(),'".$_POST['outRemarks']."','$branch3','$emp3','$prod3')";
-				$conn->exec($sql);
-				echo "<meta http-equiv='refresh' content='0'>";
-			}    
-		?>
+		
+		<?php include('addOutgoing.php'); ?>
+		
 	</body>
 </html>
 

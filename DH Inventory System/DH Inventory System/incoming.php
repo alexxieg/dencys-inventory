@@ -44,7 +44,7 @@
 	
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -103,7 +103,7 @@
 		</div>	
 		</div>
 		<div id="contents">
-			<div class="pages">
+			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">
 						
@@ -117,7 +117,7 @@
 					</table>
 				</div>
 				
-				<table class="table table-striped table-bordered table-responsive">	
+				<table class="table table-striped table-bordered">	
 					<tr>
 						<th>
 							Date
@@ -181,16 +181,16 @@
 						$incID = $item["inID"];
 					?>
 
-					<tr>
-						<td><?php echo $item["inDate"]; ?></td>	
-						<td><?php echo $item["prodID"];?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?></td>
-						<td><?php echo $item["inQty"]; ?></td>
-						<td><?php echo $item["unitType"]; ?></td>
-						<td><?php echo $item["empName"]; ?></td>
-						<td><?php echo $item["receiptNo"]; ?></td>
-						<td><?php echo $item["inRemarks"]; ?></td>
+					<tr id="centerData">
+						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?></td>
+						<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 						<td>
 							<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
 							<button type="button" class="btn btn-default">
@@ -212,7 +212,7 @@
 			
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
-						<div class="modal-content table-responsive">
+						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">Add Incoming Product</h4>
@@ -224,7 +224,7 @@
 							  <table class="table table-striped" id="tblGrid">
 								<thead id="tblHead">
 								  <tr>
-								  	<th class="hide-on-mobile">#</th>
+								  	<th>
 									<th>Item</th>
 									<th>Quantity</th>
 									<th class="text-right">Employee</th>
@@ -309,42 +309,6 @@
 			</div>
 		</nav>
 		
-		<?php
-		
-			if (isset($_POST["addInc"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			 			
-				$prod = $_POST['prodItem'];
-				$emp = $_POST['emp'];
-				
-				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
-				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-				$emp3 = $emp2['empA'];
-						
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-				$prod3 = $prod2['prodA'];
-				
-				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID)
-				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."','$emp3','$prod3')";
-				$conn->exec($sql);
-				echo "<meta http-equiv='refresh' content='0'>";
-				
-/*				$emp1 = $conn->prepare("SELECT empID AS emp FROM employee WHERE empName = '$emp'");
-				$emp1->execute();
-						
-				$prod1 = $conn->prepare("SELECT prodID AS prod FROM product WHERE prodName = '$prod'");
-				$prod1->execute();
-				
-				$sup1 = $conn->prepare("SELECT supID AS sup from suppliers WHERE supplier_name = '$sup'");
-				$sup1->execute();
-				
-				$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
-				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."',$emp1,$prod1,$sup1)";
-				$conn->exec($sql);
-*/
-			}    		
-	?>
+		<?php include('addIncoming.php'); ?>
   </body>
 </html>
