@@ -4,29 +4,6 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script>
-			function validateForm() {
-				if(document.getElementById('addBrandID').value == "") {
-					alert('Please Enter Brand ID');
-					document.getElementById('addBrandID').style.borderColor = "red";
-					return false;
-				}
-				if (document.getElementById('addBrandName').value == "") {
-					alert('Please Enter Brand Name');
-					document.getElementById('addBrandName').style.borderColor = "red";
-					return false;
-				}
-				if(confirm('Are you sure you want to add this entry?')) {
-					alert("New Brand Successfully Added");
-					return true;
-					
-				}
-				else {
-					return false;		
-				}
-			}
-		</script>
-		</script>
 		<title>Product Brands</title>
 		<?php include('dbcon.php'); ?>
 		<?php 
@@ -139,14 +116,14 @@
 									<h4 class="modal-title">Add New Brand</h4>
 								</div>
 								<div class="modal-body">
-									<form action="" method="POST" onsubmit="return validateForm()">		
+									<form action="" method="POST">		
 										<h3>Brand ID</h3>
-										<input type="text" class="form-control" id="addBrandID" placeholder="Brand ID" name="brandID"> <br>
+										<input type="text" class="form-control" id="addEntry" placeholder="Brand ID" name="brandID"> <br>
 										<h3>Brand Name</h3>
-										<input type="text" class="form-control" id ="addBrandName" placeholder="Brand Name" name="brandName"> <br>
+										<input type="text" class="form-control" id ="addEntry" placeholder="Brand Name" name="brandName"> <br>
 										<br>
-										<input type="submit" value="Add" class="btn btn-success btnclr" name="addBrand">
-										<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px"data-dismiss="modal" onclick="this.form.reset()">
+										<input type="submit" value="Add" class="btn btn-success btnclr" name="addBrand" onclick="alert('New Employee Successfully Added');">
+										<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
 									</form> 
 								</div>
 								<div class="modal-footer">
@@ -180,8 +157,7 @@
 				$sql = "INSERT INTO brand (brandID, brandName)
 				VALUES ('".$_POST['brandID']."','".$_POST['brandName']."')";
 				$conn->exec($sql);
-			echo "<meta http-equiv='refresh' content='0'>";
-			}			
+			}    
 		?>
 	</body>
 </html>
