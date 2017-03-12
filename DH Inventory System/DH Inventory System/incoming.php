@@ -7,14 +7,14 @@
 
 		<script>
 			function validateForm() {
-				if(document.getElementById('addReceip').value == "") {
+				if(document.getElementById('addRcpt').value == "") {
 					alert('Please Enter Receipt Number');
-					document.getElementById('addReceip').style.borderColor = "red";
+					document.getElementById('addRcpt').style.borderColor = "red";
 					return false;
 				}
-				if (document.getElementById('addQnty').value == "") {
+				if (document.getElementById('addQty').value == "") {
 					alert('Please Enter Quantity');
-					document.getElementById('addQnty').style.borderColor = "red";
+					document.getElementById('addQty').style.borderColor = "red";
 					return false;
 				}
 				if(confirm('Are you sure you want to add this entry?')) {
