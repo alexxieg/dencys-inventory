@@ -100,7 +100,6 @@
 			</div>
 		</nav>
 
-		
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -109,9 +108,7 @@
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 						</form>
-
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
-
 					</table>
 				</div>
 				
