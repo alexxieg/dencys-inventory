@@ -5,21 +5,22 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script>
-		function validateForm() {
-			if (document.getElementById('addQnty').value == "") {
-				alert('Please Enter Quantity');
-				document.getElementById('addQnty').style.borderColor = "red";
-				return false;
+			function validateForm() {
+				if (document.getElementById('addQty').value == "") {
+					alert('Please Enter Quantity');
+					document.getElementById('addQty').style.borderColor = "red";
+					return false;
+				}
+				if(confirm('Are you sure you want to add this entry?')) {
+					alert("Outgoing Product Successfully Added");
+					return true;			
+				}
+				else {
+					return false;		
+				}
 			}
-			if(confirm('Are you sure you want to add this entry?')) {
-				alert("Outgoing Product Successfully Added");
-				return true;			
-			}
-			else {
-				return false;		
-			}
-		}
 		</script>
+		
 		<title>Outgoing Products</title>
 		
 		<?php include('dbcon.php'); ?>
@@ -30,9 +31,9 @@
 			if (!isset($_SESSION['id']) && $role!="admin") {
 				header('Location: index.php');
 			}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
 			
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -78,7 +79,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1>Dency's Hardware and General Merchandise</h1>
+						<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right" id="categories">
@@ -87,96 +88,98 @@
 							<li><a href="outgoing.php">Outgoing</a></li>
 							<li><a href="returns.php">Returns</a></li>
 							<li><a href="admin.html">Admin</a></li>
+							<li><a href="logout.php">Logout</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>
 	
+<<<<<<< HEAD
 	<div id="contents">
 		<div class="pages no-more-tables">
 			<div id="tableHeader">
 				<table class="table table-striped table-bordered">	
+=======
+		<div id="contents">
+			<div class="pages">
+				<div id="tableHeader">
+					<table class="table table-striped table-bordered">	
+>>>>>>> 583648110727ff7a68e2b47aa10ee7ca7a32a092
 
-					<h1 id="headers">OUTGOING PRODUCTS</h1>
+						<h1 id="headers">OUTGOING PRODUCTS</h1>
 
-					<form action="?" method="post">
-						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-					</form>
+						<form action="?" method="post">
+							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						</form>
 
-					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
-						
-				</table>
-			</div>
-			
-			<table class="table table-striped table-bordered">
-				<tr>
-					<th>
-						Date
-						<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-					</th>
-					<th>
-						Product ID
-					</th>
-					<th>
-						Product Description
-						<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-						</button>						
-					</th>
-					<th>
-						Model
-					</th>
-					<th>
-						Quantity
-						<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-					</th>
-					<th>
-						Unit
-					</th>
-					<th>
-						Employee
-						<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-					</th>
-					<th>
-						Branch
-						<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-						<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;" id="sortBtn">
-							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-						</button>
-					</th>	
-					<th>
-						Remarks
-					</th>					
-					<th></th>
-
-				</tr>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>
+							
+					</table>
+				</div>
 				
-				<?php
-					foreach ($result as $item):
-					$outid = $item["outID"];
-				?>
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th>
+							Date
+							<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Product ID
+						</th>
+						<th>
+							Product Description
+							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>						
+						</th>
+						<th>
+							Model
+						</th>
+						<th>
+							Quantity
+							<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Unit
+						</th>
+						<th>
+							Employee
+							<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>
+						<th>
+							Branch
+							<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+							<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;" id="sortBtn">
+								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+							</button>
+						</th>	
+						<th>
+							Remarks
+						</th>					
+						<th></th>
 
+<<<<<<< HEAD
 				<tr id="centerData">
 					<td data-title="Date"><?php echo $item["outDate"]; ?></td>
 					<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
@@ -200,100 +203,126 @@
 						</a>
 					</td>		
 				</tr>
+=======
+					</tr>
+>>>>>>> 583648110727ff7a68e2b47aa10ee7ca7a32a092
 					
-				<?php
-					endforeach;
-				?>
-			</table>
-			
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Add Outgoing Product</h4>
-						</div>
-						<div class="modal-body">
-							<form action="" method="POST" onsubmit="return validateForm()">
-								<h3>Item</h3>
-								<?php
-								$query = $conn->prepare("SELECT prodName FROM product ");
-								$query->execute();
-								$res = $query->fetchAll();
-								?>
-								
-								<select class="form-control" id="addEntry" name="prodItem">
-									<?php foreach ($res as $row): ?>
-										<option><?=$row["prodName"]?></option>
-									<?php endforeach ?>
-								</select> 
-								<br>
-								
-								<h3>Quantity</h3>
-								<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty"> <br>
-								
-								<h3>Employee</h3>
-								<?php
-									$query = $conn->prepare("SELECT empName FROM employee ");
+					<?php
+						foreach ($result as $item):
+						$outid = $item["outID"];
+					?>
+
+					<tr>
+						<td><?php echo $item["outDate"]; ?></td>
+						<td><?php echo $item["prodID"]; ?></td>
+						<td><?php echo $item["prodName"]; ?></td>
+						<td><?php echo $item["model"]; ?></td>
+						<td><?php echo $item["outQty"]; ?></td>
+						<td><?php echo $item["unitType"]; ?></td>
+						<td><?php echo $item["empName"]; ?></td>
+						<td><?php echo $item["location"]; ?></td>
+						<td><?php echo $item["outRemarks"]; ?></td>
+						<td>
+							<a href="editOut.php?outsId=<?php echo $outid; ?>" target="_blank">
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+							</a>
+							<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+							</a>
+						</td>		
+					</tr>
+						
+					<?php
+						endforeach;
+					?>
+				</table>
+				
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add Outgoing Product</h4>
+							</div>
+							<div class="modal-body">
+								<form action="" method="POST" onsubmit="return validateForm()">
+									<h3>Item</h3>
+									<?php
+									$query = $conn->prepare("SELECT prodName FROM product ");
 									$query->execute();
 									$res = $query->fetchAll();
-								?>
-								
-								<select class="form-control" id="addEntry" name="emp">
-									<?php foreach ($res as $row): ?>
-										<option><?=$row["empName"]?></option>
-									<?php endforeach ?>
-								</select> 
+									?>
+									
+									<select class="form-control" id="addEntry" name="prodItem">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["prodName"]?></option>
+										<?php endforeach ?>
+									</select> 
 									<br>
 									
-								<h3>Branch</h3>
-								<?php
-									$query = $conn->prepare("SELECT location FROM branch");
-									$query->execute();
-									$res = $query->fetchAll();
-								?>
-								
-								<select class="form-control" id="addEntry" name="branch">
-									<?php foreach ($res as $row): ?>
-										<option><?=$row["location"]?></option>
-									<?php endforeach ?>
-								</select> 
-								<br>
-								
-								<h3>Remarks</h3>
-								<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea> <br>
-								<input type="submit" value="Add" class="btn btn-success btnclr" name="addOut">
-								<input type="submit" value="Cancel"class="btn btn-default btnclr" style="width: 100px;" data-dismiss="modal" onclick="this.form.reset()">
-							</form> 
-						</div>
-						
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+									<h3>Quantity</h3>
+									<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty"> <br>
+									
+									<h3>Employee</h3>
+									<?php
+										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+									
+									<select class="form-control" id="addEntry" name="emp">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["empName"]?></option>
+										<?php endforeach ?>
+									</select> 
+										<br>
+										
+									<h3>Branch</h3>
+									<?php
+										$query = $conn->prepare("SELECT location FROM branch");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+									
+									<select class="form-control" id="addEntry" name="branch">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["location"]?></option>
+										<?php endforeach ?>
+									</select> 
+									<br>
+									
+									<h3>Remarks</h3>
+									<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea>
+									<br>
+									
+									<input type="submit" value="Add" class="btn btn-success" name="addOut">
+									<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;" data-dismiss="modal" onclick="this.form.reset()">
+								</form> 
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right" id="logout">
-						<li><a href="logout.php">Logout</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-left" id="report">
-						<li><a href="report.html">Print Report</a></li>
-					</ul>
-				</div>
+				<ul class="nav navbar-nav navbar-left" id="report">
+					<li>
+						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+							<span class="glyphicon glyphicon-print"></span>
+						    Print
+						</button> 
+					</li>
+				</ul>
 			</div>
 		</nav>
 

@@ -63,15 +63,16 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<h1>Dency's Hardware and General Merchandise</h1>
+							<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
 						</div>
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
-								<li><a href="userinventory.php">Inventory</a></li>
-								<li><a href="userincoming.php">Incoming</a></li>
-								<li><a href="useroutgoing.php">Outgoing</a></li>
-								<li><a href="userreturns.php">Returns</a></li>
-								<li><a href="userproduct.php">Product</a></li>
+								<li><a href="userInventory.php">Inventory</a></li>
+								<li><a href="userIncoming.php">Incoming</a></li>
+								<li><a href="userOutgoing.php">Outgoing</a></li>
+								<li><a href="userReturns.php">Returns</a></li>
+								<li><a href="userProduct.php">Products</a></li>
+								<li><a href="logout.php">Logout</a></li>
 							</ul>
 						</div>
 					</div>
@@ -246,22 +247,14 @@
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right" id="logout">
-						<li><a href="logout.php">Logout</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-left" id="report">
-						<li><a href="report.html">Print Report</a></li>
-					</ul>
-				</div>
+				<ul class="nav navbar-nav navbar-left" id="report">
+					<li>
+						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+							<span class="glyphicon glyphicon-print"></span>
+						    Print
+						</button> 
+					</li>
+				</ul>
 			</div>
 		</nav>
 

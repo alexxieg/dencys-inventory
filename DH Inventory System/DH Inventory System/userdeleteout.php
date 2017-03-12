@@ -5,6 +5,6 @@
     $outid= $_GET['outsId'];
     $result = $conn->prepare("DELETE FROM outgoing WHERE outID = '$outid'");
     $result->execute();
-    header("location: useroutgoing.php");
+    header("location: userOutgoing.php");
 
 ?>

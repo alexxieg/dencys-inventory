@@ -6,9 +6,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script>
 		function validateForm() {
-			if (document.getElementById('addQnty').value == "") {
+			if (document.getElementById('addQty').value == "") {
 				alert('Please Enter Quantity');
-				document.getElementById('addQnty').style.borderColor = "red";
+				document.getElementById('addQty').style.borderColor = "red";
 				return false;
 			}
 			if(confirm('Are you sure you want to add this entry?')) {
@@ -75,7 +75,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1>Dency's Hardware and General Merchandise</h1>
+						<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right" id="categories">
@@ -84,6 +84,7 @@
 							<li><a href="outgoing.php">Outgoing</a></li>
 							<li><a href="returns.php">Returns</a></li>
 							<li><a href="admin.html">Admin</a></li>
+							<li><a href="logout.php">Logout</a></li>
 						</ul>
 					</div>
 				</div>
@@ -232,26 +233,18 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right" id="logout">
-						<li><a href="logout.php">Logout</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-left" id="report">
-						<li><a href="report.html">Print Report</a></li>
-					</ul>
-				</div>
+				<ul class="nav navbar-nav navbar-left" id="report">
+					<li>
+						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+							<span class="glyphicon glyphicon-print"></span>
+						    Print
+						</button> 
+					</li>
+				</ul>
 			</div>
 		</nav>
 

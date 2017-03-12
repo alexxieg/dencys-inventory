@@ -7048,6 +7048,7 @@ border: none;
       text-align: right;
     }
 
+<<<<<<< HEAD
     .form-group #myBtn{
         text-align: center;
         width: auto;
@@ -7103,3 +7104,14 @@ border: none;
   */
   .no-more-tables td:before { content: attr(data-title); }
 }
+=======
+@media screen and (max-width: 320px) {
+    .hide-on-mobile {
+         display: none; 
+     }
+}
+
+#mainHeader{
+	font-size: 200%;
+}
+>>>>>>> 583648110727ff7a68e2b47aa10ee7ca7a32a092
