@@ -95,17 +95,11 @@
 			</nav>
 		</div>
 	
-<<<<<<< HEAD
-	<div id="contents">
-		<div class="pages no-more-tables">
-			<div id="tableHeader">
-				<table class="table table-striped table-bordered">	
-=======
+
 		<div id="contents">
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
->>>>>>> 583648110727ff7a68e2b47aa10ee7ca7a32a092
 
 						<h1 id="headers">OUTGOING PRODUCTS</h1>
 
@@ -179,49 +173,24 @@
 						</th>					
 						<th></th>
 
-<<<<<<< HEAD
-				<tr id="centerData">
-					<td data-title="Date"><?php echo $item["outDate"]; ?></td>
-					<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-					<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-					<td data-title="Model"><?php echo $item["model"]; ?></td>
-					<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
-					<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-					<td data-title="Employee"><?php echo $item["empName"]; ?></td>
-					<td data-title="Branch"><?php echo $item["location"]; ?></td>
-					<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
-					<td>
-						<a href="editOut.php?outsId=<?php echo $outid; ?>" target="_blank">
-						<button type="button" class="btn btn-default">
-							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						</a>
-						<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
-						<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-						</button>
-						</a>
-					</td>		
-				</tr>
-=======
 					</tr>
->>>>>>> 583648110727ff7a68e2b47aa10ee7ca7a32a092
+
 					
 					<?php
 						foreach ($result as $item):
 						$outid = $item["outID"];
 					?>
-
-					<tr>
-						<td><?php echo $item["outDate"]; ?></td>
-						<td><?php echo $item["prodID"]; ?></td>
-						<td><?php echo $item["prodName"]; ?></td>
-						<td><?php echo $item["model"]; ?></td>
-						<td><?php echo $item["outQty"]; ?></td>
-						<td><?php echo $item["unitType"]; ?></td>
-						<td><?php echo $item["empName"]; ?></td>
-						<td><?php echo $item["location"]; ?></td>
-						<td><?php echo $item["outRemarks"]; ?></td>
+					
+					<tr id="centerData">
+						<td data-title="Date"><?php echo $item["outDate"]; ?></td>
+						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?></td>
+						<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+						<td data-title="Branch"><?php echo $item["location"]; ?></td>
+						<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 						<td>
 							<a href="editOut.php?outsId=<?php echo $outid; ?>" target="_blank">
 							<button type="button" class="btn btn-default">
@@ -235,7 +204,7 @@
 							</a>
 						</td>		
 					</tr>
-						
+
 					<?php
 						endforeach;
 					?>
