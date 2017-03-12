@@ -6,6 +6,48 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script>
+			function validateForm() {
+				if(document.getElementById('addProdID').value == "") {
+					alert('Please Enter Product ID');
+					document.getElementById('addProdID').style.borderColor = "red";
+					return false;
+				}
+				if (document.getElementById('addProdName').value == "") {
+					alert('Please Enter Product Name');
+					document.getElementById('addProdName').style.borderColor = "red";
+					return false;
+				}
+				if(document.getElementById('addModel').value == "") {
+					alert('Please Enter Model');
+					document.getElementById('addModel').style.borderColor = "red";
+					return false;
+				}
+				if(document.getElementById('addQty').value == "") {
+					alert('Please Enter Quantity');
+					document.getElementById('addQty').style.borderColor = "red";
+					return false;
+				}
+				if(document.getElementById('addPrice').value == "") {
+					alert('Please Enter Unit Price');
+					document.getElementById('addPrice').style.borderColor = "red";
+					return false;
+				}
+				if(document.getElementById('addReorderLvl').value == "") {
+					alert('Please Enter Reorder Level');
+					document.getElementById('addReorderLvl').style.borderColor = "red";
+					return false;
+				}
+				if(confirm('Are you sure you want to add this entry?')) {
+					alert("New Product Successfully Added");
+					return true;
+					
+				}
+				else {
+					return false;		
+				}
+			}
+		</script>
 		<title>Products</title>
 		<?php include('dbcon.php'); ?>
 			
@@ -189,18 +231,18 @@
 									<h4 class="modal-title">Add New Product</h4>
 								</div>
 								<div class="modal-body">
-									<form action="" method="POST">
+									<form action="" method="POST" onsubmit="return validateForm()">
 										<h3>Product ID</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Product ID" name="prodCode"> <br>
+										<input type="text" class="form-control" id ="addProdID" placeholder="Product ID" name="prodCode"> <br>
 										
 										<h3>Product Name</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodItem"> <br>
+										<input type="text" class="form-control" id ="addProdName" placeholder="Name" name="prodItem"> <br>
 										
 										<h3>Model</h3>
-										<input type="text" class="form-control" id="addEntry" placeholder="Model" name="prodModel"> <br>
+										<input type="text" class="form-control" id="addModel" placeholder="Model" name="prodModel"> <br>
 											
 										<h3>Quantity</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="prodQty"> <br>
+										<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Name" name="prodQty"> <br>
 											
 										<h3>Category</h3>
 										<?php
@@ -240,14 +282,14 @@
 										</select> 
 											
 										<h3>Price</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Unit Price" name="prodPrice"> <br>
+										<input type="number" class="form-control" id ="addPrice" placeholder="Unit Price" name="prodPrice"> <br>
 										
 										<h3>Reorder Level</h3>
-										<input type="text" class="form-control" id ="addEntry" placeholder="Reorder Level" name="prodRO"> <br>
+										<input type="number" class="form-control" id ="addReorderLvl" placeholder="Reorder Level" name="prodRO"> <br>
 											
 										<br>
-										<input type="submit" value="Add" class="btn btn-success btnclr" name="addProd" onclick="alert('New Product Successfully Added');">
-										<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+										<input type="submit" value="Add" class="btn btn-success btnclr" name="addProd">
+										<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
 									</form> 
 									<br>
 								</div>
