@@ -212,7 +212,7 @@
 								</button>
 							</a>	
 							<a href="deletePro.php?proId=<?php echo $proID; ?>">
-								<button type="button" class="btn btn-default">
+								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 								</button>
 							</a>
