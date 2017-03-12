@@ -103,15 +103,18 @@
 							
 						<?php
 							foreach ($result as $item):
+							$employID = $item["empID"];
 						?>
 
 						<tr>
 							<td><?php echo $item["empID"]; ?></td>
 							<td><?php echo $item["empName"]; ?></td>
 							<td>
+								<a href="editEmployees.php?emplId=<?php echo $employID; ?>" target="_blank">
 								<button type="button" class="btn btn-default">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
+								</a>	
 							
 								<button type="button" class="btn btn-default">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
