@@ -81,7 +81,7 @@
 			} else if (!empty($searching)) {
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-										WHERE prodName LIKE '%".$searching."%'
+										WHERE prodName LIKE '%".$searching."%' OR model LIKE '%".$searching."%' OR unitType LIKE '%".$searching."%' OR product.prodID LIKE '%".$searching."%'
 										GROUP BY prodID, initialQty, qty ");
 			} else { 
 				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName,  product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
