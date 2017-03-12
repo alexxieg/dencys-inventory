@@ -34,43 +34,43 @@
 		
 	</head>
     <style>
-#pagination {
-	float: left;
-	font-size: 50px;
-	text-indent: 5px;
-	border: 1px solid #1B88E4;
-	background-color: #4C97AF;
-    left: 1250px;
-    top: 1380px;
-	position: absolute;
-	display: inline-block;
-    padding-left: 0; 
-	
+		#pagination {
+			float: left;
+			font-size: 50px;
+			text-indent: 5px;
+			border: 1px solid #1B88E4;
+			background-color: #4C97AF;
+			left: 1250px;
+			top: 1380px;
+			position: absolute;
+			display: inline-block;
+			padding-left: 0; 
+			
 
-}
+		}
 
-#pagination a {
-    float: left;
-	text-align: center;
-	color: white;
-	border: 3px solid white;
+		#pagination a {
+			float: left;
+			text-align: center;
+			color: white;
+			border: 3px solid white;
 
-}
+		}
 
-#pagination a#selected {
-	font-weight: 500;
-	background-color: black;
+		#pagination a#selected {
+			font-weight: 500;
+			background-color: black;
 
-	
-}
+			
+		}
 
-</style>		
+	</style>		
   
 	<body>
 		<?php
-		$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-		$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
-	    $start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
+			$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+			$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
+			$start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
@@ -93,43 +93,44 @@
 			$total = $conn->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
 			$pages = ceil($total / $perPage);
 		?>	
-			<?php foreach($query as $queri): ?>
-			<div class="queri">
+		<?php foreach($query as $queri): ?>
+		<div class="queri">
 			<p><?php echo $queri['title']; ?></p>
-			</div>
-			<?php endforeach; ?>
-			<div id="pagination">
+		</div>
+		<?php endforeach; ?>
+		<div id="pagination">
 			<?php for ($x = 1; $x <= $pages; $x++): ?>
 			<a href="?page=<?php echo $x; ?>$per-page=<?php echo $perPage; ?>"<?php if($page === $x){echo ' id="selected"';}?>><?php echo $x; ?></a>
 			<?php endfor; ?>
-		    </div>
-	
-	<div id="contents">
-		<div class="productHolder" >
-			<nav class="navbar navbar-inverse navbar-fixed-top" >
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<h1>Dency's Hardware and General Merchandise</h1>
-					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.php">Incoming</a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.html">Admin</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
 		</div>
-	</div>
+	
+		<div id="contents">
+			<div class="productHolder" >
+				<nav class="navbar navbar-inverse navbar-fixed-top" >
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
+						</div>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right" id="categories">
+								<li><a href="inventory.php">Inventory</a></li>
+								<li><a href="incoming.php">Incoming</a></li>
+								<li><a href="outgoing.php">Outgoing</a></li>
+								<li><a href="returns.php">Returns</a></li>
+								<li><a href="admin.html">Admin</a></li>
+								<li><a href="logout.php">Logout</a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
 
 		<div class="pages">
 			
@@ -262,28 +263,14 @@
 		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right" id="logout">
-						<li><a href="logout.php">Logout</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-left" id="report">
-						<li>
-						      <button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
-						      	<span class="glyphicon glyphicon-print">
-						      	</span>
-						      		Print
-						      </button> 
-						</li>
-					</ul>
-				</div>
+				<ul class="nav navbar-nav navbar-left" id="report">
+					<li>
+						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+							<span class="glyphicon glyphicon-print"></span>
+						    Print
+						</button> 
+					</li>
+				</ul>
 			</div>
 		</nav>
 	</body>

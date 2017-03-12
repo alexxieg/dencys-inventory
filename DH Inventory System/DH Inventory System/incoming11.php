@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script>
 			function validateForm() {
 				if(document.getElementById('addReceip').value == "") {
@@ -75,7 +74,7 @@
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
-		<div class="header">
+		
 		<div class="productHolder">
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container">
@@ -86,7 +85,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
+						<h1>Dency's Hardware and General Merchandise</h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right" id="categories">
@@ -95,13 +94,12 @@
 							<li><a href="outgoing.php">Outgoing</a></li>
 							<li><a href="returns.php">Returns</a></li>
 							<li><a href="admin.html">Admin</a></li>
-							<li><a href="logout.php">Logout</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>	
-		</div>
+
 		<div id="contents">
 			<div class="pages">
 				<div id="tableHeader">
@@ -295,17 +293,26 @@
 				</div>      	
 			</div>
 		</div>		
-	
+		
+			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
-				<ul class="nav navbar-nav navbar-left" id="report">
-					<li>
-						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
-							<span class="glyphicon glyphicon-print"></span>
-						    Print
-						</button> 
-					</li>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right" id="logout">
+					<li><a href="logout.php">Logout</a></li>
 				</ul>
+				<ul class="nav navbar-nav navbar-left" id="report">
+					<li><a href="report.html">Print Report</a></li>
+				</ul>
+			</div>
 			</div>
 		</nav>
 		

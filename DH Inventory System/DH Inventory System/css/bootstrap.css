@@ -7067,3 +7067,7 @@ border: none;
          display: none; 
      }
 }
+
+#mainHeader{
+	font-size: 200%;
+}
