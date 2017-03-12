@@ -54,7 +54,7 @@
 			} else if (!empty($searching)) {
 				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-				WHERE prodName LIKE '%".$searching."%'");
+				WHERE prodName LIKE '%".$searching."%' OR product.prodID LIKE '%".$searching."%' OR model LIKE '%".$searching."%'");
 			} else {
 				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 				FROM returns INNER JOIN product ON returns.prodID = product.prodID 
