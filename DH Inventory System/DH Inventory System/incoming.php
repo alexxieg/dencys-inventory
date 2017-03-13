@@ -32,7 +32,7 @@
 		
 		<?php include('dbcon.php'); ?>
 			
-			<?php 
+		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
 			if (!isset($_SESSION['id']) && $role!="admin") {
@@ -214,41 +214,42 @@
 							</div>
 							<div class="modal-body">
 								<form action="" method="POST" onsubmit="return validateForm()">
-								  Receipt No. 
-								  <input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
-							  <table class="table table-striped" id="tblGrid">
-								<thead id="tblHead">
-								  <tr>
-								  	<th>
-									<th>Item</th>
-									<th>Quantity</th>
-									<th class="text-right">Employee</th>
-								  </tr>
-								</thead>
-								<tbody>
-								  <tr>
-									<td></td>
-									<td></td>
-									<td class="text-right"></td>
-								  </tr>
-								  <tr><td></td>
-									<td></td>
-									<td class="text-right"></td>
-								  </tr>
-								  <tr>
-									<td></td>
-									<td></td>
-									<td class="text-right"></td>
-								  </tr>
-								</tbody>
-							  </table>
+									Receipt No. 
+									<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
+									<table class="table table-striped" id="tblGrid">
+										<thead id="tblHead">
+											<tr>
+												<th>Item</th>
+												<th>Quantity</th>
+												<th class="text-right">Employee</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td></td>
+												<td class="text-right"></td>
+											</tr>
+											<tr>
+												<td></td>
+												<td></td>
+												<td class="text-right"></td>
+											</tr>
+											<tr>
+												<td></td>
+												<td></td>
+												<td class="text-right"></td>
+											</tr>
+										</tbody>
+									</table>
+									
 									<h3>Item</h3>
 									<?php
 										$query = $conn->prepare("SELECT prodName FROM product ");
 										$query->execute();
 										$res = $query->fetchAll();
 									?>
-								
+									
 									<select class="form-control" id="addEntry" name="prodItem">
 										<?php foreach ($res as $row): ?>
 											<option><?=$row["prodName"]?></option>
@@ -265,18 +266,18 @@
 										$query->execute();
 										$res = $query->fetchAll();
 									?>
-								
+									
 									<select class="form-control" id="addEntry" name="emp">
 										<?php foreach ($res as $row): ?>
-											<option><?=$row["empName"]?></option>
+										<option><?=$row["empName"]?></option>
 										<?php endforeach ?>
 									</select> 
 									<br>
 
 									<h3>Remarks</h3>
 									<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
-
 									<br>
+									
 									<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc">
 									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
 								</form> 			
