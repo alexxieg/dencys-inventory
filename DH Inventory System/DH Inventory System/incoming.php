@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 		<script>
 			function validateForm() {
 				if(document.getElementById('addRcpt').value == "") {
@@ -27,7 +26,38 @@
 				}
 			}
 		</script>
+		<script>
+			function addRow() {
+				//get input values
+				var prodItem = document.getElementById('addItem').value;
+				var incQty = document.getElementById('addQty').value;
+				var emp = document.getElementById('addEmp').value;
+				
+				
+				//get the html table
+				//0 = the first table
+				var table = document.getElementById('tblGrid');
+
 		
+		
+				//add new empty row to the table
+				//0 = in the top
+				//(table.rows.length) = in the end
+				//table.rows.length/2+1 = in the center
+				var newRow = table.insertRow(table.rows.length);
+				
+				
+				//add cells to the row
+				var cell = newRow.insertCell(0);
+				var cell2 = newRow.insertCell(1);
+				var cell3 = newRow.insertCell(2);
+				
+				cell.innerHTML = prodItem;
+				cell2.innerHTML = incQty;
+				cell3.innerHTML = emp;
+				
+			}
+		</script>	
 		<title>Incoming Products</title>
 		
 		<?php include('dbcon.php'); ?>
@@ -216,33 +246,32 @@
 								<form action="" method="POST" onsubmit="return validateForm()">
 									Receipt No. 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
-									<table class="table table-striped" id="tblGrid">
+									<table class="table table-striped" id="tblGrid" border="2">
 										<thead id="tblHead">
 											<tr>
 												<th>Item</th>
 												<th>Quantity</th>
-												<th class="text-right">Employee</th>
+												<th class="text-left">Employee</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td></td>
-												<td></td>
-												<td class="text-right"></td>
+												<td>Ruby Rose</td>
+												<td>500</td>
+												<td class="text-center">Ruby</td>
 											</tr>
 											<tr>
-												<td></td>
-												<td></td>
-												<td class="text-right"></td>
+												<td>Weiss Schnee</td>
+												<td>400</td>
+												<td class="text-center">Weiss</td>
 											</tr>
 											<tr>
-												<td></td>
-												<td></td>
-												<td class="text-right"></td>
+												<td>Pyrrha Nikos</td>
+												<td>900</td>
+												<td class="text-center">Pyrrha</td>
 											</tr>
 										</tbody>
-									</table>
-									
+									</table>								
 									<h3>Item</h3>
 									<?php
 										$query = $conn->prepare("SELECT prodName FROM product ");
@@ -250,7 +279,7 @@
 										$res = $query->fetchAll();
 									?>
 									
-									<select class="form-control" id="addEntry" name="prodItem">
+									<select class="form-control" id="addItem" name="prodItem">
 										<?php foreach ($res as $row): ?>
 											<option><?=$row["prodName"]?></option>
 										<?php endforeach ?>
@@ -267,7 +296,7 @@
 										$res = $query->fetchAll();
 									?>
 									
-									<select class="form-control" id="addEntry" name="emp">
+									<select class="form-control" id="addEmp" name="emp">
 										<?php foreach ($res as $row): ?>
 										<option><?=$row["empName"]?></option>
 										<?php endforeach ?>
@@ -276,8 +305,8 @@
 
 									<h3>Remarks</h3>
 									<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
-									<br>
-									
+									<br>								
+									<input type="button" class="btn btn-default btnclr" value="Add to Selection" onclick="addRow();">
 									<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc">
 									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
 								</form> 			
