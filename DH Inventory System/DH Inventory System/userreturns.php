@@ -4,6 +4,22 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script>
+			function validateForm() {
+				if (document.getElementById('addQty').value == "") {
+					alert('Please Enter Quantity');
+					document.getElementById('addQty').style.borderColor = "red";
+					return false;
+				}
+				if(confirm('Are you sure you want to add this entry?')) {
+					alert("Returned Product Successfully Added");
+					return true;			
+				}
+				else {
+					return false;		
+				}
+			}
+		</script>
 		<title>Returns</title>
 		<?php include('dbcon.php'); ?>
 			
@@ -162,7 +178,7 @@
 								<h4 class="modal-title">Add Returned Product</h4>
 							</div>
 							<div class="modal-body">
-								<form action="" method="POST">
+								<form action="" method="POST" onsubmit="return validateForm()">
 									<h3>Item</h3>
 									<?php
 										$query = $conn->prepare("SELECT prodName FROM product ");
@@ -178,14 +194,14 @@
 									<br>
 											
 									<h3>Quantity</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="Item Quantity" name="retQty"> <br>
+									<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="retQty"> <br>
 																			
 									<h3>Remarks</h3>
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 
 									<br>
-									<input type="submit" value="Add" class="btn btn-default" name="addRet" onclick="alert('Returned Product Successfully Added');">
-									<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+									<input type="submit" value="Add" class="btn btn-default" name="addRet">
+									<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
 								</form> 		
 							</div>
 							<div class="modal-footer">
