@@ -50,16 +50,19 @@
 					<div class="container" id="adminBtn">							  
 						<div class="form-group">
 							<form action="accounts.php">
-								<button type="submit" class="btn btn-default" id="myBtn">View Accounts</button>
+								<button type="submit" class="btn btn-default" id="myBtn">Accounts</button>
 							</form><br>
 							<form action="product.php">
-								<button type="submit" class="btn btn-default" id="myBtn">View Products</button>
+								<button type="submit" class="btn btn-default" id="myBtn">Products</button>
 							</form></br>
 							<form action="brands.php">
-								<button type="submit" class="btn btn-default" id="myBtn">View Product Brands</button>
+								<button type="submit" class="btn btn-default" id="myBtn">Product Brands</button>
 							</form></br>
+							<form action="category.php">
+								<button type="submit" class="btn btn-default" id="myBtn">Product Categories</button>
+							</form><br>
 							<form action="employees.php">
-								<button type="submit" class="btn btn-default" id="myBtn">View Employees</button>
+								<button type="submit" class="btn btn-default" id="myBtn">Employees</button>
 							</form>
 						</div>
 					</div>				
