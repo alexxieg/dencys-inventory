@@ -5,10 +5,15 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 		
 		<title>Inventory</title>
 		
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
+		
+		<script src="js/bootstrap.js"></script>
+			
 		<?php include('dbcon.php'); ?>
 		
 		<?php 
@@ -17,56 +22,13 @@
 			if (!isset($_SESSION['id']) && $role!="admin") {
 				header('Location: index.php');
 			}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
-		
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
-		<script src="js/bootstrap.js"></script>
-
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
 	</head>
-    <style>
-		#pagination {
-			float: left;
-			font-size: 50px;
-			text-indent: 5px;
-			border: 1px solid #1B88E4;
-			background-color: #4C97AF;
-			left: 1250px;
-			top: 1380px;
-			position: absolute;
-			display: inline-block;
-			padding-left: 0; 
-			
-
-		}
-
-		#pagination a {
-			float: left;
-			text-align: center;
-			color: white;
-			border: 3px solid white;
-
-		}
-
-		#pagination a#selected {
-			font-weight: 500;
-			background-color: black;
-
-			
-		}
-
-	</style>		
-  
-	<body>
+    
+  	<body>
 		<?php
 			$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 			$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
@@ -77,7 +39,7 @@
 				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, initialQty,  qty
-										ORDER BY $sort LIMIT {$start}, {$perPage}");
+										ORDER BY $sort ");
 			} else if (!empty($searching)) {
 				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
@@ -86,23 +48,14 @@
 			} else { 
 				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName,  product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.price, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, initialQty, qty LIMIT {$start}, {$perPage}");
+										GROUP BY prodID, initialQty, qty ");
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
 			$total = $conn->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
 			$pages = ceil($total / $perPage);
 		?>	
-		<?php foreach($query as $queri): ?>
-		<div class="queri">
-			<p><?php echo $queri['title']; ?></p>
-		</div>
-		<?php endforeach; ?>
-		<div id="pagination">
-			<?php for ($x = 1; $x <= $pages; $x++): ?>
-			<a href="?page=<?php echo $x; ?>$per-page=<?php echo $perPage; ?>"<?php if($page === $x){echo ' id="selected"';}?>><?php echo $x; ?></a>
-			<?php endfor; ?>
-		</div>
+	
 	
 		<div id="contents">
 			<div class="productHolder">
@@ -123,8 +76,7 @@
 								<li><a href="incoming.php">Incoming</a></li>
 								<li><a href="outgoing.php">Outgoing</a></li>
 								<li><a href="returns.php">Returns</a></li>
-								<li><a href="admin.html">Admin</a></li>
-								<li><a href="logout.php">Logout</a></li>
+								<li><a href="admin.php">Admin</a></li>
 							</ul>
 						</div>
 					</div>
@@ -268,6 +220,7 @@
 						    Print
 						</button> 
 					</li>
+					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</nav>

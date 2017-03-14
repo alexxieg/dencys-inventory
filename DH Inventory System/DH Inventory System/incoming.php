@@ -4,64 +4,19 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script>
-			function validateForm() {
-				if(document.getElementById('addRcpt').value == "") {
-					alert('Please Enter Receipt Number');
-					document.getElementById('addRcpt').style.borderColor = "red";
-					return false;
-				}
-				if (document.getElementById('addQty').value == "") {
-					alert('Please Enter Quantity');
-					document.getElementById('addQty').style.borderColor = "red";
-					return false;
-				}
-				if(confirm('Are you sure you want to add this entry?')) {
-					alert("Incoming Product Successfully Added");
-					return true;
-					
-				}
-				else {
-					return false;		
-				}
-			}
-		</script>
-		<script>
-			function addRow() {
-				//get input values
-				var prodItem = document.getElementById('addItem').value;
-				var incQty = document.getElementById('addQty').value;
-				var emp = document.getElementById('addEmp').value;
-				
-				
-				//get the html table
-				//0 = the first table
-				var table = document.getElementById('tblGrid');
-
 		
-		
-				//add new empty row to the table
-				//0 = in the top
-				//(table.rows.length) = in the end
-				//table.rows.length/2+1 = in the center
-				var newRow = table.insertRow(table.rows.length);
-				
-				
-				//add cells to the row
-				var cell = newRow.insertCell(0);
-				var cell2 = newRow.insertCell(1);
-				var cell3 = newRow.insertCell(2);
-				
-				cell.innerHTML = prodItem;
-				cell2.innerHTML = incQty;
-				cell3.innerHTML = emp;
-				
-			}
-		</script>	
 		<title>Incoming Products</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
+		
+		<script src="incoming.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
 		<?php include('dbcon.php'); ?>
-			
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -72,17 +27,6 @@
 				$session_query = $conn->query("select * from users where userName = '$session_id'");
 				$user_row = $session_query->fetch();
 		?>
-	
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
-		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
 	</head>
   
 	<body>
@@ -123,8 +67,7 @@
 						<li><a href="incoming.php">Incoming</a></li>
 						<li><a href="outgoing.php">Outgoing</a></li>
 						<li><a href="returns.php">Returns</a></li>
-						<li><a href="admin.html">Admin</a></li>
-						<li><a href="logout.php">Logout</a></li>
+						<li><a href="admin.php">Admin</a></li>
 					</ul>
 				</div>
 			</div>
@@ -244,76 +187,64 @@
 							</div>
 							<div class="modal-body">
 								<form action="" method="POST" onsubmit="return validateForm()">
-									Receipt No. 
+									<h5>Receipt No.</h5> 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
-									<table class="table table-striped" id="tblGrid" border="2">
-										<thead id="tblHead">
-											<tr>
-												<th>Item</th>
-												<th>Quantity</th>
-												<th class="text-left">Employee</th>
-											</tr>
-										</thead>
+									
+									<table class="table table-striped" id="dataTable">
 										<tbody>
 											<tr>
-												<td>Ruby Rose</td>
-												<td>500</td>
-												<td class="text-center">Ruby</td>
-											</tr>
-											<tr>
-												<td>Weiss Schnee</td>
-												<td>400</td>
-												<td class="text-center">Weiss</td>
-											</tr>
-											<tr>
-												<td>Pyrrha Nikos</td>
-												<td>900</td>
-												<td class="text-center">Pyrrha</td>
+												<td><input type="checkbox" name="chk"></TD>
+												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												<td>	
+													<?php
+														$query = $conn->prepare("SELECT prodName FROM product ");
+														$query->execute();
+														$res = $query->fetchAll();
+													?>
+										
+												<select class="form-control" id="addItem" name="prodItem">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["prodName"]?></option>
+													<?php endforeach ?>
+													</select> 
+												</td>
+														
+												<td>
+													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty">
+												</td>
+													
+												<td>
+													<?php
+														$query = $conn->prepare("SELECT empName FROM employee ");
+														$query->execute();
+														$res = $query->fetchAll();
+													?>
+													
+													<select class="form-control" id="addEmp" name="emp">
+														<?php foreach ($res as $row): ?>
+															<option><?=$row["empName"]?></option>
+														<?php endforeach ?>
+													</select> 
+												</td>
+												
+												<td>
+													<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks">
+												</td>
+												
 											</tr>
 										</tbody>
-									</table>								
-									<h3>Item</h3>
-									<?php
-										$query = $conn->prepare("SELECT prodName FROM product ");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
+									</table>
 									
-									<select class="form-control" id="addItem" name="prodItem">
-										<?php foreach ($res as $row): ?>
-											<option><?=$row["prodName"]?></option>
-										<?php endforeach ?>
-									</select> 
 									<br>
 									
-									<h3>Quantity</h3>
-									<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty"> <br>
-									
-									<h3>Employee</h3>
-									<?php
-										$query = $conn->prepare("SELECT empName FROM employee ");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
-									
-									<select class="form-control" id="addEmp" name="emp">
-										<?php foreach ($res as $row): ?>
-										<option><?=$row["empName"]?></option>
-										<?php endforeach ?>
-									</select> 
-									<br>
-
-									<h3>Remarks</h3>
-									<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
-									<br>								
-									<input type="button" class="btn btn-default btnclr" value="Add to Selection" onclick="addRow();">
-									<input type="submit" value="Add" class="btn btn-default btnclr" name="addIn">
-									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
+									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Item</button></span>
+									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 								</form> 			
 							</div>
 						
 							<div class="modal-footer">
-								<button type="button" class="btn btn-primary btnclr" onclick="alert('Saved changes successful!');">Save Changes</button>
+								<button type="submit" name="submit" class="btn btn-success" name="addIn">Submit</button>
+								<input type="submit" value="Cancel" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()">
 							</div>
 						</div>
 					</div>
@@ -330,15 +261,10 @@
 						    Print
 						</button> 
 					</li>
+					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
-		</nav>
-		
-		<?php 
-			if(isset($_POST['addIN'])){
-				
-			}
-		?>
+		</nav>	
 		
 		<?php include('addIncoming.php'); ?>
   </body>

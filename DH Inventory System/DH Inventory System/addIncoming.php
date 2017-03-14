@@ -1,5 +1,5 @@
 <?php
-	if (isset($_POST["addInc"])){
+	if (isset($_POST["addIn"])){
 			
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			 			

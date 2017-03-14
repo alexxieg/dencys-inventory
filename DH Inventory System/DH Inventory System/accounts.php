@@ -1,35 +1,23 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script>
-			function validateForm() {
-				if(document.getElementById('adduser').value == "") {
-					alert('Please Enter Username');
-					document.getElementById('adduser').style.borderColor = "red";
-					return false;
-				}
-				if (document.getElementById('addpass').value == "") {
-					alert('Please Enter Password');
-					document.getElementById('addpass').style.borderColor = "red";
-					return false;
-				}
-				if(confirm('Are you sure you want to add this account?')) {
-					alert("New Account Successfully Added");
-					return true;	
-				}
-				else {
-					return false;		
-				}
-			}
-		</script>
+
 		<title>Accounts</title>
-		<?php include('dbcon.php'); ?>
-			
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		
+		<script src="accounts.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<?php include('dbcon.php'); ?>	
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -39,22 +27,8 @@
 			$session_id = $_SESSION['id'];
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
-		?>
-			
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
-		<script src="js/bootstrap.js"></script>
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+		?>	
 	</head>
-
   
 	<body>
 		<?php
@@ -82,8 +56,7 @@
 							<li><a href="incoming.php">Incoming</a></li>
 							<li><a href="outgoing.php">Outgoing</a></li>
 							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.html">Admin</a></li>
-							<li><a href="logout.php">Logout</a></li>
+							<li><a href="admin.php">Admin</a></li>
 						</ul>
 					</div>
 				</div>
@@ -160,14 +133,12 @@
 											 </select>
 										</div>
 									
-										 <br>
-											
-										<input type="submit" value="Add" class="btn btn-success" name="addAccnt">
-										<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
+									
 									</form> 
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+									<input type="submit" value="Submit" class="btn btn-success" name="addAccnt">
+									<input type="submit" value="Cancel" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()">
 								</div>
 							</div>
 						</div>
@@ -185,6 +156,7 @@
 						    Print
 						</button> 
 					</li>
+					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</nav>

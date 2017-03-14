@@ -6,49 +6,18 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script>
-			function validateForm() {
-				if(document.getElementById('addProdID').value == "") {
-					alert('Please Enter Product ID');
-					document.getElementById('addProdID').style.borderColor = "red";
-					return false;
-				}
-				if (document.getElementById('addProdName').value == "") {
-					alert('Please Enter Product Name');
-					document.getElementById('addProdName').style.borderColor = "red";
-					return false;
-				}
-				if(document.getElementById('addModel').value == "") {
-					alert('Please Enter Model');
-					document.getElementById('addModel').style.borderColor = "red";
-					return false;
-				}
-				if(document.getElementById('addQty').value == "") {
-					alert('Please Enter Quantity');
-					document.getElementById('addQty').style.borderColor = "red";
-					return false;
-				}
-				if(document.getElementById('addPrice').value == "") {
-					alert('Please Enter Unit Price');
-					document.getElementById('addPrice').style.borderColor = "red";
-					return false;
-				}
-				if(document.getElementById('addReorderLvl').value == "") {
-					alert('Please Enter Reorder Level');
-					document.getElementById('addReorderLvl').style.borderColor = "red";
-					return false;
-				}
-				if(confirm('Are you sure you want to add this entry?')) {
-					alert("New Product Successfully Added");
-					return true;
-					
-				}
-				else {
-					return false;		
-				}
-			}
-		</script>
+	
 		<title>Products</title>
+			
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		
+		<script src="product.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 		<?php include('dbcon.php'); ?>
 			
 		<?php 
@@ -61,22 +30,8 @@
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
 		?>
-			
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
-		<script src="js/bootstrap.js"></script>
-		
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	  </head>
+	</head>
  
-
 	<body>
 		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
@@ -116,8 +71,7 @@
 						<li><a href="incoming.php">Incoming</a></li>
 						<li><a href="outgoing.php">Outgoing</a></li>
 						<li><a href="returns.php">Returns</a></li>
-						<li><a href="admin.html">Admin</a></li>
-						<li><a href="logout.php">Logout</a></li>
+						<li><a href="admin.php">Admin</a></li>
 					</ul>
 				</div>
 			</div>
@@ -232,9 +186,6 @@
 								</div>
 								<div class="modal-body">
 									<form action="" method="POST" onsubmit="return validateForm()">
-										<h3>Product ID</h3>
-										<input type="text" class="form-control" id ="addProdID" placeholder="Product ID" name="prodCode"> <br>
-										
 										<h3>Product Name</h3>
 										<input type="text" class="form-control" id ="addProdName" placeholder="Name" name="prodItem"> <br>
 										
@@ -288,13 +239,13 @@
 										<input type="number" class="form-control" id ="addReorderLvl" placeholder="Reorder Level" name="prodRO"> <br>
 											
 										<br>
-										<input type="submit" value="Add" class="btn btn-success btnclr" name="addProd">
-										<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
+										
 									</form> 
 									<br>
 								</div>
 								<div class="modal-footer">
-								  <button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+									<input type="submit" value="Submit" class="btn btn-success" name="addProd">
+									<input type="submit" value="Cancel" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()">
 								</div>
 							</div>
 						</div>
@@ -312,6 +263,7 @@
 						    Print
 						</button> 
 					</li>
+					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</nav>
