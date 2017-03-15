@@ -1,5 +1,5 @@
 <?php
-	if (isset($_POST["addBrand"])){
+	if (isset($_POST["addCategory"])){
 			
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			 

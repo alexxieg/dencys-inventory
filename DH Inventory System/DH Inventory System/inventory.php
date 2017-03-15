@@ -125,6 +125,10 @@
 					</th>
 					
 					<th>
+						Ending Quantity
+					</th>
+					
+					<th>
 						IN
 					</th>
 					
@@ -137,52 +141,53 @@
 						
 					</th>
 					
-						<th>
-							Physical Count
-						</th>
-						
-						<th>
-							Reorder Level
-						</th>
-						
-						<th>
-							Unit
-						</th>
-						
-						<th>
-							Item Price
-							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						<th>
-							Remarks
-						</th>
-						
-					</tr>
+					<th>
+						Physical Count
+					</th>
 					
-					<?php
-						foreach ($result as $item):
-						$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
-						if ($currQty <= $item["reorderLevel"]){
-					?> 
-					<tr style='background-color: #ff9999' id="centerData">
-						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"]; ?> </td>
-						<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
-						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
-						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
-						<td data-title="Current Quantity"><?php echo $currQty; ?></td>
-						<td data-title="Physical Count"></td>
-						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-						<td data-title="Unit"><?php echo $item["unitType"];?></td>
-						<td data-title="Price"><?php echo $item["price"]; ?></td>	
-						<td data-title="Remarks"></td>
-					</tr>
+					<th>
+						Reorder Level
+					</th>
+					
+					<th>
+						Unit
+					</th>
+						
+					<th>
+						Item Price
+						<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+						<button type="button" class="btn btn-default" value="?orderBy=price ASC" onclick="location = this.value;" id="sortBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
+						</button>
+					</th>
+					<th>
+						Remarks
+					</th>
+						
+				</tr>
+					
+				<?php
+					foreach ($result as $item):
+					$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+					if ($currQty <= $item["reorderLevel"]){
+				?> 
+				<tr style='background-color: #ff9999' id="centerData">
+					<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+					<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+					<td data-title="Model"><?php echo $item["model"]; ?> </td>
+					<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
+					<td data-title="End. Quantity"></td>
+					<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+					<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+					<td data-title="Current Quantity"><?php echo $currQty; ?></td>
+					<td data-title="Physical Count"></td>
+					<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+					<td data-title="Unit"><?php echo $item["unitType"];?></td>
+					<td data-title="Price"><?php echo $item["price"]; ?></td>	
+					<td data-title="Remarks"></td>
+				</tr>
 					<?php	
 						}else if ($currQty > $item["reorderLevel"]){
 					?>
@@ -191,6 +196,7 @@
 						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 						<td data-title="Model"><?php echo $item["model"]; ?> </td>
 						<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
+						<td data-title="End. Quantity"></td>
 						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
 						<td data-title="Current Quantity"><?php echo $currQty; ?></td>

@@ -135,7 +135,7 @@
 							Unit
 						</th>
 						<th>
-							Product Price
+							Price
 							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -240,12 +240,19 @@
 											
 										<br>
 										
-									</form> 
+										<span>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+										</span>
+										<span>
+											<input type="submit" value="Submit" class="btn btn-success" name="addProd" style="float:right;">
+										</span>
+											
+										</form> 
 									<br>
+									
 								</div>
 								<div class="modal-footer">
-									<input type="submit" value="Submit" class="btn btn-success" name="addProd">
-									<input type="submit" value="Cancel" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()">
+									
 								</div>
 							</div>
 						</div>

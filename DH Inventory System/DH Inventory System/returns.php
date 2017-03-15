@@ -193,11 +193,16 @@
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 									<br>
 									
+									<span>
+										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+									</span>
+									<span>
+										<input type="submit" value="Submit" class="btn btn-success" name="addRet" style="float:right;">
+									</span>
 								</form> 		
 							</div>
-							<div class="modal-footer">
-								<input type="submit" value="Submit" class="btn btn-success" name="addRet">
-								<input type="submit" value="Cancel" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()">
+							
+							<div class="modal-footer">	
 							</div>
 						</div>
 					</div>

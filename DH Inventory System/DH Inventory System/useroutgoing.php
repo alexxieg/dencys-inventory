@@ -88,7 +88,6 @@
 						<li><a href="useroutgoing.php">Outgoing</a></li>
 						<li><a href="userreturns.php">Returns</a></li>
 						<li><a href="userproduct.php">Products</a></li>
-						<li><a href="logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -249,13 +248,17 @@
 										<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea>
 										<br>
 										
-										<input type="submit" value="Add" class="btn btn-success" name="addOut">
-										<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;" data-dismiss="modal" onclick="this.form.reset()">
+										<span>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+										</span>
+										<span>
+											<input type="submit" value="Submit" class="btn btn-success" name="addOut" style="float:right;">
+										</span>
 									</form> 
 								</div>
 								
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default btnclr" data-dismiss="modal">Close</button>
+									
 								</div>
 							</div>
 						</div>
@@ -272,6 +275,9 @@
 						    Print
 						</button> 
 					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" id="logout">
+					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</nav>

@@ -120,12 +120,18 @@
 										<input type="text" class="form-control" id ="addCategoryName" placeholder="Category" name="categoryName"> <br>
 										<br>
 							
+										<span>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;">Cancel</button>
+										</span>
+										<span>
+											<input type="submit" value="Submit" class="btn btn-success" name="addCategory" style="float:right;">
+										</span>
 									</form> 
 								</div>
+								
 								<div class="modal-footer">
-									<input type="submit" value="Submit" class="btn btn-success" name="addCategory">
-									<input type="submit" value="Cancel" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()">
 								</div>
+								
 							</div>
 						</div>
 					</div>

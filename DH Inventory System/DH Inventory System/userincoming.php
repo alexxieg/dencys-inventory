@@ -177,75 +177,72 @@
 							</div>
 							<div class="modal-body">
 								<form action="" method="POST" onsubmit="return validateForm()">
-									Receipt No. 
-								  <input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
-							  <table class="table table-striped" id="tblGrid">
-								<thead id="tblHead">
-								  <tr>
-									<th>Item</th>
-									<th>Quantity</th>
-									<th class="text-right">Employee</th>
-								  </tr>
-								</thead>
-								<tbody>
-								  <tr>
-									<td></td>
-									<td></td>
-									<td class="text-right"></td>
-								  </tr>
-								  <tr><td></td>
-									<td></td>
-									<td class="text-right"></td>
-								  </tr>
-								  <tr>
-									<td></td>
-									<td></td>
-									<td class="text-right"></td>
-								  </tr>
-								</tbody>
-							  </table>
-									<h3>Item</h3>
-									<?php
-										$query = $conn->prepare("SELECT prodName FROM product ");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
-								
-									<select class="form-control" id="addEntry" name="prodItem">
-										<?php foreach ($res as $row): ?>
-											<option><?=$row["prodName"]?></option>
-										<?php endforeach ?>
-									</select> 
-									<br>
+									<h5>Receipt No.</h5> 
+									<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
 									
-									<h3>Quantity</h3>
-									<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty"> <br>
-									
-									<h3>Employee</h3>
+									<h5>Employee</h5>
 									<?php
 										$query = $conn->prepare("SELECT empName FROM employee ");
 										$query->execute();
 										$res = $query->fetchAll();
 									?>
-								
-									<select class="form-control" id="addEntry" name="emp">
+													
+									<select class="form-control" id="addEmp" name="emp">
 										<?php foreach ($res as $row): ?>
 											<option><?=$row["empName"]?></option>
 										<?php endforeach ?>
 									</select> 
+									
 									<br>
-
-									<h3>Remarks</h3>
-									<textarea class="form-control" id="addEntry" rows="3" name="inRemarks"></textarea> <br>
-
+											
+									<table class="table table-striped" id="dataTable">
+														
+										<tbody>
+											<tr>
+												<td><input type="checkbox" name="chk"></TD>
+												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												<td>	
+													<?php
+														$query = $conn->prepare("SELECT prodName FROM product ");
+														$query->execute();
+														$res = $query->fetchAll();
+													?>
+										
+												<select class="form-control" id="addItem" name="prodItem">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["prodName"]?></option>
+													<?php endforeach ?>
+													</select> 
+												</td>
+														
+												<td>
+													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty">
+												</td>
+												
+												<td>
+													<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									
 									<br>
-									<input type="submit" value="Add" class="btn btn-default btnclr" name="addInc">
-									<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px" data-dismiss="modal" onclick="this.form.reset()">
+									
+									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+									<br>
+									<br>
+									<span>
+										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+									</span>
+									<span>
+										<input type="submit" value="Submit" class="btn btn-success" name="addIn" style="float:right;">
+									</span>
 								</form> 			
 							</div>
 						
 							<div class="modal-footer">
-								<button type="button" class="btn btn-primary btnclr" onclick="alert('Saved changes successful!');">Save Changes</button>
+						
 							</div>
 						</div>
 					</div>			

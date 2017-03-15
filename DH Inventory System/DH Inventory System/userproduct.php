@@ -177,6 +177,9 @@
 						</button> 
 					</li>
 				</ul>
+				<ul class="nav navbar-nav navbar-right" id="logout">
+					<li><a href="logout.php">Logout</a></li>
+				</ul>
 			</div>
 		</nav>
   </body>

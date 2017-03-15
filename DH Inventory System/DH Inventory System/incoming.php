@@ -190,7 +190,23 @@
 									<h5>Receipt No.</h5> 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
 									
+									<h5>Employee</h5>
+									<?php
+										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+													
+									<select class="form-control" id="addEmp" name="emp">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["empName"]?></option>
+										<?php endforeach ?>
+									</select> 
+									
+									<br>
+											
 									<table class="table table-striped" id="dataTable">
+														
 										<tbody>
 											<tr>
 												<td><input type="checkbox" name="chk"></TD>
@@ -212,40 +228,32 @@
 												<td>
 													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty">
 												</td>
-													
-												<td>
-													<?php
-														$query = $conn->prepare("SELECT empName FROM employee ");
-														$query->execute();
-														$res = $query->fetchAll();
-													?>
-													
-													<select class="form-control" id="addEmp" name="emp">
-														<?php foreach ($res as $row): ?>
-															<option><?=$row["empName"]?></option>
-														<?php endforeach ?>
-													</select> 
-												</td>
 												
 												<td>
 													<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks">
 												</td>
-												
 											</tr>
 										</tbody>
 									</table>
 									
 									<br>
 									
-									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Item</button></span>
+									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
 									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+									<br>
+									<br>
+									<span>
+										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+									</span>
+									<span>
+										<input type="submit" value="Submit" class="btn btn-success" name="addIn" style="float:right;">
+									</span>
 								</form> 			
 							</div>
 						
 							<div class="modal-footer">
-								<button type="submit" name="submit" class="btn btn-success" name="addIn">Submit</button>
-								<input type="submit" value="Cancel" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()">
 							</div>
+							
 						</div>
 					</div>
 				</div>      	
@@ -261,6 +269,8 @@
 						    Print
 						</button> 
 					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" id="logout">
 					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>

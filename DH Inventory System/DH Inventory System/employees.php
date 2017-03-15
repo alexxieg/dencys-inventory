@@ -121,11 +121,16 @@
 										<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empName"> <br>
 										<br>
 										
+										<span>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+										</span>
+										<span>
+											<input type="submit" value="Submit" class="btn btn-success" name="addEmp" style="float:right;">
+										</span>
 									</form> 
 								</div>
-								<div class="modal-footer">
-									<input type="submit" value="Submit" class="btn btn-success" name="addEmp">
-									<input type="submit" value="Cancel" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()">
+								
+								<div class="modal-footer">	
 								</div>
 							</div>
 						</div>
