@@ -4,29 +4,17 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script>
-			function validateForm() {
-				if(document.getElementById('addRcpt').value == "") {
-					alert('Please Enter Receipt Number');
-					document.getElementById('addRcpt').style.borderColor = "red";
-					return false;
-				}
-				if (document.getElementById('addQty').value == "") {
-					alert('Please Enter Quantity');
-					document.getElementById('addQty').style.borderColor = "red";
-					return false;
-				}
-				if(confirm('Are you sure you want to add this entry?')) {
-					alert("Incoming Product Successfully Added");
-					return true;
-					
-				}
-				else {
-					return false;		
-				}
-			}
-		</script>
+		
 		<title>Incoming</title>
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		
+		<script src="incoming.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
 		<?php include('dbcon.php'); ?>
 		<?php 
@@ -39,17 +27,7 @@
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
 		?>
-	
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
-		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+		
 	</head>
   
 	<body>
@@ -92,7 +70,6 @@
 								<li><a href="userOutgoing.php">Outgoing</a></li>
 								<li><a href="userReturns.php">Returns</a></li>
 								<li><a href="userProduct.php">Products</a></li>
-								<li><a href="logout.php">Logout</a></li>
 							</ul>
 						</div>
 					</div>
@@ -286,6 +263,9 @@
 						    Print
 						</button> 
 					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" id="logout">
+					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</nav>
