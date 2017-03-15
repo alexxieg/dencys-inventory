@@ -115,19 +115,19 @@
 						</th>
 						<th>
 							Brand
-							<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;" id="sortBtn">
+							<button type="button" class="btn btn-default" value="?orderBy=brandName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=brand ASC" onclick="location = this.value;" id="sortBtn">
+							<button type="button" class="btn btn-default" value="?orderBy=brandName ASC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
 						<th>
 							Category
-							<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;" id="sortBtn">
+							<button type="button" class="btn btn-default" value="?orderBy=categoryName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=type ASC" onclick="location = this.value;" id="sortBtn">
+							<button type="button" class="btn btn-default" value="?orderBy=categoryName ASC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
