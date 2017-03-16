@@ -57,8 +57,8 @@
 		?>	
 	
 	
-		<div id="contents">
-			<div class="productHolder">
+		
+		
 				<nav class="navbar navbar-inverse navbar-fixed-top" >
 					<div class="container">
 						<div class="navbar-header">
@@ -81,9 +81,9 @@
 						</div>
 					</div>
 				</nav>
-			</div>
-		</div>
-
+			
+		
+		<div id="contents">
 		<div class="pages no-more-tables">
 			<div id="tableHeader">			
 				<h1 id="headers">INVENTORY</h1>	
@@ -215,6 +215,7 @@
 					?>
 				</table>
 			</div>	
+		</div>
 		</div>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
