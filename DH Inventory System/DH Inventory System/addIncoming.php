@@ -1,6 +1,9 @@
 <?php
-	if (isset($_POST["addIn"])){
-			
+	  if (isset($_POST['submit'])){
+		  if(!empty($_POST["chk"])) {
+			  foreach($_POST["chk"] as $chk) {
+				foreach($_POST["num"] as $num){
+						
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			 			
 		$prod = $_POST['prodItem'];
@@ -15,9 +18,13 @@
 		$prod3 = $prod2['prodA'];
 				
 		$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID)
-				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."','$emp3','$prod3')";
-		$conn->exec($sql);
+				VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['rcno']."','".$_POST['inRemarks']."','$emp3','$prod3')";
+		$result = $conn->query($sql);
+		echo '<td>'.$chk.$num.'</td>';
 		echo "<meta http-equiv='refresh' content='0'>";
+			  }
+		  }
+		  }
 				
 /*		$emp1 = $conn->prepare("SELECT empID AS emp FROM employee WHERE empName = '$emp'");
 		$emp1->execute();
@@ -31,6 +38,6 @@
 		$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID, supID)
 		VALUES ('".$_POST['incQty']."',CURDATE(),'".$_POST['inRecN']."','".$_POST['inRemarks']."',$emp1,$prod1,$sup1)";
 		$conn->exec($sql);
-*/
-			}    		
+*/  	
+	  }		  
 	?>

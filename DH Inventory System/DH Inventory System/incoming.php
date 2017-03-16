@@ -205,12 +205,12 @@
 									
 									<br>
 											
-									<table class="table table-striped" id="dataTable">
+									<table class="table table-striped" id="dataTable" name="chk[]">
 														
 										<tbody>
 											<tr>
-												<td><input type="checkbox" name="chk"></TD>
-												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												<td><input type="checkbox" name="chk[]"></TD>
+												<td><input type="hidden" value="1" name="num[]" id="orderdata">1</TD>
 												<td>	
 													<?php
 														$query = $conn->prepare("SELECT prodName FROM product ");
@@ -243,10 +243,10 @@
 									<br>
 									<br>
 									<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+										<input type="button" class="btn btn-danger" value="Cancel" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;">
 									</span>
 									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addIn" style="float:right;">
+										<input type="submit" name="submit" value="Submit"class="btn btn-success" style="float:right;">
 									</span>
 								</form> 			
 							</div>
