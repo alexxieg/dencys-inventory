@@ -17,21 +17,11 @@
     <![endif]-->
   </head>
   
-  <body>
-	<nav class="navbar navbar-inverse navbar-static-top">
-			<div class="container">
-				<div class="navbar-header">
-					<h1>Dency's Hardware and General Merchandise</h1>
-				</div>
-			</div>
-	</nav>
-		<center><img src="logo.jpg" alt="logo" id="logo"/></center>
-	<div class="company">
-		<h3 id="is">Login</h3>
-	</div>
+  <body class="inBack">
 
-	<div class="jumbotron" id="login">
-		<div class="container" id="form">
+		<center><img src="logo.png" alt="logo" id="logo"/></center>
+
+	<div class="newcompany">
 			<form class="form-horizontal" method= "POST" action="Login.php">
 			<?php include 'Login.php';	?>
 			  <div class="form-group">
@@ -47,22 +37,14 @@
 			    </div>
 			  </div>
 
-			 <div class="form-group">
+			 <div>
 			    <div class="col-sm-offset-2 col-sm-12">
 			      <button type="submit" class="btn btn-default loginbtn btn-md"> Login</button>
 			    </div>
  			 </div>
  			</form>
 		</div>
-	</div>
-
-	<nav class="navbar navbar-inverse navbar-fixed-bottom">
-			<div class="container">
-				<div class="navbar-header">
-				</div>
-			</div>
-	</nav>
-
+	
 
   </body>
 </html>

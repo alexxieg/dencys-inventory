@@ -39,7 +39,7 @@
 		</nav>
 		
 		<div id="adminContent">
-			<center><img src="logo.jpg" alt="logo" id="logo"/></center>
+			
 			<div>
 				<div id="manageAcc">
 					<div class="manageHeader">
@@ -78,7 +78,8 @@
 							<span class="glyphicon glyphicon-print"></span>
 						    Print
 						</button> 
-					</li>
+					</ul>
+				<ul class="nav navbar-nav navbar-right" id="logout">
 					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>

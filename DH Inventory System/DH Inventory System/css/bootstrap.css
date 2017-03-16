@@ -4593,7 +4593,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #3b5998;
+  background: linear-gradient(#3b5998, black);
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
@@ -6801,8 +6801,8 @@ button.close {
 }
 
 .loginbtn {
- background-color: #4CAF50;
- 
+ background-color: white;
+ margin-left: 50%;
 }
 
 .company {
@@ -6828,7 +6828,7 @@ button.close {
 #categories{
   font-size: 18px;
   margin-top: 30px;
-  margin-right: -100px;
+  margin-right: 30%;
 }
 
 #prodSort{
@@ -7122,4 +7122,37 @@ border: none;
 #formButton{
 	float:right; 
 	margin-left:10px;
+}
+
+/*font*/
+@font-face{
+  font-family: dencyFont;
+  src: url(bbd.ttf);
+}
+
+.compName {
+  font-family: dencyFont;
+  color: white;
+  margin-bottom: -2%;
+}
+
+
+.inBack{
+  background-image: url("in2.jpg");
+  width: auto;
+  height: auto;
+  margin-top: 5%;
+}
+
+.newcompany{
+  color: #FFFAF0;
+  margin-right: 26%;
+  margin-left: 26%;
+  margin-top: 8%;
+  height: 65px;
+  padding: 10px 15px;
+}
+
+.navName{
+  margin-top: 5%; 
 }
