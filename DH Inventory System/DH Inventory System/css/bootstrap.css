@@ -4593,7 +4593,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background: linear-gradient(#3b5998, black);
+  background: radial-gradient(circle, white, #3b5998);
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
@@ -7132,7 +7132,7 @@ border: none;
 
 .compName {
   font-family: dencyFont;
-  color: white;
+  color: black;
   margin-bottom: -2%;
 }
 

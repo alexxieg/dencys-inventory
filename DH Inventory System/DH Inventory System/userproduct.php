@@ -56,6 +56,10 @@
 	
 			<div class="productHolder" >
 				<nav class="navbar navbar-inverse navbar-fixed-top" >
+					<center><img src="logo.png" alt="logo" id="logo"/></center>
+					<div class="navName">
+						<h1 class="compName">Dency's</h1>
+					</div>
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -64,9 +68,7 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<h1 id="mainHeader">Dency's Hardware and General Merchandise</h1>
 						</div>
-						
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
 								<li><a href="userInventory.php">Inventory</a></li>
@@ -74,7 +76,6 @@
 								<li><a href="userOutgoing.php">Outgoing</a></li>
 								<li><a href="userReturns.php">Returns</a></li>
 								<li><a href="userProduct.php">Products</a></li>
-								<li><a href="logout.php">Logout</a></li>
 							</ul>
 						</div>
 					</div>
