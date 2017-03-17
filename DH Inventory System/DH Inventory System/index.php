@@ -19,7 +19,7 @@
   
   <body class="inBack">
 
-		<center><img src="logo.png" alt="logo" id="logo"/></center>
+		<center><img src="logo.png" alt="logo" id="logo1"/></center>
 
 	<div class="newcompany">
 			<form class="form-horizontal" method= "POST" action="Login.php">
@@ -39,7 +39,7 @@
 
 			 <div>
 			    <div class="col-sm-offset-2 col-sm-12">
-			      <button type="submit" class="btn btn-default loginbtn btn-md"> Login</button>
+			      <button type="submit" class="btn btn-default loginbtn btn-md">Login</button>
 			    </div>
  			 </div>
  			</form>
