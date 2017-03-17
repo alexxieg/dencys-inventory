@@ -6833,7 +6833,7 @@ button.close {
 
 #categories{
   font-size: 18px;
-  margin-top: 30px;
+  margin-top: 5%;
   margin-right: 30%;
 }
 
@@ -6931,7 +6931,7 @@ button.close {
 
 #headers{
   color: #000000;
-  margin: 5% 0 2% 0;
+  margin: -5% 0 2% 0;
 }
 
 .loginbtn {
@@ -7202,4 +7202,8 @@ border: none;
 
 .navName{
   margin-top: 5%; 
+}
+
+#contents{
+  padding-top: 5%;
 }
