@@ -73,7 +73,7 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 					<center><img src="logo.png" alt="logo" id="logo"/></center>
 					<div class="navName">
-						<h1 class="compName">Dency's</h1>
+						<h1 class="compName">Dency's Hardware and<br>General Merchandise</h1>
 					</div>
 					<div class="container">
 						<div class="navbar-header">

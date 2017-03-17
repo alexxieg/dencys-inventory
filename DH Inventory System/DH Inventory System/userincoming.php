@@ -55,8 +55,7 @@
 				<nav class="navbar navbar-inverse navbar-fixed-top" >
 					<center><img src="logo.png" alt="logo" id="logo"/></center>
 					<div class="navName">
-						<h1 class="compName">Dency's</h1>
-					</div>
+						<h1 class="compName">Dency's Hardware and<br>General Merchandise</h1>
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
