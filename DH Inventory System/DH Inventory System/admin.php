@@ -34,7 +34,7 @@
 								<li><a href="incoming.php">Incoming</a></li>
 								<li><a href="outgoing.php">Outgoing</a></li>
 								<li><a href="returns.php">Returns</a></li>
-								<li><a href="admin.php">Admin</a></li>
+								<li class="active"><a href="admin.php">Admin</a></li>
 							</ul>
 						</div>
 					</div>

@@ -74,7 +74,7 @@
 						</div>
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
-								<li><a href="inventory.php">Inventory</a></li>
+								<li class="active" id="navi"><a href="inventory.php">Inventory</a></li>
 								<li><a href="incoming.php">Incoming</a></li>
 								<li><a href="outgoing.php">Outgoing</a></li>
 								<li><a href="returns.php">Returns</a></li>
@@ -220,7 +220,7 @@
 			<div class="container">
 				<ul class="nav navbar-nav navbar-left" id="report">
 					<li>
-						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+						<button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
 							<span class="glyphicon glyphicon-print"></span>
 						    Print
 						</button> 
