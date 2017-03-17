@@ -4519,12 +4519,15 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #333;
   background-color: transparent;
 }
+
+
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #555;
+  color: black;
   background-color: #e7e7e7;
 }
+
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
 .navbar-default .navbar-nav > .disabled > a:focus {
@@ -4608,7 +4611,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #9d9d9d;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #9d9d9d;
+  color: #000000;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
@@ -4619,7 +4622,9 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
   color: #fff;
-  background-color: #080808;
+  background-color:#9b2d2d;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .navbar-inverse .navbar-nav > .disabled > a,
 .navbar-inverse .navbar-nav > .disabled > a:hover,
@@ -7033,7 +7038,7 @@ border: none;
 #printBtn {
   background-color: transparent;
   border-color: transparent;
-  color: grey;
+  color: black;
 }
 
 #addQty, #addRcpt, #adduser, #addpass,

@@ -69,7 +69,7 @@
 							<ul class="nav navbar-nav navbar-right" id="categories">
 								<li><a href="inventory.php">Inventory</a></li>
 								<li><a href="incoming.php">Incoming</a></li>
-								<li><a href="outgoing.php">Outgoing</a></li>
+								<li class="active"><a href="outgoing.php">Outgoing</a></li>
 								<li><a href="returns.php">Returns</a></li>
 								<li><a href="admin.php">Admin</a></li>
 							</ul>
