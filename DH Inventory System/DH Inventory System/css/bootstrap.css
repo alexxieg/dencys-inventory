@@ -6776,6 +6776,7 @@ button.close {
 #manageAcc{
   margin-right: 25%;
   margin-left: 25%;
+  margin-top: 10%;
 }
 
 #login {
@@ -6864,9 +6865,10 @@ button.close {
 }
 
 #logo {
-  width: 100px;
-  height: 100px;
-  margin-bottom: -100px;
+  width: 130px;
+  height: 130px;
+  margin-bottom: -150px;
+  margin-right: 500px;
 }
 
 #logo1 {
@@ -7173,7 +7175,7 @@ border: none;
 .compName {
   font-family: dencyFont;
   color: black;
-  margin-bottom: -2%;
+  margin-top: -75px;
 }
 
 
