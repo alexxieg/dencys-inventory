@@ -4593,7 +4593,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background: linear-gradient(#3b5998, black);
+  background: radial-gradient(circle, white, #3b5998);
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
@@ -6776,6 +6776,7 @@ button.close {
 #manageAcc{
   margin-right: 25%;
   margin-left: 25%;
+  margin-top: 10%;
 }
 
 #login {
@@ -6802,7 +6803,7 @@ button.close {
 
 .loginbtn {
  background-color: white;
- margin-left: 50%;
+ margin-left: 62%;
 }
 
 .company {
@@ -6864,6 +6865,13 @@ button.close {
 }
 
 #logo {
+  width: 130px;
+  height: 130px;
+  margin-bottom: -150px;
+  margin-right: 500px;
+}
+
+#logo1 {
   width: 100px;
   height: 100px;
   margin-bottom: -100px;
@@ -7038,7 +7046,7 @@ border: none;
 }
 
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1250px) {
 	
     .no-more-tables{
       margin-top: 5%;
@@ -7109,10 +7117,44 @@ border: none;
   .no-more-tables td:before { content: attr(data-title); }
 }
 
-@media screen and (max-width: 320px) {
+
+
+@media screen and (max-width: 768px) {
     .hide-on-mobile {
          display: none; 
      }
+
+    #adminBtn {
+      margin-left: 0px;
+      font-size: 9px;
+      padding-left: 6px;
+      margin-bottom: -30px;
+    }
+
+    #adminView {
+      margin-left: 26%;
+      margin-right: 26%;
+      margin-top: -10px;
+      margin-bottom: 20%;
+    }
+    
+    #adminBtn {
+      margin-left: 0px;
+      font-size: 9px;
+      padding-left: 6px;
+      margin-bottom: -30px;
+    }
+
+    #adminView {
+      margin-left: 26%;
+      margin-right: 26%;
+      margin-top: -10px;
+      margin-bottom: 20%;
+    }
+
+    #logout{
+
+    }
 }
 
 #mainHeader{
@@ -7132,8 +7174,8 @@ border: none;
 
 .compName {
   font-family: dencyFont;
-  color: white;
-  margin-bottom: -2%;
+  color: black;
+  margin-top: -75px;
 }
 
 
