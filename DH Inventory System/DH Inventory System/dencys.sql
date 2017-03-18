@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2017 at 05:44 AM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Generation Time: Mar 18, 2017 at 01:20 AM
+-- Server version: 5.7.14
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `dencys`
@@ -28,10 +28,9 @@ USE `dencys`;
 -- Table structure for table `branch`
 --
 
-CREATE TABLE IF NOT EXISTS `branch` (
+CREATE TABLE `branch` (
   `branchID` int(5) NOT NULL,
-  `location` varchar(50) CHARACTER SET latin1 NOT NULL,
-  PRIMARY KEY (`branchID`)
+  `location` varchar(50) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
 --
@@ -51,10 +50,9 @@ INSERT INTO `branch` (`branchID`, `location`) VALUES
 -- Table structure for table `brand`
 --
 
-CREATE TABLE IF NOT EXISTS `brand` (
+CREATE TABLE `brand` (
   `brandID` varchar(45) NOT NULL,
-  `brandName` varchar(45) NOT NULL,
-  PRIMARY KEY (`brandID`)
+  `brandName` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -97,10 +95,9 @@ INSERT INTO `brand` (`brandID`, `brandName`) VALUES
 -- Table structure for table `category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE `category` (
   `categoryID` varchar(45) NOT NULL,
-  `categoryName` varchar(45) NOT NULL,
-  PRIMARY KEY (`categoryID`)
+  `categoryName` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -142,11 +139,10 @@ INSERT INTO `category` (`categoryID`, `categoryName`) VALUES
 -- Table structure for table `employee`
 --
 
-CREATE TABLE IF NOT EXISTS `employee` (
-  `empID` int(5) NOT NULL AUTO_INCREMENT,
-  `empName` varchar(50) NOT NULL,
-  PRIMARY KEY (`empID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+CREATE TABLE `employee` (
+  `empID` int(5) NOT NULL,
+  `empName` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
@@ -185,16 +181,15 @@ INSERT INTO `employee` (`empID`, `empName`) VALUES
 -- Table structure for table `history`
 --
 
-CREATE TABLE IF NOT EXISTS `history` (
+CREATE TABLE `history` (
   `histID` int(11) NOT NULL,
   `month` date NOT NULL,
   `totalIn` int(11) DEFAULT NULL,
   `totalOut` int(11) DEFAULT NULL,
   `beginningQty` int(11) DEFAULT NULL,
   `endingQty` int(11) DEFAULT NULL,
-  `physicalQty` int(11) DEFAULT NULL,
-  PRIMARY KEY (`histID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `physicalQty` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -202,19 +197,15 @@ CREATE TABLE IF NOT EXISTS `history` (
 -- Table structure for table `incoming`
 --
 
-CREATE TABLE IF NOT EXISTS `incoming` (
-  `inID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `incoming` (
+  `inID` int(5) NOT NULL,
   `inQty` int(5) NOT NULL,
   `inDate` date NOT NULL,
   `receiptNo` varchar(25) NOT NULL,
   `inRemarks` varchar(25) DEFAULT 'None',
   `empID` int(5) NOT NULL,
-  `prodID` varchar(25) NOT NULL,
-  PRIMARY KEY (`inID`),
-  KEY `FKINPROD_idx` (`prodID`),
-  KEY `FKINPROD` (`prodID`),
-  KEY `FKINEMP_idx` (`empID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `prodID` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `incoming`
@@ -225,7 +216,8 @@ INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `receiptNo`, `inRemarks`, `em
 (2, 20, '2017-03-01', '4464', 'None', 5, 'LTS-HDT-0002'),
 (3, 15, '2017-03-05', '3245', 'None', 4, 'LTS-HDT-0003'),
 (4, 20, '2017-03-10', 'n7452', 'None', 8, 'LTS-ACC-0001'),
-(5, 10, '2017-03-15', 'r5123', 'None', 3, 'LTS-ACC-0002');
+(5, 10, '2017-03-15', 'r5123', 'None', 3, 'LTS-ACC-0002'),
+(6, 20, '2017-03-20', 'rjewlrk', 'None', 1, 'LTS-ACC-0002');
 
 -- --------------------------------------------------------
 
@@ -233,18 +225,16 @@ INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `receiptNo`, `inRemarks`, `em
 -- Table structure for table `inventory`
 --
 
-CREATE TABLE IF NOT EXISTS `inventory` (
-  `invID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `inventory` (
+  `invID` int(11) UNSIGNED NOT NULL,
   `qty` int(11) DEFAULT NULL,
   `phyCount` int(5) DEFAULT NULL,
   `initialQty` int(11) DEFAULT NULL,
   `inQty` int(11) DEFAULT NULL,
   `outQty` int(11) DEFAULT NULL,
   `endingQty` int(11) DEFAULT NULL,
-  `prodID` varchar(25) NOT NULL,
-  PRIMARY KEY (`invID`),
-  KEY `FKINVPROD_idx` (`prodID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+  `prodID` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `inventory`
@@ -288,19 +278,15 @@ INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `out
 -- Table structure for table `outgoing`
 --
 
-CREATE TABLE IF NOT EXISTS `outgoing` (
-  `outID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `outgoing` (
+  `outID` int(5) NOT NULL,
   `outQty` int(5) NOT NULL,
   `outDate` date NOT NULL,
   `outRemarks` text NOT NULL,
   `branchID` int(5) NOT NULL,
   `empID` int(5) NOT NULL,
-  `prodID` varchar(25) NOT NULL,
-  PRIMARY KEY (`outID`),
-  KEY `FKOUTPROD_idx` (`prodID`),
-  KEY `FKOUTEMP_idx` (`empID`),
-  KEY `FKOUTBR_idx` (`branchID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+  `prodID` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `outgoing`
@@ -319,7 +305,7 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `branchID`, 
 -- Table structure for table `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
+CREATE TABLE `product` (
   `prodID` varchar(25) NOT NULL,
   `prodName` varchar(100) NOT NULL,
   `model` varchar(45) DEFAULT NULL,
@@ -327,8 +313,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `brandID` varchar(25) NOT NULL,
   `price` decimal(11,2) NOT NULL,
   `reorderLevel` int(5) NOT NULL,
-  `unitType` varchar(45) CHARACTER SET big5 NOT NULL,
-  PRIMARY KEY (`prodID`)
+  `unitType` varchar(45) CHARACTER SET big5 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -373,14 +358,13 @@ INSERT INTO `product` (`prodID`, `prodName`, `model`, `categoryID`, `brandID`, `
 -- Table structure for table `returns`
 --
 
-CREATE TABLE IF NOT EXISTS `returns` (
-  `returnID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `returns` (
+  `returnID` int(5) NOT NULL,
   `returnDate` date NOT NULL,
   `returnQty` int(5) NOT NULL,
   `returnRemark` text NOT NULL,
-  `prodID` varchar(45) NOT NULL,
-  PRIMARY KEY (`returnID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `prodID` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `returns`
@@ -400,10 +384,9 @@ INSERT INTO `returns` (`returnID`, `returnDate`, `returnQty`, `returnRemark`, `p
 -- Table structure for table `suppliers`
 --
 
-CREATE TABLE IF NOT EXISTS `suppliers` (
+CREATE TABLE `suppliers` (
   `supID` int(5) NOT NULL,
-  `supplier_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`supID`)
+  `supplier_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -428,13 +411,12 @@ INSERT INTO `suppliers` (`supID`, `supplier_name`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `userID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `userID` int(5) NOT NULL,
   `userName` varchar(25) NOT NULL,
   `password` varchar(25) NOT NULL,
-  `user_role` text NOT NULL,
-  PRIMARY KEY (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `user_role` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -446,6 +428,123 @@ INSERT INTO `users` (`userID`, `userName`, `password`, `user_role`) VALUES
 (3, 'user1', 'dewatt123', 'user'),
 (4, 'user2', 'agp123', 'user');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `branch`
+--
+ALTER TABLE `branch`
+  ADD PRIMARY KEY (`branchID`);
+
+--
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`brandID`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`categoryID`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`empID`);
+
+--
+-- Indexes for table `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`histID`);
+
+--
+-- Indexes for table `incoming`
+--
+ALTER TABLE `incoming`
+  ADD PRIMARY KEY (`inID`),
+  ADD KEY `FKINPROD_idx` (`prodID`),
+  ADD KEY `FKINPROD` (`prodID`),
+  ADD KEY `FKINEMP_idx` (`empID`);
+
+--
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`invID`),
+  ADD KEY `FKINVPROD_idx` (`prodID`);
+
+--
+-- Indexes for table `outgoing`
+--
+ALTER TABLE `outgoing`
+  ADD PRIMARY KEY (`outID`),
+  ADD KEY `FKOUTPROD_idx` (`prodID`),
+  ADD KEY `FKOUTEMP_idx` (`empID`),
+  ADD KEY `FKOUTBR_idx` (`branchID`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`prodID`);
+
+--
+-- Indexes for table `returns`
+--
+ALTER TABLE `returns`
+  ADD PRIMARY KEY (`returnID`);
+
+--
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`supID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `employee`
+--
+ALTER TABLE `employee`
+  MODIFY `empID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `incoming`
+--
+ALTER TABLE `incoming`
+  MODIFY `inID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `invID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=906;
+--
+-- AUTO_INCREMENT for table `outgoing`
+--
+ALTER TABLE `outgoing`
+  MODIFY `outID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `returns`
+--
+ALTER TABLE `returns`
+  MODIFY `returnID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --

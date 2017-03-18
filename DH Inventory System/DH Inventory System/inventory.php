@@ -30,13 +30,10 @@
     
   	<body>
 		<?php
-			$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-			$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
-			$start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
-				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, initialQty,  qty
 										ORDER BY $sort ");
@@ -52,8 +49,6 @@
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
-			$total = $conn->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
-			$pages = ceil($total / $perPage);
 		?>	
 	
 	
@@ -158,17 +153,18 @@
 					<th>
 						Remarks
 					</th>
-						
+	
 				</tr>
 	
 				
 				<?php
 
 					foreach ($result as $item):
-					$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
-					$sql = $conn->prepare("INSERT INTO inventory (inventory.inQty) VALUES ('".$item['inQty']."')");
-					$sql->execute();
-					if ($currQty <= $item["reorderLevel"]){
+						$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+						$sql = $conn->prepare("INSERT INTO inventory (inQty) SELECT SUM(incoming.inQty) from incoming LEFT JOIN inventory ON incoming.prodID = inventory.prodID
+									GROUP BY incoming.prodID");
+						$sql->execute();
+						if ($currQty <= $item["reorderLevel"]){
 				?> 
 				
 				<tr style='background-color: #ff9999' id="centerData">
