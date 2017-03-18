@@ -51,10 +51,12 @@
 		?>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
-					<center><img src="logo.png" alt="logo" id="logo"/></center>
-					<div class="navName">
-						<h1 class="compName">Dency's Hardware and<br>General Merchandise</h1>
-					</div>
+			<div class="container">
+						<img src="WDF_1857921.jpg" id="headerBG"/>
+				<center><img src="dencys.png" alt="logo" id="logo1"/></center>
+			</div>
+
+			<div class="splitHeader">
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
