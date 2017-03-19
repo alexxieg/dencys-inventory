@@ -18,9 +18,7 @@
 						$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
 						$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 						$prod3 = $prod2['prodA'];
-						
-						
-								
+												
 						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID)
 								VALUES ('$incQty',CURDATE(),'".$_POST['rcno']."','$inRemarks','$emp3','$prod3')";
 						$result = $conn->query($sql); 

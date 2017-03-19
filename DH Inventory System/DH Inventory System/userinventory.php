@@ -35,43 +35,29 @@
   
 	<body>
 		<?php
-			$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-			$perPage = isset($_GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 30;
-			$start = ($page > 1) ? ($page * $perPage) - $perPage: 0;
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
-				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, initialQty, qty
 										ORDER BY $sort LIMIT {$start}, {$perPage}");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										WHERE prodName LIKE '%".$searching."%'
 										GROUP BY prodID, initialQty, qty ");
 			} else { 
-				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName,  product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+				$query = $conn->prepare("SELECT product.prodID, product.prodName,  product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, initialQty, qty LIMIT {$start}, {$perPage}");
+										GROUP BY prodID, initialQty, qty");
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
-			$total = $conn->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
-			$pages = ceil($total / $perPage);
+
 		?>	
 		
-		<?php foreach($query as $queri): ?>
-		<div class="queri">
-			<p><?php echo $queri['title']; ?></p>
-		</div>
-		<?php endforeach; ?>
-		<div id="pagination">
-			<?php for ($x = 1; $x <= $pages; $x++): ?>
-			<a href="?page=<?php echo $x; ?>$per-page=<?php echo $perPage; ?>"<?php if($page === $x){echo ' id="selected"';}?>><?php echo $x; ?></a>
-			<?php endfor; ?>
-	    </div>
-	
+
 		<div id="contents">
 			<div class="productHolder" >
 				<nav class="navbar navbar-inverse navbar-fixed-top" >

@@ -30,10 +30,16 @@
     
   	<body>
 		<?php
+		$updateIN = $conn->prepare("UPDATE inventory
+					SET inventory.inQty = (SELECT SUM(incoming.inQty) 
+					FROM incoming WHERE inventory.prodID = incoming.prodID GROUP BY incoming.prodID)");
+		$updateIN->execute();
+		?>
+		<?php
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
-				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, initialQty,  qty
 										ORDER BY $sort ");
@@ -43,14 +49,15 @@
 										WHERE prodName LIKE '%".$searching."%' OR model LIKE '%".$searching."%' OR unitType LIKE '%".$searching."%' OR product.prodID LIKE '%".$searching."%'
 										GROUP BY prodID, initialQty, qty ");
 			} else { 
-				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName,  product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-										GROUP BY prodID, initialQty, qty ");
+										GROUP BY prodID, initialQty,  qty, inventory.inQty");
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
 		?>	
-	
+		
+		
 	
 	<nav class="navbar navbar-inverse navbar-fixed-top" >
 		<div class="container">
@@ -164,9 +171,6 @@
 
 					foreach ($result as $item):
 						$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
-						$sql = $conn->prepare("INSERT INTO inventory (inQty) SELECT SUM(incoming.inQty) from incoming LEFT JOIN inventory ON incoming.prodID = inventory.prodID
-									GROUP BY incoming.prodID");
-						$sql->execute();
 						if ($currQty <= $item["reorderLevel"]){
 				?> 
 				
@@ -230,5 +234,6 @@
 				</ul>
 			</div>
 		</nav>
+		
 	</body>
 </html>

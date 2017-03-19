@@ -15,7 +15,6 @@
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="../js/bootbox.min.js"></script>
 		
 		<?php include('dbcon.php'); ?>
 		<?php 
@@ -51,22 +50,13 @@
 			$result = $query->fetchAll();
 		?>
 		
-<<<<<<< HEAD
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
-					<center><img src="logo.png" alt="logo" id="logo"/></center>
-					<div class="navName">
-						<h1 class="compName">Dency's Hardware and<br>General Merchandise</h1>
-					</div>
-=======
-			<div class="productHolder">
-				<nav class="navbar navbar-inverse navbar-fixed-top" >
-					<div class="container">
-								<img src="WDF_1857921.jpg" id="headerBG"/>
-						<center><img src="dencys.png" alt="logo" id="logo1"/></center>
-					</div>
+				<div class="container">
+							<img src="WDF_1857921.jpg" id="headerBG"/>
+					<center><img src="dencys.png" alt="logo" id="logo1"/></center>
+				</div>
 
 				<div class="splitHeader">
->>>>>>> 64bb13b041f225c9d1a0fec9ac654e8c5f213e7c
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -79,10 +69,10 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
 								<li><a href="userinventory.php">Inventory</a></li>
-								<li><a href="userincoming.php">Incoming</a></li>
+								<li class="active"><a href="incoming.php">Incoming</a></li>
 								<li><a href="useroutgoing.php">Outgoing</a></li>
 								<li><a href="userreturns.php">Returns</a></li>
-								<li><a href="userproduct.php">Products</a></li>
+								<li><a href="userproduct.php">Product</a></li>
 							</ul>
 						</div>
 					</div>
@@ -265,7 +255,7 @@
 									</span>
 								</form> 			
 							</div>
-								
+						
 							<div class="modal-footer">
 							</div>
 						</div>
