@@ -51,11 +51,22 @@
 			$result = $query->fetchAll();
 		?>
 		
+<<<<<<< HEAD
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 					<center><img src="logo.png" alt="logo" id="logo"/></center>
 					<div class="navName">
 						<h1 class="compName">Dency's Hardware and<br>General Merchandise</h1>
 					</div>
+=======
+			<div class="productHolder">
+				<nav class="navbar navbar-inverse navbar-fixed-top" >
+					<div class="container">
+								<img src="WDF_1857921.jpg" id="headerBG"/>
+						<center><img src="dencys.png" alt="logo" id="logo1"/></center>
+					</div>
+
+				<div class="splitHeader">
+>>>>>>> 64bb13b041f225c9d1a0fec9ac654e8c5f213e7c
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
