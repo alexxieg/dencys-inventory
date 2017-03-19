@@ -18,8 +18,9 @@
   </head>
   
   <body class="inBack">
-
-		<center><img src="logo.png" alt="logo" id="logo1"/></center>
+  	<div class="loginLogo">
+		<center><img src="logo.png" alt="loginLogo" id="loginLogo" style="width:10%; margin-bottom:-100px;"/></center>
+	</div>
 
 	<div class="newcompany">
 			<form class="form-horizontal" method= "POST" action="Login.php">

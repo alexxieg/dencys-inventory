@@ -6869,14 +6869,7 @@ button.close {
   margin: 100%;
 }
 
-#logo {
-  width: 130px;
-  height: 130px;
-  margin-bottom: -150px;
-  margin-right: 500px;
-}
-
-#logo1 {
+img#logo1 {
   width: 380px;
   height: 130px;
   margin-bottom: 1%;

@@ -69,14 +69,18 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
 								<li><a href="userinventory.php">Inventory</a></li>
+<<<<<<< HEAD
 								<li class="active"><a href="incoming.php">Incoming</a></li>
+=======
+								<li class="active"><a href="userincoming.php">Incoming</a></li>
+>>>>>>> a6c855f72fd7cc31f956921e92623545a1df9ab4
 								<li><a href="useroutgoing.php">Outgoing</a></li>
 								<li><a href="userreturns.php">Returns</a></li>
 								<li><a href="userproduct.php">Product</a></li>
 							</ul>
 						</div>
 					</div>
-				</nav>
+			</nav>
 
 		<div id="contents">
 			<div class="pages no-more-tables">
@@ -257,29 +261,31 @@
 							</div>
 						
 							<div class="modal-footer">
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>      	
-			</div>
-		</div>		
+					</div>      	
+				</div>
+			</div>	
+		</div>
+	</div>	
 	
-		<nav class="navbar navbar-inverse navbar-fixed-bottom">
-			<div class="container">
-				<ul class="nav navbar-nav navbar-left" id="report">
-					<li>
-						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
-							<span class="glyphicon glyphicon-print"></span>
-						    Print
-						</button> 
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right" id="logout">
-					<li><a href="logout.php">Logout</a></li>
-				</ul>
-			</div>
-		</nav>	
-		
-		<?php include('addIncoming.php'); ?>
+				<nav class="navbar navbar-inverse navbar-fixed-bottom">
+					<div class="container">
+						<ul class="nav navbar-nav navbar-left" id="report">
+							<li>
+								<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+									<span class="glyphicon glyphicon-print"></span>
+								    Print
+								</button> 
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right" id="logout">
+							<li><a href="logout.php">Logout</a></li>
+						</ul>
+					</div>
+				</nav>	
+				
+				<?php include('addIncoming.php'); ?>
   </body>
 </html>
