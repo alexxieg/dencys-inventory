@@ -5,16 +5,17 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Incoming</title>
-		
+		<title>Incoming Products</title>
+
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
 		<script src="incoming.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../js/bootbox.min.js"></script>
 		
 		<?php include('dbcon.php'); ?>
 		<?php 
@@ -23,11 +24,10 @@
 			if (!isset($_SESSION['id']) && $role!="user") {
 				header('Location: index.php');
 			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
+				$session_id = $_SESSION['id'];
+				$session_query = $conn->query("select * from users where userName = '$session_id'");
+				$user_row = $session_query->fetch();
 		?>
-		
 	</head>
   
 	<body>
@@ -35,15 +35,15 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType,product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
 										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 										ORDER BY $sort");
 			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
 										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-										WHERE prodName LIKE '%".$searching."%'");
+										WHERE prodName LIKE '%".$searching."%' OR product.prodID LIKE '%".$searching."%' OR model LIKE '%".$searching."%'");
 			} else {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.receiptDate, incoming.inRemarks 
+				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
 										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 										ORDER BY inID ASC;");
 			}
@@ -51,11 +51,11 @@
 			$result = $query->fetchAll();
 		?>
 		
-			<div class="productHolder">
-				<nav class="navbar navbar-inverse navbar-fixed-top" >
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
 					<center><img src="logo.png" alt="logo" id="logo"/></center>
 					<div class="navName">
 						<h1 class="compName">Dency's Hardware and<br>General Merchandise</h1>
+					</div>
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -67,33 +67,29 @@
 						</div>
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
-								<li><a href="userInventory.php">Inventory</a></li>
-								<li><a href="userIncoming.php">Incoming</a></li>
-								<li><a href="userOutgoing.php">Outgoing</a></li>
-								<li><a href="userReturns.php">Returns</a></li>
-								<li><a href="userProduct.php">Products</a></li>
+								<li><a href="userinventory.php">Inventory</a></li>
+								<li><a href="userincoming.php">Incoming</a></li>
+								<li><a href="useroutgoing.php">Outgoing</a></li>
+								<li><a href="userreturns.php">Returns</a></li>
+								<li><a href="userproduct.php">Products</a></li>
 							</ul>
 						</div>
 					</div>
 				</nav>
-			</div>	
 
-	<div id="contents">
-		<div class="pages">
+		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
-					<table class="table table-striped table-bordered">	
+					<table class="table table-striped table-bordered">
 						<h1 id="headers">INCOMING PRODUCTS</h1>
 						<form action="?" method="post">
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 						</form>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
-							Add Incoming Product
-						</button>		
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 					</table>
 				</div>
-					
-				<table class="table table-striped table-bordered">		
+				
+				<table class="table table-striped table-bordered">	
 					<tr>
 						<th>
 							Date
@@ -119,6 +115,7 @@
 						<th>
 							Model
 						</th>
+			
 						<th>
 							Quantity
 							<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;" id="sortBtn">
@@ -141,11 +138,14 @@
 							</button>
 						</th>
 						<th>
-							Receipt No.		
+							Receipt No.
+							
 						</th>
+						
 						<th>
 							Remarks
 						</th>
+						<th></th>
 					</tr>
 							
 					<?php
@@ -162,14 +162,26 @@
 						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
-						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>			
+						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+						<td>
+							<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+							</a>
+							<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+							</a>
+						</td>				
 					</tr>
 							
 					<?php
 						endforeach;
 					?>
 				</table>
-				
+
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
@@ -197,7 +209,7 @@
 									
 									<br>
 											
-									<table class="table table-striped" id="dataTable">
+									<table class="table table-striped" id="dataTable" name="chk">
 														
 										<tbody>
 											<tr>
@@ -210,19 +222,19 @@
 														$res = $query->fetchAll();
 													?>
 										
-												<select class="form-control" id="addItem" name="prodItem">
+												<select class="form-control" id="addItem" name="prodItem[]">
 													<?php foreach ($res as $row): ?>
 														<option><?=$row["prodName"]?></option>
 													<?php endforeach ?>
-													</select> 
+												</select> 
 												</td>
 														
 												<td>
-													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty">
+													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
 												</td>
 												
 												<td>
-													<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks">
+													<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
 												</td>
 											</tr>
 										</tbody>
@@ -235,24 +247,22 @@
 									<br>
 									<br>
 									<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+										<input type="button" class="btn btn-danger" value="Cancel" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;">
 									</span>
 									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addIn" style="float:right;">
+										<input type="submit" name="submit" value="Submit"class="btn btn-success" style="float:right;">
 									</span>
 								</form> 			
 							</div>
-						
+								
 							<div class="modal-footer">
-						
 							</div>
 						</div>
-					</div>			
-				</div>
-			</div>	
-		</div>
-	</div>
-			
+					</div>
+				</div>      	
+			</div>
+		</div>		
+	
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-left" id="report">
@@ -267,8 +277,8 @@
 					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
-		</nav>
+		</nav>	
 		
 		<?php include('addIncoming.php'); ?>
-	</body>
+  </body>
 </html>

@@ -4,35 +4,30 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script>
-			function validateForm() {
-				if (document.getElementById('addQty').value == "") {
-					alert('Please Enter Quantity');
-					document.getElementById('addQty').style.borderColor = "red";
-					return false;
-				}
-				if(confirm('Are you sure you want to add this entry?')) {
-					alert("Returned Product Successfully Added");
-					return true;			
-				}
-				else {
-					return false;		
-				}
-			}
-		</script>
+
 		<title>Returns</title>
+	
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
+		
+		<script src="returns.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 		<?php include('dbcon.php'); ?>
-			
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
 			if (!isset($_SESSION['id']) && $role!="user") {
 				header('Location: index.php');
 			}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
+	</head>
 		
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
@@ -102,7 +97,7 @@
 						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 					</form>
 						
-					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Returned Product</button>
+					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 										
 				</table>
 			</div>

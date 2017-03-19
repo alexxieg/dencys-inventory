@@ -12,3 +12,19 @@ function validateForm() {
 		return false;		
 	}
 }
+
+		 
+function test(){
+	BootstrapDialog.show({
+				title: 'Sign In',
+				message: 'Your sign-in form goes here.',
+				cssClass: 'login-dialog',
+				buttons: [{
+					label: 'Sign In Now!',
+					cssClass: 'btn-primary',
+					action: function(dialog){
+						dialog.close();
+					}
+				}]
+			});
+	}

@@ -220,6 +220,7 @@
 							<span class="glyphicon glyphicon-print"></span>
 						    Print
 						</button> 
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right" id="logout">
 					<li><a href="logout.php">Logout</a></li>

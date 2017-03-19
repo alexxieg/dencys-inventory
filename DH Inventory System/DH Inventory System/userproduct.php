@@ -138,7 +138,7 @@
 								Unit
 							</th>
 							<th>
-								Product Price
+								Price
 								<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
