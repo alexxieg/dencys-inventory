@@ -69,11 +69,7 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
 								<li><a href="userinventory.php">Inventory</a></li>
-<<<<<<< HEAD
-								<li class="active"><a href="incoming.php">Incoming</a></li>
-=======
 								<li class="active"><a href="userincoming.php">Incoming</a></li>
->>>>>>> a6c855f72fd7cc31f956921e92623545a1df9ab4
 								<li><a href="useroutgoing.php">Outgoing</a></li>
 								<li><a href="userreturns.php">Returns</a></li>
 								<li><a href="userproduct.php">Product</a></li>

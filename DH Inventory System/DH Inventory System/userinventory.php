@@ -33,11 +33,10 @@
 			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 			if (!empty($sort)) { 
-<<<<<<< HEAD
-				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
-=======
+
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel");
+
 				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
->>>>>>> a6c855f72fd7cc31f956921e92623545a1df9ab4
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										GROUP BY prodID, initialQty,  qty
 										ORDER BY $sort ");
@@ -49,28 +48,12 @@
 			} else { 
 				$query = $conn->prepare("SELECT product.prodID, product.prodName,  product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
 										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-<<<<<<< HEAD
 										GROUP BY prodID, initialQty, qty");
 			}	
 			$query->execute();
 			$result = $query->fetchAll();
 
-		?>	
-		
-
-		<div id="contents">
-			<div class="productHolder" >
-				<nav class="navbar navbar-inverse navbar-fixed-top" >
-				<div class="container">
-							<img src="WDF_1857921.jpg" id="headerBG"/>
-					<center><img src="dencys.png" alt="logo" id="logo1"/></center>
-=======
-										GROUP BY prodID, initialQty, qty ");
-			}	
-			$query->execute();
-			$result = $query->fetchAll();
-		?>	
-	
+		?>		
 	
 	<nav class="navbar navbar-inverse navbar-fixed-top" >
 		<div class="container">
@@ -87,12 +70,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
->>>>>>> a6c855f72fd7cc31f956921e92623545a1df9ab4
 				</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="categories">
-						<li class="active" id="navi"><a href="userinventory.php">Inventory</a></li>
+						<li class="active"><a href="userinventory.php">Inventory</a></li>
 						<li><a href="userincoming.php">Incoming</a></li>
 						<li><a href="useroutgoing.php">Outgoing</a></li>
 						<li><a href="userreturns.php">Returns</a></li>
