@@ -115,13 +115,7 @@
 							Model
 						</th>
 						<th>
-							Quantity
-							<button type="button" class="btn btn-default" value="?orderBy=returnQty DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnQty ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>							
+							Quantity					
 						</th>
 						<th>
 							Unit

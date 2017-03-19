@@ -103,12 +103,6 @@
 							</th>
 							<th>
 								Quantity
-								<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;" id="sortBtn">
-									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-								</button>
 							</th>
 							<th>
 								Unit
