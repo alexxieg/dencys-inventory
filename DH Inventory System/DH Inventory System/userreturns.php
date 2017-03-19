@@ -38,26 +38,7 @@
 	</head>
   
 	<body>
-		<?php
-			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
-			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
-			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
-										FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-										ORDER BY $sort");
-			
-			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
-										FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-										WHERE prodName LIKE '%".$searching."%'");
-			} else {
-				$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
-										FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-										ORDER BY returnID ASC;");		
-			}
-			$query->execute();
-			$result = $query->fetchAll();
-		?>
+		<?php include('fetchReturns.php'); ?>
 		
 
 		<div class="productHolder">

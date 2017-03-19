@@ -30,25 +30,7 @@
 	</head>
   
 	<body>
-		<?php
-			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
-			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
-			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType,product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
-										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-										ORDER BY $sort");
-			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
-										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-										WHERE prodName LIKE '%".$searching."%' OR product.prodID LIKE '%".$searching."%' OR model LIKE '%".$searching."%'");
-			} else {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
-										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-										ORDER BY inID ASC;");
-			}
-			$query->execute();
-			$result = $query->fetchAll();
-		?>
+		<?php include('fetchIncoming.php'); ?>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 				<div class="container">
@@ -69,11 +51,7 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
 								<li><a href="userinventory.php">Inventory</a></li>
-<<<<<<< HEAD
-								<li class="active"><a href="incoming.php">Incoming</a></li>
-=======
 								<li class="active"><a href="userincoming.php">Incoming</a></li>
->>>>>>> a6c855f72fd7cc31f956921e92623545a1df9ab4
 								<li><a href="useroutgoing.php">Outgoing</a></li>
 								<li><a href="userreturns.php">Returns</a></li>
 								<li><a href="userproduct.php">Product</a></li>

@@ -30,26 +30,7 @@
 	</head>
   
 	<body>
-		<?php
-			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
-			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
-			if (!empty($sort)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType,product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
-										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-										ORDER BY $sort");
-			} else if (!empty($searching)) {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
-										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-										WHERE prodName LIKE '%".$searching."%' OR product.prodID LIKE '%".$searching."%' OR model LIKE '%".$searching."%'");
-			} else {
-				$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, employee.empName, incoming.receiptNo, incoming.inRemarks 
-										FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-										ORDER BY inID ASC;");
-			}
-			$query->execute();
-			$result = $query->fetchAll();
-		?>
-		
+		<?php include('fetchIncoming.php'); ?>
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 				<div class="container">
 							<img src="WDF_1857921.jpg" id="headerBG"/>
@@ -113,22 +94,19 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
+						
 						<th>
 							Model
 						</th>
 			
 						<th>
 							Quantity
-							<button type="button" class="btn btn-default" value="?orderBy=inQty DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=inQty ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
 						</th>
+						
 						<th>
 							Unit
 						</th>
+						
 						<th>
 							Employee
 							<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
@@ -138,6 +116,7 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
+						
 						<th>
 							Receipt No.
 							
