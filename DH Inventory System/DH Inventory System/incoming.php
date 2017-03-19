@@ -210,12 +210,12 @@
 									
 									<br>
 											
-									<table class="table table-striped" id="dataTable" name="chk[]">
+									<table class="table table-striped" id="dataTable" name="chk">
 														
 										<tbody>
 											<tr>
-												<td><input type="checkbox" name="chk[]"></TD>
-												<td><input type="hidden" value="1" name="num[]" id="orderdata">1</TD>
+												<td><input type="checkbox" name="chk"></TD>
+												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 												<td>	
 													<?php
 														$query = $conn->prepare("SELECT prodName FROM product ");
@@ -223,7 +223,7 @@
 														$res = $query->fetchAll();
 													?>
 										
-												<select class="form-control" id="addItem" name="prodItem">
+												<select class="form-control" id="addItem" name="prodItem[]">
 													<?php foreach ($res as $row): ?>
 														<option><?=$row["prodName"]?></option>
 													<?php endforeach ?>
@@ -231,11 +231,11 @@
 												</td>
 														
 												<td>
-													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty">
+													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
 												</td>
 												
 												<td>
-													<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks">
+													<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
 												</td>
 											</tr>
 										</tbody>
