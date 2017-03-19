@@ -51,22 +51,13 @@
 			$result = $query->fetchAll();
 		?>
 		
-<<<<<<< HEAD
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
-					<center><img src="logo.png" alt="logo" id="logo"/></center>
-					<div class="navName">
-						<h1 class="compName">Dency's Hardware and<br>General Merchandise</h1>
-					</div>
-=======
-			<div class="productHolder">
-				<nav class="navbar navbar-inverse navbar-fixed-top" >
-					<div class="container">
-								<img src="WDF_1857921.jpg" id="headerBG"/>
-						<center><img src="dencys.png" alt="logo" id="logo1"/></center>
-					</div>
+				<div class="container">
+							<img src="WDF_1857921.jpg" id="headerBG"/>
+					<center><img src="dencys.png" alt="logo" id="logo1"/></center>
+				</div>
 
 				<div class="splitHeader">
->>>>>>> 64bb13b041f225c9d1a0fec9ac654e8c5f213e7c
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -79,14 +70,14 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
 								<li><a href="userinventory.php">Inventory</a></li>
-								<li><a href="userincoming.php">Incoming</a></li>
+								<li class="active"><a href="userincoming.php">Incoming</a></li>
 								<li><a href="useroutgoing.php">Outgoing</a></li>
 								<li><a href="userreturns.php">Returns</a></li>
 								<li><a href="userproduct.php">Products</a></li>
 							</ul>
 						</div>
 					</div>
-				</nav>
+			</nav>
 
 		<div id="contents">
 			<div class="pages no-more-tables">
@@ -267,29 +258,31 @@
 							</div>
 								
 							<div class="modal-footer">
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>      	
-			</div>
-		</div>		
+					</div>      	
+				</div>
+			</div>	
+		</div>
+	</div>	
 	
-		<nav class="navbar navbar-inverse navbar-fixed-bottom">
-			<div class="container">
-				<ul class="nav navbar-nav navbar-left" id="report">
-					<li>
-						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
-							<span class="glyphicon glyphicon-print"></span>
-						    Print
-						</button> 
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right" id="logout">
-					<li><a href="logout.php">Logout</a></li>
-				</ul>
-			</div>
-		</nav>	
-		
-		<?php include('addIncoming.php'); ?>
+				<nav class="navbar navbar-inverse navbar-fixed-bottom">
+					<div class="container">
+						<ul class="nav navbar-nav navbar-left" id="report">
+							<li>
+								<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+									<span class="glyphicon glyphicon-print"></span>
+								    Print
+								</button> 
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right" id="logout">
+							<li><a href="logout.php">Logout</a></li>
+						</ul>
+					</div>
+				</nav>	
+				
+				<?php include('addIncoming.php'); ?>
   </body>
 </html>

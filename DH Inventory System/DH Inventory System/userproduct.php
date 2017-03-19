@@ -77,7 +77,7 @@
 								<li><a href="userIncoming.php">Incoming</a></li>
 								<li><a href="userOutgoing.php">Outgoing</a></li>
 								<li><a href="userReturns.php">Returns</a></li>
-								<li><a href="userProduct.php">Products</a></li>
+								<li class="active"><a href="userProduct.php">Products</a></li>
 							</ul>
 						</div>
 					</div>

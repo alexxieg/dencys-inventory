@@ -90,7 +90,7 @@
 							<ul class="nav navbar-nav navbar-right" id="categories">
 								<li><a href="userInventory.php">Inventory</a></li>
 								<li><a href="userIncoming.php">Incoming</a></li>
-								<li><a href="userOutgoing.php">Outgoing</a></li>
+								<li class="active"><a href="userOutgoing.php">Outgoing</a></li>
 								<li><a href="userReturns.php">Returns</a></li>
 								<li><a href="userProduct.php">Products</a></li>
 							</ul>
