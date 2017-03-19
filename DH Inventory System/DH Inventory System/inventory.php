@@ -49,6 +49,7 @@
 						</button>
 					</div>
 
+<<<<<<< HEAD
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right" id="categories">
 							<li class="active" id="navi"><a href="inventory.php">Inventory</a></li>
@@ -58,6 +59,16 @@
 							<li><a href="admin.php">Admin</a></li>
 						</ul>
 					</div>
+=======
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" id="categories">
+						<li class="active"><a href="inventory.php">Inventory</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+						<li><a href="admin.php">Admin</a></li>
+					</ul>
+>>>>>>> c84f503fb13787b1ba5e4f5daad029af1c9e0c82
 				</div>
 			</div>
 		</nav>

@@ -29,6 +29,7 @@
 	</head>
     
   	<body>
+<<<<<<< HEAD
 		<?php include('fetchInventory.php'); ?>	
 		
 
@@ -58,6 +59,59 @@
 							<li><a href="userproduct.php">Products</a></li>
 						</ul>
 					</div>
+=======
+		<?php
+			$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
+			$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
+			if (!empty($sort)) { 
+
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel");
+
+				$query = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+										GROUP BY prodID, initialQty,  qty
+										ORDER BY $sort ");
+			} else if (!empty($searching)) {
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+										WHERE prodName LIKE '%".$searching."%' OR model LIKE '%".$searching."%' OR unitType LIKE '%".$searching."%' OR product.prodID LIKE '%".$searching."%'
+										GROUP BY prodID, initialQty, qty ");
+			} else { 
+				$query = $conn->prepare("SELECT product.prodID, product.prodName,  product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, sum(outgoing.outQty) AS outQty, inventory.initialQty, product.reorderLevel
+										FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+										GROUP BY prodID, initialQty, qty");
+			}	
+			$query->execute();
+			$result = $query->fetchAll();
+
+		?>		
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top" >
+		<div class="container">
+					<img src="WDF_1857921.jpg" id="headerBG"/>
+			<center><img src="dencys.png" alt="logo" id="logo1"/></center>
+		</div>
+
+		<div class="splitHeader">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" id="categories">
+						<li class="active"><a href="userinventory.php">Inventory</a></li>
+						<li><a href="userincoming.php">Incoming</a></li>
+						<li><a href="useroutgoing.php">Outgoing</a></li>
+						<li><a href="userreturns.php">Returns</a></li>
+						<li><a href="userproduct.php">Products</a></li>
+					</ul>
+>>>>>>> c84f503fb13787b1ba5e4f5daad029af1c9e0c82
 				</div>
 			</div>
 		</nav>
