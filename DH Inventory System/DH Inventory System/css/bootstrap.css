@@ -7218,6 +7218,88 @@ border: none;
   margin-left:10px;
 }
 
+#delBtn{
+  float: right;
+}
+
+#OutsortBtnDown{
+  float: left;
+  margin-left: 5px;
+  padding-right: 5px;
+  font-size: 5px;
+}
+
+#OutsortBtnUp{
+  float: left;
+  margin-top: -23px;
+  margin-left: 65px;
+  padding-right: 5px;
+  font-size: 5px;
+}
+
+#OutsortBtnDown1{
+  float: left;
+  margin-left: 5px;
+  padding-right: 5px;
+  font-size: 5px;
+}
+
+#OutsortBtnUp1{
+  float: left;
+  margin-top: -23px;
+  margin-left: 92px;
+  padding-right: 5px;
+  font-size: 5px;
+}
+
+#OutsortBtnUp2{
+  float: left;
+  margin-top: -23px;
+  margin-left: 103px;
+  padding-right: 5px;
+  font-size: 5px;
+}
+
+#OutsortBtnUp3{
+  float: left;
+  margin-top: -23px;
+  margin-left: 85px;
+  padding-right: 5px;
+  font-size: 5px;
+}
+
+#sortBtnDown{
+  float: left;
+  margin-left: 10px;
+  padding-right: 5px;
+  font-size: 5px;
+}
+
+#sortBtnUp{
+  float: left;
+  margin-top: -23px;
+  margin-left: 110px;
+  padding-right: 5px;
+  font-size: 5px;
+}
+
+#sortBtn{
+  float: left;  
+  margin-left: 10px;
+  font-size: 5px;
+  padding-right: 8px;
+}
+
+#tabHead{
+  float: left;  
+}
+
+#arrowBtn{
+  float: left;
+  margin-left: -8px;
+  font-size: 10px;
+}
+
 /*font*/
 @font-face{
   font-family: dencyFont;

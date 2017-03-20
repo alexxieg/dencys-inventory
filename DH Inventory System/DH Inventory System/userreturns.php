@@ -91,7 +91,7 @@
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>
-							Date
+							<div id="tabHead">Date</div>
 							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -103,7 +103,7 @@
 							Product ID
 						</th>
 						<th>
-							Product Description
+							<div id="tabHead">Product Description</div>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>

@@ -77,11 +77,11 @@
 				<table class="table table-striped table-bordered">
 						<tr>
 							<th>
-								Date
-								<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
+								<div id="tabHead">Date</div>
+								<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="OutsortBtnDown">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;" id="sortBtn">
+								<button type="button" class="btn btn-default" value="?orderBy=outDate ASC" onclick="location = this.value;" id="OutsortBtnUp">
 									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 								</button>
 							</th>
@@ -89,7 +89,7 @@
 								Product ID
 							</th>
 							<th>
-								Product Description
+								<div id="tabHead">Product Description</div>
 								<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -98,14 +98,14 @@
 								</button>						
 							</th>
 							<th>
-								Model
+								<div id="tabHead1">Model</div>
 							</th>
 							<th>
-								Quantity
-								<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;" id="sortBtn">
+								<div id="tabHead">Quantity</div>
+								<button type="button" class="btn btn-default" value="?orderBy=outQty DESC" onclick="location = this.value;" id="OutsortBtnDown1">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;" id="sortBtn">
+								<button type="button" class="btn btn-default" value="?orderBy=outQty ASC" onclick="location = this.value;" id="OutsortBtnUp1">
 									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 								</button>
 							</th>
@@ -113,20 +113,20 @@
 								Unit
 							</th>
 							<th>
-								Employee
-								<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
+								<div id="tabHead">Employee</div>
+								<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="OutsortBtnDown1">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
+								<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="OutsortBtnUp2">
 									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 								</button>
 							</th>
 							<th>
-								Branch
-								<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;" id="sortBtn">
+								<div id="tabHead">Branch</div>
+								<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;" id="OutsortBtnDown1">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
-								<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;" id="sortBtn">
+								<button type="button" class="btn btn-default" value="?orderBy=location ASC" onclick="location = this.value;" id="OutsortBtnUp3">
 									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 								</button>
 							</th>	
@@ -158,7 +158,7 @@
 								</button>
 								</a>
 								<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
-								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 								</button>
 								</a>

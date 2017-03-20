@@ -78,7 +78,7 @@
 				<table class="table table-striped table-bordered">
 						<tr>
 							<th>
-								Date
+								<div id="tabHead">Date</div>
 								<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -90,7 +90,7 @@
 								Product ID
 							</th>
 							<th>
-								Product Description
+								<div id="tabHead">Product Description</div>
 								<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -108,7 +108,7 @@
 								Unit
 							</th>
 							<th>
-								Employee
+								<div id="tabHead">Employee</div>
 								<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -117,7 +117,7 @@
 								</button>
 							</th>
 							<th>
-								Branch
+								<div id="tabHead">Branch</div>
 								<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>

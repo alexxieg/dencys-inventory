@@ -80,7 +80,8 @@
 				<div class="prodTable">
 					<table class="table table-striped table-bordered">
 						<tr>
-							<th>Product ID
+							<th>
+								<div id="tabHead">Product ID</div>
 								<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -89,7 +90,7 @@
 								</button>
 							</th>
 							<th>
-								Product Description
+								<div id="tabHead">Product Description</div>
 								<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -101,7 +102,7 @@
 								Model
 							</th>
 							<th>
-								Brand
+								<div id="tabHead">Brand</div>
 								<button type="button" class="btn btn-default" value="?orderBy=brand DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -110,7 +111,7 @@
 								</button>
 							</th>
 							<th>
-								Category
+								<div id="tabHead">Category</div>
 								<button type="button" class="btn btn-default" value="?orderBy=type DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -122,7 +123,7 @@
 								Unit
 							</th>
 							<th>
-								Price
+								<div id="tabHead">Price</div>
 								<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
