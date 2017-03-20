@@ -11,6 +11,13 @@
 								FROM outgoing WHERE inventory.prodID = outgoing.prodID GROUP BY outgoing.prodID)");
 	$updateOut->execute();
 ?>
+
+<?php 
+	$updateQty = $conn->prepare("UPDATE inventory
+								SET inventory.qty = (SELECT SUM((inventory.initialQty + IFNULL(inventory.inQty,0)) - IFNULL(inventory.outQty,0)) 
+								GROUP BY inventory.prodID)");
+	$updateQty->execute();
+?>
 		
 <?php
 	$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);

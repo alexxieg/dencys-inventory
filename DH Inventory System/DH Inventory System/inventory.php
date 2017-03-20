@@ -31,7 +31,6 @@
 	</head>
     
   	<body>
-
 		<?php include('fetchInventory.php'); ?>
 	
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -52,13 +51,13 @@
 					</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li class="active" id="navi"><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.php">Incoming</a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.php">Admin</a></li>
-						</ul>
+					<ul class="nav navbar-nav navbar-right" id="categories">
+						<li class="active" id="navi"><a href="inventory.php">Inventory</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+						<li><a href="admin.php">Admin</a></li>
+					</ul>
 				</div>
 			</div>
 		</nav>
@@ -73,7 +72,7 @@
 							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 						</form>	
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
-							View Reorder
+							Products for Reorder
 						</button>					
 					</table>
 				</div>
