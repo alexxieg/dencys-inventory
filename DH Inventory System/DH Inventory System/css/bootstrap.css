@@ -6856,6 +6856,7 @@ button.close {
 #logout{
   margin-right: -90px;
   font-size: 16px;
+  margin-top: 10px;
 }
 
 #search {
@@ -7008,6 +7009,7 @@ border: none;
 #logout {
     margin-right: -1px;
     font-size: 18px;
+    margin-top: 10px;
 }
 
 #adminContent {
@@ -7151,6 +7153,7 @@ border: none;
  
   #logout {
     margin-right: -1px;
+    margin-top: 10px;
   }
 
   /*
@@ -7174,6 +7177,7 @@ border: none;
 
     #logout {
       margin-left: 80%;
+      margin-top: 10%;
     }
 
     .hide-on-mobile {
@@ -7231,8 +7235,8 @@ border: none;
 
 #OutsortBtnUp{
   float: left;
-  margin-top: -23px;
-  margin-left: 65px;
+  margin-top: -24px;
+  margin-left: 58px;
   padding-right: 5px;
   font-size: 5px;
 }
@@ -7246,46 +7250,46 @@ border: none;
 
 #OutsortBtnUp1{
   float: left;
-  margin-top: -23px;
-  margin-left: 92px;
+  margin-top: -24px;
+  margin-left: 85px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #OutsortBtnUp2{
   float: left;
-  margin-top: -23px;
-  margin-left: 103px;
+  margin-top: -24px;
+  margin-left: 94px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #OutsortBtnUp3{
   float: left;
-  margin-top: -23px;
-  margin-left: 85px;
+  margin-top: -24px;
+  margin-left: 76px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #sortBtnDown{
   float: left;
-  margin-left: 10px;
+  margin-left: 0px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #sortBtnUp{
   float: left;
-  margin-top: -23px;
-  margin-left: 110px;
+  margin-top: -24px;
+  margin-left: 95px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #sortBtn{
   float: left;  
-  margin-left: 10px;
+  margin-left: 0px;
   font-size: 5px;
   padding-right: 8px;
 }
@@ -7389,7 +7393,7 @@ border: none;
   }
 
   #logout {
-    margin-top: 5%;
+    margin-top: 10%;
     font-size: 18px;
   }
 
