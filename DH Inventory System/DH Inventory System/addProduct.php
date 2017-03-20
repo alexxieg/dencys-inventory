@@ -40,8 +40,10 @@
 				VALUES ('$prod','".$_POST['prodItem']."','".$_POST['prodModel']."','$fincateg','$finbrand','".$_POST['prodPrice']."','".$_POST['prodRO']."','".$_POST['prodUnit']."')";
 		$conn->exec($sql);
 		
-		$sql1 = "INSERT INTO inventory (initialQty, qty, phyCount, prodID)
-				VALUES (NULL,'".$_POST['prodQty']."',NULL,'$prod')";
+		$qty = $_POST['prodQty'];
+		
+		$sql1 = "INSERT INTO inventory (initialQty, date, qty, inQty, outQty, phyCount, endingQty, prodID)
+				VALUES ('$qty',CURDATE(),'$qty',NULL,NULL,NULL,NULL,'$prod')";
 		$conn->exec($sql1);
 		echo "<meta http-equiv='refresh' content='0'>";
 	}

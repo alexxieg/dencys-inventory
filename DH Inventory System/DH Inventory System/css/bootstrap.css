@@ -6856,6 +6856,7 @@ button.close {
 #logout{
   margin-right: -90px;
   font-size: 16px;
+  margin-top: 10px;
 }
 
 #search {
@@ -7008,6 +7009,7 @@ border: none;
 #logout {
     margin-right: -1px;
     font-size: 18px;
+    margin-top: 10px;
 }
 
 #adminContent {
@@ -7151,6 +7153,7 @@ border: none;
  
   #logout {
     margin-right: -1px;
+    margin-top: 10px;
   }
 
   /*
@@ -7174,6 +7177,7 @@ border: none;
 
     #logout {
       margin-left: 80%;
+      margin-top: 10%;
     }
 
     .hide-on-mobile {
@@ -7405,7 +7409,7 @@ border: none;
   }
 
   #logout {
-    margin-top: 5%;
+    margin-top: 10%;
     font-size: 18px;
   }
 

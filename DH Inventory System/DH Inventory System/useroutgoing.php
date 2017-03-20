@@ -78,7 +78,7 @@
 				<table class="table table-striped table-bordered">
 						<tr>
 							<th>
-								<div id="tabHead">Date</div>
+								Date
 								<button type="button" class="btn btn-default" value="?orderBy=outDate DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -90,7 +90,7 @@
 								Product ID
 							</th>
 							<th>
-								<div id="tabHead">Product Description</div>
+								Product Description
 								<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -108,7 +108,7 @@
 								Unit
 							</th>
 							<th>
-								<div id="tabHead">Employee</div>
+								Employee
 								<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -117,7 +117,7 @@
 								</button>
 							</th>
 							<th>
-								<div id="tabHead">Branch</div>
+								Branch
 								<button type="button" class="btn btn-default" value="?orderBy=location DESC" onclick="location = this.value;" id="sortBtn">
 									<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 								</button>
@@ -161,38 +161,32 @@
 								</div>
 								<div class="modal-body">
 									<form action="" method="POST" onsubmit="return validateForm()">
-										<h3>Item</h3>
+									
+									<h5>Receipt No.</h5> 
+									<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
+									
 										<?php
 										$query = $conn->prepare("SELECT prodName FROM product ");
 										$query->execute();
 										$res = $query->fetchAll();
 										?>
 										
-										<select class="form-control" id="addEntry" name="prodItem">
-											<?php foreach ($res as $row): ?>
-												<option><?=$row["prodName"]?></option>
-											<?php endforeach ?>
-										</select> 
-										<br>
-										
-										<h3>Quantity</h3>
-										<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty"> <br>
-										
-										<h3>Employee</h3>
-										<?php
-											$query = $conn->prepare("SELECT empName FROM employee ");
-											$query->execute();
-											$res = $query->fetchAll();
-										?>
-										
-										<select class="form-control" id="addEntry" name="emp">
-											<?php foreach ($res as $row): ?>
-												<option><?=$row["empName"]?></option>
-											<?php endforeach ?>
-										</select> 
-											<br>
-											
-										<h3>Branch</h3>
+										<h5>Employee</h5>
+									<?php
+										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+													
+									<select class="form-control" id="addEmp" name="emp">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["empName"]?></option>
+										<?php endforeach ?>
+									</select> 
+									
+									<br>
+									
+									<h3>Branch</h3>
 										<?php
 											$query = $conn->prepare("SELECT location FROM branch");
 											$query->execute();
@@ -205,7 +199,20 @@
 											<?php endforeach ?>
 										</select> 
 										<br>
+											
+									<table class="table table-striped" id="dataTable" name="chk">
+														
+										<tbody>
+											<tr>
+												<td><input type="checkbox" name="chk"></TD>
+												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												<td>	<?php
+														$query = $conn->prepare("SELECT prodName FROM product ");
+														$query->execute();
+														$res = $query->fetchAll();
+													?>
 										
+<<<<<<< HEAD
 										<h3>Remarks</h3>
 										<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea>
 										<br>
@@ -218,11 +225,42 @@
 										</span>
 									</div>
 									</form> 
+=======
+												<select class="form-control" id="addItem" name="prodItem[]">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["prodName"]?></option>
+													<?php endforeach ?>
+												</select> 
+												</td>
+														
+												<td>
+													<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty[]">
+												</td>
+												
+												<td>
+													<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="outRemarks[]">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+									<br>
+									<br>
+									<span>
+										<input type="button" class="btn btn-danger" value="Cancel" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;">
+									</span>
+									<span>
+										<input type="submit" name = "submit" value="Submit"class="btn btn-success" style="float:right;">
+									</span>
+									</form>																		
+>>>>>>> cc603bd8aa3ef9b778ba2567e4494c6f649ada8d
 								</div>
 								
-								<div class="modal-footer">
-									
+								<div class="modal-footer">	
 								</div>
+								
 							</div>
 						</div>
 					</div>

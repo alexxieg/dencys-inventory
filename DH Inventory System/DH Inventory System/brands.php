@@ -88,20 +88,25 @@
 							
 						<?php
 							foreach ($result as $item):
+							$useThisID = $item["brandID"];
 						?>
 
 						<tr>
 							<td><?php echo $item["brandID"]; ?></td>
 							<td><?php echo $item["brandName"]; ?></td>
 							<td>
-								<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								</button>
-							
-								<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-								</button>
-							</td>		
+								<a href="editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
+									<button type="button" class="btn btn-default">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+								</a>
+								
+								<a href="deleteBrand.php?useId=<?php echo $useThisID; ?>"> 
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									</button>
+								</a>
+							</td>
 						</tr>
 							
 						<?php

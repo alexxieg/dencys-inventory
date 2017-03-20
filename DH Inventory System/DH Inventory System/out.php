@@ -228,24 +228,6 @@
 														$res = $query->fetchAll();
 													?>
 										
-<<<<<<< HEAD
-										<h3>Remarks</h3>
-										<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea>
-										<br>
-										
-										<div class="modFoot">
-										<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-										</span>
-										
-										<span>
-											<input type="submit" value="Submit" class="btn btn-success" name="addOut" id="sucBtn">
-										</span>
-										</div>
-
-										<div class="modal-footer">
-										</div>
-=======
 												<select class="form-control" id="addItem" name="prodItem[]">
 													<?php foreach ($res as $row): ?>
 														<option><?=$row["prodName"]?></option>
@@ -275,8 +257,10 @@
 									<span>
 										<input type="submit" name = "submit" value="Submit"class="btn btn-success" style="float:right;">
 									</span>
->>>>>>> cc603bd8aa3ef9b778ba2567e4494c6f649ada8d
 									</form>																		
+								</div>
+								
+								<div class="modal-footer">	
 								</div>
 								
 							</div>

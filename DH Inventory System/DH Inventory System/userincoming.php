@@ -75,7 +75,7 @@
 				<table class="table table-striped table-bordered">	
 					<tr>
 						<th>
-							<div id="tabHead">Date</div>
+							Date
 							<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -87,7 +87,7 @@
 							Product ID
 						</th>
 						<th>
-							<div id="tabHead">Product Description</div>
+							Product Description
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -106,7 +106,7 @@
 							Unit
 						</th>
 						<th>
-							<div id="tabHead">Employee</div>
+							Employee
 							<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -147,7 +147,7 @@
 							</button>
 							</a>
 							<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</button>
 							</a>
@@ -207,7 +207,7 @@
 												</td>
 														
 												<td>
-													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
+													<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
 												</td>
 												
 												<td>
