@@ -275,7 +275,7 @@
 									<span>
 										<input type="submit" name = "submit" value="Submit"class="btn btn-success" style="float:right;">
 									</span>
->>>>>>> cc603bd8aa3ef9b778ba2567e4494c6f649ada8d
+>>>>>>> cc603bd8aa3ef9b778ba2567e4494c6f649ada8dz
 									</form>																		
 								</div>
 								
