@@ -178,6 +178,13 @@
 									<h4 class="modal-title">Add Outgoing Product</h4>
 								</div>
 								<div class="modal-body">
+										<?php
+			$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
+									WHERE inventory.qty < product.reorderLevel");
+		
+			$query->execute();
+			$result = $query->fetchAll();
+		?>	
 									<form action="" method="POST" onsubmit="return validateForm()">
 										<h3>Item</h3>
 										<?php
