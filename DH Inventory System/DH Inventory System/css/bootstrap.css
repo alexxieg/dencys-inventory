@@ -6783,6 +6783,7 @@ button.close {
   margin-right: 25%;
   margin-left: 25%;
   margin-top: 10%;
+  font-family: dencyFont;
 }
 
 #login {
@@ -6995,6 +6996,7 @@ border: none;
   width: 25%;
   color: black;
   margin-top: -2%;
+  font-family: dencyFont;
 }
 
 #sortBtn {
