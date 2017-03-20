@@ -52,11 +52,11 @@
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="categories">
-						<li class="active" id="navi"><a href="inventory.php">Inventory</a></li>
-						<li><a href="incoming.php">Incoming</a></li>
-						<li><a href="outgoing.php">Outgoing</a></li>
-						<li><a href="returns.php">Returns</a></li>
-						<li><a href="admin.php">Admin</a></li>
+						<li class="active" id="navi"><a href="userinventory.php">Inventory</a></li>
+						<li><a href="userincoming.php">Incoming</a></li>
+						<li><a href="useroutgoing.php">Outgoing</a></li>
+						<li><a href="userreturns.php">Returns</a></li>
+						<li><a href="userproduct.php">Products</a></li>
 					</ul>
 				</div>
 			</div>
