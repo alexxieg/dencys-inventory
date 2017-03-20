@@ -7044,7 +7044,7 @@ border: none;
 }
 
 #addQty, #addRcpt, #adduser, #addpass,
-  #addBrandName, #addBrandID, #addEmpl {
+  #addBrandName, #addBrandID, #addEmpl,#addCategoryID {
   width: 85%; 
 }
 

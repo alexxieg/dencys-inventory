@@ -172,10 +172,10 @@
 								<div class="modal-body">
 									<form action="" method="POST" onsubmit="return validateForm()">
 										<h3>Product Name</h3>
-										<input type="text" class="form-control" id ="addProdName" placeholder="Name" name="prodItem"> <br>
+										<input type="text" class="form-control" id ="addQty" placeholder="Name" name="prodItem"> <br>
 										
 										<h3>Model</h3>
-										<input type="text" class="form-control" id="addModel" placeholder="Model" name="prodModel"> <br>
+										<input type="text" class="form-control" id="addQty" placeholder="Model" name="prodModel"> <br>
 											
 										<h3>Quantity</h3>
 										<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Name" name="prodQty"> <br>
@@ -218,10 +218,10 @@
 										</select> 
 											
 										<h3>Price</h3>
-										<input type="number" class="form-control" id ="addPrice" placeholder="Unit Price" name="prodPrice"> <br>
+										<input type="number" class="form-control" id ="addQty" placeholder="Unit Price" name="prodPrice"> <br>
 										
 										<h3>Reorder Level</h3>
-										<input type="number" class="form-control" id ="addReorderLvl" placeholder="Reorder Level" name="prodRO"> <br>
+										<input type="number" class="form-control" id ="addQty" placeholder="Reorder Level" name="prodRO"> <br>
 											
 										<br>
 										
