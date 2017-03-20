@@ -6842,9 +6842,9 @@ button.close {
 }
 
 .pages {
-	background-color: white;
-	padding: 0 5% 10% 5%;
-	
+  background-color: white;
+  padding: 0 5% 10% 5%;
+  
 }
 
 .alertHolder {
@@ -6951,12 +6951,12 @@ img#logo1 {
 }
 
 #addEntry{
-	width: 85%;
+  width: 85%;
 }
 
 h3{
-	font-size:20px;
-	text-align: left;
+  font-size:20px;
+  text-align: left;
 }
 
 #dropdown{
@@ -7051,15 +7051,18 @@ border: none;
 #prodTable {
   overflow-x:auto;
 }
-
-
 @media only screen and (max-width: 1250px) {
+  #categories{
+    font-size: 18px;
+    margin-right: 25%;
+    margin-top: .2%;
+  }
 
   #headerBG {
       height: 140px;
       width: 600px;
       position: absolute;
-      margin-left: -0%;
+      margin-left: 0%;
       margin-top: -1px;
       z-index: -1;
         -webkit-filter: blur(1px);
@@ -7161,6 +7164,14 @@ border: none;
 @media screen and (max-width: 768px) {
 
 
+    .splitHeader {
+      border: 1px solid ;
+      border-color:transparent;
+      background-color: #3b5998;
+      height: 1px;
+      margin-top: .5%;
+    }
+
     #logout {
       margin-left: 80%;
     }
@@ -7199,12 +7210,12 @@ border: none;
 }
 
 #mainHeader{
-	font-size: 200%;
+  font-size: 200%;
 }
 
 #formButton{
-	float:right; 
-	margin-left:10px;
+  float:right; 
+  margin-left:10px;
 }
 
 /*font*/
@@ -7240,20 +7251,17 @@ border: none;
   border: 1px solid ;
   border-color:transparent;
   background-color: #3b5998;
-  height: 1px;
 }
 
 #contents{
   padding-top: 5%;
 }
 
-<<<<<<< HEAD
-=======
 #headerBG {
   height: 140px;
-  width: 101%;
+  width: 121%;
   position: absolute;
-  margin-left: -7.8%;
+  margin-left: -10.5%;
   margin-top: -1px;
   z-index: -1;
     -webkit-filter: blur(1px);
@@ -7263,13 +7271,18 @@ border: none;
        filter: blur(1px);
   }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
+  #categories{
+    font-size: 18px;
+    margin-right: 30%;
+    margin-top: .2%;
+  }
 
     #headerBG {
     height: 140px;
-    width: 121%;
+    width: 161%;
     position: absolute;
-    margin-left: -10%;
+    margin-left: -30%;
     margin-top: -1px;
     z-index: -1;
       -webkit-filter: blur(1px);
@@ -7277,14 +7290,21 @@ border: none;
       -o-filter: blur(1px);
       -ms-filter: blur(1px);
          filter: blur(1px);
+
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
   #categories{
     font-size: 18px;
     margin-right: 17%;
-}
+    margin-top: .2%;
+  }
+ img#logo1 {
+    width: 230px;
+    height: 130px;
+    margin-bottom: 5%;
+  }
 
   #logout {
     margin-top: 5%;
@@ -7296,7 +7316,7 @@ border: none;
   border-color:transparent;
   background-color: #3b5998;
   height: 1px;
-  margin-top: -0.7%;
+  margin-top: -.2%;
 }
 
  #printBtn {
@@ -7322,4 +7342,3 @@ border: none;
 
   }
 }
->>>>>>> 64bb13b041f225c9d1a0fec9ac654e8c5f213e7c
