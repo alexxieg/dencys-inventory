@@ -257,10 +257,15 @@
 									<span>
 										<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
 									</span>
+<<<<<<< HEAD
+>>>>>>> cc603bd8aa3ef9b778ba2567e4494c6f649ada8dz
+									</form>																		
+=======
 									</div>
 								</form> 	
 
 								<div class="modal-footer">
+>>>>>>> 7933b1813286a95d5af7c2f52a4b5e7a6efcd48c
 								</div>
 							</div>
 						</div>

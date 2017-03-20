@@ -17,6 +17,9 @@
 								SET inventory.qty = (SELECT SUM((inventory.initialQty + IFNULL(inventory.inQty,0)) - IFNULL(inventory.outQty,0)) 
 								GROUP BY inventory.prodID)");
 	$updateQty->execute();
+	$updateInvDate = $conn->prepare("UPDATE inventory
+									SET inventory.invdate = (curdate())
+									GROUP BY inventory.prodID");
 ?>
 		
 <?php
