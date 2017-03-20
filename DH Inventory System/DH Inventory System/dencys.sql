@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2017 at 03:30 AM
+-- Generation Time: Mar 20, 2017 at 01:25 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -355,6 +355,7 @@ CREATE TABLE `outgoing` (
   `outQty` int(5) NOT NULL,
   `outDate` date NOT NULL,
   `outRemarks` text NOT NULL,
+  `receiptNo` varchar(45) NOT NULL,
   `branchID` int(5) NOT NULL,
   `empID` int(5) NOT NULL,
   `prodID` varchar(25) NOT NULL
@@ -364,19 +365,19 @@ CREATE TABLE `outgoing` (
 -- Dumping data for table `outgoing`
 --
 
-INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `branchID`, `empID`, `prodID`) VALUES
-(1, 5, '2017-03-01', 'None', 2, 2, 'LTS-HDT-0001'),
-(2, 5, '2017-03-05', 'None', 3, 3, 'LTS-HDT-0002'),
-(3, 5, '2017-03-06', 'None', 2, 4, 'LTS-HDT-0003'),
-(4, 10, '2017-03-10', 'None', 1, 5, 'LTS-ACC-0001'),
-(5, 10, '2017-03-10', 'None', 3, 3, 'LTS-ACC-0003'),
-(6, 10, '2017-03-15', 'None', 4, 2, 'LTS-HDT-0002'),
-(7, 15, '2017-03-15', 'None', 4, 3, 'DCA-PWT-0001'),
-(8, 10, '2017-03-16', 'None', 5, 10, 'DCA-PWT-0002'),
-(9, 10, '2017-03-16', 'None', 5, 8, 'LTS-ACC-0004'),
-(10, 5, '2017-03-19', 'None', 1, 10, 'LTS-HDT-0001'),
-(11, 10, '2017-03-19', 'None', 1, 18, 'DCA-PWT-0001'),
-(12, 5, '2017-03-19', 'None', 2, 17, 'DCA-PWT-0001');
+INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `receiptNo`, `branchID`, `empID`, `prodID`) VALUES
+(1, 5, '2017-03-01', 'None', '', 2, 2, 'LTS-HDT-0001'),
+(2, 5, '2017-03-05', 'None', '', 3, 3, 'LTS-HDT-0002'),
+(3, 5, '2017-03-06', 'None', '', 2, 4, 'LTS-HDT-0003'),
+(4, 10, '2017-03-10', 'None', '', 1, 5, 'LTS-ACC-0001'),
+(5, 10, '2017-03-10', 'None', '', 3, 3, 'LTS-ACC-0003'),
+(6, 10, '2017-03-15', 'None', '', 4, 2, 'LTS-HDT-0002'),
+(7, 15, '2017-03-15', 'None', '', 4, 3, 'DCA-PWT-0001'),
+(8, 10, '2017-03-16', 'None', '', 5, 10, 'DCA-PWT-0002'),
+(9, 10, '2017-03-16', 'None', '', 5, 8, 'LTS-ACC-0004'),
+(10, 5, '2017-03-19', 'None', '', 1, 10, 'LTS-HDT-0001'),
+(11, 10, '2017-03-19', 'None', '', 1, 18, 'DCA-PWT-0001'),
+(12, 5, '2017-03-19', 'None', '', 2, 17, 'DCA-PWT-0001');
 
 -- --------------------------------------------------------
 

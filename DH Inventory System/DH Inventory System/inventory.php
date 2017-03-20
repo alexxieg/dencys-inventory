@@ -13,6 +13,8 @@
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
 		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			
 		<?php include('dbcon.php'); ?>
 		
@@ -64,13 +66,16 @@
 		
 		<div id="contents">
 			<div class="pages no-more-tables">
-				<div id="tableHeader">			
-					<h1 id="headers">INVENTORY</h1>	
-					<form action="?" method="post">
-						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-					</form>
-					<br>
-					<br>
+				<div id="tableHeader">
+					<table class="table table-striped table-bordered">	
+						<h1 id="headers">INVENTORY</h1>	
+						<form action="?" method="post">
+							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						</form>	
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
+							View Reorder
+						</button>					
+					</table>
 				</div>
 				<br>
 				<table class="table table-striped table-bordered">
@@ -84,7 +89,7 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
-							
+						
 						<th>
 							<div id="tabHead">Product Description</div>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
@@ -93,7 +98,7 @@
 							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
-						</th>
+						</th>	
 						
 						<th>
 							Model
@@ -135,12 +140,9 @@
 						<th>
 							Remarks
 						</th>
-		
 					</tr>
-		
 					
 					<?php
-
 						foreach ($result as $item):
 							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
 							if ($currQty <= $item["reorderLevel"]){
@@ -158,39 +160,99 @@
 						<td data-title="Physical Count"></td>
 						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
-					
 						<td data-title="Remarks"></td>
 					</tr>
-						<?php	
-							}else if ($currQty > $item["reorderLevel"]){
-						?>
-						<tr id="centerData">
-							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Model"><?php echo $item["model"]; ?> </td>
-							<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
-							<td data-title="End. Quantity"></td>
-							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
-							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
-							<td data-title="Current Quantity"><?php echo $currQty; ?></td>
-							<td data-title="Physical Count"></td>
-							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-							<td data-title="Unit"><?php echo $item["unitType"];?></td>
 					
-							<td data-title="Remarks"></td>
-						</tr>
-						<?php
+					<?php	
+						}else if ($currQty > $item["reorderLevel"]){
+					?>
+					<tr id="centerData">
+						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?> </td>
+						<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
+						<td data-title="End. Quantity"></td>
+						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+						<td data-title="Current Quantity"><?php echo $currQty; ?></td>
+						<td data-title="Physical Count"></td>
+						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+						<td data-title="Unit"><?php echo $item["unitType"];?></td>
+						<td data-title="Remarks"></td>
+					</tr>
+					<?php
 						}	
-						?>
+					?>
 						
-						<?php
-							endforeach;
-						?>
-					</table>
-				</div>	
+					<?php
+						endforeach;
+					?>
+				</table>
+			</div>	
+				
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Summary of Items to be Reordered</h4>
+						</div>
+						<div class="modal-body">			
+							<?php
+								$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
+														WHERE inventory.qty < product.reorderLevel");
+								$query->execute();
+								$result = $query->fetchAll();
+							?>	
+							
+							<table class="table table-bordered" id="tables">
+								<tr>
+									<th>
+										Product ID
+									</th>
+									<th>
+										Product Description
+									</th>
+									<th>
+										Model
+									</th>						
+									<th>
+										Current Quantity
+									</th>
+									<th>
+										Reorder Level
+									</th>
+									<th>
+										Unit
+									</th>	
+								</tr>
+									
+								<?php
+									foreach ($result as $item):
+								?>
+
+								<tr>
+									<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+									<td data-title="Model"><?php echo $item["model"]; ?> </td>
+									<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
+									<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+									<td data-title="Unit"><?php echo $item["unitType"];?></td>
+									</td>		
+								</tr>	
+								<?php
+									endforeach;
+								?>
+							</table>																
+						</div>
+								
+						<div class="modal-footer">	
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		
+			
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-left" id="report">
