@@ -74,7 +74,7 @@
 				<table class="table table-striped table-bordered">	
 					<tr>
 						<th>
-							Date
+							<div id="tabHead">Date</div>
 							<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -86,7 +86,7 @@
 							Product ID
 						</th>
 						<th>
-							Product Description
+							<div id="tabHead">Product Description</div>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -108,7 +108,7 @@
 						</th>
 						
 						<th>
-							Employee
+							<div id="tabHead">Employee</div>
 							<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -145,12 +145,12 @@
 						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 						<td>
 							<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
-							<button type="button" class="btn btn-default">
+							<button type="button" class="btn btn-default" id="edBtn">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
 							</a>
 							<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</button>
 							</a>
