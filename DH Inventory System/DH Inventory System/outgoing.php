@@ -194,7 +194,7 @@
 										$res = $query->fetchAll();
 									?>
 													
-									<select class="form-control" id="addEmp" name="emp">
+									<select class="form-control" id="addEmpl" name="emp">
 										<?php foreach ($res as $row): ?>
 											<option><?=$row["empName"]?></option>
 										<?php endforeach ?>
@@ -202,7 +202,7 @@
 									
 									<br>
 									
-									<h3>Branch</h3>
+									<h5>Branch</h5>
 										<?php
 											$query = $conn->prepare("SELECT location FROM branch");
 											$query->execute();
@@ -227,26 +227,8 @@
 														$query->execute();
 														$res = $query->fetchAll();
 													?>
-										
-<<<<<<< HEAD
-										<h3>Remarks</h3>
-										<textarea class="form-control" id="addEntry" rows="3" name="outRemarks"></textarea>
-										<br>
-										
-										<div class="modFoot">
-										<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-										</span>
-										
-										<span>
-											<input type="submit" value="Submit" class="btn btn-success" name="addOut" id="sucBtn">
-										</span>
-										</div>
 
-										<div class="modal-footer">
-										</div>
-=======
-												<select class="form-control" id="addItem" name="prodItem[]">
+													<select class="form-control" id="addItem" name="prodItem[]">
 													<?php foreach ($res as $row): ?>
 														<option><?=$row["prodName"]?></option>
 													<?php endforeach ?>
@@ -263,22 +245,23 @@
 											</tr>
 										</tbody>
 									</table>
-											
-									
+										
+									<div class="modFoot">
 									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
 									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 									<br>
 									<br>
 									<span>
-										<input type="button" class="btn btn-danger" value="Cancel" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;">
+										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 									</span>
 									<span>
-										<input type="submit" name = "submit" value="Submit"class="btn btn-success" style="float:right;">
+										<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
 									</span>
->>>>>>> cc603bd8aa3ef9b778ba2567e4494c6f649ada8d
-									</form>																		
+									</div>
+								</form> 	
+
+								<div class="modal-footer">
 								</div>
-								
 							</div>
 						</div>
 					</div>
