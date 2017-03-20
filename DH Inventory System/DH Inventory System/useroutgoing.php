@@ -185,6 +185,20 @@
 									</select> 
 									
 									<br>
+									
+									<h3>Branch</h3>
+										<?php
+											$query = $conn->prepare("SELECT location FROM branch");
+											$query->execute();
+											$res = $query->fetchAll();
+										?>
+										
+										<select class="form-control" id="addEntry" name="branch">
+											<?php foreach ($res as $row): ?>
+												<option><?=$row["location"]?></option>
+											<?php endforeach ?>
+										</select> 
+										<br>
 											
 									<table class="table table-striped" id="dataTable" name="chk">
 														
@@ -215,20 +229,6 @@
 											</tr>
 										</tbody>
 									</table>
-											
-										<h3>Branch</h3>
-										<?php
-											$query = $conn->prepare("SELECT location FROM branch");
-											$query->execute();
-											$res = $query->fetchAll();
-										?>
-										
-										<select class="form-control" id="addEntry" name="branch">
-											<?php foreach ($res as $row): ?>
-												<option><?=$row["location"]?></option>
-											<?php endforeach ?>
-										</select> 
-										<br>
 									
 									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
 									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
