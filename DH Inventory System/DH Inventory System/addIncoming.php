@@ -1,4 +1,4 @@
-<?php
+<?php /*
 	$tmp = 0;
 	if (isset($_POST['submit'])) {
 		if(!empty($_POST["inRemarks"])) {
@@ -7,7 +7,7 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				
 				$inQty = $_POST['incQty'];
-				foreach ($inQty as $key => $incQty) {
+				foreach ($inQty as $incQty) {
 					$prod = $_POST['prodItem'];	
 					foreach($prod as $prodItem) {
 						$emp = $_POST['emp'];
@@ -44,4 +44,32 @@
 		$conn->exec($sql);
 */  	
 	  		  
-	?>
+?>
+	
+<?php
+	$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+    if (isset($_POST['submit'])) {
+
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        for ($index = 0; $index < count($prodTem); $index++) {
+
+            $inRemarks = $_POST['inRemarks'][$index];
+            $prodItem = $_POST['prodItem'][$index];
+            $inQty = $_POST['incQty'][$index];
+            $emp = $_POST['emp'];
+
+            $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
+            $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+            $emp3 = $emp2['empA'];
+            $prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+            $prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+            $prod3 = $prod2['prodA'];
+            $sql = "INSERT INTO incoming (inQty, inDate, receiptNo, inRemarks, empID, prodID)
+            VALUES ('$inQty',CURDATE(),'".$_POST['rcno']."','$inRemarks','$emp3','$prod3')";
+            $result = $conn->query($sql); 
+
+            echo "<meta http-equiv='refresh' content='0'>";
+        }
+    }
+?>	

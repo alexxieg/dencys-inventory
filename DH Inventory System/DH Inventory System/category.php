@@ -88,20 +88,24 @@
 							
 						<?php
 							foreach ($result as $item):
+							$useThisID = $item["categoryID"];
 						?>
 
 						<tr>
 							<td><?php echo $item["categoryID"]; ?></td>
 							<td><?php echo $item["categoryName"]; ?></td>
 							<td>
-								<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								</button>
-							
-								<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-								</button>
-							</td>		
+								<a>
+									<button type="button" class="btn btn-default">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+								</a>
+								<a href="deleteCategory.php?useId=<?php echo $useThisID; ?>"> 
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									</button>
+								</a>
+							</td>	
 						</tr>
 							
 						<?php
