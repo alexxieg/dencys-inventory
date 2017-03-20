@@ -80,15 +80,14 @@
 				<table class="table table-striped table-bordered">
 				
 					<tr>
-						<td>
+						<td colspan="12" style="font-size: 35px;">
 							<?php
 							$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
 							$month->execute();
 							$monthres = $month->fetchAll();
 							foreach ($monthres as $monthshow)
 							echo $monthshow["month"];
-							?>
-							
+							?>	
 						</td>
 					</tr>
 					<tr>

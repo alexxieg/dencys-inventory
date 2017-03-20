@@ -150,7 +150,7 @@
 							<td data-title="Branch"><?php echo $item["location"]; ?></td>
 							<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 							<td>
-								<a href="editOut.php?outsId=<?php echo $outid; ?>" target="_blank">
+								<a href="editOut.php?outsId=<?php echo $outid; ?>">
 								<button type="button" class="btn btn-default">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
@@ -257,15 +257,12 @@
 									<span>
 										<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
 									</span>
-<<<<<<< HEAD
->>>>>>> cc603bd8aa3ef9b778ba2567e4494c6f649ada8dz
+
 									</form>																		
-=======
 									</div>
 								</form> 	
 
 								<div class="modal-footer">
->>>>>>> 7933b1813286a95d5af7c2f52a4b5e7a6efcd48c
 								</div>
 							</div>
 						</div>

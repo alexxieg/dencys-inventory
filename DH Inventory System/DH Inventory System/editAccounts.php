@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Account</title>
-	<?php include('dbcon.php'); ?>
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Accounts</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		
-	<?php 
-		session_start();
-		if (isset($_SESSION['id'])){
+		<script src="accounts.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<?php include('dbcon.php'); ?>	
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) && $role!="admin") {
+				header('Location: index.php');
+			}
 			$session_id = $_SESSION['id'];
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
-			if (!isset($_SESSION['id']) || $_SESSION['id'] == false) {
-				session_destroy();
-				header('Location: index.php');
-			}
-		}
-	?>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="shortcut icon" href="logo.jpg">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  </head>
+		?>	
+	</head>
   
   <body>
   
@@ -54,7 +59,7 @@
 	
 	
 		<h1 id="headers">Edit Account</h1>
-		<div >
+		<div id="contents">
 			<form action="" method="POST">
 				<h3>Username</h3>
 				<input type="text" class="form-control" id ="addEntry" placeholder="Name" name="userName"> <br>

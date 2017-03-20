@@ -27,34 +27,38 @@
   
   <body>
   
-  <nav class="navbar navbar-inverse navbar-static-top" >
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<h1>Dency's Hardware and General Merchandise</h1>
+  <nav class="navbar navbar-inverse navbar-fixed-top" >
+				<div class="container">
+							<img src="WDF_1857921.jpg" id="headerBG"/>
+					<center><img src="dencys.png" alt="logo" id="logo1"/></center>
 				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.php">Incoming</a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.html">Admin</a></li>
-						</ul>
-				</div>
-			</div>
-		</nav>
 
+				<div class="splitHeader">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right" id="categories">
+								<li><a href="inventory.php">Inventory</a></li>
+								<li><a href="incoming.php">Incoming</a></li>
+								<li><a href="outgoing.php">Outgoing</a></li>
+								<li><a href="returns.php">Returns</a></li>
+								<li><a href="admin.php">Admin</a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
 	<div class="addInv">
 	
 	
 		<h1 id="headers">Edit Employee Entry</h1>
-			<div class="modal-body">
+			<div class="contents">
 					<form action="" method="POST">
 																			
 					<h3>Name</h3>

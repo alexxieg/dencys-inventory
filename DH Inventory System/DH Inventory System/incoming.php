@@ -144,7 +144,7 @@
 						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 						<td>
-							<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
+							<a href="editIn.php?incId=<?php echo $incID; ?>"> 
 							<button type="button" class="btn btn-default" id="edBtn">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>

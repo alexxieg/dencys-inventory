@@ -78,6 +78,18 @@
 				</div>
 				<br>
 				<table class="table table-striped table-bordered">
+				
+					<tr>
+						<td colspan="12" style="font-size: 35px;">
+							<?php
+							$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
+							$month->execute();
+							$monthres = $month->fetchAll();
+							foreach ($monthres as $monthshow)
+							echo $monthshow["month"];
+							?>	
+						</td>
+					</tr>
 					<tr>
 						<th>
 							<div id="tabHead">Product ID</div>
@@ -194,12 +206,12 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Summary of Items to be Reordered</h4>
+							<h4 class="modal-title">Summary of products to be reordered</h4>
 						</div>
 						<div class="modal-body">			
 							<?php
 								$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-														WHERE inventory.qty < product.reorderLevel");
+														WHERE inventory.qty <= product.reorderLevel");
 								$query->execute();
 								$result = $query->fetchAll();
 							?>	
