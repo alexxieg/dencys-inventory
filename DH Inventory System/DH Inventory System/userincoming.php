@@ -223,12 +223,14 @@
 									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 									<br>
 									<br>
+									<div class="modFoot">
 									<span>
-										<input type="button" class="btn btn-danger" value="Cancel" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;">
+										<input type="button" class="btn btn-danger" value="Cancel" data-dismiss="modal" onclick="this.form.reset()" id="canBtn">
 									</span>
 									<span>
-										<input type="submit" name="submit" value="Submit"class="btn btn-success" style="float:right;">
+										<input type="submit" name="submit" value="Submit"class="btn btn-success" id="sucBtn">
 									</span>
+									</div>
 								</form> 			
 							</div>
 						

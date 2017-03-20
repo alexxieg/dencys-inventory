@@ -78,7 +78,8 @@
 
 				<table class="table table-striped table-bordered">
 					<tr>
-						<th>Product ID
+						<th>
+							<div id="tabHead">Product ID</div>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn" ></span>
 							</button>
@@ -87,7 +88,7 @@
 							</button>
 						</th>
 						<th>
-							Product Description
+							<div id="tabHead">Product Description</div>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -99,7 +100,7 @@
 							Model
 						</th>
 						<th>
-							Brand
+							<div id="tabHead">Brand</div>
 							<button type="button" class="btn btn-default" value="?orderBy=brandName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -108,7 +109,7 @@
 							</button>
 						</th>
 						<th>
-							Category
+							<div id="tabHead">Category</div>
 							<button type="button" class="btn btn-default" value="?orderBy=categoryName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -120,7 +121,7 @@
 							Unit
 						</th>
 						<th>
-							Price
+							<div id="tabHead">Price</div>
 							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -146,12 +147,12 @@
 						<td data-title="Price"><?php echo $item["price"]; ?></td>
 						<td>
 							<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
-								<button type="button" class="btn btn-default">
+								<button type="button" class="btn btn-default" id="edBtn1">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
 							</a>	
 							<a href="deletePro.php?proId=<?php echo $proID; ?>">
-								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn1">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 								</button>
 							</a>
@@ -225,19 +226,19 @@
 											
 										<br>
 										
+										<div class="modFoot">
 										<span>
-											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 										</span>
 										<span>
-											<input type="submit" value="Submit" class="btn btn-success" name="addProd" style="float:right;">
+											<input type="submit" value="Submit" class="btn btn-success" name="addProd" id="sucBtn">
 										</span>
+									</div>
 											
-										</form> 
-									<br>
-									
-								</div>
-								<div class="modal-footer">
-									
+										</form>
+
+									<div class="modal-footer">
+									</div>
 								</div>
 							</div>
 						</div>

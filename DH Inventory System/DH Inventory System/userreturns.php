@@ -20,7 +20,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="user") {
+			if (!isset($_SESSION['id']) && $role!="admin") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -28,27 +28,16 @@
 			$user_row = $session_query->fetch();
 		?>
 	</head>
-		
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
-		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="shortcut icon" href="logo.jpg">
-	</head>
   
 	<body>
 		<?php include('fetchReturns.php'); ?>
-		
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<div class="container">
+						<img src="WDF_1857921.jpg" id="headerBG"/>
+				<center><img src="dencys.png" alt="logo" id="logo1"/></center>
+			</div>
 
-		<div class="productHolder">
-			<nav class="navbar navbar-inverse navbar-fixed-top" >
-				<div class="container">
-							<img src="WDF_1857921.jpg" id="headerBG"/>
-					<center><img src="dencys.png" alt="logo" id="logo1"/></center>
-				</div>
-
-				<div class="splitHeader">
+			<div class="splitHeader">
 					<div class="container">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -60,40 +49,36 @@
 						</div>
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
-								<li><a href="userInventory.php">Inventory</a></li>
-								<li><a href="userIncoming.php">Incoming</a></li>
-								<li><a href="userOutgoing.php">Outgoing</a></li>
-								<li class="active"><a href="userReturns.php">Returns</a></li>
-								<li><a href="userProduct.php">Products</a></li>
+								<li><a href="userinventory.php">Inventory</a></li>
+								<li><a href="userincoming.php">Incoming</a></li>
+								<li><a href="useroutgoing.php">Outgoing</a></li>
+								<li class="active"><a href="returns.php">Returns</a></li>
+								<li><a href="userproduct.php">Products</a></li>
 							</ul>
 						</div>
 					</div>
-					
 				</nav>
-
-	<div id="contents">
-		<div class="pages no-more-tables">
-			<div id="tableHeader">
-				<table class="table table-striped table-bordered">	
-					<h1 id="headers">RETURNED PRODUCTS</h1>	
-					
-					<form action="?" method="post">
-						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-					</form>
-						
-					<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
-										
-				</table>
-			</div>
-			
-			<div class="prodTable">
-				<br>
+		
+		<div id="contents">
+			<div class="pages no-more-tables">
+				<div id="tableHeader">
+					<table class="table table-striped table-bordered">	
+						<h1 id="headers">RETURNED PRODUCTS</h1>	
+						<form action="?" method="post">
+							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+						</form>	
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
+							Add Product
+						</button>					
+					</table>
+				</div>
+				
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>
 							<div id="tabHead">Date</div>
 							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
+								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"  id="arrowBtn"></span>
 							</button>
 							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
@@ -115,7 +100,7 @@
 							Model
 						</th>
 						<th>
-							Quantity					
+							Quantity							
 						</th>
 						<th>
 							Unit
@@ -124,12 +109,11 @@
 							Remarks
 						</th>
 					</tr>
-					
 					<?php
 						foreach ($result as $item):
 						$retID = $item["returnID"];
 					?>
-				
+					
 					<tr id="centerData">
 						<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
 						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
@@ -139,12 +123,12 @@
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
 					</tr>
-					
+							
 					<?php
 						endforeach;
 					?>
 				</table>
-
+				
 				<div class="modal fade" id="myModal" role="dialog">
 					 <div class="modal-dialog modal-lg">
 						 <div class="modal-content">
@@ -173,27 +157,25 @@
 																			
 									<h3>Remarks</h3>
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
-
 									<br>
+									<div class="modFoot">
 									<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 									</span>
 									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addRet" style="float:right;">
+										<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
 									</span>
+								</div>
 								</form> 		
 							</div>
 							
-							<div class="modal-footer">
-							
+							<div class="modal-footer">	
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>	
-
 
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
@@ -203,8 +185,7 @@
 							<span class="glyphicon glyphicon-print"></span>
 						    Print
 						</button> 
-					</li>
-				</ul>
+					</ul>
 				<ul class="nav navbar-nav navbar-right" id="logout">
 					<li><a href="logout.php">Logout</a></li>
 				</ul>
@@ -212,6 +193,6 @@
 		</nav>
 
 		<?php include('addReturn.php'); ?>
-
+			
 	</body>
 </html>

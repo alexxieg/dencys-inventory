@@ -7222,6 +7222,22 @@ border: none;
   float: right;
 }
 
+#delBtn1{
+  float: right;
+  margin-right: -6px;
+  padding-right: .5px;
+  padding-left: .5px;
+  font-size: 15px;
+}
+
+#edBtn1{
+  float: left;
+  margin-left: -6px;
+  padding-right: .5px;
+  padding-left: .5px;
+  font-size: 15px;
+}
+
 #OutsortBtnDown{
   float: left;
   margin-left: 5px;
@@ -7231,8 +7247,8 @@ border: none;
 
 #OutsortBtnUp{
   float: left;
-  margin-top: -23px;
-  margin-left: 65px;
+  margin-top: -24px;
+  margin-left: 58px;
   padding-right: 5px;
   font-size: 5px;
 }
@@ -7246,46 +7262,46 @@ border: none;
 
 #OutsortBtnUp1{
   float: left;
-  margin-top: -23px;
-  margin-left: 92px;
+  margin-top: -24px;
+  margin-left: 85px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #OutsortBtnUp2{
   float: left;
-  margin-top: -23px;
-  margin-left: 103px;
+  margin-top: -24px;
+  margin-left: 94px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #OutsortBtnUp3{
   float: left;
-  margin-top: -23px;
-  margin-left: 85px;
+  margin-top: -24px;
+  margin-left: 76px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #sortBtnDown{
   float: left;
-  margin-left: 10px;
+  margin-left: 0px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #sortBtnUp{
   float: left;
-  margin-top: -23px;
-  margin-left: 110px;
+  margin-top: -24px;
+  margin-left: 95px;
   padding-right: 5px;
   font-size: 5px;
 }
 
 #sortBtn{
   float: left;  
-  margin-left: 10px;
+  margin-left: 0px;
   font-size: 5px;
   padding-right: 8px;
 }
@@ -7296,7 +7312,7 @@ border: none;
 
 #arrowBtn{
   float: left;
-  margin-left: -8px;
+  margin-left: -6px;
   font-size: 10px;
 }
 
@@ -7423,4 +7439,35 @@ border: none;
          filter: blur(1px);
 
   }
+}
+
+.modFoot #canBtn{
+  float: right; 
+  margin-left: 10px;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+  background-color: transparent;
+  border-color: red;
+  color: red;
+  margin-top: 30px;
+}
+
+#canBtn:hover{
+  background-color: red;
+  color: white;
+}
+
+.modFoot #sucBtn{
+  transition-duration: 0.4s;
+  background-color: transparent;
+  border-color: green;
+  color: green;
+  float: right;
+  border-radius: 12px;
+  margin-top: 30px;
+}
+
+#sucBtn:hover{
+  background-color: green;
+  color: white;
 }

@@ -136,13 +136,15 @@
 												<option>user</option>
 											 </select>
 										</div>
-									
+										
+										<div class="modFoot">
 										<span>
-											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 										</span>
 										<span>
-											<input type="submit" value="Submit" class="btn btn-success" name="addAccnt" style="float:right;">
+											<input type="submit" value="Submit" class="btn btn-success" name="addAccnt" id="sucBtn">
 										</span>
+										</div>
 										
 									</form> 
 								</div>

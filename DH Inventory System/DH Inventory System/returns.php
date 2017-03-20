@@ -172,13 +172,14 @@
 									<h3>Remarks</h3>
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 									<br>
-									
+									<div class="modFoot">
 									<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
+										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 									</span>
 									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addRet" style="float:right;">
+										<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
 									</span>
+								</div>
 								</form> 		
 							</div>
 							
