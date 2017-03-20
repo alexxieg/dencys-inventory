@@ -6835,6 +6835,7 @@ button.close {
 #categories{
   font-size: 18px;
   margin-right: 30%;
+  font-family: dencyFont;
 }
 
 #prodSort{
@@ -6857,6 +6858,7 @@ button.close {
   margin-right: -90px;
   font-size: 16px;
   margin-top: 10px;
+  font-family: dencyFont;
 }
 
 #search {
@@ -7010,6 +7012,7 @@ border: none;
     margin-right: -1px;
     font-size: 18px;
     margin-top: 10px;
+    font-family: dencyFont;
 }
 
 #adminContent {
@@ -7043,6 +7046,7 @@ border: none;
   border-color: transparent;
   color: white;
   margin-top: 10%;
+  font-family: dencyFont;
 }
 
 #addQty, #addRcpt, #adduser, #addpass,
@@ -7058,6 +7062,7 @@ border: none;
     font-size: 18px;
     margin-right: 25%;
     margin-top: .2%;
+    font-family: dencyFont;
   }
 
   #headerBG {
@@ -7149,11 +7154,13 @@ border: none;
       color: white;
       margin-top: 0%;
       margin-bottom: -18%;
+      font-family: dencyFont;
     }
  
   #logout {
     margin-right: -1px;
     margin-top: 10px;
+    font-family: dencyFont;
   }
 
   /*
@@ -7178,6 +7185,7 @@ border: none;
     #logout {
       margin-left: 80%;
       margin-top: 10%;
+      font-family: dencyFont;
     }
 
     .hide-on-mobile {
@@ -7323,11 +7331,10 @@ border: none;
 /*font*/
 @font-face{
   font-family: dencyFont;
-  src: url(bbd.ttf);
+  src: url(CabinCondensed-Bold.ttf);
 }
 
 .compName {
-  font-family: dencyFont;
   color: black;
   margin-top: -75px;
 }
@@ -7357,6 +7364,7 @@ border: none;
 
 #contents{
   padding-top: 5%;
+  font-family: dencyFont;
 }
 
 #headerBG {
@@ -7378,6 +7386,7 @@ border: none;
     font-size: 18px;
     margin-right: 30%;
     margin-top: .2%;
+    font-family: dencyFont;
   }
 
     #headerBG {
@@ -7401,6 +7410,7 @@ border: none;
     font-size: 18px;
     margin-right: 17%;
     margin-top: .2%;
+    font-family: dencyFont;
   }
  img#logo1 {
     width: 230px;
@@ -7411,6 +7421,7 @@ border: none;
   #logout {
     margin-top: 10%;
     font-size: 18px;
+    font-family: dencyFont;
   }
 
 .splitHeader{
@@ -7427,6 +7438,7 @@ border: none;
       color: white;
       margin-top: 0%;
       margin-bottom: -23%;
+      font-family: dencyFont;
     }
 
   #headerBG {
