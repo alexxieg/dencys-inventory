@@ -12,7 +12,7 @@
 		<?php 
 				session_start();
 				$role = $_SESSION['sess_role'];
-				if (!isset($_SESSION['id']) && $role!="user") {
+				if (!isset($_SESSION['id']) || $role!="user") {
 					header('Location: index.php');
 				}
 					$session_id = $_SESSION['id'];
