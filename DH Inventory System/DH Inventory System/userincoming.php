@@ -178,7 +178,7 @@
 										$res = $query->fetchAll();
 									?>
 													
-									<select class="form-control" id="addEmp" name="emp">
+									<select class="form-control" id="addEmpl" name="emp">
 										<?php foreach ($res as $row): ?>
 											<option><?=$row["empName"]?></option>
 										<?php endforeach ?>
