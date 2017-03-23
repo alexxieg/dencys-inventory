@@ -20,44 +20,43 @@
 			if (!isset($_SESSION['id']) || $role!="admin") {
 				header('Location: index.php');
 			}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
 		
 	</head>
 	  
 	<body>
-		<br><nav class="navbar navbar-inverse navbar-fixed-top" >
-				<div class="container">
-							<img src="WDF_1857921.jpg" id="headerBG"/>
-					<center><img src="dencys.png" alt="logo" id="logo1"/></center>
-				</div>
+		<br>
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<div class="container">
+				<img src="WDF_1857921.jpg" id="headerBG"/>
+				<center><img src="dencys.png" alt="logo" id="logo1"/></center>
+			</div>
 
-				<div class="splitHeader">
-					<div class="container">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav navbar-right" id="categories">
-								<li><a href="inventory.php">Inventory</a></li>
-								<li><a href="incoming.php">Incoming</a></li>
-								<li><a href="outgoing.php">Outgoing</a></li>
-								<li><a href="returns.php">Returns</a></li>
-								<li class="active"><a href="admin.php">Admin</a></li>
-							</ul>
-						</div>
-					</div>
-				</nav>
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" id="categories">
+						<li><a href="inventory.php">Inventory</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+						<li class="active"><a href="admin.php">Admin</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 		
 		<div id="adminContent">
-			
 			<div>
 				<div id="manageAcc">
 					<div class="manageHeader">
@@ -81,6 +80,9 @@
 							</form><br>
 							<form action="employees.php">
 								<button type="submit" class="btn btn-default" id="myBtn">Employees</button>
+							</form><br>
+							<form action="branches.php">
+								<button type="submit" class="btn btn-default" id="myBtn">Branches</button>
 							</form>
 						</div>
 					</div>				
