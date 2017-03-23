@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2017 at 01:25 PM
+-- Generation Time: Mar 24, 2017 at 06:19 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -411,6 +411,26 @@ INSERT INTO `product` (`prodID`, `prodName`, `model`, `categoryID`, `brandID`, `
 ('DCA-PWT-0008', 'Electric Circular Saw 1520W 84mm', 'AMY235', 'PWT', 'DCA', '9850.00', 10, 'Piece/s'),
 ('DCA-PWT-0009', 'Electric Mitre Saw 1650W 255mm', 'AJX255', 'PWT', 'DCA', '19500.00', 10, 'Piece/s'),
 ('DCA-PWT-0010', 'Electric Nibbler 620W 3.2mm 2.5mm 120mm 128mm', 'AJH32', 'PWT', 'DCA', '12375.00', 10, 'Piece/s'),
+('DCA-PWT-0011', 'Percussion Hammer 900W', 'AZG6', 'PWT', 'DCA', '12200.00', 10, 'Piece/s'),
+('DCA-PWT-0012', 'Percussion Hammer 1500W', 'AZG10', 'PWT', 'DCA', '24350.00', 10, 'Piece/s'),
+('DCA-PWT-0013', 'Percussion Hammer 1240W', 'AZG15', 'PWT', 'DCA', '24900.00', 10, 'Piece/s'),
+('DCA-PWT-0014', 'Electric Wrench 340W 12.7x12.7mm', 'APB20C', 'PWT', 'DCA', '7500.00', 10, 'Piece/s'),
+('DCA-PWT-0015', 'Electric Shear 620W 3.2mm 2.5mm 50mm', 'AJJ32', 'PWT', 'DCA', '9375.00', 10, 'Piece/s'),
+('DCA-PWT-0016', 'Reciprocating Saw 590W 30mm 90mm 90mm', 'AJF30', 'PWT', 'DCA', '6875.00', 10, 'Piece/s'),
+('DCA-PWT-0017', 'Electric Chain Saw 1300W 405mm', 'AML02-404', 'PWT', 'DCA', '12800.00', 10, 'Piece/s'),
+('DCA-PWT-0018', 'Electric Blower 680W', 'AQF32', 'PWT', 'DCA', '3500.00', 10, 'Piece/s'),
+('DCA-PWT-0019', 'Electric Planer 500W 82mm 1m', 'AMB82', 'PWT', 'DCA', '3650.00', 10, 'Piece/s'),
+('DCA-PWT-0020', 'Electric Planer 570W 82mm 1m', 'AMB02-82', 'PWT', 'DCA', '4100.00', 10, 'Piece/s'),
+('DCA-PWT-0021', 'Belt Sander 550W 30x533mm', 'AST533', 'PWT', 'DCA', '6500.00', 10, 'Piece/s'),
+('DCA-PWT-0022', 'Belt Sander 1200W 100x610mm', 'AST610', 'PWT', 'DCA', '12500.00', 10, 'Piece/s'),
+('DCA-PWT-0023', 'Angle Grinder 1020W 100mm 16mm', 'ASM10-100', 'PWT', 'DCA', '4650.00', 10, 'Piece/s'),
+('DCA-PWT-0024', 'Angle Grinder 850W 125/115mm 22mm', 'ASM03-115', 'PWT', 'DCA', '4200.00', 10, 'Piece/s'),
+('DCA-PWT-0025', 'Angle Grinder 2020W 180mm 22mm', 'ASM180A', 'PWT', 'DCA', '7300.00', 10, 'Piece/s'),
+('DCA-PWT-0026', 'Die Grinder 400W 25mm', 'ASJ03-25', 'PWT', 'DCA', '3850.00', 10, 'Piece/s'),
+('DCA-PWT-0027', 'Orbital Sander 150W 100x110mm', 'ASB100', 'PWT', 'DCA', '2950.00', 10, 'Piece/s'),
+('DCA-PWT-0028', 'Orbital Sander 160W 93x185mm', 'ASB185', 'PWT', 'DCA', '3250.00', 10, 'Piece/s'),
+('DCA-PWT-0029', 'Orbital Sander 520W 114x234mm', 'ASB234', 'PWT', 'DCA', '6250.00', 10, 'Piece/s'),
+('DCA-PWT-0030', 'Electric Groove Cutter 1400W 110mm 32mm 50mm', 'AZR110', 'PWT', 'DCA', '9750.00', 10, 'Piece/s'),
 ('LTS-ACC-0001', 'Carbon Brush 3.25x0.8x0.5mm', 'LAG115N38', 'ACC', 'LTS', '90.00', 20, 'Piece/s'),
 ('LTS-ACC-0002', 'Carbon Brush 3.75x0.75x0.5mm', 'LID10REN22', 'ACC', 'LTS', '90.00', 20, 'Piece/s'),
 ('LTS-ACC-0003', 'Carbon Brush 3.25x0.90x0.5mm', 'LID13REN23', 'ACC', 'LTS', '90.00', 20, 'Piece/s'),
