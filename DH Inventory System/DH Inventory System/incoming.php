@@ -176,14 +176,14 @@
 									
 									<h5>Employee</h5>
 									<?php
-										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query = $conn->prepare("SELECT empFirstName FROM employee ");
 										$query->execute();
 										$res = $query->fetchAll();
 									?>
 													
 									<select class="form-control" id="addEmpl" name="emp">
 										<?php foreach ($res as $row): ?>
-											<option><?=$row["empName"]?></option>
+											<option><?=$row["empFirstName"]?></option>
 										<?php endforeach ?>
 									</select> 
 									

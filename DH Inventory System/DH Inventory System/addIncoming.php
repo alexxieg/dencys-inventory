@@ -59,9 +59,10 @@
             $inQty = $_POST['incQty'][$index];
             $emp = $_POST['emp'];
 
-            $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
+            $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
             $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
             $emp3 = $emp2['empA'];
+
             $prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
             $prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
             $prod3 = $prod2['prodA'];

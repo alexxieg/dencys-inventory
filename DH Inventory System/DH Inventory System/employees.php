@@ -31,7 +31,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT empID, empName FROM employee");
+			$query = $conn->prepare("SELECT empID, empFirstName, empLastName, empMidName, empExtensionName FROM employee");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -82,7 +82,10 @@
 					<table class="table table-bordered" id="tables">
 						<tr>
 							<th>Employee ID</th>
-							<th>Name</th>
+							<th>First Name</th>
+							<th>Middle Name</th>
+							<th>Last Name</th>
+							<th>Extension Name</th>
 							<th></th>
 						</tr>
 							
@@ -93,7 +96,10 @@
 
 						<tr>
 							<td><?php echo $item["empID"]; ?></td>
-							<td><?php echo $item["empName"]; ?></td>
+							<td><?php echo $item["empFirstName"]; ?></td>
+							<td><?php echo $item["empMidName"]; ?></td>
+							<td><?php echo $item["empLastName"]; ?></td>
+							<td><?php echo $item["empExtensionName"]; ?></td>
 							<td>
 								<a href="editEmployees.php?emplId=<?php echo $employID; ?>" target="_blank">
 								<button type="button" class="btn btn-default">

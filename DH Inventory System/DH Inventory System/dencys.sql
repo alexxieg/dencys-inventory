@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2017 at 06:19 AM
+-- Generation Time: Mar 24, 2017 at 08:35 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -144,32 +144,54 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`brandID`, `brandName`) VALUES
+('AFR', 'Alfra'),
 ('AGP', 'AGP'),
 ('BND', 'Black and Decker'),
 ('BRM', 'Bernmann'),
 ('BSH', 'Bosch'),
 ('BZW', 'Benz Werks'),
 ('DCA', 'DCA'),
+('DGR', 'Diager'),
 ('DML', 'Dremel'),
+('DSS', 'Duss'),
 ('DWT', 'Dewalt'),
+('ELP', 'Elephant'),
+('EZN', 'Ezons'),
 ('GFD', 'Greenfield'),
 ('HND', 'Honda'),
 ('HTC', 'Hitachi'),
 ('IWN', 'Irwin'),
 ('JSE', 'Johnson Elektrik'),
+('KBL', 'Kobewel Japan'),
 ('KEN', 'Ken'),
+('KLR', 'Kleener'),
+('KWK', 'Kawasaki'),
 ('LTS', 'Lotus'),
+('LVR', 'Lavor'),
 ('MKT', 'Makita'),
+('MRN', 'Metrinch'),
 ('MTC', 'Maktec'),
 ('MWK', 'Milwaukee'),
+('MXS', 'MaxSell'),
+('MXT', 'MaxTools'),
 ('RXN', 'Rexon'),
 ('RYC', 'Royce'),
 ('SKL', 'Skil'),
 ('SLY', 'Stanley'),
+('SNW', 'Tavaris'),
+('SSS', 'Shinsetsu'),
 ('STL', 'Stihl'),
+('SWA', 'Sanwa'),
+('TFM', 'Trafimet'),
+('TGZ', 'Tool-ginizer'),
+('TKU', 'Toku'),
 ('TTR', 'Tatara'),
+('TYO', 'Toyo'),
 ('UNS', 'Unistar'),
+('UTA', 'Ultra'),
+('VGD', 'Vanguard'),
 ('VRX', 'Vorex'),
+('WLO', 'Wilo'),
 ('YMA', 'Yamma'),
 ('ZKK', 'Zekoki');
 
@@ -225,39 +247,37 @@ INSERT INTO `category` (`categoryID`, `categoryName`) VALUES
 
 CREATE TABLE `employee` (
   `empID` int(5) NOT NULL,
-  `empName` varchar(50) NOT NULL
+  `empFirstName` varchar(45) NOT NULL,
+  `empLastName` varchar(45) NOT NULL,
+  `empExtensionName` varchar(45) DEFAULT NULL,
+  `empMidName` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`empID`, `empName`) VALUES
-(1, 'Emily'),
-(2, 'Caley'),
-(3, 'Dionisio'),
-(4, 'Nancy'),
-(5, 'Rommel'),
-(6, 'Jovin'),
-(7, 'Manuel'),
-(8, 'Cristine'),
-(9, 'Julius'),
-(10, 'Kenneth'),
-(11, 'Dave'),
-(12, 'Vangie'),
-(13, 'Kevin'),
-(14, 'Mike'),
-(15, 'Raymond'),
-(16, 'Ronald'),
-(17, 'Gerome'),
-(18, 'Christoper'),
-(19, 'Cynthia'),
-(20, 'Enrico'),
-(21, 'Haneyly'),
-(22, 'TJ'),
-(23, 'Christian'),
-(24, 'Kier'),
-(25, 'Kharol');
+INSERT INTO `employee` (`empID`, `empFirstName`, `empLastName`, `empExtensionName`, `empMidName`) VALUES
+(1, 'Miguel', 'Arimbuyutan', 'Mike', 'Fernandez'),
+(2, 'Cynthia', 'Buizn', '-', 'Cargamento'),
+(3, 'Haneyly Faye Anne', 'Del Rosario', 'Haney', 'Calindas'),
+(4, 'Emelita', 'Flores', '-', 'Labita'),
+(5, 'Kevin', 'Flores', '-', 'Labita'),
+(6, 'Kier', 'Flores', '-', 'Labita'),
+(7, 'Teodelio', 'Galope', 'TJ', 'Costales'),
+(8, 'Christian', 'Granzon', 'King', 'Dulay'),
+(9, 'Dave', 'Jarilla', 'Travis', 'Zeta'),
+(10, 'Christopher', 'Landicho', 'Chris', 'Nadera'),
+(11, 'Ronald', 'Landicho', 'Moe', 'Nadera'),
+(12, 'Kharol', 'Limpayos', '-', 'Dolpa'),
+(13, 'Kenneth', 'Llaneras', '-', 'Eguia'),
+(14, 'Calixto', 'Mislang', 'Calex', 'Samson'),
+(15, 'Raymond', 'Plmos', 'Mon', 'Lopez'),
+(16, 'Julius', 'Rilloraza', '-', 'Resari'),
+(17, 'Maria Christina', 'Tayaban', 'Tintin', 'Morales'),
+(18, 'Jovin', 'Tuazon', '-', 'Doroteo'),
+(19, 'Romel', 'Vargas', 'James', 'Mapalo'),
+(20, 'Gerome', 'Visalo', '-', 'Labita');
 
 -- --------------------------------------------------------
 
@@ -284,12 +304,12 @@ INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `receiptNo`, `inRemarks`, `em
 (2, 20, '2017-03-01', '4464', 'None', 5, 'LTS-HDT-0002'),
 (3, 15, '2017-03-05', '3245', 'None', 4, 'LTS-HDT-0003'),
 (4, 20, '2017-03-10', 'n7452', 'None', 8, 'LTS-ACC-0001'),
-(5, 10, '2017-03-15', 'r5123', 'None', 3, 'LTS-ACC-0002'),
+(5, 10, '2017-03-15', 'r5123', 'None', 20, 'LTS-ACC-0002'),
 (6, 30, '2017-03-18', 'RE0293', 'None', 6, 'LTS-HDT-0001'),
 (7, 20, '2017-03-18', 'RE0293', 'None', 6, 'LTS-HDT-0002'),
-(10, 25, '2017-03-19', 'RE4542', 'None', 3, 'DCA-PWT-0003'),
-(54, 25, '2017-03-19', 'RE1554', 'None', 14, 'DCA-PWT-0001'),
-(55, 50, '2017-03-19', 'REjlkd', 'None', 7, 'DCA-PWT-0001');
+(8, 25, '2017-03-19', 'RE1554', 'None', 14, 'DCA-PWT-0001'),
+(9, 50, '2017-03-19', 'REjlkd', 'None', 7, 'DCA-PWT-0001'),
+(10, 25, '2017-03-19', 'RE4542', 'None', 20, 'DCA-PWT-0003');
 
 -- --------------------------------------------------------
 
@@ -313,9 +333,9 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `outQty`, `endingQty`, `prodID`) VALUES
-(1, 30, NULL, 30, 55, 10, 20, 'LTS-HDT-0001'),
-(2, 30, NULL, 30, 40, 15, 20, 'LTS-HDT-0002'),
-(3, 30, NULL, 30, 15, 5, 20, 'LTS-HDT-0003'),
+(1, 75, NULL, 30, 55, 10, 20, 'LTS-HDT-0001'),
+(2, 55, NULL, 30, 40, 15, 20, 'LTS-HDT-0002'),
+(3, 40, NULL, 30, 15, 5, 20, 'LTS-HDT-0003'),
 (4, 50, NULL, 50, NULL, NULL, 10, 'LTS-HDT-0004'),
 (5, 30, NULL, 30, NULL, NULL, 25, 'LTS-HDT-0005'),
 (6, 25, NULL, 25, NULL, NULL, 5, 'LTS-HDT-0006'),
@@ -323,24 +343,24 @@ INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `out
 (8, 15, NULL, 15, NULL, NULL, 15, 'LTS-HDT-0008'),
 (9, 15, NULL, 15, NULL, NULL, 15, 'LTS-HDT-0009'),
 (10, 10, NULL, 10, NULL, NULL, 10, 'LTS-HDT-0010'),
-(11, 10, NULL, 10, 20, 10, 10, 'LTS-ACC-0001'),
-(12, 10, NULL, 10, 10, NULL, 10, 'LTS-ACC-0002'),
-(13, 15, NULL, 15, NULL, 10, 15, 'LTS-ACC-0003'),
-(14, 15, NULL, 15, NULL, 10, 15, 'LTS-ACC-0004'),
-(15, 25, NULL, 25, NULL, NULL, 25, 'LTS-ACC-0005'),
+(11, 20, NULL, 10, 20, 10, 10, 'LTS-ACC-0001'),
+(12, 20, NULL, 10, 10, NULL, 10, 'LTS-ACC-0002'),
+(13, 5, NULL, 15, NULL, 10, 15, 'LTS-ACC-0003'),
+(14, 5, NULL, 15, NULL, 10, 15, 'LTS-ACC-0004'),
+(15, 50, NULL, 25, 25, NULL, 25, 'LTS-ACC-0005'),
 (16, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0006'),
 (17, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0007'),
 (18, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0008'),
 (19, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0009'),
 (20, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0010'),
-(21, 25, NULL, 25, 75, 30, 25, 'DCA-PWT-0001'),
-(22, 25, NULL, 25, NULL, 10, 25, 'DCA-PWT-0002'),
-(23, 25, NULL, 25, 25, NULL, 25, 'DCA-PWT-0003'),
+(21, 70, NULL, 25, 75, 30, 25, 'DCA-PWT-0001'),
+(22, 15, NULL, 25, NULL, 10, 25, 'DCA-PWT-0002'),
+(23, 50, NULL, 25, 25, NULL, 25, 'DCA-PWT-0003'),
 (24, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0004'),
 (25, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0005'),
 (26, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0006'),
-(27, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0007'),
-(28, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0008'),
+(27, 40, NULL, 25, 15, NULL, 25, 'DCA-PWT-0007'),
+(28, 45, NULL, 25, 20, NULL, 25, 'DCA-PWT-0008'),
 (29, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0009'),
 (30, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0010');
 
@@ -366,18 +386,18 @@ CREATE TABLE `outgoing` (
 --
 
 INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `receiptNo`, `branchID`, `empID`, `prodID`) VALUES
-(1, 5, '2017-03-01', 'None', '', 2, 2, 'LTS-HDT-0001'),
-(2, 5, '2017-03-05', 'None', '', 3, 3, 'LTS-HDT-0002'),
-(3, 5, '2017-03-06', 'None', '', 2, 4, 'LTS-HDT-0003'),
-(4, 10, '2017-03-10', 'None', '', 1, 5, 'LTS-ACC-0001'),
-(5, 10, '2017-03-10', 'None', '', 3, 3, 'LTS-ACC-0003'),
-(6, 10, '2017-03-15', 'None', '', 4, 2, 'LTS-HDT-0002'),
-(7, 15, '2017-03-15', 'None', '', 4, 3, 'DCA-PWT-0001'),
-(8, 10, '2017-03-16', 'None', '', 5, 10, 'DCA-PWT-0002'),
-(9, 10, '2017-03-16', 'None', '', 5, 8, 'LTS-ACC-0004'),
-(10, 5, '2017-03-19', 'None', '', 1, 10, 'LTS-HDT-0001'),
-(11, 10, '2017-03-19', 'None', '', 1, 18, 'DCA-PWT-0001'),
-(12, 5, '2017-03-19', 'None', '', 2, 17, 'DCA-PWT-0001');
+(1, 5, '2017-03-01', 'None', 'OUT0001', 2, 2, 'LTS-HDT-0001'),
+(2, 5, '2017-03-05', 'None', 'OUT0002', 3, 20, 'LTS-HDT-0002'),
+(3, 5, '2017-03-06', 'None', 'OUT0003', 2, 4, 'LTS-HDT-0003'),
+(4, 10, '2017-03-10', 'None', 'OUT0004', 1, 5, 'LTS-ACC-0001'),
+(5, 10, '2017-03-10', 'None', 'OUT0004', 3, 20, 'LTS-ACC-0003'),
+(6, 10, '2017-03-15', 'None', 'OUT0005', 4, 2, 'LTS-HDT-0002'),
+(7, 15, '2017-03-15', 'None', 'OUT0005', 4, 14, 'DCA-PWT-0001'),
+(8, 10, '2017-03-16', 'None', 'OUT0006', 5, 10, 'DCA-PWT-0002'),
+(9, 10, '2017-03-16', 'None', 'OUT0006', 5, 8, 'LTS-ACC-0004'),
+(10, 5, '2017-03-19', 'None', 'OUT0007', 1, 10, 'LTS-HDT-0001'),
+(11, 10, '2017-03-19', 'None', 'OUT0007', 1, 18, 'DCA-PWT-0001'),
+(12, 5, '2017-03-19', 'None', 'OUT0007', 2, 17, 'DCA-PWT-0001');
 
 -- --------------------------------------------------------
 
@@ -624,7 +644,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `incoming`
 --
 ALTER TABLE `incoming`
-  MODIFY `inID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `inID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `inventory`
 --
