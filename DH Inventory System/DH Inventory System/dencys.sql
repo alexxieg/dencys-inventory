@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2017 at 09:54 AM
+-- Generation Time: Mar 25, 2017 at 05:59 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -114,19 +114,20 @@ INSERT INTO `archive` (`archiveID`, `date`, `totalIn`, `totalOut`, `beginningQty
 
 CREATE TABLE `branch` (
   `branchID` int(5) NOT NULL,
-  `location` varchar(50) CHARACTER SET latin1 NOT NULL
+  `location` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `branchName` varchar(45) COLLATE latin1_german1_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
 --
 -- Dumping data for table `branch`
 --
 
-INSERT INTO `branch` (`branchID`, `location`) VALUES
-(1, 'Camdas'),
-(2, 'Hilltop'),
-(3, 'KM 4'),
-(4, 'KM 5'),
-(5, 'San Fernando');
+INSERT INTO `branch` (`branchID`, `location`, `branchName`) VALUES
+(1, 'Camdas', 'Dencys'),
+(2, 'Hilltop', 'Enrico'),
+(3, 'KM 4', 'Tayabas'),
+(4, 'KM 5', 'KM5'),
+(5, 'San Fernando', 'Denne Hardware');
 
 -- --------------------------------------------------------
 
@@ -481,13 +482,6 @@ INSERT INTO `product` (`prodID`, `prodName`, `model`, `categoryID`, `brandID`, `
 ('DGR-ACC-0018', 'Holesaw Cobalt Bi-Metal 29mm', '650D29', 'ACC', 'DGR', '1500.00', 30, 'Piece/s'),
 ('DGR-ACC-0019', 'Holesaw Cobalt Bi-Metal 30mm', '650D30', 'ACC', 'DGR', '1510.00', 30, 'Piece/s'),
 ('DGR-ACC-0020', 'Holesaw Cobalt Bi-Metal 32mm', '650D32', 'ACC', 'DGR', '1520.00', 30, 'Piece/s'),
-('DSS-PWT-0001', 'Combination Hammer 710W', 'P26C', 'PWT', 'DSS', '49000.00', 18, 'Piece/s'),
-('DSS-PWT-0002', 'Combination Hammer 920W', 'PX48', 'PWT', 'DSS', '82000.00', 18, 'Piece/s'),
-('DSS-PWT-0003', 'Combination Hammer 1500W', 'PX78', 'PWT', 'DSS', '105000.00', 18, 'Piece/s'),
-('DSS-PWT-0004', 'Rotary Hammer 600W', 'P16SDS', 'PWT', 'DSS', '28000.00', 18, 'Piece/s'),
-('DSS-PWT-0005', 'Breaker 710W', 'PK45', 'PWT', 'DSS', '72500.00', 15, 'Piece/s'),
-('DSS-PWT-0006', 'Breaker 1050W', 'PK62', 'PWT', 'DSS', '95000.00', 15, 'Piece/s'),
-('DSS-PWT-0007', 'Demolition Hammer 1700W', 'PK300', 'PWT', 'DSS', '125000.00', 15, 'Piece/s'),
 ('LTS-ACC-0001', 'Carbon Brush 3.25x0.8x0.5mm', 'LAG115N38', 'ACC', 'LTS', '90.00', 20, 'Piece/s'),
 ('LTS-ACC-0002', 'Carbon Brush 3.75x0.75x0.5mm', 'LID10REN22', 'ACC', 'LTS', '90.00', 20, 'Piece/s'),
 ('LTS-ACC-0003', 'Carbon Brush 3.25x0.90x0.5mm', 'LID13REN23', 'ACC', 'LTS', '90.00', 20, 'Piece/s'),
@@ -507,7 +501,107 @@ INSERT INTO `product` (`prodID`, `prodName`, `model`, `categoryID`, `brandID`, `
 ('LTS-HDT-0007', 'Aluminum Level 36"/900MM', 'LAL9001M', 'HDT', 'LTS', '480.00', 15, 'Piece/s'),
 ('LTS-HDT-0008', 'Aviation Snip 10"', 'LAS250L', 'HDT', 'LTS', '400.00', 15, 'Piece/s'),
 ('LTS-HDT-0009', 'Aviation Snip 10"', 'LAS250R', 'HDT', 'LTS', '400.00', 15, 'Piece/s'),
-('LTS-HDT-0010', 'Aviation Snip 10"', 'LAS250S', 'HDT', 'LTS', '400.00', 15, 'Piece/s');
+('LTS-HDT-0010', 'Aviation Snip 10"', 'LAS250S', 'HDT', 'LTS', '400.00', 15, 'Piece/s'),
+('MXS-PWT-0001', 'Air Blower 600W', 'MAB-650', 'PWT', 'MXS', '3299.00', 20, 'Piece/s'),
+('MXS-PWT-0002', 'Hole Gun 720W ', 'MSD-720AC', 'PWT', 'MXS', '3299.00', 20, 'Piece/s'),
+('MXS-PWT-0003', 'Hammer 630W', 'MSD-1063VSR', 'PWT', 'MXS', '3499.00', 20, 'Piece/s'),
+('MXS-PWT-0004', 'Hammer 850W', 'MSD-1385VSR', 'PWT', 'MXS', '4499.00', 20, 'Piece/s'),
+('MXS-PWT-0005', 'Chipping Hammer 1200W', 'MCH-1200', 'PWT', 'MXS', '18099.00', 20, 'Piece/s'),
+('MXS-PWT-0006', 'Rotary Hammer 750W', 'MRH-2400B', 'PWT', 'MXS', '7499.00', 20, 'Piece/s'),
+('MXS-PWT-0007', 'Rotary Hammer 1100W', 'MRH-3200', 'PWT', 'MXS', '19999.00', 20, 'Piece/s'),
+('MXS-PWT-0008', 'Rotary Hammer 1350W', 'MRH-3800', 'PWT', 'MXS', '36999.00', 20, 'Piece/s'),
+('MXS-PWT-0009', 'Concrete Breaker 1700W', 'MSB-1650', 'PWT', 'MXS', '45999.00', 20, 'Piece/s'),
+('MXS-PWT-0010', 'Demolition Hammer 2100W', 'MSB-2060', 'PWT', 'MXS', '84999.00', 20, 'Piece/s'),
+('MXS-PWT-0011', 'Angle Grinder 600W', 'MSG-5402', 'PWT', 'MXS', '3099.00', 15, 'Piece/s'),
+('MXS-PWT-0012', 'Angle Grinder 800W', 'MSG-5410', 'PWT', 'MXS', '3699.00', 15, 'Piece/s'),
+('MXS-PWT-0013', 'Angle Grinder 850W', 'MSG-5420P', 'PWT', 'MXS', '4299.00', 15, 'Piece/s'),
+('MXS-PWT-0014', 'Angle Grinder 2400W', 'MLG-5755', 'PWT', 'MXS', '6999.00', 15, 'Piece/s'),
+('MXS-PWT-0015', 'Bench Grinder 250W', 'MBG-6250', 'PWT', 'MXS', '4999.00', 15, 'Piece/s'),
+('MXS-PWT-0016', 'Bench Grinder 370W', 'MBG-8550', 'PWT', 'MXS', '5999.00', 15, 'Piece/s'),
+('MXS-PWT-0017', 'Die Grinder 170W', 'MDG-147DAC', 'PWT', 'MXS', '3799.00', 15, 'Piece/s'),
+('MXS-PWT-0018', 'Straight Grinder 710W', 'MST-750', 'PWT', 'MXS', '5899.00', 15, 'Piece/s'),
+('MXS-PWT-0019', 'Cut-Off Saw 1600W', 'MSS-2009', 'PWT', 'MXS', '29500.00', 10, 'Piece/s'),
+('MXS-PWT-0020', 'Steel Slicer Saw 2800W', 'MSS-2008', 'PWT', 'MXS', '11999.00', 10, 'Piece/s'),
+('MXT-ACC-0010', 'Knotted Twist Cup Brush 3"x1.25mm', 'MXA-1075', 'ACC', 'MXT', '150.00', 25, 'Piece/s'),
+('MXT-ACC-0011', 'Cup Wheel 4"', 'MCW-4060', 'ACC', 'MXT', '600.00', 20, 'Piece/s'),
+('MXT-ACC-0012', 'Grinding Wheel 100x6.0mm', 'MTG-1146', 'ACC', 'MXT', '43.00', 20, 'Piece/s'),
+('MXT-ACC-0013', 'Continuous Rim 4"/ 105x109x16mm', 'MTC-1840', 'ACC', 'MXT', '280.00', 20, 'Piece/s'),
+('MXT-ACC-0014', 'Max-Cut 4"/100x1.2mm', 'MXT-4012', 'ACC', 'MXT', '350.00', 20, 'Piece/s'),
+('MXT-ACC-0015', 'Cutting Wheel 100x2.5mm', 'MTC-1025', 'ACC', 'MXT', '38.00', 20, 'Piece/s'),
+('MXT-ACC-0016', 'Hss Drill Bit 1.0mm', 'MXH-2301', 'ACC', 'MXT', '20.00', 30, 'Piece/s'),
+('MXT-ACC-0017', 'Hss Drill Bit 1.5mm', 'MXH-2415', 'ACC', 'MXT', '24.00', 30, 'Piece/s'),
+('MXT-ACC-0018', 'Hss Drill Bit 2.0mm', 'MXH-2502', 'ACC', 'MXT', '26.00', 30, 'Piece/s'),
+('MXT-ACC-0019', 'Hss Drill Bit 2.5mm', 'MXH-2625', 'ACC', 'MXT', '28.00', 10, 'Piece/s'),
+('MXT-ACC-0020', 'Hss Drill Bit 3.0mm', 'MXH-2703', 'ACC', 'MXT', '30.00', 10, 'Piece/s'),
+('MXT-PWT-0001', 'Hot Air Gun 2000W', 'MXT-2000K', 'PWT', 'MXT', '2599.00', 20, 'Piece/s'),
+('MXT-PWT-0002', 'Jigsaw 400W', 'MTJ-2655A', 'PWT', 'MXT', '2699.00', 20, 'Piece/s'),
+('MXT-PWT-0003', 'Sprayer 300W', 'MTS-3020', 'PWT', 'MXT', '5099.00', 20, 'Piece/s'),
+('MXT-PWT-0004', 'Angle Grinder 500W', 'MAG-101', 'PWT', 'MXT', '2099.00', 20, 'Piece/s'),
+('MXT-PWT-0005', 'Angle Grinder 730W', 'MAG-200', 'PWT', 'MXT', '2599.00', 20, 'Piece/s'),
+('MXT-PWT-0006', 'Polisher 1200W', 'MTP-7120', 'PWT', 'MXT', '6299.00', 25, 'Piece/s'),
+('MXT-PWT-0007', 'Electric Drill 420W', 'MSD-0645', 'PWT', 'MXT', '2399.00', 25, 'Piece/s'),
+('MXT-PWT-0008', 'Hammer Drill 550W', 'MSD-1055VSR', 'PWT', 'MXT', '2599.00', 25, 'Piece/s'),
+('MXT-PWT-0009', 'Hammer Drill 650W', 'MSD-1365VSR', 'PWT', 'MXT', '3199.00', 25, 'Piece/s'),
+('SSS-PWT-0001', 'Welding Generator Gasoline 686x550x570mm', 'SWG-190', 'PWT', 'SSS', '68000.00', 20, 'Piece/s'),
+('SSS-PWT-0002', 'Welding Generator Diesel 740x495x655mm', 'SDGW-70-0PT', 'PWT', 'SSS', '74000.00', 20, 'Piece/s'),
+('SSS-PWT-0003', 'Diesel Generator 1680x790x960mm', 'SDGL-10S3', 'PWT', 'SSS', '265000.00', 20, 'Piece/s'),
+('SSS-PWT-0004', 'Diesel Generator 1680x760x960mm', 'SDG-15S', 'PWT', 'SSS', '330000.00', 20, 'Piece/s'),
+('SSS-PWT-0005', 'Diesel Generator 2010x860x1070mm', 'SDG-25SIE', 'PWT', 'SSS', '570000.00', 20, 'Piece/s'),
+('SSS-PWT-0006', 'Diesel Generator 2010x860x1070mm', 'SDG-30SIE', 'PWT', 'SSS', '620000.00', 20, 'Piece/s'),
+('SSS-PWT-0007', 'Diesel Generator 2010x860x1070mm', 'SDG-35SIE', 'PWT', 'SSS', '650000.00', 25, 'Piece/s'),
+('SSS-PWT-0008', 'Portable Diesel Generator 720x492x650mm', 'SDG-65-0PT', 'PWT', 'SSS', '55000.00', 25, 'Piece/s'),
+('SSS-PWT-0009', 'Portable Diesel Generator 980x565x780mm', 'SDG-396-LN', 'PWT', 'SSS', '85000.00', 25, 'Piece/s'),
+('SSS-PWT-0010', 'Portable Gasoline Generator 460x360x420mm', 'SGG-1000', 'PWT', 'SSS', '18000.00', 25, 'Piece/s'),
+('SSS-PWT-0011', 'Portable Gasoline Generator 593x465x458mm', 'SGG-3100', 'PWT', 'SSS', '27000.00', 25, 'Piece/s'),
+('SSS-PWT-0012', 'Portable Gasoline Generator 683x540x555mm', 'SGG-396-0PT', 'PWT', 'SSS', '45000.00', 25, 'Piece/s'),
+('SSS-PWT-0013', 'Portable Inverter Generator 48.6x43mm', 'SGG-2000i', 'PWT', 'SSS', '35000.00', 15, 'Piece/s'),
+('SSS-PWT-0014', 'Single Low Bed Cylinder 43mm 30mm', 'RMC-051', 'PWT', 'SSS', '3250.00', 15, 'Piece/s'),
+('SSS-PWT-0015', 'Single Low Bed Cylinder 47mm 43mm', 'RMC-101', 'PWT', 'SSS', '5220.00', 15, 'Piece/s'),
+('SSS-PWT-0016', 'Single Low Bed Cylinder 52mm 60mm', 'RMC-201', 'PWT', 'SSS', '6050.00', 15, 'Piece/s'),
+('SSS-PWT-0017', 'Single Low Bed Cylinder 86mm 130mm', 'RMC-1001', 'PWT', 'SSS', '15200.00', 15, 'Piece/s'),
+('SSS-PWT-0018', 'Single Low Bed Cylinder100mm 189mm', 'RMC-2001', 'PWT', 'SSS', '42110.00', 15, 'Piece/s'),
+('SSS-PWT-0019', 'Single Cylinder133mm 30mm', 'RSC-0050', 'PWT', 'SSS', '3250.00', 10, 'Piece/s'),
+('SSS-PWT-0020', 'Single Cylinder 139mm 43mm', 'RSC1050', 'PWT', 'SSS', '5100.00', 10, 'Piece/s'),
+('TFM-ACC-0001', 'CINA 350 Gas Nozzle', 'MC0941', 'ACC', 'TFM', '270.00', 30, 'Piece/s'),
+('TFM-ACC-0002', 'CINA 350 Diffuser', 'ME0421', 'ACC', 'TFM', '40.00', 30, 'Piece/s'),
+('TFM-ACC-0003', 'CINA 350 Insulator Nut PANA', 'MC1104P', 'ACC', 'TFM', '200.00', 30, 'Piece/s'),
+('TFM-ACC-0004', 'CINA 350 Tip Holder of Torch Head', 'ME0426P', 'ACC', 'TFM', '265.00', 30, 'Piece/s'),
+('TFM-ACC-0005', 'CINA 350 Swan Neck Torch Head PANA', 'MF0299P', 'ACC', 'TFM', '465.00', 30, 'Piece/s'),
+('TFM-ACC-0006', 'CINA 350 Separable Torch Head PANA', 'MF0298P', 'ACC', 'TFM', '730.00', 30, 'Piece/s'),
+('TFM-ACC-0007', 'Liner 1-1.4 3m EURO', 'GM0574', 'ACC', 'TFM', '250.00', 20, 'Piece/s'),
+('TFM-ACC-0008', 'Liner 1-1.4 4m EURO', 'GM0575', 'ACC', 'TFM', '330.00', 20, 'Piece/s'),
+('TFM-ACC-0009', 'Joint with Spring', 'FB0319', 'ACC', 'TFM', '140.00', 20, 'Piece/s'),
+('TFM-ACC-0010', 'Spring Cable Support', 'EA0342', 'ACC', 'TFM', '50.00', 20, 'Piece/s'),
+('TFM-ACC-0011', 'CINA 200 Gas Nozzle', 'MC0930', 'ACC', 'TFM', '220.00', 20, 'Piece/s'),
+('TFM-ACC-0012', 'CINA 200 Torch Head', 'MF0293', 'ACC', 'TFM', '385.00', 20, 'Piece/s'),
+('TFM-ACC-0013', 'Front Cable Rubber Support', 'BW0237', 'ACC', 'TFM', '30.00', 20, 'Piece/s'),
+('TFM-ACC-0014', 'Red Liner 1-1.2 3m/Euro', 'GM0510', 'ACC', 'TFM', '245.00', 20, 'Piece/s'),
+('TFM-ACC-0015', 'Red Liner 1-1.2 4m/Euro', 'GM0511', 'ACC', 'TFM', '325.00', 25, 'Piece/s'),
+('TFM-ACC-0016', 'Contact Tip 0.8', 'MD0291-08', 'ACC', 'TFM', '63.00', 25, 'Piece/s'),
+('TFM-ACC-0017', 'Contact Tip 1.0', 'MD0291-10', 'ACC', 'TFM', '63.00', 25, 'Piece/s'),
+('TFM-ACC-0018', 'Contact Tip 1.2', 'MD0291-12', 'ACC', 'TFM', '63.00', 25, 'Piece/s'),
+('TFM-ACC-0019', 'Contact Tip 1.6mm', 'MD0291-16', 'ACC', 'TFM', '63.00', 25, 'Piece/s'),
+('TFM-ACC-0020', 'Contact Tip 1.0 (Cu, Cr, Zr)', 'MD0291-80', 'ACC', 'TFM', '63.00', 25, 'Piece/s'),
+('TKU-ACC-0011', 'Asphat Cutter 540mm', 'A-1', 'ACC', 'TKU', '4500.00', 30, 'Piece/s'),
+('TKU-ACC-0012', 'Asphat Cutter 505mm', 'A-4', 'ACC', 'TKU', '4300.00', 30, 'Piece/s'),
+('TKU-ACC-0013', 'Chisel (Narrow) 610mm', 'C-1', 'ACC', 'TKU', '2900.00', 30, 'Piece/s'),
+('TKU-ACC-0014', 'Chisel (Narrow) 610mm', 'C-2', 'ACC', 'TKU', '2800.00', 30, 'Piece/s'),
+('TKU-ACC-0015', 'Chisel (Narrow) 475mm', 'C-9', 'ACC', 'TKU', '1900.00', 30, 'Piece/s'),
+('TKU-ACC-0016', 'Digger Chisel 570mm', 'D-1', 'ACC', 'TKU', '7200.00', 30, 'Piece/s'),
+('TKU-ACC-0017', 'Digger Chisel 500mm', 'D-4', 'ACC', 'TKU', '7200.00', 30, 'Piece/s'),
+('TKU-ACC-0018', 'Digger Spade 545mm', 'DW1', 'ACC', 'TKU', '7600.00', 30, 'Piece/s'),
+('TKU-ACC-0019', 'Digger Spade 490mm', 'DW4', 'ACC', 'TKU', '7600.00', 30, 'Piece/s'),
+('TKU-ACC-0020', 'Moil Point 620mm', 'M-1', 'ACC', 'TKU', '2600.00', 30, 'Piece/s'),
+('TKU-HDT-0001', 'Air Saw/Cutter 5mm', 'AF-5A', 'PWT', 'TKU', '32000.00', 25, 'Piece/s'),
+('TKU-HDT-0002', 'Air Saw/Cutter 10mm', 'AF-10S', 'PWT', 'TKU', '42000.00', 25, 'Piece/s'),
+('TKU-HDT-0003', 'Air Saw/Cutter 30mm', 'APS-30', 'PWT', 'TKU', '80000.00', 25, 'Piece/s'),
+('TKU-HDT-0004', 'Concrete Breaker', 'TCD-20', 'PWT', 'TKU', '85000.00', 25, 'Piece/s'),
+('TKU-HDT-0005', 'Angle Grinder 100x16mm', 'TAG-40SA', 'PWT', 'TKU', '21000.00', 25, 'Piece/s'),
+('TKU-HDT-0006', 'Die Grinder', 'MG-20', 'PWT', 'TKU', '8500.00', 25, 'Piece/s'),
+('TKU-HDT-0007', 'Straight Grinder 3"', 'TSG-3F', 'PWT', 'TKU', '31000.00', 25, 'Piece/s'),
+('TKU-HDT-0008', 'Impact Wrench 3/8" Straight Body 10mm', 'MI-1310', 'PWT', 'TKU', '15000.00', 25, 'Piece/s'),
+('TKU-HDT-0009', 'Rock Drill ', 'TH-5S', 'PWT', 'TKU', '86000.00', 25, 'Piece/s'),
+('TKU-HDT-0010', 'Sander and Polisher 3" -5"', 'MS-4125B', 'PWT', 'TKU', '11000.00', 25, 'Piece/s');
 
 -- --------------------------------------------------------
 
