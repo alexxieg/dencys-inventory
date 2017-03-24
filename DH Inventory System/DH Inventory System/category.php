@@ -102,7 +102,7 @@
 								</a>
 								<a href="deleteCategory.php?useId=<?php echo $useThisID; ?>"> 
 									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
 							</td>	
