@@ -8,16 +8,20 @@
 		
 		<title>Inventory</title>
 		
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
+		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-			
+		
+		<!-- Database connection -->
 		<?php include('dbcon.php'); ?>
 		
+		<!-- Login Session-->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -34,6 +38,7 @@
 		<!-- PHP code for fetching the data-->
 		<?php include('fetchInventory.php'); ?>
 	
+		<!-- Page Header and Navigation Bar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 			<div class="container">
 					<img src="WDF_1857921.jpg" id="headerBG"/>
@@ -327,6 +332,8 @@
 			
 		</div>
 	
+	
+		<!-- Footer -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-left" id="report">
