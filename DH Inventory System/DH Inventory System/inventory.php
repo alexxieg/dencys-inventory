@@ -167,6 +167,7 @@
 					<?php
 						foreach ($result as $item):
 							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+							$incID = $item["prodID"];
 							if ($currQty <= $item["reorderLevel"]){
 					?> 
 					
@@ -184,10 +185,12 @@
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Remarks"></td>
 						<td>
-							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ledger" id="edBtn1">
+							<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+								<button type="button" class="btn btn-default" id="edBtn">
 									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-							</button>	
-						</td>	
+								</button>
+							</a>
+						</td>
 					</tr>
 					
 					<?php	
@@ -207,9 +210,11 @@
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Remarks"></td>
 						<td>
-							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ledger" id="edBtn1">
+							<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+								<button type="button" class="btn btn-default" id="edBtn">
 									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-							</button>	
+								</button>
+							</a>	
 						</td>	
 					</tr>
 					<?php
