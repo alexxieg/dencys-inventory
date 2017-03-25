@@ -20,7 +20,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="user") {
+			if (!isset($_SESSION['id']) || $role!="admin") {
 				header('Location: index.php');
 			}
 				$session_id = $_SESSION['id'];
@@ -30,8 +30,7 @@
 	</head>
   
 	<body>
-		<?php include('fetchIncoming.php'); ?>
-		
+		<?php include('functionalities/fetchIncoming.php'); ?>
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 				<div class="container">
 							<img src="WDF_1857921.jpg" id="headerBG"/>
@@ -50,15 +49,15 @@
 						</div>
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right" id="categories">
-								<li><a href="userinventory.php">Inventory</a></li>
-								<li class="active"><a href="userincoming.php">Incoming</a></li>
-								<li><a href="useroutgoing.php">Outgoing</a></li>
-								<li><a href="userreturns.php">Returns</a></li>
-								<li><a href="userproduct.php">Product</a></li>
+								<li><a href="inventory.php">Inventory</a></li>
+								<li class="active"><a href="incoming.php">Incoming</a></li>
+								<li><a href="outgoing.php">Outgoing</a></li>
+								<li><a href="returns.php">Returns</a></li>
+								<li><a href="admin.php">Admin</a></li>
 							</ul>
 						</div>
 					</div>
-			</nav>
+				</nav>
 
 		<div id="contents">
 			<div class="pages no-more-tables">
@@ -75,7 +74,7 @@
 				<table class="table table-striped table-bordered">	
 					<tr>
 						<th>
-							Date
+							<div id="tabHead">Date</div>
 							<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -87,7 +86,7 @@
 							Product ID
 						</th>
 						<th>
-							Product Description
+							<div id="tabHead">Product Description</div>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -95,6 +94,7 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
+						
 						<th>
 							Model
 						</th>
@@ -102,11 +102,13 @@
 						<th>
 							Quantity
 						</th>
+						
 						<th>
 							Unit
 						</th>
+						
 						<th>
-							Employee
+							<div id="tabHead">Employee</div>
 							<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
 							</button>
@@ -114,6 +116,7 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
+						
 						<th>
 							Receipt No.
 							
@@ -141,14 +144,14 @@
 						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 						<td>
-							<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
-							<button type="button" class="btn btn-default">
+							<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+							<button type="button" class="btn btn-default" id="edBtn">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
 							</a>
-							<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							<a href="functionalities/deleteInc.php?incId=<?php echo $incID; ?>"> 
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
+								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 							</button>
 							</a>
 						</td>				
@@ -173,14 +176,14 @@
 									
 									<h5>Employee</h5>
 									<?php
-										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query = $conn->prepare("SELECT empFirstName FROM employee ");
 										$query->execute();
 										$res = $query->fetchAll();
 									?>
 													
 									<select class="form-control" id="addEmpl" name="emp">
 										<?php foreach ($res as $row): ?>
-											<option><?=$row["empName"]?></option>
+											<option><?=$row["empFirstName"]?></option>
 										<?php endforeach ?>
 									</select> 
 									
@@ -207,7 +210,7 @@
 												</td>
 														
 												<td>
-													<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
+													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
 												</td>
 												
 												<td>
@@ -219,47 +222,45 @@
 									
 									<br>
 									
+									<div class="modFoot">
 									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
 									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 									<br>
 									<br>
-									<div class="modFoot">
 									<span>
-										<input type="button" class="btn btn-danger" value="Cancel" data-dismiss="modal" onclick="this.form.reset()" id="canBtn">
+										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 									</span>
 									<span>
-										<input type="submit" name="submit" value="Submit"class="btn btn-success" id="sucBtn">
+										<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
 									</span>
 									</div>
 								</form> 			
 							</div>
 						
 							<div class="modal-footer">
-								</div>
 							</div>
 						</div>
-					</div>      	
-				</div>
-			</div>	
-		</div>
-	</div>	
-	
-				<nav class="navbar navbar-inverse navbar-fixed-bottom">
-					<div class="container">
-						<ul class="nav navbar-nav navbar-left" id="report">
-							<li>
-								<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
-									<span class="glyphicon glyphicon-print"></span>
-								    Print
-								</button> 
-							</li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right" id="logout">
-							<li><a href="logout.php">Logout</a></li>
-						</ul>
 					</div>
-				</nav>	
-				
-				<?php include('addIncoming.php'); ?>
+				</div>      	
+			</div>
+		</div>		
+	
+		<nav class="navbar navbar-inverse navbar-fixed-bottom">
+			<div class="container">
+				<ul class="nav navbar-nav navbar-left" id="report">
+					<li>
+						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
+							<span class="glyphicon glyphicon-print"></span>
+						    Print
+						</button> 
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" id="logout">
+					<li><a href="logout.php">Logout</a></li>
+				</ul>
+			</div>
+		</nav>	
+		
+		<?php include('functionalities/addIncoming.php'); ?>
   </body>
 </html>

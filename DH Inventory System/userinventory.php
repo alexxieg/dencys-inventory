@@ -8,16 +8,20 @@
 		
 		<title>Inventory</title>
 		
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
+		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-			
+		
+		<!-- Database connection -->
 		<?php include('dbcon.php'); ?>
 		
+		<!-- Login Session-->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -31,8 +35,10 @@
 	</head>
     
   	<body>
-		<?php include('fetchInventory.php'); ?>
+		<!-- PHP code for fetching the data-->
+		<?php include('functionalities/fetchInventory.php'); ?>
 	
+		<!-- Page Header and Navigation Bar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 			<div class="container">
 					<img src="WDF_1857921.jpg" id="headerBG"/>
@@ -52,11 +58,11 @@
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right" id="categories">
-						<li class="active" id="navi"><a href="userinventory.php">Inventory</a></li>
-						<li><a href="userincoming.php">Incoming</a></li>
-						<li><a href="useroutgoing.php">Outgoing</a></li>
-						<li><a href="userreturns.php">Returns</a></li>
-						<li><a href="userproduct.php">Products</a></li>
+						<li class="active" id="navi"><a href="inventory.php">Inventory</a></li>
+						<li><a href="incoming.php">Incoming</a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+						<li><a href="admin.php">Admin</a></li>
 					</ul>
 				</div>
 			</div>
@@ -77,10 +83,11 @@
 					</table>
 				</div>
 				<br>
-				<table class="table table-striped table-bordered">
 				
+				<!-- Table for Inventory Data-->
+				<table class="table table-striped table-bordered">
 					<tr>
-						<td colspan="12" style="font-size: 35px;">
+						<td colspan="13" style="font-size: 35px;">
 							<?php
 							$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
 							$month->execute();
@@ -151,11 +158,16 @@
 						<th>
 							Remarks
 						</th>
+						
+						<th>
+							Stock Card
+						</th>
 					</tr>
 					
 					<?php
 						foreach ($result as $item):
 							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+							$incID = $item["prodID"];
 							if ($currQty <= $item["reorderLevel"]){
 					?> 
 					
@@ -172,6 +184,13 @@
 						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Remarks"></td>
+						<td>
+							<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+								<button type="button" class="btn btn-default" id="edBtn">
+									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+								</button>
+							</a>
+						</td>
 					</tr>
 					
 					<?php	
@@ -190,6 +209,13 @@
 						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Remarks"></td>
+						<td>
+							<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+								<button type="button" class="btn btn-default" id="edBtn">
+									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+								</button>
+							</a>	
+						</td>	
 					</tr>
 					<?php
 						}	
@@ -200,7 +226,8 @@
 					?>
 				</table>
 			</div>	
-				
+					
+			<!-- Modal for Reorder Products Summary -->
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
@@ -262,8 +289,56 @@
 					</div>
 				</div>
 			</div>
-		</div>
 			
+			<!-- Modal for the Product Stock Card/Ledger -->
+			<div class="modal fade" id="ledger" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Stock Card</h4>
+						</div>
+						<div class="modal-body">
+						<h5>Product Name: </h5>
+							<table class="table table-bordered" id="tables">
+								<tr>
+									<th>
+										Date
+									</th>
+									<th>
+										In
+									</th>
+									<th>
+										Out
+									</th>
+									<th>
+										Balance
+									</th>
+								</tr>
+								
+								<tr>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>
+									</td>									
+									<td>
+									</td>
+								</tr>
+							</table>
+						</div>
+						
+						<div class="modal-footer">	
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	
+	
+		<!-- Footer -->
 		<nav class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-left" id="report">

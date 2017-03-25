@@ -4,14 +4,14 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<title>Employees</title>
-				
+
+		<title>Product Brands</title>
+			
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		
-		<script src="employees.js"></script>
+		<script src="brand.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -31,7 +31,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT empID, empFirstName, empLastName, empMidName, empExtensionName FROM employee");
+			$query = $conn->prepare("SELECT brandID, brandName FROM brand");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -70,49 +70,43 @@
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
-						<h1 id="headers">EMPLOYEES</h1>
-							<form action="" method="post">
+						<h1 id="headers">PRODUCT BRANDS</h1>
+							<form action="?" method="post">
 								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 							</form>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Brand</button>							
 					</table>
 				</div>
 					
 				<div class="prodTable">
 					<table class="table table-bordered" id="tables">
 						<tr>
-							<th>Employee ID</th>
-							<th>First Name</th>
-							<th>Middle Name</th>
-							<th>Last Name</th>
-							<th>Extension Name</th>
+							<th>Brand ID</th>
+							<th>Brand Name</th>
 							<th></th>
 						</tr>
 							
 						<?php
 							foreach ($result as $item):
-							$employID = $item["empID"];
+							$useThisID = $item["brandID"];
 						?>
 
 						<tr>
-							<td><?php echo $item["empID"]; ?></td>
-							<td><?php echo $item["empFirstName"]; ?></td>
-							<td><?php echo $item["empMidName"]; ?></td>
-							<td><?php echo $item["empLastName"]; ?></td>
-							<td><?php echo $item["empExtensionName"]; ?></td>
+							<td><?php echo $item["brandID"]; ?></td>
+							<td><?php echo $item["brandName"]; ?></td>
 							<td>
-								<a href="editEmployees.php?emplId=<?php echo $employID; ?>" target="_blank">
-								<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								</button>
-								</a>	
-							
-								<a href="deleteEmployee.php?emplId=<?php echo $employID; ?>"> 
+								<a>
+									<button type="button" class="btn btn-default">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+								</a>
+								
+								<a href="functionalities/deleteBrand.php?useId=<?php echo $useThisID; ?>"> 
 									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
-							</td>		
+							</td>
 						</tr>
 							
 						<?php
@@ -125,26 +119,29 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Add New Employee</h4>
+									<h4 class="modal-title">Add New Brand</h4>
 								</div>
 								<div class="modal-body">
-									<form action="" method="POST" onsubmit="return validateForm()">									
-										<h3>Name</h3>
-										<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empName"> <br>
+									<form action="" method="POST" onsubmit="return validateForm()">		
+										<h3>Brand ID</h3>
+										<input type="text" class="form-control" id="addBrandID" placeholder="Brand ID" name="brandID"> <br>
+										<h3>Brand Name</h3>
+										<input type="text" class="form-control" id ="addBrandName" placeholder="Brand Name" name="brandName"> <br>
 										<br>
 										
-										<div class="modFoot">
-										<span>
-											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-										</span>
-										<span>
-											<input type="submit" value="Submit" class="btn btn-success" name="addEmp" id="sucBtn">
-										</span>
-									</div>
+									<div class="modFoot">
+									<span>
+										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+									</span>
+									<span>
+										<input type="submit" value="Submit" class="btn btn-success" name="addBrand" id="sucBtn">
+									</span>
 									</form> 
 								</div>
+								</div>
 								
-								<div class="modal-footer">	
+								<div class="modal-footer">
+									
 								</div>
 							</div>
 						</div>
@@ -168,7 +165,7 @@
 			</div>
 		</nav>
 		
-		<?php include('addEmployee.php'); ?>
+		<?php include('functionalities/addBrand.php'); ?>
 		
 	</body>
 </html>

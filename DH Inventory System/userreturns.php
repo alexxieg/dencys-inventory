@@ -30,7 +30,7 @@
 	</head>
   
 	<body>
-		<?php include('fetchReturns.php'); ?>
+		<?php include('functionalities/fetchReturns.php'); ?>
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 			<div class="container">
 						<img src="WDF_1857921.jpg" id="headerBG"/>
@@ -108,6 +108,8 @@
 						<th>
 							Remarks
 						</th>
+						<th>
+						</th>
 					</tr>
 					<?php
 						foreach ($result as $item):
@@ -122,6 +124,18 @@
 						<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+						<td>
+							<a href="functionalities/editRet.php?retId=<?php echo $retID; ?>" target="_blank">
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+							</a>
+							<a href="functionalities/deleteRet.php?retId=<?php echo $retID; ?>">
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+							</button>
+							</a>
+						</td>
 					</tr>
 							
 					<?php
@@ -192,7 +206,7 @@
 			</div>
 		</nav>
 
-		<?php include('addReturn.php'); ?>
+		<?php include('functionalities/addReturn.php'); ?>
 			
 	</body>
 </html>

@@ -97,12 +97,12 @@
 							<td><?php echo $item["password"]; ?></td>
 					
 							<td>
-								<a href="editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
+								<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
 									<button type="button" class="btn btn-default">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
-								<a href="deleteAcc.php?useId=<?php echo $useThisID; ?>"> 
+								<a href="functionalities/deleteAcc.php?useId=<?php echo $useThisID; ?>"> 
 									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
@@ -173,7 +173,7 @@
 			</div>
 		</nav>
 		
-		<?php include('addAccount.php'); ?>
+		<?php include('functionalities/addAccount.php'); ?>
 	</body>
 </html>
 

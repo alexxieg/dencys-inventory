@@ -5,34 +5,22 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Product Brands</title>
-			
+		<title>Product Categories</title>
+				
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		
-		<script src="brand.js"></script>
+		<script src="category.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
-		<script src="js/jquery.dataTables.js"> </script>
-		<link href="css/jquery.dataTables.css" rel="stylesheet">
-		   <script type="text/javascript">
-        $(document).ready(function(){
-            $('#brands').dataTable();
- colReorder: true  			
-        });
-		
-	
-   
-    </script>
 		
 		<?php include('dbcon.php'); ?>
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) || $role!="admin") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -43,7 +31,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT brandID, brandName FROM brand");
+			$query = $conn->prepare("SELECT categoryID, categoryName FROM category");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -82,38 +70,42 @@
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
-						<h1 id="headers">PRODUCT BRANDS</h1>
+						<h1 id="headers">PRODUCT CATEGORIES</h1>
 							<form action="?" method="post">
 								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 							</form>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Brand</button>							
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Category</button>							
 					</table>
 				</div>
 					
 				<div class="prodTable">
-					<table id="brands" class="display" cellspacing="0" width="100%">
+					<table class="table table-bordered" id="tables">
 						<tr>
-							<th>Brand ID</th>
-							<th>Brand Name</th>
+							<th>Category ID</th>
+							<th>Category</th>
 							<th></th>
 						</tr>
 							
 						<?php
 							foreach ($result as $item):
+							$useThisID = $item["categoryID"];
 						?>
 
 						<tr>
-							<td><?php echo $item["brandID"]; ?></td>
-							<td><?php echo $item["brandName"]; ?></td>
+							<td><?php echo $item["categoryID"]; ?></td>
+							<td><?php echo $item["categoryName"]; ?></td>
 							<td>
-								<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								</button>
-							
-								<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-								</button>
-							</td>		
+								<a>
+									<button type="button" class="btn btn-default">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+								</a>
+								<a href="functionalities/deleteCategory.php?useId=<?php echo $useThisID; ?>"> 
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+									</button>
+								</a>
+							</td>	
 						</tr>
 							
 						<?php
@@ -131,24 +123,25 @@
 								<div class="modal-body">
 									<form action="" method="POST" onsubmit="return validateForm()">		
 										<h3>Brand ID</h3>
-										<input type="text" class="form-control" id="addBrandID" placeholder="Brand ID" name="brandID"> <br>
+										<input type="text" class="form-control" id="addRcpt" placeholder="Category ID" name="categoryID"> <br>
 										<h3>Brand Name</h3>
-										<input type="text" class="form-control" id ="addBrandName" placeholder="Brand Name" name="brandName"> <br>
+										<input type="text" class="form-control" id ="addRcpt" placeholder="Category" name="categoryName"> <br>
 										<br>
 										
-							
-									<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" style="float:right; margin-left:10px;"> Cancel</button>
-									</span>
-									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addBrand" style="float:right;">
-									</span>
+										<div class="modFoot">
+										<span>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn">Cancel</button>
+										</span>
+										<span>
+											<input type="submit" value="Submit" class="btn btn-success" name="addCategory" id="sucBtn">
+										</span>
 									</form> 
+								</div>
 								</div>
 								
 								<div class="modal-footer">
-									
 								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -171,7 +164,7 @@
 			</div>
 		</nav>
 		
-		<?php include('addBrand.php'); ?>
+		<?php include('functionalities/addCategory.php'); ?>
 		
 	</body>
 </html>

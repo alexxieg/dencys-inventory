@@ -34,7 +34,7 @@
 	</head>
 	  
 	<body>
-		<?php include('fetchProduct.php'); ?>
+		<?php include('functionalities/fetchProduct.php'); ?>
 	
 			<div class="productHolder" >
 				<nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -131,6 +131,8 @@
 									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 								</button>
 							</th>
+							<th>
+							</th>
 						</tr>
 						<?php
 							foreach ($result as $item):
@@ -144,6 +146,18 @@
 							<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 							<td data-title="Unit"><?php echo $item["unitType"];?></td>
 							<td data-title="Price"><?php echo $item["price"]; ?></td>
+							<td>
+								<a href="functionalities/editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
+									<button type="button" class="btn btn-default" id="edBtn1">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+								</a>	
+								<a href="functionalities/deletePro.php?proId=<?php echo $proID; ?>">
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn1">
+										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+									</button>
+								</a>
+							</td>	
 						</tr>				
 						<?php
 							endforeach;

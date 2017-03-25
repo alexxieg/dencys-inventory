@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Product Brands</title>
+		<title>Branches</title>
 			
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
@@ -31,7 +31,7 @@
   
 	<body>
 		<?php
-			$query = $conn->prepare("SELECT brandID, brandName FROM brand");
+			$query = $conn->prepare("SELECT branchID, location FROM branch");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -70,38 +70,38 @@
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
-						<h1 id="headers">PRODUCT BRANDS</h1>
+						<h1 id="headers">BRANCHES</h1>
 							<form action="?" method="post">
 								<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 							</form>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Brand</button>							
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Branch</button>							
 					</table>
 				</div>
 					
 				<div class="prodTable">
 					<table class="table table-bordered" id="tables">
 						<tr>
-							<th>Brand ID</th>
-							<th>Brand Name</th>
+							<th>Branch ID</th>
+							<th>Branch</th>
 							<th></th>
 						</tr>
 							
 						<?php
 							foreach ($result as $item):
-							$useThisID = $item["brandID"];
+							$useThisID = $item["branchID"];
 						?>
 
 						<tr>
-							<td><?php echo $item["brandID"]; ?></td>
-							<td><?php echo $item["brandName"]; ?></td>
+							<td><?php echo $item["branchID"]; ?></td>
+							<td><?php echo $item["location"]; ?></td>
 							<td>
-								<a href="editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
+								<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
 									<button type="button" class="btn btn-default">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
 								
-								<a href="deleteBrand.php?useId=<?php echo $useThisID; ?>"> 
+								<a> 
 									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
@@ -124,9 +124,9 @@
 								<div class="modal-body">
 									<form action="" method="POST" onsubmit="return validateForm()">		
 										<h3>Brand ID</h3>
-										<input type="text" class="form-control" id="addBrandID" placeholder="Brand ID" name="brandID"> <br>
+										<input type="text" class="form-control" id="addBranchID" placeholder="Branch ID" name="branchID"> <br>
 										<h3>Brand Name</h3>
-										<input type="text" class="form-control" id ="addBrandName" placeholder="Brand Name" name="brandName"> <br>
+										<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="branch"> <br>
 										<br>
 										
 									<div class="modFoot">
@@ -134,7 +134,7 @@
 										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 									</span>
 									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addBrand" id="sucBtn">
+										<input type="submit" value="Submit" class="btn btn-success" name="addBranch" id="sucBtn">
 									</span>
 									</form> 
 								</div>
@@ -165,7 +165,7 @@
 			</div>
 		</nav>
 		
-		<?php include('addBrand.php'); ?>
+		<?php include('functionalities/addBranch.php'); ?>
 		
 	</body>
 </html>

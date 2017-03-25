@@ -31,7 +31,7 @@
 	</head>
   
 	<body>
-		<?php include('fetchOutgoing.php'); ?>
+		<?php include('functionalities/fetchOutgoing.php'); ?>
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 		<div class="container">
 					<img src="WDF_1857921.jpg" id="headerBG"/>
@@ -150,12 +150,12 @@
 							<td data-title="Branch"><?php echo $item["location"]; ?></td>
 							<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 							<td>
-								<a href="editOut.php?outsId=<?php echo $outid; ?>">
+								<a href="functionalities/editOut.php?outsId=<?php echo $outid; ?>">
 								<button type="button" class="btn btn-default">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
 								</a>
-								<a href="deleteOut.php?outsId=<?php echo $outid; ?>">
+								<a href="functionalities/deleteOut.php?outsId=<?php echo $outid; ?>">
 								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 								</button>
@@ -286,7 +286,7 @@
 			</div>
 		</nav>
 		
-		<?php include('addOutgoing.php'); ?>
+		<?php include('functionalities/addOutgoing.php'); ?>
 		
 	</body>
 </html>
