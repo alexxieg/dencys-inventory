@@ -40,43 +40,69 @@
 	
 		<!-- Page Header and Navigation Bar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
-			<div class="container">
-					<img src="WDF_1857921.jpg" id="headerBG"/>
-				<center><img src="dencys.png" alt="logo" id="logo1"/></center>
-			</div>
+		<!-- Header -->
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+		      </button>
+		    </div>
+		   	<h4 id="moduleIdent"><i class="glyphicon glyphicon-user"></i> Admin </h4>
+		    <img src="logohead.png" id="logohead"/>
+		    <form action="?" method="post">
+					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			</form>
+		  </div><!-- /container -->
 
-			<div class="splitHeader">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div>
 
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right" id="categories">
-						<li class="active" id="navi"><a href="inventory.php">Inventory</a></li>
-						<li><a href="incoming.php">Incoming</a></li>
-						<li><a href="outgoing.php">Outgoing</a></li>
-						<li><a href="returns.php">Returns</a></li>
-						<li><a href="admin.php">Admin</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-				
+
+		<!-- Side bar -->
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="collapse navbar-collapse">
+				<ul class="nav nav-pills nav-stacked affix">
+		        <li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+		   	
+
+		        <li class="nav-header">  	
+		        	<a href="#" data-toggle="collapse" data-target="#menu2">
+		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
+		          	</a>
+		            <ul class="list-unstyled collapse" id="menu2">
+		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a>
+		                </li>
+		                <li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a>
+		                </li>
+		                <li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a>
+		                </li>
+		                <li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a>
+		                </li>
+		                <li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a>
+		                </li>
+		                <li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
+		                </li>                              
+		            </ul>
+		            <br>	
+		            <br>	
+		            <br>	
+		            <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+		    	</ul>
+		 	 </div><!--/span-->	
+		   </div>
+		<!-- end of side  bar -->
+		 </nav><!-- /Header -->
 		
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">INVENTORY</h1>	
-						<form action="?" method="post">
-							<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-						</form>	
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
 							Products for Reorder
 						</button>					
@@ -348,9 +374,6 @@
 						    Print
 						</button> 
 					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right" id="logout">
-					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</nav>

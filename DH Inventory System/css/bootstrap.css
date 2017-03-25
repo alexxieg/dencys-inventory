@@ -6845,7 +6845,7 @@ button.close {
 
 .pages {
   background-color: white;
-  padding: 0 5% 10% 5%;
+  padding: 0 3% 10% 13%;
   
 }
 
@@ -6972,7 +6972,7 @@ margin-bottom: 2%;
 #searchBar{
   width: 26%;
   float: left;
-  margin-top: .3%;
+  margin-top: .5%;
   height: 40px;
 }
 
@@ -7019,10 +7019,6 @@ border: none;
 
 #adminContent {
   margin-top: 7%;
-}
-
-#contents {
-  margin-top: 10%;
 }
 
 #tableHeader .btnclr{
@@ -7085,10 +7081,6 @@ border: none;
       width: 300px;
       height: 130px;
       margin-bottom: 2%;
-    }
-
-    .no-more-tables{
-      margin-top: 5%;
     }
 
     #tableHeader{
@@ -7409,12 +7401,29 @@ border: none;
 }
 
 @media (max-width: 768px) {
+ 
+  #togBtn{
+    margin-bottom: -120px;
+    margin-top: 10px;
+  }
+
+  img#logohead{
+    float: right;
+    width: 15%;
+  }
+
+  #searchBar{
+    margin-left: 50px;
+    margin-top: 5px;
+  }
+
   #categories{
     font-size: 18px;
     margin-right: 17%;
     margin-top: .2%;
     font-family: dencyFont;
   }
+
  img#logo1 {
     width: 230px;
     height: 130px;
@@ -7489,4 +7498,19 @@ border: none;
 #sucBtn:hover{
   background-color: green;
   color: white;
+}
+
+#logohead{
+  width: 7%;
+  float: left;
+}
+
+.nav-header #menu2{
+  margin-left: 30px;
+}
+
+#moduleIdent{
+  color: white;
+  float: right;
+  margin-top: 1.4%;
 }
