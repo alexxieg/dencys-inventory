@@ -1,3 +1,11 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<script src="sweetalert2/dist/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+		<title> </title>
+	</head>
+	<body>
 <?php
 include('dbcon.php');
 if (isset($_POST['username'])) {	
@@ -19,14 +27,34 @@ if (isset($_POST['username'])) {
 			header('Location: userInventory.php');
 	} } else {
 ?>
+<body>
 <script>
-	alert("Invalid Username or Password")
-	window.location="index.php";
+swal({
+  title: 'Invalid Username or Password',
+  type: 'error',
+  confirmButtonColor: '#d33',
+  confirmButtonText: 'Ok'
+}).then(
+  function () {
+		window.location.href = "index.php";
+  },
+  // handling the promise rejection
+  function (dismiss) {
+    if (dismiss === 'overlay') {
+	  window.location.href = "index.php";
+    }
+  }
+)
+     
+	
 </script>
+</body>
+</html>
 <?php 
 }
 }
 ?>
+
 
 		
 		
