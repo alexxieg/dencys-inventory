@@ -21,20 +21,20 @@ function validateForm() {
 	}
 	if(document.getElementById('sucBtn').value != null) {
 swal({
-  title: "Are you sure you want to add this entry?",
+  title: "Are you sure?",
   type: "warning",
   showCancelButton: true,
   confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Yes",
-  cancelButtonText: "No",
+  confirmButtonText: "Yes, delete it!",
+  cancelButtonText: "No, cancel plx!",
   closeOnConfirm: true,
   closeOnCancel: true
 },
 function(isConfirm){
   if (isConfirm) {
-    swal(""success");
+    swal("Added!", "Your Entry has been added.", "success");
   } else {
-    swal("Cancelled");
+    swal("Cancelled", "error");
   }
 });
 	}
