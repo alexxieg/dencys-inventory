@@ -188,7 +188,7 @@
 			</div>
 		</nav>
 		
-		<?php include('addCategory.php'); ?>
+		<?php include('functionalities/addCategory.php'); ?>
 		
 	</body>
 </html>

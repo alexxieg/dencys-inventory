@@ -289,6 +289,6 @@
 			</div>
 		</nav>
 		
-		<?php include('addProduct.php'); ?>
+		<?php include('functionalities/addProduct.php'); ?>
 	</body>
 </html>
