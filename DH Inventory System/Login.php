@@ -27,6 +27,7 @@ if (isset($_POST['username'])) {
 			header('Location: userInventory.php');
 	} } else {
 ?>
+
 <body>
 <script>
 swal({

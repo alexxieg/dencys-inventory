@@ -6931,6 +6931,9 @@ img#logo1 {
 #headers{
   color: #000000;
   margin: -5% 0 2% 0;
+  font-family: dencyFont;
+
+
 }
 
 .loginbtn {
@@ -7024,8 +7027,6 @@ border: none;
 #tableHeader .btnclr{
   background-color: #3b5998;
   color: white;
-  border-width: 1px;
-  border-color: black;
   font-size: 15px;
 }
 

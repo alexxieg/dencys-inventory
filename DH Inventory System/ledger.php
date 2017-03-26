@@ -106,32 +106,33 @@
 			$res = $query->fetchAll();
 		?>
 		
-		<div class="addInv">
-			<div>
-			<h1 id="headers">Stock Card</h1>
-				<table class="table table-striped table-bordered">
-					<tr>
-						<td colspan="12" style="font-size: 35px;">
-							<?php foreach ($res as $row): ?>
-								<?php echo $row["prodName"]; break;?>
-							<?php endforeach ?>
-						</td>
-					</tr>
+		<div id="contents">
+			<div class="pages no-more-tables">
+				<div id="tableHeader">
+					<table class="table table-striped table-bordered">	
+						<h1 id="headers">Stock Card</h1>					
 					
-					<tr>
-						<th>
-							Date
-						</th>
-						
-						<th>
-							+
-						</th>
-						
-						<th>
-							-
-						</th>
-					</tr>
-					
+
+						<?php foreach ($res as $row): ?>
+							<?php echo $row["prodName"]; break;?>
+						<?php endforeach ?>
+												
+						<tr>
+							<th>
+								Date
+							</th>
+							
+							<th>
+								+
+							</th>
+							
+							<th>
+								-
+							</th>
+							<th>
+								Balance
+							</th>
+						</tr>
 					<?php
 						foreach ($res as $item):
 					?>
@@ -139,13 +140,29 @@
 							<td data-title="Date"><?php echo $item["DATE"]; ?></td>	
 							<td data-title="IN"><?php echo $item["Added"];?></td>
 							<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
+							<td></td>
 						</tr>
 					<?php
 						endforeach;
 					?>
-				</table>
+					</table>
+
+					
+					<hr>
+				
+					<br>
+					
+					<form>
+						<label>Adjustment: </label>
+						 <input type="text" name="adjustment" id="adjustment" placeholder="Enter adjustment">
+						 <button type="submit" name="adjust">Submit</button>
+					</form>
+				</div>
 			</div>
 		</div>
+					
+	<?php 
 		
+	?>
 	</body>
 </html>
