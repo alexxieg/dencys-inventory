@@ -1,17 +1,42 @@
 function validateForm() {
 	if(document.getElementById('addRcpt').value == "") {
-		alert('Please Enter Receipt Number');
+		swal({
+		title: "Error!",
+		text: "Please Enter Receipt no.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addRcpt').style.borderColor = "red";
 		return false;
 	}
 	if (document.getElementById('addQty').value == "") {
-		alert('Please Enter Quantity');
+		swal({
+		title: "Error!",
+		text: "Please Enter Quantity.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
 	}
-	if(confirm('Are you sure you want to add this entry?')) {
-		alert("Incoming Product Successfully Added");
-		return true;		
+	if(document.getElementById('sucBtn').value != null) {
+swal({
+  title: "Are you sure you want to add this entry?",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes",
+  cancelButtonText: "No",
+  closeOnConfirm: true,
+  closeOnCancel: true
+},
+function(isConfirm){
+  if (isConfirm) {
+    swal(""success");
+  } else {
+    swal("Cancelled");
+  }
+});
 	}
 	else {
 		return false;		
@@ -28,7 +53,12 @@ function deleteRow(tableID) {
 			var chkbox = row.cells[0].childNodes[0];
 			if(null != chkbox && true == chkbox.checked) {
 				if(rowCount <= 1) {
-					alert("Cannot delete all the rows.");
+					swal({
+		title: "Error!",
+		text: "Cannot delete all Rows",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 					break;
 				}
 					  
