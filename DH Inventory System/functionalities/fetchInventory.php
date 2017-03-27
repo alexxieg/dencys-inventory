@@ -26,19 +26,19 @@
 	$sort = (isset($_GET['orderBy']) ? $_GET['orderBy'] : null);
 	$searching = (isset($_REQUEST['search']) ? $_REQUEST['search'] : null);
 	if (!empty($sort)) { 
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, inventory.outQty
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.phyCount, inventory.initialQty, inventory.qty, inventory.inQty, inventory.outQty
 								FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-								GROUP BY prodID, initialQty, qty, inventory.inQty, inventory.outQty
+								GROUP BY prodID, initialQty, qty, inventory.inQty, inventory.outQty, inventory.phyCount
 								ORDER BY $sort");
 	} else if (!empty($searching)) {
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.model, product.unitType, product.reorderLevel, SUM(incoming.inQty + inventory.initialQty) AS qty, sum(incoming.inQty) AS inQty, inventory.outQty, inventory.initialQty, product.reorderLevel
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.model, product.unitType, product.reorderLevel, inventory.phyCount, inventory.qty, sum(incoming.inQty) AS inQty, inventory.outQty, inventory.initialQty, product.reorderLevel
 								FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 								WHERE prodName LIKE '%".$searching."%' OR model LIKE '%".$searching."%' OR unitType LIKE '%".$searching."%' OR product.prodID LIKE '%".$searching."%'
-								GROUP BY prodID, initialQty, qty, inventory.inQty, inventory.outQty");
+								GROUP BY prodID, initialQty, qty, inventory.inQty, inventory.outQty, inventory.phyCount");
 	} else { 
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, SUM(incoming.inQty + inventory.initialQty) AS qty, inventory.inQty, inventory.outQty
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.initialQty, inventory.phyCount, inventory.qty, inventory.inQty, inventory.outQty
 								FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-								GROUP BY prodID, initialQty, qty, inventory.inQty, inventory.outQty");
+								GROUP BY prodID, initialQty, qty, inventory.inQty, inventory.outQty, inventory.phyCount");
 	}	
 	$query->execute();
 	$result = $query->fetchAll();

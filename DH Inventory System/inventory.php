@@ -52,14 +52,14 @@
 
 		      <img src="logohead.png" id="logohead"/>
 
-            <div class="dropdown">
-			  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
-			  <div class="dropdown-content">
-			    <a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-			    <a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
-							<i class="glyphicon glyphicon-print"></i> Print</button></a>
-		    </div>
-		</div>
+				<div class="dropdown">
+				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+				  <div class="dropdown-content">
+					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+					<i class="glyphicon glyphicon-print"></i> Print</button></a>
+					</div>
+				</div>
 
    			</div>
 		    
@@ -78,6 +78,7 @@
 		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
 		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+				<li><a href="summaries.php"><i class=""></i>Summary</a></li>
 		   	
 
 		        <li class="nav-header">  	
@@ -109,7 +110,7 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">INVENTORY</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" >
 							Products for Reorder
 						</button>					
 					</table>
@@ -211,8 +212,8 @@
 						<td data-title="End. Quantity"></td>
 						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
-						<td data-title="Current Quantity"><?php echo $currQty; ?></td>
-						<td data-title="Physical Count"></td>
+						<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
+						<td data-title="Physical Count"><?php echo $item["phyCount"]; ?></td>
 						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Remarks"></td>
@@ -236,8 +237,8 @@
 						<td data-title="End. Quantity"></td>
 						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
-						<td data-title="Current Quantity"><?php echo $currQty; ?></td>
-						<td data-title="Physical Count"></td>
+						<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
+						<td data-title="Physical Count"><?php echo $item["phyCount"]; ?></td>
 						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Remarks"></td>

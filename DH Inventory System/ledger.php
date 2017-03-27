@@ -28,7 +28,7 @@
 	  
 	<body>
 	  
-	<!-- Page Header and Navigation Bar -->		
+	<!-- Page Header and Navigation Bar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 		<!-- Header -->
 		  <div class="container-fluid">
@@ -39,13 +39,25 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 		      </button>
-		    </div>
-		   	<h4 id="moduleIdent"><i class="glyphicon glyphicon-user"></i> Admin </h4>		    
-		    <img src="logohead.png" id="logohead"/>
+
+		      <img src="logohead.png" id="logohead"/>
+
+				<div class="dropdown">
+				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+				  <div class="dropdown-content">
+					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+					<i class="glyphicon glyphicon-print"></i> Print</button></a>
+					</div>
+				</div>
+
+   			</div>
+		    
 		    <form action="?" method="post">
 					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 			</form>
 		  </div><!-- /container -->
+		</nav>
 
 		<!-- Side bar -->
 		<div class="row row-offcanvas row-offcanvas-left">
@@ -57,7 +69,6 @@
 		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
 		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
 		   	
-
 		        <li class="nav-header">  	
 		        	<a href="#" data-toggle="collapse" data-target="#menu2">
 		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
@@ -76,15 +87,12 @@
 		                <li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
 		                </li>                              
 		            </ul>
-		            <br>	
-		            <br>	
-		            <br>	
-		            <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
 		    	</ul>
 		 	 </div><!--/span-->	
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
+		
 		
 		<?php
 			$incID= $_GET['incId'];
@@ -114,21 +122,25 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">Stock Card</h1>					
-<<<<<<< HEAD
-=======
+
 						
 						<tr>
 							<td>
 								Product ID:
 								<?php echo $incID;?>
 							</td>
->>>>>>> 21ee93ff37e3e7347e522c78aa9bd3ca171229f3
+
 
 							<td>
 							Product Name: 
 								<?php foreach ($res as $row): ?>
 									<?php echo $row["prodName"]; break;?>
 								<?php endforeach ?>
+							</td>
+							
+							<td>
+								Physical Quantity:
+							
 							</td>
 						</tr>
 												
@@ -182,27 +194,22 @@
 					
 					<form action="" method="POST">
 						<label>Adjustment: </label>
-<<<<<<< HEAD
-						 <input type="text" name="physQty" id="adjustment" placeholder="Enter Physical Quantity">
-						 <input type="text" name="remarks" placeholder="Enter Remarks">
-						 <button type="submit" name="adjust" id="adjust">Submit</button>
-=======
-						
+										
 						<?php foreach ($resul as $item): ?>							
 						<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["phyCount"]; ?>" placeholder="<?php echo $item["phyCount"]; ?>">
 						<?php endforeach; ?>
 						
+						<input type="text" name="remarks" placeholder="Enter Remarks">
+						
 						<button type="submit" name="adjust">Submit</button>
->>>>>>> 21ee93ff37e3e7347e522c78aa9bd3ca171229f3
+
 					</form>
 				</div>
 			</div>
 		</div>
 					
 	<?php 
-<<<<<<< HEAD
 
-=======
 		$incID= $_GET['incId'];
 		$quant=(isset($_REQUEST['adjustUpdate']) ? $_REQUEST['adjustUpdate'] : null);
 		
@@ -214,7 +221,7 @@
 			$conn->exec($sql);
 			echo "<meta http-equiv='refresh' content='0'>";
 		}
->>>>>>> 21ee93ff37e3e7347e522c78aa9bd3ca171229f3
+
 	?>
 	</body>
 </html>
