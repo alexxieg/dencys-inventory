@@ -47,8 +47,6 @@
 			</form>
 		  </div><!-- /container -->
 
-
-
 		<!-- Side bar -->
 		<div class="row row-offcanvas row-offcanvas-left">
 			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
@@ -111,7 +109,6 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">Stock Card</h1>					
-					
 
 						<?php foreach ($res as $row): ?>
 							<?php echo $row["prodName"]; break;?>
@@ -123,23 +120,36 @@
 							</th>
 							
 							<th>
+								Transaction ID
+							</th>
+							
+							<th>
 								+
 							</th>
 							
 							<th>
 								-
 							</th>
+							
+							<th>
+								Remarks
+							</th>
+							
 							<th>
 								Balance
 							</th>
+							
+					
 						</tr>
 					<?php
 						foreach ($res as $item):
 					?>
 						<tr>	
 							<td data-title="Date"><?php echo $item["DATE"]; ?></td>	
+							<td data-title="TransID"></td>
 							<td data-title="IN"><?php echo $item["Added"];?></td>
 							<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
+							<td></td>
 							<td></td>
 						</tr>
 					<?php
@@ -154,15 +164,16 @@
 					
 					<form>
 						<label>Adjustment: </label>
-						 <input type="text" name="adjustment" id="adjustment" placeholder="Enter adjustment">
-						 <button type="submit" name="adjust">Submit</button>
+						 <input type="text" name="physQty" id="adjustment" placeholder="Enter Physical Quantity">
+						 <input type="text" name="remarks" placeholder="Enter Remarks">
+						 <button type="submit" name="adjust" id="adjust">Submit</button>
 					</form>
 				</div>
 			</div>
 		</div>
 					
 	<?php 
-		
+
 	?>
 	</body>
 </html>
