@@ -47,13 +47,25 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 		      </button>
+
+		      <img src="logohead.png" id="logohead"/>
+
+            <div class="dropdown">
+			  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+			  <div class="dropdown-content">
+			    <a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+			    <a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+							<i class="glyphicon glyphicon-print"></i> Print</button></a>
 		    </div>
-		   	<h4 id="moduleIdent"><i class="glyphicon glyphicon-user"></i> Admin </h4>		    
-		    <img src="logohead.png" id="logohead"/>
+		</div>
+
+   			</div>
+		    
 		    <form action="?" method="post">
 					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 			</form>
 		  </div><!-- /container -->
+		</nav>
 
 
 
@@ -86,10 +98,6 @@
 		                <li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
 		                </li>                              
 		            </ul>
-		            <br>	
-		            <br>	
-		            <br>	
-		            <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
 		    	</ul>
 		 	 </div><!--/span-->	
 		   </div>
@@ -175,18 +183,6 @@
 				</div>
 			</div>
 		</div>
-
-		<nav class="navbar navbar-inverse navbar-fixed-bottom">
-			<div class="container">
-				<ul class="nav navbar-nav navbar-left" id="report">
-					<li>
-						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
-							<span class="glyphicon glyphicon-print"></span>
-						    Print
-						</button> 
-					</ul>
-			</div>
-		</nav>
 		
 		<?php include('functionalities/addBrand.php'); ?>
 		

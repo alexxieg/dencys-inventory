@@ -43,13 +43,25 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 		      </button>
+
+		      <img src="logohead.png" id="logohead"/>
+
+            <div class="dropdown">
+			  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+			  <div class="dropdown-content">
+			    <a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+			    <a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+							<i class="glyphicon glyphicon-print"></i> Print</button></a>
 		    </div>
-		   	<h4 id="moduleIdent"><i class="glyphicon glyphicon-user"></i> User </h4>		    
-		    <img src="logohead.png" id="logohead"/>
+		</div>
+
+   			</div>
+		    
 		    <form action="?" method="post">
 					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
 			</form>
 		  </div><!-- /container -->
+		</nav>
 
 
 
@@ -63,10 +75,6 @@
 		        <li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
 		        <li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
 		    	<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-		            <br>	
-		            <br>	
-		            <br>	
-		            <li><a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
 		    	</ul>
 		 	 </div><!--/span-->	
 		   </div>
@@ -201,18 +209,6 @@
 				</div>
 			</div>
 		</div>
-
-		<nav class="navbar navbar-inverse navbar-fixed-bottom">
-			<div class="container">
-				<ul class="nav navbar-nav navbar-left" id="report">
-					<li>
-						<button class="btn btn-success btn-lg" onclick="myFunction()" id="printBtn">
-							<span class="glyphicon glyphicon-print"></span>
-						    Print
-						</button> 
-					</ul>
-			</div>
-		</nav>
 
 		<?php include('functionalities/addReturn.php'); ?>
 			
