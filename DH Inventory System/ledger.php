@@ -104,6 +104,11 @@
 									");
 			$query->execute();
 			$res = $query->fetchAll();
+			
+			$query2 = $conn->prepare("SELECT phyCount, prodID FROM inventory WHERE prodID = '$incID'");					
+								
+			$query2->execute();
+			$resul = $query2->fetchAll();
 		?>
 		
 		<div id="contents">
@@ -111,11 +116,20 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">Stock Card</h1>					
-					
+						
+						<tr>
+							<td>
+								Product ID:
+								<?php echo $incID;?>
+							</td>
 
-						<?php foreach ($res as $row): ?>
-							<?php echo $row["prodName"]; break;?>
-						<?php endforeach ?>
+							<td>
+							Product Name: 
+								<?php foreach ($res as $row): ?>
+									<?php echo $row["prodName"]; break;?>
+								<?php endforeach ?>
+							</td>
+						</tr>
 												
 						<tr>
 							<th>
@@ -152,17 +166,31 @@
 				
 					<br>
 					
-					<form>
+					<form action="" method="POST">
 						<label>Adjustment: </label>
-						 <input type="text" name="adjustment" id="adjustment" placeholder="Enter adjustment">
-						 <button type="submit" name="adjust">Submit</button>
+						
+						<?php foreach ($resul as $item): ?>							
+						<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["phyCount"]; ?>" placeholder="<?php echo $item["phyCount"]; ?>">
+						<?php endforeach; ?>
+						
+						<button type="submit" name="adjust">Submit</button>
 					</form>
 				</div>
 			</div>
 		</div>
 					
 	<?php 
+		$incID= $_GET['incId'];
+		$quant=(isset($_REQUEST['adjustUpdate']) ? $_REQUEST['adjustUpdate'] : null);
 		
+		if (isset($_POST["adjust"])){
+		
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+			$sql = "UPDATE inventory SET phyCount=$quant WHERE prodID = '$incID'";
+			$conn->exec($sql);
+			echo "<meta http-equiv='refresh' content='0'>";
+		}
 	?>
 	</body>
 </html>
