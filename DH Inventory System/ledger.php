@@ -102,6 +102,11 @@
 									");
 			$query->execute();
 			$res = $query->fetchAll();
+			
+			$query2 = $conn->prepare("SELECT phyCount, prodID FROM inventory WHERE prodID = '$incID'");					
+								
+			$query2->execute();
+			$resul = $query2->fetchAll();
 		?>
 		
 		<div id="contents">
@@ -109,10 +114,23 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">Stock Card</h1>					
+<<<<<<< HEAD
+=======
+						
+						<tr>
+							<td>
+								Product ID:
+								<?php echo $incID;?>
+							</td>
+>>>>>>> 21ee93ff37e3e7347e522c78aa9bd3ca171229f3
 
-						<?php foreach ($res as $row): ?>
-							<?php echo $row["prodName"]; break;?>
-						<?php endforeach ?>
+							<td>
+							Product Name: 
+								<?php foreach ($res as $row): ?>
+									<?php echo $row["prodName"]; break;?>
+								<?php endforeach ?>
+							</td>
+						</tr>
 												
 						<tr>
 							<th>
@@ -162,18 +180,41 @@
 				
 					<br>
 					
-					<form>
+					<form action="" method="POST">
 						<label>Adjustment: </label>
+<<<<<<< HEAD
 						 <input type="text" name="physQty" id="adjustment" placeholder="Enter Physical Quantity">
 						 <input type="text" name="remarks" placeholder="Enter Remarks">
 						 <button type="submit" name="adjust" id="adjust">Submit</button>
+=======
+						
+						<?php foreach ($resul as $item): ?>							
+						<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["phyCount"]; ?>" placeholder="<?php echo $item["phyCount"]; ?>">
+						<?php endforeach; ?>
+						
+						<button type="submit" name="adjust">Submit</button>
+>>>>>>> 21ee93ff37e3e7347e522c78aa9bd3ca171229f3
 					</form>
 				</div>
 			</div>
 		</div>
 					
 	<?php 
+<<<<<<< HEAD
 
+=======
+		$incID= $_GET['incId'];
+		$quant=(isset($_REQUEST['adjustUpdate']) ? $_REQUEST['adjustUpdate'] : null);
+		
+		if (isset($_POST["adjust"])){
+		
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+			$sql = "UPDATE inventory SET phyCount=$quant WHERE prodID = '$incID'";
+			$conn->exec($sql);
+			echo "<meta http-equiv='refresh' content='0'>";
+		}
+>>>>>>> 21ee93ff37e3e7347e522c78aa9bd3ca171229f3
 	?>
 	</body>
 </html>
