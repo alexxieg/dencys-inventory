@@ -1,8 +1,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<script src="sweetalert2/dist/sweetalert2.min.js"></script>
-		<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		<title> </title>
 	</head>
 	<body>
