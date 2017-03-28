@@ -136,7 +136,7 @@
 					</table>
 				</div>
 				
-				<!-- Table for Brands-->
+				<!-- Table Display for Brands-->
 				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 					<div id="myTable_length" class="dataTables_length">
 						<div id="myTable_filter" class="dataTables_filter">
@@ -196,7 +196,7 @@
 					</tbody>
 				</table>	
 				
-				<!-- Modal for New Brand Entry Form -->
+				<!-- Modal: Add Brand Form -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
@@ -232,6 +232,7 @@
 			</div>
 		</div>
 		
+		<!-- Add New Brand -->
 		<?php include('functionalities/addBrand.php'); ?>
 		
 	</body>
