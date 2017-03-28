@@ -16,7 +16,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
-		<script src="js/bootstrap.min.js"></script>
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
 		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
@@ -115,7 +114,21 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->		 
+<<<<<<< HEAD
 	<div id="contents">
+=======
+							
+						<?php
+							foreach ($result as $item):
+							$useThisID = $item["brandID"];
+						?>
+
+						<?php
+							endforeach;
+						?>
+			
+		<div id="contents">
+>>>>>>> d4cbb833373487a1ed31239381f6504d88a986ab
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		

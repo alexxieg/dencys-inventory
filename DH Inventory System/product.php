@@ -18,6 +18,17 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+			<script>
+				$(document).ready(function(){
+					$('#myTable').dataTable();
+				});
+			</script>
+			
 		<?php include('dbcon.php'); ?>
 			
 		<?php 
@@ -102,7 +113,16 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
-		
+					
+					<?php
+						foreach ($result as $item):
+						$proID = $item["prodID"];
+					?>
+					
+					<?php
+						endforeach;
+					?>
+					
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -114,9 +134,16 @@
 					</table>
 				</div>
 
-				<table class="table table-striped table-bordered">
+			<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+				<div id="myTable_length" class="dataTables_length">
+					<div id="myTable_filter" class="dataTables_filter">
+					</div>
+				</div>
+			</div>
+			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+				<thead>
 					<tr>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Product ID</div>
 							<button type="button" class="btn btn-default" value="?orderBy=prodID DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn" ></span>
@@ -125,7 +152,7 @@
 									<span class="glyphicon glyphicon-chevron-up" aria-hidden="true " id="arrowBtn"></span>
 							</button>
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Product Description</div>
 							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
@@ -134,10 +161,10 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>							
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Model
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Brand</div>
 							<button type="button" class="btn btn-default" value="?orderBy=brandName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
@@ -146,7 +173,7 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Category</div>
 							<button type="button" class="btn btn-default" value="?orderBy=categoryName DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
@@ -155,10 +182,10 @@
 								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
 							</button>
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Unit
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Price</div>
 							<button type="button" class="btn btn-default" value="?orderBy=price DESC" onclick="location = this.value;" id="sortBtn">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
@@ -169,12 +196,8 @@
 						</th>					
 						<th></th>
 					</tr>
-						
-					<?php
-						foreach ($result as $item):
-						$proID = $item["prodID"];
-					?>
-					
+				</thead>
+				<tbody>
 					<tr id="centerData">
 						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
@@ -184,6 +207,21 @@
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
 						<td data-title="Price"><?php echo $item["price"]; ?></td>
 						<td>
+					</tr>
+						<?php
+						foreach ($result as $item):
+						$proID = $item["prodID"];
+						?>
+					<tr>
+						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"];?></td>
+						<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+						<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"];?></td>
+						<td data-title="Price"><?php echo $item["price"]; ?></td>
+						<td>
+					
 							<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
 								<button type="button" class="btn btn-default" id="edBtn1">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -199,7 +237,8 @@
 					<?php
 						endforeach;
 					?>
-				</table>
+				</tbody>	
+			</table>
 				
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog modal-lg">

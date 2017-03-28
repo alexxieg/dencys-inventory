@@ -16,7 +16,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
-		<script src="js/bootstrap.min.js"></script>
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
 		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
@@ -115,51 +114,17 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
-<!--
-		<div id="contents">
-			<div class="pages">
-				<div id="tableHeader">
-					<table class="table table-striped table-bordered">		
-						<h1 id="headers">PRODUCT CATEGORIES</h1>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Category</button>							
-					</table>
-				</div>
-					
-				<div class="prodTable">
-					<table class="table table-bordered" id="tables">
-						<tr>
-							<th>Category ID</th>
-							<th>Category</th>
-							<th></th>
-						</tr>
+
 							
 						<?php
 							foreach ($result as $item):
 							$useThisID = $item["categoryID"];
 						?>
-
-						<tr>
-							<td><?php echo $item["categoryID"]; ?></td>
-							<td><?php echo $item["categoryName"]; ?></td>
-							<td>
-								<a>
-									<button type="button" class="btn btn-default">
-										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									</button>
-								</a>
-								<a href="deleteCategory.php?useId=<?php echo $useThisID; ?>"> 
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-									</button>
-								</a>
-							</td>	
-						</tr>
 							
 						<?php
 							endforeach;
 						?>
-					</table>
--->				
+			
 		<div id="contents">
 			<div class="pages">
 				<div id="tableHeader">
@@ -170,10 +135,10 @@
 				</div>
 					
 			<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-			</div>		
-			<div id="myTable_length" class="dataTables_length">
-			</div>		
-			<div id="myTable_filter" class="dataTables_filter">
+				<div id="myTable_length" class="dataTables_length">
+					<div id="myTable_filter" class="dataTables_filter">
+					</div>
+				</div>
 			</div>
 			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 				<thead>

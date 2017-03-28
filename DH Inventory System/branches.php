@@ -16,6 +16,17 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+			<script>
+				$(document).ready(function(){
+					$('#myTable').dataTable();
+				});
+			</script>
+		
 		<?php include('dbcon.php'); ?>
 		<?php 
 			session_start();
@@ -104,6 +115,15 @@
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
 		 
+					<?php
+							foreach ($result as $item):
+							$useThisID = $item["branchID"];
+					?>
+					
+					<?php
+							endforeach;
+					?>		
+		 
 		<div id="contents">
 			<div class="pages">
 				<div id="tableHeader">
@@ -113,23 +133,34 @@
 					</table>
 				</div>
 					
-				<div class="prodTable">
-					<table class="table table-bordered" id="tables">
+			<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+				<div id="myTable_length" class="dataTables_length">
+					<div id="myTable_filter" class="dataTables_filter">
+					</div>
+				</div>
+			</div>
+			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+				<thead>
 						<tr>
-							<th>Branch ID</th>
-							<th>Branch</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch ID</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>
 							<th></th>
 						</tr>
-							
-						<?php
-							foreach ($result as $item):
-							$useThisID = $item["branchID"];
-						?>
-
+				</thead>	
+				<tbody>
 						<tr>
 							<td><?php echo $item["branchID"]; ?></td>
 							<td><?php echo $item["location"]; ?></td>
 							<td>
+						</tr>
+							<?php
+							foreach ($result as $item):
+							$useThisID = $item["branchID"];
+							?>
+						<tr>
+							<td><?php echo $item["branchID"]; ?></td>
+							<td><?php echo $item["location"]; ?></td>
+							<td>	
 								<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
 									<button type="button" class="btn btn-default">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -147,7 +178,8 @@
 						<?php
 							endforeach;
 						?>
-					</table>
+				</tbody>		
+			</table>
 				
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog modal-lg">
