@@ -17,9 +17,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
-<<<<<<< HEAD
 		<!-- Database Connection -->
-=======
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
 		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
@@ -32,7 +30,6 @@
 			</script>
 			
 		<!-- Database connection -->
->>>>>>> 61fcd49c7a3157c6df34ce68a52c93efe8228945
 		<?php include('dbcon.php'); ?>
 		
 		<!-- Login Session-->

@@ -6,11 +6,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 		<title>Outgoing Products</title>
-			
+		
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
+		<!-- Javascript Files -->
 		<script src="outgoing.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
@@ -21,14 +23,17 @@
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
-			<script>
-				$(document).ready(function(){
-					$('#myTable').dataTable();
-				});
-			</script>
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
 		
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 			
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -42,6 +47,7 @@
 	</head>
   
 	<body>
+		<!--Retrieve Return Data -->
 		<?php include('functionalities/fetchOutgoing.php'); ?>
 		
 	<nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -173,32 +179,7 @@
 							<th></th>
 						</tr>
 				</thead>	
-				<tbody>	
-						<tr id="centerData">
-							<td data-title="Date"><?php echo $item["outDate"]; ?></td>
-							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Model"><?php echo $item["model"]; ?></td>
-							<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
-							<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-							<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
-							<td data-title="Employee"><?php echo $item["empName"]; ?></td>
-							<td data-title="Branch"><?php echo $item["location"]; ?></td>
-							<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
-							<td>
-								<a href="functionalities/editOut.php?outsId=<?php echo $outid; ?>">
-								<button type="button" class="btn btn-default">
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								</button>
-								</a>
-								<a href="functionalities/deleteOut.php?outsId=<?php echo $outid; ?>">
-								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-								</button>
-								</a>
-							</td>		
-						</tr>
-						
+				<tbody>			
 						<?php
 							foreach ($result as $item):
 							$outid = $item["outID"];
@@ -221,7 +202,7 @@
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
 								</a>
-								<a href="functionalities/deleteOut.php?outsId=<?php echo $outid; ?>">
+								<a href="functionalities/removeOutgoing.php?outsId=<?php echo $outid; ?>">
 								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 								</button>
@@ -339,6 +320,7 @@
 			</div>
 		</div>
 		
+		<!-- Add Outgoing Entry -->
 		<?php include('functionalities/addOutgoing.php'); ?>
 		
 	</body>

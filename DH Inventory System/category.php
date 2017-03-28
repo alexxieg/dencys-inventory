@@ -6,11 +6,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>Product Categories</title>
-				
+		
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		
+		<!-- Javascript Files -->
 		<script src="category.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
@@ -21,13 +23,17 @@
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
+		<!-- Datatables -->
 			<script>
 				$(document).ready(function(){
 					$('#myTable').dataTable();
 				});
 			</script>
 		
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -41,6 +47,7 @@
 	</head>
   
 	<body>
+		<!-- Retrieve Category Data -->
 		<?php
 			$query = $conn->prepare("SELECT categoryID, categoryName FROM category");
 			$query->execute();
@@ -149,11 +156,7 @@
 						</tr>
 				</thead>
 				<tbody>
-						<tr>
-							<td><?php echo $item["categoryID"]; ?></td>
-							<td><?php echo $item["categoryName"]; ?></td>
-							<td>
-						</tr>	
+
 							<?php
 							foreach ($result as $item):
 							$useThisID = $item["categoryID"];
@@ -168,7 +171,7 @@
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
-								<a href="deleteCategory.php?useId=<?php echo $useThisID; ?>"> 
+								<a href="functionalities/removeCategory.php?useId=<?php echo $useThisID; ?>"> 
 									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
@@ -217,6 +220,7 @@
 			</div>
 		</div>
 		
+		<!-- Add New Category -->
 		<?php include('functionalities/addCategory.php'); ?>
 		
 	</body>

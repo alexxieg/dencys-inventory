@@ -227,7 +227,7 @@
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
 							</a>	
-							<a href="deletePro.php?proId=<?php echo $proID; ?>">
+							<a href="functionalities/removeProduct.php?proId=<?php echo $proID; ?>">
 								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn1">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 								</button>

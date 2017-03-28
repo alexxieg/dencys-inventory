@@ -7,10 +7,12 @@
 		
 		<title>Employees</title>
 				
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		
+		<!-- Javascript Files -->
 		<script src="employees.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
@@ -21,13 +23,17 @@
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
+		<!-- Datatables -->
 			<script>
 				$(document).ready(function(){
 					$('#myTable').dataTable();
 				});
 			</script>
 		
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -41,6 +47,7 @@
 	</head>
   
 	<body>
+		<!-- Retrieve Employee Data -->
 		<?php
 			$query = $conn->prepare("SELECT empID, empFirstName, empLastName, empMidName, empExtensionName FROM employee");
 			$query->execute();
@@ -142,24 +149,16 @@
 			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 				<thead>
 						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">>Employee ID</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">>First Name</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">>Middle Name</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">>Last Name</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">>Extension Name</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Employee ID</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">First Name</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Middle Name</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Name</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Extension Name</th>
 							<th></th>
 						</tr>
 				</thead>
 				<tbody>
-						<tr>
-							<td><?php echo $item["empID"]; ?></td>
-							<td><?php echo $item["empFirstName"]; ?></td>
-							<td><?php echo $item["empMidName"]; ?></td>
-							<td><?php echo $item["empLastName"]; ?></td>
-							<td><?php echo $item["empExtensionName"]; ?></td>
-							<td>
-						</tr>
-							<?php
+						<?php
 							foreach ($result as $item):
 							$employID = $item["empID"];
 							?>
@@ -177,7 +176,7 @@
 								</button>
 								</a>	
 							
-								<a href="functionalities/deleteEmployee.php?emplId=<?php echo $employID; ?>"> 
+								<a href="functionalities/removeEmployee.php?emplId=<?php echo $employID; ?>"> 
 									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
@@ -224,6 +223,7 @@
 			</div>
 		</div>
 		
+		<!-- Add New Employee -->
 		<?php include('functionalities/addEmployee.php'); ?>
 		
 	</body>

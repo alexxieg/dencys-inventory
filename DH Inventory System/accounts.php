@@ -8,10 +8,12 @@
 
 		<title>Accounts</title>
 
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		
+		<!-- Javascript Files -->
 		<script src="accounts.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
@@ -22,13 +24,17 @@
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
-			<script>
-				$(document).ready(function(){
-					$('#myTable').dataTable();
-				});
-			</script>
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
 		
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>	
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -42,41 +48,42 @@
 	</head>
   
 	<body>
+		<!-- Retrieve Account Data -->
 		<?php
 			$query = $conn->prepare("SELECT userID, userName, password FROM users");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
 
-	<nav class="navbar navbar-inverse navbar-fixed-top" >
-		<!-- Header -->
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-		      </button>
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<!-- Header -->
+			  <div class="container-fluid">
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+				  </button>
 
-		      <img src="logohead.png" id="logohead"/>
+				  <img src="logohead.png" id="logohead"/>
 
-            <div class="dropdown">
-			  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
-			  <div class="dropdown-content">
-			    <a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-			    <a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
-							<i class="glyphicon glyphicon-print"></i> Print</button></a>
-		    </div>
-		</div>
+				<div class="dropdown">
+				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+				  <div class="dropdown-content">
+					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+								<i class="glyphicon glyphicon-print"></i> Print</button></a>
+				</div>
+			</div>
 
-   			</div>
-		    
-		    <form action="?" method="post">
-					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</form>
-		  </div><!-- /container -->
-		</nav>
+				</div>
+				
+				<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				</form>
+			  </div><!-- /container -->
+			</nav>
 
 
 
@@ -169,7 +176,7 @@
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
-								<a href="functionalities/deleteAcc.php?useId=<?php echo $useThisID; ?>"> 
+								<a href="functionalities/removeAccount.php?useId=<?php echo $useThisID; ?>"> 
 									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
@@ -182,6 +189,7 @@
 				</tbody>
 			</table>
 		
+			<!-- Modal for New Account Form -->
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
@@ -226,6 +234,7 @@
 			</div>
 		</div>
 		
+		<!-- Add Account Functionality -->
 		<?php include('functionalities/addAccount.php'); ?>
 	</body>
 </html>
