@@ -115,6 +115,8 @@
 								
 			$query2->execute();
 			$resul = $query2->fetchAll();
+		
+			$request = current($conn->query("SELECT initialQty FROM inventory WHERE prodID = '$incID'")->fetch());
 		?>
 		
 		<div id="contents">
@@ -139,8 +141,8 @@
 							</td>
 							
 							<td>
-								Physical Quantity:
-							
+							Month Starting QTY: 
+									<?php echo $request ?>
 							</td>
 						</tr>
 												
@@ -173,13 +175,15 @@
 						</tr>
 					<?php
 						foreach ($res as $item):
+						$currQty = $request + $item["Added"] - $item["Subracted"];
 					?>
 						<tr>	
 							<td data-title="Date"><?php echo $item["DATE"]; ?></td>	
 							<td data-title="TransID"></td>
 							<td data-title="IN"><?php echo $item["Added"];?></td>
 							<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
-							<td></td>
+							<td data-title="BALANCE"><?php echo $currQty ?></td>
+		
 							<td></td>
 						</tr>
 					<?php
