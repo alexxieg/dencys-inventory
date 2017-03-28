@@ -114,9 +114,9 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->		 
-<<<<<<< HEAD
+
 	<div id="contents">
-=======
+
 							
 						<?php
 							foreach ($result as $item):
@@ -128,7 +128,7 @@
 						?>
 			
 		<div id="contents">
->>>>>>> d4cbb833373487a1ed31239381f6504d88a986ab
+
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
