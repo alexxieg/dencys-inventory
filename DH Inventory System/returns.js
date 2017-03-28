@@ -1,6 +1,11 @@
 function validateForm() {
 	if (document.getElementById('addQty').value == "") {
-		alert('Please Enter Quantity');
+		swal({
+		title: "Error!",
+		text: "Please Enter Quantity.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
 	}
@@ -9,6 +14,10 @@ function validateForm() {
 		return true;			
 	}
 	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
 		return false;		
 	}
 }

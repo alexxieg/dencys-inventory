@@ -1,11 +1,21 @@
 function validateForm() {
 	if(document.getElementById('addRcpt').value == "") {
-		alert('Please Enter Receipt Number');
+		swal({
+		title: "Error!",
+		text: "Please Enter Receipt no.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addRcpt').style.borderColor = "red";
 		return false;
 	}
 	if (document.getElementById('addQty').value == "") {
-		alert('Please Enter Quantity');
+		swal({
+		title: "Error!",
+		text: "Please Enter Quantity.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
 	}
@@ -14,6 +24,10 @@ function validateForm() {
 		return true;		
 	}
 	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
 		return false;		
 	}
 }
@@ -28,7 +42,12 @@ function deleteRow(tableID) {
 			var chkbox = row.cells[0].childNodes[0];
 			if(null != chkbox && true == chkbox.checked) {
 				if(rowCount <= 1) {
-					alert("Cannot delete all the rows.");
+					swal({
+					title: "Error!",
+					text: "Cannot delete all Rows",
+					type: "error",
+					confirmButtonText: "Ok"
+					});
 					break;
 				}
 					  

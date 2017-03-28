@@ -1,6 +1,11 @@
 function validateForm() {
 	if (document.getElementById('addEmpl').value == "") {
-		alert('Please Enter Employee Name');
+		swal({
+		title: "Error!",
+		text: "Please Enter Employee Name.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addEmpl').style.borderColor = "red";
 		return false;
 	}
@@ -9,6 +14,10 @@ function validateForm() {
 		return true;			
 	}
 	else {
+		swal({
+		title: "Adding of Employee Canceled",
+		type: "success"
+		});
 		return false;		
 	}
 }

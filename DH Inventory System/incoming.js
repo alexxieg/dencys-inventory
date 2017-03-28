@@ -19,26 +19,15 @@ function validateForm() {
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
 	}
-	if(document.getElementById('sucBtn').value != null) {
-swal({
-  title: "Are you sure?",
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Yes, delete it!",
-  cancelButtonText: "No, cancel plx!",
-  closeOnConfirm: true,
-  closeOnCancel: true
-},
-function(isConfirm){
-  if (isConfirm) {
-    swal("Added!", "Your Entry has been added.", "success");
-  } else {
-    swal("Cancelled", "error");
-  }
-});
+	if(confirm('Are you sure you want to add this entry?')) {
+		alert("Incoming Product Successfully Added");
+		return true;		
 	}
 	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
 		return false;		
 	}
 }

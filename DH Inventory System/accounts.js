@@ -1,11 +1,21 @@
 function validateForm() {
 	if(document.getElementById('adduser').value == "") {
-		alert('Please Enter Username');
+		swal({
+		title: "Error!",
+		text: "Please Enter Username.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('adduser').style.borderColor = "red";
 		return false;
 	}
 	if (document.getElementById('addpass').value == "") {
-		alert('Please Enter Password');
+		swal({
+		title: "Error!",
+		text: "Please Enter Password.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addpass').style.borderColor = "red";
 		return false;
 	}
@@ -14,6 +24,10 @@ function validateForm() {
 		return true;	
 	}
 	else {
+		swal({
+		title: "Adding of User Canceled",
+		type: "success"
+		});
 	return false;		
 	}
 }

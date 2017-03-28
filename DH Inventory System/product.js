@@ -1,26 +1,51 @@
 function validateForm() {
 	if (document.getElementById('addProdName').value == "") {
-		alert('Please Enter Product Name');
+		swal({
+		title: "Error!",
+		text: "Please Enter Product Name.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addProdName').style.borderColor = "red";
 		return false;
 	}
 	if(document.getElementById('addModel').value == "") {
-		alert('Please Enter Model');
+		swal({
+		title: "Error!",
+		text: "Please Enter Model.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addModel').style.borderColor = "red";
 		return false;
 	}
 	if(document.getElementById('addQty').value == "") {
-		alert('Please Enter Quantity');
+		swal({
+		title: "Error!",
+		text: "Please Enter Quantity.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
 	}
 	if(document.getElementById('addPrice').value == "") {
-		alert('Please Enter Unit Price');
+		swal({
+		title: "Error!",
+		text: "Please Enter Unit Price.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addPrice').style.borderColor = "red";
 		return false;
 	}
 	if(document.getElementById('addReorderLvl').value == "") {
-		alert('Please Enter Reorder Level');
+		swal({
+		title: "Error!",
+		text: "Please Enter Reorder Level.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addReorderLvl').style.borderColor = "red";
 		return false;
 	}
@@ -29,6 +54,10 @@ function validateForm() {
 		return true;	
 	}
 	else {
+		swal({
+		title: "Adding of Product Canceled",
+		type: "success"
+		});
 		return false;		
 	}
 }

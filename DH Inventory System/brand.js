@@ -1,11 +1,21 @@
 function validateForm() {
 	if(document.getElementById('addBrandID').value == "") {
-		alert('Please Enter Brand ID');
+		swal({
+		title: "Error!",
+		text: "Please Enter Brand ID.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addBrandID').style.borderColor = "red";
 		return false;
 	}
 	if (document.getElementById('addBrandName').value == "") {
-		alert('Please Enter Brand Name');
+		swal({
+		title: "Error!",
+		text: "Please Enter Brand Name.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addBrandName').style.borderColor = "red";
 		return false;
 	}
@@ -14,6 +24,10 @@ function validateForm() {
 		return true;
 	}
 	else {
+		swal({
+		title: "Adding of Brand Canceled",
+		type: "success"
+		});
 		return false;		
 	}
 }
