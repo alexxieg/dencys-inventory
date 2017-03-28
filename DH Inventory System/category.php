@@ -49,7 +49,7 @@
 	<body>
 		<!-- Retrieve Category Data -->
 		<?php
-			$query = $conn->prepare("SELECT categoryID, categoryName FROM category");
+			$query = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>

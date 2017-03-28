@@ -116,14 +116,7 @@
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
 					
-					<?php
-							$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
-							$month->execute();
-							$monthres = $month->fetchAll();
-							foreach ($monthres as $monthshow)
-							echo $monthshow["month"];
-					?>	
-					
+						
 					<?php
 						foreach ($result as $item):
 							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];

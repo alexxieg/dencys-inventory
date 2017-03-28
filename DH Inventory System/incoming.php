@@ -75,8 +75,6 @@
 		  </div><!-- /container -->
 		</nav>
 
-
-
 		<!-- Side bar -->
 		<div class="row row-offcanvas row-offcanvas-left">
 			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
@@ -135,6 +133,7 @@
 					</div>
 				</div>
 			</div>
+			<br> 
 			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 				<thead>	
 					<tr>
@@ -177,29 +176,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr id="centerData">
-						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"]; ?></td>
-						<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
-						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
-						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
-						<td>
-							<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" id="edBtn">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							</button>
-							</a>
-							<a href="functionalities/deleteInc.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
-								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-							</button>
-							</a>
-						</td>				
-					</tr>
+
 					
 					<?php
 						foreach ($result as $item):
@@ -222,7 +199,7 @@
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</button>
 							</a>
-							<a href="functionalities/deleteInc.php?incId=<?php echo $incID; ?>"> 
+							<a href="functionalities/removeIncoming.php?incId=<?php echo $incID; ?>"> 
 							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
 								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 							</button>

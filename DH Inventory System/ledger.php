@@ -141,7 +141,7 @@
 							</td>
 							
 							<td>
-							Month Starting QTY: 
+							Beginning Quantity: 
 									<?php echo $request ?>
 							</td>
 						</tr>
@@ -182,9 +182,8 @@
 							<td data-title="TransID"></td>
 							<td data-title="IN"><?php echo $item["Added"];?></td>
 							<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
-							<td data-title="BALANCE"><?php echo $currQty ?></td>
-		
 							<td></td>
+							<td data-title="BALANCE"><?php echo $currQty ?></td>
 						</tr>
 					<?php
 						endforeach;

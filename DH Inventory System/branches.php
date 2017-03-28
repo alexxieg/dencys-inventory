@@ -49,7 +49,7 @@
 	<body>
 		<!-- Retrieve Branch Data -->
 		<?php
-			$query = $conn->prepare("SELECT branchID, location FROM branch");
+			$query = $conn->prepare("SELECT branchID, location FROM branch WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>

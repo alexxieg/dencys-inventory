@@ -52,7 +52,7 @@
 	<body>
 		<!-- Retrieve Account Data -->
 		<?php
-			$query = $conn->prepare("SELECT userID, userName, password FROM users");
+			$query = $conn->prepare("SELECT userID, userName, password FROM users WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>

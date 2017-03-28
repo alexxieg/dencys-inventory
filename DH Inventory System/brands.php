@@ -51,7 +51,7 @@
 	<body>
 		<!-- Retrieve Brand Data -->
 		<?php
-			$query = $conn->prepare("SELECT brandID, brandName FROM brand");
+			$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
