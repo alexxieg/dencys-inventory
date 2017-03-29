@@ -220,12 +220,12 @@
 								
 							<td>
 								<a href="editRet.php?retId=<?php echo $retID; ?>" target="_blank">
-									<button type="button" class="btn btn-default">
+									<button type="button" class="btn-sm btn-default edBtn">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
 								<a href="functionalities/removeReturn.php?retId=<?php echo $retID; ?>">
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+									<button type="button" class="btn-sm btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
@@ -270,10 +270,10 @@
 									<br>
 									<div class="modFoot">
 									<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+										<input type="button" class="btn btn-outline-danger btn-rounded waves-effect canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 									</span>
 									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
+										<input type="submit" value="Submit" class="btn btn-outline-success btn-rounded waves-effect sucBtn" name="addRet">
 									</span>
 								</div>
 								</form> 		

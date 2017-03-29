@@ -271,7 +271,7 @@
 						<td data-title="Remarks"></td>
 						<td>
 							<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
-								<button type="button" class="btn btn-default" id="edBtn">
+								<button type="button" class="btn-sm btn-default">
 									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 								</button>
 							</a>
@@ -302,7 +302,7 @@
 						<td data-title="Remarks"></td>
 						<td>
 							<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
-								<button type="button" class="btn btn-default" id="edBtn">
+								<button type="button" class="btn-sm btn-default">
 									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 								</button>
 							</a>	

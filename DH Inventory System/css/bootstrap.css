@@ -6847,7 +6847,7 @@ button.close {
 }
 
 .pages {
-  padding: 0 3% 10% 13%;
+  padding: 0 3% 10% 3%;
 }
 
 #myTable{
@@ -7232,6 +7232,7 @@ border: none;
 
 #delBtn{
   float: right;
+  margin-top: -33px;
 }
 
 #delBtn1{
@@ -7242,12 +7243,9 @@ border: none;
   font-size: 15px;
 }
 
-#edBtn1{
+.edBtn{
   float: left;
-  margin-left: -6px;
-  padding-right: .5px;
-  padding-left: .5px;
-  font-size: 15px;
+  margin-right: 35px;
 }
 
 #OutsortBtnDown{
@@ -7366,7 +7364,6 @@ border: none;
 #contents{
   padding-top: 5%;
   font-family: dencyFont;
-  padding-left: 60px;
 }
 
 #headerBG {
@@ -7481,35 +7478,16 @@ border: none;
   }
 }
 
-.modFoot #canBtn{
-  float: right; 
-  margin-left: 10px;
-  border-radius: 12px;
-  transition-duration: 0.4s;
-  background-color: transparent;
-  border-color: red;
-  color: red;
-  margin-top: 30px;
-}
-
-#canBtn:hover{
-  background-color: red;
-  color: white;
-}
-
-.modFoot #sucBtn{
-  transition-duration: 0.4s;
-  background-color: transparent;
-  border-color: green;
-  color: green;
+.modFoot .canBtn{
+  font-size: 13px;
+  padding: 0;
   float: right;
-  border-radius: 12px;
-  margin-top: 30px;
 }
 
-#sucBtn:hover{
-  background-color: green;
-  color: white;
+.modFoot .sucBtn{
+  font-size: 13px;
+  padding: 0;
+  float: right;
 }
 
 #sidelogo{
@@ -7519,4 +7497,3 @@ border: none;
 #logobox {
   padding-bottom: 300px;
 }
-

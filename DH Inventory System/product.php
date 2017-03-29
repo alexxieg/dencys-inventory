@@ -218,12 +218,12 @@
 						<td>
 					
 							<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
-								<button type="button" class="btn btn-default" id="edBtn1">
+								<button type="button" class="btn-sm btn-default edBtn">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
 							</a>	
 							<a href="functionalities/removeProduct.php?proId=<?php echo $proID; ?>">
-								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');" id="delBtn1">
+								<button type="button" class="btn-sm btn-default" onclick="return confirm('Are you sure you want to remove this entry?');" id="delBtn">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 								</button>
 							</a>
@@ -300,10 +300,10 @@
 										
 										<div class="modFoot">
 										<span>
-											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+										<input type="button" class="btn btn-outline-danger btn-rounded waves-effect canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 										</span>
 										<span>
-											<input type="submit" value="Submit" class="btn btn-success" name="addProd" id="sucBtn">
+											<input type="submit" value="Submit" class="btn btn-outline-success btn-rounded waves-effect sucBtn" name="addProd">
 										</span>
 									</div>
 											

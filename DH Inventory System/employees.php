@@ -203,13 +203,13 @@
 							<td><?php echo $item["empExtensionName"]; ?></td>
 							<td>
 								<a href="functionalities/editEmployees.php?emplId=<?php echo $employID; ?>" target="_blank">
-								<button type="button" class="btn btn-default">
+								<button type="button" class="btn-sm btn-default edBtn">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
 								</a>	
 							
 								<a href="functionalities/removeEmployee.php?emplId=<?php echo $employID; ?>"> 
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+									<button type="button" class="btn-sm btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
@@ -237,10 +237,10 @@
 										
 										<div class="modFoot">
 										<span>
-											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+										<input type="button" class="btn btn-outline-danger btn-rounded waves-effect canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 										</span>
 										<span>
-											<input type="submit" value="Submit" class="btn btn-success" name="addEmp" id="sucBtn">
+											<input type="submit" value="Submit" class="btn btn-outline-success btn-rounded waves-effect sucBtn" name="addEmp">
 										</span>
 									</div>
 									</form> 

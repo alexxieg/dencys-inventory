@@ -215,12 +215,12 @@
 							<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 							<td>
 								<a href="functionalities/editOut.php?outsId=<?php echo $outid; ?>">
-									<button type="button" class="btn btn-default">
+									<button type="button" class="btn-sm btn-default edBtn">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
 								<a href="functionalities/userRemoveOut.php?outsId=<?php echo $outid; ?>">
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+									<button type="button" class="btn-sm btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
@@ -318,10 +318,10 @@
 										<br>
 										<br>
 										<span>
-											<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											<input type="button" class="btn btn-outline-danger btn-rounded waves-effect canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 										</span>
 										<span>
-											<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
+											<input type="submit" name="submit" value="Submit" class="btn btn-outline-success btn-rounded waves-effect sucBtn">
 										</span>																		
 									</div>
 								</form> 		
