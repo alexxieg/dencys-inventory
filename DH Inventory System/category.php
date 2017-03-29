@@ -51,8 +51,12 @@
 	</head>
   
 <body class="fixed-sn mdb-skin bg-skin-lp">
-		<!-- PHP code for fetching the data-->
-		<?php include('functionalities/fetchInventory.php'); ?>
+		<!-- Retrieve Category Data -->
+  		<?php
+ -			$query = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
+  			$query->execute();
+  			$result = $query->fetchAll();
+  		?>
 	
 		<!-- Page Header and Navigation Bar -->
     <header>
