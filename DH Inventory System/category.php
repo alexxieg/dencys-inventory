@@ -16,6 +16,18 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
+		<script src="js/bootstrap.min.js"></script>
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+			<script>
+				$(document).ready(function(){
+					$('#myTable').dataTable();
+				});
+			</script>
+		
 		<?php include('dbcon.php'); ?>
 		<?php 
 			session_start();
@@ -103,7 +115,7 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
-
+<!--
 		<div id="contents">
 			<div class="pages">
 				<div id="tableHeader">
@@ -147,7 +159,63 @@
 							endforeach;
 						?>
 					</table>
-				
+-->				
+		<div id="contents">
+			<div class="pages">
+				<div id="tableHeader">
+					<table class="table table-striped table-bordered">		
+						<h1 id="headers">PRODUCT CATEGORIES</h1>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Category</button>							
+					</table>
+				</div>
+					
+			<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+			</div>		
+			<div id="myTable_length" class="dataTables_length">
+			</div>		
+			<div id="myTable_filter" class="dataTables_filter">
+			</div>
+			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+				<thead>
+						<tr>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category ID</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category</th>
+							<th></th>
+						</tr>
+				</thead>
+				<tbody>
+						<tr>
+							<td><?php echo $item["categoryID"]; ?></td>
+							<td><?php echo $item["categoryName"]; ?></td>
+							<td>
+						</tr>	
+							<?php
+							foreach ($result as $item):
+							$useThisID = $item["categoryID"];
+							?>
+						<tr>
+							<td><?php echo $item["categoryID"]; ?></td>
+							<td><?php echo $item["categoryName"]; ?></td>
+							<td>
+							
+								<a>
+									<button type="button" class="btn btn-default">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+								</a>
+								<a href="deleteCategory.php?useId=<?php echo $useThisID; ?>"> 
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+									</button>
+								</a>
+							</td>	
+						</tr>
+							
+						<?php
+							endforeach;
+						?>
+				</tbody>	
+			</table>
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
