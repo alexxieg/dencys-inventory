@@ -16,10 +16,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- Javascript Files -->
-<<<<<<< HEAD
-=======
 		<script src="branches.js"></script>
->>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -55,7 +52,6 @@
 		?>
 	</head>
   
-<<<<<<< HEAD
 <body class="fixed-sn mdb-skin bg-skin-lp">
 		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchInventory.php'); ?>
@@ -155,7 +151,7 @@
         <!-- /.Navbar -->
     </header>
     <!--/.Double navigation-->
-=======
+
 	<body>
 		<!-- Retrieve Branch Data -->
 		<?php
@@ -227,7 +223,6 @@
 		   </div>
 		<!-- end of side  bar -->
 		</div><!-- /Header -->
->>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		 
 		<?php
 			foreach ($result as $item):
