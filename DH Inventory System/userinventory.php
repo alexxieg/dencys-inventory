@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -12,15 +11,29 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
+<<<<<<< HEAD
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+=======
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+		});
+		</script>
+			
 		<!-- Database connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -41,8 +54,9 @@
 
 		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchInventory.php'); ?>
-
+	
 		<!-- Page Header and Navigation Bar -->
+<<<<<<< HEAD
     <header>
         <!-- Sidebar navigation -->
         <ul id="slide-out" class="side-nav fixed sn-bg-1 custom-scrollbar">
@@ -121,12 +135,78 @@
     <!--/.Double navigation-->
 				
 		
+=======
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+		<!-- Header -->
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+		      </button>
+
+		      <img src="logohead.png" id="logohead"/>
+
+				<div class="dropdown">
+				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i>User</button>
+				  <div class="dropdown-content">
+					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+					<i class="glyphicon glyphicon-print"></i> Print</button></a>
+					</div>
+				</div>
+   			</div>
+		    
+		    <form action="?" method="post">
+					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			</form>
+		  </div><!-- /container -->
+		</nav>
+
+		<!-- Side bar -->
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="collapse navbar-collapse">
+				<ul class="nav nav-pills nav-stacked affix">
+					<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+					<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+					<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+					<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+					<li><a href="userproduct.php"><i class="glyphicon glyphicon-sort"></i> Products</a></li>
+		        </ul>
+		 	 </div><!--/span-->	
+		   </div>
+		<!-- end of side  bar -->
+		</nav><!-- /Header -->
+							
+		<?php
+			foreach ($result as $item):
+				$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+				$incID = $item["prodID"];
+				if ($currQty <= $item["reorderLevel"]){
+		?> 
+					
+		<?php	
+			}else if ($currQty > $item["reorderLevel"]){
+		?>
+					
+		<?php
+			}	
+		?>
+						
+		<?php
+			endforeach;
+		?>
+					
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">INVENTORY</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" >
 							Products for Reorder
 						</button>					
 					</table>
@@ -134,145 +214,141 @@
 				<br>
 				
 				<!-- Table for Inventory Data-->
-				<table class="table table-striped table-bordered">
-					<tr>
-						<td colspan="13" style="font-size: 35px;">
-							<?php
-							$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
-							$month->execute();
-							$monthres = $month->fetchAll();
-							foreach ($monthres as $monthshow)
-							echo $monthshow["month"];
-							?>	
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<div id="tabHead">Product ID</div>
-							<button type="button" class="btn btn-default sortRes" value="?orderBy=prodID DESC" onclick="location = this.value;" id="OutsortBtnDown1">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default sortRes" value="?orderBy=prodID ASC" onclick="location = this.value;" id="OutsortBtnUp1">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						
-						<th>
-							<div id="tabHead">Product Description</div>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>	
-						
-						<th>
-							Model
-						</th>
-						
-						<th>
-							Beginning Quantity
-						</th>
-						
-						<th>
-							Ending Quantity
-						</th>
-						
-						<th>
-							IN
-						</th>
-						
-						<th>
-							OUT
-						</th>
-						
-						<th>
-							Current Quantity
+				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div id="myTable_length" class="dataTables_length">
+						<div id="myTable_filter" class="dataTables_filter">
+						</div>
+					</div>
+				</div>
+				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+					<thead>	
+						<tr>
+							<td colspan="13" style="font-size: 35px;">
+								<?php
+								$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
+								$month->execute();
+								$monthres = $month->fetchAll();
+								foreach ($monthres as $monthshow)
+								echo $monthshow["month"];
+								?>	
+							</td>
+						</tr>
+						<tr>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product ID</div>
+							</th>
 							
-						</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product Description</div>
+							</th>	
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Model
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Beginning Quantity
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Ending Quantity
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								IN
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								OUT
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Current Quantity
+								
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Physical Count
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Reorder Level
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Unit
+							</th>
+			
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Remarks
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Stock Card
+							</th>
+						</tr>
+					</thead>
+					<tbody>	
+						<tr style='background-color: #ff9999' id="centerData">
+							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Model"><?php echo $item["model"]; ?> </td>
+							<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
+							<td data-title="End. Quantity"></td>
+							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
+							<td data-title="Physical Count"><?php echo $item["phyCount"]; ?></td>
+							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+							<td data-title="Unit"><?php echo $item["unitType"];?></td>
+							<td data-title="Remarks"></td>
+							<td>
+								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+									<button type="button" class="btn btn-default" id="edBtn">
+										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+									</button>
+								</a>
+							</td>
+						</tr>
+						<?php
+							foreach ($result as $item):
+								$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+								$incID = $item["prodID"];
+								if ($currQty <= $item["reorderLevel"]){
+						?> 
 						
-						<th>
-							Physical Count
-						</th>
-						
-						<th>
-							Reorder Level
-						</th>
-						
-						<th>
-							Unit
-						</th>
-		
-						<th>
-							Remarks
-						</th>
-						
-						<th>
-							Stock Card
-						</th>
-					</tr>
-					
-					<?php
-						foreach ($result as $item):
-							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
-							$incID = $item["prodID"];
-							if ($currQty <= $item["reorderLevel"]){
-					?> 
-					
-					<tr style='background-color: #ff9999' id="centerData">
-						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"]; ?> </td>
-						<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
-						<td data-title="End. Quantity"></td>
-						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
-						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
-						<td data-title="Current Quantity"><?php echo $currQty; ?></td>
-						<td data-title="Physical Count"></td>
-						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-						<td data-title="Unit"><?php echo $item["unitType"];?></td>
-						<td data-title="Remarks"></td>
-						<td>
-							<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
-								<button type="button" class="btn btn-default" id="edBtn">
-									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-								</button>
-							</a>
-						</td>
-					</tr>
-					
-					<?php	
-						}else if ($currQty > $item["reorderLevel"]){
-					?>
-					<tr id="centerData">
-						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"]; ?> </td>
-						<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
-						<td data-title="End. Quantity"></td>
-						<td data-title="IN"><?php echo $item["inQty"]; ?></td>
-						<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
-						<td data-title="Current Quantity"><?php echo $currQty; ?></td>
-						<td data-title="Physical Count"></td>
-						<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-						<td data-title="Unit"><?php echo $item["unitType"];?></td>
-						<td data-title="Remarks"></td>
-						<td>
-							<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
-								<button type="button" class="btn btn-default" id="edBtn">
-									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-								</button>
-							</a>	
-						</td>	
-					</tr>
-					<?php
-						}	
-					?>
-						
-					<?php
-						endforeach;
-					?>
+						<?php	
+							}else if ($currQty > $item["reorderLevel"]){
+						?>
+						<tr id="centerData">
+							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Model"><?php echo $item["model"]; ?> </td>
+							<td data-title="Beg. Quantity"><?php echo $item["initialQty"]; ?></td>
+							<td data-title="End. Quantity"></td>
+							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
+							<td data-title="Physical Count"><?php echo $item["phyCount"]; ?></td>
+							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+							<td data-title="Unit"><?php echo $item["unitType"];?></td>
+							<td data-title="Remarks"></td>
+							<td>
+								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+									<button type="button" class="btn btn-default" id="edBtn">
+										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+									</button>
+								</a>	
+							</td>	
+						</tr>
+						<?php
+							}	
+						?>
+							
+						<?php
+							endforeach;
+						?>
+					</tbody>	
 				</table>
 			</div>	
 					
@@ -383,6 +459,7 @@
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 			
 		</div>
 
@@ -396,5 +473,8 @@
     Ps.initialize(el);
     </script>
 
+=======
+		</div> 
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 	</body>
 </html>

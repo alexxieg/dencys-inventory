@@ -16,9 +16,15 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- Javascript Files -->
+<<<<<<< HEAD
+=======
+		<script src="branches.js"></script>
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
 		<!-- Database Connection -->
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
@@ -49,6 +55,7 @@
 		?>
 	</head>
   
+<<<<<<< HEAD
 <body class="fixed-sn mdb-skin bg-skin-lp">
 		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchInventory.php'); ?>
@@ -148,6 +155,79 @@
         <!-- /.Navbar -->
     </header>
     <!--/.Double navigation-->
+=======
+	<body>
+		<!-- Retrieve Branch Data -->
+		<?php
+			$query = $conn->prepare("SELECT branchID, branchName, location FROM branch WHERE status = 'Active' ");
+			$query->execute();
+			$result = $query->fetchAll();
+		?>
+
+		<!-- Page Header and Navigation Bar -->		
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<!-- Header -->
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+					</button>
+
+					<img src="logohead.png" id="logohead"/>
+
+					<div class="dropdown">
+					  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+					  <div class="dropdown-content">
+						<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+						<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+							<i class="glyphicon glyphicon-print"></i> Print</button></a>
+						</div>
+					</div>
+				</div>
+				
+				<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				</form>
+			</div><!-- /container -->
+		</nav>
+
+		<!-- Side bar -->
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="collapse navbar-collapse">
+				<ul class="nav nav-pills nav-stacked affix">
+		        <li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+		   	
+		        <li class="nav-header">  	
+		        	<a href="#" data-toggle="collapse" data-target="#menu2">
+		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
+		          	</a>
+		            <ul class="list-unstyled collapse" id="menu2">
+		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a>
+		                </li>
+		                <li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a>
+		                </li>
+		                <li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a>
+		                </li>
+		                <li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a>
+		                </li>
+		                <li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a>
+		                </li>
+		                <li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
+		                </li>                              
+		            </ul>
+		    	</ul>
+		 	 </div><!--/span-->	
+		   </div>
+		<!-- end of side  bar -->
+		</div><!-- /Header -->
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		 
 		<?php
 			foreach ($result as $item):
@@ -156,7 +236,7 @@
 					
 		<?php
 			endforeach;
-		?>		
+		?>			
 		 
 		<div id="contents">
 			<div class="pages">
@@ -179,7 +259,8 @@
 					<thead>
 						<tr>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch ID</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch Name</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
 							<th></th>
 						</tr>
 					</thead>	
@@ -191,16 +272,16 @@
 						?>
 						<tr>
 							<td><?php echo $item["branchID"]; ?></td>
+							<td><?php echo $item["branchName"]; ?></td>
 							<td><?php echo $item["location"]; ?></td>
 							<td>	
-								<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
+								<a>
 									<button type="button" class="btn btn-default">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
-								</a>
-								
+								</a>							
 								<a> 
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
@@ -213,21 +294,24 @@
 					</tbody>		
 				</table>
 				
-				<!-- Modal: Add Branch Form -->
+								
+				<!-- Modal for New Branch Form -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Add New Brand</h4>
+								<h4 class="modal-title">Add New Branch</h4>
 							</div>
 							<div class="modal-body">
 								<form action="" method="POST" onsubmit="return validateForm()">		
-									<h3>Brand ID</h3>
+									<h3>Branch ID</h3>
 									<input type="text" class="form-control" id="addBranchID" placeholder="Branch ID" name="branchID"> <br>
-									<h3>Brand Name</h3>
+									<h3>Branch Name</h3>
 									<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="branch"> <br>
 									<br>
+									<h3>Branch Location</h3>
+									<input type="text" class="form-control" id="addLocation" placeholder="Location" name="location"> <br>
 									
 									<div class="modFoot">
 										<span>
@@ -242,6 +326,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 		

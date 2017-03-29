@@ -18,7 +18,7 @@
   
   <body class="inBack">
   	<div class="loginLogo">
-		<center><img src="logo.png" alt="loginLogo" id="loginLogo" style="width:10%; margin-bottom:-100px;"/></center>
+		<center><img src="logoA.png" alt="loginLogo" id="loginLogo" style="width:10%; margin-bottom:-100px;"/></center>
 	</div>
 
 	<div class="newcompany">

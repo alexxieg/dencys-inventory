@@ -235,7 +235,7 @@
 								</button>
 								</a>
 								<a href="functionalities/removeOutgoing.php?outsId=<?php echo $outid; ?>">
-								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 								</button>
 								</a>
@@ -276,7 +276,7 @@
 									?>
 													
 									<select class="form-control" id="addEmpl" name="emp">
-										<?php foreach ($res as $row): ?>
+										<?php foreach ($result as $row): ?>
 											<option><?=$row["empName"]?></option>
 										<?php endforeach ?>
 									</select> 

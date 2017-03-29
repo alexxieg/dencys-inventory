@@ -16,23 +16,43 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- Javascript Files -->
+<<<<<<< HEAD
+=======
+		<script src="incoming.js"></script>
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
+		
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
 			if (!isset($_SESSION['id']) || $role!="user") {
 				header('Location: index.php');
 			}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
 	</head>
   
+<<<<<<< HEAD
 <body class="fixed-sn mdb-skin bg-skin-lp">
 	
 		<?php include('functionalities/fetchIncoming.php'); ?>
@@ -116,6 +136,66 @@
     <!--/.Double navigation-->
 
 
+=======
+	<body>
+		<!-- Retrieve Incoming Data -->
+		<?php include('functionalities/fetchIncoming.php'); ?>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<!-- Header -->
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+					</button>
+
+					<img src="logohead.png" id="logohead"/>
+
+					<div class="dropdown">
+						<button class="dropbtn"><i class="glyphicon glyphicon-user"></i> User</button>
+						<div class="dropdown-content">
+							<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+							<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+								<i class="glyphicon glyphicon-print"></i> Print</button></a>
+						</div>
+					</div>
+				</div>
+				
+				<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				</form>
+			</div><!-- /container -->
+		</nav>
+
+		<!-- Side bar -->
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+				<div class="collapse navbar-collapse">
+					<ul class="nav nav-pills nav-stacked affix">
+						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+						<li><a href="userproduct.php"><i class="glyphicon glyphicon-sort"></i>Products</a></li>
+					</ul>
+				</div><!--/span-->	
+			</div>
+			<!-- end of side  bar -->
+		</div><!-- /Header -->
+		
+		<?php
+			foreach ($result as $item):
+				$incID = $item["inID"];
+		?>
+					
+		<?php
+			endforeach;
+		?>
+					
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -125,93 +205,94 @@
 					</table>
 				</div>
 				
-				<table class="table table-striped table-bordered">	
-					<tr>
-						<th>
-							Date
-							<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						<th>
-							Product ID
-						</th>
-						<th>
-							Product Description
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						<th>
-							Model
-						</th>
-			
-						<th>
-							Quantity
-						</th>
-						<th>
-							Unit
-						</th>
-						<th>
-							Employee
-							<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						<th>
-							Receipt No.
+				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div id="myTable_length" class="dataTables_length">
+						<div id="myTable_filter" class="dataTables_filter">
+						</div>
+					</div>
+				</div>
+				<br> 
+				
+				<!-- Table Display for Incoming -->
+				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+					<thead>	
+						<tr>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Date</div>
+							</th>
 							
-						</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Product ID
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product Description</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Model
+							</th>
+				
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Quantity
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Unit
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Employee</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Receipt No.
+								
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Remarks
+							</th>
+							<th></th>
+						</tr>
+					</thead>
+					
+					<tbody>					
+						<?php
+							foreach ($result as $item):
+							$incID = $item["inID"];
+						?>
 						
-						<th>
-							Remarks
-						</th>
-						<th></th>
-					</tr>
-							
-					<?php
-						foreach ($result as $item):
-						$incID = $item["inID"];
-					?>
-
-					<tr id="centerData">
-						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"]; ?></td>
-						<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
-						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
-						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
-						<td>
-							<a href="editIn.php?incId=<?php echo $incID; ?>" target="_blank"> 
-							<button type="button" class="btn btn-default">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							</button>
-							</a>
-							<a href="deleteInc.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</button>
-							</a>
-						</td>				
-					</tr>
-							
-					<?php
-						endforeach;
-					?>
+						<tr id="centerData">
+							<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+							<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Model"><?php echo $item["model"]; ?></td>
+							<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+							<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+							<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+							<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+							<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+							<td>
+								<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+								<button type="button" class="btn btn-default" id="edBtn">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								</button>
+								</a>
+								<a href="functionalities/userRemoveIn.php?incId=<?php echo $incID; ?>"> 
+								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
+									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+								</button>
+								</a>
+							</td>	
+						</tr>	
+						
+						<?php
+							endforeach;
+						?>
+					</tbody>	
 				</table>
 
+				<!-- Modal for New Incoming Entry Form -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
@@ -226,14 +307,14 @@
 									
 									<h5>Employee</h5>
 									<?php
-										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query = $conn->prepare("SELECT empFirstName FROM employee ");
 										$query->execute();
 										$res = $query->fetchAll();
 									?>
 													
 									<select class="form-control" id="addEmpl" name="emp">
 										<?php foreach ($res as $row): ?>
-											<option><?=$row["empName"]?></option>
+											<option><?=$row["empFirstName"]?></option>
 										<?php endforeach ?>
 									</select> 
 									
@@ -260,7 +341,7 @@
 												</td>
 														
 												<td>
-													<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
+													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
 												</td>
 												
 												<td>
@@ -272,31 +353,31 @@
 									
 									<br>
 									
-									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-									<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-									<br>
-									<br>
 									<div class="modFoot">
-									<span>
-										<input type="button" class="btn btn-danger" value="Cancel" data-dismiss="modal" onclick="this.form.reset()" id="canBtn">
-									</span>
-									<span>
-										<input type="submit" name="submit" value="Submit"class="btn btn-success" id="sucBtn">
-									</span>
+										<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+										<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+										<br>
+										<br>
+										<span>
+											<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+										</span>
+										<span>
+											<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
+										</span>
 									</div>
 								</form> 			
 							</div>
-						
-							<div class="modal-footer">
-								</div>
+							<div class="modal-footer">	
 							</div>
 						</div>
-					</div>      	
-				</div>
-			</div>	
-		</div>
-				
+					</div>
+				</div>      	
+			</div>
+		</div>		
+		
+		<!-- Add Incoming Entry Functionality-->
 		<?php include('functionalities/addIncoming.php'); ?>
+<<<<<<< HEAD
 
 		<!-- SCRIPTS -->
     <script type="text/javascript" src="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/js/compiled.min.js"></script>
@@ -308,4 +389,7 @@
     Ps.initialize(el);
     </script>
 </body>
+=======
+  </body>
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 </html>

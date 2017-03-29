@@ -99,24 +99,29 @@
 			$query = $conn->prepare("
 									SELECT MAX(SamDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName FROM (SELECT DISTINCT incoming.inDate AS SamDate, incoming.inQty AS inQuant, null AS outQuant
 									FROM incoming
-									WHERE prodID='$incID'
+									WHERE prodID='$incID' AND status = 'Active'
 									UNION
 									SELECT DISTINCT outgoing.outDate, null, outgoing.outQty
 									FROM outgoing
-									WHERE prodID='$incID'
+									WHERE prodID='$incID' AND status = 'Active'
 									ORDER BY SamDate) AS SHYT JOIN product 
-									WHERE product.prodID='$incID'
+									WHERE product.prodID='$incID' AND product.status = 'Active'
 									GROUP BY SamDate
 									");
 			$query->execute();
 			$res = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT phyCount, prodID FROM inventory WHERE prodID = '$incID'");					
-								
+			$query2 = $conn->prepare("SELECT phyCount, prodID FROM inventory WHERE prodID = '$incID'");										
 			$query2->execute();
 			$resul = $query2->fetchAll();
 		
 			$request = current($conn->query("SELECT initialQty FROM inventory WHERE prodID = '$incID'")->fetch());
+			$base = $request;
+			
+			$query3 = $conn->prepare("SELECT remarks FROM inventory WHERE prodID = '$incID'");										
+			$query3->execute();
+			$thisRemark = $query3->fetchAll();
+			
 		?>
 		
 		<div id="contents">
@@ -141,7 +146,7 @@
 							</td>
 							
 							<td>
-							Month Starting QTY: 
+							Beginning Quantity: 
 									<?php echo $request ?>
 							</td>
 						</tr>
@@ -175,16 +180,23 @@
 						</tr>
 					<?php
 						foreach ($res as $item):
-						$currQty = $request + $item["Added"] - $item["Subracted"];
+						
+						if ($request == $base){
+							$currQty = $request + $item["Added"] - $item["Subracted"];
+							$base = 0;
+						}
+						else {
+							$currQty = $currQty + $item["Added"] - $item["Subracted"];
+						}
 					?>
+					
 						<tr>	
 							<td data-title="Date"><?php echo $item["DATE"]; ?></td>	
 							<td data-title="TransID"></td>
 							<td data-title="IN"><?php echo $item["Added"];?></td>
 							<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
-							<td data-title="BALANCE"><?php echo $currQty ?></td>
-		
 							<td></td>
+							<td data-title="BALANCE"><?php echo $currQty ?></td>
 						</tr>
 					<?php
 						endforeach;
@@ -203,7 +215,9 @@
 						<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["phyCount"]; ?>" placeholder="<?php echo $item["phyCount"]; ?>">
 						<?php endforeach; ?>
 						
-						<input type="text" name="remarks" placeholder="Enter Remarks">
+						<?php foreach ($thisRemark as $forRemark): ?>
+						<input type="text" name="additionalRemarks" value="<?php echo $forRemark["remarks"]; ?>" placeholder="<?php echo $forRemark["remarks"]; ?>">
+						<?php endforeach; ?>
 						
 						<button type="submit" name="adjust">Submit</button>
 
@@ -216,13 +230,16 @@
 
 		$incID= $_GET['incId'];
 		$quant=(isset($_REQUEST['adjustUpdate']) ? $_REQUEST['adjustUpdate'] : null);
+		$remark=(isset($_REQUEST['additionalRemarks']) ? $_REQUEST['additionalRemarks'] : null);
 		
 		if (isset($_POST["adjust"])){
 		
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
-			$sql = "UPDATE inventory SET phyCount=$quant WHERE prodID = '$incID'";
+			$sql = "UPDATE inventory SET phyCount=$quant, remarks='$remark' WHERE prodID = '$incID'";
 			$conn->exec($sql);
+
+			
 			echo "<meta http-equiv='refresh' content='0'>";
 		}
 

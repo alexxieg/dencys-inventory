@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2017 at 04:37 AM
+-- Generation Time: Mar 29, 2017 at 03:55 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -124,7 +124,7 @@ CREATE TABLE `branch` (
 --
 
 INSERT INTO `branch` (`branchID`, `location`, `branchName`, `status`) VALUES
-(1, 'Camdas', 'Dencys', 'Active'),
+(1, 'Camdas', 'Dency\'s Hardware', 'Active'),
 (2, 'Hilltop', 'Enrico', 'Active'),
 (3, 'KM 4', 'Tayabas', 'Active'),
 (4, 'KM 5', 'KM5', 'Active'),
@@ -147,7 +147,7 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`brandID`, `brandName`, `status`) VALUES
-('AFR', 'Alfra', 'Active'),
+('AFR', 'Alfra', 'Inactive'),
 ('AGP', 'AGP', 'Active'),
 ('BND', 'Black and Decker', 'Active'),
 ('BRM', 'Bernmann', 'Active'),
@@ -161,6 +161,7 @@ INSERT INTO `brand` (`brandID`, `brandName`, `status`) VALUES
 ('ELP', 'Elephant', 'Active'),
 ('EZN', 'Ezons', 'Active'),
 ('GFD', 'Greenfield', 'Active'),
+('HI', 'HEHE', 'Inactive'),
 ('HND', 'Honda', 'Active'),
 ('HTC', 'Hitachi', 'Active'),
 ('IWN', 'Irwin', 'Active'),
@@ -305,20 +306,25 @@ CREATE TABLE `incoming` (
 
 INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `receiptNo`, `status`, `inRemarks`, `empID`, `prodID`) VALUES
 (1, 25, '2017-03-01', 'NE0216', 'Active', 'None', 1, 'LTS-HDT-0001'),
-(2, 20, '2017-03-01', '4464', 'Active', 'None', 5, 'LTS-HDT-0002'),
+(2, 20, '2017-03-01', '4464', 'Active', 'None', 1, 'LTS-HDT-0002'),
 (3, 15, '2017-03-05', '3245', 'Active', 'None', 4, 'LTS-HDT-0003'),
 (4, 20, '2017-03-10', 'n7452', 'Active', 'None', 8, 'LTS-ACC-0001'),
 (5, 10, '2017-03-15', 'r5123', 'Active', 'None', 20, 'LTS-ACC-0002'),
 (6, 30, '2017-03-18', 'RE0293', 'Active', 'None', 6, 'LTS-HDT-0001'),
 (7, 20, '2017-03-18', 'RE0293', 'Active', 'None', 6, 'LTS-HDT-0002'),
-(8, 25, '2017-03-19', 'RE1554', 'Active', 'None', 14, 'DCA-PWT-0001'),
-(9, 50, '2017-03-19', 'REjlkd', 'Active', 'None', 7, 'DCA-PWT-0001'),
+(8, 25, '2017-03-19', 'RE1554', 'Active', 'None', 20, 'DCA-PWT-0001'),
+(9, 50, '2017-03-19', 'REjlkd', 'Active', 'None', 20, 'DCA-PWT-0001'),
 (10, 25, '2017-03-19', 'RE4542', 'Active', 'None', 20, 'DCA-PWT-0003'),
-(11, 50, '2017-03-21', 'Y7202', 'Active', 'None', 3, 'AFR-ACC-0009'),
+(11, 50, '2017-03-21', 'Y7202', 'Active', 'None', 20, 'AFR-ACC-0009'),
 (12, 30, '2017-03-22', 'G0255', 'Active', 'None', 7, 'DGR-ACC-0017'),
 (13, 45, '2017-03-25', 'K9235', 'Active', 'None', 9, 'MXS-PWT-0017'),
 (14, 60, '2017-03-26', '8255', 'Active', 'None', 10, 'MXT-ACC-0017'),
-(15, 50, '2017-03-28', '3513', 'Active', 'None', 12, 'SSS-PWT-0008');
+(15, 50, '2017-03-28', '3513', 'Active', 'None', 12, 'SSS-PWT-0008'),
+(16, 20, '2017-03-29', 'A2145', 'Active', 'None', 15, 'AFR-ACC-0006'),
+(17, 25, '2017-03-29', '8024', 'Active', 'None', 17, 'AFR-ACC-0007'),
+(18, 30, '2017-03-29', '7637', 'Active', 'None', 4, 'AFR-ACC-0008'),
+(19, 30, '2017-03-29', 'P9211', 'Active', 'None', 5, 'AFR-ACC-0009'),
+(20, 25, '2017-03-29', 'B9235', 'Active', 'None', 7, 'AFR-ACC-0010');
 
 -- --------------------------------------------------------
 
@@ -334,6 +340,7 @@ CREATE TABLE `inventory` (
   `inQty` int(11) DEFAULT NULL,
   `outQty` int(11) DEFAULT NULL,
   `endingQty` int(11) DEFAULT NULL,
+  `remarks` varchar(45) DEFAULT NULL,
   `prodID` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -341,37 +348,57 @@ CREATE TABLE `inventory` (
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `outQty`, `endingQty`, `prodID`) VALUES
-(1, 75, NULL, 30, 55, 10, 20, 'LTS-HDT-0001'),
-(2, 55, NULL, 30, 40, 15, 20, 'LTS-HDT-0002'),
-(3, 40, NULL, 30, 15, 5, 20, 'LTS-HDT-0003'),
-(4, 50, NULL, 50, NULL, NULL, 10, 'LTS-HDT-0004'),
-(5, 30, NULL, 30, NULL, NULL, 25, 'LTS-HDT-0005'),
-(6, 25, NULL, 25, NULL, NULL, 5, 'LTS-HDT-0006'),
-(7, 10, NULL, 10, NULL, NULL, 15, 'LTS-HDT-0007'),
-(8, 15, NULL, 15, NULL, NULL, 15, 'LTS-HDT-0008'),
-(9, 15, NULL, 15, NULL, NULL, 15, 'LTS-HDT-0009'),
-(10, 10, NULL, 10, NULL, NULL, 10, 'LTS-HDT-0010'),
-(11, 20, NULL, 10, 20, 10, 10, 'LTS-ACC-0001'),
-(12, 20, NULL, 10, 10, NULL, 10, 'LTS-ACC-0002'),
-(13, 5, NULL, 15, NULL, 10, 15, 'LTS-ACC-0003'),
-(14, 5, NULL, 15, NULL, 10, 15, 'LTS-ACC-0004'),
-(15, 50, NULL, 25, 25, NULL, 25, 'LTS-ACC-0005'),
-(16, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0006'),
-(17, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0007'),
-(18, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0008'),
-(19, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0009'),
-(20, 50, NULL, 50, NULL, NULL, 50, 'LTS-ACC-0010'),
-(21, 70, NULL, 25, 75, 30, 25, 'DCA-PWT-0001'),
-(22, 15, NULL, 25, NULL, 10, 25, 'DCA-PWT-0002'),
-(23, 50, NULL, 25, 25, NULL, 25, 'DCA-PWT-0003'),
-(24, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0004'),
-(25, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0005'),
-(26, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0006'),
-(27, 40, NULL, 25, 15, NULL, 25, 'DCA-PWT-0007'),
-(28, 45, NULL, 25, 20, NULL, 25, 'DCA-PWT-0008'),
-(29, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0009'),
-(30, 25, NULL, 25, NULL, NULL, 25, 'DCA-PWT-0010');
+INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `outQty`, `endingQty`, `remarks`, `prodID`) VALUES
+(1, 75, NULL, 30, 55, 10, 20, NULL, 'LTS-HDT-0001'),
+(2, 55, NULL, 30, 40, 15, 20, NULL, 'LTS-HDT-0002'),
+(3, 40, NULL, 30, 15, 5, 20, NULL, 'LTS-HDT-0003'),
+(4, 50, NULL, 50, NULL, NULL, 10, NULL, 'LTS-HDT-0004'),
+(5, 30, NULL, 30, NULL, NULL, 25, NULL, 'LTS-HDT-0005'),
+(6, 25, NULL, 25, NULL, NULL, 5, NULL, 'LTS-HDT-0006'),
+(7, 10, NULL, 10, NULL, NULL, 15, NULL, 'LTS-HDT-0007'),
+(8, 15, NULL, 15, NULL, NULL, 15, NULL, 'LTS-HDT-0008'),
+(9, 15, NULL, 15, NULL, NULL, 15, NULL, 'LTS-HDT-0009'),
+(10, 10, NULL, 10, NULL, NULL, 10, NULL, 'LTS-HDT-0010'),
+(11, 20, NULL, 10, 20, 10, 10, NULL, 'LTS-ACC-0001'),
+(12, 20, NULL, 10, 10, NULL, 10, NULL, 'LTS-ACC-0002'),
+(13, 5, NULL, 15, NULL, 10, 15, NULL, 'LTS-ACC-0003'),
+(14, 5, NULL, 15, NULL, 10, 15, NULL, 'LTS-ACC-0004'),
+(15, 25, NULL, 25, NULL, NULL, 25, NULL, 'LTS-ACC-0005'),
+(16, 50, NULL, 50, NULL, NULL, 50, NULL, 'LTS-ACC-0006'),
+(17, 50, NULL, 50, NULL, NULL, 50, NULL, 'LTS-ACC-0007'),
+(18, 50, NULL, 50, NULL, NULL, 50, NULL, 'LTS-ACC-0008'),
+(19, 50, NULL, 50, NULL, NULL, 50, NULL, 'LTS-ACC-0009'),
+(20, 50, NULL, 50, NULL, NULL, 50, NULL, 'LTS-ACC-0010'),
+(21, 70, NULL, 25, 75, 30, 25, NULL, 'DCA-PWT-0001'),
+(22, 15, NULL, 25, NULL, 10, 25, NULL, 'DCA-PWT-0002'),
+(23, 50, 25, 25, 25, NULL, 25, NULL, 'DCA-PWT-0003'),
+(24, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0004'),
+(25, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0005'),
+(26, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0006'),
+(27, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0007'),
+(28, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0008'),
+(29, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0009'),
+(30, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0010'),
+(31, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0001'),
+(32, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0002'),
+(33, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0003'),
+(34, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0004'),
+(35, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0005'),
+(36, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0001'),
+(37, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0002'),
+(38, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0003'),
+(39, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0004'),
+(40, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0005'),
+(41, 45, NULL, 25, 20, NULL, NULL, NULL, 'AFR-ACC-0006'),
+(42, 50, NULL, 25, 25, NULL, NULL, NULL, 'AFR-ACC-0007'),
+(43, 45, NULL, 25, 30, 10, NULL, NULL, 'AFR-ACC-0008'),
+(44, 95, NULL, 25, 80, 10, NULL, NULL, 'AFR-ACC-0009'),
+(45, 35, NULL, 25, 25, 15, NULL, NULL, 'AFR-ACC-0010'),
+(46, 10, NULL, 20, NULL, 10, NULL, NULL, 'AFR-ACC-0011'),
+(47, 15, NULL, 20, NULL, 5, NULL, NULL, 'AFR-ACC-0012'),
+(48, 20, NULL, 20, NULL, NULL, NULL, NULL, 'AFR-ACC-0013'),
+(49, 20, NULL, 20, NULL, NULL, NULL, NULL, 'AFR-ACC-0014'),
+(50, 15, NULL, 20, NULL, 5, NULL, NULL, 'AFR-ACC-0015');
 
 -- --------------------------------------------------------
 
@@ -410,7 +437,15 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `receiptNo`,
 (12, 5, '2017-03-19', 'None', 'OUT0007', 'Active', 2, 17, 'DCA-PWT-0001'),
 (13, 10, '2017-03-20', 'None', 'OUT0008', 'Active', 4, 13, 'AFR-ACC-0008'),
 (14, 15, '2017-03-22', 'None', 'OUT0009', 'Active', 3, 10, 'MXT-ACC-0017'),
-(15, 5, '2017-03-25', 'None', 'OUT0010', 'Active', 5, 5, 'DGR-ACC-0017');
+(15, 5, '2017-03-25', 'None', 'OUT0010', 'Active', 5, 5, 'DGR-ACC-0017'),
+(16, 10, '2017-03-28', 'None', 'OUT0011', 'Active', 2, 7, 'AFR-ACC-0009'),
+(17, 15, '2017-03-28', 'None', 'OUT0011', 'Active', 1, 5, 'AFR-ACC-0010'),
+(18, 10, '2017-03-29', 'None', 'OUT0012', 'Active', 4, 2, 'AFR-ACC-0011'),
+(19, 5, '2017-03-29', 'None', 'OUT0012', 'Active', 3, 11, 'AFR-ACC-0012'),
+(20, 5, '2017-03-29', 'None', 'OUT0012', 'Active', 5, 14, 'AFR-ACC-0015'),
+(21, 777, '2017-03-29', 'cyrilbitch', '0897uy', 'Active', 3, 2, 'AFR-ACC-0006'),
+(22, 999, '2017-03-29', 'cyxted', '89i7uyjgh', 'Active', 1, 2, 'AFR-ACC-0009'),
+(23, 998, '2017-03-29', 'cybitch', '89i7uyjgh', 'Active', 1, 2, 'AFR-ACC-0019');
 
 -- --------------------------------------------------------
 
@@ -627,6 +662,7 @@ CREATE TABLE `returns` (
   `returnDate` date NOT NULL,
   `returnQty` int(5) NOT NULL,
   `returnRemark` text NOT NULL,
+  `status` varchar(45) NOT NULL DEFAULT 'Active',
   `prodID` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -634,13 +670,12 @@ CREATE TABLE `returns` (
 -- Dumping data for table `returns`
 --
 
-INSERT INTO `returns` (`returnID`, `returnDate`, `returnQty`, `returnRemark`, `prodID`) VALUES
-(1, '2017-01-15', 1, 'none', 'LTS-ACC-0001'),
-(2, '2017-01-15', 1, 'none', 'LTS-ACC-0010'),
-(3, '2017-01-20', 1, 'none', 'LTS-ACC-0011'),
-(4, '2017-01-31', 2, 'none', 'LTS-HDT-0005'),
-(5, '2017-02-02', 1, 'none', 'LTS-HDT-0006'),
-(14, '2017-03-11', 2, 'NONE', 'DCA-PWT-0006');
+INSERT INTO `returns` (`returnID`, `returnDate`, `returnQty`, `returnRemark`, `status`, `prodID`) VALUES
+(1, '2017-01-15', 1, 'none', 'Active', 'LTS-ACC-0001'),
+(2, '2017-01-15', 1, 'none', 'Active', 'LTS-ACC-0010'),
+(3, '2017-01-20', 1, 'none', 'Active', 'LTS-ACC-0011'),
+(4, '2017-01-31', 2, 'none', 'Active', 'LTS-HDT-0005'),
+(5, '2017-02-02', 1, 'none', 'Active', 'LTS-HDT-0006');
 
 -- --------------------------------------------------------
 
@@ -679,18 +714,19 @@ CREATE TABLE `users` (
   `userID` int(5) NOT NULL,
   `userName` varchar(25) NOT NULL,
   `password` varchar(25) NOT NULL,
-  `user_role` text NOT NULL
+  `user_role` text NOT NULL,
+  `status` varchar(45) NOT NULL DEFAULT 'Active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `userName`, `password`, `user_role`) VALUES
-(1, 'admin1', 'bosch123', 'admin'),
-(2, 'admin2', 'hitachi123', 'admin'),
-(3, 'user1', 'dewatt123', 'user'),
-(4, 'user2', 'agp123', 'user');
+INSERT INTO `users` (`userID`, `userName`, `password`, `user_role`, `status`) VALUES
+(1, 'admin1', 'bosch123', 'admin', 'Active'),
+(2, 'admin2', 'hitachi123', 'admin', 'Active'),
+(3, 'user1', 'dewatt123', 'user', 'Active'),
+(4, 'user2', 'agp123', 'user', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -793,12 +829,12 @@ ALTER TABLE `incoming`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `invID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `invID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `outgoing`
 --
 ALTER TABLE `outgoing`
-  MODIFY `outID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `outID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `returns`
 --

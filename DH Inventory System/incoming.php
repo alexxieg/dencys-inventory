@@ -16,6 +16,10 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- Javascript Files -->
+<<<<<<< HEAD
+=======
+		<script src="incoming.js"></script>
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -26,25 +30,30 @@
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
-			<script>
-				$(document).ready(function(){
-					$('#myTable').dataTable();
-				});
-			</script>
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
 		
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
 			if (!isset($_SESSION['id']) || $role!="admin") {
 				header('Location: index.php');
 			}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
 	</head>
   
+<<<<<<< HEAD
 <body class="fixed-sn mdb-skin bg-skin-lp">
 	
 		<!-- PHP code for fetching the data -->	
@@ -150,10 +159,85 @@
 						foreach ($result as $item):
 						$incID = $item["inID"];
 					?>
+=======
+	<body>
+		<!-- Retrieve Incoming Data -->
+		<?php include('functionalities/fetchIncoming.php'); ?>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<!-- Header -->
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+					</button>
+
+					<img src="logohead.png" id="logohead"/>
+
+					<div class="dropdown">
+						<button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+						<div class="dropdown-content">
+							<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+							<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+								<i class="glyphicon glyphicon-print"></i> Print</button></a>
+						</div>
+					</div>
+				</div>
+				
+				<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				</form>
+			</div><!-- /container -->
+		</nav>
+
+	<!-- Side bar -->
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="collapse navbar-collapse">
+				<ul class="nav nav-pills nav-stacked affix">
+		        <li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+				<li><a href="summaries.php"><i class=""></i>Summary</a></li>
+		   	
+
+		        <li class="nav-header">  	
+		        	<a href="#" data-toggle="collapse" data-target="#menu2">
+		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
+		          	</a>
+		            <ul class="list-unstyled collapse" id="menu2">
+		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a>
+		                </li>
+		                <li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a>
+		                </li>
+		                <li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a>
+		                </li>
+		                <li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a>
+		                </li>
+		                <li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a>
+		                </li>
+		                <li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
+		                </li>                              
+		            </ul>
+		    	</ul>
+		 	 </div><!--/span-->	
+		   </div>
+		<!-- end of side  bar -->
+		</nav><!-- /Header -->
+		
+		<?php
+			foreach ($result as $item):
+				$incID = $item["inID"];
+		?>
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 					
-					<?php
-						endforeach;
-					?>
+		<?php
+			endforeach;
+		?>
 					
 		<div id="contents">
 			<div class="pages no-more-tables">
@@ -163,115 +247,103 @@
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 					</table>
 				</div>
+<<<<<<< HEAD
 
 				<!-- Table for Inventory Data-->
 			<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 				<div id="myTable_length" class="dataTables_length">
 					<div id="myTable_filter" class="dataTables_filter">
+=======
+				
+				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div id="myTable_length" class="dataTables_length">
+						<div id="myTable_filter" class="dataTables_filter">
+						</div>
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 					</div>
 				</div>
-			</div>
-			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-				<thead>	
-					<tr>
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							<div id="tabHead">Date</div>
-						</th>
-						
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							Product ID
-						</th>
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							<div id="tabHead">Product Description</div>
-						</th>
-						
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							Model
-						</th>
-			
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							Quantity
-						</th>
-						
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							Unit
-						</th>
-						
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							<div id="tabHead">Employee</div>
-						</th>
-						
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							Receipt No.
+				<br> 
+				
+				<!-- Table Display for Incoming -->
+				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+					<thead>	
+						<tr>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Date</div>
+							</th>
 							
-						</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Product ID
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product Description</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Model
+							</th>
+				
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Quantity
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Unit
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Employee</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Receipt No.
+								
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Remarks
+							</th>
+							<th></th>
+						</tr>
+					</thead>
+					
+					<tbody>					
+						<?php
+							foreach ($result as $item):
+							$incID = $item["inID"];
+						?>
 						
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							Remarks
-						</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr id="centerData">
-						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"]; ?></td>
-						<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
-						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
-						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
-						<td>
-							<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" id="edBtn">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							</button>
-							</a>
-							<a href="functionalities/deleteInc.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
-								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-							</button>
-							</a>
-						</td>				
-					</tr>
-					
-					<?php
-						foreach ($result as $item):
-						$incID = $item["inID"];
-					?>
-					
-					<tr id="centerData">
-						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"]; ?></td>
-						<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
-						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
-						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
-						<td>
-							<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" id="edBtn">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							</button>
-							</a>
-							<a href="functionalities/deleteInc.php?incId=<?php echo $incID; ?>"> 
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
-								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-							</button>
-							</a>
-						</td>	
-					</tr>	
-					
-					<?php
-						endforeach;
-					?>
-				</tbody>	
-			</table>
+						<tr id="centerData">
+							<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+							<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Model"><?php echo $item["model"]; ?></td>
+							<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+							<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+							<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+							<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+							<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+							<td>
+								<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+								<button type="button" class="btn btn-default" id="edBtn">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								</button>
+								</a>
+								<a href="functionalities/userdeletein.php?incId=<?php echo $incID; ?>"> 
+								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
+									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+								</button>
+								</a>
+							</td>	
+						</tr>	
+						
+						<?php
+							endforeach;
+						?>
+					</tbody>	
+				</table>
 
+				<!-- Modal for New Incoming Entry Form -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
@@ -346,14 +418,16 @@
 									</div>
 								</form> 			
 							</div>
-						
-							<div class="modal-footer">
-							</div>
 						</div>
 					</div>
 				</div>      	
 			</div>
 		</div>		
+<<<<<<< HEAD
+=======
+		
+		<!-- Add Incoming Entry Functionality-->
+>>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<?php include('functionalities/addIncoming.php'); ?>
   
 		<!-- SCRIPTS -->
