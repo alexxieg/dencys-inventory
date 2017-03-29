@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 		<title>Products</title>
-<<<<<<< HEAD
 		<?php include('dbcon.php'); ?>
 			
 		<?php 
@@ -29,22 +28,14 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- Javascript Files -->
-=======
-		
-		<!-- CSS Files -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
-		
-		<!-- Javascript Files -->
 		<script src="product.js"></script>
->>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 
+		<!-- Database Connection -->
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
 		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
@@ -54,13 +45,13 @@
 		<script>
 			$(document).ready(function(){
 				$('#myTable').dataTable();
-			});
+		});
 		</script>
 			
-		<!-- Database Connection -->
+		<!-- Database connection -->
 		<?php include('dbcon.php'); ?>
 		
-		<!-- Login Session -->
+		<!-- Login Session-->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -72,7 +63,6 @@
 			$user_row = $session_query->fetch();
 		?>
 	</head>
-<<<<<<< HEAD
 	  
 <body class="fixed-sn mdb-skin bg-skin-lp">
 	
@@ -155,58 +145,6 @@
         <!-- /.Navbar -->
     </header>
     <!--/.Double navigation-->
-
-=======
- 
-	<body>
-		<!-- Retrieve Product Returns -->
-		<?php include('functionalities/fetchProduct.php'); ?>
-
-		<!-- Page Header and Navigation Bar -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" >
-		<!-- Header -->
-		<div class="container-fluid">
-		    <div class="navbar-header">
-				<button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-
-				<img src="logohead.png" id="logohead"/>
-
-				<div class="dropdown">
-					<button class="dropbtn"><i class="glyphicon glyphicon-user"></i> User</button>
-					<div class="dropdown-content">
-						<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-						<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
-						<i class="glyphicon glyphicon-print"></i> Print</button></a>
-					</div>
-				</div>
-   			</div>
-		    
-		    <form action="?" method="post">
-					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</form>
-		  </div><!-- /container -->
-		</nav>
-
-		<!-- Side bar -->
-		<div class="row row-offcanvas row-offcanvas-left">
-			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-				<div class="collapse navbar-collapse">
-					<ul class="nav nav-pills nav-stacked affix">
-						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-						<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-						<li><a href="userproduct.php"><i class="glyphicon glyphicon-sort"></i>Products</a></li>
-					</ul>
-				</div><!--/span-->	
-		   </div>
-		<!-- end of side  bar -->
-		 </div><!-- /Header -->
 					
 		<?php
 			foreach ($result as $item):
@@ -217,7 +155,6 @@
 			endforeach;
 		?>
 					
->>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -285,25 +222,14 @@
 				</table>
 			</div>	
 		</div>
-<<<<<<< HEAD
-
 		<!-- SCRIPTS -->
     <script type="text/javascript" src="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/js/compiled.min.js"></script>
 
-    <script>
-    $(".button-collapse").sideNav();
-        
-    var el = document.querySelector('.custom-scrollbar');
-    Ps.initialize(el);
+		    <script>
+		    $(".button-collapse").sideNav();
+		        
+		    var el = document.querySelector('.custom-scrollbar');
+		    Ps.initialize(el);
     </script>
-		
   </body>
 </html>
-
-=======
-		
-		<!-- Add Product Functionality -->
-		<?php include('functionalities/addProduct.php'); ?>
-	</body>
-</html>
->>>>>>> b46924cb4bac82cf4f21e17c91f23463576cc20e
