@@ -218,6 +218,66 @@
 					</div>
 				</div>
 				
+				<!-- Modal - Archived Branches -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Categories</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Category Data -->
+									<?php
+										$query = $conn->prepare("SELECT branchID, branchName, location FROM branch WHERE status = 'Inactive'");
+										$query->execute();
+										$result1 = $query->fetchAll();
+									?>
+									
+									<thead>
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch ID</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch Name</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
+											<th></th>
+										</tr>
+									</thead>	
+									
+									<tbody>
+										<?php
+											foreach ($result as $item):
+											$useThisID = $item["branchID"];
+										?>
+										<tr>
+											<td><?php echo $item["branchID"]; ?></td>
+											<td><?php echo $item["branchName"]; ?></td>
+											<td><?php echo $item["location"]; ?></td>
+											<td>	
+								
+												<a> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to r this entry?');">
+														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+													</button>
+												</a>
+											</td>
+										</tr>
+												
+										<?php
+											endforeach;
+										?>
+									</tbody>		
+								</table>
+				
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
+					</div>
+				</div>
 			</div>
 		</div>
 		
