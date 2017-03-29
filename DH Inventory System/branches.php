@@ -51,7 +51,7 @@
 	<body>
 		<!-- Retrieve Branch Data -->
 		<?php
-			$query = $conn->prepare("SELECT branchID, location FROM branch WHERE status = 'Active' ");
+			$query = $conn->prepare("SELECT branchID, branchName, location FROM branch WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -127,7 +127,7 @@
 					
 		<?php
 			endforeach;
-		?>		
+		?>			
 		 
 		<div id="contents">
 			<div class="pages">
@@ -150,7 +150,8 @@
 					<thead>
 						<tr>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch ID</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch Name</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
 							<th></th>
 						</tr>
 					</thead>	
@@ -162,14 +163,14 @@
 						?>
 						<tr>
 							<td><?php echo $item["branchID"]; ?></td>
+							<td><?php echo $item["branchName"]; ?></td>
 							<td><?php echo $item["location"]; ?></td>
 							<td>	
-								<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
+								<a>
 									<button type="button" class="btn btn-default">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
-								</a>
-								
+								</a>							
 								<a> 
 									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
@@ -184,13 +185,14 @@
 					</tbody>		
 				</table>
 				
-				<!-- Modal: Add Branch Form -->
+								
+				<!-- Modal for New Branch Form -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Add New Brand</h4>
+								<h4 class="modal-title">Add New Branch</h4>
 							</div>
 							<div class="modal-body">
 								<form action="" method="POST" onsubmit="return validateForm()">		
@@ -199,6 +201,8 @@
 									<h3>Branch Name</h3>
 									<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="branch"> <br>
 									<br>
+									<h3>Branch Location</h3>
+									<input type="text" class="form-control" id="addLocation" placeholder="Location" name="location"> <br>
 									
 									<div class="modFoot">
 										<span>
@@ -213,6 +217,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 		
