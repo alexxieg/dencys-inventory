@@ -13,26 +13,21 @@
 		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 		
-		<!-- Javascript Files -->
 		<script src="category.js"></script>
 		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
-		<!-- Datatables -->
-		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
-		</script>
+			<script>
+				$(document).ready(function(){
+					$('#myTable').dataTable();
+				});
+			</script>
 		
-		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
-		
-		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -46,9 +41,8 @@
 	</head>
   
 	<body>
-		<!-- Retrieve Category Data -->
 		<?php
-			$query = $conn->prepare("SELECT categoryID, categoryName FROM category");
+			$query = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -117,22 +111,24 @@
 		 	 </div><!--/span-->	
 		   </div>
 		<!-- end of side  bar -->
-		 </div><!-- /Header -->
-
+		 </div><!-- /Header -->		
+		 
 		<?php
 			foreach ($result as $item):
-				$useThisID = $item["categoryID"];
-		?>							
-		<?php
-		endforeach;
+			$useThisID = $item["categoryID"];
 		?>
-					
+										
+		<?php
+			endforeach;
+		?>
+		
 		<div id="contents">
 			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
 						<h1 id="headers">PRODUCT CATEGORIES</h1>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Category</button>							
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Category</button>						
 					</table>
 				</div>
 					
@@ -150,7 +146,6 @@
 						</tr>
 					</thead>
 					<tbody>
-				
 						<?php
 							foreach ($result as $item):
 							$useThisID = $item["categoryID"];
@@ -164,8 +159,8 @@
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
-								<a href="../removeCategory.php?useId=<?php echo $useThisID; ?>"> 
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<a href="functionalities/removeCategory.php?useId=<?php echo $useThisID; ?>"> 
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this category?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
@@ -178,6 +173,7 @@
 					</tbody>	
 				</table>
 				
+				<!-- Modal - New Category Form -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
@@ -210,11 +206,66 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	
-		<!-- Add New Category -->
-		<?php include('functionalities/addCategory.php'); ?>
+				
+				<!-- Modal - Archived Categories -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Categories</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Category Data -->
+									<?php
+										$query = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Inactive'");
+										$query->execute();
+										$result1 = $query->fetchAll();
+									?>
+									
+									<thead>
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category ID</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category</th>
+											<th></th>
+										</tr>
+									</thead>
+									
+									<tbody>							
+										<?php
+											foreach ($result1 as $item):
+											$useThisID = $item["categoryID"];
+										?>
+										<tr>
+											<td><?php echo $item["categoryID"]; ?></td>
+											<td><?php echo $item["categoryName"]; ?></td>
+											<td>
+												<a href="functionalities/restoreCategory.php?useId=<?php echo $useThisID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this entry?');">
+														Restore
+													</button>
+												</a>
+											</td>	
+										</tr>
+												
+										<?php
+											endforeach;
+										?>
+									</tbody>	
+								</table>
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
+					</div>
+				</div>
+			</div>		
+		</div>		
 		
+		<?php include('functionalities/addCategory.php'); ?>
 	</body>
 </html>
