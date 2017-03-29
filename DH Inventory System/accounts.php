@@ -52,7 +52,7 @@
 	<body>
 		<!-- Retrieve Account Data -->
 		<?php
-			$query = $conn->prepare("SELECT userID, userName, password FROM users WHERE status = 'Active' ");
+			$query = $conn->prepare("SELECT userID, userName, password, user_role FROM users WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -133,7 +133,8 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
 						<h1 id="headers">ACCOUNTS</h1>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>							
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>						
 					</table>
 				</div>
 					
@@ -150,6 +151,7 @@
 						<tr>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Username</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Password</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User Role</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -162,7 +164,8 @@
 							
 						<tr>	
 							<td><?php echo $item["userName"]; ?></td>
-							<td><?php echo $item["password"]; ?></td>
+							<td><?php echo $item["password"]; ?></td>	
+							<td><?php echo $item["user_role"]; ?></td>
 							<td>
 								<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
 									<button type="button" class="btn btn-default">
@@ -209,17 +212,80 @@
 									</div>
 									
 									<div class="modFoot">
-									<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-									</span>
-									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addAccnt" id="sucBtn">
-									</span>
+										<span>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+										</span>
+										<span>
+											<input type="submit" value="Submit" class="btn btn-success" name="addAccnt" id="sucBtn">
+										</span>
 									</div>
 									
+									<div class="modal-footer">
+									</div>
 								</form> 
 							</div>
 						</div>
+					</div>
+				</div>
+				
+				<!-- Modal - Archived Accounts -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Categories</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Account Data -->
+									<?php
+										$query = $conn->prepare("SELECT userID, userName, password, user_role FROM users WHERE status = 'Inactive' ");
+										$query->execute();
+										$result1 = $query->fetchAll();
+									?>
+									
+									<thead>
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Username</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Password</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User Role</th>
+											<th></th>
+										</tr>
+									</thead>
+									
+									<tbody>						
+										<?php
+											foreach ($result1 as $item):
+											$useThisID = $item["userID"];
+										?>
+											
+										<tr>	
+											<td><?php echo $item["userName"]; ?></td>
+											<td><?php echo $item["password"]; ?></td>
+											<td><?php echo $item["user_role"]; ?></td>
+											<td>
+												<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this account?');">
+														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+													</button>
+												</a>
+											</td>			
+										</tr>
+										
+										<?php
+											endforeach;
+										?>
+					
+									</tbody>
+								</table>
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
 					</div>
 				</div>
 			</div>
