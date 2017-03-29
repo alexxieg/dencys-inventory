@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -170,16 +168,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr id="centerData">
-						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"];?></td>
-						<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-						<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-						<td data-title="Unit"><?php echo $item["unitType"];?></td>
-						<td data-title="Price"><?php echo $item["price"]; ?></td>
-						<td>
-					</tr>
+
 						<?php
 						foreach ($result as $item):
 						$proID = $item["prodID"];
@@ -200,7 +189,7 @@
 								</button>
 							</a>	
 							<a href="functionalities/removeProduct.php?proId=<?php echo $proID; ?>">
-								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn1">
+								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');" id="delBtn1">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 								</button>
 							</a>

@@ -7,10 +7,12 @@
 
 		<title>Returns</title>
 	
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
+		<!--Javascript Files -->
 		<script src="returns.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
@@ -18,7 +20,22 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Database Connection -->
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
+		
 		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -32,57 +49,68 @@
 	</head>
   
 	<body>
+		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchReturns.php'); ?>
 
-	<!-- Page Header and Navigation Bar -->				
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
-		<!-- Header -->
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-		      </button>
+			<!-- Header -->
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 
-		      <img src="logohead.png" id="logohead"/>
+					<img src="logohead.png" id="logohead"/>
 
-            <div class="dropdown">
-			  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
-			  <div class="dropdown-content">
-			    <a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-			    <a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
-							<i class="glyphicon glyphicon-print"></i> Print</button></a>
-		    </div>
-		</div>
-
-   			</div>
-		    
-		    <form action="?" method="post">
-					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</form>
-		  </div><!-- /container -->
+					<div class="dropdown">
+						<button class="dropbtn"><i class="glyphicon glyphicon-user"></i> User</button>
+						<div class="dropdown-content">
+							<a href="logout.php">
+								<i class="glyphicon glyphicon-log-out"></i> 
+								Logout
+							</a>
+							<a href="#">
+								<button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+									<i class="glyphicon glyphicon-print"></i> 
+									Print
+								</button>
+							</a>
+						</div>
+					</div>	
+				</div>
+				<form action="?" method="post">
+						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+				</form>
+			</div><!-- /container -->
 		</nav>
-
-
 
 		<!-- Side bar -->
 		<div class="row row-offcanvas row-offcanvas-left">
 			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-			<div class="collapse navbar-collapse">
-				<ul class="nav nav-pills nav-stacked affix">
-		        <li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-		        <li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-		        <li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-		        <li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-		    	<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-		    	</ul>
-		 	 </div><!--/span-->	
-		   </div>
-		<!-- end of side  bar -->
-		 </nav><!-- /Header -->
-		
+				<div class="collapse navbar-collapse">
+					<ul class="nav nav-pills nav-stacked affix">
+						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+						<li><a href="userproduct.php"><i class="glyphicon glyphicon-sort"></i> Products</a></li>
+					</ul>
+				 </div><!--/span-->	
+		   </div><!-- end of side  bar -->
+		 </div><!-- /Header -->
+		 
+		<?php
+			foreach ($result as $item):
+			$retID = $item["returnID"];
+		?>
+					
+		<?php
+			endforeach;
+		?>
+
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -94,76 +122,78 @@
 					</table>
 				</div>
 				
-				<table class="table table-striped table-bordered">
-					<tr>
-						<th>
-							<div id="tabHead">Date</div>
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"  id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>							
-						</th>
-						<th>
-							Product ID
-						</th>
-						<th>
-							<div id="tabHead">Product Description</div>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>							
-						</th>
-						<th>
-							Model
-						</th>
-						<th>
-							Quantity							
-						</th>
-						<th>
-							Unit
-						</th>
-						<th>
-							Remarks
-						</th>
-						<th>
-						</th>
-					</tr>
-					<?php
-						foreach ($result as $item):
-						$retID = $item["returnID"];
-					?>
-					
-					<tr id="centerData">
-						<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
-						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"]; ?></td>
-						<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-						<td data-title="Unit"><?php echo $item["unitType"];?></td>
-						<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-						<td>
-							<a href="functionalities/editRet.php?retId=<?php echo $retID; ?>" target="_blank">
-							<button type="button" class="btn btn-default">
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							</button>
-							</a>
-							<a href="functionalities/deleteRet.php?retId=<?php echo $retID; ?>">
-							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
-								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-							</button>
-							</a>
-						</td>
-					</tr>
-							
-					<?php
-						endforeach;
-					?>
-				</table>
+				<!-- Table for Returns -->
+				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div id="myTable_length" class="dataTables_length">
+						<div id="myTable_filter" class="dataTables_filter">
+						</div>
+					</div>
+				</div>
 				
+				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+					<thead>
+						<tr>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Date</div>							
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Product ID
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product Description</div>							
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Model
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Quantity							
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Unit
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Remarks
+							</th>
+							<th></th>
+						</tr>
+					</thead>
+					
+					<tbody>				
+						<?php
+							foreach ($result as $item):
+							$retID = $item["returnID"];
+						?>
+						
+						<tr id="centerData">
+							<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
+							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Model"><?php echo $item["model"]; ?></td>
+							<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+							<td data-title="Unit"><?php echo $item["unitType"];?></td>
+							<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+								
+							<td>
+								<a href="editRet.php?retId=<?php echo $retID; ?>" target="_blank">
+									<button type="button" class="btn btn-default">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+								</a>
+								<a href="functionalities/userRemoveReturn.php?retId=<?php echo $retID; ?>">
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+									</button>
+								</a>
+							</td>
+						</tr>
+								
+						<?php
+							endforeach;
+						?>
+					</tbody>	
+				</table>
+					
+				<!-- Modal for Returned Product Entry Form -->
 				<div class="modal fade" id="myModal" role="dialog">
 					 <div class="modal-dialog modal-lg">
 						 <div class="modal-content">
@@ -203,16 +233,15 @@
 								</div>
 								</form> 		
 							</div>
-							
-							<div class="modal-footer">	
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- Functionality for Adding Returns -->
 		<?php include('functionalities/addReturn.php'); ?>
 			
 	</body>
 </html>
+

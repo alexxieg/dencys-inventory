@@ -179,7 +179,7 @@
 								</a>	
 							
 								<a href="functionalities/removeEmployee.php?emplId=<?php echo $employID; ?>"> 
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>

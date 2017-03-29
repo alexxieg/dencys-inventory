@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2017 at 11:52 PM
+-- Generation Time: Mar 29, 2017 at 03:55 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -319,7 +319,12 @@ INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `receiptNo`, `status`, `inRem
 (12, 30, '2017-03-22', 'G0255', 'Active', 'None', 7, 'DGR-ACC-0017'),
 (13, 45, '2017-03-25', 'K9235', 'Active', 'None', 9, 'MXS-PWT-0017'),
 (14, 60, '2017-03-26', '8255', 'Active', 'None', 10, 'MXT-ACC-0017'),
-(15, 50, '2017-03-28', '3513', 'Active', 'None', 12, 'SSS-PWT-0008');
+(15, 50, '2017-03-28', '3513', 'Active', 'None', 12, 'SSS-PWT-0008'),
+(16, 20, '2017-03-29', 'A2145', 'Active', 'None', 15, 'AFR-ACC-0006'),
+(17, 25, '2017-03-29', '8024', 'Active', 'None', 17, 'AFR-ACC-0007'),
+(18, 30, '2017-03-29', '7637', 'Active', 'None', 4, 'AFR-ACC-0008'),
+(19, 30, '2017-03-29', 'P9211', 'Active', 'None', 5, 'AFR-ACC-0009'),
+(20, 25, '2017-03-29', 'B9235', 'Active', 'None', 7, 'AFR-ACC-0010');
 
 -- --------------------------------------------------------
 
@@ -373,7 +378,27 @@ INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `out
 (27, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0007'),
 (28, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0008'),
 (29, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0009'),
-(30, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0010');
+(30, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0010'),
+(31, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0001'),
+(32, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0002'),
+(33, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0003'),
+(34, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0004'),
+(35, 40, NULL, 40, NULL, NULL, NULL, NULL, 'AFR-PWT-0005'),
+(36, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0001'),
+(37, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0002'),
+(38, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0003'),
+(39, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0004'),
+(40, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0005'),
+(41, 45, NULL, 25, 20, NULL, NULL, NULL, 'AFR-ACC-0006'),
+(42, 50, NULL, 25, 25, NULL, NULL, NULL, 'AFR-ACC-0007'),
+(43, 45, NULL, 25, 30, 10, NULL, NULL, 'AFR-ACC-0008'),
+(44, 95, NULL, 25, 80, 10, NULL, NULL, 'AFR-ACC-0009'),
+(45, 35, NULL, 25, 25, 15, NULL, NULL, 'AFR-ACC-0010'),
+(46, 10, NULL, 20, NULL, 10, NULL, NULL, 'AFR-ACC-0011'),
+(47, 15, NULL, 20, NULL, 5, NULL, NULL, 'AFR-ACC-0012'),
+(48, 20, NULL, 20, NULL, NULL, NULL, NULL, 'AFR-ACC-0013'),
+(49, 20, NULL, 20, NULL, NULL, NULL, NULL, 'AFR-ACC-0014'),
+(50, 15, NULL, 20, NULL, 5, NULL, NULL, 'AFR-ACC-0015');
 
 -- --------------------------------------------------------
 
@@ -412,7 +437,15 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `receiptNo`,
 (12, 5, '2017-03-19', 'None', 'OUT0007', 'Active', 2, 17, 'DCA-PWT-0001'),
 (13, 10, '2017-03-20', 'None', 'OUT0008', 'Active', 4, 13, 'AFR-ACC-0008'),
 (14, 15, '2017-03-22', 'None', 'OUT0009', 'Active', 3, 10, 'MXT-ACC-0017'),
-(15, 5, '2017-03-25', 'None', 'OUT0010', 'Active', 5, 5, 'DGR-ACC-0017');
+(15, 5, '2017-03-25', 'None', 'OUT0010', 'Active', 5, 5, 'DGR-ACC-0017'),
+(16, 10, '2017-03-28', 'None', 'OUT0011', 'Active', 2, 7, 'AFR-ACC-0009'),
+(17, 15, '2017-03-28', 'None', 'OUT0011', 'Active', 1, 5, 'AFR-ACC-0010'),
+(18, 10, '2017-03-29', 'None', 'OUT0012', 'Active', 4, 2, 'AFR-ACC-0011'),
+(19, 5, '2017-03-29', 'None', 'OUT0012', 'Active', 3, 11, 'AFR-ACC-0012'),
+(20, 5, '2017-03-29', 'None', 'OUT0012', 'Active', 5, 14, 'AFR-ACC-0015'),
+(21, 777, '2017-03-29', 'cyrilbitch', '0897uy', 'Active', 3, 2, 'AFR-ACC-0006'),
+(22, 999, '2017-03-29', 'cyxted', '89i7uyjgh', 'Active', 1, 2, 'AFR-ACC-0009'),
+(23, 998, '2017-03-29', 'cybitch', '89i7uyjgh', 'Active', 1, 2, 'AFR-ACC-0019');
 
 -- --------------------------------------------------------
 
@@ -796,12 +829,12 @@ ALTER TABLE `incoming`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `invID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `invID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `outgoing`
 --
 ALTER TABLE `outgoing`
-  MODIFY `outID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `outID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `returns`
 --
