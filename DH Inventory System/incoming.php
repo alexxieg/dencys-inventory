@@ -18,6 +18,17 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+			<script>
+				$(document).ready(function(){
+					$('#myTable').dataTable();
+				});
+			</script>
+		
 		<?php include('dbcon.php'); ?>
 		<?php 
 			session_start();
@@ -100,7 +111,15 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
-
+					<?php
+						foreach ($result as $item):
+						$incID = $item["inID"];
+					?>
+					
+					<?php
+						endforeach;
+					?>
+					
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -110,68 +129,54 @@
 					</table>
 				</div>
 				
-				<table class="table table-striped table-bordered">	
+			<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+				<div id="myTable_length" class="dataTables_length">
+					<div id="myTable_filter" class="dataTables_filter">
+					</div>
+				</div>
+			</div>
+			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+				<thead>	
 					<tr>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Date</div>
-							<button type="button" class="btn btn-default" value="?orderBy=inDate DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=inDate ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-						</th>
-						<th>
-							Product ID
-						</th>
-						<th>
-							<div id="tabHead">Product Description</div>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+							Product ID
+						</th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+							<div id="tabHead">Product Description</div>
+						</th>
+						
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Model
 						</th>
 			
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Quantity
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Unit
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Employee</div>
-							<button type="button" class="btn btn-default" value="?orderBy=empName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=empName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Receipt No.
 							
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Remarks
 						</th>
 						<th></th>
 					</tr>
-							
-					<?php
-						foreach ($result as $item):
-						$incID = $item["inID"];
-					?>
-
+				</thead>
+				<tbody>
 					<tr id="centerData">
 						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
 						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
@@ -195,11 +200,41 @@
 							</a>
 						</td>				
 					</tr>
-							
+					
+					<?php
+						foreach ($result as $item):
+						$incID = $item["inID"];
+					?>
+					
+					<tr id="centerData">
+						<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+						<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?></td>
+						<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+						<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+						<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+						<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+						<td>
+							<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+							<button type="button" class="btn btn-default" id="edBtn">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+							</a>
+							<a href="functionalities/deleteInc.php?incId=<?php echo $incID; ?>"> 
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
+								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+							</button>
+							</a>
+						</td>	
+					</tr>	
+					
 					<?php
 						endforeach;
 					?>
-				</table>
+				</tbody>	
+			</table>
 
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-lg">

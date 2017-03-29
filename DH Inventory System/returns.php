@@ -16,6 +16,17 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+			<script>
+				$(document).ready(function(){
+					$('#myTable').dataTable();
+				});
+			</script>
+		
 		<?php include('dbcon.php'); ?>
 		<?php 
 			session_start();
@@ -98,7 +109,16 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
-		
+		 
+					<?php
+						foreach ($result as $item):
+						$retID = $item["returnID"];
+					?>
+					
+					<?php
+						endforeach;
+					?>
+					
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -110,43 +130,63 @@
 					</table>
 				</div>
 				
-				<table class="table table-striped table-bordered">
+			<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+				<div id="myTable_length" class="dataTables_length">
+					<div id="myTable_filter" class="dataTables_filter">
+					</div>
+				</div>
+			</div>
+			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+				<thead>
 					<tr>
-						<th>
-							<div id="tabHead">Date</div>
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"  id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=returnDate ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>							
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+							<div id="tabHead">Date</div>							
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Product ID
 						</th>
-						<th>
-							<div id="tabHead">Product Description</div>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>							
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+							<div id="tabHead">Product Description</div>							
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Model
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Quantity							
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Unit
 						</th>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Remarks
 						</th>
 						<th></th>
 					</tr>
+				</thead>	
+				<tbody>
+					<tr id="centerData">
+						<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
+						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+						<td data-title="Model"><?php echo $item["model"]; ?></td>
+						<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+						<td data-title="Unit"><?php echo $item["unitType"];?></td>
+						<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+							
+						<td>
+							<a href="editRet.php?retId=<?php echo $retID; ?>" target="_blank">
+							<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</button>
+							</a>
+							<a href="deleteRet.php?retId=<?php echo $retID; ?>">
+							<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+								<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+							</button>
+							</a>
+						</td>
+					</tr>
+					
 					<?php
 						foreach ($result as $item):
 						$retID = $item["returnID"];
@@ -178,7 +218,8 @@
 					<?php
 						endforeach;
 					?>
-				</table>
+				</tbody>	
+			</table>
 				
 				<div class="modal fade" id="myModal" role="dialog">
 					 <div class="modal-dialog modal-lg">

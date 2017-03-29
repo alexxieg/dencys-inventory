@@ -18,6 +18,17 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
+		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+			<script>
+				$(document).ready(function(){
+					$('#myTable').dataTable();
+				});
+			</script>
+			
 		<!-- Database connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -104,7 +115,34 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
-		
+					
+					<?php
+							$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
+							$month->execute();
+							$monthres = $month->fetchAll();
+							foreach ($monthres as $monthshow)
+							echo $monthshow["month"];
+					?>	
+					
+					<?php
+						foreach ($result as $item):
+							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+							$incID = $item["prodID"];
+							if ($currQty <= $item["reorderLevel"]){
+					?> 
+					
+					<?php	
+						}else if ($currQty > $item["reorderLevel"]){
+					?>
+					
+					<?php
+						}	
+					?>
+						
+					<?php
+						endforeach;
+					?>
+					
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -118,7 +156,14 @@
 				<br>
 				
 				<!-- Table for Inventory Data-->
-				<table class="table table-striped table-bordered">
+			<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+				<div id="myTable_length" class="dataTables_length">
+					<div id="myTable_filter" class="dataTables_filter">
+					</div>
+				</div>
+			</div>
+			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+				<thead>	
 					<tr>
 						<td colspan="13" style="font-size: 35px;">
 							<?php
@@ -131,79 +176,61 @@
 						</td>
 					</tr>
 					<tr>
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Product ID</div>
-							<button type="button" class="btn btn-default sortRes" value="?orderBy=prodID DESC" onclick="location = this.value;" id="OutsortBtnDown1">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default sortRes" value="?orderBy=prodID ASC" onclick="location = this.value;" id="OutsortBtnUp1">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Product Description</div>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName DESC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="arrowBtn"></span>
-							</button>
-							<button type="button" class="btn btn-default" value="?orderBy=prodName ASC" onclick="location = this.value;" id="sortBtn">
-								<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="arrowBtn"></span>
-							</button>
 						</th>	
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Model
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Beginning Quantity
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Ending Quantity
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							IN
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							OUT
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Current Quantity
 							
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Physical Count
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Reorder Level
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Unit
 						</th>
 		
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Remarks
 						</th>
 						
-						<th>
+						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							Stock Card
 						</th>
 					</tr>
-					
-					<?php
-						foreach ($result as $item):
-							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
-							$incID = $item["prodID"];
-							if ($currQty <= $item["reorderLevel"]){
-					?> 
-					
+			</thead>
+			<tbody>	
 					<tr style='background-color: #ff9999' id="centerData">
 						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
@@ -225,6 +252,12 @@
 							</a>
 						</td>
 					</tr>
+					<?php
+						foreach ($result as $item):
+							$currQty = $item["initialQty"] + $item["inQty"] - $item["outQty"];
+							$incID = $item["prodID"];
+							if ($currQty <= $item["reorderLevel"]){
+					?> 
 					
 					<?php	
 						}else if ($currQty > $item["reorderLevel"]){
@@ -257,8 +290,9 @@
 					<?php
 						endforeach;
 					?>
-				</table>
-			</div>	
+			</tbody>	
+		</table>
+	</div>	
 					
 			<!-- Modal for Reorder Products Summary -->
 			<div class="modal fade" id="myModal" role="dialog">
