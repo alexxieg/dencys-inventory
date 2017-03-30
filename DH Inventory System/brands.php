@@ -11,9 +11,8 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 		<link href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
@@ -52,7 +51,11 @@
 
 <body class="fixed-sn mdb-skin bg-skin-lp">
 		<!-- PHP code for fetching the data-->
-		<?php include('functionalities/fetchInventory.php'); ?>
+		<?php
+			$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
+			$query->execute();
+			$result = $query->fetchAll();
+		?>
 	
 		<!-- Page Header and Navigation Bar -->
     <header>
@@ -185,19 +188,7 @@
 					</thead>
 					
 					<tbody>
-						<?php
-							foreach ($result as $item):
-							$useThisID = $item["brandID"];
-						?>
-														
-						<?php
-							endforeach;
-						?>
-
-						<tr>
-							<td><?php echo $item["brandID"]; ?></td>
-							<td><?php echo $item["brandName"]; ?></td>
-						</tr>
+		
 							
 						<?php
 							foreach ($result as $item):
