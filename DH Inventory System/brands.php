@@ -134,6 +134,7 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
 						<h1 id="headers">PRODUCT BRANDS</h1>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Brand</button>							
 					</table>
 				</div>
@@ -214,15 +215,15 @@
 									<input type="text" class="form-control" id ="addBrandName" placeholder="Brand Name" name="brandName"> <br>
 									<br>
 									
-								<div class="modFoot">
-								<span>
-									<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-								</span>
-								<span>
-									<input type="submit" value="Submit" class="btn btn-success" name="addBrand" id="sucBtn">
-								</span>
+									<div class="modFoot">
+										<span>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+										</span>
+										<span>
+											<input type="submit" value="Submit" class="btn btn-success" name="addBrand" id="sucBtn">
+										</span>
+									</div>
 								</form> 
-							</div>
 							</div>
 							
 							<div class="modal-footer">
@@ -231,6 +232,65 @@
 						</div>
 					</div>
 				</div>
+				
+				<!-- Modal - Brand Archive -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Branches</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Brand Data -->
+									<?php
+										$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Inactive' ");
+										$query->execute();
+										$result = $query->fetchAll();
+									?>
+									
+									<thead>
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Brand ID</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Brand Name</th>
+										</tr>
+									</thead>
+									
+									<tbody>											
+										<?php
+											foreach ($result as $item):
+											$useThisID = $item["brandID"];
+										?>
+
+										<tr>
+											<td><?php echo $item["brandID"]; ?></td>
+											<td><?php echo $item["brandName"]; ?></td>
+											<td>											
+												<a href="functionalities/restoreBrand.php?useId=<?php echo $useThisID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this brand?');">
+														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+													</button>
+												</a>
+											</td>
+										</tr>
+												
+										<?php
+											endforeach;
+										?>
+									</tbody>
+								</table>	
+												
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
+					</div>
+				</div>
+				
 			</div>
 		</div>
 		

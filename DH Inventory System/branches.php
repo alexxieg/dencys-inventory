@@ -134,7 +134,8 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
 						<h1 id="headers">BRANCHES</h1>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Branch</button>							
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Branch</button>						
 					</table>
 				</div>
 					
@@ -171,7 +172,7 @@
 								</a>
 								
 								<a> 
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this branch?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
@@ -213,6 +214,67 @@
 						</div>
 					</div>
 				</div>
+				
+				<!-- Modal - Branch Archive -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Branches</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Branch Data -->
+									<?php
+										$query = $conn->prepare("SELECT branchID, branchName, location FROM branch WHERE status = 'Inactive' ");
+										$query->execute();
+										$result = $query->fetchAll();
+									?>
+									
+									<thead>
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch ID</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch Name</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
+											<th></th>
+										</tr>
+									</thead>	
+									
+									<tbody>
+										<?php
+											foreach ($result as $item):
+											$useThisID = $item["branchID"];
+										?>
+										<tr>
+											<td><?php echo $item["branchID"]; ?></td>
+											<td><?php echo $item["branchName"]; ?></td>
+											<td><?php echo $item["location"]; ?></td>
+											<td>	
+												<a href="functionalities/restoreAccount.php?useID=<?php echo $useThisID; ?>" target="_blank">
+													<button type="button" class="btn btn-default">
+														<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													</button>
+												</a>
+											</td>
+										</tr>
+												
+										<?php
+											endforeach;
+										?>
+									</tbody>		
+								</table>
+												
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
+					</div>
+				</div>
+				
 			</div>
 		</div>
 		
