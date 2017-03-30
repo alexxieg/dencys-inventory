@@ -86,9 +86,8 @@
 		        <li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-				<li><a href="summaries.php"><i class=""></i>Summary</a></li>
-		   	
+		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>	
+		        <li><a href="reports.php"><i class="glyphicon glyphicon-sort"></i> Reports</a></li>					
 
 		        <li class="nav-header">  	
 		        	<a href="#" data-toggle="collapse" data-target="#menu2">
@@ -138,20 +137,21 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">INVENTORY</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" >
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
 							Products for Reorder
 						</button>					
 					</table>
 				</div>
 				<br>
 				
-				<!-- Table for Inventory Data-->
 				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 					<div id="myTable_length" class="dataTables_length">
 						<div id="myTable_filter" class="dataTables_filter">
 						</div>
 					</div>
 				</div>
+				
+				<!-- Table for Inventory Data-->
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 					<thead>	
 						<tr>
