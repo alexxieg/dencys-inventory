@@ -99,13 +99,13 @@
 			$query = $conn->prepare("
 									SELECT MAX(SamDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName FROM (SELECT DISTINCT incoming.inDate AS SamDate, incoming.inQty AS inQuant, null AS outQuant
 									FROM incoming
-									WHERE prodID='$incID' AND status = 'Active'
+									WHERE prodID='$incID'
 									UNION
 									SELECT DISTINCT outgoing.outDate, null, outgoing.outQty
 									FROM outgoing
-									WHERE prodID='$incID' AND status = 'Active'
+									WHERE prodID='$incID'
 									ORDER BY SamDate) AS SHYT JOIN product 
-									WHERE product.prodID='$incID' AND product.status = 'Active'
+									WHERE product.prodID='$incID'
 									GROUP BY SamDate
 									");
 			$query->execute();

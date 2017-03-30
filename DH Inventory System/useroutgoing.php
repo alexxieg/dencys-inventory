@@ -6,21 +6,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 		<title>Outgoing Products</title>
+		
 		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- Javascript Files -->
 		<script src="outgoing.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
-		<!-- Database Connection -->
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
 		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
@@ -49,88 +48,54 @@
 		?>
 	</head>
   
-<body class="fixed-sn mdb-skin bg-skin-lp">
-	
+	<body>
+		<!--Retrieve Return Data -->
 		<?php include('functionalities/fetchOutgoing.php'); ?>
 		
-	<!-- Page Header and Navigation Bar -->
-    <header>
-        <!-- Sidebar navigation -->
-        <ul id="slide-out" class="side-nav fixed sn-bg-1 custom-scrollbar">
-            <!-- Logo -->
-            <li>
-                <div class="logo-wrapper waves-effect" id="logobox">
-                    <a href="#"><img src="logo.png" class="img-fluid flex-center"></a>
-                </div>
-            </li>
-            <!--/. Logo -->
-            <!--Search Form-->
-            <li>
-                <form class="search-form" role="search" action="?" method="post">
-                    <div class="form-group waves-effect">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                </form>
-            </li>
-            <!--/.Search Form-->
-            <!-- Side navigation links -->
-            <li>
-                <ul class="collapsible collapsible-accordion">
-                    <li><a class="collapsible-header waves-effect" href="userinventory.php">
-                    		<i class="fa fa-list"></i> Inventory
-	                	</a>
-                    </li>
-                    <li><a class="collapsible-header waves-effect" href="userincoming.php">
-	                    	<i class="fa fa-truck" aria-hidden="true"></i> Incoming
-	                    </a>
-                    </li>
-                    <li><a class="collapsible-header waves-effect active" href="useroutgoing.php">
-	                    	<i class="fa fa-external-link" aria-hidden="true"></i> Outgoing
-	                    </a>
-                    </li>
-                    <li><a class="collapsible-header waves-effect" href="userreturns.php">
-                    		<i class="fa fa-undo" aria-hidden="true"></i> Returns
-                    	</a>
-                    </li>
-                    <li><a class="collapsible-header waves-effect" href="userproduct.php">
-                    		<i class="fa fa-cubes" aria-hidden="true"></i> Products
-                    	</a>
-                    </li>
-                </ul>
-            </li>
-            <!--/. Side navigation links -->
-            <div class="sidenav-bg mask-strong"></div>
-        </ul>
-        <!--/. Sidebar navigation -->
-        <!-- Navbar -->
-        <nav class="navbar fixed-top navbar-toggleable-md navbar-dark scrolling-navbar double-nav">
-            <!-- SideNav slide-out button -->
-            <div class="float-xs-left">
-                <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
-            </div>
-            <!-- Breadcrumb-->
-            <div class="breadcrumb-dn mr-auto">
-                <p>Dency's Hardware and General Merchandise</p>
-            </div>
-            <ul class="nav navbar-nav ml-auto flex-row">
-                <li class="nav-item">
-                    <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    	<i class="fa fa-user-circle"></i> <span class="hidden-sm-down">User</span></a>
-	                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-	                        <a class="dropdown-item" href="logout.php#">
-	                        	<i class="fa fa-sign-out"></i> Logout
-	                        </a>
-	                        <a class="dropdown-item" href="#" onclick="myFunction()"> 
-	                        	<i class="glyphicon glyphicon-print"></i> Print
-	                        </a>
-	                    </div>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.Navbar -->
-    </header>
-    <!--/.Double navigation-->
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+			<!-- Header -->
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 
+					<img src="logohead.png" id="logohead"/>
+
+					<div class="dropdown">
+					  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> User</button>
+					  <div class="dropdown-content">
+						<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+						<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+						<i class="glyphicon glyphicon-print"></i> Print</button></a>
+						</div>
+					</div>
+				</div>
+		    
+		    <form action="?" method="post">
+				<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
+			</form>
+		  </div><!-- /container -->
+		</nav>
+
+		<!-- Side bar -->
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+				<div class="collapse navbar-collapse">
+					<ul class="nav nav-pills nav-stacked affix">
+						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+						<li><a href="userproduct.php"><i class="glyphicon glyphicon-sort"></i>Products</a></li>
+					</ul>
+				</div><!--/span-->	
+		   </div><!-- end of side  bar -->
+		</div><!-- /Header -->
+		 
 		<?php
 			foreach ($result as $item):
 				$outid = $item["outID"];
@@ -215,12 +180,12 @@
 							<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 							<td>
 								<a href="functionalities/editOut.php?outsId=<?php echo $outid; ?>">
-									<button type="button" class="btn-sm btn-default edBtn">
+									<button type="button" class="btn btn-default">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
 								<a href="functionalities/userRemoveOut.php?outsId=<?php echo $outid; ?>">
-									<button type="button" class="btn-sm btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
+									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
@@ -318,10 +283,10 @@
 										<br>
 										<br>
 										<span>
-											<input type="button" class="btn btn-outline-danger btn-rounded waves-effect canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 										</span>
 										<span>
-											<input type="submit" name="submit" value="Submit" class="btn btn-outline-success btn-rounded waves-effect sucBtn">
+											<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
 										</span>																		
 									</div>
 								</form> 		
@@ -337,16 +302,6 @@
 		
 		<!-- Add Outgoing Entry -->
 		<?php include('functionalities/addOutgoing.php'); ?>
-
-		<!-- SCRIPTS -->
-    <script type="text/javascript" src="https://mdbootstrap.com/wp-content/themes/mdbootstrap4/js/compiled.min.js"></script>
-
-    <script>
-    $(".button-collapse").sideNav();
-        
-    var el = document.querySelector('.custom-scrollbar');
-    Ps.initialize(el);
-    </script>
 		
 	</body>
 </html>
