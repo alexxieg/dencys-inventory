@@ -249,7 +249,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Archived Branches</h4>
+								<h4 class="modal-title">Archived Returns</h4>
 							</div>
 							<div class="modal-body">
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
