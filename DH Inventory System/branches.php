@@ -230,7 +230,7 @@
 									<?php
 										$query = $conn->prepare("SELECT branchID, branchName, location FROM branch WHERE status = 'Inactive' ");
 										$query->execute();
-										$result = $query->fetchAll();
+										$result1 = $query->fetchAll();
 									?>
 									
 									<thead>
@@ -244,20 +244,20 @@
 									
 									<tbody>
 										<?php
-											foreach ($result as $item):
+											foreach ($result1 as $item):
 											$useThisID = $item["branchID"];
 										?>
 										<tr>
 											<td><?php echo $item["branchID"]; ?></td>
 											<td><?php echo $item["branchName"]; ?></td>
 											<td><?php echo $item["location"]; ?></td>
-											<td>	
-												<a href="functionalities/restoreAccount.php?useID=<?php echo $useThisID; ?>" target="_blank">
-													<button type="button" class="btn btn-default">
-														<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+											<td>
+												<a href="functionalities/restoreBranch.php?useId=<?php echo $useThisID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">
+														Restore
 													</button>
 												</a>
-											</td>
+											</td>	
 										</tr>
 												
 										<?php

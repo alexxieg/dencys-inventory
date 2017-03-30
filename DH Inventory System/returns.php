@@ -20,18 +20,19 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
-		<!-- Database Connection -->
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
 		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
-			<script>
-				$(document).ready(function(){
-					$('#myTable').dataTable();
-				});
-			</script>
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
 		
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
 		<!-- Login Session -->
@@ -133,9 +134,8 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">RETURNED PRODUCTS</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
-							Add Product
-						</button>					
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>						
 					</table>
 				</div>
 				
@@ -150,27 +150,13 @@
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 					<thead>
 						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								<div id="tabHead">Date</div>							
-							</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Product ID
-							</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								<div id="tabHead">Product Description</div>							
-							</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Model
-							</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Quantity							
-							</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Unit
-							</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Remarks
-							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -248,11 +234,87 @@
 										<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
 									</span>
 								</div>
-								</form> 		
+								</form> 	
+
+								<div class="modal-footer">
+								</div>								
 							</div>
 						</div>
 					</div>
 				</div>
+				
+				<!-- Modal - Returns Archive -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Branches</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Return Data -->
+									<?php
+										$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+																FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+																WHERE returns.status = 'Inactive'
+																ORDER BY returnID DESC;");
+										$query->execute();
+										$result = $query->fetchAll();
+									?>
+									
+									<thead>
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th
+											<th></th>
+										</tr>
+									</thead>
+									
+									<tbody>				
+										<?php
+											foreach ($result as $item):
+											$retID = $item["returnID"];
+										?>
+										
+										<tr id="centerData">
+											<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Model"><?php echo $item["model"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"];?></td>
+											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+												
+											<td>
+												<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+													</button>
+												</a>
+											</td>
+										</tr>
+												
+										<?php
+											endforeach;
+										?>
+									</tbody>	
+								</table>
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
+					</div>
+				</div>
+				
 			</div>
 		</div>
 

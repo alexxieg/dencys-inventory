@@ -248,7 +248,7 @@
 									<?php
 										$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Inactive' ");
 										$query->execute();
-										$result = $query->fetchAll();
+										$result1 = $query->fetchAll();
 									?>
 									
 									<thead>
@@ -260,7 +260,7 @@
 									
 									<tbody>											
 										<?php
-											foreach ($result as $item):
+											foreach ($result1 as $item):
 											$useThisID = $item["brandID"];
 										?>
 
@@ -270,7 +270,7 @@
 											<td>											
 												<a href="functionalities/restoreBrand.php?useId=<?php echo $useThisID; ?>"> 
 													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this brand?');">
-														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+														Restore
 													</button>
 												</a>
 											</td>
