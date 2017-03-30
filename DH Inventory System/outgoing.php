@@ -49,7 +49,7 @@
 	</head>
   
 	<body>
-		<!--Retrieve Return Data -->
+		<!--Retrieve Outgoing Data -->
 		<?php include('functionalities/fetchOutgoing.php'); ?>
 		
 	<nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -81,8 +81,6 @@
 			</form>
 		  </div><!-- /container -->
 		</nav>
-
-
 
 		<!-- Side bar -->
 		<div class="row row-offcanvas row-offcanvas-left">
@@ -119,23 +117,22 @@
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
 		 
-					<?php
-							foreach ($result as $item):
-							$outid = $item["outID"];
-					?>
-					
-					<?php
-							endforeach;
-					?>
+		<?php
+			foreach ($result as $item):
+			$outid = $item["outID"];
+		?>
+			
+		<?php
+			endforeach;
+		?>
 
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">OUTGOING PRODUCTS</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">
-							Add Outgoing Product
-						</button>					
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
 					</table>
 				</div>
 				
@@ -145,6 +142,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- Table Display for Outgoing Entries -->
 			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 				<thead>	
 						<tr>
@@ -218,7 +217,7 @@
 				</tbody>		
 			</table>
 				
-					
+			<!-- Modal - Add Outgoing Entry Form -->
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
@@ -319,6 +318,103 @@
 						</div>
 					</div>
 				</div>
+				
+				<!-- Modal - Outgoing Archive -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Outgoing Entries</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Outgoing Data -->
+									<?php
+										$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, product.model, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empFirstName AS empName, branch.location, outgoing.outRemarks 
+																	FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
+																	WHERE outgoing.status = 'Inactive'
+																	ORDER BY outID ASC;");
+										$query->execute();
+										$result = $query->fetchAll();
+									?>
+									
+									<thead>	
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Date</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Product ID
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Product Description</div>						
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Model
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Quantity
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Unit
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Receipt No.
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Employee</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Branch</div>
+											</th>	
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Remarks
+											</th>					
+											<th></th>
+										</tr>
+									</thead>	
+									<tbody>			
+										<?php
+											foreach ($result as $item):
+											$outid = $item["outID"];
+										?>
+										
+										<tr id="centerData">
+											<td data-title="Date"><?php echo $item["outDate"]; ?></td>
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Model"><?php echo $item["model"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+											<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+											<td data-title="Branch"><?php echo $item["location"]; ?></td>
+											<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
+											<td>
+												<a href="functionalities/restoreOutgoing.php?outsId=<?php echo $outid; ?>">
+												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+													Restore
+												</button>
+												</a>
+											</td>		
+										</tr>
+										
+										<?php
+											endforeach;
+										?>
+									</tbody>		
+								</table>
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
+					</div>
+				</div>
+				
 			</div>
 		</div>
 		
