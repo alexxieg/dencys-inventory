@@ -137,6 +137,7 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">		
 						<h1 id="headers">PRODUCT CATEGORIES</h1>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Category</button>							
 					</table>
 				</div>
@@ -148,6 +149,7 @@
 					</div>
 				</div>
 			
+				<!-- Table Display for Category -->
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 					<thead>
 							<tr>
@@ -216,6 +218,64 @@
 							</div>
 							
 						</div>
+					</div>
+				</div>
+				
+				<!-- Modal - Category Archive -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Branches</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Category Data -->
+									<?php
+										$query = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Inactive' ");
+										$query->execute();
+										$result = $query->fetchAll();
+									?>
+									
+									<thead>
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category ID</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category</th>
+											<th></th>
+										</tr>
+									</thead>
+									
+									<tbody>
+										<?php
+											foreach ($result as $item):
+											$useThisID = $item["categoryID"];
+										?>
+										<tr>
+											<td><?php echo $item["categoryID"]; ?></td>
+											<td><?php echo $item["categoryName"]; ?></td>
+											<td>	
+												<a href="functionalities/restoreCategory.php?useId=<?php echo $useThisID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+														Restore
+													</button>
+												</a>
+											</td>	
+										</tr>
+												
+										<?php
+											endforeach;
+										?>
+									</tbody>	
+								</table>
+												
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
 					</div>
 				</div>
 			</div>

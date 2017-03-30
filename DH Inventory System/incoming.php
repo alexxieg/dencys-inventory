@@ -131,6 +131,7 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">
 						<h1 id="headers">INCOMING PRODUCTS</h1>
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 					</table>
 				</div>
@@ -147,9 +148,7 @@
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 					<thead>	
 						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								<div id="tabHead">Date</div>
-							</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								Product ID
@@ -208,7 +207,7 @@
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>
 								</a>
-								<a href="functionalities/userdeletein.php?incId=<?php echo $incID; ?>"> 
+								<a href="functionalities/removeIncoming.php?incId=<?php echo $incID; ?>"> 
 								<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 								</button>
@@ -295,11 +294,109 @@
 										<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
 									</span>
 									</div>
-								</form> 			
+								</form> 	
+							
+								<div class="modal-footer">
+								</div>								
 							</div>
 						</div>
 					</div>
-				</div>      	
+				</div> 
+
+				<!-- Modal - Incoming Archive -->
+				<div class="modal fade" id="archive" role="dialog">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Archived Branches</h4>
+							</div>
+							<div class="modal-body">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								
+									<!-- Retrieve Incoming Data -->
+									<?php
+										$query = $conn->prepare("SELECT product.prodName, product.prodID, product.model, product.unitType, product.model, incoming.inID, incoming.inQty, incoming.inDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.inRemarks 
+																	FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+																	WHERE incoming.status = 'Inactive'
+																	ORDER BY inID ASC;");
+										$query->execute();
+										$result = $query->fetchAll();
+									?>
+									
+									<thead>	
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+											
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Model
+											</th>
+								
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Quantity
+											</th>
+											
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Unit
+											</th>
+											
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Employee</div>
+											</th>
+											
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Receipt No.
+												
+											</th>
+											
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Remarks
+											</th>
+											<th></th>
+										</tr>
+									</thead>
+									
+									<tbody>					
+										<?php
+											foreach ($result as $item):
+											$incID = $item["inID"];
+										?>
+										
+										<tr id="centerData">
+											<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+											<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Model"><?php echo $item["model"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+											<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+											<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+											<td>
+											<a href="functionalities/restoreIncoming.php?incId=<?php echo $incID; ?>"> 
+												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
+													Restore
+												</button>
+												</a>
+											</td>	
+										</tr>	
+										
+										<?php
+											endforeach;
+										?>
+									</tbody>	
+								</table>
+												
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+						</div>
+							
+					</div>
+				</div>				
 			</div>
 		</div>		
 		

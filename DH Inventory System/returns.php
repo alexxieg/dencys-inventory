@@ -295,7 +295,7 @@
 											<td>
 												<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
 													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
-														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+														Restore
 													</button>
 												</a>
 											</td>
