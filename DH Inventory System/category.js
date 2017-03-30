@@ -1,11 +1,21 @@
 function validateForm() {
 	if(document.getElementById('addCategoryID').value == "") {
-		alert('Please Enter Brand ID');
+		swal({
+		title: "Error!",
+		text: "Please Enter Category ID.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addCategoryID').style.borderColor = "red";
 		return false;
 	}
 	if (document.getElementById('addCategoryName').value == "") {
-		alert('Please Enter Brand Name');
+		swal({
+		title: "Error!",
+		text: "Please Enter Category Name.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
 		document.getElementById('addCategoryName').style.borderColor = "red";
 		return false;
 	}
@@ -14,6 +24,10 @@ function validateForm() {
 		return true;	
 	}
 	else {
+		swal({
+		title: "Adding of Category Canceled",
+		type: "success"
+		});
 		return false;		
 	}
 }

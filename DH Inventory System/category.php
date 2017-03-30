@@ -17,6 +17,8 @@
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
 		<script src="datatables/js/jquery.dataTables.min.js"></script>
 		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -193,9 +195,9 @@
 							</div>
 							<div class="modal-body">
 									<form action="" method="POST" onsubmit="return validateForm()">		
-									<h3>Brand ID</h3>
+									<h3>Category ID</h3>
 									<input type="text" class="form-control" id="addRcpt" placeholder="Category ID" name="categoryID"> <br>
-									<h3>Brand Name</h3>
+									<h3>Category Name</h3>
 									<input type="text" class="form-control" id ="addRcpt" placeholder="Category" name="categoryName"> <br>
 									<br>
 									
