@@ -231,23 +231,17 @@
 									
 									<h5>Receipt No.</h5> 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
-									
-										<?php
-										$query = $conn->prepare("SELECT prodName FROM product ");
-										$query->execute();
-										$res = $query->fetchAll();
-										?>
 										
 										<h5>Employee</h5>
 									<?php
-										$query = $conn->prepare("SELECT empName FROM employee ");
+										$query = $conn->prepare("SELECT empFirstName FROM employee ");
 										$query->execute();
-										$res = $query->fetchAll();
+										$result = $query->fetchAll();
 									?>
 													
 									<select class="form-control" id="addEmpl" name="emp">
 										<?php foreach ($result as $row): ?>
-											<option><?=$row["empName"]?></option>
+											<option><?=$row["empFirstName"]?></option>
 										<?php endforeach ?>
 									</select> 
 									
@@ -273,12 +267,12 @@
 											<tr>
 												<td><input type="checkbox" name="chk"></TD>
 												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-												<td>	<?php
-														$query = $conn->prepare("SELECT prodName FROM product ");
+												<td>	
+													<?php
+														$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
 														$query->execute();
 														$res = $query->fetchAll();
 													?>
-
 													<select class="form-control" id="addItem" name="prodItem[]">
 													<?php foreach ($res as $row): ?>
 														<option><?=$row["prodName"]?></option>
