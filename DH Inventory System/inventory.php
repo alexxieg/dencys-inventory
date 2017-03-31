@@ -295,7 +295,7 @@
 						<div class="modal-body">			
 							<?php
 								$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-														WHERE inventory.qty <= product.reorderLevel");
+														WHERE inventory.qty <= product.reorderLevel AND NOT NULL");
 								$query->execute();
 								$result = $query->fetchAll();
 							?>	
