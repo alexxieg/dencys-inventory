@@ -156,6 +156,7 @@
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Return Type</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 							<th></th>
 						</tr>
@@ -174,6 +175,7 @@
 							<td data-title="Model"><?php echo $item["model"]; ?></td>
 							<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 							<td data-title="Unit"><?php echo $item["unitType"];?></td>
+							<td data-title="Unit"><?php echo $item["returnType"];?></td>
 							<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
 								
 							<td>
@@ -222,7 +224,14 @@
 											
 									<h3>Quantity</h3>
 									<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="retQty"> <br>
-																			
+										
+									<h3>Return Type</h3>
+									<select class="form-control" id="addEntry" name="retType">
+										<option>Branch Return</option>
+										<option>Customer Return</option>
+										<option>Warehouse Return</option>					
+									</select> 
+									
 									<h3>Remarks</h3>
 									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 									<br>
