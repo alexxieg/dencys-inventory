@@ -10,14 +10,17 @@
 		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
-		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
 		
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
+		
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
@@ -25,7 +28,7 @@
 		<script>
 			$(document).ready(function(){
 				$('#myTable').dataTable();
-		});
+			});
 		</script>
 			
 		<!-- Database connection -->
@@ -133,16 +136,15 @@
 		?>
 					
 		<div id="contents">
-			<div class="pages no-more-tables">
+			<div class="pages">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">INVENTORY</h1>	
 						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
 							Products for Reorder
-						</button>					
+						</button>				
 					</table>
 				</div>
-				<br>
 				
 				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 					<div id="myTable_length" class="dataTables_length">
