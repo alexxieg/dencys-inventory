@@ -89,30 +89,11 @@
 			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 			<div class="collapse navbar-collapse">
 				<ul class="nav nav-pills nav-stacked affix">
-		        <li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-		   	
+					<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+					<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+					<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+					<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>	   	
 
-		        <li class="nav-header">  	
-		        	<a href="#" data-toggle="collapse" data-target="#menu2">
-		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
-		          	</a>
-		            <ul class="list-unstyled collapse" id="menu2">
-		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a>
-		                </li>
-		                <li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a>
-		                </li>
-		                <li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a>
-		                </li>
-		                <li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a>
-		                </li>
-		                <li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a>
-		                </li>
-		                <li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
-		                </li>                              
-		            </ul>
 		    	</ul>
 		 	 </div><!--/span-->	
 		   </div>
@@ -133,7 +114,6 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">PRODUCTS</h1>
-						<button id="modbutt" type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive">View Archive</button>
 					</table>
 				</div>
 
@@ -191,87 +171,7 @@
 					?>
 				</tbody>	
 			</table>
-				
-			<!-- Modal - Product Archive -->
-			<div class="modal fade" id="archive" role="dialog">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Archived Categories</h4>
-						</div>
-						<div class="modal-body">
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-							
-								<!-- Retrieve Product Data -->
-								<?php
-									$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
-																FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
-																WHERE product.status = 'Inactive'
-																ORDER BY prodID");
-									$query->execute();
-									$result = $query->fetchAll();
-								?>
-								
-								<thead>
-									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Product ID</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Product Description</div>							
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Model
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Brand</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Category</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Unit
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Price</div>
-										</th>					
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-										foreach ($result as $item):
-										$proID = $item["prodID"];
-									?>
-									<tr>
-										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Model"><?php echo $item["model"];?></td>
-										<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-										<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-										<td data-title="Unit"><?php echo $item["unitType"];?></td>
-									<td data-title="Price"><?php echo $item["price"]; ?></td>
-										<td>
-											<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
-												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
-													Restore
-												</button>
-											</a>
-										</td>				
-									</tr>	
-									<?php
-										endforeach;
-									?>
-								</tbody>	
-							</table>					
-						</div>
-					</div>
-						
-					<div class="modal-footer">
-					</div>
-						
-				</div>
+										
 			</div>
 		</div>		
 		

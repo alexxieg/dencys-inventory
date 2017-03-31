@@ -63,7 +63,7 @@
 		      <img src="logohead.png" id="logohead"/>
 
 				<div class="dropdown">
-				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i>User</button>
+				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
 				  <div class="dropdown-content">
 					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
 					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
@@ -86,9 +86,8 @@
 					<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 					<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-					<li><a href="userproduct.php"><i class="glyphicon glyphicon-sort"></i> Products</a></li>
-		        </ul>
+					<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>					
+		    	</ul>
 		 	 </div><!--/span-->	
 		   </div>
 		<!-- end of side  bar -->
@@ -118,20 +117,21 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">INVENTORY</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" >
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
 							Products for Reorder
 						</button>					
 					</table>
 				</div>
 				<br>
 				
-				<!-- Table for Inventory Data-->
 				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 					<div id="myTable_length" class="dataTables_length">
 						<div id="myTable_filter" class="dataTables_filter">
 						</div>
 					</div>
 				</div>
+				
+				<!-- Table for Inventory Data-->
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 					<thead>	
 						<tr>
@@ -199,8 +199,8 @@
 								Stock Card
 							</th>
 						</tr>
-					</thead>
-					<tbody>	
+				</thead>
+				<tbody>	
 						<tr style='background-color: #ff9999' id="centerData">
 							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
@@ -260,9 +260,9 @@
 						<?php
 							endforeach;
 						?>
-					</tbody>	
-				</table>
-			</div>	
+				</tbody>	
+			</table>
+		</div>	
 					
 			<!-- Modal for Reorder Products Summary -->
 			<div class="modal fade" id="myModal" role="dialog">
