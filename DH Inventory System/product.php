@@ -188,7 +188,7 @@
 						<td data-title="Price"><?php echo $item["price"]; ?></td>
 						<td>
 					
-							<a href="editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
+							<a href="functionalities/editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
 								<button type="button" class="btn btn-default" id="edBtn1">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</button>

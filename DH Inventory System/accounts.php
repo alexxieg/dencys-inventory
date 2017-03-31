@@ -95,6 +95,7 @@
 						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
 						<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+						<li><a href="reports.php"><i class="glyphicon glyphicon-sort"></i>Reports</a></li>
 					
 						<li class="nav-header">  	
 						<a href="#" data-toggle="collapse" data-target="#menu2">

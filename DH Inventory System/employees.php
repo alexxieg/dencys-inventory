@@ -203,8 +203,20 @@
 							</div>
 							<div class="modal-body">
 								<form action="" method="POST" onsubmit="return validateForm()">									
-									<h3>Name</h3>
-									<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empName"> <br>
+									<h3>First Name</h3>
+									<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empFName"> <br>
+									<br>
+									
+									<h3>Middle Name</h3>
+									<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empMName"> <br>
+									<br>
+																
+									<h3>Last Name</h3>
+									<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empLName"> <br>
+									<br>
+									
+									<h3>Extension Name</h3>
+									<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empEName"> <br>
 									<br>
 									
 									<div class="modFoot">
