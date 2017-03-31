@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2017 at 03:55 AM
+-- Generation Time: Mar 31, 2017 at 12:58 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -207,41 +207,42 @@ INSERT INTO `brand` (`brandID`, `brandName`, `status`) VALUES
 
 CREATE TABLE `category` (
   `categoryID` varchar(45) NOT NULL,
-  `categoryName` varchar(45) NOT NULL
+  `categoryName` varchar(45) NOT NULL,
+  `status` varchar(45) NOT NULL DEFAULT 'Active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`categoryID`, `categoryName`) VALUES
-('ACC', 'Accessories'),
-('ANT', 'Adhesive and Tapes'),
-('APF', 'Air Purifier'),
-('BFL', 'Bulbs and Flourescent Lights '),
-('BNR', 'Brushes and Roller'),
-('BTY', 'Batteries'),
-('CNS', 'Caulks and Sealants'),
-('EWC', 'Extension Cords, Wires, and Cables'),
-('FCT', 'Faucets'),
-('FLT', 'Flashlights'),
-('FTN', 'Fittings'),
-('HDT', 'Hand Tools'),
-('HTA', 'Hand Tool Accessories'),
-('LDR', 'Ladders'),
-('MST', 'Measuring Tools'),
-('PMS', 'Pumps'),
-('PNT', 'Paints'),
-('PSY', 'Power Supply'),
-('PTA', 'Power Tool Accessories'),
-('PWT', 'Power Tools'),
-('RCG', 'Rechargeables'),
-('SGR', 'Safety Gear'),
-('TOR', 'Tool Organizers'),
-('WDS', 'Wiring Devices'),
-('WTF', 'Water Filtration'),
-('WTH', 'Water Heaters'),
-('WTS', 'Water Storage');
+INSERT INTO `category` (`categoryID`, `categoryName`, `status`) VALUES
+('ACC', 'Accessories', 'Active'),
+('ANT', 'Adhesive and Tapes', 'Active'),
+('APF', 'Air Purifier', 'Active'),
+('BFL', 'Bulbs and Flourescent Lights ', 'Active'),
+('BNR', 'Brushes and Roller', 'Active'),
+('BTY', 'Batteries', 'Active'),
+('CNS', 'Caulks and Sealants', 'Active'),
+('EWC', 'Extension Cords, Wires, and Cables', 'Active'),
+('FCT', 'Faucets', 'Active'),
+('FLT', 'Flashlights', 'Active'),
+('FTN', 'Fittings', 'Active'),
+('HDT', 'Hand Tools', 'Active'),
+('HTA', 'Hand Tool Accessories', 'Active'),
+('LDR', 'Ladders', 'Active'),
+('MST', 'Measuring Tools', 'Active'),
+('PMS', 'Pumps', 'Active'),
+('PNT', 'Paints', 'Active'),
+('PSY', 'Power Supply', 'Active'),
+('PTA', 'Power Tool Accessories', 'Active'),
+('PWT', 'Power Tools', 'Active'),
+('RCG', 'Rechargeables', 'Active'),
+('SGR', 'Safety Gear', 'Active'),
+('TOR', 'Tool Organizers', 'Active'),
+('WDS', 'Wiring Devices', 'Active'),
+('WTF', 'Water Filtration', 'Active'),
+('WTH', 'Water Heaters', 'Active'),
+('WTS', 'Water Storage', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -254,34 +255,35 @@ CREATE TABLE `employee` (
   `empFirstName` varchar(45) NOT NULL,
   `empLastName` varchar(45) NOT NULL,
   `empExtensionName` varchar(45) DEFAULT NULL,
-  `empMidName` varchar(45) NOT NULL
+  `empMidName` varchar(45) NOT NULL,
+  `status` varchar(45) NOT NULL DEFAULT 'Active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`empID`, `empFirstName`, `empLastName`, `empExtensionName`, `empMidName`) VALUES
-(1, 'Miguel', 'Arimbuyutan', 'Mike', 'Fernandez'),
-(2, 'Cynthia', 'Buizn', '-', 'Cargamento'),
-(3, 'Haneyly Faye Anne', 'Del Rosario', 'Haney', 'Calindas'),
-(4, 'Emelita', 'Flores', '-', 'Labita'),
-(5, 'Kevin', 'Flores', '-', 'Labita'),
-(6, 'Kier', 'Flores', '-', 'Labita'),
-(7, 'Teodelio', 'Galope', 'TJ', 'Costales'),
-(8, 'Christian', 'Granzon', 'King', 'Dulay'),
-(9, 'Dave', 'Jarilla', 'Travis', 'Zeta'),
-(10, 'Christopher', 'Landicho', 'Chris', 'Nadera'),
-(11, 'Ronald', 'Landicho', 'Moe', 'Nadera'),
-(12, 'Kharol', 'Limpayos', '-', 'Dolpa'),
-(13, 'Kenneth', 'Llaneras', '-', 'Eguia'),
-(14, 'Calixto', 'Mislang', 'Calex', 'Samson'),
-(15, 'Raymond', 'Plmos', 'Mon', 'Lopez'),
-(16, 'Julius', 'Rilloraza', '-', 'Resari'),
-(17, 'Maria Christina', 'Tayaban', 'Tintin', 'Morales'),
-(18, 'Jovin', 'Tuazon', '-', 'Doroteo'),
-(19, 'Romel', 'Vargas', 'James', 'Mapalo'),
-(20, 'Gerome', 'Visalo', '-', 'Labita');
+INSERT INTO `employee` (`empID`, `empFirstName`, `empLastName`, `empExtensionName`, `empMidName`, `status`) VALUES
+(1, 'Miguel', 'Arimbuyutan', 'Mike', 'Fernandez', 'Active'),
+(2, 'Cynthia', 'Buizn', '-', 'Cargamento', 'Active'),
+(3, 'Haneyly Faye Anne', 'Del Rosario', 'Haney', 'Calindas', 'Active'),
+(4, 'Emelita', 'Flores', '-', 'Labita', 'Active'),
+(5, 'Kevin', 'Flores', '-', 'Labita', 'Active'),
+(6, 'Kier', 'Flores', '-', 'Labita', 'Active'),
+(7, 'Teodelio', 'Galope', 'TJ', 'Costales', 'Active'),
+(8, 'Christian', 'Granzon', 'King', 'Dulay', 'Active'),
+(9, 'Dave', 'Jarilla', 'Travis', 'Zeta', 'Active'),
+(10, 'Christopher', 'Landicho', 'Chris', 'Nadera', 'Active'),
+(11, 'Ronald', 'Landicho', 'Moe', 'Nadera', 'Active'),
+(12, 'Kharol', 'Limpayos', '-', 'Dolpa', 'Active'),
+(13, 'Kenneth', 'Llaneras', '-', 'Eguia', 'Active'),
+(14, 'Calixto', 'Mislang', 'Calex', 'Samson', 'Active'),
+(15, 'Raymond', 'Plmos', 'Mon', 'Lopez', 'Active'),
+(16, 'Julius', 'Rilloraza', '-', 'Resari', 'Active'),
+(17, 'Maria Christina', 'Tayaban', 'Tintin', 'Morales', 'Active'),
+(18, 'Jovin', 'Tuazon', '-', 'Doroteo', 'Active'),
+(19, 'Romel', 'Vargas', 'James', 'Mapalo', 'Active'),
+(20, 'Gerome', 'Visalo', '-', 'Labita', 'Active');
 
 -- --------------------------------------------------------
 
@@ -321,10 +323,10 @@ INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `receiptNo`, `status`, `inRem
 (14, 60, '2017-03-26', '8255', 'Active', 'None', 10, 'MXT-ACC-0017'),
 (15, 50, '2017-03-28', '3513', 'Active', 'None', 12, 'SSS-PWT-0008'),
 (16, 20, '2017-03-29', 'A2145', 'Active', 'None', 15, 'AFR-ACC-0006'),
-(17, 25, '2017-03-29', '8024', 'Active', 'None', 17, 'AFR-ACC-0007'),
+(17, 25, '2017-03-29', '8024', 'Inactive', 'None', 17, 'AFR-ACC-0007'),
 (18, 30, '2017-03-29', '7637', 'Active', 'None', 4, 'AFR-ACC-0008'),
 (19, 30, '2017-03-29', 'P9211', 'Active', 'None', 5, 'AFR-ACC-0009'),
-(20, 25, '2017-03-29', 'B9235', 'Active', 'None', 7, 'AFR-ACC-0010');
+(20, 25, '2017-03-29', 'B9235', 'Inactive', 'None', 7, 'AFR-ACC-0010');
 
 -- --------------------------------------------------------
 
@@ -349,7 +351,7 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `outQty`, `endingQty`, `remarks`, `prodID`) VALUES
-(1, 75, NULL, 30, 55, 10, 20, NULL, 'LTS-HDT-0001'),
+(1, 65, NULL, 30, 55, 20, 20, NULL, 'LTS-HDT-0001'),
 (2, 55, NULL, 30, 40, 15, 20, NULL, 'LTS-HDT-0002'),
 (3, 40, NULL, 30, 15, 5, 20, NULL, 'LTS-HDT-0003'),
 (4, 50, NULL, 50, NULL, NULL, 10, NULL, 'LTS-HDT-0004'),
@@ -369,7 +371,7 @@ INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `out
 (18, 50, NULL, 50, NULL, NULL, 50, NULL, 'LTS-ACC-0008'),
 (19, 50, NULL, 50, NULL, NULL, 50, NULL, 'LTS-ACC-0009'),
 (20, 50, NULL, 50, NULL, NULL, 50, NULL, 'LTS-ACC-0010'),
-(21, 70, NULL, 25, 75, 30, 25, NULL, 'DCA-PWT-0001'),
+(21, 80, NULL, 25, 75, 20, 25, NULL, 'DCA-PWT-0001'),
 (22, 15, NULL, 25, NULL, 10, 25, NULL, 'DCA-PWT-0002'),
 (23, 50, 25, 25, 25, NULL, 25, NULL, 'DCA-PWT-0003'),
 (24, 25, NULL, 25, NULL, NULL, 25, NULL, 'DCA-PWT-0004'),
@@ -390,10 +392,10 @@ INSERT INTO `inventory` (`invID`, `qty`, `phyCount`, `initialQty`, `inQty`, `out
 (39, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0004'),
 (40, 35, NULL, 35, NULL, NULL, NULL, NULL, 'AFR-ACC-0005'),
 (41, 45, NULL, 25, 20, NULL, NULL, NULL, 'AFR-ACC-0006'),
-(42, 50, NULL, 25, 25, NULL, NULL, NULL, 'AFR-ACC-0007'),
+(42, 25, NULL, 25, NULL, NULL, NULL, NULL, 'AFR-ACC-0007'),
 (43, 45, NULL, 25, 30, 10, NULL, NULL, 'AFR-ACC-0008'),
 (44, 95, NULL, 25, 80, 10, NULL, NULL, 'AFR-ACC-0009'),
-(45, 35, NULL, 25, 25, 15, NULL, NULL, 'AFR-ACC-0010'),
+(45, 10, NULL, 25, NULL, 15, NULL, NULL, 'AFR-ACC-0010'),
 (46, 10, NULL, 20, NULL, 10, NULL, NULL, 'AFR-ACC-0011'),
 (47, 15, NULL, 20, NULL, 5, NULL, NULL, 'AFR-ACC-0012'),
 (48, 20, NULL, 20, NULL, NULL, NULL, NULL, 'AFR-ACC-0013'),
@@ -433,7 +435,7 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `receiptNo`,
 (8, 10, '2017-03-16', 'None', 'OUT0006', 'Active', 5, 10, 'DCA-PWT-0002'),
 (9, 10, '2017-03-16', 'None', 'OUT0006', 'Active', 5, 8, 'LTS-ACC-0004'),
 (10, 5, '2017-03-19', 'None', 'OUT0007', 'Active', 1, 10, 'LTS-HDT-0001'),
-(11, 10, '2017-03-19', 'None', 'OUT0007', 'Active', 1, 18, 'DCA-PWT-0001'),
+(11, 10, '2017-03-19', 'None', 'OUT0007', 'Active', 1, 18, 'LTS-HDT-0001'),
 (12, 5, '2017-03-19', 'None', 'OUT0007', 'Active', 2, 17, 'DCA-PWT-0001'),
 (13, 10, '2017-03-20', 'None', 'OUT0008', 'Active', 4, 13, 'AFR-ACC-0008'),
 (14, 15, '2017-03-22', 'None', 'OUT0009', 'Active', 3, 10, 'MXT-ACC-0017'),
@@ -442,10 +444,7 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `outRemarks`, `receiptNo`,
 (17, 15, '2017-03-28', 'None', 'OUT0011', 'Active', 1, 5, 'AFR-ACC-0010'),
 (18, 10, '2017-03-29', 'None', 'OUT0012', 'Active', 4, 2, 'AFR-ACC-0011'),
 (19, 5, '2017-03-29', 'None', 'OUT0012', 'Active', 3, 11, 'AFR-ACC-0012'),
-(20, 5, '2017-03-29', 'None', 'OUT0012', 'Active', 5, 14, 'AFR-ACC-0015'),
-(21, 777, '2017-03-29', 'cyrilbitch', '0897uy', 'Active', 3, 2, 'AFR-ACC-0006'),
-(22, 999, '2017-03-29', 'cyxted', '89i7uyjgh', 'Active', 1, 2, 'AFR-ACC-0009'),
-(23, 998, '2017-03-29', 'cybitch', '89i7uyjgh', 'Active', 1, 2, 'AFR-ACC-0019');
+(20, 5, '2017-03-29', 'None', 'OUT0012', 'Active', 5, 14, 'AFR-ACC-0015');
 
 -- --------------------------------------------------------
 
@@ -661,6 +660,7 @@ CREATE TABLE `returns` (
   `returnID` int(5) NOT NULL,
   `returnDate` date NOT NULL,
   `returnQty` int(5) NOT NULL,
+  `returnType` varchar(45) NOT NULL,
   `returnRemark` text NOT NULL,
   `status` varchar(45) NOT NULL DEFAULT 'Active',
   `prodID` varchar(45) NOT NULL
@@ -670,12 +670,12 @@ CREATE TABLE `returns` (
 -- Dumping data for table `returns`
 --
 
-INSERT INTO `returns` (`returnID`, `returnDate`, `returnQty`, `returnRemark`, `status`, `prodID`) VALUES
-(1, '2017-01-15', 1, 'none', 'Active', 'LTS-ACC-0001'),
-(2, '2017-01-15', 1, 'none', 'Active', 'LTS-ACC-0010'),
-(3, '2017-01-20', 1, 'none', 'Active', 'LTS-ACC-0011'),
-(4, '2017-01-31', 2, 'none', 'Active', 'LTS-HDT-0005'),
-(5, '2017-02-02', 1, 'none', 'Active', 'LTS-HDT-0006');
+INSERT INTO `returns` (`returnID`, `returnDate`, `returnQty`, `returnType`, `returnRemark`, `status`, `prodID`) VALUES
+(1, '2017-01-15', 5, 'Warehouse Return', 'none', 'Active', 'LTS-ACC-0001'),
+(2, '2017-01-15', 1, 'Customer Return', 'none', 'Active', 'LTS-ACC-0010'),
+(3, '2017-01-20', 1, 'Customer Return', 'none', 'Active', 'LTS-ACC-0011'),
+(4, '2017-01-31', 2, 'Customer Return', 'none', 'Active', 'LTS-HDT-0005'),
+(5, '2017-02-02', 1, 'Branch Return', 'none', 'Active', 'LTS-HDT-0006');
 
 -- --------------------------------------------------------
 
