@@ -83,8 +83,6 @@
 		  </div><!-- /container -->
 		</nav>
 
-
-
 		<!-- Side bar -->
 		<div class="row row-offcanvas row-offcanvas-left">
 			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
@@ -96,7 +94,6 @@
 		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
 				<li><a href="reports.php"><i class=""></i>Reports</a></li>
 		   	
-
 		        <li class="nav-header">  	
 		        	<a href="#" data-toggle="collapse" data-target="#menu2">
 		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
