@@ -127,8 +127,8 @@
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
-					<table class="table table-striped table-bordered">	
-						<h1 id="headers">Stock Card</h1>					
+					<table class="table table-striped table-bordered">
+						<h1 id="headers">Stock Card</h1>
 						<tr>
 							<td>
 								Product ID:
@@ -148,7 +148,9 @@
 							<td> 
 								Physical Count:
 							</td>
-						</tr>							
+						</tr>									
+					</table>
+					<table class="table table-striped table-bordered">			
 						<tr>
 							<th>
 								Date
@@ -204,12 +206,15 @@
 					<br>
 					
 					<form action="" method="POST">
-						<label>Adjustment: </label>
+					
+					<h4>Adjustment</h4>
+						<label>Physical Count: </label>
 										
 						<?php foreach ($resul as $item): ?>							
 						<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["phyCount"]; ?>" placeholder="<?php echo $item["phyCount"]; ?>">
 						<?php endforeach; ?>
 						
+						<label>Remarks: </label>
 						<?php foreach ($thisRemark as $forRemark): ?>
 						<input type="text" name="additionalRemarks" value="<?php echo $forRemark["remarks"]; ?>" placeholder="<?php echo $forRemark["remarks"]; ?>">
 						<?php endforeach; ?>
