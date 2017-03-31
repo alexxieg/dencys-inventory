@@ -204,6 +204,9 @@
 									<h3>Password</h3>
 									<input type="password" class="form-control" id ="addpass" placeholder="User Password" name="psw"> <br>
 									
+									<h3>Confirm Password</h3>
+									<input type="password" class="form-control" id ="addpassconf" placeholder="Confirm Password" name="confpsw"> <br>
+									
 									<div class="form-group">
 										<h3>User Role</h3>
 										<select class="form-control" id="addEntry" name="user_role">
