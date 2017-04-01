@@ -6,6 +6,24 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Branch Reports</title>
+		
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
+		
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
 		<?php include('dbcon.php'); ?>
 				
 		<?php 
@@ -27,6 +45,18 @@
 	</head>
 	  
 	<body>
+		<!-- Retrieve Brand Data -->
+		<?php
+			$locationQuery = (isset($_GET['queBy']) ? $_GET['queBy'] : null); 
+			if (!empty($locationQuery)) {
+				$query = $conn->prepare("SELECT prodName, outQty, model, location FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='$locationQuery';");
+			} else {
+				$query = $conn->prepare("SELECT prodName, outQty, model, location FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID order by outQty desc;");
+			}
+			
+			$query->execute();
+			$result = $query->fetchAll();
+		?>
 	  
 		<!-- Page Header and Navigation Bar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
@@ -93,11 +123,73 @@
 		   </div>
 		<!-- end of side  bar -->
 		 </nav><!-- /Header -->
+		 
+		 <?php
+			foreach ($result as $item):
+			$useThisID = $item["prodName"];
+		?>
+
+		<?php
+			endforeach;
+		?>
 	
 		<div id="contents">
-			<div class="pages no-more-tables">
+			<div class="pages">
 				<div id="tableHeader">
-					
+					<table class="table table-striped table-bordered">		
+						<h1 id="headers">BRANCH REPORT</h1>
+					</table>
+				</div>
+				
+				<!-- Table Display for Brands-->
+				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div id="myTable_length" class="dataTables_length">
+						<div id="myTable_filter" class="dataTables_filter">
+							<button type="button" class="btn btn-default" value="?queBy=Camdas" onclick="location = this.value;">
+								Camdas
+							</button>
+							<button type="button" class="btn btn-default" value="?queBy=Hilltop" onclick="location = this.value;">
+								Hilltop
+							</button>
+							<button type="button" class="btn btn-default" value="?queBy=San Fernando" onclick="location = this.value;">
+								San Fernando
+							</button>
+							<button type="button" class="btn btn-default" value="?queBy=KM 4" onclick="location = this.value;">
+								KM 4
+							</button>
+							<button type="button" class="btn btn-default" value="?queBy=KM 5" onclick="location = this.value;">
+								KM 5
+							</button>
+						</div>
+					</div>
+				</div>
+			
+				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+					<thead>
+						<tr>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">prodName</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">outQty</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">model</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">location</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							foreach ($result as $item):
+						?>
+
+						<tr>
+							<td><?php echo $item["prodName"]; ?></td>
+							<td><?php echo $item["outQty"]; ?></td>
+							<td><?php echo $item["model"]; ?></td>
+							<td><?php echo $item["location"]; ?></td>
+						</tr>
+						
+						<?php
+							endforeach;
+						?>
+					</tbody>
+				</table>	
 				</div>
 			</div>
 		</div>
