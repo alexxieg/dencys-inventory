@@ -90,11 +90,22 @@
 		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
 		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>	
-		        <li><a href="reports.php"><i class="glyphicon glyphicon-sort"></i> Reports</a></li>					
-
-		        <li class="nav-header">  	
+		        <li class="nav-header">
+					<a href="#" data-toggle="collapse" data-target="#reports">
+						Reports <i class="glyphicon glyphicon-chevron-down"></i>
+						</a>
+					</a>
+					 <ul class="list-unstyled collapse" id="reports">
+		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Branch Report</a>
+		                </li>
+  
+		            </ul>
+					</li>
+		
+		
+				<li class="nav-header">  	
 		        	<a href="#" data-toggle="collapse" data-target="#menu2">
-		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
+		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-down"></i>
 		          	</a>
 		            <ul class="list-unstyled collapse" id="menu2">
 		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a>
@@ -140,12 +151,13 @@
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">	
 						<h1 id="headers">INVENTORY</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
-							Products for Reorder
-						</button>
-						<a href="history.php"><button type="button" class="btn btn-info btn-lg btnclr" id="modbutt">View Previous Inventory</button></a>
+						<select>
+							<option>March 2017</option>
+						</select>
 					</table>
 				</div>
+				
+				<hr>
 				
 				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 					<div id="myTable_length" class="dataTables_length">
@@ -287,114 +299,8 @@
 				</tbody>	
 			</table>
 		</div>	
-					
-			<!-- Modal for Reorder Products Summary -->
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Summary of products to be reordered</h4>
-						</div>
-						<div class="modal-body">			
-							<?php
-								$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-														WHERE inventory.qty <= product.reorderLevel");
-								$query->execute();
-								$result = $query->fetchAll();
-							?>	
-							
-							<table class="table table-bordered" id="tables">
-								<tr>
-									<th>
-										Product ID
-									</th>
-									<th>
-										Product Description
-									</th>
-									<th>
-										Model
-									</th>						
-									<th>
-										Current Quantity
-									</th>
-									<th>
-										Reorder Level
-									</th>
-									<th>
-										Unit
-									</th>	
-								</tr>
-									
-								<?php
-									foreach ($result as $item):
-								?>
 
-								<tr>
-									<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-									<td data-title="Model"><?php echo $item["model"]; ?> </td>
-									<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
-									<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-									<td data-title="Unit"><?php echo $item["unitType"];?></td>
-									</td>		
-								</tr>	
-								<?php
-									endforeach;
-								?>
-							</table>																
-						</div>
-								
-						<div class="modal-footer">	
-						</div>
-					</div>
-				</div>
-			</div>
 			
-			<!-- Modal for the Product Stock Card/Ledger -->
-			<div class="modal fade" id="ledger" role="dialog">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Stock Card</h4>
-						</div>
-						<div class="modal-body">
-						<h5>Product Name: </h5>
-							<table class="table table-bordered" id="tables">
-								<tr>
-									<th>
-										Date
-									</th>
-									<th>
-										In
-									</th>
-									<th>
-										Out
-									</th>
-									<th>
-										Balance
-									</th>
-								</tr>
-								
-								<tr>
-									<td>
-									</td>
-									<td>
-									</td>
-									<td>
-									</td>									
-									<td>
-									</td>
-								</tr>
-							</table>
-						</div>
-						
-						<div class="modal-footer">	
-						</div>
-					</div>
-				</div>
-			</div>
 		</div> 
 	</body>
 </html>

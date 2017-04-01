@@ -8,20 +8,20 @@
 		<title>Incoming Products</title>
 
 		<!-- CSS Files -->
-		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" media="screen" type ="text/css" href="../css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
 		<!-- Javascript Files -->
-		<script src="../incoming.js"></script>
-		<script src="../js/bootstrap.js"></script>
+		<script src="incoming.js"></script>
+		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
-		<script src="../datatables/media/js/jquery.dataTables.min.js"></script>
-		<link href="../datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
