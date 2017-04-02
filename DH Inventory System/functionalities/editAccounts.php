@@ -8,12 +8,13 @@
 
 		<title>Accounts</title>
 
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="../logo.jpg">
+		<link rel="stylesheet" media="screen" type ="text/css" href="../css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="../css/responsive.css">
 		
-		<script src="accounts.js"></script>
-		<script src="js/bootstrap.js"></script>
+		<script src="../accounts.js"></script>
+		<script src="../js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
@@ -41,28 +42,64 @@
 		$query2->execute();
 		$result2 = $query2->fetchAll();
 	?>
-	<nav class="navbar navbar-inverse navbar-static-top" >
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<h1>Dency's Hardware and General Merchandise</h1>
+			<!-- Page Header and Navigation Bar -->
+		<nav class="navbar navbar-inverse navbar-fixed-top" >
+		<!-- Header -->
+		  <div class="container-fluid" id="navFix">
+		    <div class="navbar-header">
+			<div id="dencysname"><h2>Dency's Hardware and General Merchandise</h2></div>
+		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+		      </button>
+				<div class="dropdown">
+				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+				  <div class="dropdown-content">
+					<a href="../logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+					<i class="glyphicon glyphicon-print"></i> Print</button></a>
+					</div>
 				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right" id="categories">
-							<li><a href="inventory.php">Inventory</a></li>
-							<li><a href="incoming.php">Incoming</a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-							<li><a href="admin.html">Admin</a></li>
-						</ul>
-				</div>
-			</div>
+   			</div>
+		  </div><!-- /container -->
 		</nav>
+
+		<!-- Side bar -->
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="collapse navbar-collapse">	
+				<ul class="nav nav-pills nav-stacked affix">
+				      <div id="sidelogo"><img src="../logo.png" alt=""/></div>
+		        <li><a href="../inventory.php" ><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+		        <li><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+		        <li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+		        <li><a href="../returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>	
+		        <li><a href="../reports.php"><i class="glyphicon glyphicon-list-alt"></i> Reports</a></li>					
+		        <li class="nav-header">
+		        	<a href="#" data-toggle="collapse" data-target="#menu2">
+		          		<i class="glyphicon glyphicon-pencil"></i>Manage<i class="glyphicon glyphicon-chevron-down"></i>
+		          	</a>
+		            	<ul class="list-unstyled collapse affix" id="menu2">
+		                <li class="active"><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i>Accounts</a>
+		                </li>
+		                <li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a>
+		                </li>
+		                <li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a>
+		                </li>
+		                <li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a>
+		                </li>
+		                <li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a>
+		                </li>
+		                <li><a href="../branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
+		                </li>
+		                </ul>
+		          </li>                              
+		          </ul>
+		 	 </div><!--/span-->	
+		   </div>
+		<!-- end of side  bar -->
 
 	<div class="addInv">
 	

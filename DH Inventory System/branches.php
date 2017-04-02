@@ -163,7 +163,7 @@
 							<td><?php echo $item["branchName"]; ?></td>
 							<td><?php echo $item["location"]; ?></td>
 							<td>	
-								<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
+								<a href="functionalities/editBranches.php?useID=<?php echo $useThisID; ?>" target="_blank">
 									<button type="button" class="btn btn-default">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>

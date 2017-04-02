@@ -21,9 +21,11 @@
 			}
 		?>
 		
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type ="text/css" href="css/responsive.css">
 	</head>
 	  
 	<body>
@@ -60,20 +62,21 @@
 			$query6->execute();
 			$result6 = $query6->fetchAll();
 		?>
+		<!-- PHP code for fetching the data-->
+		<?php include('functionalities/fetchInventory.php'); ?>
+	
 		<!-- Page Header and Navigation Bar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
 		<!-- Header -->
-		<div class="container-fluid">
+		  <div class="container-fluid" id="navFix">
 		    <div class="navbar-header">
+			<div id="dencysname"><h2>Dency's Hardware and General Merchandise</h2></div>
 		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 		      </button>
-
-		      <img src="logohead.png" id="logohead"/>
-
 				<div class="dropdown">
 				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
 				  <div class="dropdown-content">
@@ -82,32 +85,27 @@
 					<i class="glyphicon glyphicon-print"></i> Print</button></a>
 					</div>
 				</div>
-
    			</div>
-		    
-		    <form action="?" method="post">
-					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</form>
 		  </div><!-- /container -->
 		</nav>
 
 		<!-- Side bar -->
 		<div class="row row-offcanvas row-offcanvas-left">
 			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-			<div class="collapse navbar-collapse">
+			<div class="collapse navbar-collapse">	
 				<ul class="nav nav-pills nav-stacked affix">
-		        <li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+				      <div id="sidelogo"><img src="logo.png" alt=""/></div>
+		        <li><a href="inventory.php" ><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-				<li><a href="reports.php"><i class="glyphicon glyphicon-sort"></i> Reports</a></li>
-		   	
-		        <li class="nav-header">  	
+		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>	
+		        <li class="active"><a href="reports.php"><i class="glyphicon glyphicon-list-alt"></i> Reports</a></li>					
+		        <li class="nav-header">
 		        	<a href="#" data-toggle="collapse" data-target="#menu2">
-		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
+		          		<i class="glyphicon glyphicon-pencil"></i>Manage<i class="glyphicon glyphicon-chevron-down"></i>
 		          	</a>
-		            <ul class="list-unstyled collapse" id="menu2">
-		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a>
+		            	<ul class="list-unstyled collapse affix" id="menu2">
+		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i>Accounts</a>
 		                </li>
 		                <li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a>
 		                </li>
@@ -118,18 +116,18 @@
 		                <li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a>
 		                </li>
 		                <li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
-		                </li>                              
-		            </ul>
-		    	</ul>
+		                </li>
+		                </ul>
+		          </li>                              
+		          </ul>
 		 	 </div><!--/span-->	
 		   </div>
 		<!-- end of side  bar -->
-		 </nav><!-- /Header -->
 	
 		<div id="contents">
 			<div class="pages no-more-tables">							
 				<div class="container">	
-					<h2>OUTGOING PRODUCTS PER BRANCH</h2>
+					<h2 style="margin-right:10%;">OUTGOING PRODUCTS PER BRANCH</h2>
 					<ul class="nav nav-pills nav-justified">
 						<li>
 							<a href="mainOutSummary" data-toggle="tab" style="color:white;">
@@ -167,7 +165,7 @@
 						<!-- For Outgoing Query -->
 						<div class="tab-pane active" id="mainOutSummary">
 							<h3>Overall Outgoing Products Summary for the Month</h3>
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
@@ -193,7 +191,7 @@
 						<!-- For Camdas Query -->
 						<div class="tab-pane" id="outSummaryCamdas">
 							<h3>Outgoing Products in Camdas</h3>
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
@@ -220,7 +218,7 @@
 						<!-- For Hilltop Query -->
 						 <div class="tab-pane" id="outSummaryHilltop">
 							<h3>Outgoing Products in Hilltop</h3>
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
@@ -248,7 +246,7 @@
 						 <!-- For KM 4 Query -->
 						<div class="tab-pane" id="outSummaryKM4">
 							<h3>Outgoing Products in KM4</h3>
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
@@ -276,7 +274,7 @@
 						<!-- For KM 5 Query -->
 						<div class="tab-pane" id="outSummaryKM5">
 						<h3>Outgoing Products in KM5</h3>
-						  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+						  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
@@ -304,7 +302,7 @@
 						<!-- For San Fernando Query -->
 						<div class="tab-pane" id="outSummarySF">
 						<h3>Outgoing Products in San Fernando, La Union</h3>
-						  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+						  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
