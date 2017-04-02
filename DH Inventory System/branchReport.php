@@ -197,7 +197,6 @@
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 									</tr>
 								</thead>
@@ -207,7 +206,6 @@
 									?>
 									<tr>
 										<td><?php echo $item["prodName"]; ?></td>
-										<td><?php echo $item["model"]; ?></td>
 										<td><?php echo $item["outQty"]; ?></td>
 									</tr>
 									<?php
@@ -224,7 +222,6 @@
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 									</tr>
 								</thead>
@@ -234,7 +231,6 @@
 									?>
 									<tr>
 										<td><?php echo $item2["prodName"]; ?></td>
-										<td><?php echo $item2["model"]; ?></td>
 										<td><?php echo $item2["outQty"]; ?></td>
 									</tr>
 										
@@ -252,7 +248,6 @@
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 									</tr>
 								</thead>
@@ -262,7 +257,6 @@
 									?>
 									<tr>
 										<td><?php echo $item3["prodName"]; ?></td>
-										<td><?php echo $item3["model"]; ?></td>
 										<td><?php echo $item3["outQty"]; ?></td>
 									</tr>
 										
@@ -280,7 +274,6 @@
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 									</tr>
 								</thead>
@@ -290,7 +283,6 @@
 									?>
 									<tr>
 										<td><?php echo $item4["prodName"]; ?></td>
-										<td><?php echo $item4["model"]; ?></td>
 										<td><?php echo $item4["outQty"]; ?></td>
 									</tr>
 										
@@ -309,7 +301,7 @@
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
+
 									</tr>
 								</thead>
 								<tbody>
@@ -319,7 +311,6 @@
 									<tr>
 										<td><?php echo $item5["prodName"]; ?></td>
 										<td><?php echo $item5["outQty"]; ?></td>
-										<td><?php echo $item5["model"]; ?></td>
 									</tr>
 										
 									<?php

@@ -190,10 +190,6 @@
 							</th>	
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Model
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								Beginning Quantity
 							</th>
 							
@@ -246,7 +242,6 @@
 						<tr style='background-color: #ff9999' id="centerData">
 							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Model"><?php echo $item["model"]; ?> </td>
 							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
 							<td data-title="End. Quantity"></td>
 							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
@@ -271,7 +266,6 @@
 						<tr id="centerData">
 							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Model"><?php echo $item["model"]; ?> </td>
 							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
 							<td data-title="End. Quantity"></td>
 							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
