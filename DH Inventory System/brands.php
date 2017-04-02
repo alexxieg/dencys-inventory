@@ -258,11 +258,7 @@
 										</tr>
 									</thead>
 									
-									<tbody>											
-										<?php
-											foreach ($result1 as $item):
-											$useThisID = $item["brandID"];
-										?>
+									<tbody>												
 
 										<tr>
 											<td><?php echo $item["brandID"]; ?></td>
@@ -275,7 +271,21 @@
 												</a>
 											</td>
 										</tr>
-												
+										<?php
+											foreach ($result1 as $item):
+											$useThisID = $item["brandID"];
+										?>
+										<tr>
+											<td><?php echo $item["brandID"]; ?></td>
+											<td><?php echo $item["brandName"]; ?></td>
+											<td>											
+												<a href="functionalities/restoreBrand.php?useId=<?php echo $useThisID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this brand?');">
+														Restore
+													</button>
+												</a>
+											</td>
+										</tr>
 										<?php
 											endforeach;
 										?>

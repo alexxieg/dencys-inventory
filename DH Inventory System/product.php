@@ -336,10 +336,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php
-											foreach ($result as $item):
-											$proID = $item["prodID"];
-										?>
+										
 										<tr>
 											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
@@ -355,7 +352,27 @@
 													</button>
 												</a>
 											</td>				
-										</tr>	
+										</tr>
+										<?php
+											foreach ($result as $item):
+											$proID = $item["prodID"];
+										?>	
+										<tr>
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Model"><?php echo $item["model"];?></td>
+											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"];?></td>
+											<td data-title="Price"><?php echo $item["price"]; ?></td>
+											<td>
+												<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
+														Restore
+													</button>
+												</a>
+											</td>				
+										</tr>
 										<?php
 											endforeach;
 										?>

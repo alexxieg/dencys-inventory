@@ -288,6 +288,24 @@
 									</thead>
 									
 									<tbody>				
+										
+										<tr id="centerData">
+											<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Model"><?php echo $item["model"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"];?></td>
+											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+												
+											<td>
+												<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+														Restore
+													</button>
+												</a>
+											</td>
+										</tr>
 										<?php
 											foreach ($result as $item):
 											$retID = $item["returnID"];
@@ -309,8 +327,7 @@
 													</button>
 												</a>
 											</td>
-										</tr>
-												
+										</tr>		
 										<?php
 											endforeach;
 										?>

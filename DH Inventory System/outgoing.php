@@ -126,7 +126,6 @@
 		<?php
 			endforeach;
 		?>
-
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -313,7 +312,7 @@
 						</div>
 					</div>
 				</div>
-				
+			
 				<!-- Modal - Outgoing Archive -->
 				<div class="modal fade" id="archive" role="dialog">
 					<div class="modal-dialog modal-lg">
@@ -370,11 +369,7 @@
 											<th></th>
 										</tr>
 									</thead>	
-									<tbody>			
-										<?php
-											foreach ($result as $item):
-											$outid = $item["outID"];
-										?>
+									<tbody>		
 										
 										<tr id="centerData">
 											<td data-title="Date"><?php echo $item["outDate"]; ?></td>
@@ -395,7 +390,29 @@
 												</a>
 											</td>		
 										</tr>
-										
+										<?php
+											foreach ($result as $item):
+											$outid = $item["outID"];
+										?>
+										<tr id="centerData">
+											<td data-title="Date"><?php echo $item["outDate"]; ?></td>
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Model"><?php echo $item["model"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+											<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+											<td data-title="Branch"><?php echo $item["location"]; ?></td>
+											<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
+											<td>
+												<a href="functionalities/restoreOutgoing.php?outsId=<?php echo $outid; ?>">
+												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+													Restore
+												</button>
+												</a>
+											</td>		
+										</tr>
 										<?php
 											endforeach;
 										?>

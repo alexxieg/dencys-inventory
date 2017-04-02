@@ -265,10 +265,6 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php
-											foreach ($result1 as $item):
-											$employID = $item["empID"];
-											?>
 											
 										<tr>
 											<td><?php echo $item["empID"]; ?></td>
@@ -284,7 +280,24 @@
 													</a>
 											</td>		
 										</tr>
-												
+										<?php
+											foreach ($result1 as $item):
+											$employID = $item["empID"];
+											?>
+										<tr>
+											<td><?php echo $item["empID"]; ?></td>
+											<td><?php echo $item["empFirstName"]; ?></td>
+											<td><?php echo $item["empMidName"]; ?></td>
+											<td><?php echo $item["empLastName"]; ?></td>
+											<td><?php echo $item["empExtensionName"]; ?></td>
+											<td>										
+												<a href="functionalities/restoreEmployee.php?emplId=<?php echo $employID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+													</button>
+													</a>
+											</td>		
+										</tr>	
 										<?php
 											endforeach;
 										?>
