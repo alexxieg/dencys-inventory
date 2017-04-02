@@ -98,15 +98,16 @@
 		<?php
 			$incID= $_GET['incId'];
 			$query = $conn->prepare("
-									SELECT MAX(sameDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName FROM (SELECT DISTINCT incoming.inDate AS sameDate, incoming.inQty AS inQuant, null AS outQuant
+									SELECT MAX(sameDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName 
+									FROM (SELECT DISTINCT incoming.inDate AS sameDate, incoming.inQty AS inQuant, null AS outQuant
 									FROM incoming
-									WHERE prodID='$incID'
+									WHERE prodID = '$incID'
 									UNION
 									SELECT DISTINCT outgoing.outDate, null, outgoing.outQty
 									FROM outgoing
-									WHERE prodID='$incID'
+									WHERE prodID = '$incID'
 									ORDER BY sameDate JOIN product 
-									WHERE product.prodID='$incID'
+									WHERE product.prodID = '$incID'
 									GROUP BY sameDate
 									");
 			$query->execute();
@@ -121,7 +122,7 @@
 			
 			$query3 = $conn->prepare("SELECT remarks FROM inventory WHERE prodID = '$incID'");										
 			$query3->execute();
-			$thisRemark = $query3->fetchAll();	
+			$invRemark = $query3->fetchAll();	
 		?>
 		
 		<div id="contents">
@@ -157,7 +158,7 @@
 							</th>
 							
 							<th>
-								Transaction ID
+								Receipt No.
 							</th>
 							
 							<th>
@@ -190,7 +191,7 @@
 						
 						<tr>	
 							<td data-title="Date"><?php echo $item["DATE"]; ?></td>	
-							<td data-title="TransID"></td>
+							<td data-title="Receipt"></td>
 							<td data-title="IN"><?php echo $item["Added"];?></td>
 							<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
 							<td></td>
@@ -215,7 +216,7 @@
 						<?php endforeach; ?>
 						
 						<label>Remarks: </label>
-						<?php foreach ($thisRemark as $forRemark): ?>
+						<?php foreach ($invRemark as $forRemark): ?>
 						<input type="text" name="additionalRemarks" value="<?php echo $forRemark["remarks"]; ?>" placeholder="<?php echo $forRemark["remarks"]; ?>">
 						<?php endforeach; ?>
 						

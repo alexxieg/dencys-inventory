@@ -29,27 +29,27 @@
 	<body>
 		<?php 
 			/* For Camdas Query */
-			$query = $conn->prepare("SELECT prodName, outQty, model, location FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas';");
+			$query = $conn->prepare("SELECT prodName, outQty, model FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas';");
 			$query->execute();
 			$result = $query->fetchAll();
 			
 			/* For Hilltop Query */
-			$query2 = $conn->prepare("SELECT prodName, outQty, model, location FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop';");
+			$query2 = $conn->prepare("SELECT prodName, outQty, model FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop';");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 			
 			/* For KM 4 Query */
-			$query3 = $conn->prepare("SELECT prodName, outQty, model, location FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4';");
+			$query3 = $conn->prepare("SELECT prodName, outQty, model FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4';");
 			$query3->execute();
 			$result3 = $query3->fetchAll();
 			
 			/* For KM 5 Query */
-			$query4 = $conn->prepare("SELECT prodName, outQty, model, location FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5';");
+			$query4 = $conn->prepare("SELECT prodName, outQty, model, FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5';");
 			$query4->execute();
 			$result4 = $query4->fetchAll();
 			
 			/* For San Fernando Query */
-			$query5 = $conn->prepare("SELECT prodName, outQty, model, location FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando';");
+			$query5 = $conn->prepare("SELECT prodName, outQty, model, FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando';");
 			$query5->execute();
 			$result5 = $query5->fetchAll();
 			
