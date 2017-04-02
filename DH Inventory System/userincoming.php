@@ -11,6 +11,7 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/responsive.css">
 		
 		<!-- Javascript Files -->
 		<script src="incoming.js"></script>
@@ -52,50 +53,44 @@
 		<!-- Retrieve Incoming Data -->
 		<?php include('functionalities/fetchIncoming.php'); ?>
 
+		<!-- Page Header and Navigation Bar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
-			<!-- Header -->
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-					</button>
-
-					<img src="logohead.png" id="logohead"/>
-
-					<div class="dropdown">
-						<button class="dropbtn"><i class="glyphicon glyphicon-user"></i> User</button>
-						<div class="dropdown-content">
-							<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-							<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
-								<i class="glyphicon glyphicon-print"></i> Print</button></a>
-						</div>
+		<!-- Header -->
+		  <div class="container-fluid" id="navFix">
+		    <div class="navbar-header">
+			<div id="dencysname"><h2>Dency's Hardware and General Merchandise</h2></div>
+		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+		      </button>
+				<div class="dropdown">
+				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+				  <div class="dropdown-content">
+					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
+					<i class="glyphicon glyphicon-print"></i> Print</button></a>
 					</div>
 				</div>
-				
-				<form action="?" method="post">
-						<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-				</form>
-			</div><!-- /container -->
+   			</div>
+		  </div><!-- /container -->
 		</nav>
 
-	<!-- Side bar -->
+		<!-- Side bar -->
 		<div class="row row-offcanvas row-offcanvas-left">
 			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-			<div class="collapse navbar-collapse">
+			<div class="collapse navbar-collapse">	
 				<ul class="nav nav-pills nav-stacked affix">
+				      <div id="sidelogo"><img src="logo.png" alt=""/></div>
 					<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-					<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+					<li class="active"><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-			   
-		    	</ul>
+					<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>			
+		          </ul>
 		 	 </div><!--/span-->	
 		   </div>
 		<!-- end of side  bar -->
-		</nav><!-- /Header -->
 		
 		<?php
 			foreach ($result as $item):

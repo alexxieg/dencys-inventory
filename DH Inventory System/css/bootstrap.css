@@ -4094,6 +4094,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 .nav-pills > li > a {
   border-radius: 4px;
+  color: white;
 }
 .nav-pills > li + li {
   margin-left: 2px;
@@ -4101,8 +4102,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  color: #fff;
-  background-color: #337ab7;
+  color:black;
+  background-color: #c1cdcd;
 }
 .nav-stacked > li {
   float: none;
@@ -4110,6 +4111,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-stacked > li + li {
   margin-top: 2px;
   margin-left: 0;
+  padding-right: 55px;
 }
 .nav-justified {
   width: 100%;
@@ -4257,8 +4259,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-fixed-top,
 .navbar-fixed-bottom {
   position: fixed;
+  top: 10px;
   right: 0;
-  left: 0;
+  left: 169px;
   z-index: 1030;
 }
 @media (min-width: 768px) {
@@ -4301,7 +4304,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: right;
   padding: 9px 10px;
   margin-top: 8px;
-  margin-right: 15px;
+  margin-left: -15px;
   margin-bottom: 8px;
   background-color: transparent;
   background-image: none;
@@ -4956,6 +4959,7 @@ a.badge:focus {
   color: #337ab7;
   background-color: #fff;
 }
+
 .list-group-item > .badge {
   float: right;
 }
@@ -6991,10 +6995,14 @@ margin-bottom: 2%;
 border: none;
 }
 
-#modbutt{
+.btnclr #modbutt{
   float: right;
   margin-left: 30px;
   height: 20%;
+}
+
+#invbtn{
+  float: right;
 }
 
 #myBtn {
@@ -7409,13 +7417,13 @@ border: none;
     margin-top: 10px;
   }
 
-  img#logohead{
-    float: right;
-    width: 15%;
+  
+  #navheader{
+	  float: right;
   }
 
   #searchBar{
-    margin-left: 50px;
+    margin-left: 500px;
     margin-top: 5px;
   }
 
@@ -7502,12 +7510,6 @@ border: none;
   color: white;
 }
 
-#logohead{
-  margin-top: 10px;
-  width: 7%;
-  float: left;
-}
-
 .nav-header #menu2{
   margin-left: 13px;
 }
@@ -7558,19 +7560,31 @@ border: none;
     background-color: gray;
 }
 
-#sidebar ul > li > a {
+.nav-pills{
+  background-color: #4573a1;
+  margin-left: -15px;
+  margin-right: 0px;
+  padding-right: 5.5px;
+  height: 110%;
+  margin-top: -80px;
+  padding-top: 200px;
+}
+#sidebar ul > li > a,
+#sidebar:hover ul > li > a {
   color: white;
 }
 
-.nav-pills{
-  background-color: #3b5998;
-  margin-left: -20px;
-  padding-right: 7px;
-  height: 100%;
-  margin-top: -30px;
-  padding-top: 50px;
+#dencysname{
+  margin-left: 15%;
 }
 
-#sidebar:hover ul > li > a {
-  color: black;
+#navFix{
+  margin-left: -190px;
+  padding-bottom: 10px;
+}
+
+#sidebar #sidelogo img{
+  width: 120px;
+  height: 120px;
+  margin-left: 8%;
 }
