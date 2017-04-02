@@ -112,11 +112,11 @@
 			$query->execute();
 			$res = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT phyCount, prodID FROM inventory WHERE prodID = '$incID'");										
+			$query2 = $conn->prepare("SELECT physicalQty, prodID FROM inventory WHERE prodID = '$incID'");										
 			$query2->execute();
 			$resul = $query2->fetchAll();
 		
-			$request = current($conn->query("SELECT initialQty FROM inventory WHERE prodID = '$incID'")->fetch());
+			$request = current($conn->query("SELECT beginningQty FROM inventory WHERE prodID = '$incID'")->fetch());
 			$base = $request;
 			
 			$query3 = $conn->prepare("SELECT remarks FROM inventory WHERE prodID = '$incID'");										
@@ -211,7 +211,7 @@
 						<label>Physical Count: </label>
 										
 						<?php foreach ($resul as $item): ?>							
-						<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["phyCount"]; ?>" placeholder="<?php echo $item["phyCount"]; ?>">
+						<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
 						<?php endforeach; ?>
 						
 						<label>Remarks: </label>
@@ -236,7 +236,7 @@
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
-				$sql = "UPDATE inventory SET phyCount=$quant, remarks='$remark' WHERE prodID = '$incID'";
+				$sql = "UPDATE inventory SET physicalQty=$quant, remarks='$remark' WHERE prodID = '$incID'";
 				$conn->exec($sql);
 
 				
