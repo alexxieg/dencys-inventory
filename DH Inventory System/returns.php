@@ -145,7 +145,6 @@
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Return Type</th>
@@ -164,7 +163,6 @@
 							<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
 							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Model"><?php echo $item["model"]; ?></td>
 							<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 							<td data-title="Unit"><?php echo $item["unitType"];?></td>
 							<td data-title="Unit"><?php echo $item["returnType"];?></td>
@@ -257,7 +255,7 @@
 								
 									<!-- Retrieve Return Data -->
 									<?php
-										$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+										$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 																FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 																WHERE returns.status = 'Inactive'
 																ORDER BY returnID DESC;");
@@ -270,7 +268,6 @@
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th
@@ -284,7 +281,6 @@
 											<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
 											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Model"><?php echo $item["model"]; ?></td>
 											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"];?></td>
 											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
@@ -306,7 +302,6 @@
 											<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
 											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Model"><?php echo $item["model"]; ?></td>
 											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"];?></td>
 											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>

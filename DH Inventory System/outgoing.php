@@ -151,9 +151,6 @@
 								<div id="tabHead">Product Description</div>						
 							</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Model
-							</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								Quantity
 							</th>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
@@ -184,7 +181,6 @@
 							<td data-title="Date"><?php echo $item["outDate"]; ?></td>
 							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Model"><?php echo $item["model"]; ?></td>
 							<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
 							<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 							<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
@@ -320,7 +316,7 @@
 								
 									<!-- Retrieve Outgoing Data -->
 									<?php
-										$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, product.model, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empFirstName AS empName, branch.location, outgoing.outRemarks 
+										$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empFirstName AS empName, branch.location, outgoing.outRemarks 
 																	FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 																	WHERE outgoing.status = 'Inactive'
 																	ORDER BY outID ASC;");
@@ -338,9 +334,6 @@
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												<div id="tabHead">Product Description</div>						
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												Model
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												Quantity
@@ -369,7 +362,6 @@
 											<td data-title="Date"><?php echo $item["outDate"]; ?></td>
 											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Model"><?php echo $item["model"]; ?></td>
 											<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
@@ -392,7 +384,6 @@
 											<td data-title="Date"><?php echo $item["outDate"]; ?></td>
 											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Model"><?php echo $item["model"]; ?></td>
 											<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
