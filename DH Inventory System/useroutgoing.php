@@ -20,8 +20,8 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
-		<script src="datatables/js/jquery.dataTables.min.js"></script>
-		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
@@ -66,7 +66,7 @@
 		      <img src="logohead.png" id="logohead"/>
 
             <div class="dropdown">
-			  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+			  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> User</button>
 			  <div class="dropdown-content">
 			    <a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
 			    <a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
@@ -357,10 +357,6 @@
 										</tr>
 									</thead>	
 									<tbody>			
-										<?php
-											foreach ($result as $item):
-											$outid = $item["outID"];
-										?>
 										
 										<tr id="centerData">
 											<td data-title="Date"><?php echo $item["outDate"]; ?></td>
@@ -381,7 +377,29 @@
 												</a>
 											</td>		
 										</tr>
-										
+										<?php
+											foreach ($result as $item):
+											$outid = $item["outID"];
+										?>
+										<tr id="centerData">
+											<td data-title="Date"><?php echo $item["outDate"]; ?></td>
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Model"><?php echo $item["model"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+											<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+											<td data-title="Branch"><?php echo $item["location"]; ?></td>
+											<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
+											<td>
+												<a href="functionalities/restoreOutgoing.php?outsId=<?php echo $outid; ?>">
+												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+													Restore
+												</button>
+												</a>
+											</td>		
+										</tr>
 										<?php
 											endforeach;
 										?>

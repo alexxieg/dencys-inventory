@@ -257,10 +257,6 @@
 									</thead>
 									
 									<tbody>						
-										<?php
-											foreach ($result1 as $item):
-											$useThisID = $item["userID"];
-										?>
 											
 										<tr>	
 											<td><?php echo $item["userName"]; ?></td>
@@ -274,7 +270,22 @@
 												</a>
 											</td>			
 										</tr>
-										
+										<?php
+											foreach ($result1 as $item):
+											$useThisID = $item["userID"];
+										?>
+										<tr>	
+											<td><?php echo $item["userName"]; ?></td>
+											<td><?php echo $item["password"]; ?></td>
+											<td><?php echo $item["user_role"]; ?></td>
+											<td>
+												<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">
+														Restore
+													</button>
+												</a>
+											</td>			
+										</tr>
 										<?php
 											endforeach;
 										?>

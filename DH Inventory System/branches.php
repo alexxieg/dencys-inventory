@@ -51,7 +51,7 @@
 	<body>
 		<!-- Retrieve Branch Data -->
 		<?php
-			$query = $conn->prepare("SELECT branchID, location FROM branch WHERE status = 'Active' ");
+			$query = $conn->prepare("SELECT branchID,branchName, location FROM branch WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -151,7 +151,8 @@
 					<thead>
 						<tr>
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch ID</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch Name</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
 							<th></th>
 						</tr>
 					</thead>	
@@ -163,6 +164,7 @@
 						?>
 						<tr>
 							<td><?php echo $item["branchID"]; ?></td>
+							<td><?php echo $item["branchName"]; ?></td>
 							<td><?php echo $item["location"]; ?></td>
 							<td>	
 								<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
@@ -243,10 +245,7 @@
 									</thead>	
 									
 									<tbody>
-										<?php
-											foreach ($result1 as $item):
-											$useThisID = $item["branchID"];
-										?>
+										
 										<tr>
 											<td><?php echo $item["branchID"]; ?></td>
 											<td><?php echo $item["branchName"]; ?></td>
@@ -259,7 +258,22 @@
 												</a>
 											</td>	
 										</tr>
-												
+										<?php
+											foreach ($result1 as $item):
+											$useThisID = $item["branchID"];
+										?>	
+										<tr>
+											<td><?php echo $item["branchID"]; ?></td>
+											<td><?php echo $item["branchName"]; ?></td>
+											<td><?php echo $item["location"]; ?></td>
+											<td>
+												<a href="functionalities/restoreBranch.php?useId=<?php echo $useThisID; ?>"> 
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">
+														Restore
+													</button>
+												</a>
+											</td>	
+										</tr>
 										<?php
 											endforeach;
 										?>

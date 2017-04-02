@@ -11,13 +11,13 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
-		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="datatables/js/jquery.dataTables.min.js"></script>
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
@@ -63,7 +63,7 @@
 		      <img src="logohead.png" id="logohead"/>
 
 				<div class="dropdown">
-				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> User</button>
 				  <div class="dropdown-content">
 					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
 					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
