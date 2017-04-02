@@ -127,249 +127,217 @@
 		 </nav><!-- /Header -->
 	
 		<div id="contents">
-			<div class="pages no-more-tables">
-				<div id="tableHeader">
+			<div class="pages no-more-tables">							
+				<div class="container">	
+					<h2>OUTGOING PRODUCTS PER BRANCH</h2>
+					<ul class="nav nav-pills nav-justified">
+						<li>
+							<a href="mainOutSummary" data-toggle="tab" style="color:white;">
+								<span>Outgoing</span>
+							</a>
+						</li>
+						<li>
+							<a href="#outSummaryCamdas" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1" style="color:white;">
+								<span>Camdas</span>
+							</a>
+						</li>
+						<li>
+							<a href="#outSummaryHilltop" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2"style="color:white;">
+								<span>Hilltop</span>
+							</a>
+						</li>
+						<li>
+							<a href="#outSummaryKM4" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
+								<span>KM 4</span>
+							</a>
+						</li>
+						<li>
+							<a href="#outSummaryKM5" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
+								<span>KM 5</span>
+							</a>
+						</li>
+						<li>
+							<a href="#outSummarySF" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
+								<span>San Fernando</span>
+							</a>
+						</li>
+					</ul>
+
+					<div class="tab-content clearfix">
+						<!-- For Outgoing Query -->
+						<div class="tab-pane active" id="mainOutSummary">
+							<h3>Overall Outgoing Products Summary for the Month</h3>
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										foreach ($result6 as $item6):
+									?>
+									<tr>
+										<td><?php echo $item6["location"]; ?></td>
+										<td><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
+									</tr>
+										
+									<?php
+										endforeach;
+									?>
+								</tbody>
+							</table>
+						</div>
 					
-		<div id="exTab1" class="container">	
-		<ul class="nav nav-pills">
-			<li><a href="#10a" data-toggle="tab"style="color:white;">Outgoing</a>
-			</li>
-			</li>
-			<li role="presentation" class="dropdown">
-          </a>
-            <li>
-              <a href="#5a" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1" style="color:white;">
-                <span>Camdas</span>
-              </a>
-            </li>
-            <li>
-              <a href="#6a" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2"style="color:white;">
-                <span>Hilltop</span>
-              </a>
-            </li>
-			<li>
-              <a href="#7a" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
-                <span>KM 4</span>
-              </a>
-            </li>
-			<li>
-              <a href="#8a" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
-                <span>KM 5</span>
-              </a>
-            </li>
-			<li>
-              <a href="#9a" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
-                <span>San Fernando</span>
-              </a>
-            </li>
-        </li>
-		</ul>
-
-			<div class="tab-content clearfix">
-		<div class="tab-pane active" id="1a">
-          <h3>Content's background color is the same for the tab</h3>
-		</div>
-		
-		<div class="tab-pane" id="2a">
-          <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
-		</div>
-		
-        <div class="tab-pane" id="3a">
-          <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
-		</div>
-		
-        <div class="tab-pane" id="4a">
-          <h3>We use css to change the background color of the content to be equal to the tab</h3>
-		</div>
-		
-		
-		<!-- For Camdas Query -->
-		<div class="tab-pane" id="5a">
-          <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-					<thead>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">prodName</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">outQty</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">model</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">location</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-							foreach ($result as $item):
-						?>
-
-						<tr>
-							<td><?php echo $item["prodName"]; ?></td>
-							<td><?php echo $item["outQty"]; ?></td>
-							<td><?php echo $item["model"]; ?></td>
-							<td><?php echo $item["location"]; ?></td>
-						</tr>
+						<!-- For Camdas Query -->
+						<div class="tab-pane" id="outSummaryCamdas">
+							<h3>Outgoing Products in Camdas</h3>
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										foreach ($result as $item):
+									?>
+									<tr>
+										<td><?php echo $item["prodName"]; ?></td>
+										<td><?php echo $item["model"]; ?></td>
+										<td><?php echo $item["outQty"]; ?></td>
+									</tr>
+									<?php
+										endforeach;
+									?>
+								</tbody>
+							</table>
+						</div>
 						
-						<?php
-							endforeach;
-						?>
-					</tbody>
-				</table>
-		</div>
-		<!-- For Hilltop Query -->
-		 <div class="tab-pane" id="6a">
-			<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-					<thead>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">prodName</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">outQty</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">model</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">location</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-							foreach ($result2 as $item2):
-						?>
-
-						<tr>
-							<td><?php echo $item2["prodName"]; ?></td>
-							<td><?php echo $item2["outQty"]; ?></td>
-							<td><?php echo $item2["model"]; ?></td>
-							<td><?php echo $item2["location"]; ?></td>
-						</tr>
+						<!-- For Hilltop Query -->
+						 <div class="tab-pane" id="outSummaryHilltop">
+							<h3>Outgoing Products in Hilltop</h3>
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										foreach ($result2 as $item2):
+									?>
+									<tr>
+										<td><?php echo $item2["prodName"]; ?></td>
+										<td><?php echo $item2["model"]; ?></td>
+										<td><?php echo $item2["outQty"]; ?></td>
+									</tr>
+										
+									<?php
+										endforeach;
+									?>
+								</tbody>
+							</table>
+						 </div>
+						 
+						 <!-- For KM 4 Query -->
+						<div class="tab-pane" id="outSummaryKM4">
+							<h3>Outgoing Products in KM4</h3>
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										foreach ($result3 as $item3):
+									?>
+									<tr>
+										<td><?php echo $item3["prodName"]; ?></td>
+										<td><?php echo $item3["model"]; ?></td>
+										<td><?php echo $item3["outQty"]; ?></td>
+									</tr>
+										
+									<?php
+										endforeach;
+									?>
+								</tbody>
+							</table>
+						</div>
 						
-						<?php
-							endforeach;
-						?>
-					</tbody>
-				</table>
-		 </div>
-		 
-		 <!-- For KM 4 Query -->
-		<div class="tab-pane" id="7a">
-          <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-					<thead>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">prodName</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">outQty</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">model</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">location</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-							foreach ($result3 as $item3):
-						?>
-
-						<tr>
-							<td><?php echo $item3["prodName"]; ?></td>
-							<td><?php echo $item3["outQty"]; ?></td>
-							<td><?php echo $item3["model"]; ?></td>
-							<td><?php echo $item3["location"]; ?></td>
-						</tr>
+						<!-- For KM 5 Query -->
+						<div class="tab-pane" id="outSummaryKM5">
+						<h3>Outgoing Products in KM5</h3>
+						  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										foreach ($result4 as $item4):
+									?>
+									<tr>
+										<td><?php echo $item4["prodName"]; ?></td>
+										<td><?php echo $item4["model"]; ?></td>
+										<td><?php echo $item4["outQty"]; ?></td>
+									</tr>
+										
+									<?php
+										endforeach;
+									?>
+								</tbody>
+							</table>
+						</div>
 						
-						<?php
-							endforeach;
-						?>
-					</tbody>
-				</table>
-		</div>
-		
-		<!-- For KM 5 Query -->
-		<div class="tab-pane" id="8a">
-          <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-					<thead>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">prodName</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">outQty</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">model</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">location</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-							foreach ($result4 as $item4):
-						?>
-
-						<tr>
-							<td><?php echo $item4["prodName"]; ?></td>
-							<td><?php echo $item4["outQty"]; ?></td>
-							<td><?php echo $item4["model"]; ?></td>
-							<td><?php echo $item4["location"]; ?></td>
-						</tr>
-						
-						<?php
-							endforeach;
-						?>
-					</tbody>
-				</table>
-		</div>
-		
-		<!-- For San Fernando Query -->
-		<div class="tab-pane" id="9a">
-          <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-					<thead>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">prodName</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">outQty</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">model</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">location</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-							foreach ($result5 as $item5):
-						?>
-
-						<tr>
-							<td><?php echo $item5["prodName"]; ?></td>
-							<td><?php echo $item5["outQty"]; ?></td>
-							<td><?php echo $item5["model"]; ?></td>
-							<td><?php echo $item5["location"]; ?></td>
-						</tr>
-						
-						<?php
-							endforeach;
-						?>
-					</tbody>
-				</table>
-		</div>
-		
-		<!-- For Outgoing Query -->
-		<div class="tab-pane" id="10a">
-          <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-					<thead>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-							foreach ($result6 as $item6):
-						?>
-
-						<tr>
-							<td><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
-							<td><?php echo $item6["location"]; ?></td>
-						</tr>
-						
-						<?php
-							endforeach;
-						?>
-					</tbody>
-				</table>
-		</div>
-		
-			</div>
-  </div>
-
-<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+						<!-- For San Fernando Query -->
+						<div class="tab-pane" id="outSummarySF">
+						<h3>Outgoing Products in San Fernando, La Union</h3>
+						  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Model</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										foreach ($result5 as $item5):
+									?>
+									<tr>
+										<td><?php echo $item5["prodName"]; ?></td>
+										<td><?php echo $item5["outQty"]; ?></td>
+										<td><?php echo $item5["model"]; ?></td>
+									</tr>
+										
+									<?php
+										endforeach;
+									?>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 					
-		
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+									
 	</body>
 </html>
