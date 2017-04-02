@@ -20,8 +20,8 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
-		<script src="datatables/js/jquery.dataTables.min.js"></script>
-		<link href="datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
 		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
@@ -66,7 +66,7 @@
 					<img src="logohead.png" id="logohead"/>
 
 					<div class="dropdown">
-						<button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
+						<button class="dropbtn"><i class="glyphicon glyphicon-user"></i> User</button>
 						<div class="dropdown-content">
 							<a href="logout.php">
 								<i class="glyphicon glyphicon-log-out"></i> 
