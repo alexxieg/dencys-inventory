@@ -24,10 +24,10 @@
 ?>
 		
 <?php
-	$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.phyCount, inventory.qty, inventory.inQty, inventory.outQty
+	$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
 								FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 								WHERE product.status = 'Active'
-								GROUP BY prodID, beginningQty, qty, inventory.inQty, inventory.outQty, inventory.phyCount");	
+								GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
 	$query->execute();
 	$result = $query->fetchAll();
 ?>	
