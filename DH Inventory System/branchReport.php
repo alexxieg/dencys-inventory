@@ -7,13 +7,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Branch Reports</title>
 		
-		<!-- CSS Files -->
+		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
+
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 		
 		<!-- Custom styles for this template -->
 		<link href="css/test.css" rel="stylesheet">
+		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!--Javascript Files -->
 		<script src="returns.js"></script>
@@ -89,94 +93,89 @@
 		<?php include('functionalities/fetchInventory.php'); ?>
 	
 		<!-- Topbar Navigation / Main Header -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-				  <ul class="nav navbar-nav navbar-right">
-					<li><a href="Logout.php">Logout</a></li>
-				  </ul>
-				</div>
-			</div>
-		</nav>
-
+    <nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
-			<div class="row">
-				<!-- Sidebar -->
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<li><a href="inventory.php">Inventory</a></li>
-						<li><a href="incoming.php">Incoming</a></li>
-						<li><a href="outgoing.php">Outgoing</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns">Returns</a>
-							<ul class="list collapse" id="returns">
-								<li><a href="returns.php">Return to Warehouse</a></li>
-								<li><a href="returnSupplier.php">Return to Supplier</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#report">Reports<span class="sr-only">(current)</span></a>
-							<ul class="list collapse" id="report">
-								<li><a href="branchReport.php">Branch Reports</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="#" data-toggle="collapse" data-target="#manage">Manage</a>
-							<ul class="list collapse" id="manage">
-								<li><a href="accounts.php">Accounts</a></li>
-								<li><a href="branches.php">Branches</a></li>
-								<li><a href="employees.php">Employees</a></li>
-								<li><a href="product.php">Products</a></li>
-								<li><a href="brands.php">Product Brands</a></li>
-								<li><a href="category.php">Product Categories</a></li>
-							<ul>
-						</li>
-					</ul>
-				</div>	
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="Logout.php">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+    </nav>
+
+    <div class="container-fluid" >
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+					<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+					<li>
+						<a href="incoming.php">
+							<i class="glyphicon glyphicon-import"></i> Incoming<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+					<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+					<li><a href="reports.php"><i class="glyphicon glyphicon-th-list"></i> Reports</a></li>
+					<li class="active"><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report<span class="sr-only">(current)</span></a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
+						<ul class="list-unstyled collapse" id="manage">
+							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
+							<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- End of Sidebar -->
 		 			
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
 						<div class="pages no-more-tables">							
 							<div class="container">	
-								<h2 style="margin-right:10%;">OUTGOING PRODUCTS PER BRANCH</h2>
-								<ul class="nav nav-pills nav-justified">
+								<h2 id="headrep">OUTGOING PRODUCTS PER BRANCH</h2>
+								<ul class="nav nav-pills" id="navjust">
 									<li>
-										<a href="mainOutSummary" data-toggle="tab" style="color:white;">
+										<a href="#mainOutSummary" data-toggle="tab">
 											<span>Outgoing</span>
 										</a>
 									</li>
 									<li>
-										<a href="#outSummaryCamdas" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1" style="color:white;">
+										<a href="#outSummaryCamdas" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
 											<span>Camdas</span>
 										</a>
 									</li>
 									<li>
-										<a href="#outSummaryHilltop" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2"style="color:white;">
+										<a href="#outSummaryHilltop" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">
 											<span>Hilltop</span>
 										</a>
 									</li>
 									<li>
-										<a href="#outSummaryKM4" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
+										<a href="#outSummaryKM4" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
 											<span>KM 4</span>
 										</a>
 									</li>
 									<li>
-										<a href="#outSummaryKM5" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
+										<a href="#outSummaryKM5" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
 											<span>KM 5</span>
 										</a>
 									</li>
 									<li>
-										<a href="#outSummarySF" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"style="color:white;">
+										<a href="#outSummarySF" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
 											<span>San Fernando</span>
 										</a>
 									</li>
@@ -185,8 +184,8 @@
 								<div class="tab-content clearfix">
 									<!-- For Outgoing Query -->
 									<div class="tab-pane active" id="mainOutSummary">
-										<h3>Overall Outgoing Products Summary for the Month</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
+										<h3>Overall Outgoing Products Summary for the Month:</h3>
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
 													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
@@ -211,8 +210,8 @@
 								
 									<!-- For Camdas Query -->
 									<div class="tab-pane" id="outSummaryCamdas">
-										<h3>Outgoing Products in Camdas</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
+										<h3>Outgoing Products in Camdas:</h3>
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
 													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
@@ -236,8 +235,8 @@
 									
 									<!-- For Hilltop Query -->
 									 <div class="tab-pane" id="outSummaryHilltop">
-										<h3>Outgoing Products in Hilltop</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
+										<h3>Outgoing Products in Hilltop:</h3>
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
 													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
@@ -262,8 +261,8 @@
 									 
 									 <!-- For KM 4 Query -->
 									<div class="tab-pane" id="outSummaryKM4">
-										<h3>Outgoing Products in KM4</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
+										<h3>Outgoing Products in KM4:</h3>
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
 													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
@@ -288,8 +287,8 @@
 									
 									<!-- For KM 5 Query -->
 									<div class="tab-pane" id="outSummaryKM5">
-									<h3>Outgoing Products in KM5</h3>
-									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
+									<h3>Outgoing Products in KM5:</h3>
+									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
 													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
@@ -314,8 +313,8 @@
 									
 									<!-- For San Fernando Query -->
 									<div class="tab-pane" id="outSummarySF">
-									<h3>Outgoing Products in San Fernando, La Union</h3>
-									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 80%; margin-left: 5%">
+									<h3>Outgoing Products in San Fernando, La Union:</h3>
+									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
 													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>

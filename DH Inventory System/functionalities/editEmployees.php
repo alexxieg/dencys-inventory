@@ -20,10 +20,17 @@
 			}
 		}
 	?>
+		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="../logo.jpg">
-		<link rel="stylesheet" media="screen" type ="text/css" href="../css/bootstrap.css">
-		<link rel="stylesheet" media="screen" type ="text/css" href="../css/responsive.css">
+
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="../css/test.css" rel="stylesheet">
+		<link href="../css/sidebar.css" rel="stylesheet">
 		
 		<script src="../employees.js"></script>
 		<script src="../js/bootstrap.js"></script>
@@ -47,64 +54,55 @@
 		$result2 = $query2->fetchAll();
 	?>
 
-			<!-- Page Header and Navigation Bar -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" >
-		<!-- Header -->
-		  <div class="container-fluid" id="navFix">
-		    <div class="navbar-header">
-			<div id="dencysname"><h2>Dency's Hardware and General Merchandise</h2></div>
-		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-		      </button>
-				<div class="dropdown">
-				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
-				  <div class="dropdown-content">
-					<a href="../logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
-					<i class="glyphicon glyphicon-print"></i> Print</button></a>
-					</div>
-				</div>
-   			</div>
-		  </div><!-- /container -->
-		</nav>
+				</button>
+				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="Logout.php">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+    </nav>
 
-		<!-- Side bar -->
-		<div class="row row-offcanvas row-offcanvas-left">
-			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-			<div class="collapse navbar-collapse">	
-				<ul class="nav nav-pills nav-stacked affix">
-				      <div id="sidelogo"><img src="../logo.png" alt=""/></div>
-		        <li><a href="../inventory.php" ><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-		        <li><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-		        <li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-		        <li><a href="../returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>	
-		        <li><a href="../reports.php"><i class="glyphicon glyphicon-list-alt"></i> Reports</a></li>					
-		        <li class="nav-header">
-		        	<a href="#" data-toggle="collapse" data-target="#menu2">
-		          		<i class="glyphicon glyphicon-pencil"></i>Manage<i class="glyphicon glyphicon-chevron-down"></i>
-		          	</a>
-		            	<ul class="list-unstyled collapse affix" id="menu2">
-		                <li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i>Accounts</a>
-		                </li>
-		                <li class="active"><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a>
-		                </li>
-		                <li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a>
-		                </li>
-		                <li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a>
-		                </li>
-		                <li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a>
-		                </li>
-		                <li><a href="../branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
-		                </li>
-		                </ul>
-		          </li>                              
-		          </ul>
-		 	 </div><!--/span-->	
-		   </div>
-		<!-- end of side  bar -->
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					 	<div id="sidebarLogo"><img src="../logo.png" alt="" width="100px" height="100px"/></div>
+					<li class="active">
+						<a href="inventory.php">
+							<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+					<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+					<li><a href="../returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+					<li><a href="../reports.php"><i class="glyphicon glyphicon-th-list"></i> Reports</a></li>
+					<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
+						<ul class="list-unstyled collapse" id="manage">
+							<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+							<li><a href="../branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
+							<li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+							<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+							<li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+							<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- End of Sidebar -->
 		
 	<div class="addInv">
 	

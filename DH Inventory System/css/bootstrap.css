@@ -4092,30 +4092,28 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: left;
 }
 
-.nav-pills > li > a {
-  border-radius: 4px;
-  color: white;
+.nav-pills > li > a {   border-radius: 4px;   color: white; } .nav-pills > li
++ li {   margin-left: 2px; } .nav-pills > li.active > a, .nav-pills >
+li.active > a:hover, .nav-pills > li.active > a:focus {   color:black;
+background-color: #c1cdcd; } .nav-stacked > li {   float: none; } .nav-stacked
+> li + li {   margin-top: 2px;   margin-left: 0;   padding-right: 55px; }
+
+#navjust {   
+  margin-right: 170px;   
+  padding-right: 0%;   
+  margin-top: 6%;
+  margin-bottom: 5%;  
 }
-.nav-pills > li + li {
-  margin-left: 2px;
+#navjust li > a {   
+  margin-left: 80px; 
 }
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
-  color:black;
-  background-color: #c1cdcd;
+
+#headrep{
+  margin-right: 200px;
+  text-decoration: underline;
+  font-family: dencyFont;
 }
-.nav-stacked > li {
-  float: none;
-}
-.nav-stacked > li + li {
-  margin-top: 2px;
-  margin-left: 0;
-  padding-right: 55px;
-}
-.nav-justified {
-  width: 90%;
-}
+
 .nav-justified > li {
   float: none;
 }
@@ -7563,11 +7561,11 @@ border: none;
   background-color: #4573a1;
   margin-left: -15px;
   margin-right: 0px;
-  padding-right: 5.5px;
-  height: 110%;
-  margin-top: -80px;
-  padding-top: 200px;
+  margin-top: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
+
 #sidebar ul > li > a,
 #sidebar:hover ul > li > a {
   color: white;
@@ -7586,4 +7584,9 @@ border: none;
   width: 120px;
   height: 120px;
   margin-left: 8%;
+}
+
+.tab-pane{
+  margin-left:  220px;
+  margin-right: 400px;
 }
