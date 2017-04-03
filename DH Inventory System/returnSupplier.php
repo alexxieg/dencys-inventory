@@ -5,19 +5,15 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Return to Warehouse</title>
+		<title>Return to Supplier</title>
 	
-		<!-- Bootstrap core CSS -->
+		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
 		<!-- Custom styles for this template -->
 		<link href="css/test.css" rel="stylesheet">
-		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!--Javascript Files -->
 		<script src="returns.js"></script>
@@ -58,59 +54,34 @@
 	<body>
 		<!-- PHP code for fetching the data-->
 		<?php
-			$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, branch.location 
-									FROM returns INNER JOIN product ON returns.prodID = product.prodID  INNER JOIN branch ON returns.branchID = branch.branchID
-									WHERE returns.status = 'Active' AND returns.returnType = 'Warehouse Return'
+			$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+									FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+									WHERE returns.status = 'Active' AND returns.returnType = 'Supplier Return'
 									ORDER BY returnID DESC;");	
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
 		
 		<!-- Topbar Navigation / Main Header -->
-		<!--Top Navigation Bar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+				  <ul class="nav navbar-nav navbar-right">
 					<li><a href="Logout.php">Logout</a></li>
-				</ul>
+				  </ul>
+				</div>
 			</div>
-		</div>
-    </nav>
+		</nav>
 
-<<<<<<< HEAD
-    <div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
-					<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li class="active"><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns<span class="sr-only">(current)</span></a></li>
-					<li><a href="reports.php"><i class="glyphicon glyphicon-th-list"></i> Reports</a></li>
-					<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
-						<ul class="list-unstyled collapse" id="manage">
-							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
-							<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
-							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
-							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
-						</ul>
-					</li>
-			</div>
-=======
 		<div class="container-fluid">
 			<div class="row">
 				<!-- Sidebar -->
@@ -146,7 +117,6 @@
 						</li>
 					</ul>
 				</div>	
->>>>>>> 2094f072b6faff0e6b3863308f33c47c45466dfa
 		 
 				<?php
 					foreach ($result as $item):
@@ -162,7 +132,7 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">	
-									<h1 id="headers">RETURN TO WAREHOUSE</h1>	
+									<h1 id="headers">RETURN TO SUPPLIER</h1>	
 									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>						
 								</table>
@@ -184,7 +154,6 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Returned From</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 										<th></th>
 									</tr>
@@ -202,7 +171,6 @@
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
-										<td data-title="Returned From"><?php echo $item["location"];?></td>
 										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
 											
 										<td>
@@ -252,31 +220,17 @@
 												<h3>Quantity</h3>
 												<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="retQty"> <br>
 												
-												<h3>Branch</h3>
-												<?php
-													$query = $conn->prepare("SELECT location FROM branch ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-													
-												<select class="form-control" id="addEntry" name="branchRet">
-													<?php foreach ($res as $row): ?>
-													<option><?=$row["location"]?></option>
-													<?php endforeach ?>
-												</select> 
-												<br>
-												
 												<h3>Remarks</h3>
 												<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 												<br>
 												<div class="modFoot">
-												<span>
-													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-												</span>
-												<span>
-													<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
-												</span>
-											</div>
+													<span>
+														<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+													</span>
+													<span>
+														<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
+													</span>
+												</div>
 											</form> 	
 
 											<div class="modal-footer">
@@ -301,7 +255,7 @@
 												<?php
 													$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 																			FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-																			WHERE returns.status = 'Inactive' AND returns.returnType = 'Warehouse Return'
+																			WHERE returns.status = 'Inactive'
 																			ORDER BY returnID DESC;");
 													$query->execute();
 													$result = $query->fetchAll();
@@ -378,6 +332,6 @@
 		</div>
 
 		<!-- Functionality for Adding Returns -->
-		<?php include('functionalities/addReturnWarehouse.php'); ?>
+		<?php include('functionalities/addReturnSupplier.php'); ?>
 	</body>
 </html>
