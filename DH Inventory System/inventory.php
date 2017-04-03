@@ -84,7 +84,12 @@
 					<li class="active"><a href="inventory.php">Inventory<span class="sr-only">(current)</span></a></li>
 					<li><a href="incoming.php">Incoming</a></li>
 					<li><a href="outgoing.php">Outgoing</a></li>
-					<li><a href="returns.php">Returns</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#returns">Returns</a>
+						<ul class="list collapse" id="returns">
+							<li><a href="returns.php">Return to Warehouse</a></li>
+							<li><a href="returnSupplier.php">Return to Supplier</a></li>
+						</ul>
+					</li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<li><a href="">Reports</a></li>

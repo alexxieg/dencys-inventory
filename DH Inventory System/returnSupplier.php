@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Return to Warehouse</title>
+		<title>Return to Supplier</title>
 	
 		<!-- CSS Files -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -54,9 +54,9 @@
 	<body>
 		<!-- PHP code for fetching the data-->
 		<?php
-			$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, branch.location 
-									FROM returns INNER JOIN product ON returns.prodID = product.prodID  INNER JOIN branch ON returns.branchID = branch.branchID
-									WHERE returns.status = 'Active' AND returns.returnType = 'Warehouse Return'
+			$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+									FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+									WHERE returns.status = 'Active' AND returns.returnType = 'Supplier Return'
 									ORDER BY returnID DESC;");	
 			$query->execute();
 			$result = $query->fetchAll();
@@ -132,7 +132,7 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">	
-									<h1 id="headers">RETURN TO WAREHOUSE</h1>	
+									<h1 id="headers">RETURN TO SUPPLIER</h1>	
 									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>						
 								</table>
@@ -154,7 +154,6 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Returned From</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 										<th></th>
 									</tr>
@@ -172,7 +171,6 @@
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
-										<td data-title="Returned From"><?php echo $item["location"];?></td>
 										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
 											
 										<td>
@@ -222,31 +220,17 @@
 												<h3>Quantity</h3>
 												<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="retQty"> <br>
 												
-												<h3>Branch</h3>
-												<?php
-													$query = $conn->prepare("SELECT location FROM branch ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-													
-												<select class="form-control" id="addEntry" name="branchRet">
-													<?php foreach ($res as $row): ?>
-													<option><?=$row["location"]?></option>
-													<?php endforeach ?>
-												</select> 
-												<br>
-												
 												<h3>Remarks</h3>
 												<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 												<br>
 												<div class="modFoot">
-												<span>
-													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-												</span>
-												<span>
-													<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
-												</span>
-											</div>
+													<span>
+														<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+													</span>
+													<span>
+														<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
+													</span>
+												</div>
 											</form> 	
 
 											<div class="modal-footer">
@@ -271,7 +255,7 @@
 												<?php
 													$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 																			FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-																			WHERE returns.status = 'Inactive' AND returns.returnType = 'Warehouse Return'
+																			WHERE returns.status = 'Inactive'
 																			ORDER BY returnID DESC;");
 													$query->execute();
 													$result = $query->fetchAll();
@@ -348,6 +332,6 @@
 		</div>
 
 		<!-- Functionality for Adding Returns -->
-		<?php include('functionalities/addReturnWarehouse.php'); ?>
+		<?php include('functionalities/addReturnSupplier.php'); ?>
 	</body>
 </html>
