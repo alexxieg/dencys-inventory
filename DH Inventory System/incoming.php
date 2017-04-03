@@ -7,13 +7,17 @@
 
 		<title>Incoming Products</title>
 
-		<!-- CSS Files -->
+		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
+
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 		
 		<!-- Custom styles for this template -->
 		<link href="css/test.css" rel="stylesheet">
+		<link href="css/sidebar.css" rel="stylesheet">
 			
 		<!-- Javascript Files -->
 		<script src="incoming.js"></script>
@@ -56,54 +60,54 @@
 		<?php include('functionalities/fetchIncoming.php'); ?>
 	
 		<!-- Topbar Navigation / Main Header -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-				  <ul class="nav navbar-nav navbar-right">
-					<li><a href="Logout.php">Logout</a></li>
-				  </ul>
-				</div>
-			</div>
-		</nav>
-
+    <nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<li><a href="inventory.php">Inventory</a></li>
-						<li class="active"><a href="incoming.php">Incoming<span class="sr-only">(current)</span></a></li>
-						<li><a href="outgoing.php">Outgoing</a></li>
-						<li><a href="returns.php">Returns</a></li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="#" data-toggle="collapse" data-target="#report">Reports</a>
-							<ul class="list collapse" id="report">
-								<li><a href="branchReport.php">Branch Reports</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="#" data-toggle="collapse" data-target="#manage">Manage</a>
-							<ul class="list collapse" id="manage">
-								<li><a href="accounts.php">Accounts</a></li>
-								<li><a href="branches.php">Branches</a></li>
-								<li><a href="employees.php">Employees</a></li>
-								<li><a href="product.php">Products</a></li>
-								<li><a href="brands.php">Product Brands</a></li>
-							<li><a href="category.php">Product Categories</a></li>
-							<ul>
-						</li>
-					</ul>
-				</div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="Logout.php">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+    </nav>
+
+    <div class="container-fluid" >
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+					<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+					<li class="active">
+						<a href="incoming.php">
+							<i class="glyphicon glyphicon-import"></i> Incoming<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+					<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+					<li><a href="reports.php"><i class="glyphicon glyphicon-th-list"></i> Reports</a></li>
+					<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
+						<ul class="list-unstyled collapse" id="manage">
+							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
+							<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 				
 				<?php
 					foreach ($result as $item):

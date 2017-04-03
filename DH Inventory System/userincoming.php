@@ -7,12 +7,18 @@
 		
 		<title>Incoming Products</title>
 
-		<!-- CSS Files -->
+		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
-		<link rel="stylesheet" media="screen" type ="text/css" href="css/responsive.css">
+
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 		
+		<!-- Custom styles for this template -->
+		<link href="css/test.css" rel="stylesheet">
+		<link href="css/sidebar.css" rel="stylesheet">
+				
 		<!-- Javascript Files -->
 		<script src="incoming.js"></script>
 		<script src="js/bootstrap.js"></script>
@@ -53,43 +59,39 @@
 		<!-- Retrieve Incoming Data -->
 		<?php include('functionalities/fetchIncoming.php'); ?>
 
-		<!-- Page Header and Navigation Bar -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" >
-		<!-- Header -->
-		  <div class="container-fluid" id="navFix">
-		    <div class="navbar-header">
-			<div id="dencysname"><h2>Dency's Hardware and General Merchandise</h2></div>
-		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-		      </button>
-				<div class="dropdown">
-				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
-				  <div class="dropdown-content">
-					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
-					<i class="glyphicon glyphicon-print"></i> Print</button></a>
-					</div>
+		<!-- Topbar Navigation / Main Header -->
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
-   			</div>
-		  </div><!-- /container -->
-		</nav>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="Logout.php">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+	    </nav>
 
-		<!-- Side bar -->
-		<div class="row row-offcanvas row-offcanvas-left">
-			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-			<div class="collapse navbar-collapse">	
-				<ul class="nav nav-pills nav-stacked affix">
-				      <div id="sidelogo"><img src="logo.png" alt=""/></div>
-					<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-					<li class="active"><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>			
-		          </ul>
-		 	 </div><!--/span-->	
-		   </div>
+	    <div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li class="active"><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li><span class="sr-only">(current)</span>
+						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<!-- end of side  bar -->
 		
 		<?php
@@ -100,7 +102,8 @@
 		<?php
 			endforeach;
 		?>
-					
+
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">						
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
@@ -223,8 +226,8 @@
 														
 										<tbody>
 											<tr>
-												<td><input type="checkbox" name="chk"></TD>
-												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												<td><input type="checkbox" name="chk"></td>
+												<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
 												<td>	
 													<?php
 														$query = $conn->prepare("SELECT prodName FROM product ");
@@ -364,7 +367,7 @@
 				</div>				
 			</div>
 		</div>		
-		
+	</div>	
 		<!-- Add Incoming Entry Functionality-->
 		<?php include('functionalities/addIncoming.php'); ?>
   </body>
