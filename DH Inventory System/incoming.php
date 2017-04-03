@@ -151,11 +151,14 @@
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								<div id="tabHead">Product Description</div>
 							</th>
+
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Quantity Ordered
+							</th>
 				
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Quantity
+								Quantity Arrived
 							</th>
-							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								Unit
 							</th>
@@ -186,7 +189,8 @@
 							<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
 							<td data-title="Product ID"><?php echo $item["prodID"];?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+							<td data-title="Quantity Ordered"><?php echo $item["qtyOrdered"]; ?></td>
+							<td data-title="Quantity Arrived"><?php echo $item["inQty"]; ?></td>
 							<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 							<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 							<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
@@ -260,7 +264,11 @@
 												</td>
 														
 												<td>
-													<input type="text" class="form-control" id ="addQty" placeholder="Item Quantity" name="incQty[]">
+													<input type="text" class="form-control" id ="addQty" placeholder="Quantity Arrived" name="incQty[]">
+												</td>
+												
+												<td>
+													<input type="text" class="form-control" id ="addQtyOrdered" placeholder="Quantity Ordered" name="qtyOrder[]">
 												</td>
 												
 												<td>
@@ -306,7 +314,7 @@
 								
 									<!-- Retrieve Incoming Data -->
 									<?php
-										$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.inRemarks 
+										$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.qtyOrdered, incoming.inDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.inRemarks 
 																	FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 																	WHERE incoming.status = 'Inactive'
 																	ORDER BY inID ASC;");
@@ -321,7 +329,11 @@
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 		
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												Quantity
+												Quantity Ordered
+											</th>
+
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Quantity Arrived
 											</th>
 											
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
@@ -350,7 +362,8 @@
 											<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
 											<td data-title="Product ID"><?php echo $item["prodID"];?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+											<td data-title="Quantity Ordered"><?php echo $item["qtyOrdered"]; ?></td>
+											<td data-title="Quantity Arrived"><?php echo $item["inQty"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 											<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
@@ -371,7 +384,8 @@
 											<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
 											<td data-title="Product ID"><?php echo $item["prodID"];?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+											<td data-title="Quantity Ordered"><?php echo $item["qtyOrdered"]; ?></td>
+											<td data-title="Quantity Arrived"><?php echo $item["inQty"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 											<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>

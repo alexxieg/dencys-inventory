@@ -217,9 +217,9 @@
 										
 									<h3>Return Type</h3>
 									<select class="form-control" id="addEntry" name="retType">
-										<option>Branch Return</option>
 										<option>Customer Return</option>
-										<option>Warehouse Return</option>					
+										<option>Delivery Return</option>					
+										<option>Stock Return</option>
 									</select> 
 									
 									<h3>Remarks</h3>

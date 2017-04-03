@@ -231,7 +231,7 @@
 							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
 							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
-							<td data-title="Physical Count"><?php echo $item["physicalCount"]; ?></td>
+							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 							<td data-title="Unit"><?php echo $item["unitType"];?></td>
 							<td data-title="Remarks"></td>
@@ -255,7 +255,7 @@
 							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
 							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
-							<td data-title="Physical Count"><?php echo $item["physicalCount"]; ?></td>
+							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 							<td data-title="Unit"><?php echo $item["unitType"];?></td>
 							<td data-title="Remarks"></td>

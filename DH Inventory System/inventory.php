@@ -86,7 +86,15 @@
 		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
 		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>	
-		        <li><a href="reports.php"><i class="glyphicon glyphicon-list-alt"></i> Reports</a></li>					
+				<li class="nav-header">
+		        	<a href="#" data-toggle="collapse" data-target="#reports">
+		          		<i class="glyphicon glyphicon-list-alt"></i>Reports<i class="glyphicon glyphicon-chevron-down"></i>
+		          	</a>
+		            	<ul class="list-unstyled collapse affix" id="reports">
+							<li><a href="branchReport.php">Branch Report</a></li>
+		                </ul>
+		         </li>                              
+	  
 		        <li class="nav-header">
 		        	<a href="#" data-toggle="collapse" data-target="#menu2">
 		          		<i class="glyphicon glyphicon-pencil"></i>Manage<i class="glyphicon glyphicon-chevron-down"></i>
@@ -106,7 +114,7 @@
 		                </li>
 		                </ul>
 		          </li>                              
-		          </ul>
+		         </ul>
 		 	 </div><!--/span-->	
 		   </div>
 		<!-- end of side  bar -->

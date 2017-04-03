@@ -19,6 +19,16 @@ function validateForm() {
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
 	}
+	if (document.getElementById('addQtyOrdered').value == "") {
+		swal({
+		title: "Error!",
+		text: "Please Enter Quantity.",
+		type: "error",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addQty').style.borderColor = "red";
+		return false;
+	}
 	if(confirm('Are you sure you want to add this entry?')) {
 		alert("Incoming Product Successfully Added");
 		return true;		
