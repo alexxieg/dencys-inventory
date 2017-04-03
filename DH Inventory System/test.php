@@ -106,229 +106,227 @@
 					</ul>
 				</div>	
 		 
-		<?php
-			foreach ($result as $item):
-			$retID = $item["returnID"];
-		?>
-					
-		<?php
-			endforeach;
-		?>
-					
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
-		<div id="contents">
-			<div class="pages no-more-tables">
-				<div id="tableHeader">
-					<table class="table table-striped table-bordered">	
-						<h1 id="headers">RETURNED PRODUCTS</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>						
-					</table>
-				</div>
-				
-				<!-- Table for Returns -->
-				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-					<div id="myTable_length" class="dataTables_length">
-						<div id="myTable_filter" class="dataTables_filter">
-						</div>
-					</div>
-				</div>
-				
-				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-					<thead>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Return Type</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-							<th></th>
-						</tr>
-					</thead>
-					
-					<tbody>				
-						<?php
-							foreach ($result as $item):
-							$retID = $item["returnID"];
-						?>
-						
-						<tr id="centerData">
-							<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
-							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-							<td data-title="Unit"><?php echo $item["unitType"];?></td>
-							<td data-title="Unit"><?php echo $item["returnType"];?></td>
-							<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-								
-							<td>
-								<a href="functionalities/editRet.php?retId=<?php echo $retID; ?>" target="_blank">
-									<button type="button" class="btn btn-default">
-										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									</button>
-								</a>
-								<a href="functionalities/removeReturn.php?retId=<?php echo $retID; ?>">
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
-										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-									</button>
-								</a>
-							</td>
-						</tr>
-								
-						<?php
-							endforeach;
-						?>
-					</tbody>	
-				</table>
-					
-				<!-- Modal for Returned Product Entry Form -->
-				<div class="modal fade" id="myModal" role="dialog">
-					 <div class="modal-dialog modal-lg">
-						 <div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Add Returned Product</h4>
-							</div>
-							<div class="modal-body">
-								<form action="" method="POST" onsubmit="return validateForm()">
-									<h3>Item</h3>
-									<?php
-										$query = $conn->prepare("SELECT prodName FROM product ");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
-										
-									<select class="form-control" id="addEntry" name="prodItem">
-										<?php foreach ($res as $row): ?>
-										<option><?=$row["prodName"]?></option>
-										<?php endforeach ?>
-									</select> 
-									<br>
-											
-									<h3>Quantity</h3>
-									<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="retQty"> <br>
-										
-									<h3>Return Type</h3>
-									<select class="form-control" id="addEntry" name="retType">
-										<option>Customer Return</option>
-										<option>Delivery Return</option>					
-										<option>Stock Return</option>
-									</select> 
-									
-									<h3>Remarks</h3>
-									<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
-									<br>
-									<div class="modFoot">
-									<span>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-									</span>
-									<span>
-										<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
-									</span>
-								</div>
-								</form> 	
-
-								<div class="modal-footer">
-								</div>								
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Modal - Returns Archive -->
-				<div class="modal fade" id="archive" role="dialog">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Archived Returns</h4>
-							</div>
-							<div class="modal-body">
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								
-									<!-- Retrieve Return Data -->
-									<?php
-										$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
-																FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-																WHERE returns.status = 'Inactive'
-																ORDER BY returnID DESC;");
-										$query->execute();
-										$result = $query->fetchAll();
-									?>
-									
-									<thead>
-										<tr>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th
-											<th></th>
-										</tr>
-									</thead>
-									
-									<tbody>				
-										
-										<tr id="centerData">
-											<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
-											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-											<td data-title="Unit"><?php echo $item["unitType"];?></td>
-											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-												
-											<td>
-												<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
-													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
-														Restore
-													</button>
-												</a>
-											</td>
-										</tr>
-										<?php
-											foreach ($result as $item):
-											$retID = $item["returnID"];
-										?>
-										
-										<tr id="centerData">
-											<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
-											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-											<td data-title="Unit"><?php echo $item["unitType"];?></td>
-											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-												
-											<td>
-												<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
-													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
-														Restore
-													</button>
-												</a>
-											</td>
-										</tr>		
-										<?php
-											endforeach;
-										?>
-									</tbody>	
+				<?php
+					foreach ($result as $item):
+					$retID = $item["returnID"];
+				?>
+							
+				<?php
+					endforeach;
+				?>
+							
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+					<div id="contents">
+						<div class="pages no-more-tables">
+							<div id="tableHeader">
+								<table class="table table-striped table-bordered">	
+									<h1 id="headers">RETURNED PRODUCTS</h1>	
+									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>						
 								</table>
 							</div>
-						</div>
 							
-						<div class="modal-footer">
-						</div>
+							<!-- Table for Returns -->
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
+									</div>
+								</div>
+							</div>
 							
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Return Type</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+										<th></th>
+									</tr>
+								</thead>
+								
+								<tbody>				
+									<?php
+										foreach ($result as $item):
+										$retID = $item["returnID"];
+									?>
+									
+									<tr id="centerData">
+										<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
+										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+										<td data-title="Unit"><?php echo $item["unitType"];?></td>
+										<td data-title="Unit"><?php echo $item["returnType"];?></td>
+										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+											
+										<td>
+											<a href="functionalities/editRet.php?retId=<?php echo $retID; ?>" target="_blank">
+												<button type="button" class="btn btn-default">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+												</button>
+											</a>
+											<a href="functionalities/removeReturn.php?retId=<?php echo $retID; ?>">
+												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+												</button>
+											</a>
+										</td>
+									</tr>
+											
+									<?php
+										endforeach;
+									?>
+								</tbody>	
+							</table>
+								
+							<!-- Modal for Returned Product Entry Form -->
+							<div class="modal fade" id="myModal" role="dialog">
+								 <div class="modal-dialog modal-lg">
+									 <div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Add Returned Product</h4>
+										</div>
+										<div class="modal-body">
+											<form action="" method="POST" onsubmit="return validateForm()">
+												<h3>Item</h3>
+												<?php
+													$query = $conn->prepare("SELECT prodName FROM product ");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+													
+												<select class="form-control" id="addEntry" name="prodItem">
+													<?php foreach ($res as $row): ?>
+													<option><?=$row["prodName"]?></option>
+													<?php endforeach ?>
+												</select> 
+												<br>
+														
+												<h3>Quantity</h3>
+												<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="retQty"> <br>
+													
+												<h3>Return Type</h3>
+												<select class="form-control" id="addEntry" name="retType">
+													<option>Customer Return</option>
+													<option>Delivery Return</option>					
+													<option>Stock Return</option>
+												</select> 
+												
+												<h3>Remarks</h3>
+												<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
+												<br>
+												<div class="modFoot">
+												<span>
+													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+												</span>
+												<span>
+													<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
+												</span>
+											</div>
+											</form> 	
+
+											<div class="modal-footer">
+											</div>								
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Modal - Returns Archive -->
+							<div class="modal fade" id="archive" role="dialog">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Archived Returns</h4>
+										</div>
+										<div class="modal-body">
+											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+											
+												<!-- Retrieve Return Data -->
+												<?php
+													$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+																			FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+																			WHERE returns.status = 'Inactive'
+																			ORDER BY returnID DESC;");
+													$query->execute();
+													$result = $query->fetchAll();
+												?>
+												
+												<thead>
+													<tr>
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th
+														<th></th>
+													</tr>
+												</thead>
+												
+												<tbody>				
+													
+													<tr id="centerData">
+														<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
+														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+														<td data-title="Unit"><?php echo $item["unitType"];?></td>
+														<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+															
+														<td>
+															<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
+																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+																	Restore
+																</button>
+															</a>
+														</td>
+													</tr>
+													<?php
+														foreach ($result as $item):
+														$retID = $item["returnID"];
+													?>
+													
+													<tr id="centerData">
+														<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
+														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+														<td data-title="Unit"><?php echo $item["unitType"];?></td>
+														<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+															
+														<td>
+															<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
+																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+																	Restore
+																</button>
+															</a>
+														</td>
+													</tr>		
+													<?php
+														endforeach;
+													?>
+												</tbody>	
+											</table>
+										</div>
+									</div>
+										
+									<div class="modal-footer">
+									</div>
+										
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-				
-			</div>
-		</div
 				</div>
 			</div>
 		</div>
-
 
 		<!-- Functionality for Adding Returns -->
 		<?php include('functionalities/addReturn.php'); ?>

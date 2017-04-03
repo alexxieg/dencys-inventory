@@ -97,10 +97,10 @@
 						<li><a href="#" data-toggle="collapse" data-target="#manage">Manage</a>
 							<ul class="list collapse" id="manage">
 								<li><a href="accounts.php">Accounts</a></li>
-								<li><a href="branch.php">Branches</a></li>
+								<li><a href="branches.php">Branches</a></li>
 								<li><a href="employees.php">Employees</a></li>
 								<li><a href="product.php">Products</a></li>
-								<li><a href="brand.php">Product Brands</a></li>
+								<li><a href="brands.php">Product Brands</a></li>
 								<li><a href="category.php">Product Categories</a></li>
 							<ul>
 						</li>
