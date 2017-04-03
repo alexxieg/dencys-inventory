@@ -1,110 +1,393 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Bootstrap Case</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  	<link rel="shortcut icon" href="logo.jpg">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-</head>
-<body>
+    <title>Dashboard Template for Bootstrap</title>
 
-<!-- Page Header and Navigation Bar -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" >
-		<!-- Header -->
-		<div class="container-fluid">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse" id="togBtn">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-		      </button>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-		      <img src="logohead.png" id="logohead"/>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-				<div class="dropdown">
-				  <button class="dropbtn"><i class="glyphicon glyphicon-user"></i> Admin</button>
-				  <div class="dropdown-content">
-					<a href="logout.php"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-					<a href="#"><button class="btn btn-success btn-md" onclick="myFunction()" id="printBtn">
-					<i class="glyphicon glyphicon-print"></i> Print</button></a>
+    <!-- Custom styles for this template -->
+    <link href="css/test.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		
+		<!-- Javascript Files -->
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
+		
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
+			
+		<!-- Database connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session-->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul>
+        </div>
+        <!-- PHP code for fetching the data-->
+		<?php include('functionalities/fetchInventory.php'); ?>
+	
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+          <?php
+			foreach ($result as $item):
+				$currQty = $item["beginningQty"] + $item["inQty"] - $item["outQty"];
+				$incID = $item["prodID"];
+				if ($currQty <= $item["reorderLevel"]){
+		?> 
+					
+		<?php	
+			}else if ($currQty > $item["reorderLevel"]){
+		?>
+					
+		<?php
+			}	
+		?>
+						
+		<?php
+			endforeach;
+		?>
+					
+		<div id="contents">
+			<div class="pages">
+				<div id="tableHeader">
+					<table class="table table-striped table-bordered">	
+						<h1 id="headers">INVENTORY</h1>	
+						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
+							Products for Reorder
+						</button>
+						<a href="history.php"><button type="button" class="btn btn-info btn-lg btnclr" id="modbutt">View Previous Inventory</button></a>
+					</table>
+				</div>
+				
+				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+					<div id="myTable_length" class="dataTables_length">
+						<div id="myTable_filter" class="dataTables_filter">
+						</div>
 					</div>
 				</div>
+				
+				<!-- Table for Inventory Data-->
+				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+					<thead>	
+						<tr>
+							<td colspan="13" style="font-size: 35px;">
+								<?php
+								$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
+								$month->execute();
+								$monthres = $month->fetchAll();
+								foreach ($monthres as $monthshow)
+								echo $monthshow["month"];
+								?>	
+							</td>
+						</tr>
+						<tr>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product ID</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product Description</div>
+							</th>	
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Beginning Quantity
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Ending Quantity
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								IN
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								OUT
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Current Quantity
+								
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Physical Count
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Reorder Level
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Unit
+							</th>
+			
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Remarks
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								Stock Card
+							</th>
+						</tr>
+				</thead>
+				<tbody>	
+						
+						<?php
+							foreach ($result as $item):
+						
+								$incID = $item["prodID"];
+								if ($item['qty'] <= $item["reorderLevel"]){
+						?> 
+						<tr style='background-color: #ff9999' id="centerData">
+							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
+							<td data-title="End. Quantity"></td>
+							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
+							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
+							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+							<td data-title="Unit"><?php echo $item["unitType"];?></td>
+							<td data-title="Remarks"></td>
+							<td>
+								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+									<button type="button" class="btn btn-default" id="edBtn">
+										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+									</button>
+								</a>
+							</td>
+						</tr>
+						
+						<?php	
+							}else if ($item['qty'] > $item["reorderLevel"]){
+						?>
+						<tr id="centerData">
+							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
+							<td data-title="End. Quantity"></td>
+							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
+							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
+							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+							<td data-title="Unit"><?php echo $item["unitType"];?></td>
+							<td data-title="Remarks"></td>
+							<td>
+								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_self"> 
+									<button type="button" class="btn btn-default" id="edBtn">
+										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+									</button>
+								</a>	
+							</td>	
+						</tr>
+						<?php
+							}	
+						?>
+							
+						<?php
+							endforeach;
+						?>
+				</tbody>	
+			</table>
+		</div>	
+					
+			<!-- Modal for Reorder Products Summary -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Summary of products to be reordered</h4>
+						</div>
+						<div class="modal-body">			
+							<?php
+								$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
+														WHERE inventory.qty <= product.reorderLevel");
+								$query->execute();
+								$result = $query->fetchAll();
+							?>	
+							
+							<table class="table table-bordered" id="tables">
+								<tr>
+									<th>
+										Product ID
+									</th>
+									<th>
+										Product Description
+									</th>						
+									<th>
+										Current Quantity
+									</th>
+									<th>
+										Reorder Level
+									</th>
+									<th>
+										Unit
+									</th>	
+								</tr>
+									
+								<?php
+									foreach ($result as $item):
+								?>
 
-   			</div>
-		    
-		    <form action="?" method="post">
-					<input type="text" class="form-control" placeholder="Search" id="searchBar" name="search">
-			</form>
-		  </div><!-- /container -->
-		</nav>
+								<tr>
+									<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+									<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
+									<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+									<td data-title="Unit"><?php echo $item["unitType"];?></td>
+									</td>		
+								</tr>	
+								<?php
+									endforeach;
+								?>
+							</table>																
+						</div>
+								
+						<div class="modal-footer">	
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Modal for the Product Stock Card/Ledger -->
+			<div class="modal fade" id="ledger" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Stock Card</h4>
+						</div>
+						<div class="modal-body">
+						<h5>Product Name: </h5>
+							<table class="table table-bordered" id="tables">
+								<tr>
+									<th>
+										Date
+									</th>
+									<th>
+										In
+									</th>
+									<th>
+										Out
+									</th>
+									<th>
+										Balance
+									</th>
+								</tr>
+								
+								<tr>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>
+									</td>									
+									<td>
+									</td>
+								</tr>
+							</table>
+						</div>
+						
+						<div class="modal-footer">	
+						</div>
+					</div>
+				</div>
+			</div>
 
-		<!-- Side bar -->
-		<div class="row row-offcanvas row-offcanvas-left">
-			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-			<div class="collapse navbar-collapse">
-				<ul class="nav nav-pills nav-stacked affix">
-		        <li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-		        <li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-		        <li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-		        <li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-				<li><a href="reports.php"><i class="glyphicon glyphicon-sort"></i> Reports</a></li>
-		   	
-		        <li class="nav-header">  	
-		        	<a href="#" data-toggle="collapse" data-target="#menu2">
-		          		<i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-chevron-right"></i>
-		          	</a>
-		            <ul class="list-unstyled collapse" id="menu2">
-		                <li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a>
-		                </li>
-		                <li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a>
-		                </li>
-		                <li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a>
-		                </li>
-		                <li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a>
-		                </li>
-		                <li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a>
-		                </li>
-		                <li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a>
-		                </li>                              
-		            </ul>
-		    	</ul>
-		 	 </div><!--/span-->	
-		   </div>
-		<!-- end of side  bar -->
-		 </nav><!-- /Header -->
+          
+        </div>
+      </div>
+    </div>
 
-<div class="container">
-  <h2>Dynamic Pills</h2>
-    <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
-    <li><a data-toggle="pill" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
-  </ul>
-  
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
-</div>
-
-</body>
+   
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
