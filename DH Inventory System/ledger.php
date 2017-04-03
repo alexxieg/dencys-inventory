@@ -92,15 +92,17 @@
 		<?php
 			$incID= $_GET['incId'];
 			$query = $conn->prepare("
-									SELECT MAX(sameDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName 
-									FROM (SELECT DISTINCT incoming.inDate AS sameDate, incoming.inQty AS inQuant, null AS outQuant
+									SELECT MAX(sameDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName, GROUP_CONCAT(receiptNo SEPARATOR ', ') AS 'Receipt' 
+									FROM (SELECT DISTINCT incoming.inDate AS sameDate, incoming.inQty AS inQuant, null AS outQuant, GROUP_CONCAT(incoming.receiptNo) AS receiptNo
 									FROM incoming
 									WHERE prodID = '$incID'
+									GROUP BY inDate, inQty
 									UNION
-									SELECT DISTINCT outgoing.outDate, null, outgoing.outQty
+									SELECT DISTINCT outgoing.outDate, null, outgoing.outQty, GROUP_CONCAT(outgoing.receiptNo)
 									FROM outgoing
 									WHERE prodID = '$incID'
-									ORDER BY sameDate JOIN product 
+									GROUP BY outDate, outQty
+									ORDER BY sameDate ) AS ledgerResult JOIN product 
 									WHERE product.prodID = '$incID'
 									GROUP BY sameDate
 									");
@@ -185,7 +187,7 @@
 						
 						<tr>	
 							<td data-title="Date"><?php echo $item["DATE"]; ?></td>	
-							<td data-title="Receipt"></td>
+							<td data-title="Receipt"><?php echo $item["Receipt"]; ?></td>
 							<td data-title="IN"><?php echo $item["Added"];?></td>
 							<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
 							<td></td>
