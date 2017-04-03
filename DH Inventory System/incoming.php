@@ -7,52 +7,55 @@
 
 		<title>Incoming Products</title>
 
-			<!-- CSS Files -->
-			<link href="css/bootstrap.min.css" rel="stylesheet">
-			<link rel="shortcut icon" href="logo.jpg">
-			<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
-			
-			<!-- Custom styles for this template -->
-			<link href="css/test.css" rel="stylesheet">
-			
-			<!-- Javascript Files -->
-			<script src="incoming.js"></script>
-			<script src="js/bootstrap.js"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-			<script src="alertboxes/sweetalert2.min.js"></script>
-			<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
+		<!-- CSS Files -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+		<link rel="stylesheet" media="screen" type ="text/css" href="css/bootstrap.css">
 		
-			<script src="datatables/media/js/jquery.dataTables.min.js"></script>
-			<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-			<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
-			<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		<!-- Custom styles for this template -->
+		<link href="css/test.css" rel="stylesheet">
 			
-			<!-- Datatables -->
-			<script>
-				$(document).ready(function(){
-					$('#myTable').dataTable();
-				});
-			</script>
+		<!-- Javascript Files -->
+		<script src="incoming.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
+		
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		
+		<!-- Datatables -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
 			
-			<!-- Database Connection -->
-			<?php include('dbcon.php'); ?>
-			
-			<!-- Login Session -->
-			<?php 
-				session_start();
-				$role = $_SESSION['sess_role'];
-				if (!isset($_SESSION['id']) || $role!="admin") {
-					header('Location: index.php');
-				}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
-			?>
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+	
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
 	</head>
 
 	<body>
-
+		<!-- Retrieve Incoming Data -->
+		<?php include('functionalities/fetchIncoming.php'); ?>
+	
+		<!-- Topbar Navigation / Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -73,38 +76,34 @@
 		</nav>
 
 		<div class="container-fluid">
-				<div class="row">
-					<div class="col-sm-3 col-md-2 sidebar">
-						<ul class="nav nav-sidebar">
-							<li><a href="inventory.php">Inventory</a></li>
-							<li class="active"><a href="incoming.php">Incoming<span class="sr-only">(current)</span></a></li>
-							<li><a href="outgoing.php">Outgoing</a></li>
-							<li><a href="returns.php">Returns</a></li>
-						</ul>
-						<ul class="nav nav-sidebar">
-							<li><a href="#" data-toggle="collapse" data-target="#report">Reports</a>
-								<ul class="list collapse" id="report">
-									<li><a href="branchReport.php">Branch Reports</a></li>
-								</ul>
-							</li>
-						</ul>
-						<ul class="nav nav-sidebar">
-							<li><a href="#" data-toggle="collapse" data-target="#manage">Manage</a>
-								<ul class="list collapse" id="manage">
-									<li><a href="accounts.php">Accounts</a></li>
-									<li><a href="branch.php">Branches</a></li>
-									<li><a href="employees.php">Employees</a></li>
-									<li><a href="product.php">Products</a></li>
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li><a href="inventory.php">Inventory</a></li>
+						<li class="active"><a href="incoming.php">Incoming<span class="sr-only">(current)</span></a></li>
+						<li><a href="outgoing.php">Outgoing</a></li>
+						<li><a href="returns.php">Returns</a></li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li><a href="#" data-toggle="collapse" data-target="#report">Reports</a>
+							<ul class="list collapse" id="report">
+								<li><a href="branchReport.php">Branch Reports</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li><a href="#" data-toggle="collapse" data-target="#manage">Manage</a>
+							<ul class="list collapse" id="manage">
+								<li><a href="accounts.php">Accounts</a></li>
+								<li><a href="branch.php">Branches</a></li>
+								<li><a href="employees.php">Employees</a></li>
+								<li><a href="product.php">Products</a></li>
 									<li><a href="brand.php">Product Brands</a></li>
-									<li><a href="category.php">Product Categories</a></li>
-								<ul>
-							</li>
-						</ul>
-					</div>
-				
-			
-				<!-- Retrieve Incoming Data -->
-				<?php include('functionalities/fetchIncoming.php'); ?>
+							<li><a href="category.php">Product Categories</a></li>
+							<ul>
+						</li>
+					</ul>
+				</div>
 				
 				<?php
 					foreach ($result as $item):

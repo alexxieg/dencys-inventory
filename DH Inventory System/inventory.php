@@ -53,6 +53,11 @@
 	</head>
 
 <body>
+		
+	<!-- PHP code for fetching the data-->
+	<?php include('functionalities/fetchInventory.php'); ?>
+	
+	
     <nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -98,9 +103,6 @@
 					</li>
 				</ul>
 			</div>
-		
-			<!-- PHP code for fetching the data-->
-			<?php include('functionalities/fetchInventory.php'); ?>
 		
 
 			<?php
