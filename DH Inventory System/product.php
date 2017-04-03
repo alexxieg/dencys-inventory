@@ -149,9 +149,6 @@
 							<div id="tabHead">Product Description</div>							
 						</th>
 						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-							Model
-						</th>
-						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 							<div id="tabHead">Brand</div>
 						</th>
 						<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
@@ -175,7 +172,6 @@
 					<tr>
 						<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 						<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-						<td data-title="Model"><?php echo $item["model"];?></td>
 						<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 						<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 						<td data-title="Unit"><?php echo $item["unitType"];?></td>
@@ -212,9 +208,6 @@
 							<form action="" method="POST" onsubmit="return validateForm()">
 								<h3>Product Name</h3>
 								<input type="text" class="form-control" id ="addProdName" placeholder="Name" name="prodItem"> <br>
-										
-								<h3>Model</h3>
-								<input type="text" class="form-control" id="addModel" placeholder="Model" name="prodModel"> <br>
 										
 								<h3>Quantity</h3>
 								<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="prodQty"> <br>
@@ -295,7 +288,7 @@
 								
 									<!-- Retrieve Product Data -->
 									<?php
-										$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
+										$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
 																	FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
 																	WHERE product.status = 'Inactive'
 																	ORDER BY prodID");
@@ -310,9 +303,6 @@
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												<div id="tabHead">Product Description</div>							
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												Model
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												<div id="tabHead">Brand</div>
@@ -334,7 +324,6 @@
 										<tr>
 											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Model"><?php echo $item["model"];?></td>
 											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"];?></td>
@@ -354,7 +343,6 @@
 										<tr>
 											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Model"><?php echo $item["model"];?></td>
 											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"];?></td>
