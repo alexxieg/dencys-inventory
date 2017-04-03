@@ -104,7 +104,11 @@
 							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 						</ul>
 					</li>
+				</ul>
 			</div>
+		</div>
+	</div>
+	<!-- End of Sidebar -->
 		
 
 			<?php

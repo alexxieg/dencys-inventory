@@ -79,7 +79,6 @@
 		</div>
     </nav>
 
-<<<<<<< HEAD
     <div class="container-fluid" >
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
@@ -109,42 +108,7 @@
 			</div>
 		</div>
 	</div>
-=======
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<li><a href="inventory.php">Inventory</a></li>
-						<li class="active"><a href="incoming.php">Incoming<span class="sr-only">(current)</span></a></li>
-						<li><a href="outgoing.php">Outgoing</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns">Returns</a>
-							<ul class="list collapse" id="returns">
-								<li><a href="returns.php">Return to Warehouse</a></li>
-								<li><a href="returnSupplier.php">Return to Supplier</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="#" data-toggle="collapse" data-target="#report">Reports</a>
-							<ul class="list collapse" id="report">
-								<li><a href="branchReport.php">Branch Reports</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="#" data-toggle="collapse" data-target="#manage">Manage</a>
-							<ul class="list collapse" id="manage">
-								<li><a href="accounts.php">Accounts</a></li>
-								<li><a href="branches.php">Branches</a></li>
-								<li><a href="employees.php">Employees</a></li>
-								<li><a href="product.php">Products</a></li>
-								<li><a href="brands.php">Product Brands</a></li>
-							<li><a href="category.php">Product Categories</a></li>
-							<ul>
-						</li>
-					</ul>
-				</div>
->>>>>>> 2094f072b6faff0e6b3863308f33c47c45466dfa
+	<!-- End of Sidebar -->
 				
 				<?php
 					foreach ($result as $item):
