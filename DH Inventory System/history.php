@@ -79,7 +79,7 @@
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
+			<ul class="nav nav-sidebar">
 					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
 					<li class="active">
 						<a href="inventory.php">
@@ -88,9 +88,17 @@
 					</li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-					<li><a href="reports.php"><i class="glyphicon glyphicon-th-list"></i> Reports</a></li>
-					<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns</a>
+						<ul class="list-unstyled collapse" id="returns">
+							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
+							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+						</ul>
+					</li>
+					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports</a>
+						<ul class="list-unstyled collapse" id="reports">
+							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+						</ul>
+					</li>
 					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
@@ -100,6 +108,8 @@
 							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
 							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 						</ul>
+					</li>
+				</ul>
 					</li>
 			</div>
 		<!-- end of side  bar -->

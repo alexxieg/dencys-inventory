@@ -115,8 +115,7 @@
 				</ul>
 			</div>
 			<!-- End of Sidebar -->
-		
-
+	
 			<?php
 				foreach ($result as $item):
 					$currQty = $item["beginningQty"] + $item["inQty"] - $item["outQty"];
