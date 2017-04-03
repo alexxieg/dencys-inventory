@@ -84,16 +84,24 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
-					<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-					<li class="active">
-						<a href="incoming.php">
-							<i class="glyphicon glyphicon-import"></i> Incoming<span class="sr-only">(current)</span>
+					<li>
+						<a href="inventory.php">
+							<i class="glyphicon glyphicon-list-alt"></i> Inventory
 						</a>
 					</li>
+					<li class="active"><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming<span class="sr-only">(current)</span></a></li>
 					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-					<li><a href="reports.php"><i class="glyphicon glyphicon-th-list"></i> Reports</a></li>
-					<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns</a>
+						<ul class="list-unstyled collapse" id="returns">
+							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
+							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+						</ul>
+					</li>
+					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports</a>
+						<ul class="list-unstyled collapse" id="reports">
+							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+						</ul>
+					</li>
 					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
@@ -106,8 +114,6 @@
 					</li>
 				</ul>
 			</div>
-		</div>
-	</div>
 	<!-- End of Sidebar -->
 				
 				<?php

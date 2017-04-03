@@ -14,6 +14,7 @@
 		
 		<!-- Custom styles for this template -->
 		<link href="css/test.css" rel="stylesheet">
+		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!--Javascript Files -->
 		<script src="returns.js"></script>
@@ -85,38 +86,39 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!-- Sidebar -->
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<li><a href="inventory.php">Inventory</a></li>
-						<li><a href="incoming.php">Incoming</a></li>
-						<li><a href="outgoing.php">Outgoing</a></li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns">Returns<span class="sr-only">(current)</span></a>
-							<ul class="list collapse" id="returns">
-								<li><a href="returns.php">Return to Warehouse</a></li>
-								<li><a href="returnSupplier.php">Return to Supplier</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="#" data-toggle="collapse" data-target="#report">Reports</a>
-							<ul class="list collapse" id="report">
-								<li><a href="branchReport.php">Branch Reports</a></li>
-							</ul>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="#" data-toggle="collapse" data-target="#manage">Manage</a>
-							<ul class="list collapse" id="manage">
-								<li><a href="accounts.php">Accounts</a></li>
-								<li><a href="branches.php">Branches</a></li>
-								<li><a href="employees.php">Employees</a></li>
-								<li><a href="product.php">Products</a></li>
-								<li><a href="brands.php">Product Brands</a></li>
-								<li><a href="category.php">Product Categories</a></li>
-							<ul>
-						</li>
-					</ul>
-				</div>	
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+					<li>
+						<a href="inventory.php">
+							<i class="glyphicon glyphicon-list-alt"></i> Inventory
+						</a>
+					</li>
+					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+					<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns<span class="sr-only">(current)</span></a>
+						<ul class="list-unstyled collapse" id="returns">
+							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
+							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+						</ul>
+					</li>
+					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports</a>
+						<ul class="list-unstyled collapse" id="reports">
+							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+						</ul>
+					</li>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
+						<ul class="list-unstyled collapse" id="manage">
+							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
+							<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		 
 				<?php
 					foreach ($result as $item):
