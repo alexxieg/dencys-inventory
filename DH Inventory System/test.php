@@ -13,53 +13,23 @@
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/test.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-		
-		<!-- Javascript Files -->
-		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="alertboxes/sweetalert2.min.js"></script>
-		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
-		
-		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
-		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
-		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
-		
-		<!-- Datatables -->
-		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
-		</script>
-			
-		<!-- Database connection -->
-		<?php include('dbcon.php'); ?>
-		
-		<!-- Login Session-->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
   </head>
 
   <body>
@@ -73,13 +43,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+          <a class="navbar-brand" href="#">Project name</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
           </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
         </div>
       </div>
     </nav>
@@ -88,307 +63,190 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="inventory.php">Inventory<span class="sr-only">(current)</span></a></li>
-            <li><a href="incoming.php">Incoming</a></li>
-            <li><a href="outgoing.php">Outgoing</a></li>
-            <li><a href="returns.php">Returns</a></li>
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">Reports</a></li>
-            <li><a href="branchReport.php">Branch Report</a></li>
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">Manage</a></li>
-            <li><a href="accounts.php">Accounts</a></li>
-            <li><a href="branch.php">Branches</a></li>
-			<li><a href="employees.php">Employees</a></li>
-			<li><a href="product.php">Products</a></li>
-			<li><a href="brand.php">Product Brands</a></li>
-			<li><a href="category.php">Product Categories</a></li>
-			
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
           </ul>
         </div>
-        <!-- PHP code for fetching the data-->
-		<?php include('functionalities/fetchInventory.php'); ?>
-	
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
 
-          <?php
-			foreach ($result as $item):
-				$currQty = $item["beginningQty"] + $item["inQty"] - $item["outQty"];
-				$incID = $item["prodID"];
-				if ($currQty <= $item["reorderLevel"]){
-		?> 
-					
-		<?php	
-			}else if ($currQty > $item["reorderLevel"]){
-		?>
-					
-		<?php
-			}	
-		?>
-						
-		<?php
-			endforeach;
-		?>
-					
-		<div id="contents">
-			<div class="pages">
-				<div id="tableHeader">
-					<table class="table table-striped table-bordered">	
-						<h1 id="headers">INVENTORY</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
-							Products for Reorder
-						</button>
-						<a href="history.php"><button type="button" class="btn btn-info btn-lg btnclr" id="modbutt">View Previous Inventory</button></a>
-					</table>
-				</div>
-				
-				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-					<div id="myTable_length" class="dataTables_length">
-						<div id="myTable_filter" class="dataTables_filter">
-						</div>
-					</div>
-				</div>
-				
-				<!-- Table for Inventory Data-->
-				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-					<thead>	
-						<tr>
-							<td colspan="13" style="font-size: 35px;">
-								<?php
-								$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
-								$month->execute();
-								$monthres = $month->fetchAll();
-								foreach ($monthres as $monthshow)
-								echo $monthshow["month"];
-								?>	
-							</td>
-						</tr>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								<div id="tabHead">Product ID</div>
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								<div id="tabHead">Product Description</div>
-							</th>	
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Beginning Quantity
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Ending Quantity
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								IN
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								OUT
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Current Quantity
-								
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Physical Count
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Reorder Level
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Unit
-							</th>
-			
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Remarks
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Stock Card
-							</th>
-						</tr>
-				</thead>
-				<tbody>	
-						
-						<?php
-							foreach ($result as $item):
-						
-								$incID = $item["prodID"];
-								if ($item['qty'] <= $item["reorderLevel"]){
-						?> 
-						<tr style='background-color: #ff9999' id="centerData">
-							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-							<td data-title="End. Quantity"></td>
-							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
-							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
-							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
-							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
-							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-							<td data-title="Unit"><?php echo $item["unitType"];?></td>
-							<td data-title="Remarks"></td>
-							<td>
-								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
-									<button type="button" class="btn btn-default" id="edBtn">
-										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-									</button>
-								</a>
-							</td>
-						</tr>
-						
-						<?php	
-							}else if ($item['qty'] > $item["reorderLevel"]){
-						?>
-						<tr id="centerData">
-							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-							<td data-title="End. Quantity"></td>
-							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
-							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
-							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
-							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
-							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-							<td data-title="Unit"><?php echo $item["unitType"];?></td>
-							<td data-title="Remarks"></td>
-							<td>
-								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_self"> 
-									<button type="button" class="btn btn-default" id="edBtn">
-										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-									</button>
-								</a>	
-							</td>	
-						</tr>
-						<?php
-							}	
-						?>
-							
-						<?php
-							endforeach;
-						?>
-				</tbody>	
-			</table>
-		</div>	
-					
-			<!-- Modal for Reorder Products Summary -->
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Summary of products to be reordered</h4>
-						</div>
-						<div class="modal-body">			
-							<?php
-								$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-														WHERE inventory.qty <= product.reorderLevel");
-								$query->execute();
-								$result = $query->fetchAll();
-							?>	
-							
-							<table class="table table-bordered" id="tables">
-								<tr>
-									<th>
-										Product ID
-									</th>
-									<th>
-										Product Description
-									</th>						
-									<th>
-										Current Quantity
-									</th>
-									<th>
-										Reorder Level
-									</th>
-									<th>
-										Unit
-									</th>	
-								</tr>
-									
-								<?php
-									foreach ($result as $item):
-								?>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+          </div>
 
-								<tr>
-									<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-									<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
-									<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-									<td data-title="Unit"><?php echo $item["unitType"];?></td>
-									</td>		
-								</tr>	
-								<?php
-									endforeach;
-								?>
-							</table>																
-						</div>
-								
-						<div class="modal-footer">	
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<!-- Modal for the Product Stock Card/Ledger -->
-			<div class="modal fade" id="ledger" role="dialog">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Stock Card</h4>
-						</div>
-						<div class="modal-body">
-						<h5>Product Name: </h5>
-							<table class="table table-bordered" id="tables">
-								<tr>
-									<th>
-										Date
-									</th>
-									<th>
-										In
-									</th>
-									<th>
-										Out
-									</th>
-									<th>
-										Balance
-									</th>
-								</tr>
-								
-								<tr>
-									<td>
-									</td>
-									<td>
-									</td>
-									<td>
-									</td>									
-									<td>
-									</td>
-								</tr>
-							</table>
-						</div>
-						
-						<div class="modal-footer">	
-						</div>
-					</div>
-				</div>
-			</div>
-
-          
+          <h2 class="sub-header">Section title</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1,001</td>
+                  <td>Lorem</td>
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+                </tr>
+                <tr>
+                  <td>1,002</td>
+                  <td>amet</td>
+                  <td>consectetur</td>
+                  <td>adipiscing</td>
+                  <td>elit</td>
+                </tr>
+                <tr>
+                  <td>1,003</td>
+                  <td>Integer</td>
+                  <td>nec</td>
+                  <td>odio</td>
+                  <td>Praesent</td>
+                </tr>
+                <tr>
+                  <td>1,003</td>
+                  <td>libero</td>
+                  <td>Sed</td>
+                  <td>cursus</td>
+                  <td>ante</td>
+                </tr>
+                <tr>
+                  <td>1,004</td>
+                  <td>dapibus</td>
+                  <td>diam</td>
+                  <td>Sed</td>
+                  <td>nisi</td>
+                </tr>
+                <tr>
+                  <td>1,005</td>
+                  <td>Nulla</td>
+                  <td>quis</td>
+                  <td>sem</td>
+                  <td>at</td>
+                </tr>
+                <tr>
+                  <td>1,006</td>
+                  <td>nibh</td>
+                  <td>elementum</td>
+                  <td>imperdiet</td>
+                  <td>Duis</td>
+                </tr>
+                <tr>
+                  <td>1,007</td>
+                  <td>sagittis</td>
+                  <td>ipsum</td>
+                  <td>Praesent</td>
+                  <td>mauris</td>
+                </tr>
+                <tr>
+                  <td>1,008</td>
+                  <td>Fusce</td>
+                  <td>nec</td>
+                  <td>tellus</td>
+                  <td>sed</td>
+                </tr>
+                <tr>
+                  <td>1,009</td>
+                  <td>augue</td>
+                  <td>semper</td>
+                  <td>porta</td>
+                  <td>Mauris</td>
+                </tr>
+                <tr>
+                  <td>1,010</td>
+                  <td>massa</td>
+                  <td>Vestibulum</td>
+                  <td>lacinia</td>
+                  <td>arcu</td>
+                </tr>
+                <tr>
+                  <td>1,011</td>
+                  <td>eget</td>
+                  <td>nulla</td>
+                  <td>Class</td>
+                  <td>aptent</td>
+                </tr>
+                <tr>
+                  <td>1,012</td>
+                  <td>taciti</td>
+                  <td>sociosqu</td>
+                  <td>ad</td>
+                  <td>litora</td>
+                </tr>
+                <tr>
+                  <td>1,013</td>
+                  <td>torquent</td>
+                  <td>per</td>
+                  <td>conubia</td>
+                  <td>nostra</td>
+                </tr>
+                <tr>
+                  <td>1,014</td>
+                  <td>per</td>
+                  <td>inceptos</td>
+                  <td>himenaeos</td>
+                  <td>Curabitur</td>
+                </tr>
+                <tr>
+                  <td>1,015</td>
+                  <td>sodales</td>
+                  <td>ligula</td>
+                  <td>in</td>
+                  <td>libero</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
 
-   
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
