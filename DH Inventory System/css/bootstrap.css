@@ -115,7 +115,7 @@ input,
 optgroup,
 select,
 textarea {
-  margin: 0;
+  margin: 3px;
   font: inherit;
   color: inherit;
 }
@@ -2553,7 +2553,6 @@ output {
 }
 .form-control {
   display: relative;
-  margin-left: 20px;
   width: 100%;
   height: 32px;
   padding: 6px 12px;
