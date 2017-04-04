@@ -118,6 +118,16 @@
 									FROM outgoing
 									WHERE prodID = '$incID'
 									GROUP BY outDate, outQty
+									UNION
+									SELECT DISTINCT returns.returnDate, returns.returnQty, null, NULL
+									FROM returns
+									WHERE prodID = '$incID' AND returnType = 'Warehouse Return'
+									GROUP BY returnDate, returnQty
+									UNION
+									SELECT DISTINCT returns.returnDate, null, returns.returnQty, NULL
+									FROM returns
+									WHERE prodID = '$incID' AND returnType = 'Supplier Return'
+									GROUP BY returnDate, returnQty
 									ORDER BY sameDate ) AS ledgerResult JOIN product 
 									WHERE product.prodID = '$incID'
 									GROUP BY sameDate
@@ -131,6 +141,7 @@
 		
 			$request = current($conn->query("SELECT beginningQty FROM inventory WHERE prodID = '$incID'")->fetch());
 			$base = $request;
+			$loop = True;
 			
 			$query3 = $conn->prepare("SELECT remarks FROM inventory WHERE prodID = '$incID'");										
 			$query3->execute();
@@ -193,9 +204,9 @@
 						<?php
 							foreach ($res as $item):
 							
-							if ($request == $base){
+							if ($request == $base && $loop == True){
 								$currQty = $request + $item["Added"] - $item["Subracted"];
-								$base = 0;
+								$loop = False;
 							}
 							else {
 								$currQty = $currQty + $item["Added"] - $item["Subracted"];
