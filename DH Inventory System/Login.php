@@ -32,8 +32,8 @@ if (isset($_POST['username'])) {
 <script>
 swal({
   title: 'Invalid Username or Password',
-  type: 'error',
-  confirmButtonColor: '#d33',
+  type: 'warning',
+  confirmButtonColor: '#3085d6',
   confirmButtonText: 'Ok'
 }).then(
   function () {
