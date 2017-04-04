@@ -69,7 +69,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -83,6 +83,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
+				<br>
 					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
 					<li>
 						<a href="inventory.php">
@@ -131,9 +132,33 @@
 							<div class="pages no-more-tables">
 								<div id="tableHeader">
 									<table class="table table-striped table-bordered">
-										<h1 id="headers">INCOMING PRODUCTS</h1>
-										<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-										<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+										<tr>
+											<td colspan="2"><h1 id="headers">INCOMING PRODUCTS</h1></td>
+										</tr>
+						
+										<tr>
+											<td>
+												<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+												<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+											</td>
+											<td>
+												Filter By Date <br>
+												<form action="?" method="POST">
+													<select name="dateMonthName">
+														<?php foreach ($result2 as $row): ?>
+															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+														<?php endforeach ?>
+													</select>
+													<select name="dateYearName">
+														<?php foreach ($result3 as $row): ?>
+															<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+														<?php endforeach ?>
+													</select>
+													
+													<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+												</form>	
+											</td>
+										</tr>
 									</table>
 								</div>
 								
@@ -144,21 +169,7 @@
 									</div>
 								</div>
 								<br> 
-								Filter By Date <br>
-								<form action="?" method="POST">
-									<select name="dateMonthName">
-										<?php foreach ($result2 as $row): ?>
-											<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-										<?php endforeach ?>
-									</select>
-									<select name="dateYearName">
-										<?php foreach ($result3 as $row): ?>
-											<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-										<?php endforeach ?>
-									</select>
-									
-									<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
-								</form>	
+								
 								
 								<!-- Table Display for Incoming -->
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">

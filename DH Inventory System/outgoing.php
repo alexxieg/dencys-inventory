@@ -69,7 +69,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -83,6 +83,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
+					<br>
 					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
 					<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>

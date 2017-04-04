@@ -10,7 +10,7 @@
 		$prod3 = $prod2['prodA'];
 					
 		$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, prodID)
-				VALUES (CURDATE(),'".$_POST['retQty']."','".$_POST['retType']."','".$_POST['retRemarks']."','$prod3')";
+				VALUES (CURDATE(),'".$_POST['retQty']."','Supplier Return','".$_POST['retRemarks']."','$prod3')";
 		$conn->exec($sql);
 		echo "<meta http-equiv='refresh' content='0'>";
 	}   
