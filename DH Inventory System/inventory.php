@@ -83,7 +83,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar" id="sideBarClr">
 				<ul class="nav nav-sidebar">
-						<br>
+	
 					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
 					<li class="active">
 						<a href="inventory.php">

@@ -88,7 +88,7 @@
 		<div class="row">
 			<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
 				<ul class="nav nav-sidebar">
-					<br>
+
 					<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
 					<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
