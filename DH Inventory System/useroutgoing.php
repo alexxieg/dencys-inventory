@@ -60,39 +60,46 @@
 		<?php include('functionalities/fetchOutgoing.php'); ?>
 		
 		<!-- Topbar Navigation / Main Header -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><i class="glyphicon glyphicon-user"></i> User</a></li>
+					</ul>
+				</div>
 			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Logout.php">Logout</a></li>
-				</ul>
-			</div>
-		</div>
-    </nav>
+	    </nav>
 
-    <div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
-					<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-					<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li class="active"><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li><span class="sr-only">(current)</span>
-					<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
-				</ul>
+	    <div class="container-fluid" >
+			<div class="row">
+				<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
+					<ul class="nav nav-sidebar">
+							<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
+						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li class="active"><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing<span class="sr-only">(current)</span></a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-right"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
+								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li class="PrintBtnUser"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
+						<li class="LogBtnUser"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
-		<!-- end of side  bar -->
+		<!-- End of Sidebar -->
 		 
 		<?php
 			foreach ($result as $item):
@@ -128,29 +135,37 @@
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								<div id="tabHead">Date</div>
 							</th>
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Product ID
+								<div id="tabHead">Product ID</div>
 							</th>
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								<div id="tabHead">Product Description</div>						
 							</th>
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Quantity
+								<div id="tabHead">Quantity</div>
 							</th>
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Unit
+								<div id="tabHead">Unit</div>
 							</th>
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Receipt No.
+								<div id="tabHead">Receipt No.</div>
 							</th>
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								<div id="tabHead">Employee</div>
 							</th>
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								<div id="tabHead">Branch</div>
 							</th>	
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Remarks
+								<div id="tabHead">Remarks</div>
 							</th>					
 							<th></th>
 						</tr>
@@ -315,7 +330,7 @@
 									?>
 									
 									<thead>	
-										<tr>
+										<tr id="centerData">
 											<th>
 												<div id="tabHead">Date</div>
 											</th>
@@ -360,7 +375,7 @@
 											<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 											<td>
 												<a href="functionalities/restoreOutgoing.php?outsId=<?php echo $outid; ?>">
-												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 													Restore
 												</button>
 												</a>
@@ -382,7 +397,7 @@
 											<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 											<td>
 												<a href="functionalities/restoreOutgoing.php?outsId=<?php echo $outid; ?>">
-												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 													Restore
 												</button>
 												</a>

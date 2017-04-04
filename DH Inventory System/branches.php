@@ -151,7 +151,7 @@
 							<!-- Table Display for Branches -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>
-									<tr>
+									<tr id="centerData">
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch ID</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch Name</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
@@ -164,10 +164,10 @@
 										foreach ($result as $item):
 										$useThisID = $item["branchID"];
 									?>
-									<tr>
-										<td><?php echo $item["branchID"]; ?></td>
-										<td><?php echo $item["branchName"]; ?></td>
-										<td><?php echo $item["location"]; ?></td>
+									<tr id="centerData">
+										<td data-title="Brand ID"><?php echo $item["branchID"]; ?></td>
+										<td data-title="Branch Name"><?php echo $item["branchName"]; ?></td>
+										<td data-title="Location"><?php echo $item["location"]; ?></td>
 										<td>	
 											<a href="functionalities/editBranches.php?useID=<?php echo $useThisID; ?>" target="_blank">
 												<button type="button" class="btn btn-default">
@@ -238,7 +238,7 @@
 												?>
 												
 												<thead>
-													<tr>
+													<tr id="centerData">
 														<th>
 															<div id="tabHead">Branch ID</div>
 														</th>
@@ -254,13 +254,13 @@
 												
 												<tbody>
 													
-													<tr>
-														<td><?php echo $item["branchID"]; ?></td>
-														<td><?php echo $item["branchName"]; ?></td>
-														<td><?php echo $item["location"]; ?></td>
+													<tr id="centerData">
+														<td data-title="Brand ID"><?php echo $item["branchID"]; ?></td>
+														<td data-title="Brand Name"><?php echo $item["branchName"]; ?></td>
+														<td data-title="Location"><?php echo $item["location"]; ?></td>
 														<td>
 															<a href="functionalities/restoreBranch.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this account?');">
 																	Restore
 																</button>
 															</a>
@@ -270,13 +270,13 @@
 														foreach ($result1 as $item):
 														$useThisID = $item["branchID"];
 													?>	
-													<tr>
-														<td><?php echo $item["branchID"]; ?></td>
-														<td><?php echo $item["branchName"]; ?></td>
-														<td><?php echo $item["location"]; ?></td>
+													<tr id="centerData">
+														<td data-title="Brand ID"><?php echo $item["branchID"]; ?></td>
+														<td data-title="Brand Name"><?php echo $item["branchName"]; ?></td>
+														<td data-title="Location"><?php echo $item["location"]; ?></td>
 														<td>
 															<a href="functionalities/restoreBranch.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this account?');">
 																	Restore
 																</button>
 															</a>

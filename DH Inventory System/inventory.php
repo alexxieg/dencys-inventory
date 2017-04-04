@@ -172,8 +172,9 @@
 										?>	
 									</td>
 								</tr>
-								<tr>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</div>
+								<tr id="centerData">
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+										<div id="tabHead">Product ID</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
@@ -181,44 +182,43 @@
 									</th>	
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Beginning Quantity
+										<div id="tabHead">Beginning Quantity</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Ending Quantity
+										<div id="tabHead">Ending Quantity</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										IN
+										<div id="tabHead">IN</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										OUT
+										<div id="tabHead">OUT</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Current Quantity
-										
+										<div id="tabHead">Current Quantity</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Physical Count
+										<div id="tabHead">Physical Count</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Reorder Level
+										<div id="tabHead">Reorder Level</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Unit
+										<div id="tabHead">Unit</div>
 									</th>
 					
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Remarks
+										<div id="tabHead">Remarks</div>
 									</th>
 									
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Stock Card
+										<div id="tabHead">Stock Card</div>
 									</th>
 								</tr>
 							</thead>
@@ -228,7 +228,7 @@
 									$incID = $item["prodID"];
 									if ($item['qty'] <= $item["reorderLevel"]){
 								?> 
-								<tr style='background-color: #ff9999' id="centerData">
+								<tr id="centerData">
 									<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 									<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>

@@ -60,39 +60,46 @@
 		<?php include('functionalities/fetchReturns.php'); ?>
 
 		<!-- Topbar Navigation / Main Header -->
-		    <nav class="navbar navbar-inverse navbar-fixed-top">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
-					</div>
-					<div id="navbar" class="navbar-collapse collapse">
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="Logout.php">Logout</a></li>
-						</ul>
-					</div>
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
-		    </nav>
-
-		    <div class="container-fluid">
-				<div class="row">
-					<div class="col-sm-3 col-md-2 sidebar">
-						<ul class="nav nav-sidebar">
-							 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
-							<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-							<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-							<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-							<li class="active"><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li><span class="sr-only">(current)</span>
-						</ul>
-					</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><i class="glyphicon glyphicon-user"></i> User</a></li>
+					</ul>
 				</div>
 			</div>
-		<!-- end of side  bar -->
+	    </nav>
+
+	    <div class="container-fluid" >
+			<div class="row">
+				<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
+					<ul class="nav nav-sidebar">
+							<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
+						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-right"></i><span class="sr-only">(current)</span></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
+								<li><a href="userreturnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li class="PrintBtnUser"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
+						<li class="LogBtnUser"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End of Sidebar -->
 		 
 		<?php
 			foreach ($result as $item):
@@ -125,13 +132,33 @@
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 					<thead>
 						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Return Type</th>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Date</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product ID</div> 
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Product Description</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Quantity</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Unit</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Return Type</div>
+							</th>
+							
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Remarks</div>
+							</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -153,12 +180,12 @@
 								
 							<td>
 								<a href="editRet.php?retId=<?php echo $retID; ?>" target="_blank">
-									<button type="button" class="btn btn-default">
+									<button type="button" class="btn btn-default" id="edBtn">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									</button>
 								</a>
 								<a href="functionalities/removeReturn.php?retId=<?php echo $retID; ?>">
-									<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+									<button type="button" class="btn btn-default" id="edBtn"onclick="return confirm('Are you sure you want to remove this entry?');">
 										<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 									</button>
 								</a>
@@ -247,7 +274,7 @@
 									?>
 									
 									<thead>
-										<tr>
+										<tr id="centerData">
 											<th>
 												<div id="tabHead">Date</div>
 											</th>
@@ -282,7 +309,7 @@
 												
 											<td>
 												<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
-													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+													<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 														Restore
 													</button>
 												</a>
@@ -302,7 +329,7 @@
 												
 											<td>
 												<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
-													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+													<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 														Restore
 													</button>
 												</a>
