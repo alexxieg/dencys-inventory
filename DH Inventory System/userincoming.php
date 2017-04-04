@@ -71,28 +71,35 @@
 					</button>
 					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
-				<div id="navbar" class="navbar-collapse collapse">
+				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="Logout.php">Logout</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-user"></i> User</a></li>
 					</ul>
 				</div>
 			</div>
 	    </nav>
 
-	    <div class="container-fluid">
+	    <div class="container-fluid" >
 			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
+				<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
 					<ul class="nav nav-sidebar">
-						 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+							<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
 						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
-						<li class="active"><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li><span class="sr-only">(current)</span>
+						<li class="active"><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming<span class="sr-only">(current)</span></a></li>
 						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-						<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-right"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="userreturns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
+								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li class="PrintBtnUser"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
+						<li class="LogBtnUser"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
-		<!-- end of side  bar -->
+		<!-- End of Sidebar -->
 		
 		<?php
 			foreach ($result as $item):

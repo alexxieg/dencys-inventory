@@ -18,6 +18,16 @@
 	float: left;
 }
 
+.LogBtnUser {
+	margin-top: 110%;
+	float: right;
+}
+
+.PrintBtnUser {
+	margin-top: 110%;
+	float: left;
+}
+
 @media (max-width: 766px) {
 	#sidebarLogo {
 		display: none!important;	
@@ -31,5 +41,19 @@
 	.PrintBtn {
 	margin-top: 0%;
 	float: none;
+	}
+
+	.LogBtnUser {
+	margin-top: 0%;
+	float: none;
+	}
+
+	.PrintBtnUser {
+	margin-top: 0%;
+	float: none;
+	}
+
+	#manage , #reports, #returns{
+	margin-left: 5%
 	}
 }
