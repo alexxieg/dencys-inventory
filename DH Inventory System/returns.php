@@ -79,9 +79,9 @@
 				</button>
 				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 			</div>
-			<div id="navbar" class="navbar-collapse collapse">
+			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Logout.php">Logout</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-user"></i> Admin</a></li>
 				</ul>
 			</div>
 		</div>
@@ -89,9 +89,9 @@
 
     <div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
+			<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
 				<ul class="nav nav-sidebar">
-					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+						<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
 					<li>
 						<a href="inventory.php">
 							<i class="glyphicon glyphicon-list-alt"></i> Inventory
@@ -99,18 +99,18 @@
 					</li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns<span class="sr-only">(current)</span></a>
+					<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns<span class="sr-only">(current)</span> <i class="glyphicon glyphicon-menu-right"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
 							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
 							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
 						</ul>
 					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports</a>
+					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-right"></i></a>
 						<ul class="list-unstyled collapse" id="reports">
 							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 						</ul>
 					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-right"></i></a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
@@ -120,8 +120,13 @@
 							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 						</ul>
 					</li>
+					<li class="PrintBtn"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
+					<li class="LogBtn"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
 				</ul>
 			</div>
+		</div>
+	</div>
+	<!-- End of Sidebar -->
 
 		 
 				<?php

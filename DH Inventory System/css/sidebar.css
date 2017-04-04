@@ -7,3 +7,29 @@
 	margin-left: 25%;
 	padding-bottom: 5%;
 }
+
+.LogBtn {
+	margin-top: 82%;
+	float: right;
+}
+
+.PrintBtn {
+	margin-top: 82%;
+	float: left;
+}
+
+@media (max-width: 766px) {
+	#sidebarLogo {
+		display: none!important;	
+	}
+
+	.LogBtn {
+	margin-top: 0%;
+	float: none;
+	}
+
+	.PrintBtn {
+	margin-top: 0%;
+	float: none;
+	}
+}
