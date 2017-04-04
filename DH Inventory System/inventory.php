@@ -111,6 +111,8 @@
 							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
 							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+							<li class="PrintBtn"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
+					<li class="LogBtn"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
 						</ul>
 					</li>
 				</ul>
