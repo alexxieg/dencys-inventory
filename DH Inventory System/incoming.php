@@ -333,7 +333,7 @@
 													?>
 													
 													<thead>	
-														<tr>
+														<tr id="centerData">
 															<th>
 																<div id="tabHead">Date</div>
 															</th>
@@ -379,7 +379,7 @@
 															<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 															<td>
 															<a href="functionalities/restoreIncoming.php?incId=<?php echo $incID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
 																	Restore
 																</button>
 																</a>

@@ -128,7 +128,6 @@
 						</button>					
 					</table>
 				</div>
-				<br>
 				
 				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 					<div id="myTable_length" class="dataTables_length">
@@ -161,44 +160,43 @@
 							</th>	
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Beginning Quantity
+								<div id="tabHead">Beginning Quantity</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Ending Quantity
+								<div id="tabHead">Ending Quantity</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								IN
+								<div id="tabHead">IN</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								OUT
+								<div id="tabHead">OUT</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Current Quantity
-								
+								<div id="tabHead">Current Quantity</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Physical Count
+								<div id="tabHead">Physical Count</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Reorder Level
+								<div id="tabHead">Reorder Level</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Unit
+								<div id="tabHead">Unit</div>
 							</th>
 			
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Remarks
+								<div id="tabHead">Remarks</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Stock Card
+								<div id="tabHead">Stock Card</div>
 							</th>
 						</tr>
 				</thead>

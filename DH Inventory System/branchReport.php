@@ -197,7 +197,7 @@
 										<h3>Overall Outgoing Products Summary for the Month:</h3>
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
 											<thead>
-												<tr>
+												<tr id="centerData">
 													<th>Location</th>
 													<th>Total Quantity</th>
 												</tr>
@@ -206,9 +206,9 @@
 												<?php
 													foreach ($result6 as $item6):
 												?>
-												<tr>
-													<td><?php echo $item6["location"]; ?></td>
-													<td><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
+												<tr id="centerData">
+													<td data-title="Location"><?php echo $item6["location"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
 												</tr>
 													
 												<?php
@@ -223,7 +223,7 @@
 										<h3>Outgoing Products in Camdas:</h3>
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
-												<tr>
+												<tr id="centerData">
 													<th>Product Description</th>
 													<th>Total Quantity</th>
 												</tr>
@@ -232,9 +232,9 @@
 												<?php
 													foreach ($result as $item):
 												?>
-												<tr>
-													<td><?php echo $item["prodName"]; ?></td>
-													<td><?php echo $item["outQty"]; ?></td>
+												<tr id="centerData">
+													<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item["outQty"]; ?></td>
 												</tr>
 												<?php
 													endforeach;
@@ -248,7 +248,7 @@
 										<h3>Outgoing Products in Hilltop:</h3>
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
-												<tr>
+												<tr id="centerData">
 													<th>Product Description</th>
 													<th>Total Quantity</th>
 												</tr>
@@ -257,9 +257,9 @@
 												<?php
 													foreach ($result2 as $item2):
 												?>
-												<tr>
-													<td><?php echo $item2["prodName"]; ?></td>
-													<td><?php echo $item2["outQty"]; ?></td>
+												<tr id="centerData">
+													<td data-title="Product Description"><?php echo $item2["prodName"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item2["outQty"]; ?></td>
 												</tr>
 													
 												<?php
@@ -274,7 +274,7 @@
 										<h3>Outgoing Products in KM4:</h3>
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
-												<tr>
+												<tr id="centerData">
 													<th>Product Description</th>
 													<th>Total Quantity</th>
 												</tr>
@@ -283,9 +283,9 @@
 												<?php
 													foreach ($result3 as $item3):
 												?>
-												<tr>
-													<td><?php echo $item3["prodName"]; ?></td>
-													<td><?php echo $item3["outQty"]; ?></td>
+												<tr id="centerData">
+													<td data-title="Product Description"><?php echo $item3["prodName"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item3["outQty"]; ?></td>
 												</tr>
 													
 												<?php
@@ -300,7 +300,7 @@
 									<h3>Outgoing Products in KM5:</h3>
 									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
-												<tr>
+												<tr id="centerData">
 													<th>Product Description</th>
 													<th>Total Quantity</th>
 												</tr>
@@ -309,9 +309,9 @@
 												<?php
 													foreach ($result4 as $item4):
 												?>
-												<tr>
-													<td><?php echo $item4["prodName"]; ?></td>
-													<td><?php echo $item4["outQty"]; ?></td>
+												<tr id="centerData">
+													<td data-title="Product Description"><?php echo $item4["prodName"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item4["outQty"]; ?></td>
 												</tr>
 													
 												<?php
@@ -326,7 +326,7 @@
 									<h3>Outgoing Products in San Fernando, La Union:</h3>
 									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
-												<tr>
+												<tr id="centerData">
 													<th>Product Description</th>
 													<th>Total Quantity</th>
 
@@ -336,9 +336,9 @@
 												<?php
 													foreach ($result5 as $item5):
 												?>
-												<tr>
-													<td><?php echo $item5["prodName"]; ?></td>
-													<td><?php echo $item5["outQty"]; ?></td>
+												<tr id="centerData">
+													<td data-title="Product Description"><?php echo $item5["prodName"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item5["outQty"]; ?></td>
 												</tr>
 													
 												<?php

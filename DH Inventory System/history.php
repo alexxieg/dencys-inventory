@@ -230,7 +230,7 @@
 								$incID = $item["prodID"];
 								if ($item['qty'] <= $item["reorderLevel"]){
 						?> 
-						<tr style='background-color: #ff9999' id="centerData">
+						<tr id="centerData">
 							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
