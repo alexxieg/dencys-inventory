@@ -18,15 +18,16 @@
 		<!-- Custom styles for this template -->
 		<link href="css/test.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
-		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
-		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
-		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
+		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Datatables -->
 		<script>

@@ -31,8 +31,6 @@
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css">
-		<link href="css/bootstrap.min.css">
 		
 		<!-- Datatables -->
 		<script>
@@ -259,11 +257,21 @@
 												
 												<thead>
 													<tr>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Employee ID</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">First Name</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Middle Name</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Name</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Extension Name</th>
+														<th>
+															<div id="tabHead">Employee ID</div>
+														</th>
+														<th>
+															<div id="tabHead">First Name</div>
+														</th>
+														<th>
+															<div id="tabHead">Middle Name</div>
+														</th>
+														<th>
+															<div id="tabHead">Last Name</div>
+														</th>
+														<th>	
+															<div id="tabHead">Extension Name</div>
+														</th>
 														<th></th>
 													</tr>
 												</thead>

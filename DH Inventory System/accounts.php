@@ -31,8 +31,6 @@
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css">
-		<link href="css/bootstrap.min.css">
 		
 		<!-- Datatables -->
 		<script>
@@ -255,9 +253,15 @@
 												
 												<thead>
 													<tr>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Username</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Password</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User Role</th>
+														<th>
+															<div id="tabHead">Username</div>
+														</th>
+														<th>
+															<div id="tabHead">Password</div>
+														</th>
+														<th>
+															<div id="tabHead">User Role</div>
+														</th>
 														<th></th>
 													</tr>
 												</thead>
