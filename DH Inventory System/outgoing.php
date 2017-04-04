@@ -28,9 +28,9 @@
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
-		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
 		
 		<!-- Datatables -->
 		<script>
@@ -71,9 +71,9 @@
 				</button>
 				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 			</div>
-			<div class="navbar-collapse collapse">
+			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><i class="glyphicon glyphicon-user"></i> Admin</a></li>
+					<li><a href="Logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -81,24 +81,24 @@
 
     <div class="container-fluid">
 		<div class="row">
-			<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
+			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-						<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
+					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
 					<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li class="active"><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing<span class="sr-only">(current)</span></a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-right"></i></a>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns</a>
 						<ul class="list-unstyled collapse" id="returns">
 							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
 							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
 						</ul>
 					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-right"></i></a>
+					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports</a>
 						<ul class="list-unstyled collapse" id="reports">
 							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 						</ul>
 					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-right"></i></a>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
@@ -108,13 +108,9 @@
 							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 						</ul>
 					</li>
-					<li class="PrintBtn"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
-					<li class="LogBtn"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
 				</ul>
 			</div>
-		</div>
-	</div>
-	<!-- End of Sidebar -->
+		<!-- End of Sidebar -->		
 
 				<?php
 					foreach ($result as $item):
@@ -144,6 +140,22 @@
 						</div>
 					</div>
 				</div>
+				
+				Filter By Date <br>
+				<form action="?" method="POST">
+					<select name="dateMonthName">
+						<?php foreach ($result2 as $row): ?>
+							<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+						<?php endforeach ?>
+					</select>
+					<select name="dateYearName">
+						<?php foreach ($result3 as $row): ?>
+							<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+						<?php endforeach ?>
+					</select>
+					
+					<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+				</form>
 				
 				<!-- Table Display for Outgoing Entries -->
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
@@ -333,33 +345,33 @@
 										?>
 										
 										<thead>	
-											<tr id="centerData">
-												<th>
+											<tr>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 													<div id="tabHead">Date</div>
 												</th>
-												<th>
-													<div id="tabHead">Product ID</div>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+													Product ID
 												</th>
-												<th>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 													<div id="tabHead">Product Description</div>						
 												</th>
-												<th>
-													<div id="tabHead">Quantity</div>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+													Quantity
 												</th>
-												<th>
-													<div id="tabHead">Unit</div>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+													Unit
 												</th>
-												<th>
-													<div id="tabHead">Receipt No.</div>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+													Receipt No.
 												</th>
-												<th>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 													<div id="tabHead">Employee</div>
 												</th>
-												<th>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 													<div id="tabHead">Branch</div>
 												</th>	
-												<th>
-													<div id="tabHead">Remarks</div>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+													Remarks
 												</th>					
 												<th></th>
 											</tr>
@@ -378,7 +390,7 @@
 												<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 												<td>
 													<a href="functionalities/restoreOutgoing.php?outsId=<?php echo $outid; ?>">
-													<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
+													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
 														Restore
 													</button>
 													</a>
