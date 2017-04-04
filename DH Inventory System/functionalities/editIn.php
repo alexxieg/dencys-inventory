@@ -50,9 +50,9 @@
 				</button>
 				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 			</div>
-			<div class="navbar-collapse collapse">
+			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><i class="glyphicon glyphicon-user"></i> Admin</a></li>
+					<li><a href="Logout.php">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -60,28 +60,20 @@
 
     <div class="container-fluid">
 		<div class="row">
-			<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
+			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-						<img src="../logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
-					<li >
-						<a href="../inventory.php">
-							<i class="glyphicon glyphicon-list-alt"></i> Inventory
+					 	<div id="sidebarLogo"><img src="../logo.png" alt="" width="100px" height="100px"/></div>
+					<li class="active">
+						<a href="inventory.php">
+							<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
 						</a>
 					</li>
-					<li class="active"><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming<span class="sr-only">(current)</span></a></li>
+					<li><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-right"></i></a>
-						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="../returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
-							<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-right"></i></a>
-						<ul class="list-unstyled collapse" id="reports">
-							<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-right"></i></a>
+					<li><a href="../returns.php"><i class="glyphicon glyphicon-sort"></i> Returns</a></li>
+					<li><a href="../reports.php"><i class="glyphicon glyphicon-th-list"></i> Reports</a></li>
+					<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 							<li><a href="../branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
@@ -91,8 +83,6 @@
 							<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 						</ul>
 					</li>
-					<li class="PrintBtn"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
-					<li class="LogBtn"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -107,12 +97,12 @@
 					<h3>Item</h3>
 					<?php
 						$incID= $_GET['incId'];
-						$query = $conn->prepare("SELECT product.prodName, product.model, incoming.inID, incoming.inQty, incoming.inDate, incoming.receiptNo, incoming.inRemarks, employee.empFirstName 
+						$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, incoming.receiptNo, incoming.inRemarks, employee.empFirstName 
 						FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID");
 						$query->execute();
 						$res = $query->fetchAll();
 						
-						$query2 = $conn->prepare("SELECT product.prodName, product.model, incoming.inID, incoming.inQty, incoming.inDate, incoming.receiptNo, incoming.inRemarks, employee.empFirstName 
+						$query2 = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, incoming.receiptNo, incoming.inRemarks, employee.empFirstName 
 						FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 						WHERE inID = $incID");
 						$query2->execute();
@@ -121,10 +111,10 @@
 					
 					<select class="form-control" id="addEntry" name="prodItem">
 						<?php foreach ($res as $row): ?>
-							<option><?=$row["prodName"]?> - <?=$row["model"]?></option>
+							<option><?=$row["prodName"]?></option>
 						<?php endforeach ?>
 						<?php foreach ($res2 as $row2): ?>
-							<option Selected><?=$row2["prodName"]?> - <?=$row2["model"]?></option>
+							<option Selected><?=$row2["prodName"]?></option>
 						<?php endforeach ?>
 					</select> 
 					<br>
