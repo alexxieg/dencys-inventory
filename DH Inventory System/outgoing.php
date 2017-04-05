@@ -27,10 +27,10 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
-		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
-		<link href="datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
-		<script src="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css"></script>
+				<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
+		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Datatables -->
 		<script>
@@ -128,10 +128,40 @@
 		<div id="contents">
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
-					<table class="table table-striped table-bordered">	
-						<h1 id="headers">OUTGOING PRODUCTS</h1>	
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-						<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
+					<table class="table table-striped table-bordered">
+				<tr>
+					<td colspan="2"><h1 id="headers">OUTGOING PRODUCTS</h1></td>
+				</tr>		
+				<tr>		
+					<td>		
+						<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+						<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
+					</td>
+					<td>
+						<div class="col-sm-7 pull-right">
+							<label>Filter By Date</label>
+								<form class="form-inline" action="" method="post">
+									<div class="form-group">
+										<select name="dateMonthName" class="form-control">
+											<?php foreach ($result2 as $row): ?>
+												<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+									<div class="form-group">
+										<select name="dateYearName" class="form-control">
+											<?php foreach ($result3 as $row): ?>
+												<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+											<?php endforeach ?>
+										</select>
+									</div>	
+									<div class="form-group">
+										<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+									</div>
+								</form>	
+							</div>	
+						</td>
+					</tr>
 					</table>
 				</div>
 				
@@ -141,22 +171,6 @@
 						</div>
 					</div>
 				</div>
-				
-				Filter By Date <br>
-				<form action="?" method="POST">
-					<select name="dateMonthName">
-						<?php foreach ($result2 as $row): ?>
-							<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-						<?php endforeach ?>
-					</select>
-					<select name="dateYearName">
-						<?php foreach ($result3 as $row): ?>
-							<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-						<?php endforeach ?>
-					</select>
-					
-					<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
-				</form>
 				
 				<!-- Table Display for Outgoing Entries -->
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">

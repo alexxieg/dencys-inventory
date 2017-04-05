@@ -115,7 +115,7 @@ input,
 optgroup,
 select,
 textarea {
-  margin: 0;
+  margin: 3px;
   font: inherit;
   color: inherit;
 }
