@@ -31,9 +31,6 @@
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css">
-		<link href="css/bootstrap.min.css">
-		
 		
 		<!-- Datatables -->
 		<script>
@@ -288,12 +285,24 @@
 												
 												<thead>
 													<tr>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th
+														<th>
+															<div id="tabHead">Date</div>
+														</th>
+														<th>
+															<div id="tabHead">Product ID</div> 
+														</th>
+														<th>
+															<div id="tabHead">Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Unit</div>
+														</th>
+														<th>
+															<div id="tabHead">Remarks</div>
+														</th>
 														<th></th>
 													</tr>
 												</thead>

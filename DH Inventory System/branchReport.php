@@ -31,8 +31,6 @@
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css">
-		<link href="css/bootstrap.min.css">
 		
 		<!-- Datatables -->
 		<script>
@@ -198,8 +196,8 @@
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+													<th>Location</th>
+													<th>Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -224,8 +222,8 @@
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+													<th>Product Description</th>
+													<th>Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -249,8 +247,8 @@
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+													<th>Product Description</th>
+													<th>Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -275,8 +273,8 @@
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+													<th>Product Description</th>
+													<th>Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -301,8 +299,8 @@
 									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+													<th>Product Description</th>
+													<th>Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -327,8 +325,8 @@
 									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+													<th>Product Description</th>
+													<th>Total Quantity</th>
 
 												</tr>
 											</thead>
