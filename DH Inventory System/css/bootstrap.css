@@ -6998,7 +6998,7 @@ border: none;
 .btnclr #modbutt{
   float: right;
   margin-left: 30px;
-  height: 20%;
+
 }
 
 #invbtn{
@@ -7035,7 +7035,7 @@ border: none;
 }
 
 #tableHeader .btnclr{
-  background-color: #3b5998;
+  background-color: #428bca;
   color: white;
   font-size: 15px;
 }

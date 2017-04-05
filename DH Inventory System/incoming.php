@@ -138,6 +138,7 @@
 						
 										<tr>
 											<td>
+												<br>
 												<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 												<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 											</td>

@@ -129,39 +129,40 @@
 			<div class="pages no-more-tables">
 				<div id="tableHeader">
 					<table class="table table-striped table-bordered">
-				<tr>
-					<td colspan="2"><h1 id="headers">OUTGOING PRODUCTS</h1></td>
-				</tr>		
-				<tr>		
-					<td>		
-						<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-						<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
-					</td>
-					<td>
-						<div class="col-sm-7 pull-right">
-							<label>Filter By Date</label>
-								<form class="form-inline" action="" method="post">
-									<div class="form-group">
-										<select name="dateMonthName" class="form-control">
-											<?php foreach ($result2 as $row): ?>
-												<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-											<?php endforeach ?>
-										</select>
-									</div>
-									<div class="form-group">
-										<select name="dateYearName" class="form-control">
-											<?php foreach ($result3 as $row): ?>
-												<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-											<?php endforeach ?>
-										</select>
-									</div>	
-									<div class="form-group">
-										<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
-									</div>
-								</form>	
-							</div>	
-						</td>
-					</tr>
+						<tr>
+							<td colspan="2"><h1 id="headers">OUTGOING PRODUCTS</h1></td>
+						</tr>		
+						<tr>		
+							<td>		
+								<br>
+								<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+								<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
+							</td>
+							<td>
+								<div class="col-sm-7 pull-right">
+									<label>Filter By Date</label>
+									<form class="form-inline" action="" method="post">
+										<div class="form-group">
+											<select name="dateMonthName" class="form-control">
+												<?php foreach ($result2 as $row): ?>
+													<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+												<?php endforeach ?>
+											</select>
+										</div>
+										<div class="form-group">
+											<select name="dateYearName" class="form-control">
+												<?php foreach ($result3 as $row): ?>
+													<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+												<?php endforeach ?>
+											</select>
+										</div>	
+										<div class="form-group">
+											<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+										</div>
+									</form>	
+								</div>	
+							</td>
+						</tr>
 					</table>
 				</div>
 				
