@@ -152,7 +152,7 @@
 							<!-- Table Display for Employees -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>
-										<tr>
+										<tr id="centerData">
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Employee ID</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">First Name</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Middle Name</th>
@@ -167,21 +167,21 @@
 											$employID = $item["empID"];
 											?>
 											
-										<tr>
-											<td><?php echo $item["empID"]; ?></td>
-											<td><?php echo $item["empFirstName"]; ?></td>
-											<td><?php echo $item["empMidName"]; ?></td>
-											<td><?php echo $item["empLastName"]; ?></td>
-											<td><?php echo $item["empExtensionName"]; ?></td>
+										<tr id="centerData">
+											<td data-title="Employee ID"><?php echo $item["empID"]; ?></td>
+											<td data-title="First Name"><?php echo $item["empFirstName"]; ?></td>
+											<td data-title="Middle Name"><?php echo $item["empMidName"]; ?></td>
+											<td data-title="Last Name"><?php echo $item["empLastName"]; ?></td>
+											<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
 											<td>
 												<a href="functionalities/editEmployees.php?emplId=<?php echo $employID; ?>" target="_blank">
-												<button type="button" class="btn btn-default">
+												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
 												</a>	
 											
 												<a href="functionalities/removeEmployee.php?emplId=<?php echo $employID; ?>"> 
-													<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+													<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 													</button>
 												</a>
@@ -256,7 +256,7 @@
 												?>
 												
 												<thead>
-													<tr>
+													<tr id="centerData">
 														<th>
 															<div id="tabHead">Employee ID</div>
 														</th>
@@ -277,15 +277,15 @@
 												</thead>
 												<tbody>
 														
-													<tr>
-														<td><?php echo $item["empID"]; ?></td>
-														<td><?php echo $item["empFirstName"]; ?></td>
-														<td><?php echo $item["empMidName"]; ?></td>
-														<td><?php echo $item["empLastName"]; ?></td>
-														<td><?php echo $item["empExtensionName"]; ?></td>
+													<tr id="centerData">
+														<td data-title="Employee ID"><?php echo $item["empID"]; ?></td>
+														<td data-title="First Name"><?php echo $item["empFirstName"]; ?></td>
+														<td data-title="Middle Name"><?php echo $item["empMidName"]; ?></td>
+														<td data-title="Last Name"><?php echo $item["empLastName"]; ?></td>
+														<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
 														<td>										
 															<a href="functionalities/restoreEmployee.php?emplId=<?php echo $employID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 																	<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 																</button>
 																</a>
@@ -295,18 +295,18 @@
 														foreach ($result1 as $item):
 														$employID = $item["empID"];
 														?>
-													<tr>
-														<td><?php echo $item["empID"]; ?></td>
-														<td><?php echo $item["empFirstName"]; ?></td>
-														<td><?php echo $item["empMidName"]; ?></td>
-														<td><?php echo $item["empLastName"]; ?></td>
-														<td><?php echo $item["empExtensionName"]; ?></td>
+													<tr id="centerData">
+														<td data-title="Employee ID"><?php echo $item["empID"]; ?></td>
+														<td data-title="First Name"><?php echo $item["empFirstName"]; ?></td>
+														<td data-title="Middle Name"><?php echo $item["empMidName"]; ?></td>
+														<td data-title="Last Name"><?php echo $item["empLastName"]; ?></td>
+														<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
 														<td>										
 															<a href="functionalities/restoreEmployee.php?emplId=<?php echo $employID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 																	<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 																</button>
-																</a>
+															</a>
 														</td>		
 													</tr>	
 													<?php

@@ -153,7 +153,7 @@
 							<!-- Table Display for Accounts -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>
-									<tr>
+									<tr id="centerData">
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Username</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Password</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User Role</th>
@@ -167,10 +167,10 @@
 										$useThisID = $item["userID"];
 									?>
 										
-									<tr>	
-										<td><?php echo $item["userName"]; ?></td>
-										<td><?php echo $item["password"]; ?></td>
-										<td><?php echo $item["user_role"]; ?></td>
+									<tr id="centerData">	
+										<td data-title="Username"><?php echo $item["userName"]; ?></td>
+										<td data-title="Password"><?php echo $item["password"]; ?></td>
+										<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 										<td>
 											<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
 												<button type="button" class="btn btn-default">
@@ -252,7 +252,7 @@
 												?>
 												
 												<thead>
-													<tr>
+													<tr id="centerData">
 														<th>
 															<div id="tabHead">Username</div>
 														</th>
@@ -262,19 +262,18 @@
 														<th>
 															<div id="tabHead">User Role</div>
 														</th>
-														<th></th>
 													</tr>
 												</thead>
 												
 												<tbody>						
 														
-													<tr>	
-														<td><?php echo $item["userName"]; ?></td>
-														<td><?php echo $item["password"]; ?></td>
-														<td><?php echo $item["user_role"]; ?></td>
+													<tr id="centerData">	
+														<td data-title="Username"><?php echo $item["userName"]; ?></td>
+														<td data-title="Password"><?php echo $item["password"]; ?></td>
+														<td data-title="User Role><?php echo $item["user_role"]; ?></td>
 														<td>
 															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this account?');">
 																	Restore
 																</button>
 															</a>
@@ -284,10 +283,10 @@
 														foreach ($result1 as $item):
 														$useThisID = $item["userID"];
 													?>
-													<tr>	
-														<td><?php echo $item["userName"]; ?></td>
-														<td><?php echo $item["password"]; ?></td>
-														<td><?php echo $item["user_role"]; ?></td>
+													<tr id="centerData">	
+														<td data-title="Username"><?php echo $item["userName"]; ?></td>
+														<td data-title="Password"><?php echo $item["password"]; ?></td>
+														<td data-title="User Role><?php echo $item["user_role"]; ?></td>
 														<td>
 															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
 																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">

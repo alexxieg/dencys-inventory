@@ -152,7 +152,7 @@
 							<!-- Table Display for Category -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>
-										<tr>
+										<tr id="centerData">
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category ID</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category</th>
 											<th></th>
@@ -164,17 +164,17 @@
 										foreach ($result as $item):
 										$useThisID = $item["categoryID"];
 									?>
-									<tr>
-										<td><?php echo $item["categoryID"]; ?></td>
-										<td><?php echo $item["categoryName"]; ?></td>
+									<tr id="centerData">
+										<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
+										<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 										<td>	
 											<a>
-												<button type="button" class="btn btn-default">
+												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
 											</a>
 											<a href="functionalities/removeCategory.php?useId=<?php echo $useThisID; ?>"> 
-												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+												<button type="button" class="btn btn-default" id="edBtn"onclick="return confirm('Are you sure you want to remove this entry?');">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -240,7 +240,7 @@
 												?>
 												
 												<thead>
-													<tr>
+													<tr id="centerData">
 														<th>
 															<div id="tabHead">Category ID</div>
 														</th>
@@ -253,12 +253,12 @@
 												
 												<tbody>
 													
-													<tr>
-														<td><?php echo $item["categoryID"]; ?></td>
-														<td><?php echo $item["categoryName"]; ?></td>
+													<tr id="centerData">
+														<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
+														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 														<td>	
 															<a href="functionalities/restoreCategory.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 																	Restore
 																</button>
 															</a>
@@ -268,12 +268,12 @@
 														foreach ($result as $item):
 														$useThisID = $item["categoryID"];
 													?>	
-													<tr>
-														<td><?php echo $item["categoryID"]; ?></td>
-														<td><?php echo $item["categoryName"]; ?></td>
+													<tr id="centerData">
+														<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
+														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 														<td>	
 															<a href="functionalities/restoreCategory.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 																	Restore
 																</button>
 															</a>

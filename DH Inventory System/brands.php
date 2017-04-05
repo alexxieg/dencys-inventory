@@ -152,7 +152,7 @@
 						
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>
-									<tr>
+									<tr id="centerData">
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Brand ID</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Brand Name</th>
 									</tr>
@@ -168,9 +168,9 @@
 										endforeach;
 									?>
 
-									<tr>
-										<td><?php echo $item["brandID"]; ?></td>
-										<td><?php echo $item["brandName"]; ?></td>
+									<tr id="centerData">
+										<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
+										<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 									</tr>
 										
 									<?php
@@ -178,18 +178,18 @@
 										$useThisID = $item["brandID"];
 									?>
 
-									<tr>
-										<td><?php echo $item["brandID"]; ?></td>
-										<td><?php echo $item["brandName"]; ?></td>
+									<tr id="centerData">
+										<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
+										<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 										<td>
 											<a>
-												<button type="button" class="btn btn-default">
+												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
 											</a>
 											
 											<a href="functionalities/removeBrand.php?useId=<?php echo $useThisID; ?>"> 
-												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
+												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -255,7 +255,7 @@
 												?>
 												
 												<thead>
-													<tr>
+													<tr id="centerData">
 														<th>
 															<div id="tabHead">Brand ID</div>
 														</th>
@@ -268,12 +268,12 @@
 												
 												<tbody>												
 
-													<tr>
-														<td><?php echo $item["brandID"]; ?></td>
-														<td><?php echo $item["brandName"]; ?></td>
+													<tr id="centerData">
+														<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
+														<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 														<td>											
 															<a href="functionalities/restoreBrand.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this brand?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this brand?');">
 																	Restore
 																</button>
 															</a>
@@ -283,12 +283,12 @@
 														foreach ($result1 as $item):
 														$useThisID = $item["brandID"];
 													?>
-													<tr>
-														<td><?php echo $item["brandID"]; ?></td>
-														<td><?php echo $item["brandName"]; ?></td>
+													<tr id="centerData">
+														<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
+														<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 														<td>											
 															<a href="functionalities/restoreBrand.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this brand?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this brand?');">
 																	Restore
 																</button>
 															</a>

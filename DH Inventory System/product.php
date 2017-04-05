@@ -148,7 +148,7 @@
 						<!-- Table Display for Products -->
 						<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 							<thead>
-								<tr>
+								<tr id="centerData">
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 										<div id="tabHead">Product ID</div>
 									</th>
@@ -176,22 +176,21 @@
 									foreach ($result as $item):
 									$proID = $item["prodID"];
 								?>
-								<tr>
+								<tr id="centerData">
 									<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 									<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 									<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 									<td data-title="Unit"><?php echo $item["unitType"];?></td>
 									<td data-title="Price"><?php echo $item["price"]; ?></td>
-									<td>
-								
-										<a href="functionalities/editProd.php?proId=<?php echo $proID; ?>" target="_blank">	
-											<button type="button" class="btn btn-default" id="edBtn1">
+									<td>			
+										<a href="functionalities/editProd.php?proId=<?php echo $proID; ?>">	
+											<button type="button" class="btn btn-default" id="edBtn">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 											</button>
 										</a>	
 										<a href="functionalities/removeProduct.php?proId=<?php echo $proID; ?>">
-											<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');" id="delBtn1">
+											<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');" id="delBtn1">
 												<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 											</button>
 										</a>
@@ -304,7 +303,7 @@
 												?>
 												
 												<thead>
-													<tr>
+													<tr id="centerData">
 														<th>
 															<div id="tabHead">Product ID</div>
 														</th>
@@ -328,7 +327,7 @@
 												</thead>
 												<tbody>
 													
-													<tr>
+													<tr id="centerData">
 														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
@@ -337,7 +336,7 @@
 														<td data-title="Price"><?php echo $item["price"]; ?></td>
 														<td>
 															<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
 																	Restore
 																</button>
 															</a>
@@ -347,7 +346,7 @@
 														foreach ($result as $item):
 														$proID = $item["prodID"];
 													?>	
-													<tr>
+													<tr id="centerData">
 														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
@@ -356,7 +355,7 @@
 														<td data-title="Price"><?php echo $item["price"]; ?></td>
 														<td>
 															<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
 																	Restore
 																</button>
 															</a>

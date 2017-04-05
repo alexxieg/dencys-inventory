@@ -126,21 +126,24 @@
 				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 					<thead>	
 						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
+							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+								<div id="tabHead">Date</div>
+							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Product ID
+								<div id="tabHead">Product ID</div>
 							</th>
+							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 								<div id="tabHead">Product Description</div>
 							</th>
 				
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Quantity
+								<div id="tabHead">Quantity</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Unit
+								<div id="tabHead">Unit</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
@@ -148,12 +151,11 @@
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Receipt No.
-								
+								<div id="tabHead">Receipt No.</div>
 							</th>
 							
 							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Remarks
+								<div id="tabHead">Remarks</div>
 							</th>
 							<th></th>
 						</tr>
@@ -298,7 +300,7 @@
 									?>
 									
 									<thead>	
-										<tr>
+										<tr id="centerData">
 											<th>
 												<div id="tabHead">Date</div>
 											</th>
@@ -351,7 +353,7 @@
 											<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 											<td>
 											<a href="functionalities/restoreIncoming.php?incId=<?php echo $incID; ?>"> 
-												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
+												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to delete this entry?');" id="delBtn">
 													Restore
 												</button>
 												</a>
