@@ -1,7 +1,7 @@
 <?php
 	$updateIN = $conn->prepare("UPDATE inventory
 								SET inventory.inQty = (SELECT SUM(incoming.inQty) 
-								FROM incoming WHERE inventory.prodID = incoming.prodID AND incoming.status = 'Active'
+								FROM incoming WHERE inventory.prodID = incoming.prodID AND incoming.status = 'Active' AND MONTH(incoming.inDate) = MONTH(CURRENT_DATE())
 								GROUP BY incoming.prodID)");
 	$updateIN->execute();
 ?>
@@ -9,7 +9,8 @@
 <?php
 	$updateOut = $conn->prepare("UPDATE inventory
 								SET inventory.outQty = (SELECT SUM(outgoing.outQty) 
-								FROM outgoing WHERE inventory.prodID = outgoing.prodID AND outgoing.status = 'Active' GROUP BY outgoing.prodID)");
+								FROM outgoing WHERE inventory.prodID = outgoing.prodID AND outgoing.status = 'Active' AND MONTH(outgoing.outDate) = MONTH(CURRENT_DATE())
+								GROUP BY outgoing.prodID)");
 	$updateOut->execute();
 ?>
 

@@ -54,7 +54,14 @@
     
   	<body>
 		<!-- PHP code for fetching the data-->
-		<?php include('functionalities/fetchInventory.php'); ?>
+<?php
+	$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut
+								FROM product LEFT JOIN archive ON product.prodID = archive.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+								WHERE product.status = 'Active' 
+								GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty");	
+	$query->execute();
+	$result = $query->fetchAll();
+?>	
 	
 		<!-- Page Header and Navigation Bar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -120,7 +127,7 @@
 							
 		<?php
 			foreach ($result as $item):
-				$currQty = $item["beginningQty"] + $item["inQty"] - $item["outQty"];
+				$currQty = $item["qty"];
 				$incID = $item["prodID"];
 				if ($currQty <= $item["reorderLevel"]){
 		?> 
@@ -236,8 +243,8 @@
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
 							<td data-title="End. Quantity"></td>
-							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
-							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+							<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
+							<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
 							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
 							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
@@ -260,8 +267,8 @@
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
 							<td data-title="End. Quantity"></td>
-							<td data-title="IN"><?php echo $item["inQty"]; ?></td>
-							<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
+							<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
+							<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
 							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
 							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
