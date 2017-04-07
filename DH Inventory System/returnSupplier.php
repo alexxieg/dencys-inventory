@@ -54,14 +54,7 @@
 
 	<body>
 		<!-- PHP code for fetching the data-->
-		<?php
-			$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
-									FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-									WHERE returns.status = 'Active' AND returns.returnType = 'Supplier Return'
-									ORDER BY returnID DESC;");	
-			$query->execute();
-			$result = $query->fetchAll();
-		?>
+		<?php include('functionalities/fetchReturnsSupplier.php'); ?>
 		
 		<!-- Topbar Navigation / Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -77,7 +70,7 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><i class="glyphicon glyphicon-user"></i> Admin</a></li>
+						<li><a href="Logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -117,8 +110,6 @@
 							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 						</ul>
 					</li>
-					<li class="PrintBtn"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
-					<li class="LogBtn"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
 				</ul>
 			</div>
 
@@ -138,11 +129,41 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">	
-									<h1 id="headers">RETURN TO SUPPLIER</h1>	
-									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>						
+									<tr>
+										<td colspan="2"><h1 id="headers">RETURN TO SUPPLIER</h1>	
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+											<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
+										</td>
+										<td>
+											<div class="col-sm-7 pull-right">
+												<label>Filter By Date</label>
+												<form class="form-inline" action="" method="post">
+													<div class="form-group">
+														<select name="dateMonthName" class="form-control">
+															<?php foreach ($result2 as $row): ?>
+																<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+															<?php endforeach ?>
+														</select>
+													</div>
+													<div class="form-group">
+														<select name="dateYearName" class="form-control">
+															<?php foreach ($result3 as $row): ?>
+																<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+															<?php endforeach ?>
+														</select>
+													</div>	
+													<div class="form-group">
+														<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+													</div>
+												</form>	
+											</div>
+										</td>
+									<tr>												
 								</table>
-							</div>
 							
 							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
