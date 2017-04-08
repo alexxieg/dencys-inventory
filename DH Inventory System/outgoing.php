@@ -188,6 +188,7 @@
 									<?php
 										foreach ($result as $item):
 										$outid = $item["outID"];
+										$outReceipt = $item["receiptNo"];							
 									?>
 										
 									<tr id="centerData">
@@ -201,7 +202,7 @@
 										<td data-title="Branch"><?php echo $item["location"]; ?></td>
 										<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 										<td>
-											<a href="functionalities/editOut.php?outsId=<?php echo $outid; ?>">
+											<a href="functionalities/editOut.php?outsId=<?php echo $outReceipt; ?>">
 											<button type="button" class="btn btn-default">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>

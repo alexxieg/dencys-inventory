@@ -194,6 +194,7 @@
 									</tr>
 								</thead>
 									
+<<<<<<< HEAD
 								<tbody>					
 									<?php
 										foreach ($result as $item):
@@ -246,6 +247,95 @@
 												
 												<h5>Supplier</h5> 
 												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
+=======
+									<tbody>					
+										<?php
+											foreach ($result as $item):
+											$incID = $item["inID"];
+											$incRecID = $item["receiptNo"];						
+										?>
+										
+										<tr id="centerData">
+											<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+											<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+											<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+											<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
+											<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+											<td data-title="Status"><?php echo $item["status"]; ?></td>
+											<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+											<td>
+												<a href="functionalities/editIn.php?incId=<?php echo $incRecID; ?>"> 
+												<button type="button" class="btn btn-default" id="edBtn">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+												</button>
+												</a>
+											</td>	
+										</tr>	
+										
+										<?php
+											endforeach;
+										?>
+									</tbody>	
+								</table>
+
+								<!-- Modal for New Incoming Entry Form -->
+								<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Add Incoming Product</h4>
+											</div>
+											<div class="modal-body">
+												<form action="" method="POST" onsubmit="return validateForm()">
+													<h5>Receipt No.</h5> 
+													<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
+													
+													<h5>Receipt Date</h5> 
+													<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate"><br>
+													
+													<h5>Supplier</h5> 
+													<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
+																			
+													<h5>Received By</h5>
+													<?php
+														$query = $conn->prepare("SELECT empFirstName FROM employee ");
+														$query->execute();
+														$res = $query->fetchAll();
+													?>
+																	
+													<select class="form-control" id="addEmpl" name="emp">
+														<?php foreach ($res as $row): ?>
+															<option><?=$row["empFirstName"]?></option>
+														<?php endforeach ?>
+													</select> 
+													
+													<br>
+															
+													<h5>Product/s</h5>
+													<table class="table table-striped" id="dataTable" name="chk">				
+														<tbody>
+															<tr>
+																<td><input type="checkbox" name="chk"></TD>
+																<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+																<td>	
+																	<?php
+																		$query = $conn->prepare("SELECT prodName FROM product ");
+																		$query->execute();
+																		$res = $query->fetchAll();
+																	?>
+														
+																	<select class="form-control" id="addItem" name="prodItem[]">
+																		<?php foreach ($res as $row): ?>
+																			<option><?=$row["prodName"]?></option>
+																		<?php endforeach ?>
+																	</select> 
+																</td>
+>>>>>>> 015b4d2a35242c8f4d45d106f61f2d65b194d39a
 																		
 												<h5>Received By</h5>
 												<?php
