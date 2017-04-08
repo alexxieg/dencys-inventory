@@ -4112,7 +4112,6 @@ background-color: #c1cdcd; } .nav-stacked > li {   float: none; } .nav-stacked
 #headrep{
   margin-right: 200px;
   text-decoration: underline;
-  font-family: dencyFont;
 }
 
 .nav-justified > li {
@@ -6789,7 +6788,6 @@ button.close {
   margin-right: 25%;
   margin-left: 25%;
   margin-top: 10%;
-  font-family: dencyFont;
 }
 
 #login {
@@ -6842,7 +6840,6 @@ button.close {
 #categories{
   font-size: 18px;
   margin-right: 30%;
-  font-family: dencyFont;
 }
 
 #prodSort{
@@ -6864,7 +6861,6 @@ button.close {
   margin-right: -90px;
   font-size: 16px;
   margin-top: 10px;
-  font-family: dencyFont;
 }
 
 #search {
@@ -6936,7 +6932,6 @@ img#logo1 {
 
 #headers{
   color: #000000;
-  font-family: dencyFont;
   text-decoration: underline;
 }
 
@@ -7009,7 +7004,6 @@ border: none;
   width: 25%;
   color: black;
   margin-top: -2%;
-  font-family: dencyFont;
 }
 
 #sortBtn {
@@ -7027,7 +7021,6 @@ border: none;
     margin-right: -1px;
     font-size: 18px;
     margin-top: 10px;
-    font-family: dencyFont;
 }
 
 #adminContent {
@@ -7070,7 +7063,6 @@ border: none;
     font-size: 18px;
     margin-right: 25%;
     margin-top: .2%;
-    font-family: dencyFont;
   }
 
   #headerBG {
@@ -7158,13 +7150,11 @@ border: none;
       color: white;
       margin-top: 0%;
       margin-bottom: -18%;
-      font-family: dencyFont;
     }
  
   #logout {
     margin-right: -1px;
     margin-top: 10px;
-    font-family: dencyFont;
   }
 
   /*
@@ -7189,7 +7179,6 @@ border: none;
     #logout {
       margin-left: 80%;
       margin-top: 10%;
-      font-family: dencyFont;
     }
 
     .hide-on-mobile {
@@ -7335,7 +7324,6 @@ border: none;
 
 /*font*/
 @font-face{
-  font-family: dencyFont;
   src: url(CabinCondensed-Bold.ttf);
 }
 
@@ -7367,11 +7355,6 @@ border: none;
   background-color: #3b5998;
 }
 
-#contents{
-  padding-top: 2%;
-  font-family: dencyFont;
-}
-
 #headerBG {
   height: 140px;
   width: 121%;
@@ -7391,7 +7374,6 @@ border: none;
     font-size: 18px;
     margin-right: 30%;
     margin-top: .2%;
-    font-family: dencyFont;
   }
 
     #headerBG {
@@ -7431,7 +7413,6 @@ border: none;
     font-size: 18px;
     margin-right: 17%;
     margin-top: .2%;
-    font-family: dencyFont;
   }
 
  img#logo1 {
@@ -7443,7 +7424,6 @@ border: none;
   #logout {
     margin-top: 10%;
     font-size: 18px;
-    font-family: dencyFont;
   }
 
 .splitHeader{
@@ -7460,7 +7440,6 @@ border: none;
       color: white;
       margin-top: 0%;
       margin-bottom: -23%;
-      font-family: dencyFont;
     }
 
   #headerBG {
@@ -7589,7 +7568,6 @@ border: none;
 
 
 #font{
-  font-family: dencyFont;
   color: white;
 }
 
