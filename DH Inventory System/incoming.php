@@ -139,11 +139,12 @@
 										<tr>
 											<td>
 												<br>
+												<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
 												<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
 											</td>
 											<td>
 											<div class="col-sm-7 pull-right">
-												<label>Filter By Date</label>
+												<label>View Previous Entries</label>
 												<form class="form-inline" action="" method="post">
 													<div class="form-group">
 														<select name="dateMonthName" class="form-control">
@@ -160,7 +161,7 @@
 														</select>
 													</div>	
 													<div class="form-group">
-														<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+														<input type="submit" value="View" class="btn btn-success" name="submit">
 													</div>
 												</form>	
 												</div>	
@@ -209,7 +210,9 @@
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												Supplier
 											</th>										
-											
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Status
+											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												Remarks
 											</th>
@@ -221,6 +224,7 @@
 										<?php
 											foreach ($result as $item):
 											$incID = $item["inID"];
+											$incRecID = $item["receiptNo"];
 										?>
 										
 										<tr id="centerData">
@@ -233,9 +237,10 @@
 											<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 											<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 											<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+											<td data-title="Status"><?php echo $item["status"]; ?></td>
 											<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 											<td>
-												<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+												<a href="functionalities/editIn.php?incId=<?php echo $incRecID; ?>"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
@@ -268,7 +273,7 @@
 													<h5>Supplier</h5> 
 													<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
 																			
-													<h5>Employee</h5>
+													<h5>Received By</h5>
 													<?php
 														$query = $conn->prepare("SELECT empFirstName FROM employee ");
 														$query->execute();
@@ -284,8 +289,7 @@
 													<br>
 															
 													<h5>Product/s</h5>
-													<table class="table table-striped" id="dataTable" name="chk">
-																		
+													<table class="table table-striped" id="dataTable" name="chk">				
 														<tbody>
 															<tr>
 																<td><input type="checkbox" name="chk"></TD>
@@ -297,15 +301,22 @@
 																		$res = $query->fetchAll();
 																	?>
 														
-																<select class="form-control" id="addItem" name="prodItem[]">
-																	<?php foreach ($res as $row): ?>
-																		<option><?=$row["prodName"]?></option>
-																	<?php endforeach ?>
-																</select> 
+																	<select class="form-control" id="addItem" name="prodItem[]">
+																		<?php foreach ($res as $row): ?>
+																			<option><?=$row["prodName"]?></option>
+																		<?php endforeach ?>
+																	</select> 
 																</td>
 																		
 																<td>
 																	<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="incQty[]">
+																</td>
+																
+																<td>
+																	<select class="form-control" id="addInStatus" name="inStatus[]">
+																		<option>Complete</option>
+																		<option>Partial</option>
+																	</select> 
 																</td>
 																
 																<td>
@@ -338,6 +349,104 @@
 									</div>
 								</div> 
 								<!-- End of Modal -->
+								
+								<!-- Modal Viewing Partial Deliveries -->
+								<div class="modal fade" id="partial" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Partial Deliveries</h4>
+											</div>
+											<div class="modal-body">
+											
+												<?php 
+													$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks 
+																			FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+																			WHERE incoming.status = 'Partial' AND MONTH(inDate) = MONTH(CURRENT_DATE())");
+													$query->execute();
+													$result1 = $query->fetchAll();
+												?>
+												
+												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+													<thead>	
+														<tr>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
+															
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																Product ID
+															</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																<div id="tabHead">Product Description</div>
+															</th>
+												
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																Quantity
+															</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																Unit
+															</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																Received By
+															</th>
+															
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																Receipt No.	
+															</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																Receipt Date	
+															</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																Supplier
+															</th>										
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+																Remarks
+															</th>
+															<th></th>
+														</tr>
+													</thead>
+													
+													<tbody>					
+														<?php
+															foreach ($result1 as $item):
+															$incID = $item["inID"];
+														?>
+														
+														<tr id="centerData">
+															<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+															<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+															<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+															<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+															<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+															<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+															<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+															<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
+															<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+															<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+															<td>
+																<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+																<button type="button" class="btn btn-default" id="edBtn">
+																	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+																</button>
+																</a>
+															</td>	
+														</tr>	
+														
+														<?php
+															endforeach;
+														?>
+													</tbody>	
+												</table>
+											
+												<div class="modal-footer">
+												</div>								
+											</div>
+										</div>
+									</div>
+								</div> 
+								<!-- End of Modal -->
+								
+								
 								
 							</div>
 						</div>		  
