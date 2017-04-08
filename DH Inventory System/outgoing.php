@@ -278,6 +278,7 @@
 												</select> 
 												<br>
 														
+												<h5>Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>
 														<tr>
