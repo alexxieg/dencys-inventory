@@ -55,7 +55,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
+				<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -68,9 +68,8 @@
     <div class="container-fluid" >
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<br>
-					 <div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+			<ul class="nav nav-sidebar">
+					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
 					<li class="active">
 						<a href="inventory.php">
 							<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
@@ -119,16 +118,6 @@
 									FROM outgoing
 									WHERE prodID = '$incID'
 									GROUP BY outDate, outQty
-									UNION
-									SELECT DISTINCT returns.returnDate, returns.returnQty, null, NULL
-									FROM returns
-									WHERE prodID = '$incID' AND returnType = 'Warehouse Return'
-									GROUP BY returnDate, returnQty
-									UNION
-									SELECT DISTINCT returns.returnDate, null, returns.returnQty, NULL
-									FROM returns
-									WHERE prodID = '$incID' AND returnType = 'Supplier Return'
-									GROUP BY returnDate, returnQty
 									ORDER BY sameDate ) AS ledgerResult JOIN product 
 									WHERE product.prodID = '$incID'
 									GROUP BY sameDate
@@ -142,7 +131,6 @@
 		
 			$request = current($conn->query("SELECT beginningQty FROM inventory WHERE prodID = '$incID'")->fetch());
 			$base = $request;
-			$loop = True;
 			
 			$query3 = $conn->prepare("SELECT remarks FROM inventory WHERE prodID = '$incID'");										
 			$query3->execute();
@@ -205,9 +193,9 @@
 						<?php
 							foreach ($res as $item):
 							
-							if ($request == $base && $loop == True){
+							if ($request == $base){
 								$currQty = $request + $item["Added"] - $item["Subracted"];
-								$loop = False;
+								$base = 0;
 							}
 							else {
 								$currQty = $currQty + $item["Added"] - $item["Subracted"];
