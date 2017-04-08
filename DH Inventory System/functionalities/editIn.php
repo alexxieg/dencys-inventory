@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Incoming Products</title>
+		<title>Edit Incoming Entries</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,25 @@
 	</head>
 	
 	<body>
-
+		<?php
+			$incID= $_GET['incId'];
+			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks 
+									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+									ORDER BY inID DESC;");
+			$query->execute();
+			$result = $query->fetchAll();
+			
+			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks 
+									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+									WHERE incoming.receiptNo = '$incID'
+									ORDER BY inID DESC;");
+			$query2->execute();
+			$result2 = $query2->fetchAll();
+			
+			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
+			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$supplier = current($conn->query("SELECT incoming.supplier FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+		?>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -89,74 +107,104 @@
 	</div>
 	<!-- End of Sidebar -->
   
-		<div class="addInv">
-			<h1 id="headers">Edit Incoming Entry</h1>
-			<div id="contents">
-				<form action="" method="POST">
-					
-					<h3>Item</h3>
-					<?php
-						$incID= $_GET['incId'];
-						$query = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, incoming.receiptNo, incoming.inRemarks, employee.empFirstName 
-						FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID");
-						$query->execute();
-						$res = $query->fetchAll();
+		<!-- Modal for New Incoming Entry Form -->
+			<div class="addInv">
+				<div>
+					<div>
+						<div>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Edit Incoming Product</h4>
+						</div>
+						<div>
+							<form action="" method="POST" onsubmit="return validateForm()">
+									<h5>Receipt No.</h5> 
+									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
+									
+									<h5>Receipt Date</h5> 
+									<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate"><br>
+									
+									<h5>Supplier</h5> 
+									<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplier;?>" value="<?php echo $supplier;?>" name="supplier"><br>
+								
+								<h5>Received By</h5>				
+								<select class="form-control" id="addEmpl" name="emp">
+									<?php
+										$query = $conn->prepare("SELECT empFirstName FROM employee ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+									<?php foreach ($res as $row): ?>
+										<option><?=$row["empFirstName"]?></option>
+									<?php endforeach ?>
+									<?php foreach ($result2 as $row): ?>
+										<option SELECTED><?=$row["empFirstName"]?></option>
+									<?php endforeach ?>
+								</select> 
+								
+								<br>
+										
+								<h5>Product/s</h5>
+								<table class="table table-striped" id="dataTable" name="chk">				
+									<tbody>
+										<?php foreach ($result2 as $row): ?>
+											<tr>
+												<td><input type="checkbox" name="chk"></TD>
+												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												<td>	
+													<?php
+														$query = $conn->prepare("SELECT prodName FROM product ");
+														$query->execute();
+														$res = $query->fetchAll();
+													?>
+										
+													<select class="form-control" id="addItem" name="prodItem[]">
+															<option><?=$row["prodName"]?></option>
+														
+													</select> 
+												</td>
+														
+												<td>
+													<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]">
+												</td>
+												
+												<td>
+													<select class="form-control" id="addInStatus" name="inStatus[]">
+														<option>Complete</option>
+														<option>Partial</option>
+													</select> 
+												</td>
+												
+												<td>
+													<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["inRemarks"]; ?>" value="<?php echo $row["inRemarks"]; ?>" name="inRemarks[]">
+												</td>
+											</tr>
+										<?php endforeach ?>
+									</tbody>
+								</table>
+								
+								<br>
+								
+								<div class="modFoot">
+								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+								<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+								<br>
+								<br>
+								<span>
+									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+								</span>
+								<span>
+									<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
+								</span>
+								</div>
+							</form> 	
 						
-						$query2 = $conn->prepare("SELECT product.prodName, incoming.inID, incoming.inQty, incoming.inDate, incoming.receiptNo, incoming.inRemarks, employee.empFirstName 
-						FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-						WHERE inID = $incID");
-						$query2->execute();
-						$res2 = $query2->fetchAll();
-					?>
-					
-					<select class="form-control" id="addEntry" name="prodItem">
-						<?php foreach ($res as $row): ?>
-							<option><?=$row["prodName"]?></option>
-						<?php endforeach ?>
-						<?php foreach ($res2 as $row2): ?>
-							<option Selected><?=$row2["prodName"]?></option>
-						<?php endforeach ?>
-					</select> 
-					<br>
-					
-					<h3>Quantity</h3>
-					<?php foreach ($res2 as $row2): ?>
-						<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row2["inQty"]; ?>" value="<?php echo $row2["inQty"]; ?>" name="incoQty"> 
-					<?php endforeach ?>
-					<br>
-					
-					<h3>Employee</h3>
-					<?php
-						$query = $conn->prepare("SELECT empName FROM employee ");
-						$query->execute();
-						$res = $query->fetchAll();
-					?>
-				
-					<select class="form-control" id="addEntry" name="emp">
-						<?php foreach ($res as $row): ?>
-							<option><?=$row["empFirstName"]?></option>
-						<?php endforeach ?>
-						<?php foreach ($res2 as $row2): ?>
-							<option Selected><?=$row2["empFirstName"]?></option>
-						<?php endforeach ?>
-					</select> 
-					<br>
-					
-					<h3>Receipt Number</h3>
-					<?php foreach ($res2 as $row2): ?>
-						<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row2["receiptNo"]; ?>" value="<?php echo $row2["receiptNo"]; ?>" name="inRecN"> <br>
-					<?php endforeach ?>
-					
-					<h3>Remarks</h3>
-					<?php foreach ($res2 as $row2): ?>
-						<textarea class="form-control" id="addEntry" rows="3" name="inRem"><?php echo $row2["inRemarks"]; ?></textarea> <br>
-					<?php endforeach ?>
-					
-				<input type="submit" value="Update" class="btn btn-success" name="addOut" onsubmit="return validateForm()">
-				<input type="submit" value="Cancel"class="btn btn-default">
-				</form> 
+							<div class="modal-footer">
+							</div>								
+						</div>
+					</div>
 				</div>
-		</div>
+			</div> 
+			<!-- End of Modal -->
 		
 	<?php
 			$incID= $_GET['incId'];
