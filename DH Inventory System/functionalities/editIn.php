@@ -46,7 +46,7 @@
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks 
+			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
@@ -56,6 +56,7 @@
 			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 			$supplier = current($conn->query("SELECT incoming.supplier FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$employ = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 		?>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
@@ -136,9 +137,7 @@
 									<?php foreach ($res as $row): ?>
 										<option><?=$row["empFirstName"]?></option>
 									<?php endforeach ?>
-									<?php foreach ($result2 as $row): ?>
-										<option SELECTED><?=$row["empFirstName"]?></option>
-									<?php endforeach ?>
+										<option SELECTED><?=$employ?></option>
 								</select> 
 								
 								<br>
@@ -150,16 +149,21 @@
 											<tr>
 												<td><input type="checkbox" name="chk"></TD>
 												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												
+												<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
+												
 												<td>	
 													<?php
 														$query = $conn->prepare("SELECT prodName FROM product ");
 														$query->execute();
 														$res = $query->fetchAll();
 													?>
-										
+													
 													<select class="form-control" id="addItem" name="prodItem[]">
-															<option><?=$row["prodName"]?></option>
-														
+														<option><?=$row["prodName"]?></option>
+														<?php foreach ($res as $row3): ?>
+															<option><?=$row3["prodName"]?></option>
+														<?php endforeach ?>
 													</select> 
 												</td>
 														
@@ -193,7 +197,7 @@
 									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 								</span>
 								<span>
-									<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
+									<input type="submit" name="updateIn" value="Update" class="btn btn-success" id="sucBtn">
 								</span>
 								</div>
 							</form> 	
@@ -208,35 +212,38 @@
 		
 	<?php
 			$incID= $_GET['incId'];
-			$quant=(isset($_REQUEST['incoQty']) ? $_REQUEST['incoQty'] : null);
-			$recip=(isset($_REQUEST['inRecN']) ? $_REQUEST['inRecN'] : null);
-			$rem=(isset($_REQUEST['inRem']) ? $_REQUEST['inRem'] : null);
-			$prod=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			if (isset($_POST["updateIn"])){
 			
-			if (isset($_POST["addOut"])){
-					
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-				$emp = $_POST['emp'];
-				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
-				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-				$emp3 = $emp2['empA'];
-			 	/*
-				$outid= $_GET['outsId'];		
-				$prod = $_POST['prodItem'];
-							
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-				$prod3 = $prod2['prodA'];
-	
-				*/
-				
-				$sql = "UPDATE incoming SET inQty=$quant, inDate=CURDATE(), receiptNo='$recip', inRemarks='$rem', empID='$emp3' WHERE inID=$incID";
-				$conn->exec($sql);				
-				
-				/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
-				WHERE outID = '$outid'"; */
-				  echo "<meta http-equiv='refresh' content='0'>";
+			
+				for ($index = 0; $index < count($prodTem); $index++) {	
+					$inRemarks = $_POST['inRemarks'][$index];
+					$prodItem = $_POST['prodItem'][$index];
+					$inQty = $_POST['incQty'][$index];
+					$inStat = $_POST['inStatus'][$index];
+					$rcpNo = $_POST['rcno'];
+					$recDate = $_POST['rcdate'];
+					$sup = $_POST['supplier'];
+					$incomingID = $_POST['productInID'][$index];
+					
+					$emp = $_POST['emp'];
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
+
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+					
+					$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3'
+							WHERE inID = $incomingID";
+					$conn->exec($sql);				
+					
+					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
+					WHERE outID = '$outid'"; */
+					  echo "<meta http-equiv='refresh' content='0'>";
+				}
 			}    
 	?>
 	
