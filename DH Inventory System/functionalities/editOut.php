@@ -92,130 +92,158 @@
 
 	<?php
 		$outid= $_GET['outsId'];
-		$query = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empFirstName, branch.location, outgoing.outRemarks 
-		FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID 
-		INNER JOIN employee ON outgoing.empID = employee.empID");
+		$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.outRemarks 
+								FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID");
 		$query->execute();
 		$res = $query->fetchAll();
 		
-		$query2 = $conn->prepare("SELECT product.prodName, outgoing.outID, outgoing.outQty, outgoing.outDate, employee.empFirstName, branch.location, outgoing.outRemarks 
-		FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID 
-		INNER JOIN employee ON outgoing.empID = employee.empID 
-		WHERE outID = $outid");
+		$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.outRemarks 
+								FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID  
+								WHERE receiptNo = '$outid'");
 		$query2->execute();
 		$resul = $query2->fetchAll();
+		
+		$reciptNum = current($conn->query("SELECT outgoing.receiptNo FROM outgoing WHERE outgoing.receiptNo = '$outid'")->fetch());
+		$employ = current($conn->query("SELECT DISTINCT employee.empFirstName FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
+		$branch = current($conn->query("SELECT DISTINCT location FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
 	?>
-				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
-					<div id="contents">
-						<div class="pages no-more-tables">
-							<div id="tableHeader">
-								<table class="table">	
-									<tr>
-										<td colspan="2"><h1 id="headers">Edit Outgoing Entry</h1>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>	
 	
 	<div class="addInv">
-		<div id="contents">
-			<form action="" method="POST">
-				
-				<h3>Item</h3>
+		<div>
+			<div>
+				<div>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Add Outgoing Product</h4>
+				</div>
+				<div>
+					<form action="" method="POST" onsubmit="return validateForm()">
 					
-				<select class="form-control" id="addEntry" name="prodItem">
-					<?php foreach ($resul as $item): ?>
-						<option selected><?php echo $item["prodName"]; ?></option>
-					<?php endforeach; ?>
-					<?php foreach ($res as $row): ?>
-						<option><?=$row["prodName"]?></option>
-					<?php endforeach ?>
-				</select> 
-				<br>
-				
-				<h3>Quantity</h3>
-				<?php foreach ($resul as $item): ?>
-					<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $item["outQty"]; ?>" value="<?php echo $item["outQty"]; ?>" name="outgoQty"> 
-				<?php endforeach; ?>
-				
-				<h3>Employee</h3>
-				<select class="form-control" id="addEntry" name="emp">
-					<?php foreach ($resul as $item): ?>
-						<option selected><?php echo $item["empFirstName"]; ?></option>
-					<?php endforeach; ?>
-					<?php foreach ($res as $row): ?>
-						<option><?=$row["empFirstName"]?></option>
-					<?php endforeach ?>
-				</select> 
-				<br>
-				
-				<h3>Branch</h3>
-					<?php
-						$query = $conn->prepare("SELECT location FROM branch");
-						$query->execute();
-						$res = $query->fetchAll();
-					?>
-				
-					<select class="form-control" id="addEntry" name="branch">
-						<?php foreach ($resul as $item): ?>
-							<option selected><?php echo $item["location"]; ?></option>
-						<?php endforeach; ?>
-						<?php foreach ($res as $row): ?>
-							<option><?=$row["location"]?></option>
-						<?php endforeach ?>
-					</select> 
-					<br>
-				
-				<h3>Remarks</h3>
-				<?php foreach ($resul as $item): ?>
-					<textarea class="form-control" id="addEntry" rows="3" name="outRem" placeholder="<?php echo $item["outRemarks"]; ?>"><?php echo $item["outRemarks"]; ?></textarea> <br>
-				<?php endforeach; ?>
-				
-			<input type="submit" value="Update" class="btn btn-success" name="addOut" onclick="alert('Outgoing Entry Successfully Edited');">
-			<input type="submit" value="Cancel"class="btn btn-default" style="width: 100px;">
-			</form> 
+						<h5>Receipt No.</h5> 
+						<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
+							
+						<h5>Handled By</h5>
+						<?php
+							$query = $conn->prepare("SELECT empFirstName FROM employee ");
+							$query->execute();
+							$result = $query->fetchAll();
+						?>
+										
+						<select class="form-control" id="addEmpl" name="emp">
+							<?php foreach ($result as $row): ?>
+								<option><?=$row["empFirstName"]?></option>
+							<?php endforeach ?>
+								<option SELECTED><?=$employ?></option>
+						</select> 
+						
+						<br>
+						
+						<h5>Branch</h5>
+						<?php
+							$query = $conn->prepare("SELECT location FROM branch");
+							$query->execute();
+							$res = $query->fetchAll();
+							?>
+						
+						<select class="form-control" id="addEntry" name="branch">
+							<?php foreach ($res as $row): ?>
+								<option><?=$row["location"]?></option>
+							<?php endforeach ?>
+								<option SELECTED><?=$branch?></option>
+						</select> 
+						<br>
+								
+						<h5>Product/s</h5>
+						<table class="table table-striped" id="dataTable" name="chk">
+							<tbody>
+								<?php foreach ($resul as $row): ?>
+								<tr>
+									<td><input type="checkbox" name="chk"></TD>
+									<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+										
+									<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />
+									
+									<td>	
+										<?php
+											$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
+											$query->execute();
+											$res = $query->fetchAll();
+										?>
+										<select class="form-control" id="addItem" name="prodItem[]">
+											<option><?=$row["prodName"]?></option>
+										<?php foreach ($res as $row3): ?>
+											<option><?=$row3["prodName"]?></option>
+										<?php endforeach ?>
+											
+									</select> 
+									</td>
+											
+									<td>
+										<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
+									</td>
+									
+									<td>
+										<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["outRemarks"]; ?>" value="<?php echo $row["outRemarks"]; ?>" name="outRemarks[]">
+									</td>
+								</tr>
+								<?php endforeach ?>
+							</tbody>
+						</table>
+							
+						<div class="modFoot">
+							<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+							<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+							<br>
+							<br>
+							<span>
+								<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+							</span>
+							<span>
+								<input type="submit" name="updateOut" value="Update" class="btn btn-success" id="sucBtn">
+							</span>
+						</div>
+					</form>																		
+		 
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
 	
 	<?php
 			$outid= $_GET['outsId'];
-			$quant=(isset($_REQUEST['outgoQty']) ? $_REQUEST['outgoQty'] : null);
-			$rem=(isset($_REQUEST['outRem']) ? $_REQUEST['outRem'] : null);
-			$prod=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
-			if (isset($_POST["addOut"])){
-					
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-				$branch = $_POST['branch'];
-				$branch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch'");
-				$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
-				$branch3 = $branch2['branchA'];
-				
-				$emp = $_POST['emp'];
-				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empName = '$emp'");
-				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-				$emp3 = $emp2['empA'];
-			 	/*
-				$outid= $_GET['outsId'];		
-				$prod = $_POST['prodItem'];
-		
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-				$prod3 = $prod2['prodA'];
-				
-				
-				*/
-				
-				/*$sql = "UPDATE outgoing SET outQty=$quant, outDate=CURDATE(), outRemarks='$rem', branchID='$branch3', empID='$emp3' WHERE OutID=$outid";*/
-				$sql = "UPDATE outgoing SET outQty=$quant, outDate=CURDATE(), outRemarks='$rem', branchID='$branch3', empID='$emp3' WHERE OutID=$outid";
-				$conn->exec($sql);				
-				
-				/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
-				WHERE outID = '$outid'"; */
+			if (isset($_POST["updateOut"])){
+			
+				for ($index = 0; $index < count($prodTem); $index++) {
+					$outRemarks = $_POST['outRemarks'][$index];
+					$prodItem = $_POST['prodItem'][$index];
+					$outQty = $_POST['outQty'][$index];
+					$emp = $_POST['emp'];
+					$branch = $_POST['branch'];
+					$rcpNo = $_POST['rcno'];
+					$outgoingID = $_POST['productOutID'][$index];
 
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
+					
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+					
+					$branch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch'");
+					$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
+					$branch3 = $branch2['branchA'];
+					
+					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, outRemarks = '$outRemarks', empID = '$emp3', prodID = '$prod3' 
+							WHERE outID = $outgoingID";
+					$conn->exec($sql);				
+					
+					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
+					WHERE outID = '$outid'"; */
+				}
 			}    
 
 	?>
