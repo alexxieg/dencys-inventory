@@ -224,6 +224,7 @@
 										<?php
 											foreach ($result as $item):
 											$incID = $item["inID"];
+											$incRecID = $item["receiptNo"];						
 										?>
 										
 										<tr id="centerData">
@@ -239,7 +240,7 @@
 											<td data-title="Status"><?php echo $item["status"]; ?></td>
 											<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 											<td>
-												<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+												<a href="functionalities/editIn.php?incId=<?php echo $incRecID; ?>"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
