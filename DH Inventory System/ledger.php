@@ -13,9 +13,6 @@
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
 		<!-- Custom styles for this template -->
 		<link href="css/test.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
@@ -77,21 +74,21 @@
 					</li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns</a>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
 							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
 							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
 						</ul>
 					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports</a>
+					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="reports">
 							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 						</ul>
 					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
+							<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
 							<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
 							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>

@@ -12,27 +12,25 @@
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-		<!-- Custom styles for this template -->
+		<!-- Custom CSS for this template -->
 		<link href="css/test.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
 		<script src="outgoing.js"></script>
 		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
-				<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<!-- Datatables CSS and JS Files -->
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
-		<!-- Datatables -->
+		<!-- Datatables Script-->
 		<script>
 			$(document).ready(function(){
 				$('#myTable').dataTable();
@@ -84,25 +82,25 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<br>
-							<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+						<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
 						<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 						<li class="active"><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing<span class="sr-only">(current)</span></a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns</a>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
 								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports</a>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i> </a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
+						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="manage">
 								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-								<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
+								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
 								<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
 								<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 								<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
@@ -174,33 +172,15 @@
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Date</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Product ID
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Product Description</div>						
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Quantity
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Unit
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Receipt No.
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Handled By</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Branch</div>
-										</th>	
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Remarks
-										</th>					
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt No.</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>	
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>					
 										<th></th>
 									</tr>
 								</thead>	
