@@ -1185,7 +1185,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
+  font-family: monospace;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -1223,6 +1223,7 @@ h1,
   margin-top: 10px;
   margin-bottom: 10px;
   color: #efe;
+  font-family: monospace;
 }
 h2,
 .h2,
@@ -1241,6 +1242,7 @@ h2 .small,
 h3 .small,
 .h3 .small {
   font-size: 65%;
+  font-family: monospace;
 }
 h4,
 .h4,
@@ -1268,6 +1270,7 @@ h6 .small,
 h1,
 .h1 {
   font-size: 36px;
+  font-family: monospace;
 }
 h2,
 .h2 {
@@ -1810,7 +1813,7 @@ pre code {
   }
   .col-sm-3 {
     width: 25%;
-    height: 100%;
+    height: 105%;
   }
   .col-sm-2 {
     width: 16.66666667%;
@@ -1972,7 +1975,7 @@ pre code {
   }
   .col-md-2 {
     width: 16.66666667%;
-    height: 100%;
+    height: 105%;
   }
   .col-md-1 {
     width: 8.33333333%;
@@ -2317,6 +2320,7 @@ th {
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
   border: 1px solid #ddd;
+  font-family: monospace;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
@@ -4335,6 +4339,7 @@ background-color: #c1cdcd; } .nav-stacked > li {   float: none; } .nav-stacked
   padding-top: 10px;
   padding-bottom: 10px;
   line-height: 20px;
+  font-family: monospace;
 }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {
@@ -6932,6 +6937,7 @@ img#logo1 {
 
 #headers{
   color: #000000;
+  font-family: monospace;
 }
 
 .loginbtn {
@@ -7027,6 +7033,7 @@ border: none;
 }
 
 #tableHeader .btnclr{
+  font-family: dencyFont;
   background-color: #428bca;
   color: white;
   font-size: 15px;
@@ -7323,6 +7330,7 @@ border: none;
 
 /*font*/
 @font-face{
+  font-family: dencyFont;
   src: url(CabinCondensed-Bold.ttf);
 }
 
@@ -7400,7 +7408,7 @@ border: none;
 
   
   #navheader{
-	  float: right;
+    float: right;
   }
 
   #searchBar{
@@ -7554,10 +7562,9 @@ border: none;
   padding-bottom: 10px;
 }
 
-#sidebar #sidelogo img{
-  width: 150px;
-  height: 150px;
-  margin-left: 15%;
+.nav-sidebar #sidebarLogo img{
+  width: 100px;
+  height: 100px;
 }
 
 .tab-pane{
@@ -7571,5 +7578,24 @@ border: none;
 }
 
 #dropDownArrow{
-	float:right;
+  float:right;
+}
+
+.modal-body #addRcpt, 
+#addRcptDate, #addSupplier,
+#addEmpl, #addEntry,
+#addQty, #adduser,
+#addpass, #addpassconf,
+#addProdName, #addPrice,
+#addReorderLvl {
+  width: 80%;
+}
+
+.modal-xl {
+    width: 90%;
+   max-width:1200px;
+  }
+  
+#adminDrp {
+  margin-top: -4%;
 }

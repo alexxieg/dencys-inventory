@@ -61,6 +61,13 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
+				<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
@@ -69,20 +76,27 @@
 				</button>
 				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
 			</div>
-			<div id="font" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Logout.php">Logout</a></li>
+			<div  id="navbar" class="navbar-collapse">
+				<ul class="nav navbar-nav navbar-right" id="adminDrp">
+				    <li class="dropdown" id="font">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="try">
+                        	<i class="glyphicon glyphicon-user"></i> ADMIN
+                         </a>
+                            <ul class="dropdown-menu list-unstyled">
+                                <li>
+                                    <a href="logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
+								</li>
+                            </ul>
+                     </li>
 				</ul>
 			</div>
-		</div>
-    </nav>
+
 
     <div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar" id="sideBarClr">
+		<div class="row navbar-collapse">
+			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-	
-					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+						<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
 					<li class="active">
 						<a href="inventory.php">
 							<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
@@ -90,10 +104,10 @@
 					</li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
-							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+							<li><a href="returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 						</ul>
 					</li>
 					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -113,7 +127,11 @@
 					</li>
 				</ul>
 			</div>
-			<!-- End of Sidebar -->
+			</div>
+			</div>
+		</div>
+	</nav>	
+		<!-- End of Sidebar -->
 	
 			<?php
 				foreach ($result as $item):
@@ -246,7 +264,7 @@
 								
 					<!-- Modal for Reorder Products Summary -->
 					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog modal-lg">
+						<div class="modal-dialog modal-xl">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
