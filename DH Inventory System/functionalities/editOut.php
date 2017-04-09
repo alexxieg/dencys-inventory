@@ -105,9 +105,21 @@
 		$query2->execute();
 		$resul = $query2->fetchAll();
 	?>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+					<div id="contents">
+						<div class="pages no-more-tables">
+							<div id="tableHeader">
+								<table class="table">	
+									<tr>
+										<td colspan="2"><h1 id="headers">Edit Outgoing Entry</h1>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>	
 	
 	<div class="addInv">
-		<h1 id="headers">Edit Outgoing Entry</h1>
 		<div id="contents">
 			<form action="" method="POST">
 				

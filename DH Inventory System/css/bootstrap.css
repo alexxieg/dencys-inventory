@@ -6932,7 +6932,6 @@ img#logo1 {
 
 #headers{
   color: #000000;
-  text-decoration: underline;
 }
 
 .loginbtn {
@@ -6957,7 +6956,7 @@ img#logo1 {
 }
 
 #addEntry{
-  width: 85%;
+  width: 100%;
 }
 
 h3{
