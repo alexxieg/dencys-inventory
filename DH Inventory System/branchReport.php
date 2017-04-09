@@ -131,7 +131,7 @@
 		<div class="row navbar-collapse">
 			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-						<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
+						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 					<li>
 						<a href="inventory.php">
 							<i class="glyphicon glyphicon-list-alt"></i> Inventory

@@ -61,16 +61,15 @@
 		
 		<!--Top Navigation Bar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 
-<<<<<<< HEAD
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
@@ -93,38 +92,13 @@
                      </li>
 				</ul>
 			</div>
-=======
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
-				</div>
-				<div  id="navbar" class="navbar-collapse">
-					<ul class="nav navbar-nav navbar-right" id="adminDrp">
-						<li class="dropdown" id="font">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="try">
-								<i class="glyphicon glyphicon-user"></i> ADMIN
-							 </a>
-								<ul class="dropdown-menu list-unstyled">
-									<li>
-										<a href="logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
-									</li>
-								</ul>
-						 </li>
-					</ul>
-				</div>
-			</nav>
->>>>>>> 793821c295db820a9fa9784943b04be92dc13d0a
-
+		</nav>
 
 			<div class="container-fluid">
 				<div class="row navbar-collapse">
 					<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 						<ul class="nav nav-sidebar">
-								<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
+								<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 							<li>
 								<a href="inventory.php">
 									<i class="glyphicon glyphicon-list-alt"></i> Inventory

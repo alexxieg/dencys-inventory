@@ -136,10 +136,10 @@
 		<div class="row navbar-collapse">
 			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-						<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
+					<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 					<li>
 						<a href="inventory.php">
-							<i class="glyphicon glyphicon-list-alt"></i> Inventory
+							<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
 						</a>
 					</li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
@@ -155,7 +155,7 @@
 							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 						</ul>
 					</li>
-					<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 							<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
@@ -171,7 +171,7 @@
 			</div>
 		</div>
 	</nav>	
-		<!-- End of Sidebar -->	
+		<!-- End of Sidebar -->
 
 							
 				<?php
