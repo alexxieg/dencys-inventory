@@ -139,8 +139,9 @@
 									</tr>
 									<tr>
 										<td>
-											<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-											<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
+											<br>
+											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 										</td>
 										<td>
 											<div class="col-sm-7 pull-right">
