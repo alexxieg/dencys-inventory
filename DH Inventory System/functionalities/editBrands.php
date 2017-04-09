@@ -126,7 +126,7 @@
 	
 		<h1 id="headers">Edit Brand Entry</h1>
 		<div >
-			<form action="" method="POST">
+			<form action="" method="POST" class="editPgs">
 				<?php foreach ($result2 as $row): ?>
 				<h3>Brand ID</h3>
 				<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["brandID"]; ?>" value="<?php echo $row["brandID"]; ?>" name="branID"> <br>

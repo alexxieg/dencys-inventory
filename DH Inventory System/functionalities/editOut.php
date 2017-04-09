@@ -142,7 +142,7 @@
 					<h4 class="modal-title">Add Outgoing Product</h4>
 				</div>
 				<div>
-					<form action="" method="POST" onsubmit="return validateForm()">
+					<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
 					
 						<h5>Receipt No.</h5> 
 						<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>

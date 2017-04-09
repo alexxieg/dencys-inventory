@@ -133,7 +133,7 @@
 	
 		<h1 id="headers">Edit Branch Entry</h1>
 		<div >
-			<form action="" method="POST">
+			<form action="" method="POST" class="editPgs">
 				<?php foreach ($result2 as $row): ?>
 				<h3>Branch ID</h3>
 				<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["branchID"]; ?>" value="<?php echo $row["branchID"]; ?>" name="branID"> <br>

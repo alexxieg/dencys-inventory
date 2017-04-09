@@ -6888,12 +6888,16 @@ img#logo1 {
 
 
 .addInv {
-  margin-top: 100px;
+  margin-top: 30px;
   margin-left: 300px;
   margin-right: 100px;
   padding: 5%;
-  border: rgb(0,0,53) solid 5px;
+  border: transparent;
   border-radius: 30px;
+}
+
+.editPgs{
+margin-left: 15%;
 }
 
 #bg {

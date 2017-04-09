@@ -144,7 +144,7 @@
 							<h4 class="modal-title">Edit Incoming Product</h4>
 						</div>
 						<div>
-							<form action="" method="POST" onsubmit="return validateForm()">
+							<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
 									<h5>Receipt No.</h5> 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
 									
@@ -174,8 +174,8 @@
 									<tbody>
 										<?php foreach ($result2 as $row): ?>
 											<tr>
-												<td><input type="checkbox" name="chk"></TD>
-												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												<td><input type="checkbox" name="chk"></td>
+												<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
 												
 												<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
 												

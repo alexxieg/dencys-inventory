@@ -134,7 +134,7 @@
 		
 			<h1 id="headers">Edit Return Entry</h1>
 			<div id="contents">
-				<form action="" method="POST">
+				<form action="" method="POST" class="editPgs">
 					<h3>Item</h3>
 					<select class="form-control" id="addEntry" name="prodItem">
 						<?php foreach ($resul as $item): ?>

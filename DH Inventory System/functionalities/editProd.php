@@ -137,7 +137,7 @@
 			
 			<h1 id="headers">Edit Product Information</h1>
 			<div id="contents">
-				<form action="" method="POST">
+				<form action="" method="POST" class="editPgs">
 					<?php foreach ($result2 as $row): ?>
 					<h3>Product ID</h3>
 					<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodID"]; ?>" value="<?php echo $row["prodID"]; ?>" name="prodCode"> <br>

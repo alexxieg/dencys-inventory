@@ -135,7 +135,7 @@
 	
 		<h1 id="headers">Edit Employee Entry</h1>
 			<div class="contents">
-					<form action="" method="POST">
+					<form action="" method="POST" class="editPgs">
 																			
 					<h3>First Name</h3>
 					<?php foreach ($result2 as $row): ?>

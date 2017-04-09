@@ -132,7 +132,7 @@
 	
 		<h1 id="headers">Edit Account</h1>
 		<div id="contents">
-			<form action="" method="POST">
+			<form action="" method="POST" class="editPgs">
 				<?php foreach ($result2 as $row): ?>
 				<h3>Username</h3>
 				<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["userName"]; ?>" value="<?php echo $row["userName"]; ?>" name="userName"> <br>
