@@ -82,7 +82,7 @@
 			<div class="col-sm-3 col-md-2 sidebar" id="sideBarClr">
 				<ul class="nav nav-sidebar">
 	
-					 	<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+					 	<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 					<li class="active">
 						<a href="inventory.php">
 							<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
@@ -246,7 +246,7 @@
 								
 					<!-- Modal for Reorder Products Summary -->
 					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog modal-lg">
+						<div class="modal-dialog modal-xl">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>

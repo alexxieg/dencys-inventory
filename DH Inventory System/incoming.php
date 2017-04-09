@@ -81,8 +81,8 @@
 			<div class="row">
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
-					<br>
-							<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+					
+							<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 						<li>
 							<a href="inventory.php">
 								<i class="glyphicon glyphicon-list-alt"></i> Inventory
@@ -194,7 +194,6 @@
 									</tr>
 								</thead>
 									
-<<<<<<< HEAD
 								<tbody>					
 									<?php
 										foreach ($result as $item):
@@ -247,7 +246,6 @@
 												
 												<h5>Supplier</h5> 
 												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
-=======
 									<tbody>					
 										<?php
 											foreach ($result as $item):

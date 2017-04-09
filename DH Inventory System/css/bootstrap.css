@@ -7554,10 +7554,9 @@ border: none;
   padding-bottom: 10px;
 }
 
-#sidebar #sidelogo img{
-  width: 150px;
-  height: 150px;
-  margin-left: 15%;
+.nav-sidebar #sidebarLogo img{
+  width: 100px;
+  height: 100px;
 }
 
 .tab-pane{
@@ -7573,3 +7572,18 @@ border: none;
 #dropDownArrow{
 	float:right;
 }
+
+.modal-body #addRcpt, 
+#addRcptDate, #addSupplier,
+#addEmpl, #addEntry,
+#addQty, #adduser,
+#addpass, #addpassconf,
+#addProdName, #addPrice,
+#addReorderLvl {
+  width: 80%;
+}
+
+.modal-xl {
+    width: 90%;
+   max-width:1200px;
+  }

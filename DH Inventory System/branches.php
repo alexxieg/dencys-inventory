@@ -89,7 +89,7 @@
 			<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
 				<ul class="nav nav-sidebar">
 
-					<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+					<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 					<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
@@ -107,7 +107,7 @@
 					<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-							<li><a href="branches.php"><i class="glyphicon glyphicon-homes"></i> Branches</a></li>
+							<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
 							<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
 							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
@@ -217,7 +217,7 @@
 							
 							<!-- Modal - Branch Archive -->
 							<div class="modal fade" id="archive" role="dialog">
-								<div class="modal-dialog modal-lg">
+								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>

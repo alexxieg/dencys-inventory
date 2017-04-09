@@ -82,7 +82,7 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<br>
-						<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 						<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 						<li class="active"><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing<span class="sr-only">(current)</span></a></li>

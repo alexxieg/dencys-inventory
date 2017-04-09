@@ -81,7 +81,7 @@
 			<div class="row">
 				<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
 					<ul class="nav nav-sidebar">
-							<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
+							<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 						<li>
 							<a href="inventory.php">
 								<i class="glyphicon glyphicon-list-alt"></i> Inventory
@@ -280,7 +280,7 @@
 								
 							<!-- Modal - Product Archive -->
 							<div class="modal fade" id="archive" role="dialog">
-								<div class="modal-dialog modal-lg">
+								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
