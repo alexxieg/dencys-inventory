@@ -30,7 +30,7 @@
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
-		<!-- Datatables -->
+		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function(){
 				$('#myTable').dataTable();
@@ -58,6 +58,8 @@
 		<?php include('functionalities/fetchProduct.php'); ?>
 
 		<!--Top Navigation Bar -->
+
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -89,7 +91,45 @@
                             </ul>
                      </li>
 				</ul>
+
 			</div>
+
+
+		<div class="container-fluid">
+			<div class="row">
+				<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
+					<ul class="nav nav-sidebar">
+						<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+						<li>
+							<a href="inventory.php">
+								<i class="glyphicon glyphicon-list-alt"></i> Inventory
+							</a>
+						</li>
+						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
+								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="reports">
+								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+							</ul>
+						</li>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage<span class="sr-only">(current)</span> <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="manage">
+								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
+								<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+								<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+								<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
 
 
     <div class="container-fluid">

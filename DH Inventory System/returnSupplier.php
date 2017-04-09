@@ -19,8 +19,8 @@
 		<!-- Javascript Files -->
 		<script src="returns.js"></script>
 		<script src="js/bootstrap.js"></script>
-		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
@@ -154,7 +154,6 @@
 									<tr>
 										<td>
 											<br>
-											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 										</td>
 										<td>
@@ -283,106 +282,6 @@
 											</div>								
 										</div>
 									</div>
-								</div>
-							</div>
-							
-							<!-- Modal - Returns Archive -->
-							<div class="modal fade" id="archive" role="dialog">
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Archived Returns</h4>
-										</div>
-										<div class="modal-body">
-											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-											
-												<!-- Retrieve Return Data -->
-												<?php
-													$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
-																			FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-																			WHERE returns.status = 'Inactive'
-																			ORDER BY returnID DESC;");
-													$query->execute();
-													$result = $query->fetchAll();
-												?>
-												
-												<thead>
-													<tr>
-														<th>
-															<div id="tabHead">Date</div>
-														</th>
-														<th>
-															<div id="tabHead">Product ID</div> 
-														</th>
-														<th>
-															<div id="tabHead">Product Description</div>
-														</th>
-														<th>
-															<div id="tabHead">Quantity</div>
-														</th>
-														<th>
-															<div id="tabHead">Unit</div>
-														</th>
-														<th>
-															<div id="tabHead">Remarks</div>
-														</th>
-														<th></th>
-													</tr>
-												</thead>
-												
-												<tbody>				
-													
-													<tr id="centerData">
-														<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
-														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-														<td data-title="Unit"><?php echo $item["unitType"];?></td>
-														<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-															
-														<td>
-															<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
-																	Restore
-																</button>
-															</a>
-														</td>
-													</tr>
-													<?php
-														foreach ($result as $item):
-														$retID = $item["returnID"];
-													?>
-													
-													<tr id="centerData">
-														<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
-														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-														<td data-title="Unit"><?php echo $item["unitType"];?></td>
-														<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-															
-														<td>
-															<a href="functionalities/restoreReturn.php?retId=<?php echo $retID; ?>">
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
-																	Restore
-																</button>
-															</a>
-														</td>
-													</tr>		
-													
-													<?php
-														endforeach;
-													?>
-													
-												</tbody>	
-											</table>
-										</div>
-									</div>
-										
-									<div class="modal-footer">
-									</div>
-										
 								</div>
 							</div>
 						</div>
