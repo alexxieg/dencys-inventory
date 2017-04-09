@@ -67,6 +67,13 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
+				<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
@@ -75,31 +82,38 @@
 				</button>
 				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
 			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><i class="glyphicon glyphicon-user"></i> Admin</a></li>
+			<div  id="navbar" class="navbar-collapse">
+				<ul class="nav navbar-nav navbar-right" id="adminDrp">
+				    <li class="dropdown" id="font">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="try">
+                        	<i class="glyphicon glyphicon-user"></i> ADMIN
+                         </a>
+                            <ul class="dropdown-menu list-unstyled">
+                                <li>
+                                    <a href="logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
+								</li>
+                            </ul>
+                     </li>
 				</ul>
 			</div>
-		</div>
-    </nav>
+
 
     <div class="container-fluid">
-		<div class="row">
-			<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
+		<div class="row navbar-collapse">
+			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-				
-					<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
+						<img src="logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
 					<li>
 						<a href="inventory.php">
 							<i class="glyphicon glyphicon-list-alt"></i> Inventory
 						</a>
 					</li>
 					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+					<li ><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
-							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+							<li><a href="returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 						</ul>
 					</li>
 					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -107,7 +121,7 @@
 							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 						</ul>
 					</li>
-					<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+					<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage  <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 							<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
@@ -119,9 +133,12 @@
 					</li>
 				</ul>
 			</div>
+			</div>
+			</div>
 		</div>
-	</div>
-	<!-- End of Sidebar -->
+	</nav>	
+		<!-- End of Sidebar -->	
+
 			
 				<?php
 					foreach ($result as $item):
