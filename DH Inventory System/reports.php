@@ -75,9 +75,9 @@
 				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
 			</div>
 			<div  id="navbar" class="navbar-collapse">
-				<ul class="nav navbar-nav navbar-right" id="adminDrp">
+				<ul class="nav navbar-nav-fixed navbar-right" id="adminDrp">
 				    <li class="dropdown" id="font">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="try">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         	<i class="glyphicon glyphicon-user"></i> ADMIN
                          </a>
                             <ul class="dropdown-menu list-unstyled">
