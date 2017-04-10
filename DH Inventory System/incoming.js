@@ -1,9 +1,9 @@
 function validateForm() {
 	if(document.getElementById('addRcpt').value == "") {
 		swal({
-		title: "Error!",
+		title: "Warning!",
 		text: "Please Enter Receipt no.",
-		type: "error",
+		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addRcpt').style.borderColor = "red";
@@ -11,26 +11,15 @@ function validateForm() {
 	}
 	if (document.getElementById('addQty').value == "") {
 		swal({
-		title: "Error!",
+		title: "Warning!",
 		text: "Please Enter Quantity.",
-		type: "error",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addQty').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addQtyOrdered').value == "") {
-		swal({
-		title: "Error!",
-		text: "Please Enter Quantity.",
-		type: "error",
+		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
 	}
 	if(confirm('Are you sure you want to add this entry?')) {
-		alert("Incoming Product Successfully Added");
 		return true;		
 	}
 	else {
