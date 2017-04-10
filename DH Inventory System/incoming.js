@@ -8,6 +8,8 @@ function validateForm() {
 		});
 		document.getElementById('addRcpt').style.borderColor = "red";
 		return false;
+	}else{
+        document.getElementById('addRcpt').style.borderColor = "blue";
 	}
 	if (document.getElementById('addQty').value == "") {
 		swal({
@@ -18,6 +20,8 @@ function validateForm() {
 		});
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
+	}else{
+        document.getElementById('addQty').style.borderColor = "blue";
 	}
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		

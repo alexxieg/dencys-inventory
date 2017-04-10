@@ -60,6 +60,23 @@
             $inQty = $_POST['incQty'][$index];
 			$inStat = $_POST['inStatus'][$index];
             $emp = $_POST['emp'];
+			
+			$rcno = $_POST['rcno'];
+			$query = $conn->prepare("Select * FROM incoming WHERE receiptNo = '$rcno'");
+			$count = $query->execute();
+			$row = $query->fetch();
+
+		if ($query->rowCount() > 0){
+			echo '<script language="javascript">';
+			echo 'swal(
+				  "Warning!",
+				  "Receipt No. Already Exists, Incoming Product Has Not been Added",
+				  "warning");';
+			echo '$("#myModal").modal("show");';
+			echo 'document.getElementById("addRcpt").style.borderColor = "red";';
+			echo '</script>';
+		} else {
+			// Do Something If name Doesn't Exist
 
             $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
             $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -69,10 +86,11 @@
             $prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
             $prod3 = $prod2['prodA'];
             $sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID)
-            VALUES ('$inQty',CURDATE(),'".$_POST['rcno']."','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3')";
+            VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3')";
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";
         }
     }
+	}
 ?>	
