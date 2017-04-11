@@ -34,6 +34,24 @@
     if (isset($_POST['submit'])) {
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+		for ($index = 0; $index < count($prodTem); $index++) {
+		$rcno = $_POST['rcno'];
+		$query = $conn->prepare("Select * FROM outgoing WHERE receiptNo = '$rcno'");
+		$count = $query->execute();
+		$row = $query->fetch();
+
+		if ($query->rowCount() > 0){
+			echo '<script language="javascript">';
+			echo 'swal(
+				  "Error!",
+				  "Receipt No. Already Exists, Outgoing Product Has Not been Added",
+				  "error");';
+			echo '$("#myModal").modal("show");';
+			echo 'document.getElementById("addRcpt").style.borderColor = "red";';
+			echo '</script>';
+		} else {
+			// Do Something If name Doesn't Exist
 
         for ($index = 0; $index < count($prodTem); $index++) {
 
@@ -60,6 +78,8 @@
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";
+		}
+		}
         }
     }
 ?>	

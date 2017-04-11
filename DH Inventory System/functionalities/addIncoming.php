@@ -52,31 +52,34 @@
     if (isset($_POST['submit'])) {
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+	for ($index = 0; $index < count($prodTem); $index++) {
+		$rcno = $_POST['rcno'];
+		$query = $conn->prepare("Select * FROM incoming WHERE receiptNo = '$rcno'");
+		$count = $query->execute();
+		$row = $query->fetch();
 
-        for ($index = 0; $index < count($prodTem); $index++) {
+		if ($query->rowCount() > 0){
+			echo '<script language="javascript">';
+			echo 'swal(
+				  "Error!",
+				  "Receipt No. Already Exists, Incoming Product Has Not been Added",
+				  "error");';
+			echo '$("#myModal").modal("show");';
+			echo 'document.getElementById("addRcpt").style.borderColor = "red";';
+			echo '</script>';
+		} else {
+			// Do Something If name Doesn't Exist
+			
+       for ($index = 0; $index < count($prodTem); $index++) {
 
+		
             $inRemarks = $_POST['inRemarks'][$index];
             $prodItem = $_POST['prodItem'][$index];
             $inQty = $_POST['incQty'][$index];
 			$inStat = $_POST['inStatus'][$index];
             $emp = $_POST['emp'];
 			
-			$rcno = $_POST['rcno'];
-			$query = $conn->prepare("Select * FROM incoming WHERE receiptNo = '$rcno'");
-			$count = $query->execute();
-			$row = $query->fetch();
-
-		if ($query->rowCount() > 0){
-			echo '<script language="javascript">';
-			echo 'swal(
-				  "Warning!",
-				  "Receipt No. Already Exists, Incoming Product Has Not been Added",
-				  "warning");';
-			echo '$("#myModal").modal("show");';
-			echo 'document.getElementById("addRcpt").style.borderColor = "red";';
-			echo '</script>';
-		} else {
-			// Do Something If name Doesn't Exist
 
             $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
             $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -90,7 +93,8 @@
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";
+	    }
         }
-    }
+	}
 	}
 ?>	
