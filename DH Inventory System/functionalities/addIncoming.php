@@ -59,9 +59,6 @@
 		$count = $query->execute();
 		$row = $query->fetch();
 
-<<<<<<< HEAD
-
-=======
 		if ($query->rowCount() > 0){
 			echo '<script language="javascript">';
 			echo 'swal(
@@ -72,7 +69,7 @@
 			echo 'document.getElementById("addRcpt").style.borderColor = "red";';
 			echo '</script>';
 		} else {
->>>>>>> 3a231b6e500b5f89ee6e929703ccdf7502afa079
+
 			// Do Something If name Doesn't Exist
 			
        for ($index = 0; $index < count($prodTem); $index++) {
@@ -99,11 +96,11 @@
             echo "<meta http-equiv='refresh' content='0'>";
 	    }
         }
-<<<<<<< HEAD
+
     }
 	
-=======
+
 	}
-	}
->>>>>>> 3a231b6e500b5f89ee6e929703ccdf7502afa079
+	
+
 ?>	
