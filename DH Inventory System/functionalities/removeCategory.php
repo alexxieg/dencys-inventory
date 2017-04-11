@@ -2,8 +2,8 @@
 
 	require_once 'dbcon.php';
 
-    $usethisid= $_GET['useId'];
-    $result = $conn->prepare("UPDATE category SET status = 'Inactive' WHERE categoryID = '$usethisid'");
+    $categRemoveID= $_GET['categoryID'];
+    $result = $conn->prepare("UPDATE category SET status = 'Inactive' WHERE categoryID = '$categRemoveID'");
     $result->execute();
     header("location: ../category.php");
 

@@ -64,38 +64,40 @@
 		?>
 
 		<!--Top Navigation Bar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
+				</div>
+
+					<ul class="nav navbar-nav-fixed navbar-right" id="adminDrp">
+						<li class="dropdown" id="font">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="glyphicon glyphicon-user"></i> ADMIN
+							 </a>
+								<ul class="dropdown-menu list-unstyled">
+									<li>
+										<a href="logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
+									</li>
+								</ul>
+						 </li>
+					</ul>
+
 			</div>
-			<div  id="navbar" class="navbar-collapse">
-				<ul class="nav navbar-nav-fixed navbar-right" id="adminDrp">
-				    <li class="dropdown" id="font">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        	<i class="glyphicon glyphicon-user"></i> ADMIN
-                         </a>
-                            <ul class="dropdown-menu list-unstyled">
-                                <li>
-                                    <a href="logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
-								</li>
-                            </ul>
-                     </li>
-				</ul>
-			</div>
+		</nav>
 
 
     <div class="container-fluid">
@@ -136,13 +138,13 @@
 			</div>
 			</div>
 		</div>
-	</nav>	
+	
 		<!-- End of Sidebar -->	
 
 			
 				<?php
 					foreach ($result as $item):
-					$useThisID = $item["categoryID"];
+					$categEditID = $item["categoryID"];
 				?>
 						
 				<?php
@@ -180,18 +182,19 @@
 								<tbody>
 									<?php
 										foreach ($result as $item):
-										$useThisID = $item["categoryID"];
+										$categEditID = $item["categoryID"];
+										$categRemoveID = $item["categoryID"];
 									?>
 									<tr id="centerData">
 										<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
 										<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 										<td>	
-											<a>
+											<a href="functionalities/editCategories.php?categoryID=<?php echo $categEditID; ?>">
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
 											</a>
-											<a href="functionalities/removeCategory.php?useId=<?php echo $useThisID; ?>"> 
+											<a href="functionalities/removeCategory.php?categoryID=<?php echo $categRemoveID; ?>"> 
 												<button type="button" class="btn btn-default" id="edBtn"onclick="return confirm('Are you sure you want to remove this entry?');">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
@@ -275,7 +278,7 @@
 														<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
 														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 														<td>	
-															<a href="functionalities/restoreCategory.php?useId=<?php echo $useThisID; ?>"> 
+															<a href="functionalities/restoreCategory.php?useId=<?php echo $categEditID; ?>"> 
 																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 																	Restore
 																</button>
@@ -284,13 +287,13 @@
 													</tr>
 													<?php
 														foreach ($result as $item):
-														$useThisID = $item["categoryID"];
+														$categEditID = $item["categoryID"];
 													?>	
 													<tr id="centerData">
 														<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
 														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 														<td>	
-															<a href="functionalities/restoreCategory.php?useId=<?php echo $useThisID; ?>"> 
+															<a href="functionalities/restoreCategory.php?useId=<?php echo $categEditID; ?>"> 
 																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 																	Restore
 																</button>

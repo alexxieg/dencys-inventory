@@ -35,12 +35,12 @@
   
   <body>
 		<?php
-			$catThisID = $_GET['useID'];
+			$categEditID = $_GET['categoryID'];
 			$query = $conn->prepare("SELECT categoryID, categoryName FROM category");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE categoryID = '$catThisID'");
+			$query2 = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE categoryID = '$categEditID'");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 		?>
@@ -150,7 +150,7 @@
     
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	 
-		$sql = "UPDATE category SET categoryID = '$cateID', categoryName = '$cateName' WHERE categoryID = '$catThisID'";
+		$sql = "UPDATE category SET categoryID = '$cateID', categoryName = '$cateName' WHERE categoryID = '$categEditID'";
     
 		$conn->exec($sql);
 	}    

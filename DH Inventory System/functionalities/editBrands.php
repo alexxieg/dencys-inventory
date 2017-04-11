@@ -35,12 +35,12 @@
   
   <body>
 		<?php
-			$brandThisID = $_GET['brandID'];
+			$brandEditID = $_GET['brandID'];
 			$query = $conn->prepare("SELECT brandID, brandName FROM brand");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT brandID, brandName FROM brand WHERE brandID='$brandThisID'");
+			$query2 = $conn->prepare("SELECT brandID, brandName FROM brand WHERE brandID='$brandEditID'");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 		?>
@@ -150,7 +150,7 @@
     
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	 
-		$sql = "UPDATE brand SET brandID = '$braID', brandName = '$braName' WHERE brandID = '$brandThisID'";
+		$sql = "UPDATE brand SET brandID = '$braID', brandName = '$braName' WHERE brandID = '$brandEditID'";
     
 		$conn->exec($sql);
 	}    

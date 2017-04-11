@@ -90,11 +90,12 @@
                      </li>
 				</ul>
 			</div>
+			</nav>
 
 
     <div class="container-fluid">
-		<div class="row navbar-collapse">
-			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 					<li>
@@ -127,10 +128,8 @@
 					</li>
 				</ul>
 			</div>
-			</div>
-			</div>
-		</div>
-	</nav>	
+
+
 		<!-- End of Sidebar -->	
 
 				<?php

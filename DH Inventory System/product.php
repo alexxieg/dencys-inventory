@@ -4,19 +4,19 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-		<title>Products</title>
-			
+
+		<title>Incoming Products</title>
+
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-
+		
 		<!-- Custom CSS for this template -->
 		<link href="css/test.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
-		
-		<!--Javascript Files -->
+			
+		<!-- Javascript Files -->
 		<script src="product.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
@@ -36,10 +36,10 @@
 				$('#myTable').dataTable();
 			});
 		</script>
-		
+			
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
-		
+	
 		<!-- Login Session -->
 		<?php 
 			session_start();
@@ -97,20 +97,20 @@
 
 		<div class="container-fluid">
 			<div class="row">
-				<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
+				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
-						<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
+							<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 						<li>
 							<a href="inventory.php">
 								<i class="glyphicon glyphicon-list-alt"></i> Inventory
 							</a>
 						</li>
-						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li class="active"><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming<span class="sr-only">(current)</span></a></li>
 						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
-								<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
-								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
+								<li><a href="returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -118,7 +118,7 @@
 								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage<span class="sr-only">(current)</span> <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="manage">
 								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
@@ -130,6 +130,7 @@
 						</li>
 					</ul>
 				</div>
+				<!-- End of Sidebar -->
 
 
     <div class="container-fluid">
@@ -246,7 +247,7 @@
 											</button>
 										</a>	
 										<a href="functionalities/removeProduct.php?proId=<?php echo $proID; ?>">
-											<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');" id="delBtn1">
+											<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to archive this product?');" id="delBtn1">
 												<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 											</button>
 										</a>

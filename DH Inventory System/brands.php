@@ -185,28 +185,24 @@
 									<?php
 										endforeach;
 									?>
-
-									<tr id="centerData">
-										<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
-										<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
-									</tr>
 										
 									<?php
 										foreach ($result as $item):
-										$useThisID = $item["brandID"];
+										$brandEditID = $item["brandID"];
+										$brandRemoveID = $item["brandID"];
 									?>
 
 									<tr id="centerData">
 										<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
 										<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 										<td>
-											<a>
+											<a href="functionalities/editBrands.php?brandID=<?php echo $brandEditID; ?>">
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
 											</a>
 											
-											<a href="functionalities/removeBrand.php?useId=<?php echo $useThisID; ?>"> 
+											<a href="functionalities/removeBrand.php?brandID=<?php echo $brandRemoveID; ?>"> 
 												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
@@ -290,7 +286,7 @@
 														<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
 														<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 														<td>											
-															<a href="functionalities/restoreBrand.php?useId=<?php echo $useThisID; ?>"> 
+															<a href="functionalities/restoreBrand.php?brandID=<?php echo $useThisID; ?>"> 
 																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this brand?');">
 																	Restore
 																</button>
@@ -305,7 +301,7 @@
 														<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
 														<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 														<td>											
-															<a href="functionalities/restoreBrand.php?useId=<?php echo $useThisID; ?>"> 
+															<a href="functionalities/restoreBrand.php?brandID=<?php echo $useThisID; ?>"> 
 																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this brand?');">
 																	Restore
 																</button>
