@@ -63,41 +63,26 @@
 			$result = $query->fetchAll();
 		?>
 
-		<!--Top Navigation Bar -->
+			<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
-
-					<ul class="nav navbar-nav-fixed navbar-right" id="adminDrp">
-						<li class="dropdown" id="font">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="glyphicon glyphicon-user"></i> ADMIN
-							 </a>
-								<ul class="dropdown-menu list-unstyled">
-									<li>
-										<a href="logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
-									</li>
-								</ul>
-						 </li>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="Logout.php">Logout</a></li>
 					</ul>
-
+				</div>
 			</div>
 		</nav>
+		<!-- End of Top Main Header -->
 
 
     <div class="container-fluid">

@@ -146,7 +146,14 @@
 									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
 										Products for Reorder
 									</button>
+									
 									<a href="history.php"><button type="button" class="btn btn-info btn-lg btnclr" id="modbutt">View Previous Inventory</button></a>
+									
+									<a href="physCount.php"> 
+										<button type="button" class="btn btn-info btn-lg btnclr" id="edBtn">
+											Add Physical Count
+										</button>
+									</a>
 								</table>
 							</div>
 							

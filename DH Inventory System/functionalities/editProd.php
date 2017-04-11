@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,13 +41,13 @@
   <body>
 		<?php
 			$proID = $_GET['proId'];
-			$query = $conn->prepare("SELECT product.prodID, product.prodName, product.model, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
+			$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
 										FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
 										ORDER BY prodID");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodID, product.prodName, product.model, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
+			$query2 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
 										FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
 										WHERE prodID = '$proID'
 										ORDER BY prodID");
@@ -169,12 +168,15 @@
 					<?php endforeach ?>	
 						
 					<br>
-				<input type="submit" value="Update" class="btn btn-success" name="addProd" onclick="alert('New Product Successfully Added');">
-				<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
-				</form> 
-			</div>
-		</div>
-	
+				<div class="modFoot">
+				<span>
+					<input type="submit" value="Cancel" class="btn btn-danger" id="canBtn">
+				</span>
+				<span>
+					<input type="submit" value="Update" class="btn btn-success" id="sucBtn" name="addProd" data-dismiss="modal" onclick="alert('New Product Successfully Added');">
+				</span>
+				</div>
+				
 		<?php
 			$proID = $_GET['proId'];
 			$itemName=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);

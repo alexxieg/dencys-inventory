@@ -19,11 +19,13 @@
 								SET inventory.qty = (SELECT SUM((inventory.beginningQty + IFNULL(inventory.inQty,0)) - IFNULL(inventory.outQty,0)) 
 								GROUP BY inventory.prodID)");
 	$updateQty->execute();
+?>	
+<?php
 	$updateInvDate = $conn->prepare("UPDATE inventory
-									SET inventory.invdate = (curdate())
+									SET inventory.invDate = CURDATE()
 									GROUP BY inventory.prodID");
+	$updateInvDate->execute();
 ?>
-		
 <?php
 	$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
 								FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID

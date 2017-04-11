@@ -137,13 +137,8 @@
   
 		<!-- Modal for New Incoming Entry Form -->
 			<div class="addInv">
-				<div>
-					<div>
-						<div>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Edit Incoming Product</h4>
-						</div>
-						<div>
+						<h1 id="headers">Edit Incoming Product</h1>
+						<div id="content">
 							<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
 									<h5>Receipt No.</h5> 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
@@ -229,12 +224,10 @@
 								</div>
 							</form> 	
 						
-							<div class="modal-footer">
-							</div>								
-						</div>
-					</div>
-				</div>
-			</div> 
+							
+						</div>								
+			</div>
+			 
 			<!-- End of Modal -->
 		
 	<?php
