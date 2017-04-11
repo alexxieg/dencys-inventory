@@ -221,7 +221,9 @@
 							<br>
 							<br>
 							<span>
-								<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+								<a href="../outgoing.php">
+									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+								</a>
 							</span>
 							<span>
 								<input type="submit" name="updateOut" value="Update" class="btn btn-success" id="sucBtn">

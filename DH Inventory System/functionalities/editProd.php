@@ -170,7 +170,9 @@
 					<br>
 				<div class="modFoot">
 				<span>
-					<input type="submit" value="Cancel" class="btn btn-danger" id="canBtn">
+					<a href="../product.php">
+					<input type="button" value="Cancel" class="btn btn-danger" id="canBtn">
+					</a>
 				</span>
 				<span>
 					<input type="submit" value="Update" class="btn btn-success" id="sucBtn" name="addProd" data-dismiss="modal" onclick="alert('New Product Successfully Added');">
