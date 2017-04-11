@@ -211,12 +211,14 @@
 								<br>
 								
 								<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+								<span><button type="button" name="addProduct" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
 								<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 								<br>
 								<br>
 								<span>
-									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+									<a href="../incoming.php">
+										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+									</a>
 								</span>
 								<span>
 									<input type="submit" name="updateIn" value="Update" class="btn btn-success" id="sucBtn">
@@ -256,9 +258,16 @@
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 					
-					$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3'
+					if (isset($_POST["addProduct"])) {
+						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID)
+						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3')";
+						$result = $conn->query($sql); 	
+					} else {
+						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3'
 							WHERE inID = $incomingID";
-					$conn->exec($sql);				
+						$conn->exec($sql);
+					}
+								
 					
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 					WHERE outID = '$outid'"; */

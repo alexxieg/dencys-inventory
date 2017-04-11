@@ -158,7 +158,9 @@
 					<?php endforeach ?>					
 					<br>
 					<input type="submit" value="Edit" class="btn btn-success btnclr" name="editEmp" onclick="alert('New Employee Successfully Added');">
-					<input type="submit" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+					<a href="../employees.php">
+						<input type="button" value="Cancel" class="btn btn-default btnclr" style="width: 100px">
+					</a>
 				</form> 
 			</div>
 	</div>

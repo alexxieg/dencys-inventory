@@ -164,7 +164,9 @@
 			
 					<br>
 					<input type="submit" value="Update" class="btn btn-success" name="addRet">
-					<input type="submit" value="Cancel" class="btn btn-default" style="width: 100px">
+					<a href="../returns.php">
+						<input type="button" value="Cancel" class="btn btn-default" style="width: 100px">
+					</a>
 				</form> 
 			</div>
 		</div>
