@@ -87,12 +87,11 @@
 							<a href="inventory.php">
 								<i class="glyphicon glyphicon-list-alt"></i> Inventory
 							</a>
-						</li>
-						<li class="active"><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming<span class="sr-only">(current)</span></a></li>
-						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Product Deliveries</a></li>
+						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
-								<li><a href="returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
@@ -101,7 +100,7 @@
 								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="manage">
 								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>

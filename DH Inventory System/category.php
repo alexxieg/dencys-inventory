@@ -95,11 +95,11 @@
 							<i class="glyphicon glyphicon-list-alt"></i> Inventory
 						</a>
 					</li>
-					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li ><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Product Deliveries</a></li>
+					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+							<li><a href="returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 						</ul>
 					</li>
