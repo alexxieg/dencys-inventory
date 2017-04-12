@@ -55,14 +55,14 @@
   	<body>
 		<!-- PHP code for fetching the data-->
 <?php
-	$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut
+	$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
 								FROM product LEFT JOIN archive ON product.prodID = archive.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 								WHERE product.status = 'Active' 
-								GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty");	
+								GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty, archive.endingQty, archive.remarks");	
 	$query->execute();
 	$result = $query->fetchAll();
 ?>	
-		<!-- Top Main Header -->
+	<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -76,55 +76,50 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="Logout.php">Logout</a></li>
+					<li><a href="Logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<!-- End of Top Main Header -->
 
-    <div class="container-fluid">
-		<div class="row">
-			<div id="navbar" class="col-sm-3 col-md-2 sidebar collapse">
-				<ul class="nav nav-sidebar">
-					<br>
-					<div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
-					<li class="active">
-						<a href="inventory.php">
-							<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
-						</a>
-					</li>
-					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns <i class="glyphicon glyphicon-menu-right"></i></a>
-						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
-							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-right"></i></a>
-						<ul class="list-unstyled collapse" id="reports">
-							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-right"></i></a>
-						<ul class="list-unstyled collapse" id="manage">
-							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
-							<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
-							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
-							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
-						</ul>
-					</li>
-					<li class="PrintBtn"><a href="print.php"><i class="glyphicon glyphicon-print"></i> Print</a></li>
-					<li class="LogBtn"><a href="logout.php"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- End of Sidebar -->
-							
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Sidebar -->
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
+						<li class="active">
+							<a href="inventory.php">
+								<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="reports">
+								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="manage">
+								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
+								<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+								<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+								<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- End of Sidebar -->
 		<?php
 			foreach ($result as $item):
 				$currQty = $item["qty"];
@@ -242,14 +237,14 @@
 							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-							<td data-title="End. Quantity"></td>
+							<td data-title="End. Quantity"><?php echo $item["endingQty"]; ?></td>
 							<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
 							<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
 							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
 							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 							<td data-title="Unit"><?php echo $item["unitType"];?></td>
-							<td data-title="Remarks"></td>
+							<td data-title="Remarks"><?php echo $item["remarks"];?></td>
 							<td>
 								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
 									<button type="button" class="btn btn-default" id="edBtn">
@@ -266,14 +261,14 @@
 							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-							<td data-title="End. Quantity"></td>
+							<td data-title="End. Quantity"><?php echo $item["endingQty"]; ?></td>
 							<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
 							<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
 							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
 							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 							<td data-title="Unit"><?php echo $item["unitType"];?></td>
-							<td data-title="Remarks"></td>
+							<td data-title="Remarks"><?php echo $item["remarks"];?></td>
 							<td>
 								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_self"> 
 									<button type="button" class="btn btn-default" id="edBtn">

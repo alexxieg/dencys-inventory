@@ -211,11 +211,6 @@
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
 											</a>
-											<a href="functionalities/removeReturn.php?retId=<?php echo $retID; ?>">
-												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this entry?');">
-													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-												</button>
-											</a>
 										</td>
 									</tr>
 											

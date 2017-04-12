@@ -59,37 +59,32 @@
 		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
-		  <div class="container-fluid">
-			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			  </button>
-			  <a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+					<li><a href="Logout.php">Logout</a></li>
+					</ul>
+				</div>
 			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-			  <ul class="nav navbar-nav navbar-right">
-				<li><a href="Logout.php">Logout</a></li>
-			  </ul>
-			</div>
-		  </div>
 		</nav>
 		<!-- End of Top Main Header -->
 
 		<div class="container-fluid">
 			<div class="row">
-			
 				<!-- Sidebar -->
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li class="active">
-							<a href="inventory.php">
-								<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
-							</a>
-						</li>
+						<li class="active"><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span></a></li>
 						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
 						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -182,14 +177,12 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>	
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Beginning Quantity</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Ending Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">IN</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">OUT</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Current Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Physical Count</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reorder Level</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Stock Card</th>
 									</tr>
 								</thead>
@@ -203,14 +196,12 @@
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-										<td data-title="End. Quantity"></td>
 										<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 										<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
 										<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
 										<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 										<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
-										<td data-title="Remarks"></td>
 										<td>
 											<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
 												<button type="button" class="btn btn-default" id="edBtn">
@@ -227,14 +218,12 @@
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-										<td data-title="End. Quantity"></td>
 										<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 										<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
 										<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
 										<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 										<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
-										<td data-title="Remarks"></td>
 										<td>
 											<a href="ledger.php?incId=<?php echo $incID; ?>" target="_self"> 
 												<button type="button" class="btn btn-default" id="edBtn">

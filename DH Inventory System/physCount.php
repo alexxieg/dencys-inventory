@@ -45,111 +45,111 @@
 	  
 	<body>
 	  
-	<!-- Topbar Navigation / Main Header -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
+		<!-- Top Main Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="Logout.php">Logout</a></li>
-				</ul>
+			  <ul class="nav navbar-nav navbar-right">
+				<li><a href="Logout.php">Logout</a></li>
+			  </ul>
 			</div>
-		</div>
-    </nav>
+		  </div>
+		</nav>
+		<!-- End of Top Main Header -->
 
-    <div class="container-fluid" >
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<br>
-					 <div id="sidebarLogo"><img src="logo.png" alt="" width="100px" height="100px"/></div>
-					<li class="active">
-						<a href="inventory.php">
-							<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
-						</a>
-					</li>
-					<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-sort"></i> Returns</a>
-						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="returns.php"><i class="glyphicon glyphicon-sort"></i>Warehouse Returns</a></li>
-							<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-sort"></i>Supplier Returns</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports</a>
-						<ul class="list-unstyled collapse" id="reports">
-							<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage</a>
-						<ul class="list-unstyled collapse" id="manage">
-							<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-							<li><a href="branches.php"><i class="glyphicon glyphicon-random"></i> Branches</a></li>
-							<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
-							<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-							<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
-							<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- End of Sidebar -->
+		<div class="container-fluid">
+			<div class="row">
+			
+				<!-- Sidebar -->
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
+						<li class="active">
+							<a href="inventory.php">
+								<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
+						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="reports">
+								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="manage">
+								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
+								<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+								<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+								<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- End of Sidebar -->
 	
-		<!-- Retrieve Ledger Data -->
-		<?php
-			$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
-			$query->execute();
-			$result = $query->fetchAll();
-			
-			$query2 = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
-			$query2->execute();
-			$result2 = $query2->fetchAll();
-			
-			$sortByBrand = (isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
-			$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
-			
-			if (!empty($sortByBrand)) { 
-				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty
-										FROM product 
-										INNER JOIN brand ON product.brandID = brand.brandID 
-										INNER JOIN category ON product.categoryID = category.categoryID 
-										INNER JOIN inventory ON product.prodID = inventory.prodID
-										WHERE product.status = 'Active' AND product.brandID = '$sortByBrand'
-										ORDER BY prodID");
-				$query3->execute();
-				$result3 = $query3->fetchAll();
-			} else if (!empty($sortByCategory)) {
-				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty
-										FROM product 
-										INNER JOIN brand ON product.brandID = brand.brandID 
-										INNER JOIN category ON product.categoryID = category.categoryID 
-										INNER JOIN inventory ON product.prodID = inventory.prodID
-										WHERE product.status = 'Active' AND product.categoryID = '$sortByCategory'
-										ORDER BY prodID");
-				$query3->execute();
-				$result3 = $query3->fetchAll();
-			} else {
-				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty
-										FROM product 
-										INNER JOIN brand ON product.brandID = brand.brandID 
-										INNER JOIN category ON product.categoryID = category.categoryID 
-										INNER JOIN inventory ON product.prodID = inventory.prodID
-										WHERE product.status = 'Active'
-										ORDER BY prodID");
-				$query3->execute();
-				$result3 = $query3->fetchAll();
-			}
-		?>
+			<!-- Retrieve Ledger Data -->
+			<?php
+				$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
+				$query->execute();
+				$result = $query->fetchAll();
+				
+				$query2 = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
+				$query2->execute();
+				$result2 = $query2->fetchAll();
+				
+				$sortByBrand = (isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
+				$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
+				
+				if (!empty($sortByBrand)) { 
+					$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+											FROM product 
+											INNER JOIN brand ON product.brandID = brand.brandID 
+											INNER JOIN category ON product.categoryID = category.categoryID 
+											INNER JOIN inventory ON product.prodID = inventory.prodID
+											WHERE product.status = 'Active' AND product.brandID = '$sortByBrand'
+											ORDER BY prodID");
+					$query3->execute();
+					$result3 = $query3->fetchAll();
+				} else if (!empty($sortByCategory)) {
+					$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+											FROM product 
+											INNER JOIN brand ON product.brandID = brand.brandID 
+											INNER JOIN category ON product.categoryID = category.categoryID 
+											INNER JOIN inventory ON product.prodID = inventory.prodID
+											WHERE product.status = 'Active' AND product.categoryID = '$sortByCategory'
+											ORDER BY prodID");
+					$query3->execute();
+					$result3 = $query3->fetchAll();
+				} else {
+					$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+											FROM product 
+											INNER JOIN brand ON product.brandID = brand.brandID 
+											INNER JOIN category ON product.categoryID = category.categoryID 
+											INNER JOIN inventory ON product.prodID = inventory.prodID
+											WHERE product.status = 'Active'
+											ORDER BY prodID");
+					$query3->execute();
+					$result3 = $query3->fetchAll();
+				}
+			?>
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
 		<div id="contents">
@@ -210,8 +210,11 @@
 										Unit
 									</th>
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Price</div>
-									</th>					
+										<div id="tabHead">Last physical Qty</div>
+									</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+										<div id="tabHead">Remarks</div>
+									</th>		
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 										<div id="tabHead">Physical Count</div>
 									</th>	
@@ -229,16 +232,21 @@
 									<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 									<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 									<td data-title="Unit"><?php echo $item["unitType"];?></td>
-									<td data-title="Price"><?php echo $item["price"]; ?></td>
+									<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
+									<form action="" method="POST">
+									<td data-title="Remarks">
+										<input type="text" id="adjustment" name="updateRemarks" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
+									</td>
 									<td>
-										<form action="" method="POST">
-											<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-											<input type="hidden" name="thisProductID" value="<?php echo $item["prodID"]; ?>" />
-											<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
-												UPDATE
-											</button>
-										</form>
-									</td>				
+										
+										<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
+										<input type="hidden" name="thisProductID" value="<?php echo $item["prodID"]; ?>" />
+										<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
+											UPDATE
+										</button>
+										
+									</td>
+									</form>	
 								</tr>	
 								<?php
 									endforeach;
@@ -251,25 +259,34 @@
 			</div>
 		</div>
 	</div>
+	</div>
+	</div>
 					
 		<?php 
 			$quant=(isset($_REQUEST['adjustUpdate']) ? $_REQUEST['adjustUpdate'] : null);
 			$thisProdID=(isset($_REQUEST['thisProductID']) ? $_REQUEST['thisProductID'] : null);
+			$thisRemarks=(isset($_REQUEST['updateRemarks']) ? $_REQUEST['updateRemarks'] : null);
 			
 			if (isset($_POST["adjust"])){
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
 				$sql1 = "INSERT INTO archive(archiveDate, qty, totalIn, totalOut, beginningQty, endingQty, physicalQty, remarks, prodID)
-						SELECT invDate, qty, inQty, outQty, beginningQty, endingQty, physicalQty, remarks, prodID FROM inventory
+						SELECT invDate, qty, inQty, outQty, beginningQty, physicalQty, physicalQty, remarks, prodID FROM inventory
 						WHERE prodID = '$thisProdID'";
 				$conn->exec($sql1);
 			
-				$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE() WHERE prodID = '$thisProdID'";
+				$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE(), remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
 				$conn->exec($sql2);
 
 				$sql3 = "UPDATE inventory SET beginningQty=physicalQty WHERE prodID = '$thisProdID'";
 				$conn->exec($sql3);
+				$sql4 = "UPDATE archive SET endingQty=$quant WHERE prodID = '$thisProdID'";
+				$conn->exec($sql4);
+				$sql5 = "UPDATE archive SET physicalQty=$quant WHERE prodID = '$thisProdID'";
+				$conn->exec($sql5);
+				$sql6 = "UPDATE archive SET remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
+				$conn->exec($sql6);
 				
 				echo "<meta http-equiv='refresh' content='0'>";
 			}
