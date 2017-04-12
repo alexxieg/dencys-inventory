@@ -1,9 +1,9 @@
 function validateForm() {
 	if(document.getElementById('adduser').value == "") {
 		swal({
-		title: "Error!",
+		title: "Warning!",
 		text: "Please Enter Username.",
-		type: "error",
+		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('adduser').style.borderColor = "red";
@@ -11,9 +11,9 @@ function validateForm() {
 	}
 	if (document.getElementById('addpass').value == "") {
 		swal({
-		title: "Error!",
+		title: "Warning!",
 		text: "Please Enter Password.",
-		type: "error",
+		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addpass').style.borderColor = "red";
@@ -21,9 +21,9 @@ function validateForm() {
 	}
 	if (document.getElementById('addpassconf').value == "") {
 		swal({
-		title: "Error!",
+		title: "Warning!",
 		text: "Please Enter Confirm Password.",
-		type: "error",
+		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addpassconf').style.borderColor = "red";
@@ -45,16 +45,15 @@ function validateForm() {
     }
 	if (document.getElementById('addpass').value == "") {
 		swal({
-		title: "Error!",
+		title: "Warning!",
 		text: "Please Enter Password.",
-		type: "error",
+		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addpass').style.borderColor = "red";
 		return false;
 	}
 	if(confirm('Are you sure you want to add this account?')) {
-		alert("New Account Successfully Added");
 		return true;	
 	}
 	else {
