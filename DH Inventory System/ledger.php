@@ -216,7 +216,7 @@
 											$loop = False;
 										}
 										else {
-											$currQty = $request + ($item["plus"] + $item["plus2"]) - ($item["minus"] + $item["minus2"]);
+											$currQty = $currQty + ($item["plus"] + $item["plus2"]) - ($item["minus"] + $item["minus2"]);
 										}
 									?>
 									
