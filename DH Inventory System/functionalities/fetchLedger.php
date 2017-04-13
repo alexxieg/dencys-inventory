@@ -4,65 +4,53 @@
 			$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
 			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 				$query = $conn->prepare("
-										SELECT MAX(sameDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName, GROUP_CONCAT(receiptNo SEPARATOR ', ') AS 'Receipt' 
-										FROM (SELECT DISTINCT incoming.inDate AS sameDate, incoming.inQty AS inQuant, null AS outQuant, GROUP_CONCAT(incoming.receiptNo) AS receiptNo
+										SELECT receiptNos, dates, plus, minus FROM (
+										SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null  AS minus
 										FROM incoming
-										WHERE prodID = '$incID'
-										GROUP BY inDate, inQty
-										UNION
-										SELECT DISTINCT outgoing.outDate, null, outgoing.outQty, GROUP_CONCAT(outgoing.receiptNo)
+										WHERE incoming.prodID = '$incID'
+										UNION 
+										SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, outgoing.outQty AS minus
 										FROM outgoing
-										WHERE prodID = '$incID'
-										GROUP BY outDate, outQty
+										WHERE outgoing.prodID = '$incID'
 										UNION
-										SELECT DISTINCT returns.returnDate, returns.returnQty, null, NULL
+										SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, returns.returnQty AS plus, null
 										FROM returns
-										WHERE prodID = '$incID' AND returnType = 'Warehouse Return'
-										GROUP BY returnDate, returnQty
+										WHERE returns.prodID = '$incID' AND returns.returnType = 'Warehouse Return'
 										UNION
-										SELECT DISTINCT returns.returnDate, null, returns.returnQty, NULL
+										SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS minus
 										FROM returns
-										WHERE prodID = '$incID' AND returnType = 'Supplier Return'
-										GROUP BY returnDate, returnQty
-										ORDER BY sameDate ) AS ledgerResult JOIN product 
-										WHERE product.prodID = '$incID' AND MONTHNAME(sameDate) = '$sortByMonthDate'
-										AND YEAR(sameDate) = $sortByYearDate
-										GROUP BY sameDate
+										WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return'
+										)
+										AS ledger
 										");
 				$query->execute();
 				$res = $query->fetchAll();
 			} else {
 				$query = $conn->prepare("
-										SELECT MAX(sameDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName, GROUP_CONCAT(receiptNo SEPARATOR ', ') AS 'Receipt' 
-										FROM (SELECT DISTINCT incoming.inDate AS sameDate, incoming.inQty AS inQuant, null AS outQuant, GROUP_CONCAT(incoming.receiptNo) AS receiptNo
+										SELECT receiptNos, dates, plus, minus FROM (
+										SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null  AS minus
 										FROM incoming
-										WHERE prodID = '$incID'
-										GROUP BY inDate, inQty
-										UNION
-										SELECT DISTINCT outgoing.outDate, null, outgoing.outQty, GROUP_CONCAT(outgoing.receiptNo)
+										WHERE incoming.prodID = '$incID'
+										UNION 
+										SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, outgoing.outQty AS minus
 										FROM outgoing
-										WHERE prodID = '$incID'
-										GROUP BY outDate, outQty
+										WHERE outgoing.prodID = '$incID'
 										UNION
-										SELECT DISTINCT returns.returnDate, returns.returnQty, null, NULL
+										SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, returns.returnQty AS plus, null
 										FROM returns
-										WHERE prodID = '$incID' AND returnType = 'Warehouse Return'
-										GROUP BY returnDate, returnQty
+										WHERE returns.prodID = '$incID' AND returns.returnType = 'Warehouse Return'
 										UNION
-										SELECT DISTINCT returns.returnDate, null, returns.returnQty, NULL
+										SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS minus
 										FROM returns
-										WHERE prodID = '$incID' AND returnType = 'Supplier Return'
-										GROUP BY returnDate, returnQty
-										ORDER BY sameDate ) AS ledgerResult JOIN product 
-										WHERE product.prodID = '$incID' AND MONTHNAME(sameDate) = MONTHNAME(CURDATE())
-										AND YEAR(sameDate) = YEAR(CURDATE())
-										GROUP BY sameDate
+										WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return'
+										)
+										AS ledger
 										");
 				$query->execute();
 				$res = $query->fetchAll();
 			}
 			
-			$query2 = $conn->prepare("SELECT physicalQty, prodID FROM inventory WHERE prodID = '$incID'");										
+			$query2 = $conn->prepare("SELECT physicalQty, prodID FROM inventory INNER JOIN product ON inventory.prodID = product.prodID WHERE prodID = '$incID'");										
 			$query2->execute();
 			$resul = $query2->fetchAll();
 		
@@ -70,9 +58,9 @@
 			$base = $request;
 			$loop = True;
 			
-			$query3 = $conn->prepare("SELECT remarks FROM inventory WHERE prodID = '$incID'");										
+			$query3 = $conn->prepare("SELECT prodName FROM product WHERE prodID = '$incID'");										
 			$query3->execute();
-			$invRemark = $query3->fetchAll();	
+			$result3 = $query3->fetchAll();
 			
 			$query4 = $conn->prepare("SELECT DISTINCT MONTHNAME(inDate) AS nowMonthDate, (SELECT DISTINCT YEAR(inDate) FROM incoming) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
 								FROM incoming;");
