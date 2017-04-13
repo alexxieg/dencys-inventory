@@ -161,44 +161,72 @@
 								
 								<!-- Stockcard Data -->
 								<table class="table table-striped table-bordered">			
-									<tr>
-										<th>
-											Date
-										</th>
-										
+									<tr rowspan="2">
 										<th>
 											Receipt No.
 										</th>
-										
 										<th>
-											+
+											Date
+										</th>									
+										
+										<th colspan="2">
+											IN
 										</th>
 										
-										<th>
-											-
+										<th colspan="2">
+											OUT
 										</th>
-										
+
 										<th>
 											Balance
+										</th>
+									</tr>
+									
+									<tr>
+										<th>
+										</th>
+										
+										<th>	
+										</th>									
+										
+										<th>
+											Deliveries
+										</th>
+						
+										<th>
+											Warehouse Returns
+										</th>
+						
+										<th>
+											Issuance
+										</th>
+										
+										<th>
+											Supplier Returns
+										</th>
+										<th>
+							
 										</th>
 									</tr>
 									<?php
 										foreach ($res as $item):
 										
 										if ($request == $base && $loop == True){
-											$currQty = $request + $item["plus"] - $item["minus"];
+											$currQty = $request + ($item["plus"] + $item["plus2"]) - ($item["minus"] + $item["minus2"]);
 											$loop = False;
 										}
 										else {
-											$currQty = $currQty + $item["plus"] - $item["minus"];
+											$currQty = $request + ($item["plus"] + $item["plus2"]) - ($item["minus"] + $item["minus2"]);
 										}
 									?>
 									
 									<tr>	
-										<td data-title="Date"><?php echo $item["dates"]; ?></td>	
 										<td data-title="Receipt"><?php echo $item["receiptNos"]; ?></td>
+										<td data-title="Date"><?php echo $item["dates"]; ?></td>	
 										<td data-title="IN"><?php echo $item["plus"];?></td>
+																				<td data-title="IN"><?php echo $item["plus2"];?></td>
 										<td data-title="OUT"><?php echo $item["minus"]; ?></td>
+																				<td data-title="OUT"><?php echo $item["minus2"]; ?></td>
 										<td data-title="BALANCE"><?php echo $currQty ?></td>
 									</tr>
 									<?php
