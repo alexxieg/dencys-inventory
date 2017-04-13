@@ -44,7 +44,6 @@
 	</head>
 	  
 	<body>
-	  
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -105,241 +104,118 @@
 				</div>
 				<!-- End of Sidebar -->
 
-	
-		<!-- Retrieve Ledger Data -->
-		<?php
-			$incID= $_GET['incId'];
-			$sortByMonthDate = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
-			$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-				$query = $conn->prepare("
-										SELECT MAX(sameDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName, GROUP_CONCAT(receiptNo SEPARATOR ', ') AS 'Receipt' 
-										FROM (SELECT DISTINCT incoming.inDate AS sameDate, incoming.inQty AS inQuant, null AS outQuant, GROUP_CONCAT(incoming.receiptNo) AS receiptNo
-										FROM incoming
-										WHERE prodID = '$incID'
-										GROUP BY inDate, inQty
-										UNION
-										SELECT DISTINCT outgoing.outDate, null, outgoing.outQty, GROUP_CONCAT(outgoing.receiptNo)
-										FROM outgoing
-										WHERE prodID = '$incID'
-										GROUP BY outDate, outQty
-										UNION
-										SELECT DISTINCT returns.returnDate, returns.returnQty, null, NULL
-										FROM returns
-										WHERE prodID = '$incID' AND returnType = 'Warehouse Return'
-										GROUP BY returnDate, returnQty
-										UNION
-										SELECT DISTINCT returns.returnDate, null, returns.returnQty, NULL
-										FROM returns
-										WHERE prodID = '$incID' AND returnType = 'Supplier Return'
-										GROUP BY returnDate, returnQty
-										ORDER BY sameDate ) AS ledgerResult JOIN product 
-										WHERE product.prodID = '$incID' AND MONTHNAME(sameDate) = '$sortByMonthDate'
-										AND YEAR(sameDate) = $sortByYearDate
-										GROUP BY sameDate
-										");
-				$query->execute();
-				$res = $query->fetchAll();
-			} else {
-				$query = $conn->prepare("
-										SELECT MAX(sameDate) AS 'DATE', SUM(inQuant) AS 'Added', SUM(outQuant) AS 'Subracted', prodName, GROUP_CONCAT(receiptNo SEPARATOR ', ') AS 'Receipt' 
-										FROM (SELECT DISTINCT incoming.inDate AS sameDate, incoming.inQty AS inQuant, null AS outQuant, GROUP_CONCAT(incoming.receiptNo) AS receiptNo
-										FROM incoming
-										WHERE prodID = '$incID'
-										GROUP BY inDate, inQty
-										UNION
-										SELECT DISTINCT outgoing.outDate, null, outgoing.outQty, GROUP_CONCAT(outgoing.receiptNo)
-										FROM outgoing
-										WHERE prodID = '$incID'
-										GROUP BY outDate, outQty
-										UNION
-										SELECT DISTINCT returns.returnDate, returns.returnQty, null, NULL
-										FROM returns
-										WHERE prodID = '$incID' AND returnType = 'Warehouse Return'
-										GROUP BY returnDate, returnQty
-										UNION
-										SELECT DISTINCT returns.returnDate, null, returns.returnQty, NULL
-										FROM returns
-										WHERE prodID = '$incID' AND returnType = 'Supplier Return'
-										GROUP BY returnDate, returnQty
-										ORDER BY sameDate ) AS ledgerResult JOIN product 
-										WHERE product.prodID = '$incID' AND MONTHNAME(sameDate) = MONTHNAME(CURDATE())
-										AND YEAR(sameDate) = YEAR(CURDATE())
-										GROUP BY sameDate
-										");
-				$query->execute();
-				$res = $query->fetchAll();
-			}
-			
-			$query2 = $conn->prepare("SELECT physicalQty, prodID FROM inventory WHERE prodID = '$incID'");										
-			$query2->execute();
-			$resul = $query2->fetchAll();
-		
-			$request = current($conn->query("SELECT beginningQty FROM inventory WHERE prodID = '$incID'")->fetch());
-			$base = $request;
-			$loop = True;
-			
-			$query3 = $conn->prepare("SELECT remarks FROM inventory WHERE prodID = '$incID'");										
-			$query3->execute();
-			$invRemark = $query3->fetchAll();	
-			
-			$query4 = $conn->prepare("SELECT DISTINCT MONTHNAME(inDate) AS nowMonthDate, (SELECT DISTINCT YEAR(inDate) FROM incoming) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
-								FROM incoming;");
-			$query4->execute();
-			$result4 = $query4->fetchAll();
-			
-			$query5 = $conn->prepare("SELECT DISTINCT YEAR(inDate) AS nowYearDate FROM incoming");
-			$query5->execute();
-			$result5 = $query5->fetchAll();
-		?>
+				<!-- Retrieve Ledger Data -->
+				<?php include('functionalities/fetchLedger.php'); ?>
 
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
-		<div id="contents">
-			<div class="pages no-more-tables">
-				<div id="tableHeader">
-					<table class="table table-striped table-bordered">
-						<h1 id="headers">Stock Card</h1>
-						
-						<?php 
-							$location =  $_SERVER['REQUEST_URI']; 
-						?>
-						
-						Filter By Date <br>
-						<form action="<?php echo $location; ?>" method="POST">
-							<select name="dateMonthName">
-								<?php foreach ($result4 as $row): ?>
-									<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-								<?php endforeach ?>
-							</select>
-							<select name="dateYearName">
-								<?php foreach ($result5 as $row): ?>
-									<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-								<?php endforeach ?>
-							</select>
-							
-							<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
-						</form>
-							
-						<tr>
-							<td>
-								Product ID:
-								<?php echo $incID;?>
-							</td>
-							<td>
-							Product Name: 
-								<?php foreach ($res as $row): ?>
-									<?php echo $row["prodName"]; break;?>
-								<?php endforeach ?>
-							</td>
-							
-							<td>
-								Beginning Quantity: 
-								<?php echo $request ?>
-							</td>
-							<td> 
-								Physical Count:
-							</td>
-						</tr>									
-					</table>
-					<table class="table table-striped table-bordered">			
-						<tr>
-							<th>
-								Date
-							</th>
-							
-							<th>
-								Receipt No.
-							</th>
-							
-							<th>
-								+
-							</th>
-							
-							<th>
-								-
-							</th>
-							
-							<th>
-								Remarks
-							</th>
-							
-							<th>
-								Balance
-							</th>
-						</tr>
-						<?php
-							foreach ($res as $item):
-							
-							if ($request == $base && $loop == True){
-								$currQty = $request + $item["Added"] - $item["Subracted"];
-								$loop = False;
-							}
-							else {
-								$currQty = $currQty + $item["Added"] - $item["Subracted"];
-							}
-						?>
-						
-						<tr>	
-							<td data-title="Date"><?php echo $item["DATE"]; ?></td>	
-							<td data-title="Receipt"><?php echo $item["Receipt"]; ?></td>
-							<td data-title="IN"><?php echo $item["Added"];?></td>
-							<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
-							<td></td>
-							<td data-title="BALANCE"><?php echo $currQty ?></td>
-						</tr>
-						<?php
-							endforeach;
-						?>
-					</table>
-					
-					<hr>
-				
-					<br>
-					
-					<form action="" method="POST">
-					
-					<h4>Adjustment</h4>
-						<label>Physical Count: </label>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
+					<div id="contents">
+						<div class="pages no-more-tables">
+							<div id="tableHeader">		
+								<h1 id="headers">Stock Card</h1>
+								
+								<?php 
+									$location =  $_SERVER['REQUEST_URI']; 
+								?>
+								
+								Filter By Date <br>
+								<form action="<?php echo $location; ?>" method="POST">
+									<select name="dateMonthName">
+										<?php foreach ($result4 as $row): ?>
+											<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+										<?php endforeach ?>
+									</select>
+									<select name="dateYearName">
+										<?php foreach ($result5 as $row): ?>
+											<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+										<?php endforeach ?>
+									</select>
+									
+									<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+								</form>
+									
+								<br>
+								
+								<!-- Stockcard Information -->
+								<table class="table table-striped table-bordered">
+									<tr>
+										<td>
+											Product ID:
+											<?php echo $incID;?>
+										</td>
+										<td>
+										Product Name: 
+											<?php foreach ($res as $row): ?>
+												<?php echo $row["prodName"]; break;?>
+											<?php endforeach ?>
+										</td>
 										
-						<?php foreach ($resul as $item): ?>							
-						<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-						<?php endforeach; ?>
-						
-						<label>Remarks: </label>
-						<?php foreach ($invRemark as $forRemark): ?>
-						<input type="text" name="additionalRemarks" value="<?php echo $forRemark["remarks"]; ?>" placeholder="<?php echo $forRemark["remarks"]; ?>">
-						<?php endforeach; ?>
-						
-						<button type="submit" name="adjust">Submit</button>
-
-					</form>
+										<td>
+											Beginning Quantity: 
+											<?php echo $request ?>
+										</td>
+										<td> 
+											Physical Count:
+										</td>
+									</tr>									
+								</table>
+								<br>
+								
+								<!-- Stockcard Data -->
+								<table class="table table-striped table-bordered">			
+									<tr>
+										<th>
+											Date
+										</th>
+										
+										<th>
+											Receipt No.
+										</th>
+										
+										<th>
+											+
+										</th>
+										
+										<th>
+											-
+										</th>
+										
+										<th>
+											Remarks
+										</th>
+										
+										<th>
+											Balance
+										</th>
+									</tr>
+									<?php
+										foreach ($res as $item):
+										
+										if ($request == $base && $loop == True){
+											$currQty = $request + $item["Added"] - $item["Subracted"];
+											$loop = False;
+										}
+										else {
+											$currQty = $currQty + $item["Added"] - $item["Subracted"];
+										}
+									?>
+									
+									<tr>	
+										<td data-title="Date"><?php echo $item["DATE"]; ?></td>	
+										<td data-title="Receipt"><?php echo $item["Receipt"]; ?></td>
+										<td data-title="IN"><?php echo $item["Added"];?></td>
+										<td data-title="OUT"><?php echo $item["Subracted"]; ?></td>
+										<td></td>
+										<td data-title="BALANCE"><?php echo $currQty ?></td>
+									</tr>
+									<?php
+										endforeach;
+									?>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
-	</div>
-					
-		<?php 
-
-			$incID= $_GET['incId'];
-			$quant=(isset($_REQUEST['adjustUpdate']) ? $_REQUEST['adjustUpdate'] : null);
-			$remark=(isset($_REQUEST['additionalRemarks']) ? $_REQUEST['additionalRemarks'] : null);
-			
-			if (isset($_POST["adjust"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-				$sql = "UPDATE inventory SET physicalQty=$quant, remarks='$remark' WHERE prodID = '$incID'";
-				$conn->exec($sql);
-
-				
-				echo "<meta http-equiv='refresh' content='0'>";
-			}
-
-		?>
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	</body>
 </html>
