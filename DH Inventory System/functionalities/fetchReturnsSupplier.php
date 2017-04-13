@@ -5,14 +5,14 @@
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 		$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, returns.returnQty, returns.returnType, returns.returnRemark
 								FROM returns INNER JOIN product ON returns.prodID = product.prodID
-								WHERE returns.returnType = 'Supplier Return' AND returns.status = 'Active' HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
+								WHERE returns.returnType = 'Supplier Return' HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
 								ORDER BY returnID DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}else{
 		$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, returns.returnQty, returns.returnType, returns.returnRemark 
 							FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-							WHERE returns.status = 'Active' AND returns.returnType = 'Supplier Return' AND MONTH(returnDate) = MONTH(CURRENT_DATE())
+							WHERE AND returns.returnType = 'Supplier Return' AND MONTH(returnDate) = MONTH(CURRENT_DATE())
 							ORDER BY returnID DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();

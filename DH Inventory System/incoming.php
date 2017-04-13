@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Incoming Products</title>
+		<title>Product Deliveries</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -81,15 +81,17 @@
 		<div class="container-fluid" >
 			<div class="row">
 				<div class="col-sm-3 col-md-2 sidebar">
+				
 				<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li>
-							<a href="inventory.php">
-								<i class="glyphicon glyphicon-list-alt"></i> Inventory
-							</a>
+						<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="incoming.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+							</ul>
 						</li>
-						<li class="active"><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Product Deliveries<span class="sr-only">(current)</span></a></li>
 						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
@@ -131,7 +133,7 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">
 									<tr>
-										<td colspan="2"><h1 id="headers">INCOMING PRODUCTS</h1></td>
+										<td colspan="2"><h1 id="headers">PRODUCT DELIVERIES</h1></td>
 									</tr>
 									<tr>
 										<td>

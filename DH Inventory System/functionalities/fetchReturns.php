@@ -5,14 +5,14 @@
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 		$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, returns.returnQty, returns.returnType, returns.returnRemark, branch.location
 								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN product ON returns.prodID = product.prodID
-								WHERE returns.returnType = 'Warehouse Return' AND returns.status = 'Active' HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
+								WHERE returns.returnType = 'Warehouse Return' HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
 								ORDER BY returnID DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}else{
 		$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, returns.returnQty, returns.returnType, returns.returnRemark, branch.location 
 							FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN product ON returns.prodID = product.prodID 
-							WHERE returns.status = 'Active' AND returns.returnType = 'Warehouse Return' AND MONTH(returnDate) = MONTH(CURRENT_DATE())
+							WHERE returns.returnType = 'Warehouse Return' AND MONTH(returnDate) = MONTH(CURRENT_DATE())
 							ORDER BY returnID DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
