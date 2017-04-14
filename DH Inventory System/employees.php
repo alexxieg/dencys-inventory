@@ -139,8 +139,8 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">		
 									<h1 id="headers">EMPLOYEES</h1>
-									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
+									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
 								</table>
 							</div>
 							

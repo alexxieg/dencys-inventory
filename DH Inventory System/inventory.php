@@ -145,14 +145,14 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">	
 									<h1 id="headers">INVENTORY</h1>	
-									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
+									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">
 										Products for Reorder
 									</button>
 									
-									<a href="history.php"><button type="button" class="btn btn-info btn-lg btnclr" id="modbutt">View Previous Inventory</button></a>
+									<a href="history.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
 									
 									<a href="physCount.php"> 
-										<button type="button" class="btn btn-info btn-lg btnclr" id="edBtn">
+										<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
 											Add Physical Count
 										</button>
 									</a>

@@ -128,14 +128,10 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<h1 id="headers">WAREHOUSE RETURNS</h1>	
-								<table class="table table-striped table-bordered">	
-									<tr>
-										<td>
-											<br>
-											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
-										</td>
-										<td>
-											<div class="col-sm-7 pull-right">
+								
+									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
+						
+											<div class="col-sm-7 pull-right retfilter">
 												<label>Filter By Date</label>
 												<form class="form-inline" action="" method="post">
 													<div class="form-group">
@@ -157,10 +153,7 @@
 													</div>
 												</form>	
 											</div>
-										</td>
-									<tr>												
-								</table>
-							</div>
+									</div>
 							
 							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

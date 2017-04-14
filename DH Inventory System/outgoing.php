@@ -133,14 +133,10 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<h1 id="headers">PRODUCT ISSUANCE</h1>
-								<table class="table table-striped table-bordered">
-									<tr>		
-										<td>		
-											<br>
-											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
-										</td>
-										<td>
-											<div class="col-sm-7 pull-right">
+								
+									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
+							
+											<div class="col-sm-7 pull-right filter">
 												<label>View Previous Entries</label>
 												<form class="form-inline" action="" method="post">
 													<div class="form-group">
@@ -161,11 +157,8 @@
 														<input type="submit" value="View" class="btn btn-success" name="submit">
 													</div>
 												</form>	
-											</div>	
-										</td>
-									</tr>
-								</table>
-							</div>
+											</div>
+									</div>
 				
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">

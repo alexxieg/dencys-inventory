@@ -134,15 +134,11 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<h1 id="headers">PRODUCT DELIVERIES</h1>
-								<table class="table table-striped table-bordered">
-									<tr>
-										<td>
-											<br>
-											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
-											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
-										</td>
-										<td>
-											<div class="col-sm-7 pull-right">
+								
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+								
+											<div class="col-sm-7 pull-right filter">
 												<label>View Previous Entries</label>
 												<form class="form-inline" action="" method="post">
 													<div class="form-group">
@@ -164,10 +160,7 @@
 													</div>
 												</form>	
 											</div>	
-										</td>
-									</tr>
-								</table>
-							</div>
+										</div>
 							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">

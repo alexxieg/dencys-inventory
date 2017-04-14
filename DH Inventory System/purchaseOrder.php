@@ -132,13 +132,10 @@
 					<div id="contents">
 						<div class="pages no-more-tables">
 						<h1 id="headers">PURCHASE ORDERS</h1>
-							<table class="table table-striped table-bordered">	
-								<tr>
-									<td>
-										<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
-									</td>
-									<td>
-										<div class="col-sm-7 pull-right">
+							
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
+									
+										<div class="col-sm-7 pull-right POfilter">
 											<label>View Previous Entries</label>
 											<form class="form-inline" action="" method="post">
 												<div class="form-group">
@@ -160,10 +157,7 @@
 												</div>
 											</form>	
 										</div>	
-									</td>
-								</tr>
-							</table>
-						</div>
+								</div>
 							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">

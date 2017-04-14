@@ -254,7 +254,7 @@
 					<div id="contents">
 						<div class="pages no-more-tables">							
 							<div class="container">	
-								<h2 id="headers">Summary of Products Issued per Branch for the Month</h2>
+								<h2 id="outheader">Summary of Products Issued per Branch for the Month</h2>
 
 								<ul class="nav nav-pills" id="navjust">
 									<li>
