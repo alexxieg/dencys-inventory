@@ -187,7 +187,8 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>	
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>					
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
 										<th></th>
 									</tr>
 								</thead>	
@@ -208,6 +209,7 @@
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="Branch"><?php echo $item["location"]; ?></td>
 										<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
+										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
 											<a href="functionalities/editOut.php?outsId=<?php echo $outReceipt; ?>">
 											<button type="button" class="btn btn-default">
@@ -288,6 +290,9 @@
 															
 															<td>
 																<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="outRemarks[]">
+															</td>
+															<td>
+																<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 															</td>
 														</tr>
 													</tbody>

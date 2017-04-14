@@ -71,6 +71,7 @@
             $outQty = $_POST['outQty'][$index];
             $emp = $_POST['emp'];
 			$branch = $_POST['branch'];
+			$userID = $_POST['userID'];
 
             $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
             $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -84,8 +85,8 @@
 			$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
 			$branch3 = $branch2['branchA'];
 			
-            $sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, outRemarks, empID, prodID)
-            VALUES ('$outQty',CURDATE(),'$prod','$branch3','$outRemarks','$emp3','$prod3')";
+            $sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, outRemarks, empID, prodID, userID)
+            VALUES ('$outQty',CURDATE(),'$prod','$branch3','$outRemarks','$emp3','$prod3','$userID')";
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";
