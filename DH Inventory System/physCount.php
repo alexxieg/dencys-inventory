@@ -17,7 +17,7 @@
 		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link href="css/custom.css" rel="stylesheet">
+		<link href="css/test.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 
 		<!-- Javascript Files -->
@@ -150,20 +150,6 @@
 					$query3->execute();
 					$result3 = $query3->fetchAll();
 				}
-				
-				$selectedBrand =(isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
-				if (!empty($selectedBrand)) {
-					$filterBrand = current($conn->query("SELECT brandName FROM brand WHERE brandID = '$selectedBrand'")->fetch());
-				} else {
-					$filterBrand = "-SELECTA-";
-				}
-				
-				$selectedCategory =(isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
-				if (!empty($selectedCategory)) {
-					$filterCategory = current($conn->query("SELECT categoryName FROM category WHERE categoryID = '$selectedCategory'")->fetch());
-				} else {
-					$filterCategory = "-SELECTA-";
-				}
 			?>
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
@@ -182,7 +168,6 @@
 									Filter By Brand
 									<form action="<?php echo $location; ?>" method="POST">
 										<select name="brand_Name">
-												<option value="<?php echo $selectedBrand?>" SELECTED><?php echo $filterBrand?></option>
 											<?php foreach ($result as $row): ?>
 												<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
 											<?php endforeach ?>
@@ -195,7 +180,6 @@
 									Filter By Category <br>
 									<form action="<?php echo $location; ?>" method="POST">
 										<select name="category_Name">
-												<option value="<?php echo $selectedCategory?>" SELECTED><?php echo $filterCategory?></option>
 											<?php foreach ($result2 as $row2): ?>
 												<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
 											<?php endforeach ?>
@@ -238,36 +222,37 @@
 								</tr>
 							</thead>
 							<tbody>
-
-								<?php
-									foreach ($result3 as $item):
-									$proID = $item["prodID"];
-								?>
-								<tr id="centerData">
-									<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-									<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-									<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-									<td data-title="Unit"><?php echo $item["unitType"];?></td>
-									<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
-									<form action="" method="POST">
-									<td data-title="Remarks">
-										<input type="text" id="adjustment" name="updateRemarks" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
-									</td>
-									<td>
+								<form action="" method="POST">
+									<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
+										UPDATE
+									</button>
+									<?php
+										foreach ($result3 as $item):
+										$proID = $item["prodID"];
+									?>
+									
 										
-										<input type="text" id="adjustment" name="adjustUpdate" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-										<input type="hidden" name="thisProductID" value="<?php echo $item["prodID"]; ?>" />
-										<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
-											UPDATE
-										</button>
+									<tr id="centerData">
+										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+										<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+										<td data-title="Unit"><?php echo $item["unitType"];?></td>
+										<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
 										
-									</td>
-									</form>	
-								</tr>	
-								<?php
-									endforeach;
-								?>
+										<td data-title="Remarks">
+											<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
+										</td>
+										<td>
+											<input type="text" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
+											<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
+										</td>
+											
+									</tr>	
+									<?php
+										endforeach;
+									?>
+								</form>
 							</tbody>	
 						</table>
 						
@@ -280,34 +265,37 @@
 	</div>
 					
 		<?php 
-			$quant=(isset($_REQUEST['adjustUpdate']) ? $_REQUEST['adjustUpdate'] : null);
-			$thisProdID=(isset($_REQUEST['thisProductID']) ? $_REQUEST['thisProductID'] : null);
-			$thisRemarks=(isset($_REQUEST['updateRemarks']) ? $_REQUEST['updateRemarks'] : null);
+			$productCounter=(isset($_REQUEST['thisProductID']) ? $_REQUEST['thisProductID'] : null);
 			
-			if (isset($_POST["adjust"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-				$sql1 = "INSERT INTO archive(archiveDate, qty, totalIn, totalOut, beginningQty, endingQty, physicalQty, remarks, prodID)
-						SELECT invDate, qty, inQty, outQty, beginningQty, physicalQty, physicalQty, remarks, prodID FROM inventory
-						WHERE prodID = '$thisProdID'";
-				$conn->exec($sql1);
-			
-				$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE(), remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
-				$conn->exec($sql2);
-
-				$sql3 = "UPDATE inventory SET beginningQty=physicalQty WHERE prodID = '$thisProdID'";
-				$conn->exec($sql3);
-				$sql4 = "UPDATE archive SET endingQty=$quant WHERE prodID = '$thisProdID'";
-				$conn->exec($sql4);
-				$sql5 = "UPDATE archive SET physicalQty=$quant WHERE prodID = '$thisProdID'";
-				$conn->exec($sql5);
-				$sql6 = "UPDATE archive SET remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
-				$conn->exec($sql6);
+			for ($index = 0; $index < count($productCounter); $index++) {
+				$quant=(isset($_REQUEST['adjustUpdate'][$index]) ? $_REQUEST['adjustUpdate'][$index] : null);
+				$thisProdID=(isset($_REQUEST['thisProductID'][$index]) ? $_REQUEST['thisProductID'][$index] : null);
+				$thisRemarks=(isset($_REQUEST['updateRemarks'][$index]) ? $_REQUEST['updateRemarks'][$index] : null);
 				
-				echo "<meta http-equiv='refresh' content='0'>";
-			}
+				if (isset($_POST["adjust"])){
+				
+					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				
+					$sql1 = "INSERT INTO archive(archiveDate, qty, totalIn, totalOut, beginningQty, endingQty, physicalQty, remarks, prodID)
+							SELECT invDate, qty, inQty, outQty, beginningQty, physicalQty, physicalQty, remarks, prodID FROM inventory
+							WHERE prodID = '$thisProdID'";
+					$conn->exec($sql1);
+				
+					$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE(), remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
+					$conn->exec($sql2);
 
+					$sql3 = "UPDATE inventory SET beginningQty=physicalQty WHERE prodID = '$thisProdID'";
+					$conn->exec($sql3);
+					$sql4 = "UPDATE archive SET endingQty=$quant WHERE prodID = '$thisProdID'";
+					$conn->exec($sql4);
+					$sql5 = "UPDATE archive SET physicalQty=$quant WHERE prodID = '$thisProdID'";
+					$conn->exec($sql5);
+					$sql6 = "UPDATE archive SET remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
+					$conn->exec($sql6);
+					
+					echo "<meta http-equiv='refresh' content='0'>";
+				}
+			}
 		?>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
