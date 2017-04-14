@@ -5,35 +5,36 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Edit Incoming Entries</title>
+		<title>Edit Product Delivery Entry</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="../logo.jpg">
 
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
 		<!-- Custom styles for this template -->
-		<link href="../css/test.css" rel="stylesheet">
+		<link href="../css/custom.css" rel="stylesheet">
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
-		<script src="../incoming.js"></script>
+		<!-- Javascript Files -->
+		<script src="../js/incoming.js"></script>
 		<script src="../js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../js/jquery-3.2.0.min.js"></script>	
+		<script src="../js/bootstrap.min.js"></script>
 			
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
 			if (!isset($_SESSION['id']) && $role!="admin") {
 				header('Location: index.php');
 			}
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
 	</head>
 	
@@ -59,158 +60,143 @@
 			$employ = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 		?>
 
-		<!--Top Navigation Bar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+		<!-- Top Main Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="Logout.php">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- End of Top Main Header -->
 
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
-			</div>
-			<div  id="navbar" class="navbar-collapse">
-				<ul class="nav navbar-nav navbar-right" id="adminDrp">
-				    <li class="dropdown" id="font">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="try">
-                        	<i class="glyphicon glyphicon-user"></i> ADMIN
-                         </a>
-                            <ul class="dropdown-menu list-unstyled">
-                                <li>
-                                    <a href="../logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
-								</li>
-                            </ul>
-                     </li>
-				</ul>
-			</div>
-
-
-    <div class="container-fluid">
-		<div class="row navbar-collapse">
-			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-						<img src="../logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
-					<li>
-						<a href="../inventory.php">
-							<i class="glyphicon glyphicon-list-alt"></i> Inventory
-						</a>
-					</li>
-					<li class="active"><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming  <span class="sr-only">(current)</span></a></li>
-					<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing </a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="../returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
-							<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="reports">
-							<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="manage">
-							<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-							<li><a href="../branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
-							<li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
-							<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-							<li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
-							<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			</div>
-			</div>
-		</div>
-	</nav>	
-		<!-- End of Sidebar -->	>
+		<div class="container-fluid" >
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<!-- Sidebar -->
+					<ul class="nav nav-sidebar">
+						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
+						<li><a href="../inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="../incoming.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+							</ul>
+						</li>
+						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="reports">
+								<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="manage">
+								<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+								<li><a href="../branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
+								<li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+								<li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- End of Sidebar -->
   
-		<!-- Modal for New Incoming Entry Form -->
-			<div class="addInv">
-						<h1 id="headers">Edit Incoming Product</h1>
-						<div id="content">
-							<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
-									<h5>Receipt No.</h5> 
-									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
+				<!-- Modal for New Incoming Entry Form -->
+				<div class="addInv">
+					<h1 id="headers">Edit Product Delivery Entry</h1>
+					<br>
+					<div id="content">
+						<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
+							<h5>Receipt No.</h5> 
+							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
 									
-									<h5>Receipt Date</h5> 
-									<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate"><br>
-									
-									<h5>Supplier</h5> 
-									<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplier;?>" value="<?php echo $supplier;?>" name="supplier"><br>
+							<h5>Receipt Date</h5> 
+							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate"><br>
 								
-								<h5>Received By</h5>				
-								<select class="form-control" id="addEmpl" name="emp">
-									<?php
-										$query = $conn->prepare("SELECT empFirstName FROM employee ");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
-									<?php foreach ($res as $row): ?>
+							<h5>Supplier</h5> 
+							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplier;?>" value="<?php echo $supplier;?>" name="supplier"><br>
+							
+							<h5>Received By</h5>				
+							<select class="form-control" id="addEmpl" name="emp">
+								<?php
+									$query = $conn->prepare("SELECT empFirstName FROM employee ");
+									$query->execute();
+									$res = $query->fetchAll();
+								?>
+								<?php foreach ($res as $row): ?>
 										<option><?=$row["empFirstName"]?></option>
-									<?php endforeach ?>
-										<option SELECTED><?=$employ?></option>
-								</select> 
+								<?php endforeach ?>
+									<option SELECTED><?=$employ?></option>
+							</select> 
 								
-								<br>
-										
-								<h5>Product/s</h5>
-								<table class="table table-striped" id="dataTable" name="chk">				
-									<tbody>
-										<?php foreach ($result2 as $row): ?>
-											<tr>
-												<td><input type="checkbox" name="chk"></td>
-												<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
+							<br>
+									
+							<h5>Product/s</h5>
+							<table class="table table-striped" id="dataTable" name="chk">				
+								<tbody>
+									<?php foreach ($result2 as $row): ?>
+										<tr>
+											<td><input type="checkbox" name="chk"></td>
+											<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
 												
-												<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
-												
-												<td>	
-													<?php
-														$query = $conn->prepare("SELECT prodName FROM product ");
-														$query->execute();
-														$res = $query->fetchAll();
-													?>
+											<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
+											
+											<td>	
+												<?php
+													$query = $conn->prepare("SELECT prodName FROM product ");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
 													
-													<select class="form-control" id="addItem" name="prodItem[]">
-														<option><?=$row["prodName"]?></option>
-														<?php foreach ($res as $row3): ?>
-															<option><?=$row3["prodName"]?></option>
-														<?php endforeach ?>
-													</select> 
-												</td>
-														
-												<td>
-													<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]">
-												</td>
+												<select class="form-control" id="addItem" name="prodItem[]">
+													<option><?=$row["prodName"]?></option>
+													<?php foreach ($res as $row3): ?>
+														<option><?=$row3["prodName"]?></option>
+													<?php endforeach ?>
+												</select> 
+											</td>
+													
+											<td>
+												<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]">
+											</td>
+											
+											<td>
+												<select class="form-control" id="addInStatus" name="inStatus[]">
+													<option>Complete</option>
+													<option>Partial</option>
+												</select> 
+											</td>
 												
-												<td>
-													<select class="form-control" id="addInStatus" name="inStatus[]">
-														<option>Complete</option>
-														<option>Partial</option>
-													</select> 
-												</td>
-												
-												<td>
-													<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["inRemarks"]; ?>" value="<?php echo $row["inRemarks"]; ?>" name="inRemarks[]">
-												</td>
-											</tr>
-										<?php endforeach ?>
-									</tbody>
-								</table>
+											<td>
+												<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["inRemarks"]; ?>" value="<?php echo $row["inRemarks"]; ?>" name="inRemarks[]">
+											</td>
+										</tr>
+									<?php endforeach ?>
+								</tbody>
+							</table>
 								
-								<br>
-								
-								<div class="modFoot">
+							<br>
+							
+							<div class="modFoot">
 								<span><button type="button" name="addProduct" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
 								<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 								<br>
@@ -223,16 +209,14 @@
 								<span>
 									<input type="submit" name="updateIn" value="Update" class="btn btn-success" id="sucBtn">
 								</span>
-								</div>
-							</form> 	
-						
-							
-						</div>								
-			</div>
-			 
-			<!-- End of Modal -->
+							</div>
+						</form> 								
+					</div>								
+				</div>
+			</div>	
+		</div>		 
 		
-	<?php
+		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
 			if (isset($_POST["updateIn"])){
@@ -266,15 +250,14 @@
 						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3'
 							WHERE inID = $incomingID";
 						$conn->exec($sql);
-					}
-								
+					}						
 					
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 					WHERE outID = '$outid'"; */
 					  echo "<meta http-equiv='refresh' content='0'>";
 				}
 			}    
-	?>
+		?>
 	
   </body>
 </html>

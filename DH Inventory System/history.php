@@ -17,6 +17,7 @@
 		<!-- Custom styles for this template -->
 		<link href="css/test.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
+		
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	

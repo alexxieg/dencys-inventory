@@ -20,7 +20,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!--Javascript Files -->
-		<script src="employees.js"></script>
+		<script src="js/employees.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -174,7 +174,7 @@
 											<td data-title="Last Name"><?php echo $item["empLastName"]; ?></td>
 											<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
 											<td>
-												<a href="functionalities/editEmployees.php?emplId=<?php echo $employID; ?>" target="_blank">
+												<a href="functionalities/editEmployees.php?emplId=<?php echo $employID; ?>" target="_self">
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>

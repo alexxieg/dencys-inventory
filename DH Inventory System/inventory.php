@@ -13,7 +13,7 @@
 		<link rel="shortcut icon" href="logo.jpg">
 
 		<!-- Custom CSS for this template -->
-		<link href="css/test.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 
 		<!-- Javascript Files -->
@@ -254,7 +254,7 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Summary of products to be reordered</h4>
+										<h4 class="modal-title">Products to be reordered</h4>
 									</div>
 									<div class="modal-body">			
 										<?php
