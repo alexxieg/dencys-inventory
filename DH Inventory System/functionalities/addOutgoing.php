@@ -52,6 +52,17 @@
 			echo '</script>';
 		} else {
 			// Do Something If name Doesn't Exist
+		$idretrieve = $conn->prepare("SELECT receiptNo FROM outgoing");
+		$idretrieve->execute();
+		$ids = $idretrieve->fetchAll();
+		$idBase = 00001;
+		$prod = 'OUT-' . str_pad((string)$idBase,5,0,STR_PAD_LEFT);
+		foreach ($ids AS $list):
+			if ($prod == $list["receiptNo"]){
+				$idBase = $idBase + 1;
+				$prod = 'OUT-' . str_pad((string)$idBase,5,0,STR_PAD_LEFT);
+			}
+		endforeach;
 
         for ($index = 0; $index < count($prodTem); $index++) {
 
@@ -74,7 +85,7 @@
 			$branch3 = $branch2['branchA'];
 			
             $sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, outRemarks, empID, prodID)
-            VALUES ('$outQty',CURDATE(),'".$_POST['rcno']."','$branch3','$outRemarks','$emp3','$prod3')";
+            VALUES ('$outQty',CURDATE(),'$prod','$branch3','$outRemarks','$emp3','$prod3')";
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";

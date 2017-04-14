@@ -7,19 +7,19 @@
 										SELECT receiptNos, dates, plus, plus2, minus, minus2 FROM (
 											SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null AS plus2,  null  AS minus, null as minus2
 											FROM incoming
-											WHERE incoming.prodID = 'AFR-ACC-0001'
+											WHERE incoming.prodID = '$incID'
 											UNION 
 											SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, null, outgoing.outQty AS minus, null
 											FROM outgoing
-											WHERE outgoing.prodID = 'AFR-ACC-0001'
+											WHERE outgoing.prodID = '$incID'
 											UNION
 											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS plus2, null, null
 											FROM returns
-											WHERE returns.prodID = 'AFR-ACC-0001' AND returns.returnType = 'Warehouse Return'
+											WHERE returns.prodID = '$incID' AND returns.returnType = 'Warehouse Return'
 											UNION
 											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, null, null, returns.returnQty AS minus
 											FROM returns
-											WHERE returns.prodID = 'AFR-ACC-0001' AND returns.returnType = 'Supplier Return'
+											WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return'
 										)
 										AS ledger			
 										");
@@ -30,19 +30,19 @@
 										SELECT receiptNos, dates, plus, plus2, minus, minus2 FROM (
 											SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null AS plus2,  null  AS minus, null as minus2
 											FROM incoming
-											WHERE incoming.prodID = 'AFR-ACC-0001'
+											WHERE incoming.prodID = '$incID'
 											UNION 
 											SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, null, outgoing.outQty AS minus, null
 											FROM outgoing
-											WHERE outgoing.prodID = 'AFR-ACC-0001'
+											WHERE outgoing.prodID = '$incID'	
 											UNION
 											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS plus2, null, null
 											FROM returns
-											WHERE returns.prodID = 'AFR-ACC-0001' AND returns.returnType = 'Warehouse Return'
+											WHERE returns.prodID = '$incID' AND returns.returnType = 'Warehouse Return'
 											UNION
 											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, null, null, returns.returnQty AS minus
 											FROM returns
-											WHERE returns.prodID = 'AFR-ACC-0001' AND returns.returnType = 'Supplier Return'
+											WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return'
 										)
 										AS ledger
 										");
