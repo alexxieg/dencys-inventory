@@ -150,6 +150,20 @@
 					$query3->execute();
 					$result3 = $query3->fetchAll();
 				}
+				
+				$selectedBrand =(isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
+				if (!empty($selectedBrand)) {
+					$filterBrand = current($conn->query("SELECT brandName FROM brand WHERE brandID = '$selectedBrand'")->fetch());
+				} else {
+					$filterBrand = "-SELECTA-";
+				}
+				
+				$selectedCategory =(isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
+				if (!empty($selectedCategory)) {
+					$filterCategory = current($conn->query("SELECT categoryName FROM category WHERE categoryID = '$selectedCategory'")->fetch());
+				} else {
+					$filterCategory = "-SELECTA-";
+				}
 			?>
 
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
@@ -168,6 +182,7 @@
 									Filter By Brand
 									<form action="<?php echo $location; ?>" method="POST">
 										<select name="brand_Name">
+												<option value="<?php echo $selectedBrand?>" SELECTED><?php echo $filterBrand?></option>
 											<?php foreach ($result as $row): ?>
 												<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
 											<?php endforeach ?>
@@ -180,6 +195,7 @@
 									Filter By Category <br>
 									<form action="<?php echo $location; ?>" method="POST">
 										<select name="category_Name">
+												<option value="<?php echo $selectedCategory?>" SELECTED><?php echo $filterCategory?></option>
 											<?php foreach ($result2 as $row2): ?>
 												<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
 											<?php endforeach ?>
