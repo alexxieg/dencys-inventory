@@ -131,10 +131,8 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
+						<h1 id="headers">PURCHASE ORDERS</h1>
 							<table class="table table-striped table-bordered">	
-								<tr>
-									<td colspan="2"><h1 id="headers">PURCHASE ORDERS</h1></td>
-								</tr>
 								<tr>
 									<td>
 										<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>

@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Branch Reports</title>
+		<title>Product Issuance Report</title>
 		
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -188,7 +187,6 @@
 			$resultYear = $queryYear->fetchAll();
 		?>
 	
-	
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -210,7 +208,6 @@
 		</nav>
 		<!-- End of Top Main Header -->
 
-
 		<div class="container-fluid">
 			<div class="row navbar-collapse">
 			
@@ -224,7 +221,7 @@
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="incoming.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
 							</ul>
-						</li>>
+						</li>
 						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li ><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
@@ -257,33 +254,8 @@
 					<div id="contents">
 						<div class="pages no-more-tables">							
 							<div class="container">	
-								<h2 id="headrep">OUTGOING PRODUCTS PER BRANCH</h2>
-								
-								<div class="col-sm-7 pull-right">
-									<label>View Previous Reports</label>
-									<form class="form-inline" action="" method="post">
-										<div class="form-group">
-											<select name="dateMonthName" class="form-control">
-												<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
-												<?php foreach ($resultMonth as $rowMonth): ?>
-													<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
-												<?php endforeach ?>
-											</select>
-										</div>
-										<div class="form-group">
-											<select name="dateYearName" class="form-control">
-												<option value="<?php echo $selectedYear ?>">Selected: <?php echo $selectedYear ?></option>
-												<?php foreach ($resultYear as $rowYear): ?>
-													<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
-												<?php endforeach ?>
-											</select>
-										</div>	
-										<div class="form-group">
-											<input type="submit" value="View" class="btn btn-success" name="submit">
-										</div>
-									</form>	
-								</div>	
-								
+								<h2 id="headers">Summary of Products Issued per Branch for the Month</h2>
+
 								<ul class="nav nav-pills" id="navjust">
 									<li>
 										<a href="#mainOutSummary" data-toggle="tab">
@@ -320,8 +292,30 @@
 								<div class="tab-content clearfix">
 									<!-- Overall Outgoing Branch -->
 									<div class="tab-pane active" id="mainOutSummary">
-										<h3>Overall Outgoing Branch Summary for the Month:</h3>
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
+											<label>View Previous Reports</label>
+											<form class="form-inline" action="" method="post">
+												<div class="form-group">
+													<select name="dateMonthName" class="form-control">
+														<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
+														<?php foreach ($resultMonth as $rowMonth): ?>
+															<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<select name="dateYearName" class="form-control">
+														<option value="<?php echo $selectedYear ?>">Selected: <?php echo $selectedYear ?></option>
+														<?php foreach ($resultYear as $rowYear): ?>
+															<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>	
+												<div class="form-group">
+													<input type="submit" value="View" class="btn btn-success" name="submit">
+												</div>
+											</form>	
+													
 											<thead>
 												<tr id="centerData">
 													<th>Location</th>
