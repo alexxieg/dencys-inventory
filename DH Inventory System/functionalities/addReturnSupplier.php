@@ -15,13 +15,14 @@
 		endforeach;
 								
 		$prod = $_POST['prodItem'];
+		$userID = $_POST['userID'];
 							
 		$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 		$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 		$prod3 = $prod2['prodA'];
 					
-		$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, receiptNo, prodID)
-				VALUES (CURDATE(),'".$_POST['retQty']."','Supplier Return','".$_POST['retRemarks']."','$recNo','$prod3')";
+		$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, receiptNo, prodID, userID)
+				VALUES (CURDATE(),'".$_POST['retQty']."','Supplier Return','".$_POST['retRemarks']."','$recNo','$prod3','$userID')";
 		$conn->exec($sql);
 		echo "<meta http-equiv='refresh' content='0'>";
 	}   
