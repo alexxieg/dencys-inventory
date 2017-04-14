@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Branches</title>
-	<?php include('dbcon.php'); ?>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-	<?php 
-		session_start();
-		if (isset($_SESSION['id'])){
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-			if (!isset($_SESSION['id']) || $_SESSION['id'] == false) {
-				session_destroy();
-				header('Location: index.php');
-			}
-		}
-	?>
+		<title>Edit Branches</title>
 
-  		<!-- Bootstrap core CSS -->
+		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="../logo.jpg">
 
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
 		<!-- Custom styles for this template -->
-		<link href="../css/test.css" rel="stylesheet">
+		<link href="../css/custom.css" rel="stylesheet">
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
-		<script src="../branches.js"></script>
+		<!-- Javascript Files -->
+		<script src="../js/branches.js"></script>
 		<script src="../js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../js/jquery-3.2.0.min.js"></script>	
+		<script src="../js/bootstrap.min.js"></script>
+	
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+			
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			if (isset($_SESSION['id'])){
+				$session_id = $_SESSION['id'];
+				$session_query = $conn->query("select * from users where userName = '$session_id'");
+				$user_row = $session_query->fetch();
+				if (!isset($_SESSION['id']) || $_SESSION['id'] == false) {
+					session_destroy();
+					header('Location: index.php');
+				}
+			}
+		?>	
+	</head>
   
-  </head>
-  
-  <body>
+	<body>
 		<?php
 			$branchThisID = $_GET['useID'];
 			$query = $conn->prepare("SELECT branchID, location FROM branch");
@@ -52,118 +52,114 @@
 			$result2 = $query2->fetchAll();
 		?>
 		
-		<!--Top Navigation Bar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+		<!-- Top Main Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="Logout.php">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- End of Top Main Header -->
+
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+			<div class="row navbar-collapse">
+				<!-- Sidebar -->
+				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
+						<li><a href="../inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="../incoming.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+							</ul>
+						</li>
+						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="reports">
+								<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+							</ul>
+						</li>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage  <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="manage">
+								<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+								<li><a href="../branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
+								<li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+								<li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- End of Sidebar -->
 
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
-			</div>
-			<div  id="navbar" class="navbar-collapse">
-				<ul class="nav navbar-nav navbar-right" id="adminDrp">
-				    <li class="dropdown" id="font">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="try">
-                        	<i class="glyphicon glyphicon-user"></i> ADMIN
-                         </a>
-                            <ul class="dropdown-menu list-unstyled">
-                                <li>
-                                    <a href="../logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
-								</li>
-                            </ul>
-                     </li>
-				</ul>
-			</div>
-
-
-    <div class="container-fluid">
-		<div class="row navbar-collapse">
-			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-						<img src="../logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
-					<li>
-						<a href="../inventory.php">
-							<i class="glyphicon glyphicon-list-alt"></i> Inventory
+				<div class="addInv">
+					<h1 id="headers">Edit Branch Entry</h1>
+					<br>
+					<div>
+						<form action="" method="POST" class="editPgs">
+							<?php foreach ($result2 as $row): ?>
+							<h3>Branch ID</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["branchID"]; ?>" value="<?php echo $row["branchID"]; ?>" name="branID"> <br>
+							<?php endforeach ?>
+							
+							<?php foreach ($result2 as $row): ?>
+							<h3>Branch Name</h3>
+							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["location"]; ?>" value="<?php echo $row["location"]; ?>" name="branName"> <br>
+							<?php endforeach ?>
+							<br>
+							
+							<div class="modFoot">
+								<span>
+									<a href="../branch.php">
+										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+									</a>
+								</span>
+								<span>
+									<input type="submit" name="editBranch" value="Update" class="btn btn-success" id="sucBtn">
+								</span>
+							</div>
+							
+						<input type="submit" value="Update" class="btn btn-success" name="editBranch" onclick="alert('Brand Entry Successfully Edited');">
+						<a href="../branches.php">
+							<input type="button" value="Cancel" class="btn btn-default" style="width: 100px">
 						</a>
-					</li>
-					<li><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing </a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="../returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
-							<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="reports">
-							<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-						</ul>
-					</li>
-					<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="manage">
-							<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-							<li><a href="../branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
-							<li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
-							<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-							<li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
-							<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			</div>
+						</form> 
+					</div>
+				</div>
 			</div>
 		</div>
-	</nav>	
-		<!-- End of Sidebar -->	
-
-	<div class="addInv">
-	
-	
-		<h1 id="headers">Edit Branch Entry</h1>
-		<div >
-			<form action="" method="POST" class="editPgs">
-				<?php foreach ($result2 as $row): ?>
-				<h3>Branch ID</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["branchID"]; ?>" value="<?php echo $row["branchID"]; ?>" name="branID"> <br>
-				<?php endforeach ?>
-				
-				<?php foreach ($result2 as $row): ?>
-				<h3>Branch Name</h3>
-				<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["location"]; ?>" value="<?php echo $row["location"]; ?>" name="branName"> <br>
-				<?php endforeach ?>
-				<br>
-			<input type="submit" value="Update" class="btn btn-success" name="addAccnt" onclick="alert('Brand Entry Successfully Edited');">
-			<a href="../branches.php">
-				<input type="button" value="Cancel" class="btn btn-default" style="width: 100px">
-			</a>
-			</form> 
-		</div>
-	</div>
-	   
-	<?php
-		$braID=(isset($_REQUEST['branID']) ? $_REQUEST['branID'] : null);
-		$braName=(isset($_REQUEST['branName']) ? $_REQUEST['branName'] : null);
-    if (isset($_POST["addAccnt"])){
-    
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	 
-		$sql = "UPDATE branch SET branchID = '$braID', location = '$braName' WHERE branchID = '$branchThisID'";
-    
-		$conn->exec($sql);
-	}    
-
-	?>
+		
+		<!-- Update Function -->
+		<?php
+			$braID=(isset($_REQUEST['branID']) ? $_REQUEST['branID'] : null);
+			$braName=(isset($_REQUEST['branName']) ? $_REQUEST['branName'] : null);
+			if (isset($_POST["editBranch"])){
+			
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 
+				$sql = "UPDATE branch SET branchID = '$braID', location = '$braName' WHERE branchID = '$branchThisID'";
+				$conn->exec($sql);
+			}    
+		?>
   </body>
 </html>
