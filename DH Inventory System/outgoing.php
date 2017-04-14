@@ -232,9 +232,6 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-											
-												<h5>Receipt No.</h5> 
-												<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
 													
 												<h5>Handled By</h5>
 												<?php
