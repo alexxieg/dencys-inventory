@@ -108,7 +108,6 @@
 			}
 		?>
 	
-	
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -129,7 +128,6 @@
 			</div>
 		</nav>
 		<!-- End of Top Main Header -->
-
 
 		<div class="container-fluid">
 			<div class="row navbar-collapse">
@@ -154,6 +152,8 @@
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="monthlyIncoming.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="monthlyOutgoing.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -169,6 +169,7 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
+				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
 						<div class="pages no-more-tables">							
@@ -177,12 +178,13 @@
 									
 									<!-- Overall Outgoing -->
 									<div class="tab-pane active" id="mainOutSummary">
-									
-										<h3>Overall Outgoing Products Summary for the Month:</h3>
-											<div class="col-sm-7 pull-right">
-												<label>View Previous Reports</label>
-												<form class="form-inline" action="" method="post">
-													<div class="form-group">
+										<h2 id="headers">Outgoing Product Summary for the Month</h2>
+										<br>
+	
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
+											<label>View Previous Reports</label>
+											<form class="form-inline" action="" method="post">
+												<div class="form-group">
 														<select name="dateMonthName" class="form-control">
 															<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
 															<?php foreach ($resultMonth as $rowMonth): ?>
@@ -202,14 +204,14 @@
 														<input type="submit" value="View" class="btn btn-success" name="submit">
 													</div>
 												</form>	
-											</div>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
+											
 											<thead>
 												<tr id="centerData">
 													<th>Product Name</th>
 													<th>Total Quantity</th>
 												</tr>
 											</thead>
+											
 											<tbody>
 												<?php
 													foreach ($result as $item):

@@ -17,7 +17,7 @@
 		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link href="css/test.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 
 		<!-- Javascript Files -->
@@ -44,69 +44,7 @@
 	</head>
 	  
 	<body>
-	  
-		<!-- Top Main Header -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-		  <div class="container-fluid">
-			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			  </button>
-			  <a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-			  <ul class="nav navbar-nav navbar-right">
-				<li><a href="Logout.php">Logout</a></li>
-			  </ul>
-			</div>
-		  </div>
-		</nav>
-		<!-- End of Top Main Header -->
-
-		<div class="container-fluid">
-			<div class="row">
-			
-				<!-- Sidebar -->
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li class="active"><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span></a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="incoming">
-								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="incoming.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
-							</ul>
-						</li>						
-						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="returns">
-								<li><a href="returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Product Deliveries</a></li>
-								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Product Issuance</a></li>
-							</ul>
-						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="reports">
-								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-							</ul>
-						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="manage">
-								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
-								<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
-								<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-								<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
-								<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<!-- End of Sidebar -->
-	
-			<!-- Retrieve Ledger Data -->
+	  		<!-- Retrieve Ledger Data -->
 			<?php
 				$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
 				$query->execute();
@@ -165,119 +103,180 @@
 					$filterCategory = "None";
 				}
 			?>
+	  
+		<!-- Top Main Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+					<li><a href="Logout.php">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- End of Top Main Header -->
 
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
-		<div id="contents">
-			<div class="pages no-more-tables">
-				<div id="tableHeader">
-					<table class="table table-striped table-bordered">
-						<h1 id="headers">Add Physical Count</h1>
-						
-						<?php 
-							$location =  $_SERVER['REQUEST_URI']; 
-						?>
-						<table class="table table-striped table-bordered">
-							<tr>
-								<td>
-									Filter By Brand
-									<form action="<?php echo $location; ?>" method="POST">
-										<select name="brand_Name">
-											<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
-											<?php foreach ($result as $row): ?>
-												<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-											<?php endforeach ?>
-										</select>
-										<input type="submit" value="Filter" class="btn btn-success" name="submit">
-									</form>
-								</td>	
+		<div class="container-fluid">
+			<div class="row">
+			
+				<!-- Sidebar -->
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
+						<li class="active"><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span></a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="incoming.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+							</ul>
+						</li>						
+						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="reports">
+								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="monthlyIncoming.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="monthlyOutgoing.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="manage">
+								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
+								<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+								<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+								<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- End of Sidebar -->
+
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
+				<div id="contents">
+					<div class="pages no-more-tables">
+						<div id="tableHeader">
+								<table class="table table-striped table-bordered">
+								<h1 id="headers">Add Physical Count</h1>
 								
-								<td>
-									Filter By Category <br>
-									<form action="<?php echo $location; ?>" method="POST">
-										<select name="category_Name">
-											<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
-											<?php foreach ($result2 as $row2): ?>
-												<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
-											<?php endforeach ?>
-										</select>
-										<input type="submit" value="Filter" class="btn btn-success" name="submit">
-									</form>
-								</td>
-								
-							</tr>
-						</table>
-						
-						
-						<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-							<thead>
-								<tr id="centerData">
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Product ID</div>
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Product Description</div>							
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Brand</div>
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Category</div>
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Unit
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Last physical Qty</div>
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Remarks</div>
-									</th>		
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Physical Count</div>
-									</th>	
-								</tr>
-							</thead>
-							<tbody>
-								<form action="" method="POST">
-									<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
-										UPDATE
-									</button>
-									<?php
-										foreach ($result3 as $item):
-										$proID = $item["prodID"];
-									?>
-									
-										
-									<tr id="centerData">
-										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-										<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-										<td data-title="Unit"><?php echo $item["unitType"];?></td>
-										<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
-										
-										<td data-title="Remarks">
-											<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
-										</td>
+								<?php 
+									$location =  $_SERVER['REQUEST_URI']; 
+								?>
+
+									<tr>
 										<td>
-											<input type="text" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-											<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
+											Filter By Brand
+											<form action="<?php echo $location; ?>" method="POST">
+												<select name="brand_Name">
+													<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
+													<?php foreach ($result as $row): ?>
+														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+													<?php endforeach ?>
+												</select>
+												<input type="submit" value="Filter" class="btn btn-success" name="submit">
+											</form>
+										</td>	
+										
+										<td>
+											Filter By Category <br>
+											<form action="<?php echo $location; ?>" method="POST">
+												<select name="category_Name">
+													<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
+													<?php foreach ($result2 as $row2): ?>
+														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+													<?php endforeach ?>
+												</select>
+												<input type="submit" value="Filter" class="btn btn-success" name="submit">
+											</form>
 										</td>
+										
+									</tr>
+								</table>
+								
+								
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+									<thead>
+										<tr id="centerData">
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Product ID</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Product Description</div>							
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Brand</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Category</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												Unit
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Last physical Qty</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Remarks</div>
+											</th>		
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Physical Count</div>
+											</th>	
+										</tr>
+									</thead>
+									<tbody>
+										<form action="" method="POST">
+											<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
+												UPDATE
+											</button>
+											<?php
+												foreach ($result3 as $item):
+												$proID = $item["prodID"];
+											?>
 											
-									</tr>	
-									<?php
-										endforeach;
-									?>
-								</form>
-							</tbody>	
-						</table>
-						
-						
+												
+											<tr id="centerData">
+												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+												<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+												<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+												<td data-title="Unit"><?php echo $item["unitType"];?></td>
+												<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
+												
+												<td data-title="Remarks">
+													<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
+												</td>
+												<td>
+													<input type="text" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
+													<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
+												</td>
+													
+											</tr>	
+											<?php
+												endforeach;
+											?>
+										</form>
+									</tbody>	
+								</table>	
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 					
 		<?php 

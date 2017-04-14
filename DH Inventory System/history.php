@@ -15,7 +15,7 @@
 		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link href="css/test.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
@@ -55,15 +55,16 @@
     
   	<body>
 		<!-- PHP code for fetching the data-->
-<?php
-	$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
-								FROM product LEFT JOIN archive ON product.prodID = archive.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-								WHERE product.status = 'Active' 
-								GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty, archive.endingQty, archive.remarks");	
-	$query->execute();
-	$result = $query->fetchAll();
-?>	
-	<!-- Top Main Header -->
+		<?php
+			$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
+										FROM product LEFT JOIN archive ON product.prodID = archive.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+										WHERE product.status = 'Active' 
+										GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty, archive.endingQty, archive.remarks");	
+			$query->execute();
+			$result = $query->fetchAll();
+		?>	
+		
+		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -107,6 +108,8 @@
 						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="monthlyIncoming.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="monthlyOutgoing.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -122,176 +125,176 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-		<?php
-			foreach ($result as $item):
-				$currQty = $item["qty"];
-				$incID = $item["prodID"];
-				if ($currQty <= $item["reorderLevel"]){
-		?> 
-					
-		<?php	
-			}else if ($currQty > $item["reorderLevel"]){
-		?>
-					
-		<?php
-			}	
-		?>
-						
-		<?php
-			endforeach;
-		?>
-
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">					
-		<div id="contents">
-			<div class="pages">
-				<div id="tableHeader">
-					<table class="table table-striped table-bordered">	
-						<h1 id="headers">PREVIOUS INVENTORY</h1>	
-						<select>
-							<option>March 2017</option>
-						</select>
-					</table>
-				</div>
 				
-				<hr>
-				
-				<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-					<div id="myTable_length" class="dataTables_length">
-						<div id="myTable_filter" class="dataTables_filter">
-						</div>
-					</div>
-				</div>
-				
-				<!-- Table for Inventory Data-->
-				<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-					<thead>	
-						<tr>
-							<td colspan="13" style="font-size: 35px;">
-								<?php
-								$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
-								$month->execute();
-								$monthres = $month->fetchAll();
-								foreach ($monthres as $monthshow)
-								echo $monthshow["month"];
-								?>	
-							</td>
-						</tr>
-						<tr>
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								<div id="tabHead">Product ID</div>
-							</th>
+				<?php
+					foreach ($result as $item):
+						$currQty = $item["qty"];
+						$incID = $item["prodID"];
+						if ($currQty <= $item["reorderLevel"]){
+				?> 
 							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								<div id="tabHead">Product Description</div>
-							</th>	
+				<?php	
+					}else if ($currQty > $item["reorderLevel"]){
+				?>
 							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Beginning Quantity
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Ending Quantity
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								IN
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								OUT
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Current Quantity
+				<?php
+					}	
+				?>
 								
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Physical Count
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Reorder Level
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Unit
-							</th>
-			
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Remarks
-							</th>
-							
-							<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-								Stock Card
-							</th>
-						</tr>
-				</thead>
-				<tbody>	
-						
-						<?php
-							foreach ($result as $item):
-						
-								$incID = $item["prodID"];
-								if ($item['qty'] <= $item["reorderLevel"]){
-						?> 
-						<tr id="centerData">
-							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-							<td data-title="End. Quantity"><?php echo $item["endingQty"]; ?></td>
-							<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
-							<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
-							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
-							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
-							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-							<td data-title="Unit"><?php echo $item["unitType"];?></td>
-							<td data-title="Remarks"><?php echo $item["remarks"];?></td>
-							<td>
-								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
-									<button type="button" class="btn btn-default" id="edBtn">
-										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-									</button>
-								</a>
-							</td>
-						</tr>
-						
-						<?php	
-							}else if ($item['qty'] > $item["reorderLevel"]){
-						?>
-						<tr id="centerData">
-							<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-							<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-							<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-							<td data-title="End. Quantity"><?php echo $item["endingQty"]; ?></td>
-							<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
-							<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
-							<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
-							<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
-							<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-							<td data-title="Unit"><?php echo $item["unitType"];?></td>
-							<td data-title="Remarks"><?php echo $item["remarks"];?></td>
-							<td>
-								<a href="ledger.php?incId=<?php echo $incID; ?>" target="_self"> 
-									<button type="button" class="btn btn-default" id="edBtn">
-										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-									</button>
-								</a>	
-							</td>	
-						</tr>
-						<?php
-							}	
-						?>
-							
-						<?php
-							endforeach;
-						?>
-				</tbody>	
-			</table>
-		</div>	
-	</div>
+				<?php
+					endforeach;
+				?>
 
-			
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">					
+					<div id="contents">
+						<div class="pages">
+							<div id="tableHeader">
+								<table class="table table-striped table-bordered">	
+									<h1 id="headers">PREVIOUS INVENTORY</h1>	
+									<select>
+										<option>March 2017</option>
+									</select>
+								</table>
+							</div>
+							
+							<hr>
+							
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
+									</div>
+								</div>
+							</div>
+							
+							<!-- Table for Inventory Data-->
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>	
+									<tr>
+										<td colspan="13" style="font-size: 35px;">
+											<?php
+											$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
+											$month->execute();
+											$monthres = $month->fetchAll();
+											foreach ($monthres as $monthshow)
+											echo $monthshow["month"];
+											?>	
+										</td>
+									</tr>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product ID</div>
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product Description</div>
+										</th>	
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											Beginning Quantity
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											Ending Quantity
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											IN
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											OUT
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											Current Quantity
+											
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											Physical Count
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											Reorder Level
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											Unit
+										</th>
+						
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											Remarks
+										</th>
+										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											Stock Card
+										</th>
+									</tr>
+							</thead>
+							<tbody>	
+									
+									<?php
+										foreach ($result as $item):
+									
+											$incID = $item["prodID"];
+											if ($item['qty'] <= $item["reorderLevel"]){
+									?> 
+									<tr id="centerData">
+										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
+										<td data-title="End. Quantity"><?php echo $item["endingQty"]; ?></td>
+										<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
+										<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
+										<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
+										<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
+										<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+										<td data-title="Unit"><?php echo $item["unitType"];?></td>
+										<td data-title="Remarks"><?php echo $item["remarks"];?></td>
+										<td>
+											<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+												<button type="button" class="btn btn-default" id="edBtn">
+													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+												</button>
+											</a>
+										</td>
+									</tr>
+									
+									<?php	
+										}else if ($item['qty'] > $item["reorderLevel"]){
+									?>
+									<tr id="centerData">
+										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
+										<td data-title="End. Quantity"><?php echo $item["endingQty"]; ?></td>
+										<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
+										<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
+										<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
+										<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
+										<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+										<td data-title="Unit"><?php echo $item["unitType"];?></td>
+										<td data-title="Remarks"><?php echo $item["remarks"];?></td>
+										<td>
+											<a href="ledger.php?incId=<?php echo $incID; ?>" target="_self"> 
+												<button type="button" class="btn btn-default" id="edBtn">
+													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+												</button>
+											</a>	
+										</td>	
+									</tr>
+									<?php
+										}	
+									?>
+										
+									<?php
+										endforeach;
+									?>
+							</tbody>	
+						</table>
+					</div>	
+				</div>
+			</div>
 		</div> 
 	</body>
 </html>

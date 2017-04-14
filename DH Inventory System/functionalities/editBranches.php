@@ -138,11 +138,6 @@
 									<input type="submit" name="editBranch" value="Update" class="btn btn-success" id="sucBtn">
 								</span>
 							</div>
-							
-						<input type="submit" value="Update" class="btn btn-success" name="editBranch" onclick="alert('Brand Entry Successfully Edited');">
-						<a href="../branches.php">
-							<input type="button" value="Cancel" class="btn btn-default" style="width: 100px">
-						</a>
 						</form> 
 					</div>
 				</div>

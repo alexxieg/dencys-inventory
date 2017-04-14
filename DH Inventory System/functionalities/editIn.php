@@ -120,7 +120,6 @@
 				</div>
 				<!-- End of Sidebar -->
   
-				<!-- Modal for New Incoming Entry Form -->
 				<div class="addInv">
 					<h1 id="headers">Edit Product Delivery Entry</h1>
 					<br>

@@ -13,19 +13,20 @@
 		<link href="../css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="../logo.jpg">
 
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
 		<!-- Custom styles for this template -->
-		<link href="../css/test.css" rel="stylesheet">
+		<link href="../css/custom.css" rel="stylesheet">
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
-		<script src="../returns.js"></script>
+		<!-- Javascript Files -->
+		<script src="../js/returns.js"></script>
 		<script src="../js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../js/jquery-3.2.0.min.js"></script>	
+		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -38,72 +39,55 @@
 		?>
 	</head>
   
-  
 	<body>
+		<!-- Retrieved Selected Entry Details -->
 		<?php
 			$retID= $_GET['retId'];
-			$query = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 					FROM returns INNER JOIN product ON returns.prodID = product.prodID");
 			$query->execute();
 			$res = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodID, product.unitType, product.model, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
 					FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 					WHERE returnID = $retID ");
 			$query2->execute();
 			$resul = $query2->fetchAll();
 		?>
-
-		<!--Top Navigation Bar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse" data-target="#sidebarCol" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
+		
+		<!-- Top Main Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="Logout.php">Logout</a></li>
+					</ul>
+				</div>
 			</div>
-			<div  id="navbar" class="navbar-collapse">
-				<ul class="nav navbar-nav navbar-right" id="adminDrp">
-				    <li class="dropdown" id="font">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="try">
-                        	<i class="glyphicon glyphicon-user"></i> ADMIN
-                         </a>
-                            <ul class="dropdown-menu list-unstyled">
-                                <li>
-                                    <a href="../logout.php" class="active"><i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
-								</li>
-                            </ul>
-                     </li>
-				</ul>
-			</div>
+		</nav>
+		<!-- End of Top Main Header -->
 
 
     <div class="container-fluid">
 		<div class="row navbar-collapse">
 			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-						<img src="../logo.png" alt="" width="100px" height="100px" id="sidebarLogo"/>
-					<li>
-						<a href="../inventory.php">
-							<i class="glyphicon glyphicon-list-alt"></i> Inventory
-						</a>
-					</li>
-					<li><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-					<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing </a></li>
+					<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
+					<li><a href="../inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+					<li><a href="../incoming.php"><i class="glyphicon glyphicon-import"></i> Product Deliveries</a></li>
+					<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 					<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="../returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+							<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 							<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 						</ul>
 					</li>
@@ -112,7 +96,7 @@
 							<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 						</ul>
 					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+					<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="manage">
 							<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 							<li><a href="../branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
@@ -130,53 +114,60 @@
 	</nav>	
 		<!-- End of Sidebar -->	
 				
-		<div class="addInv">
-		
-			<h1 id="headers">Edit Return Entry</h1>
-			<div id="contents">
-				<form action="" method="POST" class="editPgs">
-					<h3>Item</h3>
-					<select class="form-control" id="addEntry" name="prodItem">
-						<?php foreach ($resul as $item): ?>
-							<option selected><?php echo $item["prodName"]; ?></option>
-						<?php endforeach; ?>
-						<?php foreach ($res as $row): ?>
-							<option><?=$row["prodName"]?></option>
-						<?php endforeach ?>
-					</select>  
+				<div class="addInv">
+					<h1 id="headers">Edit Return Entry</h1>
 					<br>
-					
-					<h3>Quantity</h3>
-					<?php foreach ($resul as $item): ?>
-						<input type="text" class="form-control" id ="addEntry" value="<?php echo $item["returnQty"]; ?>" placeholder="<?php echo $item["returnQty"]; ?>" name="retQty"> <br>
-					<?php endforeach; ?>
-					
-					<div class="form-group">
-					 <h3>Status</h3>
-					  <select class="form-control" id="addEntry" name="status">
-						<option>Returned</option>
-						<option>Pending</option>
-					  </select>
+					<div id="contents">
+						<form action="" method="POST" class="editPgs">
+							<h3>Item</h3>
+							<select class="form-control" id="addEntry" name="prodItem">
+								<?php foreach ($resul as $item): ?>
+									<option selected><?php echo $item["prodName"]; ?></option>
+								<?php endforeach; ?>
+								<?php foreach ($res as $row): ?>
+									<option><?=$row["prodName"]?></option>
+								<?php endforeach ?>
+							</select>  
+							<br>
+							
+							<h3>Quantity</h3>
+								<input type="text" class="form-control" id ="addEntry" value="<?php echo $item["returnQty"]; ?>" placeholder="<?php echo $item["returnQty"]; ?>" name="retQty"> <br>
+							
+							<div class="form-group">
+							 <h3>Status</h3>
+							  <select class="form-control" id="addEntry" name="status">
+								<option>Returned</option>
+								<option>Pending</option>
+							  </select>
+							</div>
+							
+							<h3>Remarks</h3>
+							<input type="text" class="form-control" id="addEntry" value="<?php echo $row["returnRemark"]; ?>" placeholder="<?php echo $row["returnRemark"]; ?>"  name="retRemarks">
+								
+							<br>
+							
+							<div class="modFoot">
+								<span>
+									<a href="../returnsWarehouse.php">
+										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+									</a>
+								</span>
+								<span>
+									<input type="submit" name="editReturns" value="Update" class="btn btn-success" id="sucBtn">
+								</span>
+							</div>	
+						</form> 
 					</div>
-					
-					<h3>Remarks</h3>
-					<textarea class="form-control" id="addEntry" rows="3" name="retRemarks" placeholder="<?php echo $item["returnRemark"]; ?>"><?php echo $item["returnRemark"]; ?></textarea> <br>
-			
-					<br>
-					<input type="submit" value="Update" class="btn btn-success" name="addRet">
-					<a href="../returns.php">
-						<input type="button" value="Cancel" class="btn btn-default" style="width: 100px">
-					</a>
-				</form> 
+				</div>
 			</div>
 		</div>
-	
+		
 		<?php
 			$retID= $_GET['retId'];
 			$quant=(isset($_REQUEST['retQty']) ? $_REQUEST['retQty'] : null);
 			$stat=(isset($_REQUEST['status']) ? $_REQUEST['status'] : null);
 			$rem=(isset($_REQUEST['retRemarks']) ? $_REQUEST['retRemarks'] : null);
-			if (isset($_POST["addRet"])){
+			if (isset($_POST["editReturns"])){
 				
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 							
@@ -191,5 +182,5 @@
 			}    
 		?>
 
-  </body>
+	</body>
 </html>
