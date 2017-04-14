@@ -181,6 +181,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Returned From</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -199,6 +200,7 @@
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
 										<td data-title="Returned From"><?php echo $item["location"];?></td>
 										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+										<td data-title="User"><?php echo $item["userID"]; ?></td>
 											
 										<td>
 											<a href="functionalities/editRet.php?retId=<?php echo $retID; ?>" target="_blank">
@@ -259,6 +261,9 @@
 												<h3>Remarks</h3>
 												<input type="text" class="form-control" id ="addEntry" placeholder="Remarks" name="retRemarks"> <br>
 												<br>
+												<td>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User"name="userID" readonly>
+												</td>
 												<div class="modFoot">
 												<span>
 													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
