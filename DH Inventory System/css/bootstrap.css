@@ -1222,7 +1222,6 @@ h1,
 .h1 {
   margin-top: 10px;
   margin-bottom: 10px;
-  color: #efe;
   font-family: monospace;
 }
 h2,
@@ -3238,8 +3237,7 @@ fieldset[disabled] .btn-success.focus {
 }
 .btn-info {
   color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #3b5998;
 }
 .btn-info:focus,
 .btn-info.focus {
@@ -3286,12 +3284,11 @@ fieldset[disabled] .btn-info:focus,
 .btn-info.disabled.focus,
 .btn-info[disabled].focus,
 fieldset[disabled] .btn-info.focus {
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #3b5998;
 }
 .btn-info .badge {
-  color: #5bc0de;
-  background-color: #fff;
+  color: white;
+  background-color: #3b5998;
 }
 .btn-warning {
   color: #fff;
@@ -6961,7 +6958,7 @@ margin-left: 15%;
 }
 
 #headers{
-  color: #000000;
+  color: black;
   font-family: monospace;
 }
 
@@ -7224,12 +7221,6 @@ border: none;
       margin-bottom: -30px;
     }
 
-    #adminView {
-      margin-left: 26%;
-      margin-right: 26%;
-      margin-top: -10px;
-      margin-bottom: 20%;
-    }
 }
 
 #mainHeader{
@@ -7636,3 +7627,4 @@ border: none;
 #loghead{
   font-size: 100%;
 }
+
