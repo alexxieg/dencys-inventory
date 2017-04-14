@@ -80,6 +80,7 @@
             $inQty = $_POST['incQty'][$index];
 			$inStat = $_POST['inStatus'][$index];
             $emp = $_POST['emp'];
+			$userID = $_POST['userID'];
 			
 
             $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
@@ -89,8 +90,8 @@
             $prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
             $prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
             $prod3 = $prod2['prodA'];
-            $sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID)
-            VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3')";
+            $sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
+            VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3','$userID')";
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";

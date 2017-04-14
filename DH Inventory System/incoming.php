@@ -193,6 +193,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -215,6 +216,7 @@
 										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
 										<td data-title="Status"><?php echo $item["status"]; ?></td>
 										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
 											<a href="functionalities/editIn.php?incId=<?php echo $incRec; ?>"> 
 											<button type="button" class="btn btn-default" id="edBtn">
@@ -297,6 +299,9 @@
 																
 															<td>
 																<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
+															</td>
+															<td>
+																<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 															</td>
 														</tr>
 													</tbody>
