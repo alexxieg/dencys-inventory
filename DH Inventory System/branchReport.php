@@ -177,27 +177,6 @@
 				$result6 = $query6->fetchAll();
 			}
 			
-			/* For Outgoing Product Overall */
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
-				$query7 = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
-										FROM outgoing
-										JOIN product ON outgoing.prodID = product.prodID 
-										WHERE MONTHNAME(outDate) = '$sortByMonthDate'
-										AND YEAR(outDate) = $sortByYearDate
-										GROUP BY prodName ORDER BY totOutQty DESC");
-				$query7->execute();
-				$result7 = $query7->fetchAll();
-			} else {
-				$query7 = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
-									FROM outgoing
-									JOIN product ON outgoing.prodID = product.prodID 
-									WHERE MONTHNAME(outDate) = MONTHNAME(CURDATE()) 
-									AND YEAR(outDate) = YEAR(CURDATE())
-									GROUP BY prodName ORDER BY totOutQty DESC");
-				$query7->execute();
-				$result7 = $query7->fetchAll();
-			}
-			
 			/* For Date */
 			$queryMonth = $conn->prepare("SELECT DISTINCT MONTHNAME(outDate) AS nowMonthDate, (SELECT DISTINCT YEAR(outDate) FROM outgoing) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
 								FROM outgoing;");
@@ -310,11 +289,6 @@
 										</a>
 									</li>
 									<li>
-										<a href="#mainOutProdSummary" data-toggle="tab">
-											<span>Products</span>
-										</a>
-									</li>
-									<li>
 										<a href="#outSummaryCamdas" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
 											<span>Camdas</span>
 										</a>
@@ -368,32 +342,6 @@
 										</table>
 									</div>
 									
-									<!-- Overall Outgoing Products -->
-									<div class="tab-pane" id="mainOutProdSummary">
-										<h3>Overall Outgoing Products Summary for the Month:</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th>Product Name</th>
-													<th>Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result7 as $item7):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Name"><?php echo $item7["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item7["totOutQty"]; ?></td>
-												</tr>
-													
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
-								
 									<!-- Camdas Outgoing Summary -->
 									<div class="tab-pane" id="outSummaryCamdas">
 										<h3>Outgoing Products in Camdas:</h3>

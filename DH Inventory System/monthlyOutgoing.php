@@ -75,34 +75,34 @@
 			}
 			
 			/* For Date */
-			$queryMonth = $conn->prepare("SELECT DISTINCT MONTHNAME(inDate) AS nowMonthDate, (SELECT DISTINCT YEAR(inDate) FROM incoming) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
-								FROM incoming;");
+			$queryMonth = $conn->prepare("SELECT DISTINCT MONTHNAME(outDate) AS nowMonthDate, (SELECT DISTINCT YEAR(outDate) FROM outgoing) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
+								FROM outgoing;");
 			$queryMonth->execute();
 			$resultMonth = $queryMonth->fetchAll();
 			
-			$queryYear = $conn->prepare("SELECT DISTINCT YEAR(inDate) AS nowYearDate FROM incoming");
+			$queryYear = $conn->prepare("SELECT DISTINCT YEAR(outDate) AS nowYearDate FROM outgoing");
 			$queryYear->execute();
 			$resultYear = $queryYear->fetchAll();
 		?>
 		
 		<?php 
 			/* For Incoming Product Overall Query */
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-				$query = $conn->prepare("SELECT prodName, SUM(inQty) AS totInQty
-										FROM incoming 
-										JOIN product ON incoming.prodID = product.prodID 
-										WHERE MONTHNAME(inDate) = '$sortByMonthDate'
-										AND YEAR(inDate) = $sortByYearDate
-										GROUP BY prodName ORDER BY totInQty DESC");
+			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+				$query = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
+										FROM outgoing
+										JOIN product ON outgoing.prodID = product.prodID 
+										WHERE MONTHNAME(outDate) = '$sortByMonthDate'
+										AND YEAR(outDate) = $sortByYearDate
+										GROUP BY prodName ORDER BY totOutQty DESC");
 				$query->execute();
 				$result = $query->fetchAll();
 			} else {
-				$query = $conn->prepare("SELECT prodName, SUM(inQty) AS totInQty
-										FROM incoming 
-										JOIN product ON incoming.prodID = product.prodID 
-										WHERE MONTHNAME(inDate) = MONTHNAME(CURDATE()) 
-										AND YEAR(inDate) = YEAR(CURDATE())
-										GROUP BY prodName ORDER BY totInQty DESC");
+				$query = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
+									FROM outgoing
+									JOIN product ON outgoing.prodID = product.prodID 
+									WHERE MONTHNAME(outDate) = MONTHNAME(CURDATE()) 
+									AND YEAR(outDate) = YEAR(CURDATE())
+									GROUP BY prodName ORDER BY totOutQty DESC");
 				$query->execute();
 				$result = $query->fetchAll();
 			}
@@ -178,7 +178,7 @@
 									<!-- Overall Outgoing -->
 									<div class="tab-pane active" id="mainOutSummary">
 									
-										<h3>Overall Incoming Products Summary for the Month:</h3>
+										<h3>Overall Outgoing Products Summary for the Month:</h3>
 											<div class="col-sm-7 pull-right">
 												<label>View Previous Reports</label>
 												<form class="form-inline" action="" method="post">
@@ -216,7 +216,7 @@
 												?>
 												<tr id="centerData">
 													<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item["totInQty"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item["totOutQty"]; ?></td>
 												</tr>
 													
 												<?php
