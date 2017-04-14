@@ -59,39 +59,15 @@
 		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchInventory.php'); ?>
 		
-		<!-- Fetch Outgoing Data per Branch -->
 		<?php 
-			/* For Camdas Query */
-			$query = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas';");
+			/* For Incoming Product Overall Query */
+			$query = $conn->prepare("SELECT prodName, SUM(inQty) AS totInQty
+									FROM incoming 
+									JOIN product ON incoming.prodID = product.prodID 
+									WHERE MONTHNAME(inDate) = MONTHNAME(CURDATE()) 
+									GROUP BY prodName ORDER BY totInQty DESC");
 			$query->execute();
-			$result1 = $query->fetchAll();
-			
-			/* For Hilltop Query */
-			$query2 = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop';");
-			$query2->execute();
-			$result2 = $query2->fetchAll();
-			
-			/* For KM 4 Query */
-			$query3 = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4';");
-			$query3->execute();
-			$result3 = $query3->fetchAll();
-			
-			/* For KM 5 Query */
-			$query4 = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5';");
-			$query4->execute();
-			$result4 = $query4->fetchAll();
-			
-			/* For San Fernando Query */
-			$query5 = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando';");
-			$query5->execute();
-			$result5 = $query5->fetchAll();
-			
-			/* For Branch Overall Query */
-			$query6 = $conn->prepare("SELECT SUM(outQty) AS 'TOTAL_QUANTITY', location 
-										FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID 
-										GROUP BY location ORDER BY TOTAL_QUANTITY DESC;");
-			$query6->execute();
-			$result6 = $query6->fetchAll();
+			$result = $query->fetchAll();
 		?>
 	
 	
@@ -160,58 +136,24 @@
 					<div id="contents">
 						<div class="pages no-more-tables">							
 							<div class="container">	
-								<h2 id="headrep">OUTGOING PRODUCTS PER BRANCH</h2>
-								<ul class="nav nav-pills" id="navjust">
-									<li>
-										<a href="#mainOutSummary" data-toggle="tab">
-											<span>Outgoing</span>
-										</a>
-									</li>
-									<li>
-										<a href="#outSummaryCamdas" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
-											<span>Camdas</span>
-										</a>
-									</li>
-									<li>
-										<a href="#outSummaryHilltop" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">
-											<span>Hilltop</span>
-										</a>
-									</li>
-									<li>
-										<a href="#outSummaryKM4" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
-											<span>KM 4</span>
-										</a>
-									</li>
-									<li>
-										<a href="#outSummaryKM5" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
-											<span>KM 5</span>
-										</a>
-									</li>
-									<li>
-										<a href="#outSummarySF" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
-											<span>San Fernando</span>
-										</a>
-									</li>
-								</ul>
-
 								<div class="tab-content clearfix">
 									<!-- Overall Outgoing -->
 									<div class="tab-pane active" id="mainOutSummary">
-										<h3>Overall Outgoing Products Summary for the Month:</h3>
+										<h3>Overall Incoming Products Summary for the Month:</h3>
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr id="centerData">
-													<th>Location</th>
+													<th>Product Name</th>
 													<th>Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php
-													foreach ($result6 as $item6):
+													foreach ($result as $item):
 												?>
 												<tr id="centerData">
-													<td data-title="Location"><?php echo $item6["location"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
+													<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item["totInQty"]; ?></td>
 												</tr>
 													
 												<?php
@@ -219,137 +161,7 @@
 												?>
 											</tbody>
 										</table>
-									</div>
-								
-									<!-- Camdas Outgoing Summary -->
-									<div class="tab-pane" id="outSummaryCamdas">
-										<h3>Outgoing Products in Camdas:</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result1 as $item):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item["outQty"]; ?></td>
-												</tr>
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
-									
-									<!-- Hilltop Outgoing Summary -->
-									 <div class="tab-pane" id="outSummaryHilltop">
-										<h3>Outgoing Products in Hilltop:</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result2 as $item2):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item2["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item2["outQty"]; ?></td>
-												</tr>
-													
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									 </div>
-									 
-									 <!-- KM 4 Outgoing Summary-->
-									<div class="tab-pane" id="outSummaryKM4">
-										<h3>Outgoing Products in KM4:</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result3 as $item3):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item3["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item3["outQty"]; ?></td>
-												</tr>
-													
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
-									
-									<!-- KM5 Outgoing Summary-->
-									<div class="tab-pane" id="outSummaryKM5">
-									<h3>Outgoing Products in KM5:</h3>
-									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result4 as $item4):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item4["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item4["outQty"]; ?></td>
-												</tr>
-													
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
-									
-									<!-- San Fernando Outgoing Summary -->
-									<div class="tab-pane" id="outSummarySF">
-									<h3>Outgoing Products in San Fernando, La Union:</h3>
-									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
-
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result5 as $item5):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item5["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item5["outQty"]; ?></td>
-												</tr>
-													
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
+									</div>							
 								</div>
 							</div>
 						</div>

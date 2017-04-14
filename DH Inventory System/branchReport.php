@@ -92,6 +92,15 @@
 										GROUP BY location ORDER BY TOTAL_QUANTITY DESC;");
 			$query6->execute();
 			$result6 = $query6->fetchAll();
+			
+			/* For Outgoing Product Overall */
+			$query7 = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
+									FROM outgoing
+									JOIN product ON outgoing.prodID = product.prodID 
+									WHERE MONTHNAME(outDate) = MONTHNAME(CURDATE()) 
+									GROUP BY prodName ORDER BY totOutQty DESC");
+			$query7->execute();
+			$result7 = $query7->fetchAll();
 		?>
 	
 	
@@ -169,6 +178,11 @@
 										</a>
 									</li>
 									<li>
+										<a href="#mainOutProdSummary" data-toggle="tab">
+											<span>Products</span>
+										</a>
+									</li>
+									<li>
 										<a href="#outSummaryCamdas" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
 											<span>Camdas</span>
 										</a>
@@ -196,9 +210,9 @@
 								</ul>
 
 								<div class="tab-content clearfix">
-									<!-- Overall Outgoing -->
+									<!-- Overall Outgoing Branch -->
 									<div class="tab-pane active" id="mainOutSummary">
-										<h3>Overall Outgoing Products Summary for the Month:</h3>
+										<h3>Overall Outgoing Branch Summary for the Month:</h3>
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr id="centerData">
@@ -213,6 +227,32 @@
 												<tr id="centerData">
 													<td data-title="Location"><?php echo $item6["location"]; ?></td>
 													<td data-title="Total Quantity"><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
+												</tr>
+													
+												<?php
+													endforeach;
+												?>
+											</tbody>
+										</table>
+									</div>
+									
+									<!-- Overall Outgoing Products -->
+									<div class="tab-pane" id="mainOutProdSummary">
+										<h3>Overall Outgoing Products Summary for the Month:</h3>
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
+											<thead>
+												<tr id="centerData">
+													<th>Product Name</th>
+													<th>Total Quantity</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+													foreach ($result7 as $item7):
+												?>
+												<tr id="centerData">
+													<td data-title="Product Name"><?php echo $item7["prodName"]; ?></td>
+													<td data-title="Total Quantity"><?php echo $item7["totOutQty"]; ?></td>
 												</tr>
 													
 												<?php
