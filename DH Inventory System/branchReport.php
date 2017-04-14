@@ -61,46 +61,152 @@
 		
 		<!-- Fetch Outgoing Data per Branch -->
 		<?php 
+			$sortByMonthDate = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
+			if (!empty($sortByMonthDate)) { 
+				$selectedMonth = $sortByMonthDate;
+			} else {
+				$selectedMonth = "-SELECTA-";
+			}
+			
+			$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
+			if (!empty($sortByYearDate)) { 
+				$selectedYear = $sortByYearDate;
+			} else {
+				$selectedYear = "-SELECTA-";
+			}
+			
 			/* For Camdas Query */
-			$query = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas';");
-			$query->execute();
-			$result1 = $query->fetchAll();
+			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
+				$query = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas' 
+										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+				$query->execute();
+				$result1 = $query->fetchAll();
+			} else {
+				$query = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas' 
+										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
+				$query->execute();
+				$result1 = $query->fetchAll();
+			}
 			
 			/* For Hilltop Query */
-			$query2 = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop';");
-			$query2->execute();
-			$result2 = $query2->fetchAll();
+			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+				$query2 = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop'
+										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+				$query2->execute();
+				$result2 = $query2->fetchAll();
+			} else {
+				$query2 = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop'
+										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
+				$query2->execute();
+				$result2 = $query2->fetchAll();
+			}
 			
 			/* For KM 4 Query */
-			$query3 = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4';");
-			$query3->execute();
-			$result3 = $query3->fetchAll();
+			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+				$query3 = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4'
+										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+				$query3->execute();
+				$result3 = $query3->fetchAll();
+			} else {
+				$query3 = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4'
+										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
+				$query3->execute();
+				$result3 = $query3->fetchAll();
+			}
 			
 			/* For KM 5 Query */
-			$query4 = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5';");
-			$query4->execute();
-			$result4 = $query4->fetchAll();
+			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+				$query4 = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5'
+										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+				$query4->execute();
+				$result4 = $query4->fetchAll();
+			} else {
+				$query4 = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5'
+										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
+				$query4->execute();
+				$result4 = $query4->fetchAll();
+			}
 			
 			/* For San Fernando Query */
-			$query5 = $conn->prepare("SELECT prodName, outQty FROM outgoing JOIN product ON outgoing.prodID = product.prodID JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando';");
-			$query5->execute();
-			$result5 = $query5->fetchAll();
+			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+				$query5 = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando'
+										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+				$query5->execute();
+				$result5 = $query5->fetchAll();
+			} else {
+				$query5 = $conn->prepare("SELECT prodName, outQty 
+										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando'
+										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
+				$query5->execute();
+				$result5 = $query5->fetchAll();
+			}
 			
 			/* For Branch Overall Query */
-			$query6 = $conn->prepare("SELECT SUM(outQty) AS 'TOTAL_QUANTITY', location 
-										FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID 
-										GROUP BY location ORDER BY TOTAL_QUANTITY DESC;");
-			$query6->execute();
-			$result6 = $query6->fetchAll();
+			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+				$query6 = $conn->prepare("SELECT SUM(outQty) AS 'TOTAL_QUANTITY', location 
+											FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID 
+											WHERE MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate
+											GROUP BY location ORDER BY TOTAL_QUANTITY DESC;");
+				$query6->execute();
+				$result6 = $query6->fetchAll();
+			} else {
+				$query6 = $conn->prepare("SELECT SUM(outQty) AS 'TOTAL_QUANTITY', location 
+											FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID 
+											WHERE MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE())
+											GROUP BY location ORDER BY TOTAL_QUANTITY DESC;");
+				$query6->execute();
+				$result6 = $query6->fetchAll();
+			}
 			
 			/* For Outgoing Product Overall */
-			$query7 = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
+			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+				$query7 = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
+										FROM outgoing
+										JOIN product ON outgoing.prodID = product.prodID 
+										WHERE MONTHNAME(outDate) = '$sortByMonthDate'
+										AND YEAR(outDate) = $sortByYearDate
+										GROUP BY prodName ORDER BY totOutQty DESC");
+				$query7->execute();
+				$result7 = $query7->fetchAll();
+			} else {
+				$query7 = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
 									FROM outgoing
 									JOIN product ON outgoing.prodID = product.prodID 
 									WHERE MONTHNAME(outDate) = MONTHNAME(CURDATE()) 
+									AND YEAR(outDate) = YEAR(CURDATE())
 									GROUP BY prodName ORDER BY totOutQty DESC");
-			$query7->execute();
-			$result7 = $query7->fetchAll();
+				$query7->execute();
+				$result7 = $query7->fetchAll();
+			}
+			
+			/* For Date */
+			$queryMonth = $conn->prepare("SELECT DISTINCT MONTHNAME(outDate) AS nowMonthDate, (SELECT DISTINCT YEAR(outDate) FROM outgoing) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
+								FROM outgoing;");
+			$queryMonth->execute();
+			$resultMonth = $queryMonth->fetchAll();
+			
+			$queryYear = $conn->prepare("SELECT DISTINCT YEAR(outDate) AS nowYearDate FROM outgoing");
+			$queryYear->execute();
+			$resultYear = $queryYear->fetchAll();
 		?>
 	
 	
@@ -171,6 +277,32 @@
 						<div class="pages no-more-tables">							
 							<div class="container">	
 								<h2 id="headrep">OUTGOING PRODUCTS PER BRANCH</h2>
+								
+								<div class="col-sm-7 pull-right">
+									<label>View Previous Reports</label>
+									<form class="form-inline" action="" method="post">
+										<div class="form-group">
+											<select name="dateMonthName" class="form-control">
+												<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
+												<?php foreach ($resultMonth as $rowMonth): ?>
+													<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
+												<?php endforeach ?>
+											</select>
+										</div>
+										<div class="form-group">
+											<select name="dateYearName" class="form-control">
+												<option value="<?php echo $selectedYear ?>">Selected: <?php echo $selectedYear ?></option>
+												<?php foreach ($resultYear as $rowYear): ?>
+													<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
+												<?php endforeach ?>
+											</select>
+										</div>	
+										<div class="form-group">
+											<input type="submit" value="View" class="btn btn-success" name="submit">
+										</div>
+									</form>	
+								</div>	
+								
 								<ul class="nav nav-pills" id="navjust">
 									<li>
 										<a href="#mainOutSummary" data-toggle="tab">
