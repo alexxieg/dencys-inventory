@@ -71,7 +71,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-					<li><a href="Logout.php">Logout</a></li>
+					<li id="adminhead"><h3>User |</h3></li>
+					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -136,18 +137,25 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">	
 									<h1 id="headers">INVENTORY</h1>	
-									<button type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal" id="modButt">
+									<table class="table">	
+									<tr>
+										<td>
+											<br>
+									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">
 										Products for Reorder
 									</button>
-									
-									<a href="history.php"><button type="button" class="btn btn-info btn-lg btnclr" id="modbutt">View Previous Inventory</button></a>
+
+									<a href="history.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
 									
 									<a href="physCount.php"> 
-										<button type="button" class="btn btn-info btn-lg btnclr" id="edBtn">
+										<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
 											Add Physical Count
 										</button>
 									</a>
-								</table>
+							    	</td>
+								  </tr>	
+								</table>											
+							  </table>
 							</div>
 							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

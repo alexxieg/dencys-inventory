@@ -71,7 +71,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="Logout.php">Logout</a></li>
+						<li id="adminhead"><h3>User |</h3></li>
+					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -125,17 +126,17 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">	
 									<h1 id="headers">PRODUCTS</h1>
+									<table class="table">	
+								   		<tr>
+									 	<td>
+									  	<br>
 									<button id="modbutt" type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive">View Archive</button>
 									<button id="modbutt" type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">Add Product</button>
+										</td>
+										</tr>
+									</table>
 								</table>
 							</div>
-
-						<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-							<div id="myTable_length" class="dataTables_length">
-								<div id="myTable_filter" class="dataTables_filter">
-								</div>
-							</div>
-						</div>
 						
 						<!-- Table Display for Products -->
 						<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
