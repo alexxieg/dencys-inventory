@@ -71,7 +71,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="Logout.php">Logout</a></li>
+						<li id="adminhead"><h3>Admin |</h3></li>
+					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -134,10 +135,14 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<h1 id="headers">PRODUCT DELIVERIES</h1>
-								
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
-								
+								  <table class="table">	
+									<tr>
+									  <td>
+									  <br>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Incoming Product</button>
+										</td>
+										<td>
 											<div class="col-sm-7 pull-right filter">
 												<label>View Previous Entries</label>
 												<form class="form-inline" action="" method="post">
@@ -160,7 +165,10 @@
 													</div>
 												</form>	
 											</div>	
-										</div>
+										  </td>
+										</tr>
+									 </table>
+							       </div>
 							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
