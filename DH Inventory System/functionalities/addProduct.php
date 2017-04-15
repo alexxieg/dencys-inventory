@@ -36,15 +36,29 @@
 				$prod = $finbrand . '-' . $fincateg . '-' . str_pad((string)$idNum,4,0,STR_PAD_LEFT);
 			}
 		endforeach; 
-		$sql = "INSERT INTO product (prodID, prodName, model, categoryID, brandID, price, reorderLevel, unitType)
-				VALUES ('$prod','".$_POST['prodItem']."','".$_POST['prodModel']."','$fincateg','$finbrand','".$_POST['prodPrice']."','".$_POST['prodRO']."','".$_POST['prodUnit']."')";
+		$defect = $prod . 'D';
+		$prodName = $_POST['prodItem'];
+		$defectName = $prodName . ' (Defective)';
+		$unitType = $_POST['prodUnit'];
+		
+		$sql = "INSERT INTO product (prodID, prodName, categoryID, brandID, price, reorderLevel, unitType)
+				VALUES ('$prod','$prodName','$fincateg','$finbrand','".$_POST['prodPrice']."','".$_POST['prodRO']."','$unitType')";
 		$conn->exec($sql);
 		
 		$qty = $_POST['prodQty'];
 		
 		$sql1 = "INSERT INTO inventory (initialQty, date, qty, inQty, outQty, phyCount, endingQty, prodID)
-				VALUES ('$qty',CURDATE(),'$qty',NULL,NULL,NULL,NULL,'$prod')";
+				 VALUES ('$qty',CURDATE(),'$qty',NULL,NULL,NULL,NULL,'$prod')";
 		$conn->exec($sql1);
+		
+		$sql2 = "INSERT INTO defectives (defectProdID, prodName, categoryID, brandID, unitType, status, prodID)
+				 VALUES ('$defect', '$defectName', '$fincateg', '$finbrand', '$unitType','Inactive', '$prod')";
+		$conn->exec($sql2);
+		
+		$sql3 = "INSERT INTO inventory (initialQty, date, qty, inQty, outQty, phyCount, endingQty, prodID)
+				 VALUES ('$qty', CURDATE(), '$qty', NULL, NULL, NULL, NULL, '$defect')";
+		$conn->exec($sql3);
+		
 		echo "<meta http-equiv='refresh' content='0'>";
 	}
 ?>

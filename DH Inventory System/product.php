@@ -236,7 +236,7 @@
 														
 											<select class="form-control" id="addEntry" name="prodCateg">
 												<?php foreach ($res as $row): ?>
-													<option><?=$row["categoryName"]?></option>
+													<option value = "<?=$row["categoryName"]?>"><?=$row["categoryName"]?></option>
 												<?php endforeach ?>
 											</select> 
 											<br>
@@ -250,19 +250,19 @@
 														
 											<select class="form-control" id="addEntry" name="prodBrand">
 												<?php foreach ($res as $row): ?>
-													<option><?=$row["brandName"]?></option>
+													<option value = "<?=$row["brandName"]?>"><?=$row["brandName"]?></option>
 												<?php endforeach ?>
 											</select> 
 											<br>
 															
 											<h3>Unit</h3>
 												<select class="form-control" id="addEntry" name="prodUnit">
-													<option>Box/es</option>
-													<option>Kilogram/s</option>
-													<option>Piece/s</option>
-													<option>Set/s</option>
-													<option>Yard/s</option>
-													<option>Roll/s</option>
+													<option value = "Box/es">Box/es</option>
+													<option value = "Kilogram/s">Kilogram/s</option>
+													<option value = "Piece/s">Piece/s</option>
+													<option value = "Set/s">Set/s</option>
+													<option value = "Yard/s">Yard/s</option>
+													<option value = "Roll/s">Roll/s</option>
 												</select> 
 														
 											<h3>Price</h3>
