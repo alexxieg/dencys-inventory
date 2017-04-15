@@ -11,7 +11,8 @@ include('dbcon.php');
 if (isset($_POST['username'])) {	
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	$query = $conn->prepare("Select * FROM users WHERE userName = '$username' AND password = '$password'");
+	$query = $conn->prepare("Select * FROM users WHERE userName = '$username' AND password = '$password'
+							AND status = 'Active'");
 	$count = $query->execute();
 	$row = $query->fetch();
 	if ($query->rowCount() > 0) {
