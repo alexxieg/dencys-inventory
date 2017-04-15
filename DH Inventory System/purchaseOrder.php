@@ -184,7 +184,8 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
 									</tr>
 								</thead>
 								<tbody>					
@@ -200,6 +201,7 @@
 										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
 										<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+										<td data-title="User"><?php echo $item["userID"]; ?></td>
 									</tr>	
 									
 									<?php
@@ -244,7 +246,9 @@
 															<td>
 																<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
 															</td>
-																
+															<td>
+																<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+															</td>	
 														</tr>
 													</tbody>
 												</table>
