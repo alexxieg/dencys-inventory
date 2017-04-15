@@ -120,18 +120,6 @@
 								
 								Filter By Date <br>
 								<form action="<?php echo $location; ?>" method="POST">
-								<!--
-									<select name="dateMonthName">
-										<?php foreach ($result4 as $row): ?>
-											<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-										<?php endforeach ?>
-									</select>
-									<select name="dateYearName">
-										<?php foreach ($result5 as $row): ?>
-											<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-										<?php endforeach ?>
-									</select>
-								-->
 									<select name="startDate">
 										<option value="" SELECTED></option>
 										<?php foreach ($result4 as $row): ?>
