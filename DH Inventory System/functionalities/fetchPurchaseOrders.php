@@ -17,7 +17,7 @@
 			$result = $query->fetchAll();
 	}
 	
-	$query2 = $conn->prepare("SELECT DISTINCT MONTHNAME(poDate) AS nowMonthDate, (SELECT DISTINCT YEAR(poDate) FROM purchaseorders) AS nowYearDate, MONTH(curdate()) AS currentMonthDate
+	$query2 = $conn->prepare("SELECT DISTINCT MONTHNAME(poDate) AS nowMonthDate, (SELECT DISTINCT YEAR(poDate) FROM purchaseorders) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
 								FROM purchaseorders;");
 	$query2->execute();
 	$result2 = $query2->fetchAll();
