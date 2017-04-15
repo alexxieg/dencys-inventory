@@ -65,8 +65,6 @@
 		endforeach;
 
         for ($index = 0; $index < count($prodTem); $index++) {
-
-            $outRemarks = $_POST['outRemarks'][$index];
             $prodItem = $_POST['prodItem'][$index];
             $outQty = $_POST['outQty'][$index];
             $emp = $_POST['emp'];
@@ -85,8 +83,8 @@
 			$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
 			$branch3 = $branch2['branchA'];
 			
-            $sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, outRemarks, empID, prodID, userID)
-            VALUES ('$outQty',CURDATE(),'$prod','$branch3','$outRemarks','$emp3','$prod3','$userID')";
+            $sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID, userID)
+            VALUES ('$outQty',CURDATE(),'$prod','$branch3','$emp3','$prod3','$userID')";
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";

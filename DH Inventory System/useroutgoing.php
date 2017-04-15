@@ -175,10 +175,9 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt No.</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>	
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
 										<th></th>
 									</tr>
@@ -196,10 +195,9 @@
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
 										<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-										<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
+										<td data-title="Reference No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="Branch"><?php echo $item["location"]; ?></td>
-										<td data-title="Remarks"><?php echo $item["outRemarks"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
 											<a href="functionalities/editOut.php?outsId=<?php echo $outReceipt; ?>">
@@ -279,9 +277,6 @@
 																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty[]">
 															</td>
 															
-															<td>
-																<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="outRemarks[]">
-															</td>
 															<td>
 																<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 															</td>

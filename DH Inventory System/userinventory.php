@@ -145,9 +145,9 @@
 										Products for Reorder
 									</button>
 
-									<a href="history.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
+									<a href="userHistory.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
 									
-									<a href="physCount.php"> 
+									<a href="userPhyCount.php"> 
 										<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
 											Add Physical Count
 										</button>
