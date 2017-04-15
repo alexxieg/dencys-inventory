@@ -44,7 +44,7 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-	background-color: #dedfe8;
+	background-color: #0c2354;
     border-right: 1px solid #eee;
   }
 }
@@ -59,18 +59,31 @@ body {
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
+  color: white;
 }
+
+.nav-sidebar > li > a:hover {
+  color: #020000;
+  background-color: #efd73e;
+}
+
+.nav-sidebar > li > a:focus{
+	  color: #020000;
+  background-color: #efd73e;
+}
+
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-  color: #fff;
-  background-color: #428bca;
+  color: #020000;
+  background-color: #efd73e;
 }
-
 
 /*
  * Main content
  */
+ 
+
 
 .main {
   padding: 20px;

@@ -73,12 +73,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<div id="font"><h3>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h3></div>
+					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li id="adminhead"><h3>Admin |</h3></li>
-					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+						<li id="adminhead"><a href="#">Admin |</a></li>
+						<li><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -90,12 +90,7 @@
 				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="inventory">
-								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="adddefectives.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
-							</ul>
-						</li>
+						<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
@@ -292,20 +287,6 @@
 												</thead>
 												<tbody>
 														
-													<tr id="centerData">
-														<td data-title="Employee ID"><?php echo $item["empID"]; ?></td>
-														<td data-title="First Name"><?php echo $item["empFirstName"]; ?></td>
-														<td data-title="Middle Name"><?php echo $item["empMidName"]; ?></td>
-														<td data-title="Last Name"><?php echo $item["empLastName"]; ?></td>
-														<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
-														<td>										
-															<a href="functionalities/restoreEmployee.php?emplId=<?php echo $employID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
-																	<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-																</button>
-																</a>
-														</td>		
-													</tr>
 													<?php
 														foreach ($result1 as $item):
 														$employID = $item["empID"];

@@ -1100,12 +1100,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #fff;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
+  color: #efd73e;
   text-decoration: underline;
 }
 a:focus {
@@ -1189,7 +1189,7 @@ h6,
   font-family: monospace;
   font-weight: 500;
   line-height: 1.1;
-  color: white;
+  color: black;
 }
 h1 small,
 h2 small,
@@ -3239,12 +3239,12 @@ fieldset[disabled] .btn-success.focus {
 }
 .btn-info {
   color: #fff;
-  background-color: #3b5998;
+  background-color: #0c2354;
 }
 .btn-info:focus,
 .btn-info.focus {
   color: #fff;
-  background-color: #31b0d5;
+  background-color: #0c2354;
   border-color: #1b6d85;
 }
 .btn-info:hover {
@@ -4307,9 +4307,10 @@ li.active > a:hover, .nav-pills > li.active > a:focus {
   float: left;
   height: 50px;
   padding: 15px 15px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 20px;
   background-color: black;
+  color: white;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -4630,7 +4631,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
-  color: #9d9d9d;
+  color: #fff;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
@@ -6991,7 +6992,7 @@ margin-left: 15%;
 }
 
 h3{
-  font-size:20px;
+  font-size:18px;
   text-align: left;
 }
 
@@ -7129,7 +7130,7 @@ border: none;
   .no-more-tables tbody,  
   .no-more-tables td, 
   .no-more-tables tr { 
-    display: block;
+    display: inline-block;
   }
 
   .no-more-tables th{
@@ -7580,10 +7581,9 @@ border: none;
   margin-right: 400px;
 }
 
-
 #font{
   margin-top: -1%;
-  color: white;
+  color: black;
 }
 
 #dropDownArrow{
@@ -7610,7 +7610,7 @@ border: none;
 }
 
 .btnmod{
-  background-color: #3b5998;
+  background-color: #0c2354;
   float: left;
   font-family: monospace;
   margin-bottom: 5%;
@@ -7626,8 +7626,7 @@ border: none;
 }
 
 #adminhead{
-  margin-top: -5%;
-  color: white; 
+  font-size: 20px; 
 }
 
 #loghead{
