@@ -46,6 +46,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
+			$user = $_SESSION['id'];
 			if (!isset($_SESSION['id']) || $role!="admin") {
 				header('Location: index.php');
 			}
@@ -58,7 +59,7 @@
 	<body>
 		<!-- Retrieve Account Data -->
 		<?php
-			$query = $conn->prepare("SELECT userID, userName, password, user_role FROM users WHERE status = 'Active' ");
+			$query = $conn->prepare("SELECT userID, userName, password, user_role FROM users WHERE status = 'Active' AND userName != '$user' ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -73,7 +74,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<div id="font"><h3>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h3></div>
+					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -89,13 +90,8 @@
 			<div class="row navbar-collapse">
 				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
-						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="inventory">
-								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="adddefectives.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
-							</ul>
-						</li>
+							<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
+						<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
@@ -281,7 +277,19 @@
 												</thead>
 												
 												<tbody>						
-
+														
+													<tr id="centerData">	
+														<td data-title="Username"><?php echo $item["userName"]; ?></td>
+														<td data-title="Password"><?php echo $item["password"]; ?></td>
+														<td data-title="User Role><?php echo $item["user_role"]; ?></td>
+														<td>
+															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this account?');">
+																	Restore
+																</button>
+															</a>
+														</td>			
+													</tr>
 													<?php
 														foreach ($result1 as $item):
 														$useThisID = $item["userID"];
