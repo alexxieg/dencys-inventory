@@ -270,18 +270,6 @@
 												
 												<tbody>
 													
-													<tr id="centerData">
-														<td data-title="Brand ID"><?php echo $item["branchID"]; ?></td>
-														<td data-title="Brand Name"><?php echo $item["branchName"]; ?></td>
-														<td data-title="Location"><?php echo $item["location"]; ?></td>
-														<td>
-															<a href="functionalities/restoreBranch.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this account?');">
-																	Restore
-																</button>
-															</a>
-														</td>	
-													</tr>
 													<?php
 														foreach ($result1 as $item):
 														$useThisID = $item["branchID"];
@@ -323,4 +311,3 @@
 		
 	</body>
 </html>
-
