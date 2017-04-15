@@ -291,12 +291,12 @@
 				
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				
-					$sql1 = "INSERT INTO archive(archiveDate, qty, totalIn, totalOut, beginningQty, endingQty, physicalQty, remarks, prodID)
-							SELECT invDate, qty, inQty, outQty, beginningQty, physicalQty, physicalQty, remarks, prodID FROM inventory
+					$sql1 = "INSERT INTO archive(archiveDate, qty, totalIn, totalOut, beginningQty, endingQty, physicalQty, remarks, prodID, archPeriodStart)
+							SELECT invDate, qty, inQty, outQty, beginningQty, physicalQty, physicalQty, remarks, prodID, invPeriodStart FROM inventory
 							WHERE prodID = '$thisProdID'";
 					$conn->exec($sql1);
 				
-					$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE(), remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
+					$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE(), remarks='$thisRemarks', invPeriodStart = CURDATE() WHERE prodID = '$thisProdID'";
 					$conn->exec($sql2);
 
 					$sql3 = "UPDATE inventory SET beginningQty=physicalQty WHERE prodID = '$thisProdID'";
