@@ -198,6 +198,7 @@
 									?>
 									
 									<tr id="centerData">
+										<td data-title="Reference No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>

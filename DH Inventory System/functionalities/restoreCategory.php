@@ -1,5 +1,4 @@
 <?php
-
 	require_once 'dbcon.php';
 
     $usethisid= $_GET['useId'];
