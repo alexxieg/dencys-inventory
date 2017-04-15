@@ -71,7 +71,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="Logout.php">Logout</a></li>
+						<li id="adminhead"><h3>User |</h3></li>
+					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -124,11 +125,11 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<h1 id="headers">SUPPLIER RETURNS</h1>	
-								<table class="table table-striped table-bordered">	
+								<table class="table">	
 									<tr>
 										<td>
 											<br>
-											<button type="button" class="btn btn-info btn-lg btnclr pull-left" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 										</td>
 										<td>
 											<div class="col-sm-7 pull-right">
