@@ -109,12 +109,12 @@
 				<!-- Retrieve Selected Entry's Details -->
 				<?php
 					$outid= $_GET['outsId'];
-					$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location 
+					$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID 
 											FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID");
 					$query->execute();
 					$res = $query->fetchAll();
 					
-					$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location 
+					$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID 
 											FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID  
 											WHERE receiptNo = '$outid'");
 					$query2->execute();
@@ -192,6 +192,9 @@
 										<td>
 											<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
 										</td>
+										<td>
+											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+											</td>
 										<td>
 											<a href="removeOutgoingProduct.php?outID=<?php echo $row["outID"];?>">
 												<button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">ReMoVe</button>
@@ -317,13 +320,13 @@
 			if (isset($_POST["updateOut"])){
 			
 				for ($index = 0; $index < count($prodTem); $index++) {
-					$outRemarks = $_POST['outRemarks'][$index];
 					$prodItem = $_POST['prodItem'][$index];
 					$outQty = $_POST['outQty'][$index];
 					$emp = $_POST['emp'];
 					$branch = $_POST['branch'];
 					$rcpNo = $_POST['rcno'];
 					$outgoingID = $_POST['productOutID'][$index];
+					$userID = $_POST['userID'];
 
 					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
 					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -337,7 +340,7 @@
 					$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
 					$branch3 = $branch2['branchA'];
 					
-					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, outRemarks = '$outRemarks', empID = '$emp3', prodID = '$prod3' 
+					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, empID = '$emp3', prodID = '$prod3', userID = '$userID' 
 							WHERE outID = $outgoingID";
 					$conn->exec($sql);				
 					
