@@ -132,21 +132,21 @@
 
 		<div class="container-fluid">
 			<div class="row navbar-collapse">
-			
 				<!-- Sidebar -->
 				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 							<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li>
-							<a href="inventory.php">
-								<i class="glyphicon glyphicon-list-alt"></i> Inventory
-							</a>
+						<li><a href="inventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="incoming.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+							</ul>
 						</li>
-						<li><a href="incoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-						<li ><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing </a></li>
+						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li ><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
-								<li><a href="returns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
@@ -169,7 +169,7 @@
 						</li>
 					</ul>
 				</div>
-				<!-- End of Sidebar -->	
+				<!-- End of Sidebar -->
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">

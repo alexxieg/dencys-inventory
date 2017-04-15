@@ -89,7 +89,7 @@
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="incoming.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+								<li><a href="incoming.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
 						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
@@ -147,23 +147,23 @@
 								<table class="table table-striped table-bordered">	
 									<h1 id="headers">INVENTORY</h1>	
 									<table class="table">	
-									<tr>
-										<td>
-											<br>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">
-										Products for Reorder
-									</button>
+										<tr>
+											<td>
+												<br>
+												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">
+													Products for Reorder
+												</button>
 
-									<a href="history.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
-									
-									<a href="physCount.php"> 
-										<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
-											Add Physical Count
-										</button>
-									</a>
-							    	</td>
-								  </tr>	
-								</table>											
+												<a href="history.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
+												
+												<a href="physCount.php"> 
+													<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
+														Add Physical Count
+													</button>
+												</a>
+											</td>
+										</tr>	
+									</table>											
 							  </table>
 							</div>
 							

@@ -3,16 +3,16 @@
 	$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
 	
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-		$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, returns.returnQty, returns.returnType, returns.returnRemark, returns.userID
-								FROM returns INNER JOIN product ON returns.prodID = product.prodID
+		$query = $conn->prepare("SELECT product.prodID, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, CONCAT(returns.returnQty,' ', product.unitType) AS returnQty, returns.returnType, returns.receiptNo, returns.returnRemark, branch.location, returns.userID
+								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN product ON returns.prodID = product.prodID
 								WHERE returns.returnType = 'Supplier Return' HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
 								ORDER BY returnID DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}else{
-		$query = $conn->prepare("SELECT product.prodID, product.unitType, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, returns.returnQty, returns.returnType, returns.returnRemark, returns.userID
-							FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-							WHERE AND returns.returnType = 'Supplier Return' AND MONTH(returnDate) = MONTH(CURRENT_DATE())
+		$query = $conn->prepare("SELECT product.prodID, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, CONCAT(returns.returnQty,' ', product.unitType) AS returnQty, returns.returnType, returns.receiptNo, returns.returnRemark, branch.location, returns.userID
+							FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN product ON returns.prodID = product.prodID 
+							WHERE returns.returnType = 'Supplier Return' AND MONTH(returnDate) = MONTH(CURRENT_DATE())
 							ORDER BY returnID DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
