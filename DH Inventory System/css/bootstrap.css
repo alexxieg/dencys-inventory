@@ -1189,7 +1189,7 @@ h6,
   font-family: monospace;
   font-weight: 500;
   line-height: 1.1;
-  color: inherit;
+  color: white;
 }
 h1 small,
 h2 small,
@@ -7582,6 +7582,7 @@ border: none;
 
 
 #font{
+  margin-top: -1%;
   color: white;
 }
 
