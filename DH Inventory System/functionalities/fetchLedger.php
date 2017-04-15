@@ -1,25 +1,25 @@
 		<?php
 			$incID= $_GET['incId'];
-			$sortByMonthDate = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
-			$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
+			$sortByStartDate = (isset($_REQUEST['startDate']) ? $_REQUEST['startDate'] : null);
+			$sortByEndDate = (isset($_REQUEST['endDate']) ? $_REQUEST['endDate'] : null);
+			if (!empty($sortByStartDate) AND !empty($sortByEndDate)) { 
 				$query = $conn->prepare("
 										SELECT receiptNos, dates, plus, plus2, minus, minus2 FROM (
 											SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null AS plus2,  null  AS minus, null as minus2
 											FROM incoming
-											WHERE incoming.prodID = '$incID'
+											WHERE incoming.prodID = '$incID' AND incoming.inDate >= '$sortByStartDate' AND incoming.inDate <= '$sortByEndDate'
 											UNION 
 											SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, null, outgoing.outQty AS minus, null
 											FROM outgoing
-											WHERE outgoing.prodID = '$incID'
+											WHERE outgoing.prodID = '$incID' AND outgoing.outDate >= '$sortByStartDate' AND outgoing.outDate <= '$sortByEndDate'
 											UNION
 											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS plus2, null, null
 											FROM returns
-											WHERE returns.prodID = '$incID' AND returns.returnType = 'Warehouse Return'
+											WHERE returns.prodID = '$incID' AND returns.returnType = 'Warehouse Return' AND returns.returnDate >= '$sortByStartDate' AND returns.returnDate <= '$sortByEndDate'
 											UNION
 											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, null, null, returns.returnQty AS minus
 											FROM returns
-											WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return'
+											WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return' AND returns.returnDate >= '$sortByStartDate' AND returns.returnDate <= '$sortByEndDate'
 										)
 										AS ledger			
 										");
@@ -62,6 +62,16 @@
 			$query3->execute();
 			$result3 = $query3->fetchAll();
 			
+			$query4 = $conn->prepare("SELECT DISTINCT archPeriodStart as startDate from archive");
+			$query4->execute();
+			$result4 = $query4->fetchAll();
+			
+			$query5 = $conn->prepare("SELECT DISTINCT archiveDate AS endDate from archive");
+			$query5->execute();
+			$result5 = $query5->fetchAll();
+			
+			
+			/*
 			$query4 = $conn->prepare("SELECT DISTINCT MONTHNAME(inDate) AS nowMonthDate, (SELECT DISTINCT YEAR(inDate) FROM incoming) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
 								FROM incoming;");
 			$query4->execute();
@@ -70,4 +80,5 @@
 			$query5 = $conn->prepare("SELECT DISTINCT YEAR(inDate) AS nowYearDate FROM incoming");
 			$query5->execute();
 			$result5 = $query5->fetchAll();
+			*/
 		?>
