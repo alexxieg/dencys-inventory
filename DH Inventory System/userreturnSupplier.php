@@ -13,7 +13,7 @@
 		<link rel="shortcut icon" href="logo.jpg">
 		
 		<!-- Custom CSS for this template -->
-		<link href="css/test.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
@@ -57,8 +57,8 @@
 		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchReturnsSupplier.php'); ?>
 		
-	<!-- Topbar Navigation / Main Header -->
-	    <nav class="navbar navbar-inverse navbar-fixed-top">
+		<!-- Top Main Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -69,44 +69,46 @@
 					</button>
 					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
-				<div class="navbar-collapse collapse">
+				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><i class="glyphicon glyphicon-user"></i> User</a></li>
+						<li><a href="Logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
-	    </nav>
+		</nav>
+		<!-- End of Top Main Header -->
 
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row navbar-collapse">
 				<!-- Sidebar -->
-				<div class="col-sm-3 col-md-2 sidebar">
+				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li>
-							<a href="userinventory.php">
-								<i class="glyphicon glyphicon-list-alt"></i> Inventory
-							</a>
+						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+							</ul>
 						</li>
-						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<span class="sr-only">(current)</span> <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
-								<li><a href="userreturns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns </a></li>
+								<li><a href="userreturns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
-								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
-						<li>
-							<a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-						</li>
+							<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 					</ul>
 				</div>
-				<!-- End of Sidebar -->
+				<!-- End of Sidebar -->	
 		 
 				<?php
 					foreach ($result as $item):
@@ -121,11 +123,8 @@
 					<div id="contents">
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
+								<h1 id="headers">SUPPLIER RETURNS</h1>	
 								<table class="table table-striped table-bordered">	
-									<tr>
-										<td colspan="2"><h1 id="headers">RETURN TO SUPPLIER</h1>	
-										</td>
-									</tr>
 									<tr>
 										<td>
 											<br>

@@ -4,41 +4,41 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+
 		<title>Inventory</title>
-		
+
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-		
-		<!-- Custom styles for this template -->
-		<link href="css/test.css" rel="stylesheet">
+		<!-- Custom CSS for this template -->
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
-		
+
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
+			
+		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
-		<!-- Datatables -->
+		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function(){
 				$('#myTable').dataTable();
-		});
+			});
 		</script>
 			
-		<!-- Database connection -->
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
-		
+			
 		<!-- Login Session-->
 		<?php 
 			session_start();
@@ -51,13 +51,14 @@
 			$user_row = $session_query->fetch();
 		?>
 	</head>
-    
-  	<body>
+
+	<body>
+		
 		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchInventory.php'); ?>
-	
-		<!-- Topbar Navigation / Main Header -->
-	    <nav class="navbar navbar-inverse navbar-fixed-top">
+		
+		<!-- Top Main Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -68,13 +69,14 @@
 					</button>
 					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
-				<div class="navbar-collapse collapse">
+				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><i class="glyphicon glyphicon-user"></i> User</a></li>
+					<li><a href="Logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
-	    </nav>
+		</nav>
+		<!-- End of Top Main Header -->
 
 		<div class="container-fluid">
 			<div class="row">
@@ -82,13 +84,14 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li class="active">
-							<a href="userinventory.php">
-								<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
-							</a>
+						<li class="active"><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span></a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+							</ul>
 						</li>
-						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userreturns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -97,36 +100,36 @@
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
-								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
-						<li>
-							<a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-						</li>
+						<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
+		
+				<?php
+					foreach ($result as $item):
+						$currQty = $item["beginningQty"] + $item["inQty"] - $item["outQty"];
+						$incID = $item["prodID"];
+						if ($currQty <= $item["reorderLevel"]){
+				?> 
 							
-		<?php
-			foreach ($result as $item):
-				$currQty = $item["beginningQty"] + $item["inQty"] - $item["outQty"];
-				$incID = $item["prodID"];
-				if ($currQty <= $item["reorderLevel"]){
-		?> 
-					
-		<?php	
-			}else if ($currQty > $item["reorderLevel"]){
-		?>
-					
-		<?php
-			}	
-		?>
-						
-		<?php
-			endforeach;
-		?>					
-
-	<!-- Main Container for Page Contents -->
+				<?php	
+					}else if ($currQty > $item["reorderLevel"]){
+				?>
+							
+				<?php
+					}	
+				?>
+								
+				<?php
+					endforeach;
+				?>
+							
+				<!-- Main Container for Page Contents -->
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<div id="contents">
 						<div class="pages">
@@ -244,7 +247,7 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Summary of products to be reordered</h4>
+										<h4 class="modal-title">Products to be reordered</h4>
 									</div>
 									<div class="modal-body">			
 										<?php
@@ -321,7 +324,8 @@
 					</div>
 				</div>
 				<!-- End of Main Container -->
+				
+			</div>
 		</div>
-	</div> 
 	</body>
 </html>

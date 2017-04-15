@@ -13,11 +13,11 @@
 		<link rel="shortcut icon" href="logo.jpg">
 		
 		<!-- Custom CSS for this template -->
-		<link href="css/test.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 			
 		<!-- Javascript Files -->
-		<script src="product.js"></script>
+		<script src="js/product.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>
@@ -57,9 +57,8 @@
 		<!-- Retrieve Product Data -->
 		<?php include('functionalities/fetchProduct.php'); ?>
 
-
-	<!-- Topbar Navigation / Main Header -->
-	    <nav class="navbar navbar-inverse navbar-fixed-top">
+		<!-- Top Main Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -70,27 +69,28 @@
 					</button>
 					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
-				<div class="navbar-collapse collapse">
+				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><i class="glyphicon glyphicon-user"></i> User</a></li>
+						<li><a href="Logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
-	    </nav>
+		</nav>
+		<!-- End of Top Main Header -->
 
 		<div class="container-fluid">
 			<div class="row">
-				<!-- Sidebar -->
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li class="active">
-							<a href="userinventory.php">
-								<i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span>
-							</a>
+						<li><a href="userinventory.php"><i class="glyphicon glyphicon-list-alt"></i> Inventory</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+							</ul>
 						</li>
-						<li><a href="userincoming.php"><i class="glyphicon glyphicon-import"></i> Incoming</a></li>
-						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Outgoing</a></li>
+						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userreturns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -99,16 +99,15 @@
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
-								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
-						<li>
-							<a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-						</li>
+								<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products<span class="sr-only">(current)</span></a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-
 
 							
 				<?php
@@ -126,8 +125,8 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">	
 									<h1 id="headers">PRODUCTS</h1>
-									<button id="modbutt" type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#archive">View Archive</button>
-									<button id="modbutt" type="button" class="btn btn-info btn-lg btnclr" data-toggle="modal" data-target="#myModal">Add Product</button>
+									<button id="modbutt" type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive">View Archive</button>
+									<button id="modbutt" type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">Add Product</button>
 								</table>
 							</div>
 
