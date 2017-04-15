@@ -207,7 +207,7 @@
 										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/editIn.php?incId=<?php echo $incRec; ?>"> 
+											<a href="functionalities/userEditIn.php?incId=<?php echo $incRec; ?>"> 
 											<button type="button" class="btn btn-default" id="edBtn">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 											</button>

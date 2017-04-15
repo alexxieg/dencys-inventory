@@ -95,7 +95,7 @@
 						<li class="active"><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance <span class="sr-only">(current)</span></a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
-								<li><a href="userreturns.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
@@ -106,7 +106,7 @@
 								<li><a href="usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
-								<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+						<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
@@ -200,7 +200,7 @@
 										<td data-title="Branch"><?php echo $item["location"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/editOut.php?outsId=<?php echo $outReceipt; ?>">
+											<a href="functionalities/userEditOut.php?outsId=<?php echo $outReceipt; ?>">
 											<button type="button" class="btn btn-default">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>

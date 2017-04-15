@@ -177,7 +177,7 @@
 									<td data-title="Unit"><?php echo $item["unitType"];?></td>
 									<td data-title="Price"><?php echo $item["price"]; ?></td>
 									<td>			
-										<a href="functionalities/editProd.php?proId=<?php echo $proID; ?>">	
+										<a href="functionalities/userEditProd.php?proId=<?php echo $proID; ?>">	
 											<button type="button" class="btn btn-default" id="edBtn">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 											</button>
