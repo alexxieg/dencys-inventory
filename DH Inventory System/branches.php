@@ -61,6 +61,9 @@
 			$query = $conn->prepare("SELECT branchID,branchName, location FROM branch WHERE status = 'Active' ");
 			$query->execute();
 			$result = $query->fetchAll();
+			
+			$curBranchID = current($conn->query("SELECT MAX(branchID) FROM branch")->fetch());
+			$BranchID = $curBranchID + 1;
 		?>
 
 		<!-- Top Main Header -->
@@ -211,9 +214,11 @@
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">		
 												<h3>Branch ID</h3>
-												<input type="text" class="form-control" id="addBranchID" placeholder="Branch ID" name="branchID"> <br>
+												<input type="text" class="form-control" id="addBranchID" placeholder="<?php echo $BranchID;?>" value="<?php echo $BranchID;?>" name="branchID" Readonly> <br>
+												<h3>Location</h3>
+												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="location"> <br>
 												<h3>Branch Name</h3>
-												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="branch"> <br>
+												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="branchName"> <br>
 												<br>
 												
 												<div class="modFoot">
