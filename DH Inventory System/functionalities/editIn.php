@@ -21,7 +21,7 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
-			
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -124,7 +124,7 @@
 					<h1 id="headers">Edit Product Delivery Entry</h1>
 					<br>
 					<div id="content">
-						<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
+						<form action="" method="POST" class="editPgs">
 							<h5>Receipt No.</h5> 
 							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
 									
@@ -150,7 +150,7 @@
 							<br>
 									
 							<h5>Product/s</h5>
-							<table class="table table-striped" id="dataTable" name="chk">				
+							<table class="table table-striped" name="chk">				
 								<tbody>
 									<?php foreach ($result2 as $row): ?>
 										<tr>
@@ -188,6 +188,11 @@
 											<td>
 												<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["inRemarks"]; ?>" value="<?php echo $row["inRemarks"]; ?>" name="inRemarks[]">
 											</td>
+											<td>
+												<a href="removeIncomingProduct.php?incID=<?php echo $row["inID"];?>"> 
+													<button type="button" value="Delete Row" class="btn btn-default" name="RemoveThis">ReMoVe</button>
+												</a>
+											</td>
 										</tr>
 									<?php endforeach ?>
 								</tbody>
@@ -196,8 +201,7 @@
 							<br>
 							
 							<div class="modFoot">
-								<span><button type="button" name="addProduct" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-								<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+								<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
 								<br>
 								<br>
 								<span>
@@ -213,7 +217,95 @@
 					</div>								
 				</div>
 			</div>	
-		</div>		 
+		</div>
+
+		<!-- Modal for New Incoming Entry Form -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add Incoming Product</h4>
+					</div>
+					<div class="modal-body">
+						<form action="" method="POST" onsubmit="return validateForm()">
+							<h5>Receipt No.</h5> 
+							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcnoEdit" readonly><br>
+							
+							<h5>Receipt Date</h5> 
+							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdateEdit" readonly><br>
+							
+							<h5>Supplier</h5> 
+							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplier;?>" value="<?php echo $supplier;?>" name="supplierEdit" readonly><br>
+													
+							<h5>Received By</h5>
+							<select class="form-control" id="addEmpl" name="empEdit" READONLY>
+									<option SELECTED><?=$employ?></option>
+							</select>  
+							
+							<br>
+								
+							<h5>Product/s</h5>
+							
+							<table class="table table-striped" id="dataTable" name="chk">				
+								<tbody>
+									<tr>
+										<td><input type="checkbox" name="chk"></td>
+										<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+										<td>	
+											<?php
+												$query = $conn->prepare("SELECT prodName FROM product ");
+												$query->execute();
+												$res = $query->fetchAll();
+											?>
+									
+											<select class="form-control" id="addItem" name="prodItem[]">
+												<?php foreach ($res as $row): ?>
+														<option><?=$row["prodName"]?></option>
+											<?php endforeach ?>
+											</select> 
+										</td>
+												
+										<td>
+											<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="incQty[]">
+										</td>
+										
+										<td>
+											<select class="form-control" id="addInStatus" name="inStatus[]">
+												<option>Complete</option>
+												<option>Partial</option>
+											</select> 
+										</td>
+											
+										<td>
+											<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
+										</td>
+										<td>
+											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							
+							<br>
+							
+							<div class="modFoot">
+								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+								<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+								<br>
+								<br>
+								<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
+								<span><input type="submit" name="addEditProducts" value="Add Products" class="btn btn-success" id="sucBtn"></span>
+							</div>
+						</form> 	
+					
+						<div class="modal-footer">
+						</div>								
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End of Modal -->
 		
 		<?php
 			$incID= $_GET['incId'];
@@ -255,7 +347,31 @@
 					WHERE outID = '$outid'"; */
 					  echo "<meta http-equiv='refresh' content='0'>";
 				}
-			}    
+			}
+
+			if (isset($_POST["addEditProducts"])){
+				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+					$inRemarks = $_POST['inRemarks'][$index2];
+					$prodItem = $_POST['prodItem'][$index2];
+					$inQty = $_POST['incQty'][$index2];
+					$inStat = $_POST['inStatus'][$index2];
+					
+					$emp = $_POST['empEdit'];
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
+
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+						
+					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID)
+						VALUES ('$inQty',CURDATE(),'$reciptNum','$reciptDate','$supplier','$inStat','$inRemarks','$emp3','$prod3')";
+						$result = $conn->query($sql);
+				}
+				echo "<meta http-equiv='refresh' content='0'>";
+			}
+			
 		?>
 	
   </body>
