@@ -16,7 +16,7 @@
 		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link href="css/test.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!--Javascript Files -->
@@ -77,7 +77,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="Logout.php">Logout</a></li>
+						<li id="adminhead"><h3>Admin |</h3></li>
+					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -139,8 +140,15 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">		
 									<h1 id="headers">EMPLOYEES</h1>
+									<table class="table">	
+								   	  <tr>
+									  <td>
+									  <br>
 									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
+									  </td>
+									  </tr>
+									</table>
 								</table>
 							</div>
 							
