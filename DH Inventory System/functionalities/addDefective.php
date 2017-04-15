@@ -101,7 +101,7 @@
 				<!-- End of Sidebar -->	
 				
 				<div class="addInv">
-					<h1 id="headers">Edit Category</h1>
+					<h1 id="headers">Transfer Defective Items</h1>
 					<div>
 						<form action="" method="POST" class="editPgs">
 						
@@ -112,11 +112,26 @@
 								$res = $query->fetchAll();
 							?>
 														
-							<select class="form-control" id="addItem" name="prodItem[]">
+							<select class="form-control" id="addItem" name="prodItem">
 								<?php foreach ($res as $row): ?>
-									<option><?=$row["prodName"]?></option>
+									<option value = "<?=$row["prodName"]?>"><?=$row["prodName"]?></option>
 								<?php endforeach ?>
 							</select> 
+							
+							<h3>Handled By</h3>
+							<?php
+								$query = $conn->prepare("SELECT empFirstName FROM employee ");
+								$query->execute();
+								$result = $query->fetchAll();
+							?>
+																
+							<select class="form-control" id="addEmpl" name="emp">
+							<?php foreach ($result as $row): ?>
+								<option value = "<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
+							<?php endforeach ?>
+							</select> 
+										
+							<br>
 							
 							<h3>Quantity Moved</h3>
 							<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
@@ -140,12 +155,46 @@
 			
 		<!-- Update Function -->
 		<?php
-			if (isset($_POST["addDefect"])){
+			if (isset($_POST['qty'])){
+				$receiptRetrieve = $conn->prepare("SELECT receiptNO FROM product");
+				$receiptRetrieve->execute();
+				$receipts = $receiptRetrieve->fetchAll();
+				$recNum = 00001;
+				$rec = 'DEF-' . str_pad((string)$recNum,5,0,STR_PAD_LEFT);
+				foreach ($receipts AS $list):
+					if ($rec == $list["receiptNO"]){
+						$recNum = $recNum + 1;
+						$rec = 'DEF-' . str_pad((string)$recNum,5,0,STR_PAD_LEFT);
+					}
+				endforeach; 
 				
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			 
-				$sql = "UPDATE category SET categoryID = '$cateID', categoryName = '$cateName' WHERE categoryID = '$categEditID'";	
-				$conn->exec($sql);
+				$qty = $_POST['qty'];
+				
+				$prodName = $_POST['prodItem'];
+				$prodSQL = $conn->query("SELECT prodID from product WHERE prodName = '$prodName'");
+				$prodSQLRes = $prodSQL->fetch(PDO::FETCH_ASSOC);
+				$prodRef = $prodSQLRes['prodID'];
+				$defSQL = $conn->query("SELECT defectProdID AS defID from defectives WHERE prodID = '$prodRef'");
+				$defRes = $defSQL->fetch(PDO::FETCH_ASSOC);
+				$defID = $defRes['defID'];
+				
+				$branchSQL = $conn->query("SELECT branchID from branch WHERE branchName = 'Defective'");
+				$branchRes = $branchSQL->fetch(PDO::FETCH_ASSOC);
+				$branchID = $branchRes['branchID'];
+				
+				$emp = $_POST['emp'];
+				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+				$emp3 = $emp2['empA'];
+				
+				$sqlIn = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, inRemarks, status, empID, prodID)
+						  VALUES ('$qty', CURDATE(), '$rec', CURDATE(), 'None', 'None', 'Complete', '$emp3', '$defID')";
+				$conn->exec($sqlIn);
+				
+				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID)
+						   VALUES ('$qty', CURDATE(), '$rec', '$branchID', '$emp3', '$defID')";
+				$conn->exec($sqlOut);
 			}    
 		?>
 	</body>
