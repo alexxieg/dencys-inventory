@@ -1071,6 +1071,7 @@ th {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+		  font-family:monospace;
 }
 *:before,
 *:after {
@@ -2518,6 +2519,7 @@ label {
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: bold;
+  font-family: monospace;
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;
@@ -3990,6 +3992,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   position: relative;
   display: block;
   padding: 10px 15px;
+  font-family: monospace;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -7048,6 +7051,13 @@ border: none;
   margin-top: 7%;
 }
 
+#tableHeader .btnclr{
+	font-family: monospace;
+	background-color: #428bca;
+	color: white;
+	font-size: 15px;
+}
+
 .modal-body .btnclr{
   background-color: #3b5998;
   color: white;
@@ -7331,11 +7341,6 @@ border: none;
   font-size: 10px;
 }
 
-/*font*/
-@font-face{
-  font-family: dencyFont;
-  src: url(CabinCondensed-Bold.ttf);
-}
 
 .compName {
   color: black;
@@ -7606,7 +7611,7 @@ border: none;
 .btnmod{
   background-color: #3b5998;
   float: left;
-  font-family: dencyFont;
+  font-family: monospace;
   margin-bottom: 5%;
   margin-top: -1%;
 }
@@ -7626,5 +7631,6 @@ border: none;
 
 #loghead{
   font-size: 100%;
+  font-family: monospace;
 }
 

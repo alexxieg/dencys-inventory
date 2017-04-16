@@ -67,7 +67,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -150,7 +150,7 @@
 										<tr>
 											<td>
 												<br>
-												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">
+												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">
 													Products for Reorder
 												</button>
 
