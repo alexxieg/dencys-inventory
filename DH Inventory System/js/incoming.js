@@ -11,6 +11,18 @@ function validateForm() {
 	}else{
         document.getElementById('addRcpt').style.borderColor = "blue";
 	}
+	if (document.getElementById('addRcptDate').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Receipt Date.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addRcptDate').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addQty').style.borderColor = "blue";
+	}
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
