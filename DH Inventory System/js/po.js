@@ -1,4 +1,16 @@
 function validateForm() {
+	if (document.getElementById('addSupplier').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Supplier.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addSupplier').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addSupplier').style.borderColor = "blue";
+	}
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
