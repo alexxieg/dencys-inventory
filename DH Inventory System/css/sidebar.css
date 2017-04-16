@@ -1,4 +1,4 @@
-#manage , #incoming, #reports, #returns{
+#manage , #incoming, #reports, #returns, #inventory{
 	margin-left: 20%;
 }
 
@@ -53,7 +53,7 @@
 	float: none;
 	}
 
-	#manage , #reports, #returns{
+	#manage , #reports, #returns, #inventory, #incoming {
 	margin-left: 5%
 	}
 }
