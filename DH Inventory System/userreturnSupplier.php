@@ -220,6 +220,9 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
+												<h5> User </h5>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+												
 												<h3>Item</h3>
 												<?php
 													$query = $conn->prepare("SELECT prodName FROM product ");
@@ -240,9 +243,6 @@
 												<h3>Remarks</h3>
 												<textarea class="form-control" id="addEntry" rows="3" name="retRemarks"></textarea> <br>
 												<br>
-												<td>
-												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												</td>
 												<div class="modFoot">
 													<span>
 														<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>

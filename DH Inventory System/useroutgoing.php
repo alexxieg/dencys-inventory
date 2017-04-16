@@ -227,6 +227,8 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
+												<h5> User </h5>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
 												<h5>Handled By</h5>
 												<?php
@@ -278,10 +280,6 @@
 																	
 															<td>
 																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty[]">
-															</td>
-															
-															<td>
-																<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 															</td>
 														</tr>
 													</tbody>

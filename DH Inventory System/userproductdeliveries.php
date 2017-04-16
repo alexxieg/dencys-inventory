@@ -236,6 +236,9 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
+												<h5> User </h5>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+												
 												<h5>Receipt No.</h5> 
 												<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
 												
@@ -293,9 +296,6 @@
 																
 															<td>
 																<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
-															</td>
-															<td>
-																<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 															</td>
 														</tr>
 													</tbody>

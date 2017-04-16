@@ -215,7 +215,10 @@
 											<h4 class="modal-title">Add Purchase Order</h4>
 										</div>
 										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()">																								
+											<form action="" method="POST" onsubmit="return validateForm()">
+												<h5> User </h5>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+												
 												<h5>Supplier</h5> 
 												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
 													
@@ -241,11 +244,7 @@
 																	
 															<td>
 																<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
-															</td>
-															<td>
-																<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-															</td>
-																
+															</td>															
 														</tr>
 													</tbody>
 												</table>
