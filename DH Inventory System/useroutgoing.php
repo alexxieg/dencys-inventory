@@ -174,7 +174,6 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>	
@@ -194,7 +193,6 @@
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
-										<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 										<td data-title="Reference No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="Branch"><?php echo $item["location"]; ?></td>

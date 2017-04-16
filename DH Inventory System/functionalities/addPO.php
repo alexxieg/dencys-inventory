@@ -17,13 +17,14 @@
 		   for ($index = 0; $index < count($prodTem); $index++) {
 
 				$prodItem = $_POST['prodItem'][$index];
-				$qty = $_POST['qty'][$index];				
+				$qty = $_POST['qty'][$index];
+				$userID = $_POST['userID'];				
 
 				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
-				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supplier, prodID)
-				VALUES ('$qty',CURDATE(),'$prod','".$_POST['supplier']."','$prod3')";
+				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supplier, prodID, userID)
+				VALUES ('$qty',CURDATE(),'$prod','".$_POST['supplier']."','$prod3','$userID')";
 				$result = $conn->query($sql); 
 
 				echo "<meta http-equiv='refresh' content='0'>";
