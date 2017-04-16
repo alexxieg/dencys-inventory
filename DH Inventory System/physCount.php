@@ -114,11 +114,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<div id="font"><h2>DENCY'S HARDWARE AND GENERAL MERCHANDISE</h2></div>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-					<li><a href="Logout.php">Logout</a></li>
+						<li id="adminhead"><h3>Admin |</h3></li>
+					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -247,7 +248,6 @@
 												foreach ($result3 as $item):
 												$proID = $item["prodID"];
 											?>
-											
 												
 											<tr id="centerData">
 												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
