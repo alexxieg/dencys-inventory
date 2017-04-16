@@ -87,7 +87,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="adddefectives.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -136,43 +136,43 @@
 							
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<div class="pages no-more-tables">
-							<div id="tableHeader">
-								<h1 id="headers">WAREHOUSE RETURNS</h1>	
-								<table class="table">	
-								   <tr>
-									 <td>
-									  <br>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
-										</td>
-										<td>
-											<div class="col-sm-7 pull-right retfilter">
-												<label>Filter By Date</label>
-												<form class="form-inline" action="" method="post">
-													<div class="form-group">
+						<div id="tableHeader">
+							<h1 id="headers">WAREHOUSE RETURNS</h1>	
+							<table class="table">	
+								<tr>
+									<td>
+										<br>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
+									</td>
+									<td>
+										<div class="col-sm-7 pull-right retfilter">
+											<label>Filter By Date</label>
+											<form class="form-inline" action="" method="post">
+												<div class="form-group">
 														<select name="dateMonthName" class="form-control">
-															<?php foreach ($result2 as $row): ?>
-																<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>
-													<div class="form-group">
-														<select name="dateYearName" class="form-control">
+														<?php foreach ($result2 as $row): ?>
+															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<select name="dateYearName" class="form-control">
 															<?php foreach ($result3 as $row): ?>
-																<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>	
-													<div class="form-group">
-														<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
-													</div>
-												</form>	
-											</div>
-										</td>
-									</tr>
-								</table>
-							</div>
+															<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>	
+												<div class="form-group">
+													<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+												</div>
+											</form>	
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
 							
+						<div class="pages no-more-tables">
 							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
@@ -275,13 +275,13 @@
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User"name="userID" readonly>
 												</td>
 												<div class="modFoot">
-												<span>
-													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-												</span>
-												<span>
-													<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
-												</span>
-											</div>
+													<span>
+														<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+													</span>
+													<span>
+														<input type="submit" value="Submit" class="btn btn-success" name="addRet" id="sucBtn">
+													</span>
+												</div>
 											</form> 	
 
 											<div class="modal-footer">

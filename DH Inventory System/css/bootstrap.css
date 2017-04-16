@@ -4764,7 +4764,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 6px 12px;
   margin-left: -1px;
   line-height: 1.42857143;
-  color: #337ab7;
+  color: #0c2354;
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -4798,8 +4798,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   z-index: 3;
   color: #fff;
   cursor: default;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #0c2354;
+  border-color: #0c2354;
 }
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,
@@ -7057,6 +7057,7 @@ border: none;
 	background-color: #428bca;
 	color: white;
 	font-size: 15px;
+	display: inline;
 }
 
 .modal-body .btnclr{
@@ -7130,7 +7131,7 @@ border: none;
   .no-more-tables tbody,  
   .no-more-tables td, 
   .no-more-tables tr { 
-    display: inline-block;
+    display: block;
   }
 
   .no-more-tables th{
@@ -7633,4 +7634,3 @@ border: none;
   font-size: 100%;
   font-family: monospace;
 }
-

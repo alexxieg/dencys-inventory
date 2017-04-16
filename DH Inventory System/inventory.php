@@ -88,7 +88,7 @@
 						<li class="active"><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="adddefectives.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#"data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -147,31 +147,31 @@
 				<!-- Main Container for Page Contents -->
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<div id="contents">
-						<div class="pages">
-							<div id="tableHeader">
-								<table class="table table-striped table-bordered">	
-									<h1 id="headers">INVENTORY</h1>	
-									<table class="table">	
-										<tr>
-											<td>
-												<br>
-												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">
-													Products for Reorder
-												</button>
+						<div id="tableHeader">
+							<table class="table">	
+								<h1 id="headers">INVENTORY</h1>	
+								<table class="table">	
+									<tr>
+										<td>
+											<br>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">
+												Products for Reorder
+											</button>
 
-												<a href="history.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
-												
-												<a href="physCount.php"> 
-													<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
-														Add Physical Count
-													</button>
-												</a>
-											</td>
-										</tr>	
-									</table>											
-							  </table>
-							</div>
+											<a href="history.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
+											
+											<a href="physCount.php"> 
+												<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
+													Add Physical Count
+												</button>
+											</a>
+										</td>
+									</tr>	
+								</table>											
+							</table>
+						</div>
 							
+						<div class="pages">
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
@@ -189,9 +189,7 @@
 											$month->execute();
 											$monthres = $month->fetchAll();
 											foreach ($monthres as $monthshow)
-											echo $monthshow["month"];
-									
-											
+											echo $monthshow["month"];									
 											?>	
 										</td>
 									</tr>
@@ -308,7 +306,7 @@
 									</div>
 											
 									<div class="modal-footer">	
-										</div>
+									</div>
 								</div>
 							</div>
 						</div>

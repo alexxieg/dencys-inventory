@@ -88,7 +88,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="adddefectives.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -136,43 +136,43 @@
 					
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<div class="pages no-more-tables">
-							<div id="tableHeader">
-								<h1 id="headers">PRODUCT ISSUANCE</h1>
-								<table class="table">	
-								   <tr>
-									 <td>
-									  <br>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
+						<div id="tableHeader">
+							<h1 id="headers">PRODUCT ISSUANCE</h1>
+							<table class="table">	
+								<tr>
+									<td>
+										<br>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
 									</td>
 									<td>	
-											<div class="col-sm-7 pull-right filter">
-												<label>View Previous Entries</label>
-												<form class="form-inline" action="" method="post">
-													<div class="form-group">
-														<select name="dateMonthName" class="form-control">
+										<div class="col-sm-7 pull-right filter">
+											<label>View Previous Entries</label>
+											<form class="form-inline" action="" method="post">
+												<div class="form-group">
+													<select name="dateMonthName" class="form-control">
 															<?php foreach ($result2 as $row): ?>
-																<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>
-													<div class="form-group">
-														<select name="dateYearName" class="form-control">
-															<?php foreach ($result3 as $row): ?>
+															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<select name="dateYearName" class="form-control">
+														<?php foreach ($result3 as $row): ?>
 																<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>	
-													<div class="form-group">
-														<input type="submit" value="View" class="btn btn-success" name="submit">
-													</div>
-												</form>	
-											</div>
-										</td>
-									</tr>
-								</table>
-							</div>
-				
+														<?php endforeach ?>
+													</select>
+												</div>	
+												<div class="form-group">
+													<input type="submit" value="View" class="btn btn-success" name="submit">
+												</div>
+											</form>	
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					
+						<div class="pages no-more-tables">
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
