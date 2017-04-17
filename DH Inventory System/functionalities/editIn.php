@@ -147,7 +147,7 @@
 									$res = $query->fetchAll();
 								?>
 								<?php foreach ($res as $row): ?>
-										<option><?=$row["empFirstName"]?></option>
+									<option><?=$row["empFirstName"]?></option>
 								<?php endforeach ?>
 									<option SELECTED><?=$employ?></option>
 							</select> 
@@ -184,10 +184,18 @@
 											</td>
 											
 											<td>
+												<?php
+													$query3 = $conn->prepare("SELECT DISTINCT status FROM incoming;");
+													$query3->execute();
+													$res3 = $query3->fetchAll();
+												?>
 												<select class="form-control" id="addInStatus" name="inStatus[]">
-													<option>Complete</option>
-													<option>Partial</option>
-												</select> 
+														<option value="<?=$row["status"]?>">Selected: <?=$row["status"]?></option>
+													<?php foreach ($res3 as $row3): ?>
+														<option><?=$row3["status"]?></option>
+													<?php endforeach ?>
+														
+												</select>  
 											</td>
 												
 											<td>
@@ -270,7 +278,7 @@
 											<select class="form-control" id="addItem" name="prodItem[]">
 												<?php foreach ($res as $row): ?>
 														<option><?=$row["prodName"]?></option>
-											<?php endforeach ?>
+												<?php endforeach ?>
 											</select> 
 										</td>
 												
@@ -279,9 +287,16 @@
 										</td>
 										
 										<td>
+											<?php
+												$query3 = $conn->prepare("SELECT DISTINCT status FROM incoming;");
+												$query3->execute();
+												$res3 = $query3->fetchAll();
+											?>
+											
 											<select class="form-control" id="addInStatus" name="inStatus[]">
-												<option>Complete</option>
-												<option>Partial</option>
+												<?php foreach ($res3 as $row3): ?>
+														<option><?=$row3["status"]?></option>
+												<?php endforeach ?>
 											</select> 
 										</td>
 											
@@ -354,7 +369,9 @@
 					
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 					WHERE outID = '$outid'"; */
-					  echo "<meta http-equiv='refresh' content='0'>";
+					echo '<script>
+					  window.location = "../incoming.php"
+					</script>';
 				}
 			}
 
