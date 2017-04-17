@@ -6025,7 +6025,8 @@ button.close {
 }
 @media (min-width: 992px) {
   .modal-lg {
-    width: 900px;
+   width: 60%;
+   max-width:1200px;
   }
 }
 .tooltip {
@@ -6908,9 +6909,7 @@ img#logo1 {
   padding-top: 10px;
 }
 
-
 .addInv {
-  margin-top: 30px;
   margin-left: 300px;
   margin-right: 100px;
   padding: 5%;
@@ -6993,7 +6992,12 @@ margin-left: 15%;
 
 h3{
   font-size:18px;
+  margin-left:25%;
   text-align: left;
+}
+
+#multipleProd h3{
+	margin:none;
 }
 
 #dropdown{
@@ -7597,12 +7601,14 @@ border: none;
 #addQty, #adduser,
 #addpass, #addpassconf,
 #addProdName, #addPrice,
-#addReorderLvl {
-  width: 80%;
+#addReorderLvl, #userID, #addItem {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .modal-xl {
-    width: 90%;
+   width: 100%;
    max-width:1200px;
   }
   
