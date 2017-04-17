@@ -134,10 +134,6 @@
 									<table class="table">	
 								   		<tr>
 									 	<td>
-									  	<br>
-									<button id="modbutt" type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive">View Archive</button>
-									<button id="modbutt" type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">Add Product</button>
-										</td>
 										</tr>
 									</table>
 								</table>
@@ -165,7 +161,6 @@
 									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 										<div id="tabHead">Price</div>
 									</th>					
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -180,19 +175,7 @@
 									<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 									<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 									<td data-title="Unit"><?php echo $item["unitType"];?></td>
-									<td data-title="Price"><?php echo $item["price"]; ?></td>
-									<td>			
-										<a href="functionalities/userEditProd.php?proId=<?php echo $proID; ?>">	
-											<button type="button" class="btn btn-default" id="edBtn">
-												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-											</button>
-										</a>	
-										<a href="functionalities/removeProduct.php?proId=<?php echo $proID; ?>">
-											<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to archive this product?');" id="delBtn1">
-												<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-											</button>
-										</a>
-									</td>				
+									<td data-title="Price"><?php echo $item["price"]; ?></td>			
 								</tr>	
 								<?php
 									endforeach;
