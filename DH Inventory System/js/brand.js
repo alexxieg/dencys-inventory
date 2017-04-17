@@ -1,9 +1,9 @@
 function validateForm() {
 	if(document.getElementById('addBrandID').value == "") {
 		swal({
-		title: "Error!",
+		title: "Warning!",
 		text: "Please Enter Brand ID.",
-		type: "error",
+		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addBrandID').style.borderColor = "red";
@@ -11,16 +11,15 @@ function validateForm() {
 	}
 	if (document.getElementById('addBrandName').value == "") {
 		swal({
-		title: "Error!",
+		title: "Warning!",
 		text: "Please Enter Brand Name.",
-		type: "error",
+		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addBrandName').style.borderColor = "red";
 		return false;
 	}
 	if(confirm('Are you sure you want to add this entry?')) {
-		alert("New Brand Successfully Added");
 		return true;
 	}
 	else {
