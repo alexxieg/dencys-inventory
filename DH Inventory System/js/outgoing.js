@@ -1,22 +1,12 @@
 function validateForm() {
-	if(document.getElementById('addRcpt').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Receipt no.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addRcpt').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addQty').value == "") {
+	if (document.getElementById('addOutQty').value == "") {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
-		document.getElementById('addQty').style.borderColor = "red";
+		document.getElementById('addOutQty').style.borderColor = "red";
 		return false;
 	}
 	if(confirm('Are you sure you want to add this entry?')) {

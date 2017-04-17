@@ -192,7 +192,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>	
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 										<th></th>
 									</tr>
 								</thead>	
@@ -237,10 +237,10 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-												<h5> User </h5>
+												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
-												<h5>Handled By</h5>
+												<h3>Handled By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");
 													$query->execute();
@@ -253,11 +253,9 @@
 													<?php endforeach ?>
 												</select> 
 												
-												<br>
-												
-												<h5>Branch</h5>
+												<h3>Branch</h3>
 												<?php
-													$query = $conn->prepare("SELECT location FROM branch");
+													$query = $conn->prepare("SELECT location FROM branch WHERE branchID > 0");
 													$query->execute();
 													$res = $query->fetchAll();
 													?>
@@ -269,7 +267,7 @@
 												</select> 
 												<br>
 														
-												<h5>Product/s</h5>
+												<h5 id="multipleProd">Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>
 														<tr>
@@ -289,7 +287,7 @@
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty[]">
+																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Item Quantity" name="outQty[]">
 															</td>
 														</tr>
 													</tbody>

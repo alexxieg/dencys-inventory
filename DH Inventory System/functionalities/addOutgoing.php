@@ -36,8 +36,18 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 		for ($index = 0; $index < count($prodTem); $index++) {
-		$rcno = $_POST['rcno'];
-		$query = $conn->prepare("Select * FROM outgoing WHERE receiptNo = '$rcno'");
+		$idretrieve = $conn->prepare("SELECT receiptNo FROM outgoing");
+		$idretrieve->execute();
+		$ids = $idretrieve->fetchAll();
+		$idBase = 00001;
+		$prod = 'OUT-' . str_pad((string)$idBase,5,0,STR_PAD_LEFT);
+		foreach ($ids AS $list):
+			if ($prod == $list["receiptNo"]){
+				$idBase = $idBase + 1;
+				$prod = 'OUT-' . str_pad((string)$idBase,5,0,STR_PAD_LEFT);
+			}
+		endforeach;
+		$query = $conn->prepare("Select * FROM outgoing WHERE receiptNo = '$prod'");
 		$count = $query->execute();
 		$row = $query->fetch();
 
@@ -52,17 +62,7 @@
 			echo '</script>';
 		} else {
 			// Do Something If name Doesn't Exist
-		$idretrieve = $conn->prepare("SELECT receiptNo FROM outgoing");
-		$idretrieve->execute();
-		$ids = $idretrieve->fetchAll();
-		$idBase = 00001;
-		$prod = 'OUT-' . str_pad((string)$idBase,5,0,STR_PAD_LEFT);
-		foreach ($ids AS $list):
-			if ($prod == $list["receiptNo"]){
-				$idBase = $idBase + 1;
-				$prod = 'OUT-' . str_pad((string)$idBase,5,0,STR_PAD_LEFT);
-			}
-		endforeach;
+		
 
         for ($index = 0; $index < count($prodTem); $index++) {
             $prodItem = $_POST['prodItem'][$index];

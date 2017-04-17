@@ -190,7 +190,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 									</tr>
 								</thead>
 								<tbody>					
@@ -253,7 +253,7 @@
 															</td>
 																	
 															<td>
-																<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
+																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
 															</td>
 														</tr>
 													</tbody>

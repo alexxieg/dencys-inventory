@@ -197,7 +197,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Received By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -245,19 +245,19 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-												<h5> User </h5>
+												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 														
-												<h5>Receipt No.</h5> 
+												<h3>Receipt No.</h3> 
 												<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
 												
-												<h5>Receipt Date</h5> 
+												<h3>Receipt Date</h3> 
 												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate"><br>
 												
-												<h5>Supplier</h5> 
+												<h3>Supplier</h3> 
 												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
 																		
-												<h5>Received By</h5>
+												<h3>Received By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");
 													$query->execute();
@@ -285,7 +285,7 @@
 																	$res = $query->fetchAll();
 																?>
 														
-																<select class="form-control" id="addItem" name="prodItem[]">
+																<select class="form-control" name="prodItem[]">
 																	<?php foreach ($res as $row): ?>
 																			<option><?=$row["prodName"]?></option>
 																<?php endforeach ?>
@@ -293,11 +293,11 @@
 															</td>
 																	
 															<td>
-																<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="incQty[]">
+																<input type="number" min="1" class="form-control" id="addIncQty" placeholder="Quantity" name="incQty[]">
 															</td>
 															
 															<td>
-																<select class="form-control" id="addInStatus" name="inStatus[]">
+																<select class="form-control"  name="inStatus[]">
 																	<option>Complete</option>
 																	<option>Partial</option>
 																</select> 

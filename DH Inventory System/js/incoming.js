@@ -21,19 +21,19 @@ function validateForm() {
 		document.getElementById('addRcptDate').style.borderColor = "red";
 		return false;
 	}else{
-        document.getElementById('addQty').style.borderColor = "blue";
+        document.getElementById('addRcptDate').style.borderColor = "blue";
 	}
-	if (document.getElementById('addQty').value == "") {
+	if (document.getElementById('addIncQty').value == "") {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
-		document.getElementById('addQty').style.borderColor = "red";
+		document.getElementById('addIncQty').style.borderColor = "red";
 		return false;
 	}else{
-        document.getElementById('addQty').style.borderColor = "blue";
+        document.getElementById('addIncQty').style.borderColor = "blue";
 	}
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		
