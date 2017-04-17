@@ -148,7 +148,7 @@
 							<h3>Quantity</h3>
 							<input type="text" class="form-control" id ="addEntry" value="<?php echo $item["returnQty"]; ?>" placeholder="<?php echo $item["returnQty"]; ?>" name="retQty"> <br>
 							
-							<h5>Branch</h5>
+							<h3>Branch</h3>
 							<?php
 								$query = $conn->prepare("SELECT location FROM branch");
 								$query->execute();
