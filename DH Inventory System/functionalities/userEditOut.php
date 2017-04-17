@@ -33,7 +33,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) || $role!="user") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -83,7 +83,7 @@
 								<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance <span class="sr-only">(current)</span></a></li>
+						<li class="active"><a href="../useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance <span class="sr-only">(current)</span></a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -105,12 +105,12 @@
 				<!-- Retrieve Selected Entry's Details -->
 				<?php
 					$outid= $_GET['outsId'];
-					$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location 
+					$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID
 											FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID");
 					$query->execute();
 					$res = $query->fetchAll();
 					
-					$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location 
+					$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID 
 											FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID  
 											WHERE receiptNo = '$outid'");
 					$query2->execute();
@@ -126,7 +126,10 @@
 					<br>
 					<div id="contents">
 						<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
-						
+							<h5> User </h5>
+							<td>
+							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+							</td>
 							<h5>Receipt No.</h5> 
 							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno" Readonly><br>
 									
@@ -227,7 +230,10 @@
 					</div>
 					<div class="modal-body">
 						<form action="" method="POST" onsubmit="return validateForm()">
-								
+							<h5> User </h5>
+							<td>
+							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+							</td>
 							<h5>Handled By</h5>
 							<?php
 								$query = $conn->prepare("SELECT empFirstName FROM employee ");
@@ -275,10 +281,6 @@
 										<td>
 											<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty[]">
 										</td>
-										
-										<td>
-											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -313,13 +315,13 @@
 			if (isset($_POST["updateOut"])){
 			
 				for ($index = 0; $index < count($prodTem); $index++) {
-					$outRemarks = $_POST['outRemarks'][$index];
 					$prodItem = $_POST['prodItem'][$index];
 					$outQty = $_POST['outQty'][$index];
 					$emp = $_POST['emp'];
 					$branch = $_POST['branch'];
 					$rcpNo = $_POST['rcno'];
 					$outgoingID = $_POST['productOutID'][$index];
+					$userID = $_POST['userID'];
 
 					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
 					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -333,7 +335,7 @@
 					$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
 					$branch3 = $branch2['branchA'];
 					
-					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, outRemarks = '$outRemarks', empID = '$emp3', prodID = '$prod3' 
+					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, empID = '$emp3', prodID = '$prod3', userID = '$userID'
 							WHERE outID = $outgoingID";
 					$conn->exec($sql);				
 					
@@ -349,6 +351,7 @@
 					$userID = $_POST['userID'];
 					$emp = $_POST['emp'];
 					$branch = $_POST['branch'];
+					$userID = $_POST['userID'];
 
 					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
 					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);

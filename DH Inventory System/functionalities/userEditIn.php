@@ -29,7 +29,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) && $role!="user") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -41,13 +41,13 @@
 	<body>
 		<?php
 			$incID= $_GET['incId'];
-			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks 
+			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									ORDER BY inID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks
+			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
@@ -124,6 +124,10 @@
 					<br>
 					<div id="content">
 						<form action="" method="POST" class="editPgs">
+							<h5>User</h5> 
+							<td>
+							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+							</td>
 							<h5>Receipt No.</h5> 
 							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
 									
@@ -227,6 +231,10 @@
 						<h4 class="modal-title">Add Incoming Product</h4>
 					</div>
 					<div class="modal-body">
+					<h5>User</h5> 
+					<td>
+					<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+					</td>
 						<form action="" method="POST" onsubmit="return validateForm()">
 							<h5>Receipt No.</h5> 
 							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcnoEdit" readonly><br>
@@ -279,9 +287,6 @@
 										<td>
 											<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
 										</td>
-										<td>
-											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -322,6 +327,7 @@
 					$recDate = $_POST['rcdate'];
 					$sup = $_POST['supplier'];
 					$incomingID = $_POST['productInID'][$index];
+					$userID = $_POST['userID'];
 					
 					$emp = $_POST['emp'];
 					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
@@ -333,11 +339,11 @@
 					$prod3 = $prod2['prodA'];
 					
 					if (isset($_POST["addProduct"])) {
-						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID)
-						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3')";
+						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
+						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3','$userID')";
 						$result = $conn->query($sql); 	
 					} else {
-						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3'
+						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
 							WHERE inID = $incomingID";
 						$conn->exec($sql);
 					}						
@@ -354,6 +360,7 @@
 					$prodItem = $_POST['prodItem'][$index2];
 					$inQty = $_POST['incQty'][$index2];
 					$inStat = $_POST['inStatus'][$index2];
+					$userID = $_POST['userID'];
 					
 					$emp = $_POST['empEdit'];
 					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
