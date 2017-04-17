@@ -284,7 +284,7 @@
 															</td>
 																	
 															<td>
-																<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="incQty[]">
+																<input type="number" min="1" class="form-control" id ="addIncQty" placeholder="Quantity" name="incQty[]">
 															</td>
 															
 															<td>

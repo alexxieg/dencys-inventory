@@ -17,7 +17,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="returns.js"></script>
+		<script src="js/returns.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>

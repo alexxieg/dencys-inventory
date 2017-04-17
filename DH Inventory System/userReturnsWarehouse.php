@@ -17,7 +17,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!--Javascript Files -->
-		<script src="returns.js"></script>
+		<script src="js/returns.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -229,7 +229,7 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">					
-												<h5> User </h5>
+												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 												
 												<h3>Item</h3>
