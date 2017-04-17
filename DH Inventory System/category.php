@@ -215,9 +215,9 @@
 										<div class="modal-body">
 												<form action="" method="POST" onsubmit="return validateForm()">		
 												<h3>Category ID</h3>
-												<input type="text" class="form-control" id="addRcpt" placeholder="Category ID" name="categoryID"> <br>
+												<input type="text" class="form-control" id="addCategoryID" placeholder="Category ID" name="categoryID"> <br>
 												<h3>Category Name</h3>
-												<input type="text" class="form-control" id ="addRcpt" placeholder="Category" name="categoryName"> <br>
+												<input type="text" class="form-control" id ="addCategoryName" placeholder="Category" name="categoryName"> <br>
 												<br>
 												
 												<div class="modFoot">
