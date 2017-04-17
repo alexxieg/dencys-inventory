@@ -225,7 +225,7 @@
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Deliveries</a></li>
+								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i>Delivered Products</a></li>
 							</ul>
 						</li>
 						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
