@@ -198,6 +198,13 @@
 				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID)
 						   VALUES ('$qty', CURDATE(), '$rec', '$branchID', '$emp3', '$defID')";
 				$conn->exec($sqlOut);
+				$defStatusQuery = $conn->query("SELECT status FROM defectives WHERE defectProdID = '$defID'");
+				$defStatusRes = $defStatusQuery->fetch(PDO::FETCH_ASSOC);
+				$defStatus = $defStatusRes['status'];
+				if (strcmp($defStatus,"Inactive") == 0){
+					$defConverter = $conn->query("UPDATE defectives SET status='Active' WHERE defectProdID = '$defID'");
+					$conn->exec($defStatus);
+				}
 			}    
 		?>
 	</body>
