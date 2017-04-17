@@ -13,6 +13,23 @@
 		$conn->exec($sql1);	
 	}    */
 	if (isset($_POST["addProd"])){
+		
+		$prodItem = $_POST['prodItem'];
+		$query = $conn->prepare("Select * FROM product WHERE prodName = '$prodItem'");
+		$count = $query->execute();
+		$row = $query->fetch();
+
+		if ($query->rowCount() > 0){
+			echo '<script language="javascript">';
+			echo 'swal(
+				  "Error!",
+				  "Product Already Exists, New Product Has Not been Added",
+				  "error");';
+			echo '$("#myModal").modal("show");';
+			echo 'document.getElementById("addProdName").style.borderColor = "red";';
+			echo '</script>';
+		} else {
+		
 		$brandretrieve = $conn->prepare("SELECT brandID FROM brand WHERE brandName ='".$_POST['prodBrand']."'");
 		$brandretrieve->execute();
 		$brands = $brandretrieve->fetchAll();
@@ -60,5 +77,6 @@
 		$conn->exec($sql3);
 		
 		echo "<meta http-equiv='refresh' content='0'>";
+		}
 	}
 ?>
