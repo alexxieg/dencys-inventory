@@ -220,19 +220,19 @@
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">									
 												<h3>First Name</h3>
-												<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empFName"> <br>
+												<input type="text" class="form-control" id ="addFName" placeholder="First Name" name="empFName"> <br>
 												<br>
 												
 												<h3>Middle Name</h3>
-												<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empMName"> <br>
+												<input type="text" class="form-control" id ="addMName" placeholder="Middle Name" name="empMName"> <br>
 												<br>
 																			
 												<h3>Last Name</h3>
-												<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empLName"> <br>
+												<input type="text" class="form-control" id ="addLName" placeholder="Last Name" name="empLName"> <br>
 												<br>
 												
 												<h3>Extension Name</h3>
-												<input type="text" class="form-control" id ="addEmpl" placeholder="Name" name="empEName"> <br>
+												<input type="text" class="form-control" id ="addEName" placeholder="Extension/Nickname" name="empEName"> <br>
 												<br>
 												
 												<div class="modFoot">
