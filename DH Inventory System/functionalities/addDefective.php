@@ -89,6 +89,8 @@
 						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="../monthlyIncoming.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="../monthlyOutgoing.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage  <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -198,13 +200,6 @@
 				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID)
 						   VALUES ('$qty', CURDATE(), '$rec', '$branchID', '$emp3', '$defID')";
 				$conn->exec($sqlOut);
-				$defStatusQuery = $conn->query("SELECT status FROM defectives WHERE defectProdID = '$defID'");
-				$defStatusRes = $defStatusQuery->fetch(PDO::FETCH_ASSOC);
-				$defStatus = $defStatusRes['status'];
-				if (strcmp($defStatus,"Inactive") == 0){
-					$defConverter = $conn->query("UPDATE defectives SET status='Active' WHERE defectProdID = '$defID'");
-					$conn->exec($defStatus);
-				}
 			}    
 		?>
 	</body>
