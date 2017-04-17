@@ -43,12 +43,12 @@
 		<!-- Retrieved Selected Entry Details -->
 		<?php
 			$retID= $_GET['retId'];
-			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID  
 					FROM returns INNER JOIN product ON returns.prodID = product.prodID");
 			$query->execute();
 			$res = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark 
+			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID 
 					FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 					WHERE returnID = $retID ");
 			$query2->execute();
@@ -131,6 +131,10 @@
 					<br>
 					<div id="contents">
 						<form action="" method="POST" class="editPgs">
+							<td>
+							<h3> User </h3>	
+							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+							</td>			
 							<h3>Item</h3>
 							<select class="form-control" id="addEntry" name="prodItem">
 								<?php foreach ($resul as $item): ?>
@@ -176,12 +180,13 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 							
 				$prod = $_POST['prodItem'];
+				$userID = $_POST['userID'];
 						
 				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
-				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', status = '$stat', returnRemark = '$rem' WHERE returnID = $retID";
+				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', status = '$stat', returnRemark = '$rem', userID = '$userID' WHERE returnID = $retID";
 				$conn->exec($sql);
 			}    
 		?>
