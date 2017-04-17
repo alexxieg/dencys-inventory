@@ -27,15 +27,13 @@
 		<!-- Login Session -->
 		<?php 
 			session_start();
-			if (isset($_SESSION['id'])){
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
-				if (!isset($_SESSION['id']) || $_SESSION['id'] == false) {
-					session_destroy();
-					header('Location: index.php');
-				}
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="admin") {
+				header('Location: index.php');
 			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
 	</head>
 	  
@@ -55,7 +53,7 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li id="adminhead"><a href="#">Admin |</a></li>
-						<li><a href="../Logout.php">Logout</a></li>
+						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
