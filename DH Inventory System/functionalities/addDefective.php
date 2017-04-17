@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Add Category</title>
+		<title>Defectives</title>
 		
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -106,7 +106,7 @@
 				<!-- End of Sidebar -->	
 				
 				<div class="addInv">
-					<h1 id="headers">Transfer Defective Items</h1>
+					<h1 id="headers">Add Defective Items</h1>
 					<div>
 						<form action="" method="POST" class="editPgs">
 						
@@ -136,8 +136,6 @@
 							<?php endforeach ?>
 							</select> 
 										
-							<br>
-							
 							<h3>Quantity Moved</h3>
 							<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
 							<br>

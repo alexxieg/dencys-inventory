@@ -2,13 +2,12 @@
 	if (isset($_POST["addRet"])){
 				
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
 		$recRetrieve = $conn->prepare("SELECT receiptNo FROM returns");
 		$recRetrieve->execute();
 		$recs = $recRetrieve->fetchAll();
 		$recBase = 00001;
 		$recNo = 'RET-WHS-' . str_pad((string)$recBase,5,0,STR_PAD_LEFT);
-		foreach ($nums AS $list):
+		foreach ($recs AS $list):
 			if ($recNo == $list["receiptNo"]){
 				$numBase = $recBase + 1;
 				$recNo = 'RET-WHS-' . str_pad((string)$recBase,5,0,STR_PAD_LEFT);

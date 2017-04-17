@@ -243,6 +243,9 @@
 													<input type="submit" value="Submit" class="btn btn-success" name="addAccnt" id="sucBtn">
 												</span>
 												</div>
+																						
+											<div class="modal-footer">
+											</div>	
 											</form> 
 										</div>
 									</div>
@@ -283,18 +286,6 @@
 												
 												<tbody>						
 														
-													<tr id="centerData">	
-														<td data-title="Username"><?php echo $item["userName"]; ?></td>
-														<td data-title="Password"><?php echo $item["password"]; ?></td>
-														<td data-title="User Role><?php echo $item["user_role"]; ?></td>
-														<td>
-															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this account?');">
-																	Restore
-																</button>
-															</a>
-														</td>			
-													</tr>
 													<?php
 														foreach ($result1 as $item):
 														$useThisID = $item["userID"];

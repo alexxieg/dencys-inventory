@@ -5,7 +5,7 @@
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 		$query = $conn->prepare("SELECT product.prodID, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, CONCAT(returns.returnQty,' ', product.unitType) AS returnQty, returns.returnType, returns.receiptNo, returns.returnRemark, branch.location, returns.userID
 								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN product ON returns.prodID = product.prodID
-								WHERE returns.returnType = 'Supplier Return' HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
+								WHERE returns.returnType = 'Supplier Return' AND nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
 								ORDER BY returnID DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
