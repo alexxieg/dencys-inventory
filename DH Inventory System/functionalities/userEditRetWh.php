@@ -30,7 +30,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) || $role!="user") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -71,8 +71,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li id="adminhead"><h3>Admin |</h3></li>
-					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+					<li id="adminhead"><a href="#">User |</a></li>
+						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -121,6 +121,10 @@
 					<br>
 					<div id="contents">
 						<form action="" method="POST" class="editPgs">
+						<td>
+						<h3> User </h3>	
+						<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+						</td>		
 							<h3>Item</h3>
 							<select class="form-control" id="addEntry" name="prodItem">
 								<?php foreach ($resul as $item): ?>
@@ -153,6 +157,7 @@
 							<?php foreach ($resul as $row2): ?>
 								<input type="text" class="form-control" id="addEntry" value="<?php echo $row2["returnRemark"]; ?>" placeholder="<?php echo $row2["returnRemark"]; ?>"  name="retRemarks">
 							<?php endforeach ?>	
+								
 							<br>
 							
 							<div class="modFoot">
@@ -181,12 +186,13 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 							
 				$prod = $_POST['prodItem'];
+				$userID = $_POST['userID'];
 						
 				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
-				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', returnRemark = '$rem' WHERE returnID = $retID";
+				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', returnRemark = '$rem', userID = '$userID' WHERE returnID = $retID";
 				$conn->exec($sql);
 			}    
 		?>
