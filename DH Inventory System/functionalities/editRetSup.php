@@ -69,7 +69,7 @@
 				</div>
 				<ul class="nav navbar-nav navbar-right">
 				<li id="adminhead"><a href="#">Admin |</a></li>
-				<li><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+				<li><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 				</ul>
 				</div>
 			</div>
