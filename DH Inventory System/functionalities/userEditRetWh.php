@@ -53,6 +53,8 @@
 					WHERE returnID = $retID ");
 			$query2->execute();
 			$resul = $query2->fetchAll();
+			
+			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returnID = $retID")->fetch())
 		?>
 		
 		<!-- Top Main Header -->
@@ -133,7 +135,7 @@
 							<h3>Quantity</h3>
 							<input type="text" class="form-control" id ="addEntry" value="<?php echo $item["returnQty"]; ?>" placeholder="<?php echo $item["returnQty"]; ?>" name="retQty"> <br>
 							
-							<h5>Branch</h5>
+							<h3>Branch</h3>
 							<?php
 								$query = $conn->prepare("SELECT location FROM branch");
 								$query->execute();
@@ -148,8 +150,9 @@
 							</select> 
 							
 							<h3>Remarks</h3>
-							<input type="text" class="form-control" id="addEntry" value="<?php echo $row["returnRemark"]; ?>" placeholder="<?php echo $row["returnRemark"]; ?>"  name="retRemarks">
-								
+							<?php foreach ($resul as $row2): ?>
+								<input type="text" class="form-control" id="addEntry" value="<?php echo $row2["returnRemark"]; ?>" placeholder="<?php echo $row2["returnRemark"]; ?>"  name="retRemarks">
+							<?php endforeach ?>	
 							<br>
 							
 							<div class="modFoot">
@@ -183,7 +186,7 @@
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
-				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', status = '$stat', returnRemark = '$rem' WHERE returnID = $retID";
+				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', returnRemark = '$rem' WHERE returnID = $retID";
 				$conn->exec($sql);
 			}    
 		?>
