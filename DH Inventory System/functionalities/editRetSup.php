@@ -67,10 +67,10 @@
 					</button>
 					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="Logout.php">Logout</a></li>
-					</ul>
+				<ul class="nav navbar-nav navbar-right">
+				<li id="adminhead"><a href="#">Admin |</a></li>
+				<li><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+				</ul>
 				</div>
 			</div>
 		</nav>

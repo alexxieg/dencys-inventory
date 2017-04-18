@@ -212,7 +212,7 @@
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 											
 										<td>
-											<a href="functionalities/editRetSup.php?retId=<?php echo $retID; ?>" target="_blank">
+											<a href="functionalities/editRetSup.php?retId=<?php echo $retID; ?>">
 												<button type="button" class="btn btn-default">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>

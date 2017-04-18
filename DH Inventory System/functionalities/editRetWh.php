@@ -71,9 +71,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li id="adminhead"><h3>Admin |</h3></li>
-					<li id="loghead"><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
-					</ul>
+					<li id="adminhead"><a href="#">Admin |</a></li>
+					<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 				</div>
 			</div>
 		</nav>
@@ -84,7 +83,7 @@
 				<!-- Sidebar -->
 				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
-						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
+						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
