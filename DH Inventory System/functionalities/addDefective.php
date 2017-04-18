@@ -183,9 +183,6 @@
 				$defRes = $defSQL->fetch(PDO::FETCH_ASSOC);
 				$defID = $defRes['defID'];
 				
-				$branchSQL = $conn->query("SELECT branchID from branch WHERE branchName = 'Defective'");
-				$branchRes = $branchSQL->fetch(PDO::FETCH_ASSOC);
-				$branchID = $branchRes['branchID'];
 				
 				$emp = $_POST['emp'];
 				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
@@ -197,7 +194,7 @@
 				$conn->exec($sqlIn);
 				
 				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID)
-						   VALUES ('$qty', CURDATE(), '$rec', '$branchID', '$emp3', '$defID')";
+						   VALUES ('$qty', CURDATE(), '$rec', 0, '$emp3', '$defID')";
 				$conn->exec($sqlOut);
 			}    
 		?>
