@@ -173,7 +173,6 @@
 		<?php
 			$retID= $_GET['retId'];
 			$quant=(isset($_REQUEST['retQty']) ? $_REQUEST['retQty'] : null);
-			$stat=(isset($_REQUEST['status']) ? $_REQUEST['status'] : null);
 			$rem=(isset($_REQUEST['retRemarks']) ? $_REQUEST['retRemarks'] : null);
 			if (isset($_POST["editReturns"])){
 				
@@ -186,7 +185,7 @@
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
-				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', status = '$stat', returnRemark = '$rem', userID = '$userID' WHERE returnID = $retID";
+				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', returnRemark = '$rem', userID = '$userID' WHERE returnID = $retID";
 				$conn->exec($sql);
 			}    
 		?>
