@@ -70,8 +70,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li id="adminhead"><a href="#">User |</a></li>
-						<li><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+					<li id="adminhead"><a href="#">User |</a></li>
+						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
@@ -205,7 +205,7 @@
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 											
 										<td>
-											<a href="functionalities/editRetWh.php?retId=<?php echo $retID; ?>" target="_blank">
+											<a href="functionalities/editRetWh.php?retId=<?php echo $retID; ?>">
 												<button type="button" class="btn btn-default">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
