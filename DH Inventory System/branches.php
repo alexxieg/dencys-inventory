@@ -188,7 +188,7 @@
 										<td data-title="Branch Name"><?php echo $item["branchName"]; ?></td>
 										<td data-title="Location"><?php echo $item["location"]; ?></td>
 										<td>	
-											<a href="functionalities/editBranches.php?useID=<?php echo $useThisID; ?>" target="_blank">
+											<a href="functionalities/editBranches.php?useID=<?php echo $useThisID; ?>">
 												<button type="button" class="btn btn-default">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>

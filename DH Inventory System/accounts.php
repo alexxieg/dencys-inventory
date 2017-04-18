@@ -188,7 +188,7 @@
 										<td data-title="Password"><?php echo $item["password"]; ?></td>
 										<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 										<td>
-											<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>" target="_blank">
+											<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>">
 												<button type="button" class="btn btn-default">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
