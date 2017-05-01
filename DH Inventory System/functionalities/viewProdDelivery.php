@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Edit Product Delivery Entry</title>
+		<title>View Product Delivery</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -54,14 +54,14 @@
 	<body>
 		<?php
 			$incID= $_GET['incId'];
-			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
+			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inID, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
+			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
@@ -111,10 +111,10 @@
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="../incoming.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -154,7 +154,7 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div id="tableHeader">
-							<h1 id="headers">PRODUCT DELIVERY</h1>
+							<h1 id="headers">PRODUCT DELIVERY DETAILS</h1>
 									
 							<a href="editIn.php?incId=<?php echo $incRec; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
@@ -232,77 +232,6 @@
 				</div>
 			</div>	
 		</div>
-		
-		<?php
-			$incID= $_GET['incId'];
-			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-			if (isset($_POST["updateIn"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-				for ($index = 0; $index < count($prodTem); $index++) {	
-					$inRemarks = $_POST['inRemarks'][$index];
-					$prodItem = $_POST['prodItem'][$index];
-					$inQty = $_POST['incQty'][$index];
-					$inStat = $_POST['inStatus'][$index];
-					$rcpNo = $_POST['rcno'];
-					$recDate = $_POST['rcdate'];
-					$sup = $_POST['supplier'];
-					$incomingID = $_POST['productInID'][$index];
-					$userID = $_POST['userID'];
-					
-					$emp = $_POST['emp'];
-					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
-					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-					$emp3 = $emp2['empA'];
-
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
-					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-					$prod3 = $prod2['prodA'];
-					
-					if (isset($_POST["addProduct"])) {
-						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
-						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3','$userID')";
-						$result = $conn->query($sql); 	
-					} else {
-						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
-							WHERE inID = $incomingID";
-						$conn->exec($sql);
-					}						
-					
-					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
-					WHERE outID = '$outid'"; */
-					echo '<script>
-					  window.location = "../incoming.php"
-					</script>';
-				}
-			}
-
-			if (isset($_POST["addEditProducts"])){
-				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
-					$inRemarks = $_POST['inRemarks'][$index2];
-					$prodItem = $_POST['prodItem'][$index2];
-					$inQty = $_POST['incQty'][$index2];
-					$inStat = $_POST['inStatus'][$index2];
-					$userID = $_POST['userID'];
-					
-					$emp = $_POST['empEdit'];
-					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
-					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-					$emp3 = $emp2['empA'];
-
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
-					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-					$prod3 = $prod2['prodA'];
-						
-					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
-						VALUES ('$inQty',CURDATE(),'$reciptNum','$reciptDate','$supplier','$inStat','$inRemarks','$emp3','$prod3','$userID')";
-						$result = $conn->query($sql);
-				}
-				echo "<meta http-equiv='refresh' content='0'>";
-			}
-			
-		?>
 	
   </body>
 </html>

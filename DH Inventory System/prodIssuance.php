@@ -5,19 +5,19 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Purchase Orders</title>
-
+		<title>Product Issuance</title>
+		
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-		
+
 		<!-- Custom CSS for this template -->
 		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
-			
+		
 		<!-- Javascript Files -->
-		<script src="js/po.js"></script>
+		<script src="js/outgoing.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>
@@ -30,16 +30,16 @@
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
-		<!-- Datatables Script -->
+		<!-- Datatables Script-->
 		<script>
 			$(document).ready(function(){
 				$('#myTable').dataTable();
 			});
 		</script>
-			
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
-	
+			
 		<!-- Login Session -->
 		<?php 
 			session_start();
@@ -53,9 +53,10 @@
 		?>
 	</head>
 
-	<body>
-		<!-- Retrieve Incoming Data -->
-		<?php include('functionalities/fetchPurchaseOrders.php');		?>
+	<body>			
+		<!--Retrieve Outgoing Data -->
+		<?php include('functionalities/fetchOutgoing.php'); ?>
+		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -66,7 +67,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="inventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -78,10 +79,10 @@
 		</nav>
 		<!-- End of Top Main Header -->
 
-		<div class="container-fluid" >
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
 				<!-- Sidebar -->
+				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -90,13 +91,13 @@
 								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li class="active"><a href="prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance <span class="sr-only">(current)</span></a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -122,170 +123,196 @@
 						</li>
 					</ul>
 				</div>
-				<!-- End of Sidebar -->
-				
+				<!-- End of Sidebar -->	
+
 				<?php
 					foreach ($result as $item):
-						$po = $item["poID"];
+					$outid = $item["receiptNo"];
 				?>
-							
+					
 				<?php
 					endforeach;
 				?>
 					
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<div class="pages no-more-tables">
-							<div id="tableHeader">
-								<h1 id="headers">PURCHASE ORDERS</h1>
-								<table class="table">	
-									<tr>
-										<td>
-											<br>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
-										</td>
-										<td>
-											<div class="col-sm-7 pull-right POfilter">
-												<label>View Previous Entries</label>
-												<form class="form-inline" action="" method="post">
-													<div class="form-group">
-														<select name="dateMonthName" class="form-control">
+						<div id="tableHeader">
+							<h1 id="headers">PRODUCT ISSUANCE</h1>
+							<table class="table">	
+								<tr>
+									<td>
+										<br>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Issued Products</button>					
+									</td>
+									<td>	
+										<div class="col-sm-7 pull-right filter">
+											<label>View Previous Entries</label>
+											<form class="form-inline" action="" method="post">
+												<div class="form-group">
+													<select name="dateMonthName" class="form-control">
 															<?php foreach ($result2 as $row): ?>
-																<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-																<?php endforeach ?>
-														</select>
-													</div>
-													<div class="form-group">
-														<select name="dateYearName" class="form-control">
-															<?php foreach ($result3 as $row): ?>
+															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<select name="dateYearName" class="form-control">
+														<?php foreach ($result3 as $row): ?>
 																<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-															<?php endforeach ?>
-														</select>
-														</div>	
-													<div class="form-group">
-														<input type="submit" value="View" class="btn btn-success" name="submit">
-													</div>
-												</form>	
-											</div>	
-										</td>
-									</tr>												
-								</table>
-							</div>
-							
+														<?php endforeach ?>
+													</select>
+												</div>	
+												<div class="form-group">
+													<input type="submit" value="View" class="btn btn-success" name="submit">
+												</div>
+											</form>	
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					
+						<div class="pages no-more-tables">
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
 									</div>
 								</div>
 							</div>
-							<br> 
-							
-							<!-- Table Display for Incoming -->
+				
+							<!-- Table Display for Outgoing Entries -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>	
+								<thead>
+								
 									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Entered</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>	
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
 									</tr>
-								</thead>
-								<tbody>					
+								</thead>	
+								<tbody>			
 									<?php
 										foreach ($result as $item):
-											$po = $item["poID"];
+										$outid = $item["receiptNo"];
+										$outReceipt = $item["receiptNo"];							
 									?>
-									
+										
 									<tr id="centerData">
-										<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
-										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
-										<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+										<td data-title="Reference No."><?php echo $item["receiptNo"]; ?></td>
+										<td data-title="Date Entered"><?php echo $item["outDate"]; ?></td>
+										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+										<td data-title="Branch"><?php echo $item["location"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
-									</tr>	
+										<td>
+											<a href="functionalities/viewProdIssuance.php?outsId=<?php echo $outReceipt; ?>">
+											<button type="button" class="btn btn-default">
+												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+												</button>
+											</a>
+										</td>		
+									</tr>
 									
 									<?php
 										endforeach;
 									?>
-								</tbody>	
+								</tbody>		
 							</table>
-
-							<!-- Modal for New Purchase Order -->
+					
+							<!-- Modal - Add Outgoing Entry Form -->
 							<div class="modal fade" id="myModal" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add Purchase Order</h4>
+											<h4 class="modal-title">Add Outgoing Product</h4>
 										</div>
 										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()"><td>
-											<td>
-											<h5> User </h5>
-											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-											</td>																									
-												<h5>Supplier</h5> 
-												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
+											<form action="" method="POST" onsubmit="return validateForm()">
+												<h3> User </h3>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
-												<h5>Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
+												<h3>Handled By</h3>
+												<?php
+													$query = $conn->prepare("SELECT empFirstName FROM employee ");
+													$query->execute();
+													$result = $query->fetchAll();
+												?>
+																
+												<select class="form-control" id="addEmpl" name="emp">
+													<?php foreach ($result as $row): ?>
+														<option><?=$row["empFirstName"]?></option>
+													<?php endforeach ?>
+												</select> 
+												
+												<h3>Branch</h3>
+												<?php
+													$query = $conn->prepare("SELECT location FROM branch WHERE branchID > 0");
+													$query->execute();
+													$res = $query->fetchAll();
+													?>
+												
+												<select class="form-control" id="addEntry" name="branch">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["location"]?></option>
+													<?php endforeach ?>
+												</select> 
+												<br>
+														
+												<h5 id="multipleProd">Product/s</h5>
+												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>
 														<tr>
 															<td><input type="checkbox" name="chk"></TD>
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<?php
-																	$query = $conn->prepare("SELECT prodName FROM product ");
+																	$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
 																	$query->execute();
 																	$res = $query->fetchAll();
 																?>
-														
 																<select class="form-control" id="addItem" name="prodItem[]">
-																	<?php foreach ($res as $row): ?>
-																			<option><?=$row["prodName"]?></option>
+																<?php foreach ($res as $row): ?>
+																	<option><?=$row["prodName"]?></option>
 																<?php endforeach ?>
-																</select> 
+															</select> 
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
+																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Item Quantity" name="outQty[]">
 															</td>
 														</tr>
 													</tbody>
 												</table>
-												
-												<br>
-												
+													
 												<div class="modFoot">
 													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+													<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 													<br>
 													<br>
-													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-													<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
+													<span>
+														<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+													</span>
+													<span>
+														<input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn">
+													</span>
 												</div>
-											</form> 	
-										
+											</form>																		
+								 
 											<div class="modal-footer">
-											</div>								
+											</div>
 										</div>
 									</div>
 								</div>
-							</div> 
-							<!-- End of Modal -->		
-							
+							</div>
 						</div>
-					</div>		  
+					</div>
 				</div>
 			</div>
 		</div>
-		
-		<!-- Add Incoming Entry Functionality-->
-		<?php include('functionalities/addPO.php'); ?>
+		<!-- Add Outgoing Entry -->
+		<?php include('functionalities/addOutgoing.php'); ?>
 	</body>
 </html>

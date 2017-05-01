@@ -3,17 +3,16 @@
 	$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
 	
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-		$query = $conn->prepare("SELECT product.prodName, product.prodID, outgoing.receiptNo, outgoing.outID, CONCAT(outgoing.outQty,' ', product.unitType) AS outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID  
-									FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
+		$query = $conn->prepare("SELECT outgoing.receiptNo, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID   
+									FROM outgoing INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
 									HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
-									ORDER BY outID DESC;");
+									GROUP BY outgoing.receiptNo, outgoing.outDate, empName, branch.location, outgoing.userID;");
 		$query->execute();
 		$result = $query->fetchAll();
 	} else {
-		$query = $conn->prepare("SELECT product.prodName, product.prodID, outgoing.receiptNo, outgoing.outID, CONCAT(outgoing.outQty,' ', product.unitType) AS outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID   
-									FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
-									WHERE MONTH(outDate) = MONTH(CURRENT_DATE())
-									ORDER BY outID DESC;");
+		$query = $conn->prepare("SELECT outgoing.receiptNo, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID   
+									FROM outgoing INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID
+									GROUP BY outgoing.receiptNo, outgoing.outDate, empName, branch.location, outgoing.userID;");
 		$query->execute();
 		$result = $query->fetchAll();
 	}
