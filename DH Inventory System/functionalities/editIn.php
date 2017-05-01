@@ -127,8 +127,9 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-  
-				<div class="addInv">
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+					<div id="contents">
+						<div class="pages no-more-tables">
 					<h1 id="headers">Edit Product Delivery Entry</h1>
 					<br>
 					<div id="content">
@@ -158,7 +159,7 @@
 							<br>
 									
 							<h5>Product/s</h5>
-							<table class="table table-striped" name="chk">				
+							<table class="table table-striped" id="dataTable" name="chk">				
 								<tbody>
 									<?php foreach ($result2 as $row): ?>
 										<tr>
@@ -207,11 +208,6 @@
 											<td>
 											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 											</td>
-											<td>
-												<a href="removeIncomingProduct.php?incID=<?php echo $row["inID"];?>"> 
-													<button type="button" value="Delete Row" class="btn btn-default" name="RemoveThis">Remove</button>
-												</a>
-											</td>
 										</tr>
 									<?php endforeach ?>
 								</tbody>
@@ -234,6 +230,8 @@
 							</div>
 						</form> 								
 					</div>								
+				</div>
+				</div>
 				</div>
 			</div>	
 		</div>

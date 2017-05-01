@@ -148,7 +148,7 @@
 									</td>
 									<td>
 										<div class="col-sm-7 pull-right filter">
-											<label>View Previous Entries</label>
+											<label>View Previous Deliveries</label>
 											<form class="form-inline" action="" method="post">
 												<div class="form-group">
 													<select name="dateMonthName" class="form-control">
@@ -193,7 +193,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Received By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
-										<th></th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
 									</tr>
 								</thead>
 								<tbody>					
@@ -211,19 +211,12 @@
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/editIn.php?incId=<?php echo $incRec; ?>"> 
-											<button type="button" class="btn btn-default" id="edBtn">
-												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-											</button>
-											</a>
-										</td>
-										<td>
 											<a href="functionalities/viewProdDelivery.php?incId=<?php echo $incRec; ?>"> 
 											<button type="button" class="btn btn-default" id="edBtn">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 											</button>
 											</a>
-										</td>										
+										</td>
 									</tr>	
 									
 									<?php

@@ -22,6 +22,19 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Datatables CSS and JS Files -->
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
+		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		
+		<!-- Datatables Script -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -43,6 +56,7 @@
 			$incID= $_GET['incId'];
 			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
@@ -50,15 +64,14 @@
 			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									WHERE incoming.receiptNo = '$incID'
-						
 									ORDER BY inID DESC;");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 			
-			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
-			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$receiptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
+			$receiptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 			$supplier = current($conn->query("SELECT incoming.supplier FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
-			$employ = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$employee = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 		?>
 
 		<!-- Top Main Header -->
@@ -129,9 +142,48 @@
 				</div>
 				<!-- End of Sidebar -->
   
+				<?php
+					foreach ($result as $item):
+						$incID = $item["receiptNo"];
+						$incRec = $item["receiptNo"];
+				?>
+				<?php
+					endforeach;
+				?>
+  
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div id="tableHeader">
+							<h1 id="headers">PRODUCT DELIVERY</h1>
+									
+							<a href="editIn.php?incId=<?php echo $incRec; ?>"> 
+								<button type="button" class="btn btn-default" id="modButt">
+									EDIT ENTRY
+								</button>
+							</a>
+							
+							<br>
+							<br>
+							<table class="table table-striped table-bordered">
+									<tr>
+										<td>
+											Receipt No:
+											<?php echo $incID;?>
+										</td>
+										<td>
+											Receipt Date:
+											<?php echo  $receiptDate;?> 
+										</td>
+										<td>
+											Supplier: 
+											<?php echo $supplier ?>
+										</td>
+										<td> 
+											Received by:
+											<?php echo $employee ?>
+										</td>
+									</tr>									
+								</table>
 						</div>
 					   
 						<div class="pages no-more-tables">
@@ -147,14 +199,11 @@
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt No.</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Entered</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Received By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
-										<th></th>
 									</tr>
 								</thead>
 								<tbody>					
@@ -165,20 +214,11 @@
 									?>
 									
 									<tr id="centerData">
-										<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
-										<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
-										<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
-										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
-										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
-										<td data-title="User"><?php echo $item["userID"]; ?></td>
-										<td>
-											<a href="functionalities/editIn.php?incId=<?php echo $incRec; ?>"> 
-											<button type="button" class="btn btn-default" id="edBtn">
-												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-											</button>
-											</a>
-										</td>									
+										<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+										<td data-title="Status"><?php echo $item["status"]; ?></td>
+										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
 									</tr>	
 									
 									<?php
@@ -192,7 +232,6 @@
 				</div>
 			</div>	
 		</div>
-
 		
 		<?php
 			$incID= $_GET['incId'];
