@@ -3,17 +3,16 @@
 	$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
 	
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-		$query = $conn->prepare("SELECT product.prodName, product.prodID,incoming.inID, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID  
+		$query = $conn->prepare("SELECT incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.userID  
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
-									ORDER BY inID DESC;");
+									GROUP BY incoming.receiptNo, incoming.inDate, empName, incoming.supplier, incoming.receiptDate, incoming.userID;");
 		$query->execute();
 		$result = $query->fetchAll();
 	} else {
-		$query = $conn->prepare("SELECT product.prodName, product.prodID, incoming.inID, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID  
+		$query = $conn->prepare("SELECT incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.userID  
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-									WHERE MONTH(inDate) = MONTH(CURRENT_DATE())
-									ORDER BY inID DESC;");
+									GROUP BY incoming.receiptNo, incoming.inDate, empName, incoming.supplier, incoming.receiptDate, incoming.userID;");
 		$query->execute();
 		$result = $query->fetchAll();
 	}
