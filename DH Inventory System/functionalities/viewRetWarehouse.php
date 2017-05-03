@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<title>View Product Delivery</title>
 
+		<title>Edit Warehouse Return Entry</title>
+	
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
@@ -17,23 +18,10 @@
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="../js/incoming.js"></script>
+		<script src="../js/returns.js"></script>
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
-		
-		<!-- Datatables CSS and JS Files -->
-		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
-		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		
-		<!-- Datatables Script -->
-		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
-		</script>
 		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -50,31 +38,26 @@
 			$user_row = $session_query->fetch();
 		?>
 	</head>
-	
+  
 	<body>
 		<!-- Retrieved Selected Entry Details -->
 		<?php
-			$incID= $_GET['incId'];
-			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inID, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
-									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-									WHERE incoming.receiptNo = '$incID'
-									ORDER BY inID DESC;");
+			$retID= $_GET['retId'];
+			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID 
+					FROM returns INNER JOIN product ON returns.prodID = product.prodID
+					WHERE returns.receiptNo = '$retID';");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
-									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
-									WHERE incoming.receiptNo = '$incID'
-									ORDER BY inID DESC;");
+			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.branchID, returns.userID  
+					FROM returns INNER JOIN product ON returns.prodID = product.prodID 
+					WHERE receiptNo = '$retID' ");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 			
-			$receiptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
-			$receiptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
-			$supplier = current($conn->query("SELECT incoming.supplier FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
-			$employee = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
-
+		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -85,22 +68,21 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav navbar-right">
 					<li id="adminhead"><a href="#">Admin |</a></li>
 						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
-				</div>
 			</div>
 		</nav>
 		<!-- End of Top Main Header -->
 
-		<div class="container-fluid" >
-			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
-					<!-- Sidebar -->
+		<div class="container-fluid">
+			<div class="row navbar-collapse">
+				<!-- Sidebar -->
+				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -109,14 +91,14 @@
 								<li><a href="../functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+								<li><a href="../incoming.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
@@ -141,23 +123,14 @@
 						</li>
 					</ul>
 				</div>
-				<!-- End of Sidebar -->
-  
-				<?php
-					foreach ($result as $item):
-						$incID = $item["receiptNo"];
-						$incRec = $item["receiptNo"];
-				?>
-				<?php
-					endforeach;
-				?>
-  
-				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+				<!-- End of Sidebar -->	
+				
+								<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div id="tableHeader">
-							<h1 id="headers">PRODUCT DELIVERY DETAILS</h1>
+							<h1 id="headers">SUPPLIER RETURN DETAILS</h1>
 									
-							<a href="editIn.php?incId=<?php echo $incRec; ?>"> 
+							<a href="editRetSup.php?retId=<?php echo $retID; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY
 								</button>
@@ -168,71 +141,72 @@
 							<table class="table table-striped table-bordered">
 									<tr>
 										<td>
-											Receipt No:
-											<?php echo $incID;?>
+											Reference No:
+									
 										</td>
 										<td>
-											Receipt Date:
-											<?php echo  $receiptDate;?> 
+											Return date:
+								
 										</td>
 										<td>
 											Supplier: 
-											<?php echo $supplier ?>
+							
 										</td>
 										<td> 
 											Received by:
-											<?php echo $employee ?>
+										
 										</td>
 									</tr>									
 								</table>
 						</div>
-					   
 						<div class="pages no-more-tables">
+							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
 									</div>
 								</div>
 							</div>
-							<br> 
 							
-							<!-- Table Display for Incoming -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>	
+								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+
 									</tr>
 								</thead>
-								<tbody>					
+								
+								<tbody>				
 									<?php
 										foreach ($result as $item):
-										$incID = $item["inID"];
-										$incRec = $item["receiptNo"];
+										$retID = $item["returnID"];
 									?>
 									
 									<tr id="centerData">
-										<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-										<td data-title="Status"><?php echo $item["status"]; ?></td>
-										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
-									</tr>	
-									
+										<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+		
+	
+									</tr>
+											
 									<?php
 										endforeach;
 									?>
 								</tbody>	
-							</table>			
-								
+							</table>
 						</div>
-					</div>		  
-				</div>
-			</div>	
+				
+				
+			</div>
 		</div>
-	
-  </body>
+			</div>
+		</div>
+
+
+	</body>
 </html>

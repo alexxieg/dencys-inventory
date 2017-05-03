@@ -45,7 +45,7 @@
 	<body>
 		<!-- Retrieve Selected Entry's Details -->
 		<?php
-			$outid= $_GET['outsId'];
+			$outid= $_GET['outId'];
 			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, CONCAT(outgoing.outQty,' ', product.unitType) AS outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID 
 									FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID");
 			$query->execute();

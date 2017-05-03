@@ -5,14 +5,14 @@
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, branch.location, returns.userID
 								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID
-								WHERE returns.returnType = 'Supplier Return' AND nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate 
+								WHERE returns.returnType = 'Warehouse Return' AND nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate 
                                 GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, branch.location, returns.userID;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}else{
 		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, branch.location, returns.userID
 								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID
-						        WHERE returns.returnType = 'Supplier Return' 								
+						        WHERE returns.returnType = 'Warehouse Return' 								
 								GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, branch.location, returns.userID;");	
 		$query->execute();
 		$result = $query->fetchAll();

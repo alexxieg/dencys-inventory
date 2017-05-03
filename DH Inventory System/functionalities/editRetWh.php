@@ -54,7 +54,7 @@
 			$query2->execute();
 			$resul = $query2->fetchAll();
 			
-			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returnID = $retID")->fetch());
+			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
 		
 		<!-- Top Main Header -->

@@ -18,7 +18,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="js/returns.js"></script>
+		<script src="js/returnWarehouse.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>
@@ -56,7 +56,7 @@
 
 	<body>
 		<!-- PHP code for fetching the data-->
-		<?php include('functionalities/fetchReturns.php'); ?>
+		<?php include('functionalities/fetchReturnsWarehouse.php'); ?>
 		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -129,7 +129,7 @@
 			 
 				<?php
 					foreach ($result as $item):
-					$retID = $item["returnID"];
+					$retID = $item["receiptNo"];
 				?>
 							
 				<?php
@@ -188,11 +188,7 @@
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Returned From</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 										<th></th>
 									</tr>
@@ -201,21 +197,17 @@
 								<tbody>				
 									<?php
 										foreach ($result as $item):
-										$retID = $item["returnID"];
+										$retID = $item["receiptNo"];
 									?>
 									
 									<tr id="centerData">
 										<td data-title="Reference No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
-										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 										<td data-title="Returned From"><?php echo $item["location"];?></td>
-										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 											
 										<td>
-											<a href="functionalities/editRetWh.php?retId=<?php echo $retID; ?>">
+											<a href="functionalities/viewRetWarehouse.php?retId=<?php echo $retID; ?>">
 												<button type="button" class="btn btn-default">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
@@ -241,22 +233,6 @@
 											<form action="" method="POST" onsubmit="return validateForm()">
 												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												<h3>Item</h3>
-												<?php
-													$query = $conn->prepare("SELECT prodName FROM product ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-													
-												<select class="form-control" id="addEntry" name="prodItem">
-													<?php foreach ($res as $row): ?>
-													<option><?=$row["prodName"]?></option>
-													<?php endforeach ?>
-												</select> 
-												<br>
-														
-												<h3>Quantity</h3>
-												<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="retQty"> <br>
 												
 												<h3>Branch</h3>
 												<?php
@@ -271,11 +247,42 @@
 													<?php endforeach ?>
 												</select> 
 												<br>
-												
-												<h3>Remarks</h3>
-												<input type="text" class="form-control" id ="addEntry" placeholder="Remarks" name="retRemarks"> <br>
+											<h5 id="multipleProd">Product/s</h5>
+												<table class="table table-striped" id="dataTable" name="chk">
+													<tbody>
+														<tr>
+															<td><input type="checkbox" name="chk"></TD>
+															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+															<td>	
+																<?php
+																	$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
+																	$query->execute();
+																	$res = $query->fetchAll();
+																?>
+																<select class="form-control" id="addItem" name="prodItem[]">
+																<?php foreach ($res as $row): ?>
+																	<option><?=$row["prodName"]?></option>
+																<?php endforeach ?>
+															</select> 
+															</td>
+																	
+															<td>
+																<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Item Quantity" name="retQty[]">
+															</td>
+															
+															<td>
+																<input type="text" class="form-control" id="addEntry" placeholder="Remarks" name="retRemarks[]">
+															</td>
+														</tr>
+													</tbody>
+												</table>
 												<br>
+												
 												<div class="modFoot">
+													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+													<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+													<br>
+													<br>
 													<span>
 														<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 													</span>

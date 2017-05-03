@@ -127,7 +127,7 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
 					<h1 id="headers">Edit Product Delivery Entry</h1>

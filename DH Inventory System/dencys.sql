@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2017 at 10:28 AM
+-- Generation Time: May 02, 2017 at 07:36 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -3091,21 +3091,51 @@ INSERT INTO `suppliers` (`supID`, `supplier_name`) VALUES
 (8, 'Ben/ Alex Uy'),
 (9, 'Black and Decker'),
 (10, 'Bosch'),
-(11, 'Philman'),
-(12, 'Elcabo Trading'),
-(13, 'Ohayo'),
-(14, 'New Royal'),
-(15, 'Century Trace'),
-(16, 'Golden Field'),
-(17, 'Vanity'),
-(18, 'Quantech'),
-(19, 'Hans Corp'),
-(20, 'Seaking'),
-(21, 'Tramat Enterprises'),
-(22, 'VDH'),
-(23, 'Justino'),
-(24, 'Elektrower'),
-(25, 'Susing');
+(11, 'Brixton/Anonas'),
+(12, 'Century Trace'),
+(13, 'Dangguan MKTG'),
+(14, 'Elcabo Trading'),
+(15, 'Elektrower/Metabo'),
+(16, 'EPMS/Iris Commercial'),
+(17, 'Fine Thing/ Master Wealth'),
+(18, 'GAMC'),
+(19, 'Golden Field'),
+(20, 'Great Power'),
+(21, 'Guan Yiac Hardware'),
+(22, 'Hans Corp/ Golden Hit Corp'),
+(23, 'Hexagon/MCM'),
+(24, 'Jimmy Ng'),
+(25, 'Jopay Exim'),
+(26, 'JSX'),
+(27, 'Justino'),
+(28, 'Kimgolo/Bachelor Industrial'),
+(29, 'Sim Bengko'),
+(30, 'Grind Master'),
+(31, 'MSW Dist. Comp. Inc'),
+(32, 'Mapex Hardware'),
+(33, 'Marswin MKTG'),
+(34, 'New Royal'),
+(35, 'NKD/Cobankiat'),
+(36, 'Ohayo'),
+(37, 'Panpisco'),
+(38, 'Petts'),
+(39, 'Phil Oi'),
+(40, 'Philman'),
+(41, 'Prominent'),
+(42, 'Quantech'),
+(43, 'Seaking'),
+(44, 'SKA'),
+(45, 'Susing'),
+(46, 'Tavaris/Keylargo'),
+(47, 'Tomita Industrial'),
+(48, 'Tool Wind Parts'),
+(49, 'Tramat Enterprises'),
+(50, 'Ultimate Exim'),
+(51, 'Vanity'),
+(52, 'VCSC/VICS'),
+(53, 'VCN'),
+(54, 'Visayan'),
+(55, 'Weld');
 
 -- --------------------------------------------------------
 

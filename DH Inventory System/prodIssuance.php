@@ -207,7 +207,7 @@
 										<td data-title="Branch"><?php echo $item["location"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/viewProdIssuance.php?outsId=<?php echo $outReceipt; ?>">
+											<a href="functionalities/viewProdIssuance.php?outId=<?php echo $outReceipt; ?>">
 											<button type="button" class="btn btn-default">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
