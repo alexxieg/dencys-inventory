@@ -126,7 +126,7 @@
 				
 				<?php
 					foreach ($result as $item):
-						$po = $item["poID"];
+						$po = $item["poNumber"];
 				?>
 							
 				<?php
@@ -186,27 +186,27 @@
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
 									</tr>
 								</thead>
 								<tbody>					
 									<?php
 										foreach ($result as $item):
-											$po = $item["poID"];
+											$po = $item["poNumber"];
 									?>
 									
 									<tr id="centerData">
 										<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
 										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
-										<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
+										<td data-title="User">
+											<a href="functionalities/viewPO.php?incId=<?php echo $po; ?>"> 
+											<button type="button" class="btn btn-default" id="edBtn">
+												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+											</button>
+											</a>
+										</td>
 									</tr>	
 									
 									<?php
