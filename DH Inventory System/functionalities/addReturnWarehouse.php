@@ -3,16 +3,18 @@
 	if (isset($_POST["addRet"])){
 				
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$recRetrieve = $conn->prepare("SELECT receiptNo FROM returns");
+		$recRetrieve = $conn->prepare("SELECT receiptNo FROM returns 
+									   WHERE returnType = 'Warehouse Return' 
+									   GROUP BY 1");
 		$recRetrieve->execute();
 		$recs = $recRetrieve->fetchAll();
-		$recBase = 00001;
+		$recBase = 1;
 		$recNo = 'RET-WHS-' . str_pad((string)$recBase,5,0,STR_PAD_LEFT);
 		foreach ($recs AS $list):
-			if ($recNo == $list["receiptNo"]){
-				$numBase = $recBase + 1;
-				$recNo = 'RET-WHS-' . str_pad((string)$recBase,5,0,STR_PAD_LEFT);
-			}
+				if ($recNo == $list["receiptNo"]){
+					$recBase = $recBase + 1;
+					$recNo = 'RET-WHS-' . str_pad((string)$recBase,5,0,STR_PAD_LEFT);
+				}
 		endforeach;
 		
 		for ($index = 0; $index < count($prodTem); $index++) {

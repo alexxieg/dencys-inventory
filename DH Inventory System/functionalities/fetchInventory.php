@@ -27,10 +27,51 @@
 	$updateInvDate->execute();
 ?>
 <?php
-	$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
-								FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-								WHERE product.status = 'Active' 
-								GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
-	$query->execute();
-	$result = $query->fetchAll();
+	$query1 = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
+	$query1->execute();
+	$brandType = $query1->fetchAll();
+	
+	$query2 = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
+	$query2->execute();
+	$categoryType = $query2->fetchAll();
+	
+	$sortByBrand = (isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
+	$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
+	
+	if (!empty($sortByBrand)) {
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
+									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+									WHERE product.status = 'Active' AND product.brandID = '$sortByBrand'
+									GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
+		$query->execute();
+		$result = $query->fetchAll();
+	} else if (!empty($sortByCategory)) {
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
+									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+									WHERE product.status = 'Active' AND product.categoryID = '$sortByCategory'
+									GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
+		$query->execute();
+		$result = $query->fetchAll();
+	} else {
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
+									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+									WHERE product.status = 'Active' 
+									GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
+		$query->execute();
+		$result = $query->fetchAll();
+	}
+	
+	$selectedBrand =(isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
+	if (!empty($selectedBrand)) {
+		$filterBrand = current($conn->query("SELECT brandName FROM brand WHERE brandID = '$selectedBrand'")->fetch());
+	} else {
+		$filterBrand = "None";
+	}
+	
+	$selectedCategory =(isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
+	if (!empty($selectedCategory)) {
+		$filterCategory = current($conn->query("SELECT categoryName FROM category WHERE categoryID = '$selectedCategory'")->fetch());
+	} else {
+		$filterCategory = "None";
+	}
 ?>	
