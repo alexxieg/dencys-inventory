@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Edit Warehouse Return Entry</title>
+		<title>View Warehouse Return Entry</title>
 	
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -128,9 +128,9 @@
 								<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div id="tableHeader">
-							<h1 id="headers">SUPPLIER RETURN DETAILS</h1>
+							<h1 id="headers">WAREHOUSE RETURN DETAILS</h1>
 									
-							<a href="editRetSup.php?retId=<?php echo $retID; ?>"> 
+							<a href="editRetWh.php?retId=<?php echo $retID; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY
 								</button>

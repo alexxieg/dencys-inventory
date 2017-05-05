@@ -43,16 +43,16 @@
 		<!-- Retrieved Selected Entry Details -->
 		<?php
 			$retID= $_GET['retId'];
-			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID 
-					FROM returns INNER JOIN product ON returns.prodID = product.prodID");
+			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID, branch.branchID, branch.location 
+					FROM returns INNER JOIN product ON returns.prodID = product.prodID JOIN branch ON branch.branchID = returns.branchID");
 			$query->execute();
 			$res = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.branchID, returns.userID  
-					FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-					WHERE returnID = $retID ");
+			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.branchID, returns.userID, branch.branchID, branch.location  
+					FROM returns INNER JOIN product ON returns.prodID = product.prodID JOIN branch ON branch.branchID = returns.branchID 
+					WHERE receiptNo = '$retID'");
 			$query2->execute();
-			$resul = $query2->fetchAll();
+			$result2 = $query2->fetchAll();
 			
 			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
@@ -128,55 +128,72 @@
 					<h1 id="headers">Edit Warehouse Return Entry</h1>
 					<br>
 					<div id="contents">
-						<form action="" method="POST" class="editPgs">
-						<td>
-						<h3> User </h3>	
-						<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-						</td>			
-							<h3>Item</h3>
-							<select class="form-control" id="addEntry" name="prodItem">
-								<?php foreach ($resul as $item): ?>
-									<option selected><?php echo $item["prodName"]; ?></option>
-								<?php endforeach; ?>
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["prodName"]?></option>
-								<?php endforeach ?>
-							</select>  
-							<br>
+						<form action="" method="POST" onsubmit="return validateForm()">
+							<h3> User </h3>
+							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 							
-							<h3>Quantity</h3>
-							<input type="text" class="form-control" id ="addEntry" value="<?php echo $item["returnQty"]; ?>" placeholder="<?php echo $item["returnQty"]; ?>" name="retQty"> <br>
+							<h3> Receipt No. </h3>
+							<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>"placeholder="User" name="userID" readonly>
 							
-							<h3>Branch</h3>
-							<?php
-								$query = $conn->prepare("SELECT location FROM branch");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-								
-							<select class="form-control" id="addEntry" name="branch">
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["location"]?></option>
-								<?php endforeach ?>
-									<option selected><?=$branch?></option>
-							</select> 
-							
-							<h3>Remarks</h3>
-							<?php foreach ($resul as $row2): ?>
-								<input type="text" class="form-control" id="addEntry" value="<?php echo $row2["returnRemark"]; ?>" placeholder="<?php echo $row2["returnRemark"]; ?>"  name="retRemarks">
-							<?php endforeach ?>	
-							<br>
-							
+							<h5 id="multipleProd">Product/s</h5>
+							<table class="table table-striped" id="dataTable" name="chk">
+								<tbody>
+									<?php foreach ($result2 as $row2): ?>
+									<tr>
+										<td><input type="checkbox" name="chk"></TD>
+										<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+										<td>	
+											<?php
+												$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
+												$query->execute();
+												$res = $query->fetchAll();
+											?>
+											<select class="form-control" id="addItem" name="prodItem[]">
+												<option><?=$row2["prodName"]?></option>
+											<?php foreach ($res as $row): ?>
+												<option><?=$row["prodName"]?></option>
+											<?php endforeach ?>
+										</select> 
+										</td>
+												
+										<td>
+											<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]">
+										</td>
+										
+										<td>	
+											<?php
+												$query = $conn->prepare("SELECT location, branchID FROM branch WHERE branchID != 0");
+												$query->execute();
+												$res = $query->fetchAll();
+											?>
+											<select class="form-control" id="addItem" name="branchItem[]">
+												<option value=<?=$row2["branchID"]?>>Selected: <?=$row2["location"]?></option>
+											<?php foreach ($res as $row): ?>
+												<option value=<?=$row["branchID"]?>><?=$row["location"]?></option>
+											<?php endforeach ?>
+											</select> 
+										</td>
+										
+										<td>
+											<input type="text" class="form-control" id="addEntry" placeholder="<?php echo $row2["returnRemark"]; ?>" value="<?php echo $row2["returnRemark"]; ?>" name="retRemarks[]">
+										</td>
+									</tr>
+									<?php endforeach ?>
+								</tbody>
+							</table>
+									
 							<div class="modFoot">
+								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+								<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+								<br>
+								<br>
 								<span>
-									<a href="../returnsWarehouse.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
+									<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 								</span>
 								<span>
-									<input type="submit" name="editReturns" value="Update" class="btn btn-success" id="sucBtn">
+									<input type="submit" value="Update" class="btn btn-success" name="addRet" id="sucBtn">
 								</span>
-							</div>	
+							</div>
 						</form> 
 					</div>
 				</div>
@@ -184,23 +201,28 @@
 		</div>
 		
 		<?php
-			$retID= $_GET['retId'];
-			$quant=(isset($_REQUEST['retQty']) ? $_REQUEST['retQty'] : null);
-			$rem=(isset($_REQUEST['retRemarks']) ? $_REQUEST['retRemarks'] : null);
-			if (isset($_POST["editReturns"])){
+			$retID= $_GET['retId'];	
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			if (isset($_POST["addRet"])){
 				
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-							
-				$prod = $_POST['prodItem'];
-				$userID = $_POST['userID'];
-						
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-				$prod3 = $prod2['prodA'];
-				
-				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', returnRemark = '$rem', userID = '$userID' WHERE returnID = $retID";
-				$conn->exec($sql);
-			}    
+				for ($index = 0; $index < count($prodTem); $index++) {			
+					$prod = $_POST['prodItem'][$index];
+					$userID = $_POST['userID'][$index];
+					$quant = $_POST['retQty'][$index];
+					$rem = $_POST['retRemarks'][$index];
+					$quant = $_POST['retQty'][$index];
+					$branch = $_POST['branchItem'][$index];
+					
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+					
+					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', branchID = $branch WHERE receiptNo = '$retID' AND prodID = '$prod3'";
+					$conn->exec($sql);
+				}
+				echo "<meta http-equiv='refresh' content='0'>";
+			}   
 		?>
 
 	</body>
