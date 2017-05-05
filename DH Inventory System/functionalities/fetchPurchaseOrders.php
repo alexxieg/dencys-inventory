@@ -3,16 +3,16 @@
 	$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
 	
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supplier, product.unitType, product.prodName, purchaseorders.userID
+			$query = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID
 									HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
-									ORDER BY poID DESC");
+									GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID");
 			$query->execute();
 			$result = $query->fetchAll();
 	} else {
-			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supplier, product.unitType, product.prodName, purchaseorders.userID
+			$query = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID
-									ORDER BY poID DESC");
+									GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID");
 			$query->execute();
 			$result = $query->fetchAll();
 	}
