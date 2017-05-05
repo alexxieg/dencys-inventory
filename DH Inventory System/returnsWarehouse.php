@@ -236,7 +236,7 @@
 												
 												<h3>Branch</h3>
 												<?php
-													$query = $conn->prepare("SELECT location FROM branch ");
+													$query = $conn->prepare("SELECT location FROM branch WHERE branchID > 0 ");
 													$query->execute();
 													$res = $query->fetchAll();
 												?>

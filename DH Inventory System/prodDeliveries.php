@@ -237,26 +237,29 @@
 											<form action="" method="POST" onsubmit="return validateForm()">
 												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-														
-												<h3>Receipt No.</h3> 
-												<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
 												
-												<h3>Receipt Date</h3> 
-												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate"><br>
-												
-												<h3>Supplier</h3> 
-												<?php 
-													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
+												<h3>Product Order Number</h3>
+												<?php
+													$query = $conn->prepare("SELECT DISTINCT poNumber FROM purchaseorders ");
 													$query->execute();
 													$res = $query->fetchAll();
 												?>
-												
-												<select class="form-control" id="addSup" name="supplier">
+																	
+												<select class="form-control" id="addEmpl" name="po">
+													<option SELECTED>-Select PO No-</option>
 													<?php foreach ($res as $row): ?>
-														<option><?=$row["supplier_name"]?></option>
+														<option><?=$row["poNumber"]?></option>
 													<?php endforeach ?>
-												</select>
-												<br>
+												</select> 
+												
+												<h3>Receipt No.</h3> 
+												<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno">
+												
+												<h3>Receipt Date</h3> 
+												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
+												
+												<h3>Supplier</h3> 
+												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier">
 																		
 												<h3>Received By</h3>
 												<?php

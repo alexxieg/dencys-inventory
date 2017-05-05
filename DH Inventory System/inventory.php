@@ -53,10 +53,9 @@
 	</head>
 
 	<body>
-		
 		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchInventory.php'); ?>
-	
+		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -150,6 +149,41 @@
 						<div id="tableHeader">
 							<table class="table">	
 								<h1 id="headers">INVENTORY</h1>	
+									<table class="table table-striped table-bordered">
+									<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
+
+										<tr>
+											<td>
+												Filter By Brand
+												<form action="<?php echo $location; ?>" method="POST">
+													<select name="brand_Name">
+														<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
+														<?php foreach ($brandType as $row): ?>
+															<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+														<?php endforeach ?>
+													</select>
+													<input type="submit" value="Filter" class="btn btn-success" name="submit">
+												</form>
+											</td>	
+											
+											<td>
+												Filter By Category <br>
+												<form action="<?php echo $location; ?>" method="POST">
+													<select name="category_Name">
+														<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
+														<?php foreach ($categoryType as $row2): ?>
+															<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+														<?php endforeach ?>
+													</select>
+													<input type="submit" value="Filter" class="btn btn-success" name="submit">
+												</form>
+											</td>
+											
+										</tr>
+									</table>
+									
 								<table class="table">	
 									<tr>
 										<td>

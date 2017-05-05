@@ -185,7 +185,7 @@
 										
 									<tr id="centerData">	
 										<td data-title="Username"><?php echo $item["userName"]; ?></td>
-										<td data-title="Password"><?php echo $item["password"]; ?></td>
+										<td data-title="Password"><?php echo str_repeat("*", strlen($item["password"])); ?></td>
 										<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 										<td>
 											<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>">
