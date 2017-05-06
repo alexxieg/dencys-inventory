@@ -162,6 +162,7 @@
 								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
 								<li><a href="employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="suppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
 								<li><a href="product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 								<li><a href="brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
 								<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>

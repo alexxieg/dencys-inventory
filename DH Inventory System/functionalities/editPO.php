@@ -48,7 +48,7 @@
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$supplier = current($conn->query("SELECT supplier FROM purchaseorders WHERE poNumber = '$incID'")->fetch());
+			$supID = current($conn->query("SELECT supID FROM purchaseorders WHERE poNumber = '$incID'")->fetch());
 		?>
 
 		<!-- Top Main Header -->
@@ -88,7 +88,7 @@
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="../incoming.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
 						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
@@ -110,6 +110,7 @@
 								<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 								<li><a href="../branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
 								<li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="../suppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
 								<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 								<li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
 								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
@@ -134,7 +135,7 @@
 							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
 							
 							<h5>Supplier</h5> 
-							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $supplier; ?>" placeholder="<?php echo $supplier; ?>" name="supplier"><br>
+							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $supID; ?>" placeholder="<?php echo $supID; ?>" name="supplier"><br>
 									
 							<h5>Product/s</h5>
 							<table class="table table-striped" id="dataTable" name="chk">	
