@@ -187,6 +187,7 @@
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>		
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
 									</tr>
@@ -200,6 +201,7 @@
 									<tr id="centerData">
 										<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
 										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
+										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td data-title="User">
 											<a href="functionalities/viewPO.php?incId=<?php echo $po; ?>"> 

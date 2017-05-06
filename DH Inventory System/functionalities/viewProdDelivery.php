@@ -56,15 +56,15 @@
 		<!-- Retrieved Selected Entry Details -->
 		<?php
 			$incID= $_GET['incId'];
-			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inID, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
-									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inID, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.status, incoming.inRemarks, incoming.userID 
+									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID INNER JOIN suppliers ON incoming.supID = suppliers.supID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
-									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.status, incoming.inRemarks, incoming.userID 
+									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID INNER JOIN suppliers ON incoming.supID = suppliers.supID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
 			$query2->execute();
@@ -72,7 +72,7 @@
 			
 			$receiptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$receiptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
-			$supplier = current($conn->query("SELECT incoming.supplier FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$supplier = current($conn->query("SELECT suppliers.supplier_name FROM incoming INNER JOIN suppliers ON incoming.supID = suppliers.supID WHERE incoming.receiptNo = '$incID'")->fetch());
 			$employee = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 		?>
 

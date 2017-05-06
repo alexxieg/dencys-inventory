@@ -208,7 +208,7 @@
 										<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 										<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
