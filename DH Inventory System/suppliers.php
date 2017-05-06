@@ -267,8 +267,7 @@
 														
 													<?php
 														foreach ($result1 as $item):
-														$supID = $item["supID"];
-?													?>
+														$supID = $item["supID"];													?>
 													
 													<tr id="centerData">
 														<td data-title="Employee ID"><?php echo $item["supID"]; ?></td>
