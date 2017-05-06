@@ -146,6 +146,12 @@
 								<h1 id="headers">PURCHASE ORDERS</h1>
 							</div>
 							
+							<a href="editPO.php?incId=<?php echo $incID; ?>"> 
+								<button type="button" class="btn btn-default" id="modButt">
+									EDIT ENTRY
+								</button>
+							</a>
+							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
