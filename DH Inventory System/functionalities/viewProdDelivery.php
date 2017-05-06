@@ -15,6 +15,7 @@
 		<!-- Custom styles for this template -->
 		<link href="../css/custom.css" rel="stylesheet">
 		<link href="../css/sidebar.css" rel="stylesheet">
+		<link href="../css/printFunction.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
 		<script src="../js/incoming.js"></script>
@@ -163,6 +164,8 @@
 								</button>
 							</a>
 							
+							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
+							
 							<br>
 							<br>
 							<table class="table table-striped table-bordered">
@@ -196,38 +199,40 @@
 							</div>
 							<br> 
 							
-							<!-- Table Display for Incoming -->
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>	
-									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-									</tr>
-								</thead>
-								<tbody>					
-									<?php
-										foreach ($result as $item):
-										$incID = $item["inID"];
-										$incRec = $item["receiptNo"];
-									?>
-									
-									<tr id="centerData">
-										<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-										<td data-title="Status"><?php echo $item["status"]; ?></td>
-										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
-									</tr>	
-									
-									<?php
-										endforeach;
-									?>
-								</tbody>	
-							</table>			
-								
+							<div id="printThisTable" name="printThisTable">
+								<!-- Table Display for Incoming -->
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+									<thead>	
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+										</tr>
+									</thead>
+									<tbody>					
+										<?php
+											foreach ($result as $item):
+											$incID = $item["inID"];
+											$incRec = $item["receiptNo"];
+										?>
+										
+										<tr id="centerData">
+											<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+											<td data-title="Status"><?php echo $item["status"]; ?></td>
+											<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
+										</tr>	
+										
+										<?php
+											endforeach;
+										?>
+									</tbody>	
+								</table>			
+							</div>
+							
 						</div>
 					</div>		  
 				</div>

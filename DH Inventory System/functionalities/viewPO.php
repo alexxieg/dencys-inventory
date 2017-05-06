@@ -15,6 +15,7 @@
 		<!-- Custom styles for this template -->
 		<link href="../css/custom.css" rel="stylesheet">
 		<link href="../css/sidebar.css" rel="stylesheet">
+		<link href="../css/printFunction.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
 		<script src="../js/incoming.js"></script>
@@ -152,6 +153,8 @@
 								</button>
 							</a>
 							
+							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
+							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
@@ -161,39 +164,41 @@
 							<br> 
 							
 							<!-- Table Display for Incoming -->
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>	
-									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
-									</tr>
-								</thead>
-								<tbody>					
-									<?php
-										foreach ($result as $item):
-											$po = $item["poID"];
-									?>
-									
-									<tr id="centerData">
-										<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
-										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
-										<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
-										<td data-title="User"><?php echo $item["userID"]; ?></td>
-									</tr>	
-									
-									<?php
-										endforeach;
-									?>
-								</tbody>	
-							</table>
+							<div id="printThisTable" name="printThisTable">	
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+									<thead>	
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
+										</tr>
+									</thead>
+									<tbody>					
+										<?php
+											foreach ($result as $item):
+												$po = $item["poID"];
+										?>
+										
+										<tr id="centerData">
+											<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
+											<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
+											<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+											<td data-title="User"><?php echo $item["userID"]; ?></td>
+										</tr>	
+										
+										<?php
+											endforeach;
+										?>
+									</tbody>	
+								</table>
+							</div>	
 
 							<!-- Modal for New Purchase Order -->
 							<div class="modal fade" id="myModal" role="dialog">
