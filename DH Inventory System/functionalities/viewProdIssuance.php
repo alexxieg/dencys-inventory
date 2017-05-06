@@ -146,7 +146,7 @@
 					<div id="contents">
 						<div id="tableHeader">
 							<h1 id="headers">PRODUCT ISSUANCE DETAILS</h1>
-									
+							<hr>		
 							<a href="editOut.php?outId=<?php echo $outReceipt; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY
@@ -154,9 +154,8 @@
 							</a>
 							
 							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
-							
-							<br>
-							<br>
+							<hr>
+	
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td>
@@ -174,7 +173,7 @@
 								</tr>									
 							</table>
 						</div>	
-
+						<hr>
 						<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 							<div id="myTable_length" class="dataTables_length">
 								<div id="myTable_filter" class="dataTables_filter">

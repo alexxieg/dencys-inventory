@@ -247,7 +247,7 @@
 											
 												<!-- Retrieve Supplier Data -->
 												<?php
-													$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers");
+													$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Inactive'");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -268,13 +268,14 @@
 													<?php
 														foreach ($result1 as $item):
 														$supID = $item["supID"];
-														?>
+?													?>
+													
 													<tr id="centerData">
 														<td data-title="Employee ID"><?php echo $item["supID"]; ?></td>
 														<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
 														<td>										
 															<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this supplier?');">
 																	<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 																</button>
 															</a>

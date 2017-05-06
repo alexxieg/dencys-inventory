@@ -68,6 +68,9 @@
 					WHERE returns.receiptNo = '$retID'");
 			$query2->execute();
 			$resul = $query2->fetchAll();
+			
+			$supplier = current($conn->query("SELECT supplier_name FROM returns INNER JOIN suppliers ON returns.supID = suppliers.supID WHERE returns.receiptNo = '$retID'")->fetch());
+			$employee = current($conn->query("SELECT CONCAT(empFirstName, ' ', empLastName) AS empName FROM returns INNER JOIN employee ON returns.empID = employee.empID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
 		
 		<!-- Top Main Header -->
@@ -105,11 +108,11 @@
 							</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
-								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -136,8 +139,6 @@
 						</li>
 					</ul>
 				</div>
-				
-
 		</nav>	
 		<!-- End of Sidebar -->	
 		
@@ -154,6 +155,8 @@
 						<div id="tableHeader">
 							<h1 id="headers">SUPPLIER RETURN DETAILS</h1>
 									
+							<hr>
+							
 							<a href="editRetSup.php?retId=<?php echo $retID; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY
@@ -161,30 +164,32 @@
 							</a>
 							
 							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
-							
-							<br>
-							<br>
+						
+							<hr>
+	
 							<table class="table table-striped table-bordered">
-									<tr>
-										<td>
-											Reference No:
+								<tr>
+									<td>
+										Reference No:
 									
-										</td>
-										<td>
-											Return date:
-								
-										</td>
-										<td>
-											Supplier: 
+									</td>
+									<td>
+										Return Date:
 							
-										</td>
-										<td> 
-											Received by:
-										
-										</td>
-									</tr>									
-								</table>
+									</td>
+									<td>
+										Supplier: 
+										<?php echo  $supplier;?> 
+									</td>
+									<td> 
+										Handled by:
+										<?php echo $employee;?>
+									</td>
+								</tr>									
+							</table>
 						</div>
+						<hr>
+						
 						<div class="pages no-more-tables">
 							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -217,8 +222,6 @@
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-			
-		
 										</tr>
 												
 										<?php

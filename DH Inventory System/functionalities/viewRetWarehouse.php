@@ -70,6 +70,7 @@
 			$result2 = $query2->fetchAll();
 			
 			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returns.receiptNo = '$retID'")->fetch());
+			$employee = current($conn->query("SELECT CONCAT(empFirstName, ' ', empLastName) AS empName FROM returns INNER JOIN employee ON returns.empID = employee.empID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
 		
 		<!-- Top Main Header -->
@@ -111,7 +112,7 @@
 								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -171,16 +172,17 @@
 									
 										</td>
 										<td>
-											Return date:
+											Return Date:
 								
 										</td>
 										<td>
-											Supplier: 
+											Branch:
+											<?php echo $branch;?> 
 							
 										</td>
 										<td> 
-											Received by:
-										
+											Handled by:
+											<?php echo $employee;?>
 										</td>
 									</tr>									
 							</table>

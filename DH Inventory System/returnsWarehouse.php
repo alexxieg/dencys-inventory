@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>Return to Warehouse</title>
-	
 		
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -210,7 +209,7 @@
 										<td>
 											<a href="functionalities/viewRetWarehouse.php?retId=<?php echo $retID; ?>">
 												<button type="button" class="btn btn-default">
-													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 												</button>
 											</a>
 										</td>

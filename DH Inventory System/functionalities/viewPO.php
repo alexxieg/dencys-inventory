@@ -150,13 +150,16 @@
 								<h1 id="headers">PURCHASE ORDERS</h1>
 							</div>
 							
+							<hr>					
+							
 							<a href="editPO.php?incId=<?php echo $incID; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY
 								</button>
 							</a>
-							
 							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
+						
+							<hr>
 							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
@@ -164,8 +167,7 @@
 									</div>
 								</div>
 							</div>
-							<br> 
-							<br>
+	
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td>
@@ -209,71 +211,7 @@
 										?>
 									</tbody>	
 								</table>
-							</div>	
-
-							<!-- Modal for New Purchase Order -->
-							<div class="modal fade" id="myModal" role="dialog">
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add Purchase Order</h4>
-										</div>
-										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()"><td>
-											<td>
-											<h5> User </h5>
-											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-											</td>																									
-												<h5>Supplier</h5> 
-												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
-													
-												<h5>Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
-													<tbody>
-														<tr>
-															<td><input type="checkbox" name="chk"></TD>
-															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-															<td>	
-																<?php
-																	$query = $conn->prepare("SELECT prodName FROM product ");
-																	$query->execute();
-																	$res = $query->fetchAll();
-																?>
-														
-																<select class="form-control" id="addItem" name="prodItem[]">
-																	<?php foreach ($res as $row): ?>
-																			<option><?=$row["prodName"]?></option>
-																<?php endforeach ?>
-																</select> 
-															</td>
-																	
-															<td>
-																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
-															</td>
-														</tr>
-													</tbody>
-												</table>
-												
-												<br>
-												
-												<div class="modFoot">
-													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-													<br>
-													<br>
-													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-													<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
-												</div>
-											</form> 	
-										
-											<div class="modal-footer">
-											</div>								
-										</div>
-									</div>
-								</div>
-							</div> 
-							<!-- End of Modal -->		
+							</div>		
 							
 						</div>
 					</div>		  
