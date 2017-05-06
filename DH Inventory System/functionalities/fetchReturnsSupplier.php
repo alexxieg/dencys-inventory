@@ -3,17 +3,17 @@
 	$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
 	
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, branch.location, returns.userID
-								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID
-								WHERE returns.returnType = 'Supplier Return' AND nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate 
-                                GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, branch.location, returns.userID;");	
+		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, suppliers.supplier_name, returns.userID
+								FROM returns INNER JOIN suppliers ON returns.supID = suppliers.supID
+						        WHERE returns.returnType = 'Supplier Return'  AND nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate 
+                                GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, suppliers.supplier_name, returns.userID;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}else{
-		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, branch.location, returns.userID
-								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID
+		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, suppliers.supplier_name, returns.userID
+								FROM returns INNER JOIN suppliers ON returns.supID = suppliers.supID
 						        WHERE returns.returnType = 'Supplier Return' 								
-								GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, branch.location, returns.userID;");	
+								GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, suppliers.supplier_name, returns.userID;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}
