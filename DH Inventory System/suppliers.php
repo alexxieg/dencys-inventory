@@ -12,27 +12,25 @@
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
 		<!-- Custom styles for this template -->
 		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
 		
-		<!--Javascript Files -->
-		<script src="js/employees.js"></script>
+		<!-- Javascript Files -->
+		<script src="js/supplier.js"></script>
 		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
-		<!-- Datatables -->
+		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function(){
 				$('#myTable').dataTable();
@@ -158,6 +156,8 @@
 								</table>
 							</div>
 							
+						<div class="pages no-more-tables">
+						<!-- Table Display for Suppliers -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
@@ -165,22 +165,22 @@
 								</div>
 							</div>
 							
-							<!-- Table Display for Employees -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>
-										<tr id="centerData">
+										<tr>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier ID</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
+											<th></th>
 										</tr>
 								</thead>
 								<tbody>
 										<?php
 											foreach ($result as $item):
 											$supID = $item["supID"];
-											?>
+										?>
 											
 										<tr id="centerData">
-											<td data-title="Employee ID"><?php echo $item["supID"]; ?></td>
+											<td data-title="Supplier ID"><?php echo $item["supID"]; ?></td>
 											<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
 											<td>
 												<a href="functionalities/editSupplier.php?supID=<?php echo $supID; ?>" target="_self">
@@ -267,7 +267,8 @@
 														
 													<?php
 														foreach ($result1 as $item):
-														$supID = $item["supID"];													?>
+														$supID = $item["supID"];													
+													?>
 													
 													<tr id="centerData">
 														<td data-title="Employee ID"><?php echo $item["supID"]; ?></td>
@@ -299,7 +300,7 @@
 			</div>
 		</div>
 		
-		<!-- Add New Employee -->
+		<!-- Add New Supplier -->
 		<?php include('functionalities/addSupplier.php'); ?>
 		
 	</body>
