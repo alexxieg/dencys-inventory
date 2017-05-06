@@ -189,6 +189,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Returned From</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 										<th></th>
 									</tr>
@@ -204,6 +205,7 @@
 										<td data-title="Reference No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
 										<td data-title="Returned From"><?php echo $item["location"];?></td>
+										<td data-title="Handled By"><?php echo $item["empName"];?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 											
 										<td>
@@ -240,7 +242,15 @@
 													$query->execute();
 													$res = $query->fetchAll();
 												?>
-													
+
+												<select class="form-control" id="addEntry" name="branchRet">
+													<?php foreach ($res as $row): ?>
+													<option><?=$row["location"]?></option>
+													<?php endforeach ?>
+												</select> 
+												
+												<br>
+												
 												<h3>Received By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");
@@ -254,12 +264,9 @@
 													<?php endforeach ?>
 												</select> 
 													
-												<select class="form-control" id="addEntry" name="branchRet">
-													<?php foreach ($res as $row): ?>
-													<option><?=$row["location"]?></option>
-													<?php endforeach ?>
-												</select> 
+
 												<br>
+												
 											<h5 id="multipleProd">Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>

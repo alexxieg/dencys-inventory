@@ -235,7 +235,7 @@
 												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
-												<h5>Supplier</h5> 
+												<h3>Supplier</h3> 
 												<?php
 													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
 													$query->execute();

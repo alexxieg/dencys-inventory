@@ -21,13 +21,23 @@
 			$retQty = $_POST['retQty'][$index];
 			$retRem = $_POST['retRemarks'][$index];
 			$userID = $_POST['userID'];
+			$emp = $_POST['emp'];
+			$supName = $_POST['supplier'];
 								
 			$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 			$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 			$prod3 = $prod2['prodA'];
+			
+			$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+            $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+            $emp3 = $emp2['empA'];
+
+			$sup1 = $conn->query("SELECT supID as supA FROM suppliers WHERE supplier_name = '$supName'");
+			$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+			$sup3 = $sup2['supA'];
 						 
-			$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, receiptNo, prodID, branchID, userID)
-					VALUES (CURDATE(),'$retQty','Supplier Return','$retRem','$recNo','$prod3', 0 ,'$userID')";
+			$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, receiptNo, prodID, branchID, supID, empID, userID)
+					VALUES (CURDATE(),'$retQty','Supplier Return','$retRem','$recNo','$prod3', 0 ,'$sup3','$emp3','$userID')";
 			$conn->exec($sql);
 			echo "<meta http-equiv='refresh' content='0'>";
 		} 

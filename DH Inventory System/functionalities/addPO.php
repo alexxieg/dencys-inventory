@@ -18,13 +18,19 @@
 
 				$prodItem = $_POST['prodItem'][$index];
 				$qty = $_POST['qty'][$index];
-				$userID = $_POST['userID'];				
+				$userID = $_POST['userID'];		
+				$supName = $_POST['supplier'];			
 
 				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
-				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supplier, prodID, userID)
-				VALUES ('$qty',CURDATE(),'$prod','".$_POST['supplier']."','$prod3','$userID')";
+				
+				$sup1 = $conn->query("SELECT supID as supA FROM suppliers WHERE supplier_name = '$supName'");
+				$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+				$sup3 = $sup2['supA'];
+				
+				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supID, prodID, userID)
+				VALUES ('$qty',CURDATE(),'$prod','$sup3','$prod3','$userID')";
 				$result = $conn->query($sql); 
 
 				echo "<meta http-equiv='refresh' content='0'>";

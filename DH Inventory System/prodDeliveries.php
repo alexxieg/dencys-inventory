@@ -259,7 +259,7 @@
 												<h3>Receipt Date</h3> 
 												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
 												
-												<h5>Supplier</h5> 
+												<h3>Supplier</h3> 
 												<?php
 													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
 													$query->execute();

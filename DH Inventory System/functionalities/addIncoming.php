@@ -81,17 +81,21 @@
 			$inStat = $_POST['inStatus'][$index];
             $emp = $_POST['emp'];
 			$userID = $_POST['userID'];
-			
+			$supName = $_POST['supplier'];	
 
             $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
             $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
             $emp3 = $emp2['empA'];
 
+			$sup1 = $conn->query("SELECT supID as supA FROM suppliers WHERE supplier_name = '$supName'");
+			$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+			$sup3 = $sup2['supA'];
+			
             $prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
             $prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
             $prod3 = $prod2['prodA'];
-            $sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
-            VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3','$userID')";
+            $sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inRemarks, empID, prodID, userID)
+            VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','$sup3','$inStat','$inRemarks','$emp3','$prod3','$userID')";
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";
