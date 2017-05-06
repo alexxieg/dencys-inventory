@@ -189,6 +189,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 										<th></th>
 									</tr>
@@ -205,6 +206,7 @@
 										<td data-title="Reference No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
 										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
+										<td data-title="Handled By"><?php echo $item["empName"];?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 											
 										<td>
