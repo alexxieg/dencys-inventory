@@ -21,9 +21,22 @@
 		<!-- Javascript Files -->
 		<script src="../js/returns.js"></script>
 		<script src="../js/bootstrap.js"></script>
-		<script src="../js/jquery-3.2.0.min.js"></script>	
+		<script src="../js/jquery-3.2.0.min.js"></script>		
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Datatables CSS and JS Files -->
+		<script src="../datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="../datatables/media/js/dataTables.bootstrap.min.js"></script>
+		<link href="../datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		
+		<!-- Datatables Script -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
+			
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -95,7 +108,7 @@
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="../incoming.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
 						<li><a href="outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
@@ -127,7 +140,16 @@
 				</div>
 				<!-- End of Sidebar -->	
 				
-								<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+				<?php
+					foreach ($result as $item):
+					$retID = $item["returnID"];
+				?>
+				
+				<?php
+					endforeach;
+				?>
+										
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div id="tableHeader">
 							<h1 id="headers">WAREHOUSE RETURN DETAILS</h1>
@@ -161,7 +183,7 @@
 										
 										</td>
 									</tr>									
-								</table>
+							</table>
 						</div>
 						<div class="pages no-more-tables">
 							<!-- Table for Returns -->
@@ -180,23 +202,22 @@
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-
 										</tr>
 									</thead>
 									
-									<tbody>				
+									<tbody>
 										<?php
 											foreach ($result as $item):
 											$retID = $item["returnID"];
 										?>
+										
 										
 										<tr id="centerData">
 											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
 											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-			
-		
+	
 										</tr>
 												
 										<?php
@@ -208,8 +229,8 @@
 						</div>
 				
 				
-			</div>
-		</div>
+					</div>
+				</div>
 			</div>
 		</div>
 

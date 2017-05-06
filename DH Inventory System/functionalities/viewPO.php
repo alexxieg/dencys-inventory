@@ -24,9 +24,9 @@
 		<script src="../js/bootstrap.min.js"></script>
 		
 		<!-- Datatables CSS and JS Files -->
-		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
-		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<script src="../datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="../datatables/media/js/dataTables.bootstrap.min.js"></script>
+		<link href="../datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Datatables Script -->
@@ -134,14 +134,14 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-  
 				<?php
 					foreach ($result as $item):
-						$incID = $item["poNumber"];
+					$po = $item["poID"];
 				?>
+				
 				<?php
 					endforeach;
-				?>
+				?>						
   
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
@@ -190,7 +190,8 @@
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
 										</tr>
 									</thead>
-									<tbody>					
+									<tbody>	
+									
 										<?php
 											foreach ($result as $item):
 												$po = $item["poID"];
