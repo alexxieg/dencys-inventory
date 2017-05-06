@@ -56,12 +56,14 @@
 		<!-- Retrieved Selected Entry Details -->
 		<?php
 			$incID= $_GET['incId']; 
-			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supplier, product.unitType, product.prodName, purchaseorders.userID
+			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate,  CONCAT(purchaseorders.qtyOrder,' ', product.unitType) AS qtyOrder, product.prodName
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID
 									WHERE poNumber = '$incID'
 									ORDER BY poID DESC");
 			$query->execute();
-			$result = $query->fetchAll();
+			$result = $query->fetchAll();	
+			$receiptNum = current($conn->query("SELECT purchaseorders.poNumber FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
+			$supplier = current($conn->query("SELECT DISTINCT suppliers.supplier_name FROM purchaseorders INNER JOIN product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.poNumber = '$incID'")->fetch());
 		?>
 
 		<!-- Top Main Header -->
@@ -163,6 +165,19 @@
 								</div>
 							</div>
 							<br> 
+							<br>
+							<table class="table table-striped table-bordered">
+								<tr>
+									<td>
+										Receipt No:
+										<?php echo $receiptNum;?>
+									</td>
+									<td>
+										Supplier: 
+										<?php echo $supplier ?>
+									</td>
+								</tr>									
+							</table>
 							
 							<!-- Table Display for Incoming -->
 							<div id="printThisTable" name="printThisTable">	
@@ -173,9 +188,6 @@
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 										</tr>
 									</thead>
 									<tbody>					
@@ -189,9 +201,6 @@
 											<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 											<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
-											<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-											<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
-											<td data-title="User"><?php echo $item["userID"]; ?></td>
 										</tr>	
 										
 										<?php
