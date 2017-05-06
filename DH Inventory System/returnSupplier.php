@@ -234,7 +234,34 @@
 											<form action="" method="POST" onsubmit="return validateForm()">
 												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-																					
+													
+												<h5>Supplier</h5> 
+												<?php
+													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+											
+												<select class="form-control" id="addSupplier" name="supplier">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["supplier_name"]?></option>
+													<?php endforeach ?>
+												</select> 
+												<br>
+													
+												<h3>Handled By</h3>
+												<?php
+													$query = $conn->prepare("SELECT empFirstName FROM employee ");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+																	
+												<select class="form-control" id="addEmpl" name="emp">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["empFirstName"]?></option>
+													<?php endforeach ?>
+												</select> 
+												
 												<h5 id="multipleProd">Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>

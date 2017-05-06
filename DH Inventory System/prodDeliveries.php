@@ -259,8 +259,19 @@
 												<h3>Receipt Date</h3> 
 												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
 												
-												<h3>Supplier</h3> 
-												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier">
+												<h5>Supplier</h5> 
+												<?php
+													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+											
+												<select class="form-control" id="addSupplier" name="supplier">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["supplier_name"]?></option>
+													<?php endforeach ?>
+												</select> 
+												<br>
 																		
 												<h3>Received By</h3>
 												<?php

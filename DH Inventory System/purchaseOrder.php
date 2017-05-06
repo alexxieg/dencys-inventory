@@ -189,7 +189,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>		
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
 									</tr>
 								</thead>
 								<tbody>					
@@ -232,35 +232,47 @@
 											<h5> User </h5>
 											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 											</td>																									
-												<h5>Supplier</h5> 
-												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
+											
+											<h5>Supplier</h5> 
+												<?php
+													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+											
+												<select class="form-control" id="addSupplier" name="supplier">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["supplier_name"]?></option>
+													<?php endforeach ?>
+												</select> 
+											<br>
 													
-												<h5>Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
-													<tbody>
-														<tr>
-															<td><input type="checkbox" name="chk"></TD>
+											<h5>Product/s</h5>
+											<table class="table table-striped" id="dataTable" name="chk">				
+												<tbody>
+													<tr>
+														<td><input type="checkbox" name="chk"></TD>
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-															<td>	
-																<?php
-																	$query = $conn->prepare("SELECT prodName FROM product ");
-																	$query->execute();
-																	$res = $query->fetchAll();
-																?>
-														
-																<select class="form-control" id="addItem" name="prodItem[]">
-																	<?php foreach ($res as $row): ?>
-																			<option><?=$row["prodName"]?></option>
+														<td>	
+															<?php
+																$query = $conn->prepare("SELECT prodName FROM product ");
+																$query->execute();
+																$res = $query->fetchAll();
+															?>
+													
+															<select class="form-control" id="addItem" name="prodItem[]">
+																<?php foreach ($res as $row): ?>
+																	<option><?=$row["prodName"]?></option>
 																<?php endforeach ?>
-																</select> 
-															</td>
+															</select> 
+														</td>
 																	
-															<td>
-																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
-															</td>
-														</tr>
-													</tbody>
-												</table>
+														<td>
+															<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
+														</td>
+													</tr>
+												</tbody>
+											</table>
 												
 												<br>
 												

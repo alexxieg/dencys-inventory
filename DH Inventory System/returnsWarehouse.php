@@ -241,6 +241,19 @@
 													$res = $query->fetchAll();
 												?>
 													
+												<h3>Received By</h3>
+												<?php
+													$query = $conn->prepare("SELECT empFirstName FROM employee ");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+																	
+												<select class="form-control" id="addEmpl" name="emp">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["empFirstName"]?></option>
+													<?php endforeach ?>
+												</select> 
+													
 												<select class="form-control" id="addEntry" name="branchRet">
 													<?php foreach ($res as $row): ?>
 													<option><?=$row["location"]?></option>
