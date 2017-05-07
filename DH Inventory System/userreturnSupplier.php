@@ -82,7 +82,8 @@
 		<div class="container-fluid">
 			<div class="row navbar-collapse">
 				<!-- Sidebar -->
-				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -91,13 +92,13 @@
 								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
-								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -111,15 +112,15 @@
 								<li><a href="usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
-							<li><a href="usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
-							<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+						<li><a href="usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
+						<li><a href="userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
 		 
 				<?php
 					foreach ($result as $item):
-					$retID = $item["returnID"];
+					$retID = $item["receiptNo"];
 				?>
 							
 				<?php
@@ -177,10 +178,7 @@
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID </th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
 										<th></th>
 									</tr>
@@ -189,22 +187,19 @@
 								<tbody>				
 									<?php
 										foreach ($result as $item):
-										$retID = $item["returnID"];
+										$retID = $item["receiptNo"];
 									?>
 									
 									<tr id="centerData">
 										<td data-title="Date"><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Date"><?php echo $item["returnDate"]; ?></td>
-										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 											
 										<td>
-											<a href="functionalities/userEditRetSup.php?retId=<?php echo $retID; ?>">
+											<a href="functionalities/userViewRetSupplier.php?retId=<?php echo $retID; ?>">
 												<button type="button" class="btn btn-default">
-													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 												</button>
 											</a>
 										</td>

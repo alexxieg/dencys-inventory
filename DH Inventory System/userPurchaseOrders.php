@@ -93,11 +93,11 @@
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
-								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -119,7 +119,7 @@
 				
 				<?php
 					foreach ($result as $item):
-						$po = $item["poID"];
+						$po = $item["poNumber"];
 				?>
 							
 				<?php
@@ -178,9 +178,6 @@
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
 									</tr>
@@ -188,17 +185,21 @@
 								<tbody>					
 									<?php
 										foreach ($result as $item):
-											$po = $item["poID"];
+											$po = $item["poNumber"];
 									?>
 									
 									<tr id="centerData">
 										<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
 										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
-										<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
-										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
+										<td data-title="User">
+											<a href="functionalities/userViewPO.php?incId=<?php echo $po; ?>"> 
+											<button type="button" class="btn btn-default" id="edBtn">
+												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+											</button>
+											</a>
+										</td>
 									</tr>	
 									
 									<?php
@@ -221,7 +222,18 @@
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 												
 												<h5>Supplier</h5> 
-												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
+												<?php
+													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+											
+												<select class="form-control" id="addSupplier" name="supplier">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["supplier_name"]?></option>
+													<?php endforeach ?>
+												</select> 
+												<br>
 													
 												<h5>Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">				

@@ -56,8 +56,8 @@
 	<body>			
 		<!--Retrieve Outgoing Data -->
 		<?php include('functionalities/fetchOutgoing.php'); ?>
-	
-	<!-- Top Main Header -->
+		
+		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -67,11 +67,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="inventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li id="adminhead"><a href="#">User |</a></li>
+						<li id="adminhead"><a href="#">Admin |</a></li>
 						<li><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
@@ -93,11 +93,11 @@
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
-								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance <span class="sr-only">(current)</span></a></li>
+						<li><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -119,7 +119,7 @@
 
 				<?php
 					foreach ($result as $item):
-					$outid = $item["outID"];
+					$outid = $item["receiptNo"];
 				?>
 					
 				<?php
@@ -128,43 +128,43 @@
 					
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<div class="pages no-more-tables">
-							<div id="tableHeader">
-								<h1 id="headers">PRODUCT ISSUANCE</h1>
-								<table class="table">	
-								   <tr>
-									 <td>
-									  <br>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Outgoing Product</button>					
+						<div id="tableHeader">
+							<h1 id="headers">PRODUCT ISSUANCE</h1>
+							<table class="table">	
+								<tr>
+									<td>
+										<br>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Issued Products</button>					
 									</td>
 									<td>	
-											<div class="col-sm-7 pull-right filter">
-												<label>View Previous Entries</label>
-												<form class="form-inline" action="" method="post">
-													<div class="form-group">
-														<select name="dateMonthName" class="form-control">
+										<div class="col-sm-7 pull-right filter">
+											<label>View Previous Entries</label>
+											<form class="form-inline" action="" method="post">
+												<div class="form-group">
+													<select name="dateMonthName" class="form-control">
 															<?php foreach ($result2 as $row): ?>
-																<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>
-													<div class="form-group">
-														<select name="dateYearName" class="form-control">
-															<?php foreach ($result3 as $row): ?>
+															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<select name="dateYearName" class="form-control">
+														<?php foreach ($result3 as $row): ?>
 																<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>	
-													<div class="form-group">
-														<input type="submit" value="View" class="btn btn-success" name="submit">
-													</div>
-												</form>	
-											</div>
-										</td>
-									</tr>
-								</table>
-							</div>
-				
+														<?php endforeach ?>
+													</select>
+												</div>	
+												<div class="form-group">
+													<input type="submit" value="View" class="btn btn-success" name="submit">
+												</div>
+											</form>	
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					
+						<div class="pages no-more-tables">
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
@@ -174,39 +174,34 @@
 				
 							<!-- Table Display for Outgoing Entries -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>	
+								<thead>
+								
 									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Entered</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Handled By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch</th>	
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
-										<th></th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
 									</tr>
 								</thead>	
 								<tbody>			
 									<?php
 										foreach ($result as $item):
-										$outid = $item["outID"];
+										$outid = $item["receiptNo"];
 										$outReceipt = $item["receiptNo"];							
 									?>
 										
 									<tr id="centerData">
-										<td data-title="Date"><?php echo $item["outDate"]; ?></td>
-										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
 										<td data-title="Reference No."><?php echo $item["receiptNo"]; ?></td>
+										<td data-title="Date Entered"><?php echo $item["outDate"]; ?></td>
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="Branch"><?php echo $item["location"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/userEditOut.php?outsId=<?php echo $outReceipt; ?>">
+											<a href="functionalities/viewProdIssuance.php?outId=<?php echo $outReceipt; ?>">
 											<button type="button" class="btn btn-default">
-												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 												</button>
 											</a>
 										</td>		
@@ -228,10 +223,10 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-												<h5> User </h5>
+												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
-												<h5>Handled By</h5>
+												<h3>Handled By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");
 													$query->execute();
@@ -244,11 +239,9 @@
 													<?php endforeach ?>
 												</select> 
 												
-												<br>
-												
-												<h5>Branch</h5>
+												<h3>Branch</h3>
 												<?php
-													$query = $conn->prepare("SELECT location FROM branch");
+													$query = $conn->prepare("SELECT location FROM branch WHERE branchID > 0");
 													$query->execute();
 													$res = $query->fetchAll();
 													?>
@@ -260,7 +253,7 @@
 												</select> 
 												<br>
 														
-												<h5>Product/s</h5>
+												<h5 id="multipleProd">Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>
 														<tr>
@@ -280,7 +273,7 @@
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addOutQty" placeholder="Item Quantity" name="outQty[]">
+																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Item Quantity" name="outQty[]">
 															</td>
 														</tr>
 													</tbody>
