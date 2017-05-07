@@ -41,13 +41,13 @@
 	<body>
 		<?php
 			$incID= $_GET['incId'];
-			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
+			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supID, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									ORDER BY inID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
+			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supID, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
@@ -56,7 +56,8 @@
 			
 			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
-			$supplier = current($conn->query("SELECT incoming.supplier FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$supplierID = current($conn->query("SELECT incoming.supID FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$supplierName = current($conn->query("SELECT supplier_name FROM suppliers WHERE supID = $supplierID")->fetch());
 			$employ = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 		?>
 
@@ -135,13 +136,23 @@
 					<div id="content">
 						<form action="" method="POST" class="editPgs">
 							<h5>Receipt No.</h5> 
-							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
+							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno">
 									
 							<h5>Receipt Date</h5> 
-							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate"><br>
+							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate">
 								
-							<h5>Supplier</h5> 
-							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplier;?>" value="<?php echo $supplier;?>" name="supplier"><br>
+							<h5>Supplier</h5>				
+							<select class="form-control" id="addEmpl" name="thisSupplier">
+								<?php
+									$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers ");
+									$query->execute();
+									$suppRes = $query->fetchAll();
+								?>
+								<?php foreach ($suppRes as $suppRow): ?>
+									<option value=<?=$suppRow["supID"]?>><?=$suppRow["supplier_name"]?></option>
+								<?php endforeach ?>
+									<option value=<?=$supplierID?> SELECTED><?=$supplierName?></option>
+							</select>
 							
 							<h5>Received By</h5>				
 							<select class="form-control" id="addEmpl" name="emp">
@@ -345,9 +356,9 @@
 					$inStat = $_POST['inStatus'][$index];
 					$rcpNo = $_POST['rcno'];
 					$recDate = $_POST['rcdate'];
-					$sup = $_POST['supplier'];
 					$incomingID = $_POST['productInID'][$index];
 					$userID = $_POST['userID'];
+					$sup = $_POST['thisSupplier'];
 					
 					$emp = $_POST['emp'];
 					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
@@ -359,11 +370,11 @@
 					$prod3 = $prod2['prodA'];
 					
 					if (isset($_POST["addProduct"])) {
-						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
-						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3','$userID')";
+						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inRemarks, empID, prodID, userID)
+						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."',$sup,'$inStat','$inRemarks','$emp3','$prod3','$userID')";
 						$result = $conn->query($sql); 	
 					} else {
-						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
+						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supID = $sup, status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
 							WHERE inID = $incomingID";
 						$conn->exec($sql);
 					}						
@@ -371,7 +382,7 @@
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 					WHERE outID = '$outid'"; */
 					echo '<script>
-					  window.location = "../incoming.php"
+					  window.location = "../productDeliveries.php"
 					</script>';
 				}
 			}
