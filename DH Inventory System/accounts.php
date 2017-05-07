@@ -186,7 +186,8 @@
 										
 									<tr id="centerData">	
 										<td data-title="Username"><?php echo $item["userName"]; ?></td>
-										<td data-title="Password"><?php echo str_repeat("*", strlen($item["password"])); ?></td>
+										<td data-title="Password">
+										<input name="viewPass" type="password" value="<?php echo $item["password"]; ?>" disabled/></td>
 										<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 										<td>
 											<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>">
@@ -199,6 +200,8 @@
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
+											<button type="button" id="" class="btn btn-default" name="dynamic"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+											<script src="js/showPass.js"></script>
 										</td>			
 									</tr>
 									
