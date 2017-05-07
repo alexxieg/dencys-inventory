@@ -94,11 +94,11 @@
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
-								<li><a href="userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -120,7 +120,7 @@
 				
 				<?php
 					foreach ($result as $item):
-						$incID = $item["inID"];
+						$incID = $item["receiptNo"];
 				?>
 							
 				<?php
@@ -182,13 +182,8 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt Date</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Received By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
 										<th></th>
 									</tr>
@@ -196,7 +191,7 @@
 								<tbody>					
 									<?php
 										foreach ($result as $item):
-										$incID = $item["inID"];
+										$incID = $item["receiptNo"];
 										$incRec = $item["receiptNo"];
 									?>
 									
@@ -204,16 +199,11 @@
 										<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 										<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-										<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
-										<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
-										<td data-title="Status"><?php echo $item["status"]; ?></td>
-										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/userEditIn.php?incId=<?php echo $incRec; ?>"> 
+											<a href="functionalities/userViewProdDelivery.php?incId=<?php echo $incRec; ?>"> 
 											<button type="button" class="btn btn-default" id="edBtn">
 												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 											</button>
@@ -237,19 +227,30 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-												<h5> User </h5>
+												<h3>User</h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 												
-												<h5>Receipt No.</h5> 
+												<h3>Receipt No.</h3> 
 												<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
 												
-												<h5>Receipt Date</h5> 
+												<h3>Receipt Date</h3> 
 												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate"><br>
 												
-												<h5>Supplier</h5> 
-												<input type="text" class="form-control" id ="addSupplier" placeholder="Supplier" name="supplier"><br>
+												<h3>Supplier</h3> 
+												<?php
+													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+											
+												<select class="form-control" id="addSupplier" name="supplier">
+													<?php foreach ($res as $row): ?>
+														<option><?=$row["supplier_name"]?></option>
+													<?php endforeach ?>
+												</select> 
+												<br>
 																		
-												<h5>Received By</h5>
+												<h3>Received By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");
 													$query->execute();
