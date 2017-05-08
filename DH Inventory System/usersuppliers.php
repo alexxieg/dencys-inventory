@@ -75,7 +75,7 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li id="adminhead"><a href="#">Admin |</a></li>
+						<li id="adminhead"><a href="#">User |</a></li>
 						<li><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
@@ -174,7 +174,7 @@
 											<td data-title="Supplier ID"><?php echo $item["supID"]; ?></td>
 											<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
 											<td>
-												<a href="functionalities/editSupplier.php?supID=<?php echo $supID; ?>" target="_self">
+												<a href="functionalities/userEditSupplier.php?supID=<?php echo $supID; ?>" target="_self">
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>

@@ -250,7 +250,7 @@
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
 										<td data-title="Remarks"><?php echo $item["remarks"];?></td>
 										<td>
-											<a href="ledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+											<a href="userledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 												</button>

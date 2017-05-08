@@ -43,7 +43,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) && $role!="user") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -90,7 +90,7 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li id="adminhead"><a href="#">Admin |</a></li>
+					<li id="adminhead"><a href="#">User |</a></li>
 						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
@@ -153,7 +153,7 @@
 						
 						<hr>
 							
-						<a href="editIn.php?incId=<?php echo $incRec; ?>"> 
+						<a href="userEditIn.php?incId=<?php echo $incRec; ?>"> 
 							<button type="button" class="btn btn-default" id="modButt">
 								EDIT ENTRY
 							</button>

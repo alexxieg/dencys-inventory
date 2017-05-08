@@ -71,7 +71,7 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li id="adminhead"><a href="#">Admin |</a></li>
+						<li id="adminhead"><a href="#">User |</a></li>
 						<li><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
@@ -97,7 +97,7 @@
 								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li class="active"><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -199,7 +199,7 @@
 										<td data-title="Branch"><?php echo $item["location"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/viewProdIssuance.php?outId=<?php echo $outReceipt; ?>">
+											<a href="functionalities/userViewProdIssuance.php?outId=<?php echo $outReceipt; ?>">
 											<button type="button" class="btn btn-default">
 												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 												</button>

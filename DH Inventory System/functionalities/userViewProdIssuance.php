@@ -89,22 +89,21 @@
 					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-					<li id="adminhead"><a href="#">Admin |</a></li>
+				<ul class="nav navbar-nav navbar-right">
+					<li id="adminhead"><a href="#">User |</a></li>
 						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<!-- End of Top Main Header -->
-		
-		<div class="container-fluid">
+
+		<div class="container-fluid" >
 			<div class="row">
-			
-				<!-- Sidebar -->
 				<div class="col-sm-3 col-md-2 sidebar">
+					<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
-						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
+						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
@@ -117,7 +116,7 @@
 								<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="../userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li class="active"><a href="../userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -131,8 +130,8 @@
 								<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
-								<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
-								<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+						<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
+						<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
@@ -151,7 +150,7 @@
 						<div id="tableHeader">
 							<h1 id="headers">PRODUCT ISSUANCE DETAILS</h1>
 							<hr>		
-							<a href="editOut.php?outId=<?php echo $outReceipt; ?>"> 
+							<a href="userEditOut.php?outId=<?php echo $outReceipt; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY
 								</button>

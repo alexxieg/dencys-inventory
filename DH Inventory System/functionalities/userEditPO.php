@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>View Purchase Order</title>
+		<title>Edit Product Order Entry</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -15,26 +15,12 @@
 		<!-- Custom styles for this template -->
 		<link href="../css/custom.css" rel="stylesheet">
 		<link href="../css/sidebar.css" rel="stylesheet">
-		<link href="../css/printFunction.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
 		<script src="../js/incoming.js"></script>
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
-		
-		<!-- Datatables CSS and JS Files -->
-		<script src="../datatables/media/js/jquery.dataTables.min.js"></script>
-		<script src="../datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="../datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		
-		<!-- Datatables Script -->
-		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
-		</script>
 		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -53,17 +39,16 @@
 	</head>
 	
 	<body>
-		<!-- Retrieved Selected Entry Details -->
 		<?php
 			$incID= $_GET['incId']; 
-			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate,  CONCAT(purchaseorders.qtyOrder,' ', product.unitType) AS qtyOrder, product.prodName
+			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supplier, product.unitType, product.prodName, purchaseorders.userID
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID
 									WHERE poNumber = '$incID'
 									ORDER BY poID DESC");
 			$query->execute();
-			$result = $query->fetchAll();	
-			$receiptNum = current($conn->query("SELECT purchaseorders.poNumber FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
-			$supplier = current($conn->query("SELECT DISTINCT suppliers.supplier_name FROM purchaseorders INNER JOIN product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.poNumber = '$incID'")->fetch());
+			$result = $query->fetchAll();
+			
+			$supID = current($conn->query("SELECT supID FROM purchaseorders WHERE poNumber = '$incID'")->fetch());
 		?>
 
 		<!-- Top Main Header -->
@@ -125,90 +110,97 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-				<?php
-					foreach ($result as $item):
-					$po = $item["poID"];
-				?>
-				
-				<?php
-					endforeach;
-				?>						
-  
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
-							<div id="tableHeader">
-								<h1 id="headers">PURCHASE ORDER</h1>
-							</div>
+					<h1 id="headers">Edit Product Order Entry</h1>
+					<br>
+					<div id="content">
+						<form action="" method="POST" onsubmit="return validateForm()"><td>
+							<td>
+							<h5> User </h5>
+							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+							</td>	
+
+							<h5>Purchase No</h5> 
+							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
 							
-							<hr>					
-							
-							<a href="userEditPO.php?incId=<?php echo $incID; ?>"> 
-								<button type="button" class="btn btn-default" id="modButt">
-									EDIT ENTRY
-								</button>
-							</a>
-							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
-						
-							<hr>
-							
-							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-								<div id="myTable_length" class="dataTables_length">
-									<div id="myTable_filter" class="dataTables_filter">
-									</div>
-								</div>
-							</div>
-	
-							<table class="table table-striped table-bordered">
-								<tr>
-									<td>
-										Receipt No:
-										<?php echo $receiptNum;?>
-									</td>
-									<td>
-										Supplier: 
-										<?php echo $supplier ?>
-									</td>
-								</tr>									
+							<h5>Supplier</h5> 
+							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $supID; ?>" placeholder="<?php echo $supID; ?>" name="supplier"><br>
+									
+							<h5>Product/s</h5>
+							<table class="table table-striped" id="dataTable" name="chk">	
+								<?php foreach ($result as $row): ?>
+									<tbody>
+										<tr>
+											<td><input type="checkbox" name="chk"></TD>
+											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+											<td>	
+												<?php
+													$query = $conn->prepare("SELECT prodName FROM product ");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+										
+												<select class="form-control" id="addItem" name="prodItem[]">
+														<option><?=$row["prodName"]?></option>
+													<?php foreach ($res as $row2): ?>
+														<option><?=$row2["prodName"]?></option>
+													<?php endforeach ?>
+												</select> 
+											</td>
+													
+											<td>
+												<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row["qtyOrder"]?>" placeholder="<?php echo $row["qtyOrder"]?>" name="qty[]">
+											</td>
+										</tr>
+									</tbody>
+								<?php endforeach ?>
 							</table>
 							
-							<!-- Table Display for Incoming -->
-							<div id="printThisTable" name="printThisTable">	
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-									<thead>	
-										<tr>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
-										</tr>
-									</thead>
-									<tbody>	
-									
-										<?php
-											foreach ($result as $item):
-												$po = $item["poID"];
-										?>
-										
-										<tr id="centerData">
-											<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
-											<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
-											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
-										</tr>	
-										
-										<?php
-											endforeach;
-										?>
-									</tbody>	
-								</table>
-							</div>		
+							<br>
 							
-						</div>
-					</div>		  
+							<div class="modFoot">
+								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+								<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+								<br>
+								<br>
+								<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
+								<span><input type="submit" name="editPO" value="Update" class="btn btn-success" id="sucBtn"></span>
+							</div>
+						</form>  								
+					</div>								
+				</div>
+				</div>
 				</div>
 			</div>	
 		</div>
+		
+		<?php
+			$incID= $_GET['incId'];
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+
+			if (isset($_POST["editPO"])){
+				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+					$inRemarks = $_POST['inRemarks'][$index2];
+					$prodItem = $_POST['prodItem'][$index2];
+					$inQty = $_POST['qty'][$index2];
+					$userID = $_POST['userID'];
+					$poNum = $_POST['poNum'];
+					$thisSup = $_POST['supplier'];
+
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+						
+					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supplier = '$thisSup', prodID = '$prod3', userID = '$userID'
+							WHERE poNumber = '$incID' AND prodID = '$prod3'";
+						$conn->exec($sql);
+				}
+				echo "<meta http-equiv='refresh' content='0'>";
+			}
+			
+		?>
 	
   </body>
 </html>

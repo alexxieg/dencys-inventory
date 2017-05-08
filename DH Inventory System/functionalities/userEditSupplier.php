@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<title>Edit Supplier Return Entry</title>
 	
+		<title>Edit Products</title>
+			
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
@@ -18,11 +17,11 @@
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="../js/returns.js"></script>
+		<script src="../js/product.js"></script>
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
-		
+
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -30,7 +29,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) && $role!="user") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -40,19 +39,12 @@
 	</head>
   
 	<body>
-		<!-- Retrieved Selected Entry Details -->
 		<?php
-			$retID= $_GET['retId'];
-			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID  
-					FROM returns INNER JOIN product ON returns.prodID = product.prodID");
+			$supID = $_GET['supID'];
+		
+			$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE supID = $supID ");
 			$query->execute();
-			$res = $query->fetchAll();
-			
-			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID  
-					FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-					WHERE returnID = $retID ");
-			$query2->execute();
-			$resul = $query2->fetchAll();
+			$result = $query->fetchAll();
 		?>
 		
 		<!-- Top Main Header -->
@@ -91,12 +83,12 @@
 						</li>
 					<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="incoming">
-							<li><a href="../userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-							<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+							<li><a href="../userpurchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+							<li><a href="../userincoming.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 						</ul>
 					</li>
-					<li><a href="../userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-					<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+					<li><a href="../useroutgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
 							<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 							<li><a href="../userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
@@ -109,75 +101,49 @@
 							<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 						</ul>
 					</li>
-					<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
+					<li class="active"><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
 					<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 				</ul>
 			</div>
-		<!-- End of Sidebar -->	
-				
+				<!-- End of Sidebar -->
+
+				<!-- Retrieve Selected Entry Details -->
 				<div class="addInv">
-					<h1 id="headers">Edit Supplier Return Entry</h1>
-					<br>
+					<h1 id="headers">Edit Supplier Information</h1>
 					<div id="contents">
-						<form action="" method="POST" class="editPgs">
-							<td>
-							<h3> User </h3>	
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-							</td>		
-							<h3>Item</h3>
-							<select class="form-control" id="addEntry" name="prodItem">
-								<?php foreach ($resul as $item): ?>
-									<option selected><?php echo $item["prodName"]; ?></option>
-								<?php endforeach; ?>
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["prodName"]?></option>
-								<?php endforeach ?>
-							</select>  
-							<br>
-							
-							<h3>Quantity</h3>
-								<input type="text" class="form-control" id ="addEntry" value="<?php echo $item["returnQty"]; ?>" placeholder="<?php echo $item["returnQty"]; ?>" name="retQty"> <br>
-							
-							<h3>Remarks</h3>
-							<input type="text" class="form-control" id="addEntry" value="<?php echo $row["returnRemark"]; ?>" placeholder="<?php echo $row["returnRemark"]; ?>"  name="retRemarks">
-								
+						<form action="" method="POST" onsubmit="return validateForm()">									
+							<h3>Supplier Name</h3>
+							<?php foreach ($result as $row): ?>
+								<input type="text" class="form-control" id="editSName" value="<?php echo $row["supplier_name"]; ?>" placeholder="<?php echo $row["supplier_name"]; ?>" name="supName"> <br>
+							<?php endforeach ?>
 							<br>
 							
 							<div class="modFoot">
 								<span>
-									<a href="../userReturnsWarehouse.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
+									<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 								</span>
 								<span>
-									<input type="submit" name="editReturns" value="Update" class="btn btn-success" id="sucBtn">
+									<input type="submit" value="Update" class="btn btn-success" name="editSup" id="sucBtn">
 								</span>
-							</div>	
+							</div>
 						</form> 
 					</div>
 				</div>
 			</div>
 		</div>
-		
+			
+		<!-- Update Function -->
 		<?php
-			$retID= $_GET['retId'];
-			$quant=(isset($_REQUEST['retQty']) ? $_REQUEST['retQty'] : null);
-			$rem=(isset($_REQUEST['retRemarks']) ? $_REQUEST['retRemarks'] : null);
-			if (isset($_POST["editReturns"])){
-				
+			$suppName=(isset($_REQUEST['supName']) ? $_REQUEST['supName'] : null);
+			if (isset($_POST["editSup"])){
+			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-							
-				$prod = $_POST['prodItem'];
-				$userID = $_POST['userID'];
-						
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-				$prod3 = $prod2['prodA'];
-				
-				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', returnRemark = '$rem', userID = '$userID' WHERE returnID = $retID";
-				$conn->exec($sql);
-			}    
-		?>
 
+				$sql = "UPDATE suppliers SET supplier_name = '$suppName' WHERE supID = $supID";
+				$conn->exec($sql);
+				echo "<meta http-equiv='refresh' content='0'>";
+			}    
+			
+		?>
 	</body>
 </html>
