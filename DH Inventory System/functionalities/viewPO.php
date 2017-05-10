@@ -32,7 +32,14 @@
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function(){
-				$('#myTable').dataTable();
+				$('#myTable').dataTable(
+			{
+   
+        buttons: [
+            'print'
+        ]
+    } );
+    
 			});
 		</script>
 		
@@ -162,6 +169,7 @@
 							<hr>
 							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
 									</div>
