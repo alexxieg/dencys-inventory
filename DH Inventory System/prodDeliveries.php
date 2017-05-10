@@ -190,6 +190,7 @@
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt Date</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Entered</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Received By</th>
@@ -207,6 +208,7 @@
 									<tr id="centerData">
 										<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
+										<td data-title="Receipt Date"><?php echo $item["poNumber"]; ?></td>
 										<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
 										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
