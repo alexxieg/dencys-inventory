@@ -159,6 +159,7 @@
 								</div>
 							</div>
 	
+	<div id="printThisTable" name="printThisTable">	
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td>
@@ -171,7 +172,7 @@
 									</td>
 								</tr>									
 							</table>
-							
+							</div>
 							<!-- Table Display for Incoming -->
 							<div id="printThisTable" name="printThisTable">	
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">

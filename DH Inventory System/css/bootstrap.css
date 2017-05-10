@@ -191,7 +191,8 @@ th {
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
-  *,
+
+ *,
   *:before,
   *:after {
     color: #000 !important;
@@ -261,7 +262,18 @@ th {
   .table-bordered td {
     border: 1px solid #ddd !important;
   }
+ body * {
+    visibility: hidden;
+  }
+  #printThisTable, #printThisTable * {
+    visibility: visible;
+  }
+  #printThisTable {
+    position: absolute;
+    left: 0;
+    top: 0;
 }
+
 @font-face {
   font-family: 'Glyphicons Halflings';
 
