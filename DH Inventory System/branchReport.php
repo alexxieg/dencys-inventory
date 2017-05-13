@@ -20,9 +20,12 @@
 		
 		<!--Javascript Files -->
 		<script src="js/bootstrap.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
@@ -33,8 +36,27 @@
 			$(document).ready(function(){
 				$('#myTable').dataTable();
 			});
-		</script>
 		
+			$(document).ready(function(){
+				$('#myTable1').dataTable();
+			});
+		
+			$(document).ready(function(){
+				$('#myTable2').dataTable();
+			});
+		
+			$(document).ready(function(){
+				$('#myTable3').dataTable();
+			});
+			
+			$(document).ready(function(){
+				$('#myTable4').dataTable();
+			});
+			
+			$(document).ready(function(){
+				$('#myTable5').dataTable();
+			});
+		</script>
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -183,6 +205,7 @@
 			$queryYear->execute();
 			$resultYear = $queryYear->fetchAll();
 		?>
+		
 	
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -253,7 +276,49 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-		 			
+		 		<!-- PHP code for the datatables data -->
+				<?php
+					foreach ($result6 as $item6):
+				?>
+				
+				<?php
+					endforeach;
+				?>	
+					
+				<?php
+					foreach ($result1 as $item):
+				?>	
+				<?php
+					endforeach;
+				?>	
+				
+				<?php
+					foreach ($result2 as $item2):
+				?>				
+				<?php
+					endforeach;
+				?>
+				
+				<?php
+					foreach ($result3 as $item3):
+				?>
+				<?php
+					endforeach;
+				?>
+				
+				<?php
+					foreach ($result4 as $item4):
+				?>
+				<?php
+					endforeach;
+				?>								
+				
+				<?php
+					foreach ($result5 as $item5):
+				?>
+				<?php
+					endforeach;
+				?>								
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
 						<div class="pages no-more-tables">							
@@ -292,12 +357,18 @@
 										</a>
 									</li>
 								</ul>
-
-								<div class="tab-content clearfix">
-									<!-- Overall Outgoing Branch -->
-									<div class="tab-pane active" id="mainOutSummary">
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
-											<label>View Previous Reports</label>
+				
+					
+						
+						<div class="pages">
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
+									</div>
+								</div>
+							</div>
+							
+							<label>View Previous Reports</label>
 											<form class="form-inline" action="" method="post">
 												<div class="form-group">
 													<select name="dateMonthName" class="form-control">
@@ -319,11 +390,17 @@
 													<input type="submit" value="View" class="btn btn-success" name="submit">
 												</div>
 											</form>	
-													
+								<hr>
+							
+								<div class="tab-content clearfix">
+							<div class="tab-pane active" id="mainOutSummary">
+									<!-- Overall Outgoing Branch -->
+									
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
 											<thead>
 												<tr id="centerData">
-													<th>Location</th>
-													<th>Total Quantity</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -333,23 +410,27 @@
 												<tr id="centerData">
 													<td data-title="Location"><?php echo $item6["location"]; ?></td>
 													<td data-title="Total Quantity"><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
-												</tr>
-													
+												</tr>	
 												<?php
 													endforeach;
 												?>
 											</tbody>
 										</table>
 									</div>
-									
-									<!-- Camdas Outgoing Summary -->
+													
 									<div class="tab-pane" id="outSummaryCamdas">
+									<!-- Camdas Outgoing Summary -->
+								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
+										</div>
+									</div>
 										<h3>Outgoing Products in Camdas:</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+										<table id="myTable1" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
 											<thead>
 												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -366,15 +447,22 @@
 											</tbody>
 										</table>
 									</div>
-									
+									</div>
+			
+									<div class="tab-pane" id="outSummaryHilltop">
 									<!-- Hilltop Outgoing Summary -->
-									 <div class="tab-pane" id="outSummaryHilltop">
+									
+									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
+										</div>
+									</div>
 										<h3>Outgoing Products in Hilltop:</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+										<table id="myTable2" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -385,22 +473,28 @@
 													<td data-title="Product Description"><?php echo $item2["prodName"]; ?></td>
 													<td data-title="Total Quantity"><?php echo $item2["outQty"]; ?></td>
 												</tr>
-													
 												<?php
 													endforeach;
 												?>
 											</tbody>
 										</table>
 									 </div>
-									 
-									 <!-- KM 4 Outgoing Summary-->
+									</div> 
+									
 									<div class="tab-pane" id="outSummaryKM4">
+									 <!-- KM 4 Outgoing Summary-->
+									
+									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
+										</div>
+									</div>
 										<h3>Outgoing Products in KM4:</h3>
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+										<table id="myTable3" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -418,15 +512,22 @@
 											</tbody>
 										</table>
 									</div>
+									</div>
 									
-									<!-- KM5 Outgoing Summary-->
 									<div class="tab-pane" id="outSummaryKM5">
+									<!-- KM5 Outgoing Summary-->
+									
+									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
+										</div>
+									</div>
 									<h3>Outgoing Products in KM5:</h3>
-									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+									  <table id="myTable4" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -444,15 +545,22 @@
 											</tbody>
 										</table>
 									</div>
+									</div>
 									
-									<!-- San Fernando Outgoing Summary -->
 									<div class="tab-pane" id="outSummarySF">
+									<!-- San Fernando Outgoing Summary -->
+									
+									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
+										</div>
+									</div>
 									<h3>Outgoing Products in San Fernando, La Union:</h3>
-									  <table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+									  <table id="myTable5" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 											<thead>
 												<tr id="centerData">
-													<th>Product Description</th>
-													<th>Total Quantity</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 
 												</tr>
 											</thead>
@@ -471,6 +579,7 @@
 											</tbody>
 										</table>
 									</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -478,12 +587,7 @@
 				</div>
 			</div>
 		</div>
-		
-	<!-- Bootstrap core JavaScript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 									
 	</body>
 </html>
