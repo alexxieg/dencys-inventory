@@ -45,6 +45,16 @@
 
 		</script>
 		
+		<script>
+		  $(function() {
+			$('#supplier').autocomplete({
+				minLength:2,
+				source: "searchSup.php"
+			});
+		  });
+
+		</script>
+		
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function(){
@@ -248,18 +258,10 @@
 											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 											</td>																									
 											
-											<h5>Supplier</h5> 
-												<?php
-													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-											
-												<select class="form-control" id="addSupplier" name="supplier">
-													<?php foreach ($res as $row): ?>
-														<option><?=$row["supplier_name"]?></option>
-													<?php endforeach ?>
-												</select> 
+											<h5>Supplier</h5>  
+												<div class="ui-widget">
+													<input id="supplier" name="supplier">
+												</div>
 											<br>
 													
 											<h5>Product/s</h5>
