@@ -29,12 +29,29 @@
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+        
+        <script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
+        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
+        <link href="datatables/Buttons/css/buttons.bootstrap4.min.css"rel="stylesheet">
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
 		
 		<!-- Autocomplete Script -->
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<script src="js/jquery-1.9.1.js"></script>
 		<script src="js/jquery-ui.js"></script>
 
+		<!-- Datatables Script -->
+		<script>
+			$(document).ready(function(){
+				$('#myTable').dataTable({
+                        dom: 'Bfrtip',
+                    buttons: [
+                        'print'
+                    ]
+                } );
+            } );
+		</script>
+		
 		<script>
 		  $(function() {
 			$('#product').autocomplete({
@@ -53,13 +70,6 @@
 			});
 		  });
 
-		</script>
-		
-		<!-- Datatables Script -->
-		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
 		</script>
 			
 		<!-- Database Connection -->
@@ -80,7 +90,8 @@
 
 	<body>
 		<!-- Retrieve Incoming Data -->
-		<?php include('functionalities/fetchPurchaseOrders.php');		?>
+		<?php include('functionalities/fetchPurchaseOrders.php');?>
+		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -198,6 +209,7 @@
 								</table>
 							</div>
 							
+						<div class="pages">
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
@@ -207,7 +219,7 @@
 							<br> 
 							
 							<!-- Table Display for Incoming -->
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 								<thead>	
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
@@ -223,7 +235,7 @@
 											$po = $item["poNumber"];
 									?>
 									
-									<tr id="centerData">
+									<tr>
 										<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
 										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
 										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
@@ -242,7 +254,8 @@
 									?>
 								</tbody>	
 							</table>
-
+						</div>
+						
 							<!-- Modal for New Purchase Order -->
 							<div class="modal fade" id="myModal" role="dialog">
 								<div class="modal-dialog modal-lg">

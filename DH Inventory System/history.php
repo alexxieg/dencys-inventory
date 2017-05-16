@@ -25,16 +25,27 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 			
+		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+        
+        <script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
+        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
+        <link href="datatables/Buttons/css/buttons.bootstrap4.min.css"rel="stylesheet">
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
 		
 		<!-- Datatables -->
 		<script>
 			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
+				$('#myTable').dataTable({
+                        dom: 'Bfrtip',
+                    buttons: [
+                        'print'
+                    ]
+                } );
+            } );
 		</script>
 			
 		<!-- Database connection -->
