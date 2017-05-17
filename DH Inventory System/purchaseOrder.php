@@ -24,6 +24,11 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		
 		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
@@ -35,11 +40,6 @@
         <link href="datatables/Buttons/css/buttons.bootstrap4.min.css"rel="stylesheet">
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
 		
-		<!-- Autocomplete Script -->
-		<link rel="stylesheet" href="css/jquery-ui.css">
-		<script src="js/jquery-1.9.1.js"></script>
-		<script src="js/jquery-ui.js"></script>
-
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function(){
