@@ -10,6 +10,7 @@
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/responsive.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -30,6 +31,7 @@
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Datatables -->
@@ -297,7 +299,7 @@
 													<tr id="centerData">	
 														<td data-title="Username"><?php echo $item["userName"]; ?></td>
 														<td data-title="Password"><?php echo $item["password"]; ?></td>
-														<td data-title="User Role><?php echo $item["user_role"]; ?></td>
+														<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 														<td>
 															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
 																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">

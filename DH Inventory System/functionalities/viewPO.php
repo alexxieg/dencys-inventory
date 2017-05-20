@@ -10,6 +10,7 @@
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/responsive.css" rel="stylesheet">
 		<link rel="shortcut icon" href="../logo.jpg">
 
 		<!-- Custom styles for this template -->
@@ -27,6 +28,7 @@
 		<script src="../datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="../datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="../datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="../datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Datatables Script -->
@@ -200,8 +202,8 @@
 										?>
 										
 										<tr id="centerData">
-											<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
-											<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
+											<td data-title="PO Number"><?php echo $item["poNumber"];?></td>
+											<td data-title="PO Date"><?php echo $item["poDate"]; ?></td>	
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 											<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
 										</tr>	

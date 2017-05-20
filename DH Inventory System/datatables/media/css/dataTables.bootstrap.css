@@ -182,3 +182,52 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:fir
 div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
   padding-right: 0;
 }
+
+
+@media only screen and (max-width: 800px) {
+  
+   /* Force table to not be like tables anymore */
+  .dataTable table, thead, tbody, td, tr, th { 
+    display: block; 
+  }
+ 
+  /* Hide table headers (but not display: none;, for accessibility) */
+  .dataTable table, th { 
+    display: none;
+  }
+ 
+  .dataTable tr { 
+    border: 1px solid #ccc; 
+  }
+ 
+  .dataTable td { 
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee; 
+    position: relative;
+    padding-left: 50%; 
+    white-space: normal;
+    text-align: right;
+  }
+ 
+  .dataTable td:before { 
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    right: 50%;
+    text-align: left;
+    width: 45%; 
+    padding-right: 10px; 
+    white-space: nowrap;
+    font-weight: bold;
+  }
+ 
+  /*
+  Label the data
+  */
+  .dataTable td:before { 
+    content: attr(data-title); 
+  }
+
+}
+  

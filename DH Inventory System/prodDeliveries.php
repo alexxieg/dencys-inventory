@@ -10,6 +10,7 @@
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/responsive.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 		
 		<!-- Custom CSS for this template -->
@@ -33,6 +34,7 @@
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<script>
@@ -233,8 +235,8 @@
 									<tr id="centerData">
 										<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
-										<td data-title="Receipt Date"><?php echo $item["poNumber"]; ?></td>
-										<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
+										<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
+										<td data-title="Date Entered"><?php echo $item["inDate"]; ?></td>	
 										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>

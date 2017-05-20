@@ -1,83 +1,13 @@
-@media (max-width: 1280px){
-
-	.navFix .navbar-header{
-		margin-bottom: -30px;
+@media (max-width: 766px){
+	.navbar-brand{
+		margin-top: -0.5%;
 	}
-
-	#contents{
-		margin-left: 50px;
-	}
-
-	#sidelogo{
-		margin-top: -150px;
-		margin-left: 13px;
-		margin-bottom: 30px;
-	}
-
-	#dencysname{
-		float: left;
-		margin-right: -100px;
-	}
-
-
 }
 
-@media (max-width: 1070px){
+@media (max-device-width: 480px){
 
-	#contents{
-		margin-left: 80px;
-	}
-
-}
-
-@media (max-width: 872px){
-
-	#contents{
-		margin-left: 100px;
-	}
-
-}
-
-@media (max-width: 768px){
-
-	#contents{
-		margin-left: -80px;
-	}
-
-	.navres .navbar-header{
-		margin-left: -200px;
-		margin-bottom: -10px;
-	}
-
-	#dencysname{
-		background-color: #3b5998;
-		padding-bottom: 11px;
-		padding-left: 20px;
-		padding-right: 90px;
-	}
-
-	 #togBtn{
-		margin-top: 21px;
-		margin-left: 30px;
-	}
-
-	#sidebar{
-		float: right;
-		margin-right: 130px;
-		margin-top: -150px;
-	}
-
-	.nav-pills li a{
-		display: inline;
-		margin-left: 30px;
-	}
-
-	.nav-pills{
-		height: 65%;
-	}
-
-	#sidelogo{
-		margin-bottom: 40px;
+	.navbar-brand{
+	margin-top: -10%;	
 	}
 
 }

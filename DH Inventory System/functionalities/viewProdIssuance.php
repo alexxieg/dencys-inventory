@@ -11,6 +11,7 @@
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/responsive.css" rel="stylesheet">
 		<link rel="shortcut icon" href="../logo.jpg">
 
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -31,6 +32,7 @@
 		<script src="../datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="../datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="../datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="../datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Datatables Script -->
