@@ -28,12 +28,22 @@
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+        
+        <script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
+        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
+        <link href="datatables/Buttons/css/buttons.bootstrap4.min.css"rel="stylesheet">
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
 		
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
+				$('#myTable').dataTable({
+                        dom: 'Bfrtip',
+                    buttons: [
+                        'print'
+                    ]
+                } );
+            } );
 		</script>
 			
 		<!-- Database Connection -->

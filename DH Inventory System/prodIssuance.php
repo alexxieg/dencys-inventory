@@ -24,11 +24,36 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		
 		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		
+		<script>
+		  $(function() {
+			$('#product').autocomplete({
+				minLength:2,
+				source: "search.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
+			$('#supplier').autocomplete({
+				minLength:2,
+				source: "searchSup.php"
+			});
+		  });
+
+		</script>
 		
 		<!-- Datatables Script-->
 		<script>
@@ -269,16 +294,9 @@
 															<td><input type="checkbox" name="chk"></TD>
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
-																<?php
-																	$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
-																	$query->execute();
-																	$res = $query->fetchAll();
-																?>
-																<select class="form-control" id="addItem" name="prodItem[]">
-																<?php foreach ($res as $row): ?>
-																	<option><?=$row["prodName"]?></option>
-																<?php endforeach ?>
-															</select> 
+																<div class="ui-widget">
+																	<input id="product" name="prodItem">
+																</div>
 															</td>
 																	
 															<td>

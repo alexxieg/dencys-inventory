@@ -24,11 +24,36 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		
 		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		
+		<script>
+		  $(function() {
+			$('#product').autocomplete({
+				minLength:2,
+				source: "search.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
+			$('#supplier').autocomplete({
+				minLength:2,
+				source: "searchSup.php"
+			});
+		  });
+
+		</script>
 		
 		<!-- Datatables Script -->
 		<script>
@@ -262,18 +287,9 @@
 												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
 												
 												<h3>Supplier</h3> 
-												<?php
-													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-											
-												<select class="form-control" id="addSupplier" name="supplier">
-													<?php foreach ($res as $row): ?>
-														<option><?=$row["supplier_name"]?></option>
-													<?php endforeach ?>
-												</select> 
-												<br>
+													<div class="ui-widget">
+														<input id="supplier" name="supplier">
+													</div>
 																		
 												<h3>Received By</h3>
 												<?php
@@ -297,17 +313,9 @@
 															<td><input type="checkbox" name="chk"></TD>
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
-																<?php
-																	$query = $conn->prepare("SELECT prodName FROM product ");
-																	$query->execute();
-																	$res = $query->fetchAll();
-																?>
-														
-																<select class="form-control" name="prodItem[]">
-																	<?php foreach ($res as $row): ?>
-																			<option><?=$row["prodName"]?></option>
-																<?php endforeach ?>
-																</select> 
+																<div class="ui-widget">
+																	<input id="product" name="prodItem">
+																</div>
 															</td>
 																	
 															<td>
