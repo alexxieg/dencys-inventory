@@ -10,6 +10,7 @@
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/responsive.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
 
 		<!-- Custom CSS for this template -->
@@ -27,6 +28,7 @@
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Datatables Script -->
@@ -206,7 +208,7 @@
 									?> 
 									<tr style='background-color: #ff9999' id="centerData">
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td><?php echo $item["prodName"]; ?></td>
 										<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
 										<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 										<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
@@ -214,7 +216,7 @@
 										<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 										<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
-										<td>
+										<td data-title="Stock Card">
 											<a href="userledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
@@ -228,7 +230,7 @@
 									?>
 									<tr id="centerData">
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td><?php echo $item["prodName"]; ?></td>
 										<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
 										<td data-title="IN"><?php echo $item["inQty"]; ?></td>
 										<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
@@ -236,7 +238,7 @@
 										<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
 										<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
-										<td>
+										<td data-title="Stock Card">
 											<a href="userledger.php?incId=<?php echo $incID; ?>" target="_self"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
