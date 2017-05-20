@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2017 at 03:46 AM
+-- Generation Time: May 20, 2017 at 03:06 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -564,6 +564,19 @@ INSERT INTO `defectives` (`defectProdID`, `prodName`, `unitType`, `status`, `bra
 ('ZKK-PWT-0018D', 'ZKK6100DG - Angle Grinder 680W (Defective)', 'Piece/s', 'Inactive', 'ZKK', 'PWT', 'ZKK-PWT-0018'),
 ('ZKK-PWT-0019D', 'ZX1-200A - CU Welding Machine 200A Copper (Defective)', 'Piece/s', 'Inactive', 'ZKK', 'PWT', 'ZKK-PWT-0019'),
 ('ZKK-PWT-0020D', 'ZX1-200B - CU Welding Machine 200A Copper (Defective)', 'Piece/s', 'Inactive', 'ZKK', 'PWT', 'ZKK-PWT-0020');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `edits`
+--
+
+CREATE TABLE `edits` (
+  `editID` int(5) NOT NULL,
+  `editDate` date NOT NULL,
+  `editContent` varchar(100) NOT NULL,
+  `editRef` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -3278,7 +3291,10 @@ INSERT INTO `suppliers` (`supID`, `supplier_name`, `status`) VALUES
 (52, 'VCSC/VICS', 'Active'),
 (53, 'VDH', 'Active'),
 (54, 'Visayan', 'Active'),
-(55, 'Weld', 'Active');
+(55, 'Weld', 'Active'),
+(56, 'Egyril', 'Blacklisted'),
+(57, 'Robin William', 'Blacklisted'),
+(58, 'Dagpen', 'Blacklisted');
 
 -- --------------------------------------------------------
 
@@ -3341,6 +3357,12 @@ ALTER TABLE `defectives`
   ADD KEY `FKDEFPROD_idx` (`prodID`),
   ADD KEY `FKDEFBRAND_idx` (`brandID`),
   ADD KEY `FKDEFCAT_idx` (`categoryID`);
+
+--
+-- Indexes for table `edits`
+--
+ALTER TABLE `edits`
+  ADD PRIMARY KEY (`editID`);
 
 --
 -- Indexes for table `employee`
@@ -3412,6 +3434,11 @@ ALTER TABLE `users`
 --
 ALTER TABLE `archive`
   MODIFY `archiveID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `edits`
+--
+ALTER TABLE `edits`
+  MODIFY `editID` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `employee`
 --
