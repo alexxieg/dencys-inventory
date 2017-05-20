@@ -22,8 +22,23 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
 		
 		<!-- Login Session -->
 		<?php 
@@ -41,7 +56,7 @@
 	<body>
 		<?php
 			$incID= $_GET['incId']; 
-			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supplier, product.unitType, product.prodName, purchaseorders.userID
+			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supID, product.unitType, product.prodName, purchaseorders.userID
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID
 									WHERE poNumber = '$incID'
 									ORDER BY poID DESC");
@@ -49,6 +64,7 @@
 			$result = $query->fetchAll();
 			
 			$supID = current($conn->query("SELECT supID FROM purchaseorders WHERE poNumber = '$incID'")->fetch());
+			$supName = current($conn->query("SELECT supplier_name FROM suppliers WHERE supID = $supID")->fetch());
 		?>
 
 		<!-- Top Main Header -->
@@ -132,11 +148,13 @@
 							</td>	
 
 							<h5>Purchase No</h5> 
-							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
+							<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
 							
 							<h5>Supplier</h5> 
-							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $supID; ?>" placeholder="<?php echo $supID; ?>" name="supplier"><br>
-									
+							<div class="ui-widget">
+								<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier">
+							</div>
+								
 							<h5>Product/s</h5>
 							<table class="table table-striped" id="dataTable" name="chk">	
 								<?php foreach ($result as $row): ?>
@@ -191,22 +209,25 @@
 
 			if (isset($_POST["editPO"])){
 				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
-					$inRemarks = $_POST['inRemarks'][$index2];
 					$prodItem = $_POST['prodItem'][$index2];
 					$inQty = $_POST['qty'][$index2];
 					$userID = $_POST['userID'];
 					$poNum = $_POST['poNum'];
-					$thisSup = $_POST['supplier'];
+					$sup = $_POST['supplier'];
+					
+					$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$sup'");
+					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+					$sup3 = $sup2['supA'];
 
 					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 						
-					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supplier = '$thisSup', prodID = '$prod3', userID = '$userID'
+					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supID = $sup3, prodID = '$prod3', userID = '$userID'
 							WHERE poNumber = '$incID' AND prodID = '$prod3'";
 						$conn->exec($sql);
 				}
-				echo "<meta http-equiv='refresh' content='0'>";
+				
 			}
 			
 		?>
