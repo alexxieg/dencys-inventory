@@ -63,7 +63,7 @@
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.branchID, returns.userID  
+			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.branchID, returns.userID, returns.receiptNo  
 					FROM returns INNER JOIN product ON returns.prodID = product.prodID 
 					WHERE receiptNo = '$retID' ");
 			$query2->execute();
@@ -142,8 +142,8 @@
 				<!-- End of Sidebar -->	
 				
 				<?php
-					foreach ($result as $item):
-					$retID = $item["returnID"];
+					foreach ($result2 as $item):
+					$retID = $item["receiptNo"];
 				?>
 				
 				<?php
