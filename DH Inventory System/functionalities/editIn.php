@@ -382,7 +382,7 @@
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 					WHERE outID = '$outid'"; */
 					echo '<script>
-					  window.location = "../productDeliveries.php"
+					  window.location = "../prodDeliveries.php"
 					</script>';
 				}
 			}
