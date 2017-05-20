@@ -1,7 +1,12 @@
-@media (max-width: 766px){
+@media (max-width: 768px){
 	.navbar-brand{
 		margin-top: -0.5%;
 	}
+
+	#navjust{
+		background-color: black;
+	}
+
 }
 
 @media (max-device-width: 480px){
@@ -10,4 +15,17 @@
 	margin-top: -10%;	
 	}
 
+	#navjust{
+		background-color: black;
+	}
 }
+
+@media (max-device-width: 375px){
+
+	.navbar-brand{
+	margin-top: -15%;
+	margin-bottom: 3%;	
+	}
+
+}
+

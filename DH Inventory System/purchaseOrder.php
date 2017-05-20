@@ -241,7 +241,7 @@
 										<td data-title="PO Number"><?php echo $item["poNumber"];?></td>
 										<td data-title="PO Date"><?php echo $item["poDate"]; ?></td>	
 										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
-										<td data-title="Last Modified by"><?php echo $item["userID"]; ?></td>
+										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td data-title="Purchase Order">
 											<a href="functionalities/viewPO.php?incId=<?php echo $po; ?>"> 
 											<button type="button" class="btn btn-default" id="edBtn">
