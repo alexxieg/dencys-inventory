@@ -1,3 +1,13 @@
+if(document.getElementById('pwds').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Wrong Password!",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});        
+		return false;
+} else {
+
 var myButton = document.getElementsByName('dynamic');
 var myInput = document.getElementsByName('viewPass');
 myButton.forEach(function(element, index){
@@ -16,3 +26,4 @@ myButton.forEach(function(element, index){
       }
   }
 })
+}
