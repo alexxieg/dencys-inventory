@@ -29,13 +29,14 @@
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
-		<link href="datatables/Buttons/js/buttons.bootstrap.min.js"rel="stylesheet">
+		<script src="datatables/Buttons/js/buttons.bootstrap.min.js"></script>
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
 
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
-		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
 
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
         <script src="datatables/Buttons/js/buttons.print.min.js"></script>
@@ -53,7 +54,7 @@
 								columns: ':visible'
 							}
 						},
-						'colvis'
+						 'colvis'
 					],
 					columnDefs: [ {
 						targets: -1,
