@@ -72,7 +72,7 @@
 		
 		<script>
 		  $(function() {
-			$('#product').autocomplete({
+			$('.thisProduct').autocomplete({
 				minLength:2,
 				source: "search.php"
 			});
@@ -342,7 +342,7 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<div class="ui-widget">
-																	<input id="product" name="prodItem">
+																	<input class="thisProduct" name="prodItem">
 																</div>
 															</td>
 																	

@@ -38,9 +38,11 @@
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
+
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
         <script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
@@ -70,7 +72,7 @@
 		
 		<script>
 		  $(function() {
-			$('#product').autocomplete({
+			$('.thisProduct').autocomplete({
 				minLength:2,
 				source: "search.php"
 			});
@@ -321,7 +323,7 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<div class="ui-widget">
-																	<input id="product" name="prodItem">
+																	<input class="thisProduct" name="prodItem">
 																</div>
 															</td>
 																	

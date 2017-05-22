@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Purchase Orders</title>
+		<title>Purchase Orders SHYT</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -72,12 +72,11 @@
 		
 		<script>
 		  $(function() {
-			$('#product').autocomplete({
+			$('.prodItem').autocomplete({
 				minLength:2,
 				source: "search.php"
 			});
 		  });
-
 		</script>
 		
 		<script>
@@ -303,7 +302,7 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 														<td>	
 															<div class="ui-widget">
-																<input id="product" name="prodItem">
+																<input type="text" class="prodItem" name="prodItem">
 															</div>
 														</td>
 																	
