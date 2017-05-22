@@ -31,7 +31,6 @@
 		<script src="js/jquery-ui.js"></script>
 		
 		<!-- Datatables CSS and JS Files -->
-		<script src="datatables/jquery-1.12.4.js"></script>
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
