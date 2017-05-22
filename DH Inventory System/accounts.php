@@ -186,7 +186,8 @@
 										$useThisID = $item["userID"];
 									?>
 										
-									<tr id="centerData">	
+									<tr id="centerData">
+										<form class="form-horizontal" method= "POST" action="viewing.php">
 										<td data-title="Username"><?php echo $item["userName"]; ?></td>
 										<td data-title="Password">
 										<input name="viewPass" type="password" value="<?php echo $item["password"]; ?>" disabled/></td>
@@ -202,8 +203,9 @@
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
-											<button type="button" id="" class="btn btn-default" name="dynamic"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
-											<script src="js/showPass.js"></script>
+											<button type="submit" id="" class="btn btn-default" name="dynamic"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+											<input type="password" name="password" class="form-control" id="pwds" placeholder="Enter password" required>
+											</form>
 										</td>			
 									</tr>
 									

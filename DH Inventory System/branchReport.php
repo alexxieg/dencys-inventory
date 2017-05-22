@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
+	
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,51 +42,140 @@
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
 		<!-- Datatables CSS and JS Files -->
+		<script src="datatables/jquery-1.12.4.js"></script>
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.bootstrap.min.js"></script>
+		<script src="datatables/media/js/buttons.html5.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+
+		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
+
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
 		
-		<!-- Datatables -->
+		<!-- Datatables Script-->
 		<script>
 			$(document).ready(function(){
-				$('#myTable').dataTable();
+				$('#myTable').dataTable( {
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						'colvis'
+					],
+					columnDefs: [ {
+						targets: -1,
+						visible: true
+					} ]
+				});
 			});
 		
 			$(document).ready(function(){
-				$('#myTable1').dataTable();
+				$('#myTable1').dataTable( {
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						'colvis'
+					],
+					columnDefs: [ {
+						targets: -1,
+						visible: true
+					} ]
+				});
 			});
 		
 			$(document).ready(function(){
-				$('#myTable2').dataTable();
+				$('#myTable2').dataTable({
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						'colvis'
+					],
+					columnDefs: [ {
+						targets: -1,
+						visible: true
+					} ]
+				});
 			});
 		
 			$(document).ready(function(){
-				$('#myTable3').dataTable();
+				$('#myTable3').dataTable({
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						'colvis'
+					],
+					columnDefs: [ {
+						targets: -1,
+						visible: true
+					} ]
+				});
 			});
 			
 			$(document).ready(function(){
-				$('#myTable4').dataTable();
+				$('#myTable4').dataTable({
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						'colvis'
+					],
+					columnDefs: [ {
+						targets: -1,
+						visible: true
+					} ]
+				});
 			});
 			
 			$(document).ready(function(){
-				$('#myTable5').dataTable();
+				$('#myTable5').dataTable({ 
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						'colvis'
+					],
+					columnDefs: [ {
+						targets: -1,
+						visible: true
+					} ]
+				});
 			});
 		</script>
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
 		
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
 	  
 	<body>
