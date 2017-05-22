@@ -200,12 +200,7 @@
 										</td>
 										<td>
 											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-											</td>
-										<td>
-											<a href="removeOutgoingProduct.php?outID=<?php echo $row["outID"];?>">
-												<button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove</button>
-											</a>
-										</td>
+										</td> 
 									</tr>
 									<?php endforeach ?>
 								</tbody>
