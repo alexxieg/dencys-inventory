@@ -256,7 +256,7 @@
 													
 												<h3>Supplier</h3> 
 												<?php
-													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
+													$query = $conn->prepare("SELECT supplier_name FROM suppliers WHERE status = 'Active'");
 													$query->execute();
 													$res = $query->fetchAll();
 												?>
