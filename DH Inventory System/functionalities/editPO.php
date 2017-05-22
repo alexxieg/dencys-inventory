@@ -208,7 +208,16 @@
 				</div>
 			</div>	
 		</div>
-		
+		<?php
+		require_once 'dbcon.php';
+		$incID= $_GET['incId'];
+		if (isset($_POST["editPO"])){
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "INSERT INTO purchaseordersarchive (poNumber, poDate, qtyOrder, supID, prodID, userID)
+				SELECT poNumber, poDate, qtyOrder, supID, prodID, userID from purchaseorders WHERE poNumber = '$incID' ORDER BY poID";
+		$conn->exec($sql);
+		}
+		?>
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
