@@ -26,10 +26,10 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
 		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 		
 		<!-- Datatables -->
@@ -129,7 +129,7 @@
 			</div>
 		</nav>
 		<!-- End of Top Main Header -->
-
+		
 		<div class="container-fluid">
 			<div class="row navbar-collapse">
 			
@@ -168,7 +168,13 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
-				
+				<?php
+					foreach ($result as $item):
+				?>
+				<?php
+					endforeach;
+				?>
+		
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
 						<div class="pages no-more-tables">							
@@ -203,10 +209,21 @@
 														<input type="submit" value="View" class="btn btn-success" name="submit">
 													</div>
 												</form>	
+												
+									
+									<div class="pages no-more-tables">
+										<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+											<div id="myTable_length" class="dataTables_length">
+												<div id="myTable_filter" class="dataTables_filter">
+												</div>
+											</div>
+										</div>
+												
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 											<thead>
-												<tr id="centerData">
-													<th>Product Name</th>
-													<th>Total Quantity</th>
+												<tr>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Name</th>
+													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 												</tr>
 											</thead>
 											<tbody>

@@ -422,7 +422,8 @@
 				?>
 				<?php
 					endforeach;
-				?>								
+				?>				
+				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
 						<div class="pages no-more-tables">							
@@ -462,8 +463,6 @@
 									</li>
 								</ul>
 				
-					
-						
 						<div class="pages">
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
