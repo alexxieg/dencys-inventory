@@ -7082,7 +7082,7 @@ border: none;
 }
 
 #addQty, #addRcpt, #adduser, #addpass,
-  #addBrandName, #addBrandID, #addEmpl,#addCategoryID {
+  #addBrandName, #addBrandID, #addEmpl,#addCategoryID , #addProdQty{
   width: 85%; 
 }
 
@@ -7596,7 +7596,8 @@ border: none;
 #addQty, #adduser,
 #addpass, #addpassconf,
 #addProdName, #addPrice,
-#addReorderLvl, #userID, #addItem {
+#addReorderLvl, #userID, #addItem, #addProdQty,
+#addPO {
   width: 50%;
   margin-left: auto;
   margin-right: auto;

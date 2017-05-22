@@ -143,14 +143,14 @@
 					<div id="content">
 						<form action="" method="POST" onsubmit="return validateForm()"><td>
 							<td>
-							<h5> User </h5>
+							<h3> User </h3>
 							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 							</td>	
 
-							<h5>Purchase No</h5> 
+							<h3>Purchase No</h3> 
 							<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
 							
-							<h5>Supplier</h5> 
+							<h3>Supplier</h3> 
 							<div class="ui-widget">
 								<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier">
 							</div>
@@ -161,7 +161,7 @@
 									<tbody>
 										<tr>
 											<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+											<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
 											<td>	
 												<?php
 													$query = $conn->prepare("SELECT prodName FROM product ");
@@ -191,8 +191,15 @@
 								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
 								<br>
 								<br>
-								<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-								<span><input type="submit" name="editPO" value="Update" class="btn btn-success" id="sucBtn"></span>
+								<span>
+									<a href="../purchaseOrder.php">
+										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+									</a>
+								</span>
+								
+								<span>
+									<input type="submit" name="editPO" value="Update" class="btn btn-success" id="sucBtn">
+								</span>
 							</div>
 						</form>  								
 					</div>								
@@ -225,10 +232,8 @@
 					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supID = $sup3, prodID = '$prod3', userID = '$userID'
 							WHERE poNumber = '$incID' AND prodID = '$prod3'";
 						$conn->exec($sql);
-				}
-				
+				}	
 			}
-			
 		?>
 	
   </body>

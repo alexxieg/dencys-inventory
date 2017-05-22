@@ -161,7 +161,9 @@
 			 
 				$sql = "UPDATE branch SET branchID = '$braID', location = '$braName' WHERE branchID = '$branchThisID'";
 				$conn->exec($sql);
+		
 			}    
+			
 		?>
   </body>
 </html>

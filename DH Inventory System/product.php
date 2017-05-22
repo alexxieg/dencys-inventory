@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Incoming Products</title>
+		<title>Products</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -260,7 +260,7 @@
 											<input type="text" class="form-control" id ="addProdName" placeholder="Name" name="prodItem"> <br>
 													
 											<h3>Quantity</h3>
-											<input type="number" min = "1" class="form-control" id ="addProdQty" placeholder="Item Quantity" name="prodQty"> <br>
+											<input type="number" min="0" class="form-control" id="addProdQty" placeholder="Item Quantity" name="prodQty"> <br>
 											
 											<h3>Category</h3>
 											<?php
@@ -301,7 +301,7 @@
 												</select> 
 														
 											<h3>Price</h3>
-											<input type="number" class="form-control" id ="addPrice" placeholder="Unit Price" name="prodPrice"> <br>
+											<input type="number" min="1" class="form-control" id ="addPrice" placeholder="Unit Price" name="prodPrice"> <br>
 											
 											<h3>Reorder Level</h3>
 											<input type="number" class="form-control" id ="addReorderLvl" placeholder="Reorder Level" name="prodRO"> <br>
@@ -371,21 +371,6 @@
 												</thead>
 												<tbody>
 													
-													<tr id="centerData">
-														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-														<td data-title="Unit"><?php echo $item["unitType"];?></td>
-														<td data-title="Price"><?php echo $item["price"]; ?></td>
-														<td>
-															<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
-																	Restore
-																</button>
-															</a>
-														</td>				
-													</tr>
 													<?php
 														foreach ($result as $item):
 														$proID = $item["prodID"];

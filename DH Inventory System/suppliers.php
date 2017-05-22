@@ -193,16 +193,16 @@
 											</a>	
 											
 											<a href="functionalities/removeSupplier.php?supID=<?php echo $supID; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
+												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to archive this supplier?');">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
 											
 											<a href="functionalities/addBlacklist.php?supID=<?php echo $supID; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
-													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to blacklist this supplier?');">
+													<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
 												</button>
-											</a>											</a>
+											</a>								
 										</td>		
 									</tr>
 											

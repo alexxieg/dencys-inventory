@@ -172,7 +172,8 @@
 				$sql = "UPDATE users SET userName = '$useName', password = '$passW' WHERE userID = '$useThisID'";
 			
 				$conn->exec($sql);
-			}    
+			} 
+			
 		?>
 	</body>
 </html>
