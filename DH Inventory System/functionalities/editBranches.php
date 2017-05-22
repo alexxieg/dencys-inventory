@@ -137,7 +137,7 @@
 							
 							<div class="modFoot">
 								<span>
-									<a href="../branch.php">
+									<a href="../branches.php">
 										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 									</a>
 								</span>
