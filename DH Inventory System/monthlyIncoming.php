@@ -21,6 +21,8 @@
 		<!--Javascript Files -->
 		<script src="returns.js"></script>
 		<script src="js/bootstrap.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
@@ -211,44 +213,22 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
 						<div class="pages no-more-tables">	
-						  <div clas="container">
-							<h2 id="inheaders">Incoming Product Summary for the Month </h2>
+						  <div class="container">
 								<div class="tab-content clearfix">
 								
-								<div class="pages">
+								<!-- Incoming Product Summary -->
+								<div class="tab-pane active" id="mainInSummary">
+									<h2 id="inheaders">Incoming Product Summary for the Month </h2>
+								
+								
+									<div class="pages no-more-tables">
 										<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 											<div id="myTable_length" class="dataTables_length">
 												<div id="myTable_filter" class="dataTables_filter">
 												</div>
 											</div>
 										</div>
-										
-									<label>View Previous Reports</label>
-											<form class="form-inline" action="" method="post">
-												<div class="form-group">
-														<select name="dateMonthName" class="form-control">
-															<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
-															<?php foreach ($resultMonth as $rowMonth): ?>
-																<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>
-													<div class="form-group">
-														<select name="dateYearName" class="form-control">
-															<option value="<?php echo $selectedYear ?>">Selected: <?php echo $selectedYear ?></option>
-															<?php foreach ($resultYear as $rowYear): ?>
-																<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>	
-													<div class="form-group">
-														<input type="submit" value="View" class="btn btn-success" name="submit">
-													</div>
-												</form>	
-									<hr>
-									
-									<div class="tab-pane active" id="mainInSummary">
-										<!-- Table Display for Incoming Entries -->
+												
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 											<thead>							
 												<tr>
@@ -278,10 +258,5 @@
 				</div>
 			</div>
 		</div>
-		<!-- Bootstrap core JavaScript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>		
 	</body>
 </html>

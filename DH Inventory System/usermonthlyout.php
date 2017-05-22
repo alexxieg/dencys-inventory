@@ -22,19 +22,49 @@
 		<!--Javascript Files -->
 		<script src="returns.js"></script>
 		<script src="js/bootstrap.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		
-		<!-- Datatables -->
+		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.bootstrap.min.js"></script>
+		<script src="datatables/media/js/buttons.html5.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+
+		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
+
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+
+		<!-- Datatables Script -->
 		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
+			$(document).ready(function() {
+				$('#myTable').DataTable( {
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						'colvis'
+					],
+					columnDefs: [ {
+						targets: -1,
+						visible: true
+					} ]
+				} );
+			} );
+
 		</script>
 		
 		<!-- Database Connection -->
@@ -130,9 +160,9 @@
 
 		<div class="container-fluid">
 			<div class="row navbar-collapse">
-			
+				<div class="col-sm-3 col-md-2 sidebar">
+				
 				<!-- Sidebar -->
-				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -166,6 +196,12 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
+				<?php
+					foreach ($result as $item):
+				?>
+				<?php
+					endforeach;
+				?>
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
@@ -178,34 +214,19 @@
 										<h2 id="headers">Outgoing Product Summary for the Month</h2>
 										<br>
 	
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="80%" role="grid" aria-describedby="myTable_info">
-											<label>View Previous Reports</label>
-											<form class="form-inline" action="" method="post">
-												<div class="form-group">
-														<select name="dateMonthName" class="form-control">
-															<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
-															<?php foreach ($resultMonth as $rowMonth): ?>
-																<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>
-													<div class="form-group">
-														<select name="dateYearName" class="form-control">
-															<option value="<?php echo $selectedYear ?>">Selected: <?php echo $selectedYear ?></option>
-															<?php foreach ($resultYear as $rowYear): ?>
-																<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>	
-													<div class="form-group">
-														<input type="submit" value="View" class="btn btn-success" name="submit">
-													</div>
-												</form>	
-											
+									<div class="pages no-more-tables">
+										<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+											<div id="myTable_length" class="dataTables_length">
+												<div id="myTable_filter" class="dataTables_filter">
+												</div>
+											</div>
+										</div>
+												
+										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 											<thead>
 												<tr id="centerData">
-													<th>Product Name</th>
-													<th>Total Quantity</th>
+													<th  class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Name</th>
+													<th  class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 												</tr>
 											</thead>
 											
@@ -230,13 +251,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-					
-		<!-- Bootstrap core JavaScript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-									
+		</div>					
 	</body>
 </html>

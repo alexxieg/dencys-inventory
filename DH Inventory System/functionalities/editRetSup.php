@@ -186,7 +186,6 @@
 							
 					<div class="modFoot">
 						<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-						<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 						<br>
 						<br>
 						<span>

@@ -231,7 +231,7 @@
 								<br>
 								<br>
 								<span>
-									<a href="../incoming.php">
+									<a href="../prodDeliveries.php">
 										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 									</a>
 								</span>
