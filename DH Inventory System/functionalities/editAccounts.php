@@ -159,7 +159,16 @@
 				</div>
 			</div>
 		</div>
-			   
+		<?php
+		require_once 'dbcon.php';
+		$usethisid= $_GET['useID'];
+		if (isset($_POST["editAccount"])){
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "INSERT INTO userarchive (userName, password, user_role)
+				SELECT userName, password, user_role from users WHERE userID = '$useThisID' ORDER BY userID";
+		$conn->exec($sql);
+		}
+		?>	   
 		<?php
 			$useThisID= $_GET['useID'];
 			$useName=(isset($_REQUEST['userName']) ? $_REQUEST['userName'] : null);
