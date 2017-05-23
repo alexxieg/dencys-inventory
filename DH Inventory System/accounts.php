@@ -155,7 +155,8 @@
 									 <td>
 									 <br>
 									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>						
+									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Account</button>
+									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
 									</td>
 									</tr>
 								</table>
@@ -325,6 +326,66 @@
 										
 								</div>
 							</div>
+							
+								<!-- Modal - Activity Log -->
+							<div class="modal fade" id="activityLog" role="dialog">
+								<div class="modal-dialog modal-xl">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Edit Activity Log</h4>
+										</div>
+										<div class="modal-body">
+											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+											
+												<!-- Retrieve Category Data -->
+												<?php
+													$query = $conn->prepare("SELECT userID, userName, password, user_role FROM userarchive");
+													$query->execute();
+													$result1 = $query->fetchAll();
+												?>
+												
+												<thead>
+													<tr id="centerData">
+														<th>
+															<div id="tabHead">Username</div>
+														</th>
+														<th>
+															<div id="tabHead">Password</div>
+														</th>
+														<th>
+															<div id="tabHead">User Role</div>
+														</th>
+													</tr>
+												</thead>
+												
+												<tbody>						
+														
+													<?php
+														foreach ($result1 as $item):
+														$useThisID = $item["userID"];
+													?>
+													<tr id="centerData">	
+														<td data-title="Username"><?php echo $item["userName"]; ?></td>
+														<td data-title="Password"><?php echo $item["password"]; ?></td>
+														<td data-title="User Role"><?php echo $item["user_role"]; ?></td>		
+													</tr>
+													<?php
+														endforeach;
+													?>
+												
+												</tbody>
+											</table>
+											
+										</div>
+									</div>
+										
+									<div class="modal-footer">
+									</div>
+										
+								</div>
+							</div>
+							
 						</div>
 					</div>
 				</div>

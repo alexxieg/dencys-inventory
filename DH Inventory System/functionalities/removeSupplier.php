@@ -5,6 +5,6 @@
     $supID = $_GET['supID'];
     $result = $conn->prepare("UPDATE suppliers SET status = 'Inactive' WHERE supID = '$supID'");
     $result->execute();
-    header("location: ../suppliers.php");
+    header("location: ../usersuppliers.php");
 
 ?>
