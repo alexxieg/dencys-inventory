@@ -72,7 +72,7 @@
 		
 		<script>
 		  $(function() {
-			$('#product').autocomplete({
+			$('.thisProduct').autocomplete({
 				minLength:2,
 				source: "search.php"
 			});
@@ -290,10 +290,7 @@
 											<h4 class="modal-title">Add Incoming Product</h4>
 										</div>
 										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()">
-												<h3> User </h3>
-												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												
+											<form action="functionalities/addProdDeliveries.php" method="GET" onsubmit="return validateForm()">
 												<h3>Product Order Number</h3>
 												<?php
 													$query = $conn->prepare("SELECT DISTINCT poNumber FROM purchaseorders ");
@@ -302,77 +299,14 @@
 												?>
 																	
 												<select class="form-control" id="addEmpl" name="po">
-													<option SELECTED>-Select PO No-</option>
 													<?php foreach ($res as $row): ?>
 														<option><?=$row["poNumber"]?></option>
 													<?php endforeach ?>
-												</select> 
-												
-												<h3>Receipt No.</h3> 
-												<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno">
-												
-												<h3>Receipt Date</h3> 
-												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
-												
-												<h3>Supplier</h3> 
-													<div class="ui-widget">
-														<input id="supplier" name="supplier">
-													</div>
-																		
-												<h3>Received By</h3>
-												<?php
-													$query = $conn->prepare("SELECT empFirstName FROM employee ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-																	
-												<select class="form-control" id="addEmpl" name="emp">
-													<?php foreach ($res as $row): ?>
-														<option><?=$row["empFirstName"]?></option>
-													<?php endforeach ?>
-												</select> 
-												
-												<br>
-													
-												<h5>Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
-													<tbody>
-														<tr>
-															<td><input type="checkbox" name="chk"></TD>
-															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-															<td>	
-																<div class="ui-widget">
-																	<input id="product" name="prodItem">
-																</div>
-															</td>
-																	
-															<td>
-																<input type="number" min="1" class="form-control" id="addIncQty" placeholder="Quantity" name="incQty[]">
-															</td>
-															
-															<td>
-																<select class="form-control"  name="inStatus[]">
-																	<option>Complete</option>
-																	<option>Partial</option>
-																</select> 
-															</td>
-																
-															<td>
-																<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
-															</td>
-														</tr>
-													</tbody>
-												</table>
-												
-												<br>
+												</select>
 												
 												<div class="modFoot">
-													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-													<br>
-													<br>
 													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-													<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
+													<span><input type="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
 												</div>
 											</form> 	
 										
