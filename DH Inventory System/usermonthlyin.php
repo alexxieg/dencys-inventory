@@ -68,7 +68,6 @@
 
 		</script>
 		
-		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
