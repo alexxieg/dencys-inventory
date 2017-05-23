@@ -7603,6 +7603,14 @@ border: none;
   margin-right: auto;
 }
 
+.modal-body #supplier{
+width:50%;
+margin-left:25%;}
+
+.modal-body #prod{
+width:100%;
+}
+
 .modal-xl {
    width: 100%;
    max-width:1200px;

@@ -284,11 +284,11 @@
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()"><td>
 											<td>
-											<h5> User </h5>
+											<h3> User </h3>
 											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 											</td>																									
 											
-											<h5>Supplier</h5>  
+											<h3>Supplier</h3>  
 												<div class="ui-widget">
 													<input id="supplier" name="supplier">
 												</div>
@@ -302,7 +302,7 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 														<td>	
 															<div class="ui-widget">
-																<input type="text" class="prodItem" name="prodItem">
+																<input type="text" class="prodItem" name="prodItem" id="prod">
 															</div>
 														</td>
 																	
