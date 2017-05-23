@@ -210,11 +210,19 @@
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
-						<div class="pages no-more-tables">							
-							<div class="container">	
-							<h2 id="outheaders">Outgoing Product Summary for the Month</h2>
+						<div class="pages no-more-tables">	
+						  <div clas="container">
+							<h2 id="inheaders">Outcoming Product Summary for the Month </h2>
 								<div class="tab-content clearfix">
-	
+								
+								<div class="pages">
+										<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+											<div id="myTable_length" class="dataTables_length">
+												<div id="myTable_filter" class="dataTables_filter">
+												</div>
+											</div>
+										</div>
+										
 									<label>View Previous Reports</label>
 											<form class="form-inline" action="" method="post">
 												<div class="form-group">
@@ -238,17 +246,9 @@
 													</div>
 												</form>	
 									<hr>
-								
-								<div class="tab-pane active" id="mainOutSummary">
+									
+									<div class="tab-pane active" id="mainOutSummary">
 										<!-- Table Display for Outcoming Entries -->	
-									<div class="pages">
-										<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-											<div id="myTable_length" class="dataTables_length">
-												<div id="myTable_filter" class="dataTables_filter">
-												</div>
-											</div>
-										</div>
-										
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 											<thead>
 												<tr id="centerData">
@@ -276,13 +276,11 @@
 					</div>
 				</div>
 			</div>
-		</div>
-					
+		</div>					
 		<!-- Bootstrap core JavaScript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-									
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>									
 	</body>
 </html>
