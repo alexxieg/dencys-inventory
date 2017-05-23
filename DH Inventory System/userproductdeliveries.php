@@ -28,15 +28,39 @@
 		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		
+		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.bootstrap.min.js"></script>
+		<script src="datatables/media/js/buttons.html5.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+
 		<!-- Datatables Script -->
 		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
+			$(document).ready(function() {
+				$('#myTable').DataTable( {
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						'colvis'
+					],
+					columnDefs: [ {
+						targets: -1,
+						visible: true
+					} ]
+				} );
+			} );
+
 		</script>
 			
 		<!-- Database Connection -->
@@ -187,7 +211,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Received By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
-										<th></th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
 									</tr>
 								</thead>
 								<tbody>					
