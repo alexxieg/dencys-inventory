@@ -280,11 +280,11 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add Outgoing Product</h4>
+											<h4 class="modal-title">Add Product Issuance</h4>
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-												<h3> User </h3>
+												<h3>User</h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
 												<h3>Handled By</h3>
@@ -322,7 +322,7 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<div class="ui-widget">
-																	<input class="thisProduct" name="prodItem">
+																	<input class="thisProduct" name="prodItem[]" placeholder="Product Name">
 																</div>
 															</td>
 																	

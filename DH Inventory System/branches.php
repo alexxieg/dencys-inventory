@@ -23,8 +23,8 @@
 		<!--Javascript Files -->
 		<script src="js/branches.js"></script>
 		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
@@ -221,8 +221,7 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">		
-												<h3>Branch ID</h3>
-												<input type="text" class="form-control" id="addBranchID" placeholder="<?php echo $BranchID;?>" value="<?php echo $BranchID;?>" name="branchID" Readonly> <br>
+									
 												<h3>Location</h3>
 												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="location"> <br>
 												<h3>Branch Name</h3>
@@ -237,6 +236,8 @@
 														<input type="submit" value="Submit" class="btn btn-success" name="addBranch" id="sucBtn">
 													</span>
 												</div>
+												<div class="modal-footer">
+												</div>	
 											</form>
 										</div>
 									</div>

@@ -291,7 +291,7 @@
 											
 											<h3>Supplier</h3>  
 												<div class="ui-widget">
-													<input id="supplier" name="supplier">
+													<input id="supplier" name="supplier" placeholder="Supplier">
 												</div>
 											<br>
 													
@@ -303,7 +303,7 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 														<td>	
 															<div class="ui-widget">
-																<input type="text" class="prodItem" name="prodItem" id="prod">
+																<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name">
 															</div>
 														</td>
 																	
