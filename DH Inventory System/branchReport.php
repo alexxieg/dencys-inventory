@@ -183,26 +183,55 @@
 		
 		<!-- Fetch Outgoing Data per Branch -->
 		<?php 
-			$sortByMonthDate = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
-			if (!empty($sortByMonthDate)) { 
-				$selectedMonth = $sortByMonthDate;
+			$firstSortByMonthDate = (isset($_REQUEST['firstDateMonthName']) ? $_REQUEST['firstDateMonthName'] : null);
+			if (!empty($firstSortByMonthDate)) { 
+				$firstSelectedMonth = $firstSortByMonthDate;
 			} else {
-				$selectedMonth = "none";
+				$firstSelectedMonth = "none";
 			}
 			
-			$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
-			if (!empty($sortByYearDate)) { 
-				$selectedYear = $sortByYearDate;
+			$firstSortByDayDate = (isset($_REQUEST['firstDateDayName']) ? $_REQUEST['firstDateDayName'] : null);
+			if (!empty($firstSortByDayDate)) { 
+				$firstSelectedDay = $firstSortByDayDate;
 			} else {
-				$selectedYear = "none";
+				$firstSelectedDay = "none";
+			}
+			
+			$firstSortByYearDate = (isset($_REQUEST['firstDateYearName']) ? $_REQUEST['firstDateYearName'] : null);
+			if (!empty($firstSortByYearDate)) { 
+				$firstSelectedYear = $firstSortByYearDate;
+			} else {
+				$firstSelectedYear = "none";
+			}
+			
+			$secondSortByMonthDate = (isset($_REQUEST['secondDateMonthName']) ? $_REQUEST['secondDateMonthName'] : null);
+			if (!empty($secondSortByMonthDate)) { 
+				$secondSelectedMonth = $secondSortByMonthDate;
+			} else {
+				$secondSelectedMonth = "none";
+			}
+			
+			$secondSortByDayDate = (isset($_REQUEST['secondDateDayName']) ? $_REQUEST['secondDateDayName'] : null);
+			if (!empty($secondSortByDayDate)) { 
+				$secondSelectedDay = $secondSortByDayDate;
+			} else {
+				$secondSelectedDay = "none";
+			}
+			
+			$secondSortByYearDate = (isset($_REQUEST['secondDateYearName']) ? $_REQUEST['secondDateYearName'] : null);
+			if (!empty($secondSortByYearDate)) { 
+				$secondSelectedYear = $secondSortByYearDate;
+			} else {
+				$secondSelectedYear = "none";
 			}
 			
 			/* For Camdas Query */
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-				$query = $conn->prepare("SELECT prodName, outQty 
+			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) { 
+				$query = $conn->prepare("SELECT prodName, outQty, outDate
 										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas' 
-										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas'
+										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
+										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
 				$query->execute();
 				$result1 = $query->fetchAll();
 			} else {
@@ -215,11 +244,12 @@
 			}
 			
 			/* For Hilltop Query */
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
 				$query2 = $conn->prepare("SELECT prodName, outQty 
 										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
 										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop'
-										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
+										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
 				$query2->execute();
 				$result2 = $query2->fetchAll();
 			} else {
@@ -232,11 +262,12 @@
 			}
 			
 			/* For KM 4 Query */
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
 				$query3 = $conn->prepare("SELECT prodName, outQty 
 										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
 										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4'
-										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
+										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
 				$query3->execute();
 				$result3 = $query3->fetchAll();
 			} else {
@@ -249,11 +280,12 @@
 			}
 			
 			/* For KM 5 Query */
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
 				$query4 = $conn->prepare("SELECT prodName, outQty 
 										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
 										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5'
-										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
+										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
 				$query4->execute();
 				$result4 = $query4->fetchAll();
 			} else {
@@ -266,11 +298,12 @@
 			}
 			
 			/* For San Fernando Query */
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
 				$query5 = $conn->prepare("SELECT prodName, outQty 
 										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
 										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando'
-										AND MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate;");
+										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
+										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
 				$query5->execute();
 				$result5 = $query5->fetchAll();
 			} else {
@@ -283,11 +316,13 @@
 			}
 			
 			/* For Branch Overall Query */
-			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
+			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
 				$query6 = $conn->prepare("SELECT SUM(outQty) AS 'TOTAL_QUANTITY', location 
 											FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID 
-											WHERE MONTHNAME(outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate
-											GROUP BY location ORDER BY TOTAL_QUANTITY DESC;");
+											WHERE (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
+											AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d')) 
+											GROUP BY location
+											ORDER BY TOTAL_QUANTITY DESC;");
 				$query6->execute();
 				$result6 = $query6->fetchAll();
 			} else {
@@ -304,6 +339,10 @@
 								FROM outgoing;");
 			$queryMonth->execute();
 			$resultMonth = $queryMonth->fetchAll();
+			
+			$queryDay = $conn->prepare("SELECT DISTINCT DAY(outDate) AS nowDayDate FROM outgoing ORDER BY nowDayDate ASC");
+			$queryDay->execute();
+			$resultDay = $queryDay->fetchAll();
 			
 			$queryYear = $conn->prepare("SELECT DISTINCT YEAR(outDate) AS nowYearDate FROM outgoing");
 			$queryYear->execute();
@@ -472,27 +511,76 @@
 							</div>
 							
 							<label>View Previous Reports</label>
-											<form class="form-inline" action="" method="post">
+								<form class="form-inline" action="" method="post">
+									<table>
+										<th>
+											FROM
+										</th>
+										<th>
+											TO
+										</th>
+										<tr>
+											<td>
 												<div class="form-group">
-													<select name="dateMonthName" class="form-control">
-														<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
+													<select name="firstDateMonthName" class="form-control">
+														<option value="<?php echo $firstSelectedMonth ?>" SELECTED>Month: <?php echo $firstSelectedMonth ?></option>
 														<?php foreach ($resultMonth as $rowMonth): ?>
 															<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
 														<?php endforeach ?>
 													</select>
 												</div>
 												<div class="form-group">
-													<select name="dateYearName" class="form-control">
-														<option value="<?php echo $selectedYear ?>">Selected: <?php echo $selectedYear ?></option>
+													<select name="firstDateDayName" class="form-control">
+														<option value="<?php echo $firstSelectedDay ?>" SELECTED>Day: <?php echo $firstSelectedDay ?></option>
+														<?php foreach ($resultDay as $rowDay): ?>
+															<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<select name="firstDateYearName" class="form-control">
+														<option value="<?php echo $firstSelectedYear ?>">Year: <?php echo $firstSelectedYear ?></option>
 														<?php foreach ($resultYear as $rowYear): ?>
 															<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
 														<?php endforeach ?>
 													</select>
 												</div>	
+											</td>
+											
+											<td>
 												<div class="form-group">
-													<input type="submit" value="View" class="btn btn-success" name="submit">
+													<select name="secondDateMonthName" class="form-control">
+														<option value="<?php echo $secondSelectedMonth ?>" SELECTED>Month: <?php echo $secondSelectedMonth ?></option>
+														<?php foreach ($resultMonth as $rowMonth): ?>
+															<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
+														<?php endforeach ?>
+													</select>
 												</div>
-											</form>	
+												<div class="form-group">
+													<select name="secondDateDayName" class="form-control">
+														<option value="<?php echo $secondSelectedDay ?>" SELECTED>Day: <?php echo $secondSelectedDay ?></option>
+														<?php foreach ($resultDay as $rowDay): ?>
+															<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<select name="secondDateYearName" class="form-control">
+														<option value="<?php echo $secondSelectedYear ?>">Year: <?php echo $secondSelectedYear ?></option>
+														<?php foreach ($resultYear as $rowYear): ?>
+															<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>	
+												
+											</td>
+										</tr>
+									</table>
+									<div class="form-group">
+										<input type="submit" value="View" class="btn btn-success" name="submit">
+									</div>
+								</form>		
+								
 								<hr>
 							
 								<div class="tab-content clearfix">
