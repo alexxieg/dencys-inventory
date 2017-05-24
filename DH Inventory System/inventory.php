@@ -179,39 +179,34 @@
 							<table class="table">	
 								<h1 id="headers">INVENTORY</h1>	
 									<table class="table table-striped table-bordered">
-									<?php 
-										$location =  $_SERVER['REQUEST_URI']; 
-									?>
-
+								<?php 
+									$location =  $_SERVER['REQUEST_URI']; 
+								?>
+									<form action="<?php echo $location; ?>" method="POST">
 										<tr>
 											<td>
-												Filter By Brand
-												<form action="<?php echo $location; ?>" method="POST">
-													<select name="brand_Name">
-														<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
-														<?php foreach ($brandType as $row): ?>
-															<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-														<?php endforeach ?>
-													</select>
-													<input type="submit" value="Filter" class="btn btn-success" name="submit">
-												</form>
+												Filter By Brand <br>
+												<select name="brand_Name">
+													<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
+													<?php foreach ($brandType as $row): ?>
+														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+													<?php endforeach ?>
+												</select>
 											</td>	
 											
 											<td>
 												Filter By Category <br>
-												<form action="<?php echo $location; ?>" method="POST">
-													<select name="category_Name">
-														<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
-														<?php foreach ($categoryType as $row2): ?>
-															<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
-														<?php endforeach ?>
-													</select>
-													<input type="submit" value="Filter" class="btn btn-success" name="submit">
-												</form>
+												<select name="category_Name">
+													<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
+													<?php foreach ($categoryType as $row2): ?>
+														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+													<?php endforeach ?>
+												</select>	
 											</td>
-											
 										</tr>
-									</table>
+										<input type="submit" value="Filter" class="btn btn-success" name="submit">
+									</form>
+								</table>
 									
 								<table class="table">	
 									<tr>
