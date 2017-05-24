@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2017 at 10:27 PM
+-- Generation Time: May 23, 2017 at 04:28 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `dencys`
 --
+CREATE DATABASE IF NOT EXISTS `dencys` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `dencys`;
 
 -- --------------------------------------------------------
 
@@ -3185,22 +3187,6 @@ INSERT INTO `purchaseorders` (`poID`, `poNumber`, `poDate`, `qtyOrder`, `supID`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchaseordersarchive`
---
-
-CREATE TABLE `purchaseordersarchive` (
-  `poID` int(6) NOT NULL,
-  `poNumber` varchar(45) DEFAULT NULL,
-  `poDate` date DEFAULT NULL,
-  `qtyOrder` int(5) DEFAULT NULL,
-  `supID` varchar(45) DEFAULT NULL,
-  `prodID` varchar(45) DEFAULT NULL,
-  `userID` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `returns`
 --
 
@@ -3344,20 +3330,6 @@ INSERT INTO `suppliers` (`supID`, `supplier_name`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userarchive`
---
-
-CREATE TABLE `userarchive` (
-  `userID` int(5) NOT NULL,
-  `userName` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL,
-  `user_role` text NOT NULL,
-  `status` varchar(45) NOT NULL DEFAULT 'Active'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -3467,12 +3439,6 @@ ALTER TABLE `purchaseorders`
   ADD PRIMARY KEY (`poID`);
 
 --
--- Indexes for table `purchaseordersarchive`
---
-ALTER TABLE `purchaseordersarchive`
-  ADD PRIMARY KEY (`poID`);
-
---
 -- Indexes for table `returns`
 --
 ALTER TABLE `returns`
@@ -3483,12 +3449,6 @@ ALTER TABLE `returns`
 --
 ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`supID`);
-
---
--- Indexes for table `userarchive`
---
-ALTER TABLE `userarchive`
-  ADD PRIMARY KEY (`userID`);
 
 --
 -- Indexes for table `users`
@@ -3536,20 +3496,10 @@ ALTER TABLE `outgoing`
 ALTER TABLE `purchaseorders`
   MODIFY `poID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=512;
 --
--- AUTO_INCREMENT for table `purchaseordersarchive`
---
-ALTER TABLE `purchaseordersarchive`
-  MODIFY `poID` int(6) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `returns`
 --
 ALTER TABLE `returns`
   MODIFY `returnID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
---
--- AUTO_INCREMENT for table `userarchive`
---
-ALTER TABLE `userarchive`
-  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
