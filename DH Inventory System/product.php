@@ -190,7 +190,8 @@
 											<td>
 												Filter By Brand <br>
 												<select name="brand_Name">
-													<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
+													<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
+													<option value="<?php echo $None?>">--None--</option>
 													<?php foreach ($brandType as $row): ?>
 														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
 													<?php endforeach ?>
@@ -200,7 +201,8 @@
 											<td>
 												Filter By Category <br>
 												<select name="category_Name">
-													<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
+													<option value="<?php echo $selectedCategory?>" SELECTED>Category: <?php echo $filterCategory?></option>
+													<option value="<?php echo $None?>">--None--</option>
 													<?php foreach ($categoryType as $row2): ?>
 														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
 													<?php endforeach ?>
