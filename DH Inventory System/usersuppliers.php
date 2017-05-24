@@ -58,7 +58,7 @@
 	<body>
 		<!-- Retrieve Employee Data -->
 		<?php
-			$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers");
+			$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Active'");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -138,163 +138,163 @@
 								<table class="table table-striped table-bordered">		
 									<h1 id="headers">SUPPLIERS</h1>
 									<table class="table">	
-								   	  <tr>
-									  <td>
-									  <br>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Supplier</button>							
-									  </td>
-									  </tr>
+										<tr>
+											<td>
+												<br>
+												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#blacklist" id="modbutt">View Blacklist</button>						
+											</td>
+										</tr>
 									</table>
 								</table>
 							</div>
 							
-						<div class="pages no-more-tables">
-						<!-- Table Display for Suppliers -->
-							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-								<div id="myTable_length" class="dataTables_length">
-									<div id="myTable_filter" class="dataTables_filter">
+							<div class="pages no-more-tables">
+							<!-- Table Display for Suppliers -->
+								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
+										</div>
 									</div>
 								</div>
-							</div>
 							
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+									<thead>
 										<tr>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier ID</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
-											<th></th>
 										</tr>
-								</thead>
-								<tbody>
+									</thead>
+									<tbody>
 										<?php
 											foreach ($result as $item):
 											$supID = $item["supID"];
 										?>
-											
+										
 										<tr id="centerData">
 											<td data-title="Supplier ID"><?php echo $item["supID"]; ?></td>
 											<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
-											<td>
-												<a href="functionalities/userEditSupplier.php?supID=<?php echo $supID; ?>" target="_self">
-												<button type="button" class="btn btn-default" id="edBtn">
-													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-												</button>
-												</a>	
-											
-												<a href="functionalities/removeSupplier.php?supID=<?php echo $supID; ?>"> 
-													<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
-														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-													</button>
-												</a>
-											</td>		
 										</tr>
 											
 										<?php
 											endforeach;
 										?>
-								</tbody>	
-							</table>
-								
-							<!-- Modal - Add Employee Form -->
-							<div class="modal fade" id="myModal" role="dialog">
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add New Supplier</h4>
-										</div>
-										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()">									
-												<h3>Supplier Name</h3>
-												<input type="text" class="form-control" id ="addFName" placeholder="First Name" name="supName"> <br>
-												<br>
-												
-												<div class="modFoot">
-												<span>
-													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-												</span>
-												<span>
-													<input type="submit" value="Submit" class="btn btn-success" name="addSup" id="sucBtn">
-												</span>
-											</div>
-											</form> 
-										</div>
-										
-										<div class="modal-footer">	
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<!-- Modal - Supplier Archive -->
-							<div class="modal fade" id="archive" role="dialog">
-								<div class="modal-dialog modal-xl">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Archived Branches</h4>
-										</div>
-										<div class="modal-body">
-											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-											
-												<!-- Retrieve Supplier Data -->
-												<?php
-													$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Inactive'");
-													$query->execute();
-													$result1 = $query->fetchAll();
-												?>
-												
-												<thead>
-													<tr id="centerData">
-														<th>
-															<div id="tabHead">Supplier ID</div>
-														</th>
-														<th>
-															<div id="tabHead">Supplier Name</div>
-														</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
+									</tbody>	
+								</table>
 														
+								<!-- Modal - Supplier Archive -->
+								<div class="modal fade" id="archive" role="dialog">
+									<div class="modal-dialog modal-xl">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Archived Suppliers</h4>
+											</div>
+											<div class="modal-body">
+												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+												
+													<!-- Retrieve Supplier Data -->
 													<?php
-														foreach ($result1 as $item):
-														$supID = $item["supID"];													
+														$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Inactive'");
+														$query->execute();
+														$result1 = $query->fetchAll();
 													?>
 													
-													<tr id="centerData">
-														<td data-title="Employee ID"><?php echo $item["supID"]; ?></td>
-														<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
-														<td>										
-															<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this supplier?');">
-																	<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-																</button>
-															</a>
-														</td>		
-													</tr>	
-													<?php
-														endforeach;
-													?>
-												</tbody>	
-											</table>
+													<thead>
+														<tr id="centerData">
+															<th>
+																<div id="tabHead">Supplier ID</div>
+															</th>
+															<th>
+																<div id="tabHead">Supplier Name</div>
+															</th>
+														</tr>
+													</thead>
+													<tbody>
+															
+														<?php
+															foreach ($result1 as $item):
+															$supID = $item["supID"];													
+														?>
+														
+														<tr id="centerData">
+															<td data-title="Supplier ID"><?php echo $item["supID"]; ?></td>
+															<td data-title="Supplier Name"><?php echo $item["supplier_name"]; ?></td>	
+														</tr>	
+														<?php
+															endforeach;
+														?>
+													</tbody>	
+												</table>
+											</div>
 										</div>
+											
+										<div class="modal-footer">
+										</div>
+											
 									</div>
-										
-									<div class="modal-footer">
-									</div>
-										
 								</div>
-							</div>					
+								<!-- End of Modal -->
+							
+								<!-- Modal - Blacklist -->
+								<div class="modal fade" id="blacklist" role="dialog">
+									<div class="modal-dialog modal-xl">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Blacklisted Suppliers</h4>
+											</div>
+											<div class="modal-body">
+												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+												
+													<!-- Retrieve Supplier Data -->
+													<?php
+														$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Blacklisted'");
+														$query->execute();
+														$result1 = $query->fetchAll();
+													?>
+													
+													<thead>
+														<tr id="centerData">
+															<th>
+																<div id="tabHead">Supplier ID</div>
+															</th>
+															<th>
+																<div id="tabHead">Supplier Name</div>
+															</th>
+														</tr>
+													</thead>
+													<tbody>
+															
+														<?php
+															foreach ($result1 as $item):
+															$supID = $item["supID"];													
+														?>
+														
+														<tr id="centerData">
+															<td data-title="Supplier ID"><?php echo $item["supID"]; ?></td>
+															<td data-title="Supplier Name"><?php echo $item["supplier_name"]; ?></td>		
+														</tr>	
+														<?php
+															endforeach;
+														?>
+													</tbody>	
+												</table>
+											</div>
+										</div>
+											
+										<div class="modal-footer">
+										</div>
+											
+									</div>
+								</div>
+								<!-- End of Modal -->	
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		<!-- Add New Supplier -->
-		<?php include('functionalities/addSupplier.php'); ?>
 		
 	</body>
 </html>

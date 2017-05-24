@@ -238,6 +238,7 @@
 									?>
 								</tbody>	
 							</table>
+							<!-- End of table display -->
 								
 							<!-- Modal for Returned Product Entry Form -->
 							<div class="modal fade" id="myModal" role="dialog">
@@ -334,6 +335,8 @@
 									</div>
 								</div>
 							</div>
+							<!-- End of modal -->
+							
 						</div>
 					</div>
 				</div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2017 at 03:04 AM
+-- Generation Time: May 24, 2017 at 04:02 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -573,6 +573,7 @@ INSERT INTO `defectives` (`defectProdID`, `prodName`, `unitType`, `status`, `bra
 
 CREATE TABLE `editincoming` (
   `inEditID` int(11) NOT NULL,
+  `inEditDate` date NOT NULL,
   `inQty` varchar(45) NOT NULL,
   `inDate` varchar(45) NOT NULL,
   `receiptNo` varchar(45) NOT NULL,
@@ -596,6 +597,7 @@ CREATE TABLE `editincoming` (
 
 CREATE TABLE `editoutgoing` (
   `outEditID` int(11) NOT NULL,
+  `outEditDate` date NOT NULL,
   `outID` varchar(45) NOT NULL,
   `outQty` varchar(45) NOT NULL,
   `outDate` varchar(45) NOT NULL,
@@ -614,6 +616,7 @@ CREATE TABLE `editoutgoing` (
 
 CREATE TABLE `editpo` (
   `poEditID` int(5) NOT NULL,
+  `poEditDate` date NOT NULL,
   `poID` int(5) NOT NULL,
   `poNumber` varchar(45) NOT NULL,
   `poDate` date NOT NULL,
@@ -631,6 +634,7 @@ CREATE TABLE `editpo` (
 
 CREATE TABLE `editreturn` (
   `returnEditID` int(11) NOT NULL,
+  `returnEditDate` date NOT NULL,
   `returnID` varchar(45) NOT NULL,
   `receiptNo` varchar(45) NOT NULL,
   `returnDate` varchar(45) NOT NULL,
@@ -652,6 +656,7 @@ CREATE TABLE `editreturn` (
 
 CREATE TABLE `edituser` (
   `userEditID` int(5) NOT NULL,
+  `userEditDate` date NOT NULL,
   `userID` int(5) NOT NULL,
   `userName` varchar(25) NOT NULL,
   `password` varchar(255) NOT NULL,
