@@ -236,7 +236,8 @@
 									?>
 								</tbody>	
 							</table>
-								
+							<!-- End of Table -->
+							
 							<!-- Modal for Returned Product Entry Form -->
 							<div class="modal fade" id="myModal" role="dialog">
 								 <div class="modal-dialog modal-lg">
