@@ -20,7 +20,7 @@
 			echo '</script>';
 		} else {
 			
-		
+		$psw = password_hash($psw, PASSWORD_BCRYPT);
 				 
 		$sql = "INSERT INTO users (userName, password, user_role)
 				VALUES ('$userName','$psw','".$_POST['user_role']."')";
