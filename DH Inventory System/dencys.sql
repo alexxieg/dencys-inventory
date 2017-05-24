@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2017 at 03:04 AM
+-- Generation Time: May 24, 2017 at 03:30 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -3427,10 +3427,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `userName`, `password`, `user_role`, `status`) VALUES
-(1, 'denne', 'bosch123', 'admin', 'Active'),
-(2, 'dennielle', 'hitachi123', 'admin', 'Active'),
-(3, 'haney', 'dewatt123', 'user', 'Active'),
-(4, 'kharol', 'agp123', 'user', 'Active');
+(1, 'denne', '$2y$10$aUXTUK9D.oE/qVEJ4r4j5.1b44pjuZAfRQEojJMoOB5dkrphlyNW2', 'admin', 'Active'),
+(2, 'dennielle', '$2y$10$h6rQs4vU1rb8NmUxlr1cgucCXlgkyKvgDxk8IqVk4ZzVoOA6WI8M2', 'admin', 'Active'),
+(3, 'haney', '$2y$10$5orgVJStaD0QS4lp2XmsAe9u8hBtoYuihWicGTHcuNu8ljImo5hC2', 'user', 'Active'),
+(4, 'kharol', '$2y$10$yNI9043Q6Ec9SV1aHGadgOANjXRgYwEWbup4jIFGnWhV5.pHaW3be', 'user', 'Active');
 
 --
 -- Indexes for dumped tables
