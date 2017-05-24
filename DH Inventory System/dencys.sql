@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2017 at 04:28 AM
+-- Generation Time: May 24, 2017 at 03:04 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -568,14 +568,95 @@ INSERT INTO `defectives` (`defectProdID`, `prodName`, `unitType`, `status`, `bra
 -- --------------------------------------------------------
 
 --
--- Table structure for table `edits`
+-- Table structure for table `editincoming`
 --
 
-CREATE TABLE `edits` (
-  `editID` int(5) NOT NULL,
-  `editDate` date NOT NULL,
-  `editContent` varchar(100) NOT NULL,
-  `editRef` varchar(10) NOT NULL
+CREATE TABLE `editincoming` (
+  `inEditID` int(11) NOT NULL,
+  `inQty` varchar(45) NOT NULL,
+  `inDate` varchar(45) NOT NULL,
+  `receiptNo` varchar(45) NOT NULL,
+  `receiptDate` varchar(45) NOT NULL,
+  `inRemarks` varchar(45) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `partialRcptNo` varchar(45) DEFAULT NULL,
+  `partialRcptDate` varchar(45) DEFAULT NULL,
+  `empID` varchar(45) NOT NULL,
+  `prodID` varchar(45) NOT NULL,
+  `supID` varchar(45) NOT NULL,
+  `userID` varchar(45) NOT NULL,
+  `poNumber` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `editoutgoing`
+--
+
+CREATE TABLE `editoutgoing` (
+  `outEditID` int(11) NOT NULL,
+  `outID` varchar(45) NOT NULL,
+  `outQty` varchar(45) NOT NULL,
+  `outDate` varchar(45) NOT NULL,
+  `receiptNo` varchar(45) NOT NULL,
+  `branchID` varchar(45) NOT NULL,
+  `empID` varchar(45) NOT NULL,
+  `prodID` varchar(45) NOT NULL,
+  `userID` varchar(45) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `editpo`
+--
+
+CREATE TABLE `editpo` (
+  `poEditID` int(5) NOT NULL,
+  `poID` int(5) NOT NULL,
+  `poNumber` varchar(45) NOT NULL,
+  `poDate` date NOT NULL,
+  `qtyOrder` int(5) NOT NULL,
+  `supID` varchar(45) NOT NULL,
+  `prodID` varchar(45) NOT NULL,
+  `userID` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `editreturn`
+--
+
+CREATE TABLE `editreturn` (
+  `returnEditID` int(11) NOT NULL,
+  `returnID` varchar(45) NOT NULL,
+  `receiptNo` varchar(45) NOT NULL,
+  `returnDate` varchar(45) NOT NULL,
+  `returnQty` varchar(45) NOT NULL,
+  `returnType` varchar(45) NOT NULL,
+  `returnRemark` varchar(45) NOT NULL,
+  `prodID` varchar(45) NOT NULL,
+  `branchID` varchar(45) DEFAULT NULL,
+  `userID` varchar(45) DEFAULT NULL,
+  `supID` varchar(45) DEFAULT NULL,
+  `empID` varchar(45) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `edituser`
+--
+
+CREATE TABLE `edituser` (
+  `userEditID` int(5) NOT NULL,
+  `userID` int(5) NOT NULL,
+  `userName` varchar(25) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `user_role` text CHARACTER SET big5 NOT NULL,
+  `status` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1480,11 +1561,11 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (313, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'KBL-WLD-0013', NULL),
 (314, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'KBL-WLD-0014', NULL),
 (315, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'KBL-WLD-0015', NULL),
-(316, '2017-03-31', 40, 0, 0, 40, NULL, NULL, NULL, 'KBL-WLD-0016', NULL),
-(317, '2017-03-31', 40, 0, 0, 40, NULL, NULL, NULL, 'KBL-WLD-0017', NULL),
-(318, '2017-03-31', 40, 0, 0, 40, NULL, NULL, NULL, 'KBL-WLD-0018', NULL),
-(319, '2017-03-31', 40, 0, 0, 40, NULL, NULL, NULL, 'KBL-WLD-0019', NULL),
-(320, '2017-03-31', 40, 0, 0, 40, NULL, NULL, NULL, 'KBL-WLD-0020', NULL),
+(316, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'KBL-WLD-0016', NULL),
+(317, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'KBL-WLD-0017', NULL),
+(318, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'KBL-WLD-0018', NULL),
+(319, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'KBL-WLD-0019', NULL),
+(320, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'KBL-WLD-0020', NULL),
 (321, '2017-03-31', 20, 0, 0, 30, 10, NULL, NULL, 'KWK-LTE-0001', NULL),
 (322, '2017-03-31', 20, 0, 0, 30, 10, NULL, NULL, 'KWK-LTE-0002', NULL),
 (323, '2017-03-31', 20, 0, 0, 30, 10, NULL, NULL, 'KWK-LTE-0003', NULL),
@@ -3336,7 +3417,7 @@ INSERT INTO `suppliers` (`supID`, `supplier_name`, `status`) VALUES
 CREATE TABLE `users` (
   `userID` int(5) NOT NULL,
   `userName` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `user_role` text NOT NULL,
   `status` varchar(45) NOT NULL DEFAULT 'Active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -3390,10 +3471,34 @@ ALTER TABLE `defectives`
   ADD KEY `FKDEFCAT_idx` (`categoryID`);
 
 --
--- Indexes for table `edits`
+-- Indexes for table `editincoming`
 --
-ALTER TABLE `edits`
-  ADD PRIMARY KEY (`editID`);
+ALTER TABLE `editincoming`
+  ADD PRIMARY KEY (`inEditID`);
+
+--
+-- Indexes for table `editoutgoing`
+--
+ALTER TABLE `editoutgoing`
+  ADD PRIMARY KEY (`outEditID`);
+
+--
+-- Indexes for table `editpo`
+--
+ALTER TABLE `editpo`
+  ADD PRIMARY KEY (`poEditID`);
+
+--
+-- Indexes for table `editreturn`
+--
+ALTER TABLE `editreturn`
+  ADD PRIMARY KEY (`returnEditID`);
+
+--
+-- Indexes for table `edituser`
+--
+ALTER TABLE `edituser`
+  ADD PRIMARY KEY (`userEditID`);
 
 --
 -- Indexes for table `employee`
@@ -3466,10 +3571,15 @@ ALTER TABLE `users`
 ALTER TABLE `archive`
   MODIFY `archiveID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `edits`
+-- AUTO_INCREMENT for table `editpo`
 --
-ALTER TABLE `edits`
-  MODIFY `editID` int(5) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `editpo`
+  MODIFY `poEditID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `edituser`
+--
+ALTER TABLE `edituser`
+  MODIFY `userEditID` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `employee`
 --
