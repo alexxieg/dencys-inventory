@@ -178,7 +178,7 @@
 											Date
 										</th>									
 										
-										<th colspan="2">
+										<th colspan="3">
 											IN
 										</th>
 										
@@ -203,9 +203,13 @@
 										</th>
 						
 										<th>
+											Freebies
+										</th>
+									
+										<th>
 											Warehouse Returns
 										</th>
-						
+																		
 										<th>
 											Issuance
 										</th>
@@ -221,11 +225,11 @@
 										foreach ($res as $item):
 										
 										if ($request == $base && $loop == True){
-											$currQty = $request + ($item["plus"] + $item["plus2"]) - ($item["minus"] + $item["minus2"]);
+											$currQty = $request + ($item["plus"] + $item["plus2"] + $item["plus3"]) - ($item["minus"] + $item["minus2"]);
 											$loop = False;
 										}
 										else {
-											$currQty = $currQty + ($item["plus"] + $item["plus2"]) - ($item["minus"] + $item["minus2"]);
+											$currQty = $currQty + ($item["plus"] + $item["plus2"] + $item["plus3"]) - ($item["minus"] + $item["minus2"]);
 										}
 									?>
 									
@@ -233,9 +237,10 @@
 										<td data-title="Receipt"><?php echo $item["receiptNos"]; ?></td>
 										<td data-title="Date"><?php echo $item["dates"]; ?></td>	
 										<td data-title="IN"><?php echo $item["plus"];?></td>
-																				<td data-title="IN"><?php echo $item["plus2"];?></td>
+										<td data-title=""><?php echo $item["plus3"];?></td>
+										<td data-title="IN"><?php echo $item["plus2"];?></td>
 										<td data-title="OUT"><?php echo $item["minus"]; ?></td>
-																				<td data-title="OUT"><?php echo $item["minus2"]; ?></td>
+										<td data-title="OUT"><?php echo $item["minus2"]; ?></td>
 										<td data-title="BALANCE"><?php echo $currQty ?></td>
 									</tr>
 									<?php

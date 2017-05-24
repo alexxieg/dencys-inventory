@@ -56,14 +56,14 @@
 		<!-- Retrieved Selected Entry Details -->
 		<?php
 			$incID= $_GET['incId'];
-			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inID, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.status, incoming.inRemarks, incoming.userID 
+			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inID, incoming.inType, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID INNER JOIN suppliers ON incoming.supID = suppliers.supID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.status, incoming.inRemarks, incoming.userID 
+			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inType, CONCAT(incoming.inQty,' ', product.unitType) AS inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID INNER JOIN suppliers ON incoming.supID = suppliers.supID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
@@ -206,6 +206,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Delivery Type</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
 									</tr>
 								</thead>
@@ -221,6 +222,7 @@
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
 										<td data-title="Status"><?php echo $item["status"]; ?></td>
+										<td data-title="Type"><?php echo $item["inType"]; ?></td>
 										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
 									</tr>	
 									

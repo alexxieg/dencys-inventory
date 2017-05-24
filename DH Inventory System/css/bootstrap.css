@@ -6025,7 +6025,7 @@ button.close {
 }
 @media (min-width: 992px) {
   .modal-lg {
-   width: 60%;
+   width: 100%;
    max-width:1200px;
   }
 }
@@ -7597,24 +7597,30 @@ border: none;
 #addpass, #addpassconf,
 #addProdName, #addPrice,
 #addReorderLvl, #userID, #addItem, #addProdQty,
-#addPO {
+#addPO{
   width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
 
+.modal-body #addOutQty{
+	width: 25%;
+	margin-left: 5%;
+}
+
 .modal-body #supplier{
-width:50%;
-margin-left:25%;}
+	width:50%;
+	margin-left:25%;
+}
 
 .modal-body #prod{
-width:100%;
+	width:100%;
 }
 
 .modal-xl {
    width: 100%;
    max-width:1200px;
-  }
+ }
   
 #adminDrp {
   margin-top: -4%;

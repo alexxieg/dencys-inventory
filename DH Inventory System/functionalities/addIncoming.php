@@ -79,9 +79,11 @@
             $prodItem = $_POST['prodItem'][$index];
             $inQty = $_POST['incQty'][$index];
 			$inStat = $_POST['inStatus'][$index];
+			$inType = $_POST['inType'][$index];
             $emp = $_POST['emp'];
 			$userID = $_POST['userID'];
 			$supName = $_POST['supplier'];	
+			$poNum = $_POST['po'];
 
             $emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
             $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -94,8 +96,8 @@
             $prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
             $prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
             $prod3 = $prod2['prodA'];
-            $sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inRemarks, empID, prodID, userID)
-            VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','$sup3','$inStat','$inRemarks','$emp3','$prod3','$userID')";
+            $sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
+            VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$prod3','$userID','$poNum')";
             $result = $conn->query($sql); 
 
             echo "<meta http-equiv='refresh' content='0'>";

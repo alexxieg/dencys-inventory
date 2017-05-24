@@ -103,9 +103,7 @@
 				<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 				
 				<h3>Product Order Number</h3>				
-				<select class="form-control" id="addEmpl" name="po" onchange="this.form.submit();" readonly>
-					<option SELECTED><?php echo $varPO; ?></option>
-				</select>
+				<input type="text" class="form-control" id="poNum" value="<?php echo $varPO; ?>" name="po" readonly>
 				
 				<h3>Receipt No.</h3> 
 				<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno">
@@ -156,6 +154,13 @@
 									<option>Partial</option>
 								</select> 
 							</td>
+								
+							<td>
+								<select class="form-control" name="inType[]">
+									<option>Ordered</option>
+									<option>Freebie</option>
+								</select>
+							</td>	
 								
 							<td>
 								<input type="text" class="form-control" id="addRem" value="None" placeholder="Remarks" name="inRemarks[]">

@@ -4,20 +4,20 @@
 			$sortByEndDate = (isset($_REQUEST['endDate']) ? $_REQUEST['endDate'] : null);
 			if (!empty($sortByStartDate) AND !empty($sortByEndDate)) { 
 				$query = $conn->prepare("
-										SELECT receiptNos, dates, plus, plus2, minus, minus2 FROM (
-											SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null AS plus2,  null  AS minus, null as minus2
+										SELECT receiptNos, dates, plus, plus2, plus3, minus, minus2 FROM (
+											SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null AS plus2, null AS plus3,  null  AS minus, null as minus2
 											FROM incoming
 											WHERE incoming.prodID = '$incID' AND incoming.inDate >= '$sortByStartDate' AND incoming.inDate <= '$sortByEndDate'
 											UNION 
-											SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, null, outgoing.outQty AS minus, null
+											SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, null, null, outgoing.outQty AS minus, null
 											FROM outgoing
 											WHERE outgoing.prodID = '$incID' AND outgoing.outDate >= '$sortByStartDate' AND outgoing.outDate <= '$sortByEndDate'
 											UNION
-											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS plus2, null, null
+											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS plus2, null, null, null
 											FROM returns
 											WHERE returns.prodID = '$incID' AND returns.returnType = 'Warehouse Return' AND returns.returnDate >= '$sortByStartDate' AND returns.returnDate <= '$sortByEndDate'
 											UNION
-											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, null, null, returns.returnQty AS minus
+											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, null, null, null, returns.returnQty AS minus
 											FROM returns
 											WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return' AND returns.returnDate >= '$sortByStartDate' AND returns.returnDate <= '$sortByEndDate'
 										)
@@ -27,20 +27,24 @@
 				$res = $query->fetchAll();
 			} else {
 				$query = $conn->prepare("
-										SELECT receiptNos, dates, plus, plus2, minus, minus2 FROM (
-											SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null AS plus2,  null  AS minus, null as minus2
+										SELECT receiptNos, dates, plus, plus2, plus3, minus, minus2 FROM (
+											SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null AS plus2, null AS plus3,  null  AS minus, null as minus2
 											FROM incoming
 											WHERE incoming.prodID = '$incID'
 											UNION 
-											SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, null, outgoing.outQty AS minus, null
+                                            SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, null, null, incoming.inQty AS plus3, null, null
+                                            FROM incoming
+                                            WHERE incoming.prodID = '$incID' AND incoming.inType = 'Freebie'
+                                            UNION
+											SELECT outgoing.receiptNo AS receiptNos, outgoing.outDate AS dates, null, null, null, outgoing.outQty AS minus, null
 											FROM outgoing
 											WHERE outgoing.prodID = '$incID'	
-											UNION
-											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS plus2, null, null
+											UNION                                            
+											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, returns.returnQty AS plus2, null, null, null
 											FROM returns
 											WHERE returns.prodID = '$incID' AND returns.returnType = 'Warehouse Return'
 											UNION
-											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, null, null, returns.returnQty AS minus
+											SELECT returns.receiptNo AS receiptNos, returns.returnDate AS dates, null, null, null, null, returns.returnQty AS minus
 											FROM returns
 											WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return'
 										)

@@ -327,7 +327,7 @@
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Item Quantity" name="outQty[]">
+																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Quantity" name="outQty[]">
 															</td>
 														</tr>
 													</tbody>
@@ -353,6 +353,8 @@
 									</div>
 								</div>
 							</div>
+							<!-- End of modal -->
+							
 						</div>
 					</div>
 				</div>
