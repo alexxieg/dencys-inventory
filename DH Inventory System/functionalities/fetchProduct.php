@@ -10,6 +10,8 @@
 	$sortByBrand = (isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
 	$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
 	
+	$None = null;
+	
 	if (!empty($sortByBrand)) {
 		$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
 								FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
@@ -44,13 +46,13 @@
 	if (!empty($selectedBrand)) {
 		$filterBrand = current($conn->query("SELECT brandName FROM brand WHERE brandID = '$selectedBrand'")->fetch());
 	} else {
-		$filterBrand = "None";
+		$filterBrand = $None;
 	}
 	
 	$selectedCategory =(isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
 	if (!empty($selectedCategory)) {
 		$filterCategory = current($conn->query("SELECT categoryName FROM category WHERE categoryID = '$selectedCategory'")->fetch());
 	} else {
-		$filterCategory = "None";
+		$filterCategory = $None;
 	}
 ?>
