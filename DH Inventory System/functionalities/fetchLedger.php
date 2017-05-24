@@ -31,7 +31,7 @@
 										SELECT receiptNos, dates, plus, plus2, plus3, minus, minus2 FROM (
 											SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, incoming.inQty AS plus, null AS plus2, null AS plus3,  null  AS minus, null as minus2
 											FROM incoming
-											WHERE incoming.prodID = '$incID'
+											WHERE incoming.prodID = '$incID' AND incoming.inType = 'Ordered'
 											UNION 
                                             SELECT incoming.receiptNo AS receiptNos, incoming.inDate AS dates, null, null, incoming.inQty AS plus3, null, null
                                             FROM incoming
