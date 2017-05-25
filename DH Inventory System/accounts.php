@@ -377,7 +377,7 @@
 													<tr id="centerData">
 														<td data-title="User Edit Date"><?php echo $item["userEditDate"]; ?></td>	
 														<td data-title="Username"><?php echo $item["userName"]; ?></td>
-														<td data-title="Password"><?php echo $item["password"]; ?></td>
+														<td data-title="Password"><?php echo str_repeat('*', strlen( $item["password"])); ?></td>
 														<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 														<td data-title="Status"><?php echo $item["status"]; ?></td>														
 													</tr>
