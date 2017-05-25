@@ -53,11 +53,12 @@
                     buttons: [
                         {
                             title: 'Dencys Hardware and General Merchandise', 
+							message: 'Current Inventory', 
 							customize: function ( win ) {
                                 $(win.document.body)
                                     .css( 'font-size', '10pt' )
                                     .prepend(
-                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="height:100px; width:100px;" />'
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="float: left; height:100px; width:100px;" />'
                                     );
 
                                 $(win.document.body).find( 'table' )
