@@ -345,7 +345,8 @@
 												<th>Product Description</th>						
 												<th>Current Quantity</th>
 												<th>Reorder Level</th>
-												<th>Unit</th>	
+												<th>Unit</th>
+												<th></th>
 											</tr>
 												
 											<?php
@@ -357,6 +358,13 @@
 												<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
 												<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 												<td data-title="Unit"><?php echo $item["unitType"];?></td>
+												<td data-title="Reorder">
+													<a href="functionalities/reorderPO.php?reoId=<?php echo $item["prodID"]; ?>" target="_blank"> 
+														<button type="button" class="btn btn-default" id="edBtn">
+															Reorder
+														</button>
+													</a>
+												</td>
 												</td>		
 											</tr>	
 											<?php
