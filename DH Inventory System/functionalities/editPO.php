@@ -213,8 +213,8 @@
 		$incID= $_GET['incId'];
 		if (isset($_POST["editPO"])){
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO purchaseordersarchive (poNumber, poDate, qtyOrder, supID, prodID, userID)
-				SELECT poNumber, poDate, qtyOrder, supID, prodID, userID from purchaseorders WHERE poNumber = '$incID' ORDER BY poID";
+		$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
+				SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poNumber = '$incID'";
 		$conn->exec($sql);
 		}
 		?>

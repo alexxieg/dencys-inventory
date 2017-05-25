@@ -347,13 +347,16 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT poNumber, poDate, qtyOrder, prodID, userID from purchaseordersarchive");
+													$query = $conn->prepare("SELECT editPO.poEditDate, editPO.poNumber, editPO.poDate, editPO.qtyOrder, product.prodName, editPO.userID from editpo INNER JOIN product ON editpo.prodID = product.prodID");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
 												
 												<thead>
 													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Edited</div>
+														</th>
 														<th>
 															<div id="tabHead">PO Number</div>
 														</th>
@@ -364,10 +367,10 @@
 															<div id="tabHead">Quantity Order</div>
 														</th>
 														<th>
-															<div id="tabHead">Product ID</div>
+															<div id="tabHead">Product Description</div>
 														</th>
 														<th>
-															<div id="tabHead">Last Edited By</div>
+															<div id="tabHead">Edited By</div>
 														</th>
 													</tr>
 												</thead>
@@ -379,11 +382,12 @@
 														$incID = $item["poNumber"];
 													?>
 													<tr id="centerData">	
+														<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
 														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
 														<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
 														<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
-														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-														<td data-title="Last Edited By"><?php echo $item["userID"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
 													</tr>
 													<?php
 														endforeach;
