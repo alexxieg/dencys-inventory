@@ -294,7 +294,7 @@
 												<h3>Product Order Number</h3>
 												<?php
 													$query = $conn->prepare("SELECT DISTINCT poNumber, poDate, suppliers.supplier_name FROM purchaseorders
-																			JOIN suppliers ON suppliers.supID = purchaseorders.supID");
+																			JOIN suppliers ON suppliers.supID = purchaseorders.supID WHERE purchaseorders.status!='Complete'");
 													$query->execute();
 													$res = $query->fetchAll();
 												?>
