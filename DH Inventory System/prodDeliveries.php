@@ -199,6 +199,7 @@
 										<br>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product Delivery</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
 									</td>
 									<td>
 										<div class="col-sm-7 pull-right filter">
@@ -296,6 +297,7 @@
 													$query = $conn->prepare("SELECT DISTINCT poNumber, poDate, suppliers.supplier_name FROM purchaseorders
 																			JOIN suppliers ON suppliers.supID = purchaseorders.supID WHERE purchaseorders.status!='Complete'");
 													$query->execute();
+													$query->execute();
 													$res = $query->fetchAll();
 												?>
 																	
@@ -392,7 +394,94 @@
 									</div>
 								</div>
 							</div> 
-							<!-- End of Modal -->			
+							<!-- End of Modal -->
+
+									<!-- Modal - Activity Log -->
+							<div class="modal fade" id="activityLog" role="dialog">
+								<div class="modal-dialog modal-xl">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Edit Activity Log</h4>
+										</div>
+										<div class="modal-body">
+											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+											
+												<!-- Retrieve Category Data -->
+												<?php
+													$query = $conn->prepare("SELECT editIncoming.inID, editIncoming.inEditDate, editIncoming.inQty, editIncoming.inDate, editIncoming.receiptNo, editIncoming.receiptDate, editIncoming.inRemarks, editIncoming.status, editIncoming.poNumber, product.prodName, editIncoming.userID from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
+													$query->execute();
+													$result1 = $query->fetchAll();
+												?>
+												
+												<thead>
+													<tr id="centerData">
+														<th>
+															<div id="tabHead">Incoming ID</div>
+														</th>
+														<th>
+															<div id="tabHead">Date Edited</div>
+														</th>
+														<th>
+															<div id="tabHead">Incoming Date</div>
+														</th>
+														<th>
+															<div id="tabHead">Receipt No</div>
+														</th>
+														<th>
+															<div id="tabHead">Receipt Date</div>
+														</th>
+														<th>
+															<div id="tabHead">Remarks</div>
+														</th>
+														<th>
+															<div id="tabHead">Status</div>
+														</th>
+														<th>
+															<div id="tabHead">PO Number</div>
+														</th>
+														<th>
+															<div id="tabHead">Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited By</div>
+														</th>
+													</tr>
+												</thead>
+												
+												<tbody>						
+														
+													<?php
+														foreach ($result1 as $item):
+														$incRec = $item["poNumber"];
+													?>
+													<tr id="centerData">
+														<td data-title="Incoming ID"><?php echo $item["inID"]; ?></td>
+														<td data-title="Edit Date"><?php echo $item["inEditDate"]; ?></td>
+														<td data-title="Incoming Date"><?php echo $item["inDate"]; ?></td>
+														<td data-title="Receipt Number"><?php echo $item["receiptNo"]; ?></td>
+														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
+														<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+														<td data-title="Status"><?php echo $item["status"]; ?></td>
+														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+													</tr>
+													<?php
+														endforeach;
+													?>
+												
+												</tbody>
+											</table>
+											
+										</div>
+									</div>
+										
+									<div class="modal-footer">
+									</div>
+										
+								</div>
+							</div>
 								
 						</div>
 					</div>		  

@@ -362,7 +362,17 @@
 				</div>
 			</div>
 		</div> 
-		<!-- End of Modal -->
+		<!-- End of Modal -->	
+		<?php
+		require_once 'dbcon.php';
+		$incID= $_GET['incId'];
+		if (isset($_POST["updateIn"])){
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "INSERT INTO editincoming (inEditDate, inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID)
+				SELECT CURDATE(), inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID from incoming WHERE poNumber = '$incID'";
+		$conn->exec($sql);
+		}
+		?>
 		
 		<?php
 			$incID= $_GET['incId'];
