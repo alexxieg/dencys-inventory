@@ -294,18 +294,6 @@
 												</thead>
 												
 												<tbody>												
-
-													<tr id="centerData">
-														<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
-														<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
-														<td>											
-															<a href="functionalities/restoreBrand.php?brandID=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this brand?');">
-																	Restore
-																</button>
-															</a>
-														</td>
-													</tr>
 													<?php
 														foreach ($result1 as $item):
 														$useThisID = $item["brandID"];
