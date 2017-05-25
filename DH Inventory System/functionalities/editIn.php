@@ -276,21 +276,21 @@
 						<h4 class="modal-title">Add Incoming Product</h4>
 					</div>
 					<div class="modal-body">
-						<form action="" method="POST" onsubmit="return validateForm()">
+						<form action="" method="POST">
 							<h5>Receipt No.</h5> 
-							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcnoEdit" readonly><br>
+							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcnoEdit"><br>
 							
 							<h5>Product Order Number</h5>				
 							<input type="text" class="form-control" id="poNum" value="<?php echo $poQuery; ?>" name="po" readonly><br>
 							
 							<h5>Receipt Date</h5> 
-							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdateEdit" readonly><br>
+							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdateEdit"><br>
 							
 							<h5>Supplier</h5> 
-							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplierName;?>" value="<?php echo $supplierName;?>" name="supplierEdit" readonly><br>
+							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplierName;?>" value="<?php echo $supplierName;?>" name="supplierEdit"><br>
 													
 							<h5>Received By</h5>
-							<select class="form-control" id="addEmpl" name="empEdit" READONLY>
+							<select class="form-control" id="addEmpl" name="empEdit">
 									<option SELECTED><?=$employ?></option>
 							</select>  
 							
@@ -362,17 +362,7 @@
 				</div>
 			</div>
 		</div> 
-		<!-- End of Modal -->	
-		<?php
-		require_once 'dbcon.php';
-		$incID= $_GET['incId'];
-		if (isset($_POST["updateIn"])){
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO editincoming (inEditDate, inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID)
-				SELECT CURDATE(), inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID from incoming WHERE poNumber = '$incID'";
-		$conn->exec($sql);
-		}
-		?>
+		<!-- End of Modal -->
 		
 		<?php
 			$incID= $_GET['incId'];
@@ -415,6 +405,7 @@
 			}
 			
 			if (isset($_POST["addEditProducts"])){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {	
 					$rcpNo2 =(isset($_REQUEST['rcnoEdit']) ? $_REQUEST['rcnoEdit'] : null);
 					$inRemarks = $_POST['inRemarks2'][$index2];
@@ -437,7 +428,7 @@
 					$prod3 = $prod2['prodA'];
 
 					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
-						VALUES ($inQty2,CURDATE(),'$reciptNum','$reciptDate',$sup3,'$inStat2','$inType2','$inRemarks',$emp3,'$prod3','$userID','$poQuery')";
+						VALUES ($inQty2,CURDATE(),'$reciptNum','$reciptDate','$sup3','$inStat2','$inType2','$inRemarks',$emp3,'$prod3','$userID','$poQuery')";
 						$result = $conn->query($sql);	
 				}
 				
