@@ -52,7 +52,8 @@
 					],
                     buttons: [
                         {
-                            customize: function ( win ) {
+                            title: 'Dencys Hardware and General Merchandise', 
+							customize: function ( win ) {
                                 $(win.document.body)
                                     .css( 'font-size', '10pt' )
                                     .prepend(
