@@ -262,9 +262,6 @@
 							
 							<h5>Receipt Date</h5> 
 							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdateEdit" readonly><br>
-							
-							<h5>Supplier</h5> 
-							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplier;?>" value="<?php echo $supplier;?>" name="supplierEdit" readonly><br>
 													
 							<h5>Received By</h5>
 							<select class="form-control" id="addEmpl" name="empEdit" READONLY>
