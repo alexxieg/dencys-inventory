@@ -196,7 +196,8 @@
 								<tr>
 									<td>
 										<br>
-										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Issued Products</button>					
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Issued Products</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>										
 									</td>
 									<td>	
 										<div class="col-sm-7 pull-right filter">
@@ -354,6 +355,77 @@
 								</div>
 							</div>
 							<!-- End of modal -->
+							
+							<!-- Modal - Activity Log -->
+							<div class="modal fade" id="activityLog" role="dialog">
+								<div class="modal-dialog modal-xl">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Edit Activity Log</h4>
+										</div>
+										<div class="modal-body">
+											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+											
+												<!-- Retrieve Category Data -->
+												<?php
+													$query = $conn->prepare("SELECT editOutgoing.outEditDate, editOutgoing.outQty, editOutgoing.outDate, editOutgoing.receiptNo, product.prodName, editOutgoing.userID from editoutgoing INNER JOIN product ON editoutgoing.prodID = product.prodID");
+													$query->execute();
+													$result1 = $query->fetchAll();
+												?>
+												
+												<thead>
+													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Edited</div>
+														</th>
+														<th>
+															<div id="tabHead">Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Outgoing Date</div>
+														</th>
+														<th>
+															<div id="tabHead">Receipt No</div>
+														</th>
+														<th>
+															<div id="tabHead">Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited By</div>
+														</th>
+													</tr>
+												</thead>
+												
+												<tbody>						
+														
+													<?php
+														foreach ($result1 as $item):
+														$outid = $item["receiptNo"];
+													?>
+													<tr id="centerData">	
+														<td data-title="Edit Date"><?php echo $item["outEditDate"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
+														<td data-title="Outgoing Date"><?php echo $item["outDate"]; ?></td>
+														<td data-title="Receipt No"><?php echo $item["receiptNo"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+													</tr>
+													<?php
+														endforeach;
+													?>
+												
+												</tbody>
+											</table>
+											
+										</div>
+									</div>
+										
+									<div class="modal-footer">
+									</div>
+										
+								</div>
+							</div>
 							
 						</div>
 					</div>
