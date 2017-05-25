@@ -173,12 +173,13 @@
 			$useThisID= $_GET['useID'];
 			$useName=(isset($_REQUEST['userName']) ? $_REQUEST['userName'] : null);
 			$passW=(isset($_REQUEST['psw']) ? $_REQUEST['psw'] : null);
+			$hashPW=password_hash($passW, PASSWORD_BCRYPT);
 			$urole=(isset($_REQUEST['user_role']) ? $_REQUEST['user_role'] : null);
 			if (isset($_POST["editAccount"])){
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			 
-				$sql = "UPDATE users SET userName = '$useName', password = '$passW', user_role = '$urole' WHERE userID = '$useThisID'";
+				$sql = "UPDATE users SET userName = '$useName', password = '$hashPW', user_role = '$urole' WHERE userID = '$useThisID'";
 			
 				$conn->exec($sql);
 			} 
