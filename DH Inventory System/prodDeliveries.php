@@ -409,7 +409,7 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editIncoming.inID, editIncoming.inEditDate, editIncoming.inQty, editIncoming.inDate, editIncoming.receiptNo, editIncoming.receiptDate, editIncoming.inRemarks, editIncoming.status, editIncoming.poNumber, product.prodName, editIncoming.userID from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
+													$query = $conn->prepare("SELECT editIncoming.inEditDate, editIncoming.inQty, editIncoming.inDate, editIncoming.receiptNo, editIncoming.receiptDate, editIncoming.inRemarks, editIncoming.status, editIncoming.poNumber, product.prodName, editIncoming.userID from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -417,10 +417,10 @@
 												<thead>
 													<tr id="centerData">
 														<th>
-															<div id="tabHead">Incoming ID</div>
+															<div id="tabHead">Date Edited</div>
 														</th>
 														<th>
-															<div id="tabHead">Date Edited</div>
+															<div id="tabHead">Incoming Quantity</div>
 														</th>
 														<th>
 															<div id="tabHead">Incoming Date</div>
@@ -453,11 +453,11 @@
 														
 													<?php
 														foreach ($result1 as $item):
-														$incRec = $item["poNumber"];
+														$incID = $item["receiptNo"];
 													?>
 													<tr id="centerData">
-														<td data-title="Incoming ID"><?php echo $item["inID"]; ?></td>
 														<td data-title="Edit Date"><?php echo $item["inEditDate"]; ?></td>
+														<td data-title="Edit Date"><?php echo $item["inQty"]; ?></td>
 														<td data-title="Incoming Date"><?php echo $item["inDate"]; ?></td>
 														<td data-title="Receipt Number"><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
