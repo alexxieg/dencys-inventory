@@ -22,8 +22,32 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script> 
+		
+		<script>
+		  $(function() {
+			$('#supplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
 		
 		<!-- Login Session -->
 		<?php 
@@ -53,7 +77,9 @@
 									ORDER BY inID DESC;");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
-			
+		
+			$poQuery = current($conn->query("SELECT DISTINCT incoming.poNumber FROM purchaseorders JOIN incoming ON purchaseorders.poNumber = incoming.PONumber 
+										WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 			$supplierID = current($conn->query("SELECT incoming.supID FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
@@ -128,7 +154,7 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
 					<h1 id="headers">Edit Product Delivery Entry</h1>
@@ -137,7 +163,10 @@
 						<form action="" method="POST" class="editPgs">
 							<h5>Receipt No.</h5> 
 							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno">
-									
+							
+							<h5>Product Order Number</h5>				
+							<input type="text" class="form-control" id="poNum" value="<?php echo $poQuery; ?>" name="po" readonly>
+							
 							<h5>Receipt Date</h5> 
 							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate">
 								
@@ -170,7 +199,7 @@
 							<br>
 									
 							<h5>Product/s</h5>
-							<table class="table table-striped" id="dataTable" name="chk">				
+							<table class="table table-striped" id="dataTable2" name="chk">				
 								<tbody>
 									<?php foreach ($result2 as $row): ?>
 										<tr>
@@ -180,18 +209,9 @@
 											<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
 											
 											<td>	
-												<?php
-													$query = $conn->prepare("SELECT prodName FROM product ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-													
-												<select class="form-control" id="addItem" name="prodItem[]">
-													<option><?=$row["prodName"]?></option>
-													<?php foreach ($res as $row3): ?>
-														<option><?=$row3["prodName"]?></option>
-													<?php endforeach ?>
-												</select> 
+												<div class="ui-widget">
+													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+												</div>
 											</td>
 													
 											<td>
@@ -260,8 +280,14 @@
 							<h5>Receipt No.</h5> 
 							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcnoEdit" readonly><br>
 							
+							<h5>Product Order Number</h5>				
+							<input type="text" class="form-control" id="poNum" value="<?php echo $poQuery; ?>" name="po" readonly><br>
+							
 							<h5>Receipt Date</h5> 
 							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdateEdit" readonly><br>
+							
+							<h5>Supplier</h5> 
+							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplierName;?>" value="<?php echo $supplierName;?>" name="supplierEdit" readonly><br>
 													
 							<h5>Received By</h5>
 							<select class="form-control" id="addEmpl" name="empEdit" READONLY>
@@ -278,21 +304,13 @@
 										<td><input type="checkbox" name="chk"></td>
 										<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 										<td>	
-											<?php
-												$query = $conn->prepare("SELECT prodName FROM product ");
-												$query->execute();
-												$res = $query->fetchAll();
-											?>
-									
-											<select class="form-control" id="addItem" name="prodItem[]">
-												<?php foreach ($res as $row): ?>
-														<option><?=$row["prodName"]?></option>
-												<?php endforeach ?>
-											</select> 
+											<div class="ui-widget">
+												<input class="thisProduct" name="prodItem2[]">
+											</div> 
 										</td>
 												
 										<td>
-											<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="incQty[]">
+											<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="incQty2[]">
 										</td>
 										
 										<td>
@@ -302,15 +320,22 @@
 												$res3 = $query3->fetchAll();
 											?>
 											
-											<select class="form-control" id="addInStatus" name="inStatus[]">
+											<select class="form-control" id="addInStatus" name="inStatus2[]">
 												<?php foreach ($res3 as $row3): ?>
 														<option><?=$row3["status"]?></option>
 												<?php endforeach ?>
 											</select> 
 										</td>
+										
+										<td>
+											<select class="form-control" name="inType2[]">
+												<option>Ordered</option>
+												<option>Freebie</option>
+											</select>
+										</td>	
 											
 										<td>
-											<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
+											<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks2[]">
 										</td>
 										<td>
 											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
@@ -342,6 +367,7 @@
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
 			if (isset($_POST["updateIn"])){
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -366,46 +392,45 @@
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 					
-					if (isset($_POST["addProduct"])) {
-						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inRemarks, empID, prodID, userID)
-						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."',$sup,'$inStat','$inRemarks','$emp3','$prod3','$userID')";
-						$result = $conn->query($sql); 	
-					} else {
-						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supID = $sup, status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
-							WHERE inID = $incomingID";
-						$conn->exec($sql);
-					}						
-					
+					$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supID = $sup, status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
+						WHERE inID = $incomingID";
+					$conn->exec($sql);						
+				
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 					WHERE outID = '$outid'"; */
-					echo '<script>
-					  window.location = "../prodDeliveries.php"
-					</script>';
 				}
+				$url='../prodDeliveries.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+			
 			}
-
+			
 			if (isset($_POST["addEditProducts"])){
-				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
-					$inRemarks = $_POST['inRemarks'][$index2];
-					$prodItem = $_POST['prodItem'][$index2];
-					$inQty = $_POST['incQty'][$index2];
-					$inStat = $_POST['inStatus'][$index2];
+				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {	
+					$rcpNo2 =(isset($_REQUEST['rcnoEdit']) ? $_REQUEST['rcnoEdit'] : null);
+					$inRemarks = $_POST['inRemarks2'][$index2];
+					$prodItem2 = $_POST['prodItem2'][$index2];
+					$inQty2 = $_POST['incQty2'][$index2];
+					$inStat2 = $_POST['inStatus2'][$index2];
 					$userID = $_POST['userID'];
+					$inType2 = $_POST['inType2'][$index2];
 					
-					$emp = $_POST['empEdit'];
-					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$supplierName;'");
+					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+					$sup3 = $sup2['supA'];
+					
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$employ'");
 					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 					$emp3 = $emp2['empA'];
 
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem2'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
-						
-					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
-						VALUES ('$inQty',CURDATE(),'$reciptNum','$reciptDate','$supplier','$inStat','$inRemarks','$emp3','$prod3','$userID')";
-						$result = $conn->query($sql);
+
+					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
+						VALUES ($inQty2,CURDATE(),'$reciptNum','$reciptDate',$sup3,'$inStat2','$inType2','$inRemarks',$emp3,'$prod3','$userID','$poQuery')";
+						$result = $conn->query($sql);	
 				}
-				echo "<meta http-equiv='refresh' content='0'>";
+				
 			}
 			
 		?>
