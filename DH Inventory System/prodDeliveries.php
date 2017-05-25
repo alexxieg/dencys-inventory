@@ -293,14 +293,15 @@
 											<form action="functionalities/addProdDeliveries.php" method="GET" onsubmit="return validateForm()">
 												<h3>Product Order Number</h3>
 												<?php
-													$query = $conn->prepare("SELECT DISTINCT poNumber FROM purchaseorders ");
+													$query = $conn->prepare("SELECT DISTINCT poNumber, poDate, suppliers.supplier_name FROM purchaseorders
+																			JOIN suppliers ON suppliers.supID = purchaseorders.supID");
 													$query->execute();
 													$res = $query->fetchAll();
 												?>
 																	
 												<select class="form-control" id="addEmpl" name="po">
 													<?php foreach ($res as $row): ?>
-														<option><?=$row["poNumber"]?></option>
+														<option value="<?=$row["poNumber"]?>">Product Number: <?=$row["poNumber"]?> - <?=$row["poDate"]?> - <?=$row["supplier_name"]?></option>
 													<?php endforeach ?>
 												</select>
 												
