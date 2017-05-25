@@ -132,10 +132,10 @@
 			<div id="contents">
 				<form action="" method="POST" onsubmit="return validateForm2()">
 					<h3> User </h3>
-					<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+					<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>" placeholder="User" name="userID" readonly>
 					
 					<h3> Receipt No. </h3>
-					<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>"placeholder="User" name="userID" readonly>
+					<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>"placeholder="User" name="recID" readonly>
 					
 					<h5 id="multipleProd">Product/s</h5>
 					<table class="table table-striped" id="dataTable" name="chk">
@@ -208,7 +208,7 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				for ($index = 0; $index < count($prodTem); $index++) {			
 					$prod = $_POST['prodItem'][$index];
-					$userID = $_POST['userID'][$index];
+					$userID = $_POST['userID'];
 					$quant = $_POST['retQty'][$index];
 					$rem = $_POST['retRemarks'][$index];
 					$quant = $_POST['retQty'][$index];
