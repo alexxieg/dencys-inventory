@@ -34,7 +34,7 @@
 				$result = $conn->query($sql); 
 
 			}
-		$url='../purchaseOrder.php.php';
+		$url='../purchaseOrder.php';
 		echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 	}	
 ?>	

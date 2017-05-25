@@ -22,7 +22,7 @@
 											WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return' AND returns.returnDate >= '$sortByStartDate' AND returns.returnDate <= '$sortByEndDate'
 										)
 										AS ledger
-                                        ORDER by dates DESC										
+                                        ORDER by dates ASC									
 										");
 				$query->execute();
 				$res = $query->fetchAll();
@@ -50,7 +50,7 @@
 											WHERE returns.prodID = '$incID' AND returns.returnType = 'Supplier Return'
 										)
 										AS ledger
-										ORDER by dates DESC
+										ORDER by dates ASC
 										");
 				$query->execute();
 				$res = $query->fetchAll();
