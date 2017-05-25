@@ -44,25 +44,36 @@
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-				$('#myTable').DataTable( {
-					dom: 'Bfrtip',
-					buttons: [
-						{
-							extend: 'print',
-							exportOptions: {
-								columns: ':visible'
-							}
-						},
-						 'colvis'
-					],
-					columnDefs: [ {
-						targets: -1,
-						visible: true
-					} ]
-				} );
-			} );
+                $('#myTable').DataTable( {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://datatables.net/media/images/logo.png" />'
+                                    );
 
-		</script>
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis'
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );		
+        </script>
 			
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
