@@ -26,9 +26,7 @@
 			$userID = $_POST['userID'];
 			$emp = $_POST['emp'];
 								
-			$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-			$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-			$prod3 = $prod2['prodA'];
+			$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'")->fetch());
 			
 			$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
             $emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -39,9 +37,9 @@
 			$branch3 = $branch2['branchA'];
 						
 			$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, prodID, receiptNo ,branchID, empID, userID)
-					VALUES (CURDATE(),'$retQty','Warehouse Return','$retRem','$prod3','$recNo','$branch3','$emp3','$userID')";
+					VALUES (CURDATE(),$retQty,'Warehouse Return','$retRem','$productID','$recNo',$branch3,$emp3,'$userID')";
 			$conn->exec($sql);
-			echo "<meta http-equiv='refresh' content='0'>";
 		} 
+		echo "<meta http-equiv='refresh' content='0'>";
 	}		
 ?>
