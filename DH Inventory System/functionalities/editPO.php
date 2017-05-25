@@ -40,6 +40,15 @@
 
 		</script>
 		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script> 
+		
 		<!-- Login Session -->
 		<?php 
 			session_start();
@@ -163,18 +172,9 @@
 											<td><input type="checkbox" name="chk"></TD>
 											<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
 											<td>	
-												<?php
-													$query = $conn->prepare("SELECT prodName FROM product ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-										
-												<select class="form-control" id="addItem" name="prodItem[]">
-														<option><?=$row["prodName"]?></option>
-													<?php foreach ($res as $row2): ?>
-														<option><?=$row2["prodName"]?></option>
-													<?php endforeach ?>
-												</select> 
+												<div class="ui-widget">
+													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+												</div>		
 											</td>
 													
 											<td>
@@ -241,7 +241,9 @@
 					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supID = $sup3, prodID = '$prod3', userID = '$userID'
 							WHERE poNumber = '$incID' AND prodID = '$prod3'";
 						$conn->exec($sql);
-				}	
+				}
+				$url='../purchaseOrder.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';	
 			}
 		?>
 	
