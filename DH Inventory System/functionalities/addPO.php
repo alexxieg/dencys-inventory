@@ -29,12 +29,12 @@
 				$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
 				$sup3 = $sup2['supA'];
 				
-				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supID, prodID, userID)
-				VALUES ('$qty',CURDATE(),'$prod','$sup3','$prod3','$userID')";
+				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supID, prodID, userID, status)
+				VALUES ('$qty',CURDATE(),'$prod','$sup3','$prod3','$userID', 'Incomplete')";
 				$result = $conn->query($sql); 
 
 			}
-		$url='../purchaseOrder.php.php';
+		$url='purchaseOrder.php.php';
 		echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 	}	
 ?>	
