@@ -319,7 +319,7 @@
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Item Quantity" name="retQty[]">
+																<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Quantity" name="retQty[]">
 															</td>
 															
 															<td>

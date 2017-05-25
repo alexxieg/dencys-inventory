@@ -144,12 +144,7 @@
 							
 							<div class="modFoot">
 								<span>
-									<a>
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="addDefect" value="Update" class="btn btn-success" id="sucBtn">
+									<input type="submit" name="addDefect" value="Add Item" class="btn btn-success" id="sucBtn">
 								</span>
 							</div>
 						</form> 
