@@ -189,6 +189,7 @@
 						<br>
 						<br>
 						<span>
+							<a href="../returnSupplier.php">
 							<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 						</span>
 						<span>
