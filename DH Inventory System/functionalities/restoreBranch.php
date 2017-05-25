@@ -5,6 +5,6 @@
     $result = $conn->prepare("UPDATE branch SET status = 'Active' WHERE branchID = '$usethisid'");
     $result->execute();
 	
-    header("location: ../brands.php");
+    header("location: ../branches.php");
 
 ?>

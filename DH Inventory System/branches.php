@@ -197,7 +197,7 @@
 												</button>
 											</a>
 											
-											<a> 
+												<a href="functionalities/removeBranch.php?useId=<?php echo $useThisID; ?>"> 
 												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this branch?');">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
