@@ -273,17 +273,6 @@
 												
 												<tbody>
 													
-													<tr id="centerData">
-														<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
-														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-														<td>	
-															<a href="functionalities/restoreCategory.php?useId=<?php echo $categEditID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
-																	Restore
-																</button>
-															</a>
-														</td>	
-													</tr>
 													<?php
 														foreach ($result as $item):
 														$categEditID = $item["categoryID"];
