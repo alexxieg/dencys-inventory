@@ -33,7 +33,8 @@
 				VALUES ('$qty',CURDATE(),'$prod','$sup3','$prod3','$userID')";
 				$result = $conn->query($sql); 
 
-				echo "<meta http-equiv='refresh' content='0'>";
 			}
-		}	
+		$url='../inventory.php';
+		echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+	}	
 ?>	
