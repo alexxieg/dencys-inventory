@@ -46,13 +46,17 @@
 			$(document).ready(function() {
                 $('#myTable').DataTable( {
                     dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
+					],
                     buttons: [
                         {
                             customize: function ( win ) {
                                 $(win.document.body)
                                     .css( 'font-size', '10pt' )
                                     .prepend(
-                                        '<img src="http://datatables.net/media/images/logo.png" />'
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="height:100px; width:100px;" />'
                                     );
 
                                 $(win.document.body).find( 'table' )
@@ -64,7 +68,8 @@
                                 columns: ':visible'
                                 }
                         },
-							'colvis'
+							'colvis','pageLength',
+
                     ],
                         columnDefs: [{
                             targets: -1,
