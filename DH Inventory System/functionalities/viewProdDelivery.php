@@ -243,6 +243,11 @@
 								</tbody>	
 							</table>
 							<!-- End of Table Display -->
+							<span>
+									<a href="../prodDeliveries.php">
+									<input type="button" class="btn btn-danger" id="canBtn" value="Back" data-dismiss="modal" onclick="this.form.reset()">
+									</a>
+								</span>
 						</div>
 						
 					</div>

@@ -229,6 +229,11 @@
 										?>
 									</tbody>	
 								</table>
+								<span>
+									<a href="../returnsWarehouse.php">
+									<input type="button" class="btn btn-danger" id="canBtn" value="Back" data-dismiss="modal" onclick="this.form.reset()">
+									</a>
+								</span>
 							</div>
 						</div>
 				
