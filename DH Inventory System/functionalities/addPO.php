@@ -34,11 +34,9 @@
 				$result = $conn->query($sql); 
 
 			}
-<<<<<<< HEAD
-		$url='../purchaseOrder.php';
-=======
-		$url='purchaseOrder.php.php';
->>>>>>> 7f165ab8303a9f599a704bf47227244d48fc409a
+
+		$url='purchaseOrder.php';
+
 		echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 	}	
 ?>	
