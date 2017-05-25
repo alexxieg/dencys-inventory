@@ -130,7 +130,7 @@
 			<h1 id="headers">Edit Supplier Return Entry</h1>
 			<br>
 			<div id="contents">
-				<form action="" method="POST" onsubmit="return validateForm()">
+				<form action="" method="POST" onsubmit="return validateForm2()">
 					<h3> User </h3>
 					<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 					

@@ -21,6 +21,29 @@ function validateForm() {
 	}
 }
 
+function validateForm2() {
+	if (document.getElementById('addQty').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Quantity.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addQty').style.borderColor = "red";
+		return false;
+	}
+	if(confirm('Are you sure you want to update this entry?')) {
+		return true;			
+	}
+	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
+		return false;		
+	}
+}
+
 function deleteRow(tableID) {
 	try {
 		var table = document.getElementById(tableID);
