@@ -188,7 +188,6 @@
 									?>
 										
 									<tr id="centerData">
-										<form class="form-horizontal" method= "POST" action="viewing.php">
 										<td data-title="Username"><?php echo $item["userName"]; ?></td>
 										<td data-title="Password">
 										<input name="viewPass" type="password" value="<?php echo $item["password"]; ?>" disabled/></td>
@@ -204,9 +203,6 @@
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
-											<button type="submit" id="" class="btn btn-default" name="dynamic"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
-											<input type="password" name="password" class="form-control" id="pwds" placeholder="Enter password" required>
-											</form>
 										</td>			
 									</tr>
 									
@@ -274,7 +270,7 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT userID, userName, password, user_role FROM users WHERE status = 'Inactive'");
+													$query = $conn->prepare("SELECT userID, userName, password, user_role, status FROM users WHERE status = 'Inactive'");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -290,6 +286,12 @@
 														<th>
 															<div id="tabHead">User Role</div>
 														</th>
+														<th>
+															<div id="tabHead">Status</div>
+														</th>
+														<th>
+															<div id="tabHead">Restore Option</div>
+														</th>
 													</tr>
 												</thead>
 												
@@ -303,6 +305,7 @@
 														<td data-title="Username"><?php echo $item["userName"]; ?></td>
 														<td data-title="Password"><?php echo $item["password"]; ?></td>
 														<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
+														<td data-title="Status"><?php echo $item["status"]; ?></td>
 														<td>
 															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
 																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">
@@ -340,13 +343,16 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT userID, userName, password, user_role FROM userarchive");
+													$query = $conn->prepare("SELECT userEditDate, userID, userName, password, user_role, status FROM edituser");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
 												
 												<thead>
 													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Edited</div>
+														</th>
 														<th>
 															<div id="tabHead">Username</div>
 														</th>
@@ -355,6 +361,9 @@
 														</th>
 														<th>
 															<div id="tabHead">User Role</div>
+														</th>
+														<th>
+															<div id="tabHead">Status</div>
 														</th>
 													</tr>
 												</thead>
@@ -365,10 +374,12 @@
 														foreach ($result1 as $item):
 														$useThisID = $item["userID"];
 													?>
-													<tr id="centerData">	
+													<tr id="centerData">
+														<td data-title="User Edit Date"><?php echo $item["userEditDate"]; ?></td>	
 														<td data-title="Username"><?php echo $item["userName"]; ?></td>
 														<td data-title="Password"><?php echo $item["password"]; ?></td>
-														<td data-title="User Role"><?php echo $item["user_role"]; ?></td>		
+														<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
+														<td data-title="Status"><?php echo $item["status"]; ?></td>														
 													</tr>
 													<?php
 														endforeach;

@@ -164,8 +164,8 @@
 		$usethisid= $_GET['useID'];
 		if (isset($_POST["editAccount"])){
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO userarchive (userName, password, user_role)
-				SELECT userName, password, user_role from users WHERE userID = '$useThisID' ORDER BY userID";
+		$sql = "INSERT INTO edituser (userName, userEditDate, password, user_role, userID, status)
+				SELECT  userName, CURDATE(), password, user_role, userID, status from users WHERE userID = '$useThisID' ORDER BY userID";
 		$conn->exec($sql);
 		}
 		?>	   
@@ -178,7 +178,7 @@
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			 
-				$sql = "UPDATE users SET userName = '$useName', password = '$passW' WHERE userID = '$useThisID'";
+				$sql = "UPDATE users SET userName = '$useName', password = '$passW', user_role = '$urole' WHERE userID = '$useThisID'";
 			
 				$conn->exec($sql);
 			} 
