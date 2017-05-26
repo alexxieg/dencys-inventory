@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2017 at 04:33 AM
+-- Generation Time: May 26, 2017 at 03:37 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -1283,11 +1283,11 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (28, '2017-03-31', 25, 0, 0, 40, 15, NULL, NULL, 'DCA-PWT-0008', NULL),
 (29, '2017-03-31', 15, 0, 0, 40, 25, NULL, NULL, 'DCA-PWT-0009', NULL),
 (30, '2017-03-31', 25, 0, 0, 40, 15, NULL, NULL, 'DCA-PWT-0010', NULL),
-(31, '2017-03-31', -20, 0, 0, 40, 60, NULL, NULL, 'DCA-PWT-0011', NULL),
-(32, '2017-03-31', -10, 0, 0, 40, 50, NULL, NULL, 'DCA-PWT-0012', NULL),
-(33, '2017-03-31', -10, 0, 0, 40, 50, NULL, NULL, 'DCA-PWT-0013', NULL),
-(34, '2017-03-31', -10, 0, 0, 40, 50, NULL, NULL, 'DCA-PWT-0014', NULL),
-(35, '2017-03-31', -10, 0, 0, 40, 50, NULL, NULL, 'DCA-PWT-0015', NULL),
+(31, '2017-03-31', 20, 0, 0, 40, 20, NULL, NULL, 'DCA-PWT-0011', NULL),
+(32, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'DCA-PWT-0012', NULL),
+(33, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'DCA-PWT-0013', NULL),
+(34, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'DCA-PWT-0014', NULL),
+(35, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'DCA-PWT-0015', NULL),
 (36, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'DCA-PWT-0016', NULL),
 (37, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'DCA-PWT-0017', NULL),
 (38, '2017-03-31', 30, 0, 0, 40, 10, NULL, NULL, 'DCA-PWT-0018', NULL),
@@ -1378,11 +1378,11 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (123, '2017-03-31', 45, 0, 0, 45, NULL, NULL, NULL, 'SSS-PWT-0003', NULL),
 (124, '2017-03-31', 45, 0, 0, 45, NULL, NULL, NULL, 'SSS-PWT-0004', NULL),
 (125, '2017-03-31', 40, 0, 0, 45, 5, NULL, NULL, 'SSS-PWT-0005', NULL),
-(126, '2017-03-31', 105, 0, 0, 105, NULL, NULL, NULL, 'SSS-PWT-0006', NULL),
-(127, '2017-03-31', 100, 0, 0, 105, 5, NULL, NULL, 'SSS-PWT-0007', NULL),
-(128, '2017-03-31', 100, 0, 0, 105, 5, NULL, NULL, 'SSS-PWT-0008', NULL),
-(129, '2017-03-31', 70, 0, 0, 75, 5, NULL, NULL, 'SSS-PWT-0009', NULL),
-(130, '2017-03-31', 70, 0, 0, 75, 5, NULL, NULL, 'SSS-PWT-0010', NULL),
+(126, '2017-03-31', 65, 0, 0, 105, 40, NULL, NULL, 'SSS-PWT-0006', NULL),
+(127, '2017-03-31', 60, 0, 0, 105, 45, NULL, NULL, 'SSS-PWT-0007', NULL),
+(128, '2017-03-31', 60, 0, 0, 105, 45, NULL, NULL, 'SSS-PWT-0008', NULL),
+(129, '2017-03-31', 30, 0, 0, 75, 45, NULL, NULL, 'SSS-PWT-0009', NULL),
+(130, '2017-03-31', 30, 0, 0, 75, 45, NULL, NULL, 'SSS-PWT-0010', NULL),
 (131, '2017-03-31', 70, 0, 0, 75, 5, NULL, NULL, 'SSS-PWT-0011', NULL),
 (132, '2017-03-31', 75, 0, 0, 75, NULL, NULL, NULL, 'SSS-PWT-0012', NULL),
 (133, '2017-03-31', 75, 0, 0, 75, NULL, NULL, NULL, 'SSS-PWT-0013', NULL),
@@ -2356,11 +2356,11 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `receiptNo`, `branchID`, `
 (338, 15, '2017-01-06', 'OUT-00046', 2, 5, 'HTC-PWT-0018', 'kharol'),
 (339, 15, '2017-05-06', 'OUT-00046', 2, 5, 'HTC-PWT-0019', 'kharol'),
 (340, 15, '2017-05-06', 'OUT-00046', 2, 5, 'HTC-PWT-0020', 'kharol'),
-(341, 40, '2017-05-07', 'OUT-00047', 1, 13, 'DCA-PWT-0011', 'haney'),
-(342, 40, '2017-05-07', 'OUT-00047', 1, 13, 'DCA-PWT-0012', 'haney'),
-(343, 40, '2017-05-07', 'OUT-00047', 1, 13, 'DCA-PWT-0013', 'haney'),
-(344, 40, '2017-05-07', 'OUT-00047', 1, 13, 'DCA-PWT-0014', 'haney'),
-(345, 40, '2017-05-07', 'OUT-00047', 1, 13, 'DCA-PWT-0015', 'haney'),
+(341, 40, '2017-05-07', 'OUT-00047', 1, 13, 'SSS-PWT-0006', 'haney'),
+(342, 40, '2017-05-07', 'OUT-00047', 1, 13, 'SSS-PWT-0007', 'haney'),
+(343, 40, '2017-05-07', 'OUT-00047', 1, 13, 'SSS-PWT-0008', 'haney'),
+(344, 40, '2017-05-07', 'OUT-00047', 1, 13, 'SSS-PWT-0009', 'haney'),
+(345, 40, '2017-05-07', 'OUT-00047', 1, 13, 'SSS-PWT-0010', 'haney'),
 (346, 30, '2017-05-07', 'OUT-00047', 1, 13, 'JEK-PWT-0011', 'haney'),
 (347, 30, '2017-05-07', 'OUT-00047', 1, 13, 'JEK-PWT-0012', 'haney'),
 (348, 30, '2017-05-07', 'OUT-00047', 1, 13, 'JEK-PWT-0013', 'haney'),

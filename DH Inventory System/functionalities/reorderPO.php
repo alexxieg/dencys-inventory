@@ -234,9 +234,16 @@
 															</td>
 																		
 															<td>
-																<input type="number" min="1" class="form-control" id ="addQty" 
-																placeholder="<?php echo(abs($row["reorderLevel"])); ?>" 
-																value="<?php echo(abs($row["reorderLevel"]));  ?>" name="qty[]">
+																<input type="number" min="1" class="form-control" id ="addQty"  
+																value="<?php 
+																if ($row["qty"] < ($row["reorderLevel"]/2)) {
+																	echo $row["reorderLevel"] + 5; 
+																} else if($row["qty"] = ($row["reorderLevel"])){
+																	echo 5;
+																} else {
+																	echo $row["reorderLevel"];
+																}
+																?>" name="qty[]">
 															</td>
 														</tr>
 													<?php endforeach ?>

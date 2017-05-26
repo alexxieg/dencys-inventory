@@ -219,9 +219,9 @@
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
 										</td>
 										<td>
-											<div class="col-sm-7 pull-right POfilter">
-												<label>View Previous Entries</label>
+											
 												<form class="form-inline" action="" method="post">
+												<label>View Previous Entries</label>
 													<div class="form-group">
 														<select name="dateMonthName" class="form-control">
 															<?php foreach ($result2 as $row): ?>
@@ -240,12 +240,13 @@
 														<input type="submit" value="View" class="btn btn-success" name="submit">
 													</div>
 												</form>	
-											</div>	
+										
 										</td>
 									</tr>												
 								</table>
 							</div>
 							
+							<hr>
 						<div class="pages">
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
