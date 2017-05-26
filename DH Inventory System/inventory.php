@@ -53,12 +53,12 @@
                     buttons: [
                         {
                             title: 'Dencys Hardware and General Merchandise', 
-							message: 'Current Inventory' , 
+							message: 'Current Inventory', 
 							customize: function ( win ) {
                                 $(win.document.body)
                                     .css( 'font-size', '10pt' )
                                     .prepend(
-                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="float: left; height:100px; width:100px;" />'
                                     );
 
                                 $(win.document.body).find( 'table' )
@@ -197,9 +197,9 @@
 							<table class="table">	
 								<h1 id="headers">INVENTORY</h1>	
 								<table class="table table-striped table-bordered">
-								<?php 
-									$location =  $_SERVER['REQUEST_URI']; 
-								?>
+									<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
 									<form action="<?php echo $location; ?>" method="POST">
 										<tr>
 											<td>
@@ -349,49 +349,47 @@
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 										<h4 class="modal-title">Products to be reordered</h4>
 									</div>
-									<div class="modal-body">			
-										<?php
-											$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-																	WHERE inventory.qty <= product.reorderLevel");
-											$query->execute();
-											$result = $query->fetchAll();
-										?>	
-										
-										<table class="table table-bordered" id="tables">
-											<tr>
-												<th>Product ID</th>
-												<th>Product Description</th>						
-												<th>Current Quantity</th>
-												<th>Reorder Level</th>
-												<th>Unit</th>
-												<th></th>
-											</tr>
-												
+									<div class="modal-body">
+										<form action="functionalities/reorderPO.php" method="POST">
 											<?php
-												foreach ($result as $item):
-											?>
+												$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
+																		WHERE inventory.qty <= product.reorderLevel");
+												$query->execute();
+												$result = $query->fetchAll();
+											?>	
+											
+											<table class="table table-bordered" id="tables">
 												<tr>
-												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-												<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
-												<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-												<td data-title="Unit"><?php echo $item["unitType"];?></td>
-												<td data-title="Reorder">
-													<a href="functionalities/reorderPO.php?reoId=<?php echo $item["prodID"]; ?>" target="_blank"> 
-														<button type="button" class="btn btn-default" id="edBtn">
-															Reorder
-														</button>
-													</a>
-												</td>
-												</td>		
-											</tr>	
-											<?php
-												endforeach;
+													<th>Product ID</th>
+													<th>Product Description</th>						
+													<th>Current Quantity</th>
+													<th>Reorder Level</th>
+													<th>Unit</th>
+													<th></th>
+												</tr>
+													
+												<?php
+													foreach ($result as $item):
 												?>
-										</table>																
+													<tr>
+													<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+													<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+													<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
+													<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+													<td data-title="Unit"><?php echo $item["unitType"];?></td>
+													<td data-title="Reorder Check"><input type="checkbox" name="chkbox[]" value="<?php echo $item["prodID"]; ?>"></td>	
+													</tr>	
+												<?php
+													endforeach;
+													?>
+											</table>
+											<div class="form-group">
+												<input type="submit" value="Reorder" class="btn btn-success">
+											</div>
+										</form>
 									</div>
 											
-									<div class="modal-footer">	
+									<div class="modal-footer">
 									</div>
 								</div>
 							</div>
