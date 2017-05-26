@@ -195,284 +195,281 @@
 								<table class="table">	
 									<tr>
 										<td>
-											<br>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Incomplete PO</button>
 										</td>
 										<td>
-											<div class="col-sm-7 pull-right POfilter">
+											<form class="form-inline" action="" method="post">
 												<label>View Previous Entries</label>
-												<form class="form-inline" action="" method="post">
-													<div class="form-group">
-														<select name="dateMonthName" class="form-control">
-															<?php foreach ($result2 as $row): ?>
-																<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-																<?php endforeach ?>
-														</select>
-													</div>
-													<div class="form-group">
-														<select name="dateYearName" class="form-control">
-															<?php foreach ($result3 as $row): ?>
-																<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+												<div class="form-group">
+													<select name="dateMonthName" class="form-control">
+														<?php foreach ($result2 as $row): ?>
+															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
 															<?php endforeach ?>
-														</select>
-														</div>	
-													<div class="form-group">
-														<input type="submit" value="View" class="btn btn-success" name="submit">
-													</div>
-												</form>	
-											</div>	
+													</select>
+												</div>
+												<div class="form-group">
+													<select name="dateYearName" class="form-control">
+														<?php foreach ($result3 as $row): ?>
+															<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+														<?php endforeach ?>
+													</select>
+												</div>	
+												<div class="form-group">
+													<input type="submit" value="View" class="btn btn-success" name="submit">
+												</div>
+											</form>		
 										</td>
 									</tr>												
 								</table>
 							</div>
 							
-						<div class="pages">
-							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-								<div id="myTable_length" class="dataTables_length">
-									<div id="myTable_filter" class="dataTables_filter">
-									</div>
-								</div>
-							</div>
-							<br> 
-							
-							<!-- Table Display for Incoming -->
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-								<thead>	
-									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>		
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
-									</tr>
-								</thead>
-								<tbody>					
-									<?php
-										foreach ($result as $item):
-											$po = $item["poNumber"];
-									?>
-									
-									<tr>
-										<td data-title="PO Number"><?php echo $item["poNumber"];?></td>
-										<td data-title="PO Date"><?php echo $item["poDate"]; ?></td>	
-										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
-										<td data-title="User"><?php echo $item["userID"]; ?></td>
-										<td data-title="Purchase Order">
-											<a href="functionalities/viewPO.php?incId=<?php echo $po; ?>"> 
-											<button type="button" class="btn btn-default" id="edBtn">
-												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-											</button>
-											</a>
-										</td>
-									</tr>	
-									
-									<?php
-										endforeach;
-									?>
-								</tbody>	
-							</table>
-						</div>
-						
-							<!-- Modal for New Purchase Order -->
-							<div class="modal fade" id="myModal" role="dialog">
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add Purchase Order</h4>
-										</div>
-										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()"><td>
-											<td>
-											<h3> User </h3>
-											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-											</td>																									
-											
-											<h3>Supplier</h3>  
-												<div class="ui-widget">
-													<input id="supplier" name="supplier" placeholder="Supplier">
-												</div>
-											<br>
-													
-											<h5>Product/s</h5>
-											<table class="table table-striped" id="dataTable" name="chk">				
-												<tbody>
-													<tr>
-														<td><input type="checkbox" name="chk"></TD>
-															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-														<td>	
-															<div class="ui-widget">
-																<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name">
-															</div>
-														</td>
-																	
-														<td>
-															<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
-														</td>
-													</tr>
-												</tbody>
-											</table>
-												
-												<br>
-												
-												<div class="modFoot">
-													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-													<br>
-													<br>
-													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-													<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
-												</div>
-											</form> 	
-										
-											<div class="modal-footer">
-											</div>								
+							<div class="pages">
+								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
 										</div>
 									</div>
 								</div>
-							</div> 
-							<!-- End of Modal -->
+								<br> 
 								
-							<!-- Modal - Activity Log -->
-							<div class="modal fade" id="activityLog" role="dialog">
-								<div class="modal-dialog modal-xl">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Edit Activity Log</h4>
-										</div>
-										<div class="modal-body">
-											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-											
-												<!-- Retrieve Category Data -->
-												<?php
-													$query = $conn->prepare("SELECT editPO.poEditDate, editPO.poNumber, editPO.poDate, editPO.qtyOrder, product.prodName, editPO.userID from editpo INNER JOIN product ON editpo.prodID = product.prodID");
-													$query->execute();
-													$result1 = $query->fetchAll();
-												?>
+								<!-- Table Display for Incoming -->
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+									<thead>	
+										<tr>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>		
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
+										</tr>
+									</thead>
+									<tbody>					
+										<?php
+											foreach ($result as $item):
+												$po = $item["poNumber"];
+										?>
+										
+										<tr>
+											<td data-title="PO Number"><?php echo $item["poNumber"];?></td>
+											<td data-title="PO Date"><?php echo $item["poDate"]; ?></td>	
+											<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
+											<td data-title="User"><?php echo $item["userID"]; ?></td>
+											<td data-title="Purchase Order">
+												<a href="functionalities/viewPO.php?incId=<?php echo $po; ?>"> 
+												<button type="button" class="btn btn-default" id="edBtn">
+													<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+												</button>
+												</a>
+											</td>
+										</tr>	
+										
+										<?php
+											endforeach;
+										?>
+									</tbody>	
+								</table>
+					
+						
+								<!-- Modal for New Purchase Order -->
+								<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Add Purchase Order</h4>
+											</div>
+											<div class="modal-body">
+												<form action="" method="POST" onsubmit="return validateForm()"><td>
+												<td>
+												<h3> User </h3>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+												</td>																									
 												
-												<thead>
-													<tr id="centerData">
-														<th>
-															<div id="tabHead">Date Edited</div>
-														</th>
-														<th>
-															<div id="tabHead">PO Number</div>
-														</th>
-														<th>
-															<div id="tabHead">PO Date</div>
-														</th>
-														<th>
-															<div id="tabHead">Quantity Order</div>
-														</th>
-														<th>
-															<div id="tabHead">Product Description</div>
-														</th>
-														<th>
-															<div id="tabHead">Edited By</div>
-														</th>
-													</tr>
-												</thead>
-												
-												<tbody>						
+												<h3>Supplier</h3>  
+													<div class="ui-widget">
+														<input id="supplier" name="supplier" placeholder="Supplier">
+													</div>
+												<br>
 														
-													<?php
-														foreach ($result1 as $item):
-														$incID = $item["poNumber"];
-													?>
-													<tr id="centerData">	
-														<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
-														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
-														<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
-														<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
-														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
-													</tr>
-													<?php
-														endforeach;
-													?>
-												
-												</tbody>
-											</table>
+												<h5>Product/s</h5>
+												<table class="table table-striped" id="dataTable" name="chk">				
+													<tbody>
+														<tr>
+															<td><input type="checkbox" name="chk"></TD>
+																<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+															<td>	
+																<div class="ui-widget">
+																	<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name">
+																</div>
+															</td>
+																		
+															<td>
+																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
+															</td>
+														</tr>
+													</tbody>
+												</table>
+													
+													<br>
+													
+													<div class="modFoot">
+														<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+														<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+														<br>
+														<br>
+														<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
+														<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
+													</div>
+												</form> 	
 											
+												<div class="modal-footer">
+												</div>								
+											</div>
 										</div>
 									</div>
-										
-									<div class="modal-footer">
+								</div> 
+								<!-- End of Modal -->
+									
+								<!-- Modal - Activity Log -->
+								<div class="modal fade" id="activityLog" role="dialog">
+									<div class="modal-dialog modal-xl">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Edit Activity Log</h4>
+											</div>
+											<div class="modal-body">
+												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+												
+													<!-- Retrieve Category Data -->
+													<?php
+														$query = $conn->prepare("SELECT editPO.poEditDate, editPO.poNumber, editPO.poDate, editPO.qtyOrder, product.prodName, editPO.userID from editpo INNER JOIN product ON editpo.prodID = product.prodID");
+														$query->execute();
+														$result1 = $query->fetchAll();
+													?>
+													
+													<thead>
+														<tr id="centerData">
+															<th>
+																<div id="tabHead">Date Edited</div>
+															</th>
+															<th>
+																<div id="tabHead">PO Number</div>
+															</th>
+															<th>
+																<div id="tabHead">PO Date</div>
+															</th>
+															<th>
+																<div id="tabHead">Quantity Order</div>
+															</th>
+															<th>
+																<div id="tabHead">Product Description</div>
+															</th>
+															<th>
+																<div id="tabHead">Edited By</div>
+															</th>
+														</tr>
+													</thead>
+													
+													<tbody>						
+															
+														<?php
+															foreach ($result1 as $item):
+															$incID = $item["poNumber"];
+														?>
+														<tr id="centerData">	
+															<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
+															<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
+															<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
+															<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
+															<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+															<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+														</tr>
+														<?php
+															endforeach;
+														?>
+													
+													</tbody>
+												</table>
+												
+											</div>
+										</div>
+											
+										<div class="modal-footer">
+										</div>
+											
 									</div>
-										
+								</div>
+								
+								<!-- Modal - Incomplete PO -->
+								<div class="modal fade" id="incPOModal" role="dialog">
+									<div class="modal-dialog modal-xl">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Edit Activity Log</h4>
+											</div>
+											<div class="modal-body">
+												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+												
+													<!-- Retrieve Category Data -->
+													<?php
+														$thisPOQuery = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
+																				FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.status = 'Incomplete'
+																				GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name");
+														$thisPOQuery->execute();
+														$thisPOResult = $thisPOQuery->fetchAll();
+													?>
+													
+													<thead>
+														<tr id="centerData">
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>		
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
+														</tr>
+													</thead>
+													
+													<tbody>						
+															
+														<?php
+															foreach ($thisPOResult as $poItem):
+															$poIncID = $poItem["poNumber"];
+														?>
+														<tr id="centerData">	
+															<td data-title="PO Number"><?php echo $poItem["poNumber"];?></td>
+															<td data-title="PO Date"><?php echo $poItem["poDate"]; ?></td>	
+															<td data-title="Supplier"><?php echo $poItem["supplier_name"]; ?></td>
+															<td data-title="User"><?php echo $poItem["userID"]; ?></td>
+															<td data-title="Purchase Order">
+																<a href="functionalities/viewPO.php?incId=<?php echo $poIncID; ?>"> 
+																<button type="button" class="btn btn-default" id="edBtn">
+																	<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+																</button>
+																</a>
+															</td>
+														</tr>
+														<?php
+															endforeach;
+														?>
+													
+													</tbody>
+												</table>
+												
+											</div>
+										</div>
+											
+										<div class="modal-footer">
+										</div>
+							
+									</div>
 								</div>
 							</div>
-							
-							<!-- Modal - Incomplete PO -->
-							<div class="modal fade" id="incPOModal" role="dialog">
-								<div class="modal-dialog modal-xl">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Edit Activity Log</h4>
-										</div>
-										<div class="modal-body">
-											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-											
-												<!-- Retrieve Category Data -->
-												<?php
-													$thisPOQuery = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
-																			FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.status = 'Incomplete'
-																			GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name");
-													$thisPOQuery->execute();
-													$thisPOResult = $thisPOQuery->fetchAll();
-												?>
-												
-												<thead>
-													<tr id="centerData">
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>		
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
-													</tr>
-												</thead>
-												
-												<tbody>						
-														
-													<?php
-														foreach ($thisPOResult as $poItem):
-														$poIncID = $poItem["poNumber"];
-													?>
-													<tr id="centerData">	
-														<td data-title="PO Number"><?php echo $poItem["poNumber"];?></td>
-														<td data-title="PO Date"><?php echo $poItem["poDate"]; ?></td>	
-														<td data-title="Supplier"><?php echo $poItem["supplier_name"]; ?></td>
-														<td data-title="User"><?php echo $poItem["userID"]; ?></td>
-														<td data-title="Purchase Order">
-															<a href="functionalities/viewPO.php?incId=<?php echo $poIncID; ?>"> 
-															<button type="button" class="btn btn-default" id="edBtn">
-																<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-															</button>
-															</a>
-														</td>
-													</tr>
-													<?php
-														endforeach;
-													?>
-												
-												</tbody>
-											</table>
-											
-										</div>
-									</div>
-										
-									<div class="modal-footer">
-									</div>
-										
-								</div>
-							</div>
-							
-						</div>
-					</div>		  
+						</div>		  
+					</div>
 				</div>
 			</div>
 		</div>

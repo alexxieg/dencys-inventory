@@ -215,13 +215,12 @@
 							<table class="table">	
 								<tr>
 									<td>
-										<br>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 									</td>
 									<td>
 										<div class="col-sm-7 pull-right retfilter">
-											<label>Filter By Date</label>
 											<form class="form-inline" action="" method="post">
+												<label>Filter By Date</label>
 												<div class="form-group">
 														<select name="dateMonthName" class="form-control">
 														<?php foreach ($result2 as $row): ?>

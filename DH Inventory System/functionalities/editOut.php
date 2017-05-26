@@ -77,7 +77,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -99,10 +99,10 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="../functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -154,167 +154,90 @@
 					$employ = current($conn->query("SELECT DISTINCT employee.empFirstName FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
 					$branch = current($conn->query("SELECT DISTINCT location FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
 				?>
-	
-				<div class="addInv">
-					<h1 id="headers">Edit Product Issuance Entry </h1>
-					<br>
+				
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
-						
-							<h5>Receipt No.</h5> 
-							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno" Readonly><br>
-									
-							<h5>Handled By</h5>
-							<?php
-								$query = $conn->prepare("SELECT empFirstName FROM employee ");
-								$query->execute();
-								$result = $query->fetchAll();
-								?>
-											
-							<select class="form-control" id="addEmpl" name="emp">
-								<?php foreach ($result as $row): ?>
-									<option><?=$row["empFirstName"]?></option>
-								<?php endforeach ?>
-									<option SELECTED><?=$employ?></option>
-							</select> 
-								
+						<div class="pages no-more-tables">	
+							<h1 id="headers">Edit Product Issuance Entry </h1>
 							<br>
-								
-							<h5>Branch</h5>
-							<?php
-								$query = $conn->prepare("SELECT location FROM branch");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-								
-							<select class="form-control" id="addEntry" name="branch">
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["location"]?></option>
-								<?php endforeach ?>
-									<option SELECTED><?=$branch?></option>
-							</select> 
-							<br>
-									
-							<h5>Product/s</h5>
-							<table class="table table-striped" name="chk">
-								<tbody>
-									<?php foreach ($resul as $row): ?>
-									<tr>
-										<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+							<div id="content">
+								<form action="" method="POST" onsubmit="return validateForm()">
+									<h3>Receipt No.</h3> 
+									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno" Readonly>
 											
-										<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />
-												
-										<td>	
-											<div class="ui-widget">
-												<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
-											</div>
-										</td>
-														
-										<td>
-											<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
-										</td>
-										<td>
-											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-										</td> 
-									</tr>
-									<?php endforeach ?>
-								</tbody>
-							</table>
-											
-							<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-								<br>
-								<br>
-									<span>
-										<a href="../prodissuance.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="updateOut" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
-							</div>
-						</form>																		
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Modal - Add Outgoing Entry Form -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add Outgoing Product</h4>
-					</div>
-					<div class="modal-body">
-						<form action="" method="POST" onsubmit="return validateForm()">
-								
-							<h5>Handled By</h5>
-							<?php
-								$query = $conn->prepare("SELECT empFirstName FROM employee ");
-								$query->execute();
-								$result = $query->fetchAll();
-							?>
-											
-							<select class="form-control" id="addEmpl" name="emp" Readonly>
-								<option SELECTED><?=$employ?></option>
-							</select> 
-							
-							<br>
-							
-							<h5>Branch</h5>
-							<?php
-								$query = $conn->prepare("SELECT location FROM branch");
-								$query->execute();
-								$res = $query->fetchAll();
-								?>
-							
-							<select class="form-control" id="addEntry" name="branch" Readonly>
-								<option SELECTED><?=$branch?></option>
-							</select> 
-							<br>
-									
-							<h5>Product/s</h5>
-							<table class="table table-striped" id="dataTable" name="chk">
-								<tbody>
-									<tr>
-										<td><input type="checkbox" name="chk"></TD>
-										<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-										<td>	
-											<div class="ui-widget">
-												<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
-											</div>
-										</select> 
-										</td>
-												
-										<td>
-											<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty[]">
-										</td>
+									<h3>Handled By</h3>
+									<?php
+										$query = $conn->prepare("SELECT empFirstName FROM employee ");
+										$query->execute();
+										$result = $query->fetchAll();
+										?>
+													
+									<select class="form-control" id="addEmpl" name="emp">
+										<?php foreach ($result as $row): ?>
+											<option><?=$row["empFirstName"]?></option>
+										<?php endforeach ?>
+											<option SELECTED><?=$employ?></option>
+									</select> 
+																		
+									<h3>Branch</h3>
+									<?php
+										$query = $conn->prepare("SELECT location FROM branch");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
 										
-										<td>
-											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-								
-							<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-								<br>
-								<br>
-								<span>
-									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-								</span>
-								<span>
-									<input type="submit" name="editAddOutgoing" value="Issue Products" class="btn btn-success" id="sucBtn">
-								</span>
+									<select class="form-control" id="addEntry" name="branch">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["location"]?></option>
+										<?php endforeach ?>
+											<option SELECTED><?=$branch?></option>
+									</select> 
+									<br>
+											
+									<h5>Product/s</h5>
+									<table class="table table-striped" name="chk">
+										<tbody>
+											<?php foreach ($resul as $row): ?>
+											<tr>
+												<td><input type="checkbox" name="chk"></TD>
+													<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+													
+												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />
+														
+												<td>	
+													<div class="ui-widget">
+														<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+													</div>
+												</td>
+																
+												<td>
+													<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
+												</td>
+												<td>
+													<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+												</td> 
+											</tr>
+											<?php endforeach ?>
+										</tbody>
+									</table>
+													
+									<div class="modFoot">
+										<span><button type="button" class="btn btn-default" value="Add Row" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
+										<br>
+										<br>
+											<span>
+												<a href="../prodissuance.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										<span>
+											<input type="submit" name="updateOut" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>
+								</form>																		
 							</div>
-						</form>																		
-			 
-						<div class="modal-footer">
 						</div>
 					</div>
 				</div>

@@ -96,10 +96,10 @@
 					<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="../functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -136,6 +136,7 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
+				
 				<?php
 					foreach ($result as $item):
 					$po = $item["poID"];
@@ -154,13 +155,16 @@
 							
 							<hr>					
 							
+							<a href="../purchaseorder.php">
+								<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
+							</a>
+							
 							<a href="editPO.php?incId=<?php echo $incID; ?>"> 
-								<button type="button" class="btn btn-default" id="modButt">
+								<button type="button" class="btn btn-default">
 									EDIT ENTRY
 								</button>
 							</a>
-							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
-						
+												
 							<hr>
 							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -170,6 +174,7 @@
 								</div>
 							</div>
 	
+							<!-- Table Display for PO Details -->
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td>
@@ -183,48 +188,43 @@
 								</tr>									
 							</table>
 							
-							<!-- Table Display for Incoming -->
-							<div id="printThisTable" name="printThisTable">	
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-									<thead>	
-										<tr>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
-										</tr>
-									</thead>
-									<tbody>	
+							<hr>
+							
+							<!-- Table Display for PO Content -->
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>	
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
+									</tr>
+								</thead>
+								<tbody>	
+								
+									<?php
+										foreach ($result as $item):
+											$po = $item["poID"];
+									?>
 									
-										<?php
-											foreach ($result as $item):
-												$po = $item["poID"];
-										?>
-										
-										<tr id="centerData">
-											<td data-title="PO Number"><?php echo $item["poNumber"];?></td>
-											<td data-title="PO Date"><?php echo $item["poDate"]; ?></td>	
-											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
-										</tr>	
-										
-										<?php
-											endforeach;
-										?>
-									</tbody>	
-								</table>
-								<span>
-									<a href="../purchaseorder.php">
-									<input type="button" class="btn btn-danger" id="canBtn" value="Back" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-							</div>		
+									<tr id="centerData">
+										<td data-title="PO Number"><?php echo $item["poNumber"];?></td>
+										<td data-title="PO Date"><?php echo $item["poDate"]; ?></td>	
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
+									</tr>	
+									
+									<?php
+										endforeach;
+									?>
+								</tbody>	
+							</table>
+							<!-- End of Table Display -->
 							
 						</div>
 					</div>		  
 				</div>
 			</div>	
 		</div>
-	
-  </body>
+	</body>
 </html>

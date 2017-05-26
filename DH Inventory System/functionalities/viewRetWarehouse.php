@@ -70,7 +70,8 @@
 					WHERE receiptNo = '$retID' ");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
-			
+		
+			$receiptNum = current($conn->query("SELECT returns.receiptNo FROM returns WHERE returns.receiptNo = '$retID'")->fetch());
 			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returns.receiptNo = '$retID'")->fetch());
 			$employee = current($conn->query("SELECT CONCAT(empFirstName, ' ', empLastName) AS empName FROM returns INNER JOIN employee ON returns.empID = employee.empID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
@@ -85,7 +86,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="../inventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -102,13 +103,13 @@
 				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="../functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -156,41 +157,46 @@
 					<div id="contents">
 						<div id="tableHeader">
 							<h1 id="headers">WAREHOUSE RETURN DETAILS</h1>
+								
+							<hr>
+							
+							<a href="../returnsWarehouse.php">
+								<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
+							</a>
 									
 							<a href="editRetWh.php?retId=<?php echo $retID; ?>"> 
-								<button type="button" class="btn btn-default" id="modButt">
+								<button type="button" class="btn btn-default">
 									EDIT ENTRY
 								</button>
 							</a>
 							
-							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
+							<hr>
 							
-							<br>
-							<br>
+							<!-- Table Display for Warehouse Returns Details -->
 							<table class="table table-striped table-bordered">
-									<tr>
-										<td>
-											Reference No:
-									
-										</td>
-										<td>
-											Return Date:
+								<tr>
+									<td>
+										Reference No:
+										<?php echo $receiptNum;?> 
 								
-										</td>
-										<td>
-											Branch:
-											<?php echo $branch;?> 
+									</td>
+									<td>
+										Returned From:
+										<?php echo $branch;?> 
 							
-										</td>
-										<td> 
-											Handled by:
-											<?php echo $employee;?>
-										</td>
-									</tr>									
+									</td>
+									<td> 
+										Handled by:
+										<?php echo $employee;?>
+									</td>
+								</tr>									
 							</table>
+							<!-- End of Table Display -->
 						</div>
+						
+						<hr>
+						
 						<div class="pages no-more-tables">
-							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
@@ -198,51 +204,41 @@
 								</div>
 							</div>
 							
-							<div id="printThisTable" name="printThisTable">
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-									<thead>
-										<tr>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-										</tr>
-									</thead>
-									
-									<tbody>
-										<?php
-											foreach ($result as $item):
-											$retID = $item["returnID"];
-										?>
+							<!-- Table Display for Warehouse Returns Content -->
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<?php
+										foreach ($result as $item):
+										$retID = $item["returnID"];
+									?>
 										
-										
-										<tr id="centerData">
-											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-	
-										</tr>
-												
-										<?php
-											endforeach;
-										?>
-									</tbody>	
-								</table>
-								<span>
-									<a href="../returnsWarehouse.php">
-									<input type="button" class="btn btn-danger" id="canBtn" value="Back" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-							</div>
-						</div>
-				
-				
+									<tr id="centerData">
+										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+									</tr>
+											
+									<?php
+										endforeach;
+									?>
+								</tbody>	
+							</table>
+							<!-- End of Table Display -->
+							
+						</div>				
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 	</body>
 </html>

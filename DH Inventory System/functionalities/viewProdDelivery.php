@@ -88,7 +88,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -106,10 +106,10 @@
 					<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="../functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -163,18 +163,20 @@
 						</div>
 						
 						<hr>
-							
+						
+						<a href="../prodDeliveries.php">
+							<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
+						</a>
+						
 						<a href="editIn.php?incId=<?php echo $incRec; ?>"> 
-							<button type="button" class="btn btn-default" id="modButt">
+							<button type="button" class="btn btn-default">
 								EDIT ENTRY
 							</button>
 						</a>
-						
-						<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
-						
-						<br>
-						<br>
+
+						<hr>
 							
+						<!-- Table Display for Product Delivery Details -->
 						<table class="table table-striped table-bordered">
 							<tr>
 								<td>
@@ -195,6 +197,7 @@
 								</td>
 							</tr>									
 						</table>
+						<!-- End of Table Display -->
 					</div>
 					
 					<hr>
@@ -208,52 +211,44 @@
 						</div>
 						<br> 
 							
-						<div id="printThisTable" name="printThisTable">
-							<!-- Table Display for Incoming -->
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>	
-									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Type</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-									</tr>
-								</thead>
-								<tbody>					
-									<?php
-										foreach ($result as $item):
-										$incID = $item["inID"];
-										$incRec = $item["receiptNo"];
-									?>
+						<!-- Table Display for Product Delivery Content -->
+						<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+							<thead>	
+								<tr>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Type</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+								</tr>
+							</thead>
+							<tbody>					
+								<?php
+									foreach ($result as $item):
+									$incID = $item["inID"];
+									$incRec = $item["receiptNo"];
+								?>
+								
+								<tr id="centerData">
+									<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+									<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+									<td data-title="Status"><?php echo $item["status"]; ?></td>
+									<td data-title="Status"><?php echo $item["inType"]; ?></td>
+									<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
+								</tr>	
 									
-									<tr id="centerData">
-										<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-										<td data-title="Status"><?php echo $item["status"]; ?></td>
-										<td data-title="Status"><?php echo $item["inType"]; ?></td>
-										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
-									</tr>	
-									
-									<?php
-										endforeach;
-									?>
-								</tbody>	
-							</table>
-							<!-- End of Table Display -->
-							<span>
-									<a href="../prodDeliveries.php">
-									<input type="button" class="btn btn-danger" id="canBtn" value="Back" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-						</div>
+								<?php
+									endforeach;
+								?>
+							</tbody>	
+						</table>
+						<!-- End of Table Display -->
 						
-					</div>
-				</div>		  
-			</div>
+					</div>	
+				</div>
+			</div>		  
 		</div>	
-	
-  </body>
+	</body>
 </html>

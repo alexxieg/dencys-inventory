@@ -7621,6 +7621,15 @@ border: none;
 	margin-right: auto;
 }
 
+#addEmpl{
+	width: 50%;
+}
+
+#addRcpt{
+	width: 50%;
+	margin-left: 25%;
+}
+
 .modal-body #prod{
 	width:100%;
 }
@@ -7657,4 +7666,8 @@ border: none;
 #loghead{
   font-size: 100%;
   font-family: monospace;
+}
+
+#backButton{
+	float:right;
 }
