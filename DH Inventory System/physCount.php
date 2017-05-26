@@ -26,9 +26,44 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
+		
+		<!-- Datatables CSS and JS Files -->
+		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
+		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.bootstrap.min.js"></script>
+		<script src="datatables/media/js/buttons.html5.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
 
+		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
+
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+		
+		<!-- Datatables Script -->
+		<script>
+			$(document).ready(function() {
+				$('#myTable').DataTable( {
+					dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows','Show all' ]
+					],
+					buttons: [
+						'pageLength'
+					]
+				} );
+			} );		
+		</script>
+
+		<!-- Database connection -->
 		<?php include('dbcon.php'); ?>
-				
+		
+		<!-- Login Session-->		
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -171,7 +206,15 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-
+				
+				<?php
+					foreach ($result3 as $item):
+					$proID = $item["prodID"];
+				?>
+				<?php
+					endforeach;
+				?>
+				
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
 				<div id="contents">
 					<div class="pages no-more-tables">
@@ -213,6 +256,12 @@
 									</tr>
 								</table>
 								
+								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
+										</div>
+									</div>
+								</div>
 								
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 									<thead>
@@ -248,6 +297,7 @@
 											<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
 												UPDATE
 											</button>
+										
 											<?php
 												foreach ($result3 as $item):
 												$proID = $item["prodID"];
@@ -276,12 +326,12 @@
 										</form>
 									</tbody>	
 								</table>	
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 					
 		<?php 
 			$productCounter=(isset($_REQUEST['thisProductID']) ? $_REQUEST['thisProductID'] : null);

@@ -108,13 +108,7 @@
 	<body>
 		<!-- Retrieve Incoming Data -->
 		<?php include('fetchPurchaseOrders.php');?>
-		<?php
-			$useThisID = $_GET['reoId'];
-			$reorderQuery = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-									WHERE inventory.qty <= product.reorderLevel AND inventory.prodID = '$useThisID'");
-			$reorderQuery->execute();
-			$reorderResult = $reorderQuery->fetchAll();
-		?>
+		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -219,21 +213,34 @@
 										<h5>Product/s</h5>
 										<table class="table table-striped" id="dataTable" name="chk">				
 											<tbody>
-												<?php foreach ($reorderResult as $row): ?>
-													<tr>
-														<td><input type="checkbox" name="chk"></TD>
-															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-														<td>	
-															<div class="ui-widget">
-																<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
-															</div>
-														</td>
-																	
-														<td>
-															<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo(abs($row["qty"]));  ?>" value="<?php echo(abs($row["qty"]));  ?>" name="qty[]">
-														</td>
-													</tr>
-												<?php endforeach ?>
+												<?php
+													$useThisID = $_POST["chkbox"];
+													$countChkBox = count($useThisID);
+													for ($index = 0; $index < $countChkBox; $index++) {
+														$productID = $useThisID[$index];
+														$reorderQuery = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
+																				WHERE inventory.qty <= product.reorderLevel AND inventory.prodID = '$productID'");
+														$reorderQuery->execute();
+														$reorderResult = $reorderQuery->fetchAll();
+												?>
+													<?php foreach ($reorderResult as $row): ?>
+														<tr>
+															<td><input type="checkbox" name="chk"></TD>
+																<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+															<td>	
+																<div class="ui-widget">
+																	<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
+																</div>
+															</td>
+																		
+															<td>
+																<input type="number" min="1" class="form-control" id ="addQty" 
+																placeholder="<?php echo(abs($row["reorderLevel"])); ?>" 
+																value="<?php echo(abs($row["reorderLevel"]));  ?>" name="qty[]">
+															</td>
+														</tr>
+													<?php endforeach ?>
+												<?php } ?>
 											</tbody>
 										</table>
 											
@@ -261,8 +268,6 @@
 				</div>
 			</div>
 		</div>
-		
-		<!-- Add Incoming Entry Functionality-->
-		<?php include('addPO.php'); ?>
+		<?php include('addPO.php');?>
 	</body>
 </html>

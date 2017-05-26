@@ -194,7 +194,43 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<div id="contents">
 						<div id="tableHeader">
+<<<<<<< HEAD
 							<h1 id="headers">INVENTORY</h1>	
+=======
+							<table class="table">	
+								<h1 id="headers">INVENTORY</h1>	
+								<table class="table table-striped table-bordered">
+									<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
+									<form action="<?php echo $location; ?>" method="POST">
+										<tr>
+											<td>
+												Filter By Brand <br>
+												<select name="brand_Name">
+													<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
+													<option value="<?php echo $None?>">--None--</option>
+													<?php foreach ($brandType as $row): ?>
+														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+													<?php endforeach ?>
+												</select>
+											</td>	
+											
+											<td>
+												Filter By Category <br>
+												<select name="category_Name">
+													<option value="<?php echo $selectedCategory?>" SELECTED>Category: <?php echo $filterCategory?></option>
+													<option value="<?php echo $None?>">--None--</option>
+													<?php foreach ($categoryType as $row2): ?>
+														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+													<?php endforeach ?>
+												</select>	
+											</td>
+										</tr>
+										<input type="submit" value="Filter" class="btn btn-success" name="submit">
+									</form>
+								</table>
+>>>>>>> 0df7b2302918f554325e815eab1f9d89222fe1ea
 									
 							<table class="table">	
 								<tr>
@@ -347,49 +383,47 @@
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 										<h4 class="modal-title">Products to be reordered</h4>
 									</div>
-									<div class="modal-body">			
-										<?php
-											$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-																	WHERE inventory.qty <= product.reorderLevel");
-											$query->execute();
-											$result = $query->fetchAll();
-										?>	
-										
-										<table class="table table-bordered" id="tables">
-											<tr>
-												<th>Product ID</th>
-												<th>Product Description</th>						
-												<th>Current Quantity</th>
-												<th>Reorder Level</th>
-												<th>Unit</th>
-												<th></th>
-											</tr>
-												
+									<div class="modal-body">
+										<form action="functionalities/reorderPO.php" method="POST">
 											<?php
-												foreach ($result as $item):
-											?>
+												$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
+																		WHERE inventory.qty <= product.reorderLevel");
+												$query->execute();
+												$result = $query->fetchAll();
+											?>	
+											
+											<table class="table table-bordered" id="tables">
 												<tr>
-												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-												<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
-												<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-												<td data-title="Unit"><?php echo $item["unitType"];?></td>
-												<td data-title="Reorder">
-													<a href="functionalities/reorderPO.php?reoId=<?php echo $item["prodID"]; ?>" target="_blank"> 
-														<button type="button" class="btn btn-default" id="edBtn">
-															Reorder
-														</button>
-													</a>
-												</td>
-												</td>		
-											</tr>	
-											<?php
-												endforeach;
+													<th>Product ID</th>
+													<th>Product Description</th>						
+													<th>Current Quantity</th>
+													<th>Reorder Level</th>
+													<th>Unit</th>
+													<th></th>
+												</tr>
+													
+												<?php
+													foreach ($result as $item):
 												?>
-										</table>																
+													<tr>
+													<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+													<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+													<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
+													<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+													<td data-title="Unit"><?php echo $item["unitType"];?></td>
+													<td data-title="Reorder Check"><input type="checkbox" name="chkbox[]" value="<?php echo $item["prodID"]; ?>"></td>	
+													</tr>	
+												<?php
+													endforeach;
+													?>
+											</table>
+											<div class="form-group">
+												<input type="submit" value="Reorder" class="btn btn-success">
+											</div>
+										</form>
 									</div>
 											
-									<div class="modal-footer">	
+									<div class="modal-footer">
 									</div>
 								</div>
 							</div>

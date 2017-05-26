@@ -28,17 +28,37 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
+		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.bootstrap.min.js"></script>
+		<script src="datatables/media/js/buttons.html5.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+
+		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
+
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
 		
 		<!-- Datatables -->
 		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
+			$(document).ready(function() {
+				$('#myTable').DataTable( {
+					dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows','Show all' ]
+					],
+					buttons: [
+						'pageLength'
+					]
+				} );
+			} );		
 		</script>
 		
 		<!-- Database Connection -->
@@ -177,7 +197,7 @@
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch ID</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Branch Name</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
-										<th></th>
+										<th>Action</th>
 									</tr>
 								</thead>	
 								
