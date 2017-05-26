@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-		<title>Edit Products</title>
+		<title>Edit Product Information</title>
 			
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -125,52 +125,58 @@
 				<!-- End of Sidebar -->
 
 				<!-- Retrieve Selected Entry Details -->
-				<div class="addInv">
-					<h1 id="headers">Edit Product Information</h1>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<form action="" method="POST" class="editPgs">
-							<?php foreach ($result2 as $row): ?>
-							<h3>Product ID</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodID"]; ?>" value="<?php echo $row["prodID"]; ?>" name="prodCode"> <br>
-							<?php endforeach ?>
-							
-							<?php foreach ($result2 as $row): ?>
-							<h3>Product Name</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>" name="prodItem"> <br>
-							<?php endforeach ?>
-								
-							<?php foreach ($result2 as $row): ?>	
-							<h3>Product Type</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["unitType"]; ?>" value="<?php echo $row["unitType"]; ?>" name="prodType"> <br>
-							<?php endforeach ?>
-							
-							<?php foreach ($result2 as $row): ?>
-							<h3>Brand</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["brandName"]; ?>" value="<?php echo $row["brandName"]; ?>" name="prodBrand"> <br>
-							<?php endforeach ?>
-							
-							<?php foreach ($result2 as $row): ?>
-							<h3>Price</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["price"]; ?>" value="<?php echo $row["price"]; ?>" name="prodPrice"> <br>
-							<?php endforeach ?>
-							
-							<?php foreach ($result2 as $row): ?>
-							<h3>Reorder Level</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["reorderLevel"]; ?>" value="<?php echo $row["reorderLevel"]; ?>" name="prodRO"> <br>
-							<?php endforeach ?>	
-								
-							<br>
-							<div class="modFoot">
-								<span>
-									<a href="../product.php">
-										<input type="button" value="Cancel" class="btn btn-danger" id="canBtn">
-									</a>
-								</span>
-								<span>
-									<input type="submit" value="Update" class="btn btn-success" id="sucBtn" name="addProd" data-dismiss="modal" onclick="alert('New Product Successfully Added');">
-								</span>
+						<div class="pages no-more-tables">	
+							<h1 id="headers">Edit Product Information</h1>
+							<div id="content">
+								<form action="" method="POST">
+									<?php foreach ($result2 as $row): ?>
+									<h3>Product ID</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodID"]; ?>" value="<?php echo $row["prodID"]; ?>" name="prodCode"> <br>
+									<?php endforeach ?>
+									
+									<?php foreach ($result2 as $row): ?>
+									<h3>Product Name</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>" name="prodItem"> <br>
+									<?php endforeach ?>
+										
+									<?php foreach ($result2 as $row): ?>	
+									<h3>Product Type</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["unitType"]; ?>" value="<?php echo $row["unitType"]; ?>" name="prodType"> <br>
+									<?php endforeach ?>
+									
+									<?php foreach ($result2 as $row): ?>
+									<h3>Brand</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["brandName"]; ?>" value="<?php echo $row["brandName"]; ?>" name="prodBrand"> <br>
+									<?php endforeach ?>
+									
+									<?php foreach ($result2 as $row): ?>
+									<h3>Price</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["price"]; ?>" value="<?php echo $row["price"]; ?>" name="prodPrice"> <br>
+									<?php endforeach ?>
+									
+									<?php foreach ($result2 as $row): ?>
+									<h3>Reorder Level</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["reorderLevel"]; ?>" value="<?php echo $row["reorderLevel"]; ?>" name="prodRO"> <br>
+									<?php endforeach ?>	
+										
+									<br>
+									<div class="modFoot">
+										<span>
+											<a href="../product.php">
+												<input type="button" value="Cancel" class="btn btn-danger" id="canBtn">
+											</a>
+										</span>
+										<span>
+											<input type="submit" value="Update" class="btn btn-success" id="sucBtn" name="addProd" data-dismiss="modal" onclick="alert('New Product Successfully Added');">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>
+								</form>
 							</div>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>

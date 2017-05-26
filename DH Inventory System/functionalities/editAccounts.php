@@ -59,7 +59,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -90,7 +90,7 @@
 								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivred Products</a></li>
 							</ul>
 						</li>
-						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -119,46 +119,54 @@
 				</div>
 				<!-- End of Sidebar -->
 				
-				<div class="addInv">
-					<h1 id="headers">Edit Account</h1>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<form action="" method="POST" class="editPgs">
-							<?php foreach ($result2 as $row): ?>
-							<h3>Username</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["userName"]; ?>" value="<?php echo $row["userName"]; ?>" name="userName"> <br>
-							<?php endforeach ?>
-							
-							<?php foreach ($result2 as $row): ?>
-							<h3>Password</h3>
-							<input type="password" class="form-control" id ="addEntry" placeholder="<?php echo $row["password"]; ?>" value="<?php echo $row["password"]; ?>" name="psw"> <br>
-							<?php endforeach ?>
-							
-							<?php foreach ($result2 as $row): ?>
-							<div class="form-group">
-								 <h3>User Role</h3>
-								  <select class="form-control" id="addEntry" name="user_role">
-									<option>admin</option>
-									<option>user</option>
-								  </select>
+						<div class="pages no-more-tables">	
+							<h1 id="headers">Edit Account</h1>
+							<div id="contents">
+								<form action="" method="POST" class="editPgs">
+									<?php foreach ($result2 as $row): ?>
+									<h3>Username</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["userName"]; ?>" value="<?php echo $row["userName"]; ?>" name="userName"> <br>
+									<?php endforeach ?>
+									
+									<?php foreach ($result2 as $row): ?>
+									<h3>Password</h3>
+									<input type="password" class="form-control" id ="addEntry" placeholder="<?php echo $row["password"]; ?>" value="<?php echo $row["password"]; ?>" name="psw"> <br>
+									<?php endforeach ?>
+									
+									<?php foreach ($result2 as $row): ?>
+									<div class="form-group">
+										 <h3>User Role</h3>
+										  <select class="form-control" id="addEntry" name="user_role">
+											<option>admin</option>
+											<option>user</option>
+										  </select>
+									</div>
+									<?php endforeach ?>
+									<br>
+									
+									<div class="modFoot">
+										<span>
+											<a href="../accounts.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										<span>
+											<input type="submit" name="editAccount" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>	
+									<div class="modal-footer">
+									</div>
+								</form> 
 							</div>
-							<?php endforeach ?>
-							<br>
-							
-							<div class="modFoot">
-								<span>
-									<a href="../accounts.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="editAccount" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
-							</div>	
-						</form> 
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	
+		<!-- Update Function -->
 		<?php
 		require_once 'dbcon.php';
 		$usethisid= $_GET['useID'];
@@ -182,8 +190,7 @@
 				$sql = "UPDATE users SET userName = '$useName', password = '$hashPW', user_role = '$urole' WHERE userID = '$useThisID'";
 			
 				$conn->exec($sql);
-			} 
-			
+			} 	
 		?>
 	</body>
 </html>

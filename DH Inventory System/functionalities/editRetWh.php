@@ -125,82 +125,88 @@
 				</div>
 				<!-- End of Sidebar -->	
 				
-				<div class="addInv">
-					<h1 id="headers">Edit Warehouse Return Entry</h1>
-					<br>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<form action="" method="POST" onsubmit="return validateForm()">
-							<h3>User</h3>
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-							
-							<h3> Receipt No. </h3>
-							<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>"placeholder="User" name="recID" readonly>
-							
-							<h5 id="multipleProd">Product/s</h5>
-							<table class="table table-striped" id="dataTable" name="chk">
-								<tbody>
-									<?php foreach ($result2 as $row2): ?>
-									<tr>
-										<td><input type="checkbox" name="chk"></TD>
-										<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-										<td>	
-											<?php
-												$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
-												$query->execute();
-												$res = $query->fetchAll();
-											?>
-											<select class="form-control" id="addItem" name="prodItem[]">
-												<option><?=$row2["prodName"]?></option>
-											<?php foreach ($res as $row): ?>
-												<option><?=$row["prodName"]?></option>
-											<?php endforeach ?>
-										</select> 
-										</td>
-												
-										<td>
-											<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]">
-										</td>
-										
-										<td>	
-											<?php
-												$query = $conn->prepare("SELECT location, branchID FROM branch WHERE branchID != 0");
-												$query->execute();
-												$res = $query->fetchAll();
-											?>
-											<select class="form-control" id="addItem" name="branchItem[]">
-												<option value=<?=$row2["branchID"]?>>Selected: <?=$row2["location"]?></option>
-											<?php foreach ($res as $row): ?>
-												<option value=<?=$row["branchID"]?>><?=$row["location"]?></option>
-											<?php endforeach ?>
+						<div class="pages no-more-tables">
+							<h1 id="headers">Edit Warehouse Return Entry</h1>
+							<form action="" method="POST" onsubmit="return validateForm()">
+								<h3>User</h3>
+								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+								
+								<h3>Receipt No.</h3>
+								<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>"placeholder="User" name="recID" readonly>
+								
+								<br>
+								
+								<h5 id="multipleProd">Product/s</h5>
+								<table class="table table-striped" id="dataTable" name="chk">
+									<tbody>
+										<?php foreach ($result2 as $row2): ?>
+										<tr>
+											<td><input type="checkbox" name="chk"></TD>
+											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+											<td>	
+												<?php
+													$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+												<select class="form-control" id="addItem" name="prodItem[]">
+													<option><?=$row2["prodName"]?></option>
+												<?php foreach ($res as $row): ?>
+													<option><?=$row["prodName"]?></option>
+												<?php endforeach ?>
 											</select> 
-										</td>
+											</td>
+													
+											<td>
+												<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]">
+											</td>
+											
+											<td>	
+												<?php
+													$query = $conn->prepare("SELECT location, branchID FROM branch WHERE branchID != 0");
+													$query->execute();
+													$res = $query->fetchAll();
+												?>
+												<select class="form-control" id="addItem" name="branchItem[]">
+													<option value=<?=$row2["branchID"]?>>Selected: <?=$row2["location"]?></option>
+												<?php foreach ($res as $row): ?>
+													<option value=<?=$row["branchID"]?>><?=$row["location"]?></option>
+												<?php endforeach ?>
+												</select> 
+											</td>
+											
+											<td>
+												<input type="text" class="form-control" id="addEntry" placeholder="<?php echo $row2["returnRemark"]; ?>" value="<?php echo $row2["returnRemark"]; ?>" name="retRemarks[]">
+											</td>
+										</tr>
+										<?php endforeach ?>
+									</tbody>
+								</table>
 										
-										<td>
-											<input type="text" class="form-control" id="addEntry" placeholder="<?php echo $row2["returnRemark"]; ?>" value="<?php echo $row2["returnRemark"]; ?>" name="retRemarks[]">
-										</td>
-									</tr>
-									<?php endforeach ?>
-								</tbody>
-							</table>
-									
-							<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-								<br>
-								<br>
-								<span>
-									<a href="../returnswarehouse.php">
-									<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-								</span>
-								<span>
-									<input type="submit" value="Update" class="btn btn-success" name="addRet" id="sucBtn">
-								</span>
-							</div>
-						</form> 
+								<div class="modFoot">
+									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+									<br>
+									<br>
+									<span>
+										<a href="../returnswarehouse.php">
+										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+									</span>
+									<span>
+										<input type="submit" value="Update" class="btn btn-success" name="addRet" id="sucBtn">
+									</span>
+								</div>
+								
+								<div class="modal-footer">
+								</div>	
+							</form> 
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+			
 		<?php
 			$retID= $_GET['retId'];	
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);

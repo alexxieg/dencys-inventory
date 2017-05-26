@@ -60,7 +60,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -84,13 +84,13 @@
 								<li><a href="../functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -119,37 +119,43 @@
 				</div>
 				<!-- End of Sidebar -->
 
-				<div class="addInv">
-					<h1 id="headers">Edit Branch Entry</h1>
-					<br>
-					<div>
-						<form action="" method="POST" class="editPgs">
-							<?php foreach ($result2 as $row): ?>
-							<h3>Branch ID</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["branchID"]; ?>" value="<?php echo $row["branchID"]; ?>" name="branID"> <br>
-							<?php endforeach ?>
-							
-							<?php foreach ($result2 as $row): ?>
-							<h3>Branch Name</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["location"]; ?>" value="<?php echo $row["location"]; ?>" name="branName"> <br>
-							<?php endforeach ?>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+					<div id="contents">
+						<div class="pages no-more-tables">	
+							<h1 id="headers">Edit Branch Entry</h1>
 							<br>
-							
-							<div class="modFoot">
-								<span>
-									<a href="../branches.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="editBranch" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
+							<div id="content">
+								<form action="" method="POST">
+									<?php foreach ($result2 as $row): ?>
+									<h3>Branch ID</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["branchID"]; ?>" value="<?php echo $row["branchID"]; ?>" name="branID"> <br>
+									<?php endforeach ?>
+									
+									<?php foreach ($result2 as $row): ?>
+									<h3>Branch Name</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["location"]; ?>" value="<?php echo $row["location"]; ?>" name="branName"> <br>
+									<?php endforeach ?>
+									<br>
+									
+									<div class="modFoot">
+										<span>
+											<a href="../branches.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										<span>
+											<input type="submit" name="editBranch" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>
+								</form> 
 							</div>
-						</form> 
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 		
 		<!-- Update Function -->
 		<?php
@@ -161,9 +167,7 @@
 			 
 				$sql = "UPDATE branch SET branchID = '$braID', location = '$braName' WHERE branchID = '$branchThisID'";
 				$conn->exec($sql);
-		
-			}    
-			
+			}    		
 		?>
-  </body>
+	</body>
 </html>

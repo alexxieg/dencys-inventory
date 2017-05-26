@@ -61,7 +61,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -91,8 +91,8 @@
 								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
@@ -120,32 +120,38 @@
 				</div>
 				<!-- End of Sidebar -->	
 				
-				<div class="addInv">
-					<h1 id="headers">Edit Category</h1>
-					<div>
-						<form action="" method="POST" class="editPgs">
-							<?php foreach ($result2 as $row): ?>
-							<h3>Category ID</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["categoryID"]; ?>" value="<?php echo $row["categoryID"]; ?>" name="catID"> <br>
-							<?php endforeach ?>
-							
-							<?php foreach ($result2 as $row): ?>
-							<h3>Category Name</h3>
-							<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["categoryName"]; ?>" value="<?php echo $row["categoryName"]; ?>" name="catName"> <br>
-							<?php endforeach ?>
-							<br>
-							
-							<div class="modFoot">
-								<span>
-									<a href="../category.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="editCat" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+					<div id="contents">
+						<div class="pages no-more-tables">	
+							<h1 id="headers">Edit Category</h1>
+							<div>
+								<form action="" method="POST">
+									<?php foreach ($result2 as $row): ?>
+									<h3>Category ID</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["categoryID"]; ?>" value="<?php echo $row["categoryID"]; ?>" name="catID"> <br>
+									<?php endforeach ?>
+									
+									<?php foreach ($result2 as $row): ?>
+									<h3>Category Name</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["categoryName"]; ?>" value="<?php echo $row["categoryName"]; ?>" name="catName"> <br>
+									<?php endforeach ?>
+									<br>
+									
+									<div class="modFoot">
+										<span>
+											<a href="../category.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										<span>
+											<input type="submit" name="editCat" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>
+								</form> 
 							</div>
-						</form> 
+						</div>
 					</div>
 				</div>
 			</div>

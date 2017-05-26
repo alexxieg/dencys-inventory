@@ -63,7 +63,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -84,7 +84,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="../functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -93,7 +93,7 @@
 								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
@@ -122,67 +122,72 @@
 				</div>
 				<!-- End of Sidebar -->
 		
-				<div class="addInv">
-					<h1 id="headers">Edit Employee Entry</h1>
-					<br>
-					<div class="contents">
-						<form action="" method="POST" class="editPgs">
-																					
-							<h3>First Name</h3>
-							<?php foreach ($result2 as $row): ?>
-								<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empFirstName"]; ?>" value="<?php echo $row["empFirstName"]; ?>" name="empFName"> <br>
-							<?php endforeach ?>
-								
-							<h3>Middle Name</h3>
-							<?php foreach ($result2 as $row): ?>
-								<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empMidName"]; ?>" value="<?php echo $row["empMidName"]; ?>" name="empMName"> <br>
-							<?php endforeach ?>
-							
-							<h3>Last Name</h3>
-							<?php foreach ($result2 as $row): ?>
-								<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empLastName"]; ?>" value="<?php echo $row["empLastName"]; ?>" name="empLName"> <br>
-							<?php endforeach ?>
-
-							<h3>Extension Name</h3>
-							<?php foreach ($result2 as $row): ?>
-								<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empExtensionName"]; ?>" value="<?php echo $row["empExtensionName"]; ?>" name="empEName"> <br>
-							<?php endforeach ?>					
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+					<div id="contents">
+						<div class="pages no-more-tables">	
+							<h1 id="headers">Edit Employee Entry</h1>
 							<br>
+							<div class="content">
+								<form action="" method="POST">
+																							
+									<h3>First Name</h3>
+									<?php foreach ($result2 as $row): ?>
+										<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empFirstName"]; ?>" value="<?php echo $row["empFirstName"]; ?>" name="empFName"> <br>
+									<?php endforeach ?>
 										
-							<div class="modFoot">
-								<span>
-									<a href="../employees.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="editEmp" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
+									<h3>Middle Name</h3>
+									<?php foreach ($result2 as $row): ?>
+										<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empMidName"]; ?>" value="<?php echo $row["empMidName"]; ?>" name="empMName"> <br>
+									<?php endforeach ?>
+									
+									<h3>Last Name</h3>
+									<?php foreach ($result2 as $row): ?>
+										<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empLastName"]; ?>" value="<?php echo $row["empLastName"]; ?>" name="empLName"> <br>
+									<?php endforeach ?>
+
+									<h3>Extension Name</h3>
+									<?php foreach ($result2 as $row): ?>
+										<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empExtensionName"]; ?>" value="<?php echo $row["empExtensionName"]; ?>" name="empEName"> <br>
+									<?php endforeach ?>					
+									<br>
+												
+									<div class="modFoot">
+										<span>
+											<a href="../employees.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										<span>
+											<input type="submit" name="editEmp" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>
+								</form> 
 							</div>
-	
-						</form> 
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-				   
-		<?php
-		$emploFirstName=(isset($_REQUEST['empFName']) ? $_REQUEST['empFName'] : null);
-		$emploMiddleName=(isset($_REQUEST['empMName']) ? $_REQUEST['empMName'] : null);
-		$emploLastName=(isset($_REQUEST['empLName']) ? $_REQUEST['empLName'] : null);
-		$emploExtenName=(isset($_REQUEST['empEName']) ? $_REQUEST['empEName'] : null);
-		
-		if (isset($_POST["editEmp"])){
-				
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				 
-						 
-		$sql = "UPDATE employee SET empFirstName = '$emploFirstName', empMidName = '$emploMiddleName', empLastName = '$emploLastName', empExtensionName = '$emploExtenName'
-				WHERE empID = '$employID'";
-		$conn->exec($sql);
-					
-		}
 
+		<!-- Update Function -->
+		<?php
+			$emploFirstName=(isset($_REQUEST['empFName']) ? $_REQUEST['empFName'] : null);
+			$emploMiddleName=(isset($_REQUEST['empMName']) ? $_REQUEST['empMName'] : null);
+			$emploLastName=(isset($_REQUEST['empLName']) ? $_REQUEST['empLName'] : null);
+			$emploExtenName=(isset($_REQUEST['empEName']) ? $_REQUEST['empEName'] : null);
+			
+			if (isset($_POST["editEmp"])){
+					
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					 
+							 
+			$sql = "UPDATE employee SET empFirstName = '$emploFirstName', empMidName = '$emploMiddleName', empLastName = '$emploLastName', empExtensionName = '$emploExtenName'
+					WHERE empID = '$employID'";
+			$conn->exec($sql);
+						
+			}
 		?>
 	</body>
 </html>

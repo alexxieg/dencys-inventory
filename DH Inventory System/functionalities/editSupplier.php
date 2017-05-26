@@ -117,27 +117,31 @@
 				<!-- End of Sidebar -->
 
 				<!-- Retrieve Selected Entry Details -->
-				<div class="addInv">
-					<h1 id="headers">Edit Supplier Information</h1>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<form action="" method="POST" onsubmit="return validateForm()">									
-							<h3>Supplier Name</h3>
-							<?php foreach ($result as $row): ?>
-								<input type="text" class="form-control" id="editSName" value="<?php echo $row["supplier_name"]; ?>" placeholder="<?php echo $row["supplier_name"]; ?>" name="supName"> <br>
-							<?php endforeach ?>
-							<br>
-							
-							<div class="modFoot">
-								<span>
-									<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-								</span>
-								<span>
-									<input type="submit" value="Update" class="btn btn-success" name="editSup" id="sucBtn">
-								</span>
+						<div class="pages no-more-tables">	
+							<h1 id="headers">Edit Supplier Information</h1>
+							<div id="contents">
+								<form action="" method="POST" onsubmit="return validateForm()">									
+									<h3>Supplier Name</h3>
+									<?php foreach ($result as $row): ?>
+										<input type="text" class="form-control" id="editSName" value="<?php echo $row["supplier_name"]; ?>" placeholder="<?php echo $row["supplier_name"]; ?>" name="supName"> <br>
+									<?php endforeach ?>
+									<br>
+									
+									<div class="modFoot">
+										<span>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+										</span>
+										<span>
+											<input type="submit" value="Update" class="btn btn-success" name="editSup" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>	
+								</form> 
 							</div>
-							<div class="modal-footer">
-							</div>	
-						</form> 
+						</div>
 					</div>
 				</div>
 			</div>
