@@ -451,6 +451,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<!-- Add Outgoing Entry -->
 		<?php include('functionalities/addOutgoing.php'); ?>
 	</body>
