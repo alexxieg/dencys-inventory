@@ -194,58 +194,56 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<div id="contents">
 						<div id="tableHeader">
-							<table class="table">	
-								<h1 id="headers">INVENTORY</h1>	
-								<table class="table table-striped table-bordered">
-								<?php 
-									$location =  $_SERVER['REQUEST_URI']; 
-								?>
-									<form action="<?php echo $location; ?>" method="POST">
-										<tr>
-											<td>
-												Filter By Brand <br>
-												<select name="brand_Name">
-													<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
-													<option value="<?php echo $None?>">--None--</option>
-													<?php foreach ($brandType as $row): ?>
-														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-													<?php endforeach ?>
-												</select>
-											</td>	
-											
-											<td>
-												Filter By Category <br>
-												<select name="category_Name">
-													<option value="<?php echo $selectedCategory?>" SELECTED>Category: <?php echo $filterCategory?></option>
-													<option value="<?php echo $None?>">--None--</option>
-													<?php foreach ($categoryType as $row2): ?>
-														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
-													<?php endforeach ?>
-												</select>	
-											</td>
-										</tr>
-										<input type="submit" value="Filter" class="btn btn-success" name="submit">
-									</form>
-								</table>
+							<h1 id="headers">INVENTORY</h1>	
 									
-								<table class="table">	
-									<tr>
-										<td>
-											<br>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">
-												Products for Reorder
-											</button>
+							<table class="table">	
+								<tr>
+									<td>	
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">
+											Products for Reorder
+										</button>
 
-											<a href="history.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
+										<a href="history.php">
+											<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
+												View Previous Inventory
+											</button>
+										</a>
 											
-											<a href="physCount.php"> 
-												<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
-													Add Physical Count
-												</button>
-											</a>
-										</td>
-									</tr>	
-								</table>											
+										<a href="physCount.php"> 
+											<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
+												Add Physical Count
+											</button>
+										</a>
+									</td>
+									
+									<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
+										
+									<td>
+										<form action="<?php echo $location; ?>" method="POST">
+											<label> Filter by Brand / Category </label>
+										
+											<select name="brand_Name">
+												<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
+												<option value="<?php echo $None?>">--None--</option>
+												<?php foreach ($brandType as $row): ?>
+													<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+												<?php endforeach ?>
+											</select>
+										
+											<select name="category_Name">
+												<option value="<?php echo $selectedCategory?>" SELECTED>Category: <?php echo $filterCategory?></option>
+												<option value="<?php echo $None?>">--None--</option>
+												<?php foreach ($categoryType as $row2): ?>
+													<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+												<?php endforeach ?>
+											</select>	
+										
+											<input type="submit" value="Filter" class="btn btn-success" name="submit">
+										</form>
+									</td>
+								</tr>
 							</table>
 						</div>
 							
