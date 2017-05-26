@@ -193,44 +193,9 @@
 				<!-- Main Container for Page Contents -->
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<div id="contents">
-						<div id="tableHeader">
-<<<<<<< HEAD
+						<div class="pages no-more-tables">
+							<div id="tableHeader">
 							<h1 id="headers">INVENTORY</h1>	
-=======
-							<table class="table">	
-								<h1 id="headers">INVENTORY</h1>	
-								<table class="table table-striped table-bordered">
-									<?php 
-										$location =  $_SERVER['REQUEST_URI']; 
-									?>
-									<form action="<?php echo $location; ?>" method="POST">
-										<tr>
-											<td>
-												Filter By Brand <br>
-												<select name="brand_Name">
-													<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
-													<option value="<?php echo $None?>">--None--</option>
-													<?php foreach ($brandType as $row): ?>
-														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-													<?php endforeach ?>
-												</select>
-											</td>	
-											
-											<td>
-												Filter By Category <br>
-												<select name="category_Name">
-													<option value="<?php echo $selectedCategory?>" SELECTED>Category: <?php echo $filterCategory?></option>
-													<option value="<?php echo $None?>">--None--</option>
-													<?php foreach ($categoryType as $row2): ?>
-														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
-													<?php endforeach ?>
-												</select>	
-											</td>
-										</tr>
-										<input type="submit" value="Filter" class="btn btn-success" name="submit">
-									</form>
-								</table>
->>>>>>> 0df7b2302918f554325e815eab1f9d89222fe1ea
 									
 							<table class="table">	
 								<tr>
@@ -258,7 +223,7 @@
 										
 									<td>
 										<form action="<?php echo $location; ?>" method="POST">
-											<label> Filter by Brand / Category </label>
+											<label>View by Brand / Category</label>
 										
 											<select name="brand_Name">
 												<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
@@ -276,7 +241,7 @@
 												<?php endforeach ?>
 											</select>	
 										
-											<input type="submit" value="Filter" class="btn btn-success" name="submit">
+											<input type="submit" value="View" class="btn btn-success" name="submit">
 										</form>
 									</td>
 								</tr>
