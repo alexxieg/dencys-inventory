@@ -60,119 +60,233 @@
 		
 		<!-- Datatables Script-->
 		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable( {
-					dom: 'Bfrtip',
-					buttons: [
-						{
-							extend: 'print',
-							exportOptions: {
-								columns: ':visible'
-							}
-						},
-						'colvis'
+			$(document).ready(function() {
+                $('#myTable').DataTable( {
+                    dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
 					],
-					columnDefs: [ {
-						targets: -1,
-						visible: true
-					} ]
-				});
-			});
-		
-			$(document).ready(function(){
-				$('#myTable1').dataTable( {
-					dom: 'Bfrtip',
-					buttons: [
-						{
-							extend: 'print',
-							exportOptions: {
-								columns: ':visible'
-							}
-						},
-						'colvis'
-					],
-					columnDefs: [ {
-						targets: -1,
-						visible: true
-					} ]
-				});
-			});
-		
-			$(document).ready(function(){
-				$('#myTable2').dataTable({
-					dom: 'Bfrtip',
-					buttons: [
-						{
-							extend: 'print',
-							exportOptions: {
-								columns: ':visible'
-							}
-						},
-						'colvis'
-					],
-					columnDefs: [ {
-						targets: -1,
-						visible: true
-					} ]
-				});
-			});
-		
-			$(document).ready(function(){
-				$('#myTable3').dataTable({
-					dom: 'Bfrtip',
-					buttons: [
-						{
-							extend: 'print',
-							exportOptions: {
-								columns: ':visible'
-							}
-						},
-						'colvis'
-					],
-					columnDefs: [ {
-						targets: -1,
-						visible: true
-					} ]
-				});
-			});
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Overall Outgoing Reports ', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis','pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );		
 			
-			$(document).ready(function(){
-				$('#myTable4').dataTable({
-					dom: 'Bfrtip',
-					buttons: [
-						{
-							extend: 'print',
-							exportOptions: {
-								columns: ':visible'
-							}
-						},
-						'colvis'
+			$(document).ready(function() {
+                $('#myTable1').DataTable( {
+                    dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
 					],
-					columnDefs: [ {
-						targets: -1,
-						visible: true
-					} ]
-				});
-			});
-			
-			$(document).ready(function(){
-				$('#myTable5').dataTable({ 
-					dom: 'Bfrtip',
-					buttons: [
-						{
-							extend: 'print',
-							exportOptions: {
-								columns: ':visible'
-							}
-						},
-						'colvis'
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Outgoing Products in Camdas', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis','pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );	
+
+			$(document).ready(function() {
+                $('#myTable2').DataTable( {
+                    dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
 					],
-					columnDefs: [ {
-						targets: -1,
-						visible: true
-					} ]
-				});
-			});
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Outgoing Products in Hilltop', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis','pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );	
+
+			$(document).ready(function() {
+                $('#myTable3').DataTable( {
+                    dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
+					],
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Outgoing Products in KM4', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis','pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );	
+
+			$(document).ready(function() {
+                $('#myTable4').DataTable( {
+                    dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
+					],
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Outgoing Products in KM5', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis','pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );	
+
+			$(document).ready(function() {
+                $('#myTable5').DataTable( {
+                    dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
+					],
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Outgoing Products in San Fernando, La Union', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis','pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );		
 		</script>
 		
 	</head>
