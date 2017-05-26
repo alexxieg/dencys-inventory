@@ -26,14 +26,59 @@
 		<!-- Datatables CSS and JS Files -->
 		<script src="../datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="../datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="../datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		
+		<script src="../datatables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script src="../datatables/Buttons/js/buttons.bootstrap.min.js"></script>
+		<script src="../datatables/media/js/buttons.html5.min.js"></script>
+		<script src="../datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="../datatables/Buttons/js/buttons.colVis.min.js"></script>
+
+		<link href="../datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
+		<link href="../datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="../datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
+
+        <link href="../datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+        <script src="../datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="../datatables/Buttons/js/buttons.colVis.min.js"></script>
+
 		<!-- Datatables Script -->
 		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
+			$(document).ready(function() {
+                $('#myTable').DataTable( {
+                    dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
+					],
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Purchase Order Details', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis','pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );		
 		</script>
 		
 		<!-- Database Connection -->
@@ -125,6 +170,7 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
+				
 				<?php
 					foreach ($result as $item):
 					$po = $item["poID"];
@@ -138,7 +184,7 @@
 					<div id="contents">
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
-								<h1 id="headers">PURCHASE ORDER</h1>
+								<h1 id="headers">PURCHASE ORDER DETAILS</h1>
 							</div>
 							
 							<hr>					
@@ -148,16 +194,8 @@
 									EDIT ENTRY
 								</button>
 							</a>
-							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
 						
 							<hr>
-							
-							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-								<div id="myTable_length" class="dataTables_length">
-									<div id="myTable_filter" class="dataTables_filter">
-									</div>
-								</div>
-							</div>
 	
 							<table class="table table-striped table-bordered">
 								<tr>
@@ -172,9 +210,15 @@
 								</tr>									
 							</table>
 							
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
+									</div>
+								</div>
+							</div>
+							
 							<!-- Table Display for Incoming -->
-							<div id="printThisTable" name="printThisTable">	
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 									<thead>	
 										<tr>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
@@ -202,13 +246,10 @@
 										?>
 									</tbody>	
 								</table>
-							</div>		
-							
-						</div>
-					</div>		  
-				</div>
-			</div>	
-		</div>
-	
+							</div>
+						</div>		  
+					</div>
+				</div>	
+			</div>
   </body>
 </html>

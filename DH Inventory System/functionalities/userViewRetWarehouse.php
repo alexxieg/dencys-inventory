@@ -27,14 +27,59 @@
 		<!-- Datatables CSS and JS Files -->
 		<script src="../datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="../datatables/media/js/dataTables.bootstrap.min.js"></script>
-		<link href="../datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet">	
-		<link href="..datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
-		
+		<script src="../datatables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script src="../datatables/Buttons/js/buttons.bootstrap.min.js"></script>
+		<script src="../datatables/media/js/buttons.html5.min.js"></script>
+		<script src="../datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="../datatables/Buttons/js/buttons.colVis.min.js"></script>
+
+		<link href="../datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
+		<link href="../datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+		<link href="../datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
+
+        <link href="../datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+        <script src="../datatables/Buttons/js/buttons.print.min.js"></script>
+		<script src="../datatables/Buttons/js/buttons.colVis.min.js"></script>
+
 		<!-- Datatables Script -->
 		<script>
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
+			$(document).ready(function() {
+                $('#myTable').DataTable( {
+                    dom: 'Bfrtip',
+					lengthMenu: [
+						[ 10, 25, 50, 100, -1 ],
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
+					],
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Warehouse Return Details', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							'colvis','pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );		
 		</script>
 			
 		<!-- Database Connection -->
@@ -152,9 +197,7 @@
 									EDIT ENTRY
 								</button>
 							</a>
-							
-							<input type="button" class="btn btn-default" id="modButt" onclick="window.print()" value="PRINT TABLE" />
-							
+
 							<br>
 							<br>
 							<table class="table table-striped table-bordered">
@@ -179,6 +222,7 @@
 									</tr>									
 							</table>
 						</div>
+						
 						<div class="pages no-more-tables">
 							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -188,7 +232,6 @@
 								</div>
 							</div>
 							
-							<div id="printThisTable" name="printThisTable">
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 									<thead>
 										<tr>
@@ -224,6 +267,5 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</body>
 </html>
