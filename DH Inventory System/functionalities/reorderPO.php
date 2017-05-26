@@ -131,7 +131,7 @@
 		</nav>
 		<!-- End of Top Main Header -->
 
-		<div class="container-fluid" >
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-3 col-md-2 sidebar">
 				<!-- Sidebar -->
@@ -190,91 +190,86 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
-						
-							<!-- Modal for New Purchase Order -->
-							<div class="modal-dialog modal-lg">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title">Add Purchase Order</h4>
-									</div>
-									<div class="modal-body">
-										<form action="" method="POST" onsubmit="return validateForm()"><td>
-										<td>
-											<h3> User </h3>
-											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-										</td>																									
-										
-										<h3>Supplier</h3>  
-											<div class="ui-widget">
-												<input id="supplier" name="supplier" placeholder="Supplier">
-											</div>
-										<br>
-												
-										<h5>Product/s</h5>
-										<table class="table table-striped" id="dataTable" name="chk">				
-											<tbody>
-												<?php
-													$useThisID = $_POST["chkbox"];
-													$countChkBox = count($useThisID);
-													for ($index = 0; $index < $countChkBox; $index++) {
-														$productID = $useThisID[$index];
-														$reorderQuery = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-																				WHERE inventory.qty <= product.reorderLevel AND inventory.prodID = '$productID'");
-														$reorderQuery->execute();
-														$reorderResult = $reorderQuery->fetchAll();
-												?>
-													<?php foreach ($reorderResult as $row): ?>
-														<tr>
-															<td><input type="checkbox" name="chk"></TD>
-																<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-															<td>	
-																<div class="ui-widget">
-																	<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
-																</div>
-															</td>
-																		
-															<td>
-																<input type="number" min="1" class="form-control" id ="addQty"  
-																value="<?php 
-																if ($row["qty"] < ($row["reorderLevel"]/2)) {
-																	echo $row["reorderLevel"] + 5; 
-																} else if($row["qty"] = ($row["reorderLevel"])){
-																	echo 5;
-																} else {
-																	echo $row["reorderLevel"];
-																}
-																?>" name="qty[]">
-															</td>
-														</tr>
-													<?php endforeach ?>
-												<?php } ?>
-											</tbody>
-										</table>
-											
-											<br>
-											
-											<div class="modFoot">
-												<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-												<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-												<br>
-												<br>
-												<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-												<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
-											</div>
-										</form> 	
-									
-										<div class="modal-footer">
-										</div>								
-									</div>
-								</div>
-							</div>
-							<!-- End of Modal -->
+							<h1 id="headers">Add New Purchase Order</h1>
+							<br>
 							
+							<div id="content">
+								<form action="" method="POST" onsubmit="return validateForm()"><td>
+									<h3>User</h3>
+									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+																																		
+									<h3>Supplier</h3>  
+									<div class="ui-widget">
+										<input id="supplierName" name="supplier" placeholder="Supplier">
+									</div>
+									<br>
+													
+									<h5>Product/s</h5>
+									<table class="table table-striped" id="dataTable" name="chk">				
+										<tbody>
+											<?php
+											$useThisID = $_POST["chkbox"];
+												$countChkBox = count($useThisID);
+												for ($index = 0; $index < $countChkBox; $index++) {
+													$productID = $useThisID[$index];
+													$reorderQuery = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
+																			WHERE inventory.qty <= product.reorderLevel AND inventory.prodID = '$productID'");
+													$reorderQuery->execute();
+													$reorderResult = $reorderQuery->fetchAll();
+											?>
+											<?php foreach ($reorderResult as $row): ?>
+												<tr>
+													<td><input type="checkbox" name="chk"></TD>
+													<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+													<td>	
+														<div class="ui-widget">
+															<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
+														</div>
+													</td>
+																	
+													<td>
+														<input type="number" min="1" class="form-control" id ="addQty"  
+														value="<?php 
+														if ($row["qty"] < ($row["reorderLevel"]/2)) {
+															echo $row["reorderLevel"] + 5; 
+														} else if($row["qty"] = ($row["reorderLevel"])){
+																echo 5;
+														} else {
+																echo $row["reorderLevel"];
+															}
+														?>" name="qty[]">
+													</td>
+												</tr>
+											<?php endforeach ?>
+											<?php } ?>
+										</tbody>
+									</table>
+									<br>
+										
+									<div class="modFoot">
+										<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+										<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+										<br>
+										<br>
+										<a href="../inventory.php">
+											<span>
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</span>
+										</a>
+										<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
+									</div>
+								</form> 	
+								
+								<div class="modal-footer">
+								</div>								
+							</div>
 						</div>
-					</div>		  
+					</div>
+							
 				</div>
 			</div>
 		</div>
+
 		<?php include('addPO.php');?>
 	</body>
 </html>

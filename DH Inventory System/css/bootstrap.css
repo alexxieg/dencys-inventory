@@ -7615,6 +7615,12 @@ border: none;
 	margin-left:25%;
 }
 
+#supplierName{
+	width:50%;
+	margin-left: 25%;
+	margin-right: auto;
+}
+
 .modal-body #prod{
 	width:100%;
 }

@@ -144,70 +144,74 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
+				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
-					<h1 id="headers">Edit Product Order Entry</h1>
-					<br>
-					<div id="content">
-						<form action="" method="POST" onsubmit="return validateForm()"><td>
-							<td>
-							<h3>User</h3>
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-							</td>	
-
-							<h3>Purchase No</h3> 
-							<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
-							
-							<h3>Supplier</h3> 
-							<div class="ui-widget">
-								<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier">
-							</div>
-								
-							<h5>Product/s</h5>
-							<table class="table table-striped" id="dataTable" name="chk">	
-								<?php foreach ($result as $row): ?>
-									<tbody>
-										<tr>
-											<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
-											<td>	
-												<div class="ui-widget">
-													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
-												</div>		
-											</td>
-													
-											<td>
-												<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row["qtyOrder"]?>" placeholder="<?php echo $row["qtyOrder"]?>" name="qty[]">
-											</td>
-										</tr>
-									</tbody>
-								<?php endforeach ?>
-							</table>
-							
+							<h1 id="headers">Edit Product Order Entry</h1>
 							<br>
-							
-							<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-								<br>
-								<br>
-								<span>
-									<a href="../purchaseOrder.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								
-								<span>
-									<input type="submit" name="editPO" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
-							</div>
-						</form>  								
-					</div>								
-				</div>
-				</div>
+							<div id="content">
+								<form action="" method="POST" onsubmit="return validateForm()"><td>
+									<td>
+									<h3>User</h3>
+									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+									</td>	
+
+									<h3>Purchase No</h3> 
+									<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
+									
+									<h3>Supplier</h3> 
+									<div class="ui-widget">
+										<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier">
+									</div>
+										
+									<h5>Product/s</h5>
+									<table class="table table-striped" id="dataTable" name="chk">	
+										<?php foreach ($result as $row): ?>
+											<tbody>
+												<tr>
+													<td><input type="checkbox" name="chk"></TD>
+													<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
+													<td>	
+														<div class="ui-widget">
+															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+														</div>		
+													</td>
+															
+													<td>
+														<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row["qtyOrder"]?>" placeholder="<?php echo $row["qtyOrder"]?>" name="qty[]">
+													</td>
+												</tr>
+											</tbody>
+										<?php endforeach ?>
+									</table>
+									
+									<br>
+									
+									<div class="modFoot">
+										<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+										<br>
+										<br>
+										<span>
+											<a href="../purchaseOrder.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										
+										<span>
+											<input type="submit" name="editPO" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>	
+								</form>  								
+							</div>								
+						</div>
+					</div>
 				</div>
 			</div>	
 		</div>
+		
 		<?php
 		require_once 'dbcon.php';
 		$incID= $_GET['incId'];
