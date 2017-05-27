@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -114,6 +113,7 @@
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 			
+			$receiptNum = current($conn->query("SELECT returns.receiptNo FROM returns WHERE returns.receiptNo = '$retID'")->fetch());
 			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returns.receiptNo = '$retID'")->fetch());
 			$employee = current($conn->query("SELECT CONCAT(empFirstName, ' ', empLastName) AS empName FROM returns INNER JOIN employee ON returns.empID = employee.empID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
@@ -128,13 +128,14 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="../userinventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 					<li id="adminhead"><a href="#">User |</a></li>
 						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
+				</div>
 			</div>
 		</nav>
 		<!-- End of Top Main Header -->
@@ -149,7 +150,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -203,34 +204,32 @@
 									EDIT ENTRY
 								</button>
 							</a>
-
-							<br>
-							<br>
-							<table class="table table-striped table-bordered">
-									<tr>
-										<td>
-											Reference No:
-									
-										</td>
-										<td>
-											Return Date:
-								
-										</td>
-										<td>
-											Branch:
-											<?php echo $branch;?> 
 							
-										</td>
-										<td> 
-											Handled by:
-											<?php echo $employee;?>
-										</td>
-									</tr>									
+							<hr>
+							
+							<!-- Table Display for Warehouse Return Details -->
+							<table class="table table-striped table-bordered">
+								<tr>
+									<td>
+										Reference No:
+										<?php echo $receiptNum;?>
+									</td>
+									<td>
+										Branch:
+										<?php echo $branch;?> 
+									</td>
+									<td> 
+										Handled by:
+										<?php echo $employee;?>
+									</td>
+								</tr>									
 							</table>
+							<!-- End of Table Display -->
 						</div>
 						
+						<hr>
+						
 						<div class="pages no-more-tables">
-							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
@@ -238,40 +237,40 @@
 								</div>
 							</div>
 							
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-									<thead>
-										<tr>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-										</tr>
-									</thead>
-									
-									<tbody>
-										<?php
-											foreach ($result as $item):
-											$retID = $item["returnID"];
-										?>
-										
-										
-										<tr id="centerData">
-											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
-											<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
-	
-										</tr>
+							<!-- Table Display for Warehouse Return Content -->
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<?php
+										foreach ($result as $item):
+										$retID = $item["returnID"];
+									?>
+									<tr id="centerData">
+										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Quantity"><?php echo $item["returnQty"]; ?></td>
+										<td data-title="Remarks"><?php echo $item["returnRemark"]; ?></td>
+									</tr>
 												
-										<?php
-											endforeach;
-										?>
-									</tbody>	
-								</table>
-							</div>
+									<?php
+										endforeach;
+									?>
+								</tbody>	
+							</table>
+							<!-- End of Table Display -->
+							
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</body>
 </html>

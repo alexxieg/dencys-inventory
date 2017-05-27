@@ -113,7 +113,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="userinventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -180,13 +180,12 @@
 							<table class="table">	
 								<tr>
 									<td>
-										<br>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 									</td>
 									<td>
 										<div class="col-sm-7 pull-right retfilter">
-											<label>Filter By Date</label>
 											<form class="form-inline" action="" method="post">
+												<label>View by Date</label>
 												<div class="form-group">
 														<select name="dateMonthName" class="form-control">
 														<?php foreach ($result2 as $row): ?>
@@ -202,7 +201,7 @@
 													</select>
 												</div>	
 												<div class="form-group">
-													<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+													<input type="submit" value="View Entries" class="btn btn-success" name="submit">
 												</div>
 											</form>	
 										</div>

@@ -121,7 +121,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../userinventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -142,7 +142,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -201,6 +201,7 @@
 						
 							<hr>
 	
+							<!-- Table Display for PO Details -->
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td>
@@ -213,6 +214,9 @@
 									</td>
 								</tr>									
 							</table>
+							<!-- End of Table Display -->
+							
+							<hr>
 							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
@@ -221,39 +225,40 @@
 								</div>
 							</div>
 							
-							<!-- Table Display for Incoming -->
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-									<thead>	
-										<tr>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
-										</tr>
-									</thead>
-									<tbody>	
+							<!-- Table Display for PO Content -->
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+								<thead>	
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
+									</tr>
+								</thead>
+								<tbody>	
+								
+									<?php
+										foreach ($result as $item):
+											$po = $item["poID"];
+									?>
+										
+									<tr id="centerData">
+										<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
+										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
+									</tr>	
 									
-										<?php
-											foreach ($result as $item):
-												$po = $item["poID"];
-										?>
-										
-										<tr id="centerData">
-											<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
-											<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
-											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
-										</tr>	
-										
-										<?php
-											endforeach;
-										?>
-									</tbody>	
-								</table>
-							</div>
-						</div>		  
-					</div>
-				</div>	
-			</div>
-  </body>
+									<?php
+										endforeach;
+									?>
+								</tbody>	
+							</table>
+							<!-- End of Table Display -->
+						</div>
+					</div>		  
+				</div>
+			</div>	
+		</div>
+	</body>
 </html>
