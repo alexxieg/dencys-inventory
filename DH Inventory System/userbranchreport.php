@@ -435,7 +435,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="inventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="userinventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -467,13 +467,13 @@
 							</ul>
 						</li>
 						<li><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports  <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 								<li><a href="usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
@@ -579,84 +579,83 @@
 							</div>
 							
 							<label>View Previous Reports</label>
-											<form class="form-inline" action="" method="post">
-												<div class="form-group">
-													<select name="dateMonthName" class="form-control">
-														<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
-														<?php foreach ($resultMonth as $rowMonth): ?>
-															<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>
-												<div class="form-group">
-													<select name="dateYearName" class="form-control">
-														<option value="<?php echo $selectedYear ?>">Selected: <?php echo $selectedYear ?></option>
-														<?php foreach ($resultYear as $rowYear): ?>
-															<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>	
-												<div class="form-group">
-													<input type="submit" value="View" class="btn btn-success" name="submit">
-												</div>
-											</form>	
-								<hr>
+							<form class="form-inline" action="" method="post">
+								<div class="form-group">
+									<select name="dateMonthName" class="form-control">
+										<option value="<?php echo $selectedMonth ?>" SELECTED>Selected: <?php echo $selectedMonth ?></option>
+											<?php foreach ($resultMonth as $rowMonth): ?>
+										<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
+											<?php endforeach ?>
+									</select>
+								</div>
+								<div class="form-group">
+									<select name="dateYearName" class="form-control">
+										<option value="<?php echo $selectedYear ?>">Selected: <?php echo $selectedYear ?></option>
+											<?php foreach ($resultYear as $rowYear): ?>
+										<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
+											<?php endforeach ?>
+									</select>
+								</div>	
+								<div class="form-group">
+									<input type="submit" value="View" class="btn btn-success" name="submit">
+								</div>
+							</form>	
+							<hr>
 							
-								<div class="tab-content clearfix">
-							<div class="tab-pane active" id="mainOutSummary">
+							<div class="tab-content clearfix">
+								<div class="tab-pane active" id="mainOutSummary">
 									<!-- Overall Outgoing Branch -->
-									
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
-											<thead>
-												<tr id="centerData">
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result6 as $item6):
-												?>
-												<tr id="centerData">
-													<td data-title="Location"><?php echo $item6["location"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
-												</tr>	
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
+									<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
+										<thead>
+											<tr id="centerData">
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
+												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+												foreach ($result6 as $item6):
+											?>
+											<tr id="centerData">
+												<td data-title="Location"><?php echo $item6["location"]; ?></td>
+												<td data-title="Total Quantity"><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
+											</tr>	
+											<?php
+												endforeach;
+											?>
+										</tbody>
+									</table>
+								</div>
 													
-									<div class="tab-pane" id="outSummaryCamdas">
+								<div class="tab-pane" id="outSummaryCamdas">
 									<!-- Camdas Outgoing Summary -->
-								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
+									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+										<div id="myTable_length" class="dataTables_length">
+											<div id="myTable_filter" class="dataTables_filter">
+											</div>
 										</div>
-									</div>
-										<h3>Outgoing Products in Camdas:</h3>
-										<table id="myTable1" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
-											<thead>
-												<tr id="centerData">
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result1 as $item):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item["outQty"]; ?></td>
-												</tr>
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
+											<h3>Outgoing Products in Camdas:</h3>
+											<table id="myTable1" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
+												<thead>
+													<tr id="centerData">
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+														foreach ($result1 as $item):
+													?>
+													<tr id="centerData">
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Total Quantity"><?php echo $item["outQty"]; ?></td>
+													</tr>
+													<?php
+														endforeach;
+													?>
+												</tbody>
+											</table>
+										</div>
 									</div>
 			
 									<div class="tab-pane" id="outSummaryHilltop">

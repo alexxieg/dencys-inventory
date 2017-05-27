@@ -113,7 +113,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="userinventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -130,13 +130,13 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -185,30 +185,30 @@
 											?>
 											<td>
 												<form action="<?php echo $location; ?>" method="POST">
-														<label>Filter By Brand / Category</label>
-														
-														<select name="brand_Name">
-															<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
-															<option value="<?php echo $None?>">--None--</option>
-															<?php foreach ($brandType as $row): ?>
-																<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-															<?php endforeach ?>
-														</select>
+													<label>Filter By Brand / Category</label>
 													
-														<select name="category_Name">
-															<option value="<?php echo $selectedCategory?>" SELECTED>Category: <?php echo $filterCategory?></option>
-															<option value="<?php echo $None?>">--None--</option>
-															<?php foreach ($categoryType as $row2): ?>
-																<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
-															<?php endforeach ?>
-														</select>	
-														<input type="submit" value="Filter" class="btn btn-success" name="submit">
-												</form>
-											</td>
-										</tr>
-									</table>
+													<select name="brand_Name">
+														<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
+														<option value="<?php echo $None?>">--None--</option>
+														<?php foreach ($brandType as $row): ?>
+															<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+														<?php endforeach ?>
+													</select>
+												
+													<select name="category_Name">
+														<option value="<?php echo $selectedCategory?>" SELECTED>Category: <?php echo $filterCategory?></option>
+														<option value="<?php echo $None?>">--None--</option>
+														<?php foreach ($categoryType as $row2): ?>
+															<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+														<?php endforeach ?>
+													</select>	
+												<input type="submit" value="Filter" class="btn btn-success" name="submit">
+											</form>
+										</td>
+									</tr>
 								</table>
-							</div>
+							</table>
+						</div>
 						
 						<!-- Table Display for Products -->
 						<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">

@@ -141,7 +141,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="userinventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -166,7 +166,7 @@
 								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -206,15 +206,15 @@
 					<div class="pages no-more-tables">
 						<div id="tableHeader">
 							<table class="table table-striped table-bordered">
-							<h1 id="headers">Add Physical Count</h1>
-							
-							<?php 
-								$location =  $_SERVER['REQUEST_URI']; 
-							?>
+								<h1 id="headers">Add Physical Count</h1>
+								
+								<?php 
+									$location =  $_SERVER['REQUEST_URI']; 
+								?>
 
 								<tr>
 									<td>
-										Filter By Brand
+										View by Brand / Category
 										<form action="<?php echo $location; ?>" method="POST">
 											<select name="brand_Name">
 												<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
@@ -224,10 +224,7 @@
 											</select>
 											<input type="submit" value="Filter" class="btn btn-success" name="submit">
 										</form>
-									</td>	
-										
-									<td>
-										Filter By Category <br>
+
 										<form action="<?php echo $location; ?>" method="POST">
 											<select name="category_Name">
 												<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
@@ -235,7 +232,7 @@
 													<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
 												<?php endforeach ?>
 											</select>
-												<input type="submit" value="Filter" class="btn btn-success" name="submit">
+											<input type="submit" value="Filter" class="btn btn-success" name="submit">
 										</form>
 									</td>		
 								</tr>
@@ -255,7 +252,7 @@
 											<div id="tabHead">Product ID</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Product Description</div>							
+											<div id="tabHead">Product Description</div>							
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Brand</div>
@@ -264,7 +261,7 @@
 											<div id="tabHead">Category</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Unit
+											<div id="tabHead">Unit</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Last physical Qty</div>
@@ -349,8 +346,5 @@
 			}
 		}
 	?>
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	</body>
 </html>
