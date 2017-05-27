@@ -165,6 +165,7 @@
 								<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 								<br>
 								<br>
+								<a href="../userpurchaseOrders.php">
 								<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
 								<span><input type="submit" name="editPO" value="Update" class="btn btn-success" id="sucBtn"></span>
 							</div>
