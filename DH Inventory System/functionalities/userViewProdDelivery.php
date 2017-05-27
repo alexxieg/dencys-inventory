@@ -131,7 +131,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../userinventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -149,13 +149,13 @@
 					<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -208,9 +208,9 @@
 							</button>
 						</a>
 
-						<br>
-						<br>
+						<hr>
 							
+						<!-- Table Display for Product Delivery Details -->
 						<table class="table table-striped table-bordered">
 							<tr>
 								<td>
@@ -231,6 +231,7 @@
 								</td>
 							</tr>									
 						</table>
+						<!-- End of Table Display -->
 					</div>
 					
 					<hr>
@@ -244,44 +245,43 @@
 						</div>
 						<br> 
 							
-							<!-- Table Display for Incoming -->
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>	
-									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Delivery Type</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
-									</tr>
-								</thead>
-								<tbody>					
-									<?php
-										foreach ($result as $item):
-										$incID = $item["inID"];
-										$incRec = $item["receiptNo"];
-									?>
+						<!-- Table Display for Product Delivery Content -->
+						<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+							<thead>	
+								<tr>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product ID</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Delivery Type</th>
+									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Remarks</th>
+								</tr>
+							</thead>
+							<tbody>					
+								<?php
+									foreach ($result as $item):
+									$incID = $item["inID"];
+									$incRec = $item["receiptNo"];
+								?>
 									
-									<tr id="centerData">
-										<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-										<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-										<td data-title="Status"><?php echo $item["status"]; ?></td>
-										<td data-title="Type"><?php echo $item["inType"]; ?></td>
-										<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
-									</tr>	
-									
-									<?php
-										endforeach;
-									?>
-								</tbody>	
-							</table>
-							<!-- End of Table Display -->
+								<tr id="centerData">
+									<td data-title="Product ID"><?php echo $item["prodID"];?></td>
+									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+									<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+									<td data-title="Status"><?php echo $item["status"]; ?></td>
+									<td data-title="Type"><?php echo $item["inType"]; ?></td>
+									<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>	
+								</tr>	
+								
+								<?php
+									endforeach;
+								?>
+							</tbody>	
+						</table>
+						<!-- End of Table Display -->
 					</div>
 				</div>		  
 			</div>
-		</div>	
-	
-  </body>
+		</div>
+	</body>
 </html>
