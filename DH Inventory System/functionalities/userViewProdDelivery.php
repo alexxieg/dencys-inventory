@@ -69,7 +69,7 @@
                                 columns: ':visible'
                                 }
                         },
-							'colvis','pageLength',
+							{extend:'colvis', text: 'Select Column'},'pageLength',
 
                     ],
                         columnDefs: [{
