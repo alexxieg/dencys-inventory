@@ -364,7 +364,7 @@
 													<th>Current Quantity</th>
 													<th>Reorder Level</th>
 													<th>Unit</th>
-													<th></th>
+													<th>Select for Reorder</th>
 												</tr>
 													
 												<?php

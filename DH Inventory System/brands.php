@@ -308,7 +308,9 @@
 														<th>
 															<div id="tabHead">Brand Name</div>
 														</th>
-														<th></th>
+														<th>
+															<div id="tabHead">Restore</div>
+														</th>
 													</tr>
 												</thead>
 												
@@ -323,7 +325,7 @@
 														<td>											
 															<a href="functionalities/restoreBrand.php?brandID=<?php echo $useThisID; ?>"> 
 																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this brand?');">
-																	Restore
+																	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
 														</td>

@@ -310,7 +310,6 @@
 														<th>	
 															<div id="tabHead">Extension Name</div>
 														</th>
-														<th></th>
 													</tr>
 												</thead>
 												<tbody>

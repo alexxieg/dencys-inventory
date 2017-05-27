@@ -288,7 +288,6 @@
 															<th>
 																<div id="tabHead">Supplier Name</div>
 															</th>
-															<th></th>
 														</tr>
 													</thead>
 													<tbody>

@@ -444,11 +444,21 @@
 													
 													<thead>
 														<tr id="centerData">
-															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
-															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>		
-															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
-															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
+															<th>
+																<div id="tabHead">PO Number</div>
+															</th>
+															<th>
+																<div id="tabHead">PO Date</div>
+															</th>
+															<th>
+																<div id="tabHead">Supplier</div>
+															</th>		
+															<th>
+																<div id="tabHead">Last Modified By</div>
+															</th>
+															<th>
+																<div id="tabHead">View Purchase Order</div>
+															</th>
 														</tr>
 													</thead>
 													

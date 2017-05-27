@@ -405,7 +405,6 @@
 															<th>
 																<div id="tabHead">Price</div>
 															</th>					
-															<th></th>
 														</tr>
 													</thead>
 													<tbody>

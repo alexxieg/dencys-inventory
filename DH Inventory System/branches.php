@@ -293,7 +293,6 @@
 														<th>
 															<div id="tabHead">Location</div>
 														</th>
-														<th></th>
 													</tr>
 												</thead>	
 												
