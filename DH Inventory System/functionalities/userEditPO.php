@@ -175,6 +175,16 @@
 				</div>
 			</div>	
 		</div>
+		<?php
+		require_once 'dbcon.php';
+		$incID= $_GET['incId'];
+		if (isset($_POST["editPO"])){
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
+				SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poNumber = '$incID'";
+		$conn->exec($sql);
+		}
+		?>
 		
 		<?php
 			$incID= $_GET['incId'];

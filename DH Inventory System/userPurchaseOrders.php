@@ -179,6 +179,7 @@
 									<tr>
 										<td>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
 										</td>
 										<td>
 										<div class="col-sm-7 pull-right POfilter">
@@ -325,7 +326,78 @@
 									</div>
 								</div>
 							</div> 
-							<!-- End of Modal -->		
+							<!-- End of Modal -->
+
+								<!-- Modal - Activity Log -->
+								<div class="modal fade" id="activityLog" role="dialog">
+									<div class="modal-dialog modal-xl">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Edit Activity Log</h4>
+											</div>
+											<div class="modal-body">
+												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+												
+													<!-- Retrieve Category Data -->
+													<?php
+														$query = $conn->prepare("SELECT editPO.poEditDate, editPO.poNumber, editPO.poDate, editPO.qtyOrder, product.prodName, editPO.userID from editpo INNER JOIN product ON editpo.prodID = product.prodID");
+														$query->execute();
+														$result1 = $query->fetchAll();
+													?>
+													
+													<thead>
+														<tr id="centerData">
+															<th>
+																<div id="tabHead">Date Edited</div>
+															</th>
+															<th>
+																<div id="tabHead">PO Number</div>
+															</th>
+															<th>
+																<div id="tabHead">PO Date</div>
+															</th>
+															<th>
+																<div id="tabHead">Quantity Order</div>
+															</th>
+															<th>
+																<div id="tabHead">Product Description</div>
+															</th>
+															<th>
+																<div id="tabHead">Edited By</div>
+															</th>
+														</tr>
+													</thead>
+													
+													<tbody>						
+															
+														<?php
+															foreach ($result1 as $item):
+															$incID = $item["poNumber"];
+														?>
+														<tr id="centerData">	
+															<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
+															<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
+															<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
+															<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
+															<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+															<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+														</tr>
+														<?php
+															endforeach;
+														?>
+													
+													</tbody>
+												</table>
+												
+											</div>
+										</div>
+											
+										<div class="modal-footer">
+										</div>
+											
+									</div>
+								</div>
 							
 						</div>
 					</div>		  
