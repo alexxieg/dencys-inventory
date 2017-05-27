@@ -187,7 +187,11 @@
 								<h1 id="headers">PURCHASE ORDER DETAILS</h1>
 							</div>
 							
-							<hr>					
+							<hr>
+								
+							<a href="../userPurchaseOrders.php">
+								<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
+							</a>	
 							
 							<a href="userEditPO.php?incId=<?php echo $incID; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">

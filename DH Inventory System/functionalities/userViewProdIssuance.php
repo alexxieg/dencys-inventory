@@ -194,7 +194,13 @@
 					<div id="contents">
 						<div id="tableHeader">
 							<h1 id="headers">PRODUCT ISSUANCE DETAILS</h1>
-							<hr>		
+							
+							<hr>	
+
+							<a href="../userProdIssuance.php">
+								<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
+							</a>
+						
 							<a href="userEditOut.php?outId=<?php echo $outReceipt; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY

@@ -197,7 +197,11 @@
 						</div>
 						
 						<hr>
-							
+						
+						<a href="../userproductdeliveries.php">
+								<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
+						</a>
+						
 						<a href="userEditIn.php?incId=<?php echo $incRec; ?>"> 
 							<button type="button" class="btn btn-default" id="modButt">
 								EDIT ENTRY

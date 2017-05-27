@@ -194,6 +194,9 @@
 									
 							<hr>
 							
+							<a href="../userreturnSupplier.php">
+								<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
+							</a>
 							<a href="userEditRetSup.php?retId=<?php echo $retID; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY

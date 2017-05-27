@@ -191,7 +191,13 @@
 					<div id="contents">
 						<div id="tableHeader">
 							<h1 id="headers">WAREHOUSE RETURN DETAILS</h1>
-									
+							
+							<hr>
+							
+							<a href="../userReturnsWarehouse.php">
+								<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
+							</a>	
+							
 							<a href="userEditRetWh.php?retId=<?php echo $retID; ?>"> 
 								<button type="button" class="btn btn-default" id="modButt">
 									EDIT ENTRY
