@@ -23,8 +23,32 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script>
 		
 		<!-- Login Session -->
 		<?php 
@@ -145,17 +169,9 @@
 												<td><input type="checkbox" name="chk"></TD>
 												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 												<td>	
-													<?php
-														$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
-														$query->execute();
-														$res = $query->fetchAll();
-													?>
-													<select class="form-control" id="addItem" name="prodItem[]">
-														<option><?=$row2["prodName"]?></option>
-													<?php foreach ($res as $row): ?>
-														<option><?=$row["prodName"]?></option>
-													<?php endforeach ?>
-												</select> 
+													<div class="ui-widget">
+														<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+													</div>		
 												</td>
 														
 												<td>

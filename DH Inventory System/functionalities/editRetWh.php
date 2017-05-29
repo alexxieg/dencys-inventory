@@ -23,8 +23,32 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script>
 		
 		<!-- Login Session -->
 		<?php 
@@ -55,6 +79,7 @@
 			$result2 = $query2->fetchAll();
 			
 			$branch = current($conn->query("SELECT returns.branchID FROM returns Join branch ON returns.branchID = branch.branchID WHERE returns.receiptNo = '$retID'")->fetch());
+			$branchLocation = current($conn->query("SELECT location FROM branch WHERE branchID = $branch")->fetch());
 		?>
 		
 		<!-- Top Main Header -->
@@ -136,6 +161,19 @@
 								<h3>Receipt No.</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>"placeholder="User" name="recID" readonly>
 								
+								<h3>Branch</h3>
+								<?php
+									$query = $conn->prepare("SELECT location, branchID FROM branch WHERE branchID != 0");
+									$query->execute();
+									$res = $query->fetchAll();
+								?>
+								<select class="form-control" id="addItem" name="branchItem[]">
+									<option value=<?=$branchLocation?>>Selected: <?=$branchLocation?></option>
+								<?php foreach ($res as $row): ?>
+									<option value=<?=$row["branchID"]?>><?=$row["location"]?></option>
+								<?php endforeach ?>
+								</select>
+								
 								<br>
 								
 								<h5 id="multipleProd">Product/s</h5>
@@ -146,37 +184,15 @@
 											<td><input type="checkbox" name="chk"></TD>
 											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 											<td>	
-												<?php
-													$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-												<select class="form-control" id="addItem" name="prodItem[]">
-													<option><?=$row2["prodName"]?></option>
-												<?php foreach ($res as $row): ?>
-													<option><?=$row["prodName"]?></option>
-												<?php endforeach ?>
-											</select> 
+												<div class="ui-widget">
+													<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>">
+												</div>		
 											</td>
 													
 											<td>
 												<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]">
 											</td>
-											
-											<td>	
-												<?php
-													$query = $conn->prepare("SELECT location, branchID FROM branch WHERE branchID != 0");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-												<select class="form-control" id="addItem" name="branchItem[]">
-													<option value=<?=$row2["branchID"]?>>Selected: <?=$row2["location"]?></option>
-												<?php foreach ($res as $row): ?>
-													<option value=<?=$row["branchID"]?>><?=$row["location"]?></option>
-												<?php endforeach ?>
-												</select> 
-											</td>
-											
+
 											<td>
 												<input type="text" class="form-control" id="addEntry" placeholder="<?php echo $row2["returnRemark"]; ?>" value="<?php echo $row2["returnRemark"]; ?>" name="retRemarks[]">
 											</td>

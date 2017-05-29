@@ -22,8 +22,32 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script> 
 		
 		<!-- Login Session -->
 		<?php 
@@ -137,6 +161,9 @@
 							<br>
 							<div id="content">
 								<form action="" method="POST">
+									<h3>User</h3>
+									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+								
 									<h3>Receipt No.</h3> 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno">
 											
@@ -182,18 +209,9 @@
 													<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
 													
 													<td>	
-														<?php
-															$query = $conn->prepare("SELECT prodName FROM product ");
-															$query->execute();
-															$res = $query->fetchAll();
-														?>
-															
-														<select class="form-control" id="addItem" name="prodItem[]">
-															<option><?=$row["prodName"]?></option>
-															<?php foreach ($res as $row3): ?>
-																<option><?=$row3["prodName"]?></option>
-															<?php endforeach ?>
-														</select> 
+														<div class="ui-widget">
+															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+														</div>		
 													</td>
 															
 													<td>
@@ -217,9 +235,6 @@
 														
 													<td>
 														<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["inRemarks"]; ?>" value="<?php echo $row["inRemarks"]; ?>" name="inRemarks[]">
-													</td>
-													<td>
-													<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													</td>
 												</tr>
 											<?php endforeach ?>
@@ -256,6 +271,9 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
+												<h5>User</h5>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+											
 												<h5>Receipt No.</h5> 
 												<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcnoEdit" readonly><br>
 												
@@ -277,17 +295,9 @@
 															<td><input type="checkbox" name="chk"></td>
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
-																<?php
-																	$query = $conn->prepare("SELECT prodName FROM product ");
-																	$query->execute();
-																	$res = $query->fetchAll();
-																?>
-														
-																<select class="form-control" id="addItem" name="prodItem[]">
-																	<?php foreach ($res as $row): ?>
-																			<option><?=$row["prodName"]?></option>
-																	<?php endforeach ?>
-																</select> 
+																<div class="ui-widget">
+																	<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+																</div>		
 															</td>
 																	
 															<td>
@@ -310,9 +320,6 @@
 																
 															<td>
 																<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
-															</td>
-															<td>
-																<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 															</td>
 														</tr>
 													</tbody>
