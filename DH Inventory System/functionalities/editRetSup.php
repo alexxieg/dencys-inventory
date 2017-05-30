@@ -170,7 +170,7 @@
 												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 												<td>	
 													<div class="ui-widget">
-														<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+														<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>">
 													</div>		
 												</td>
 														
