@@ -14,6 +14,22 @@
 	$updateOut->execute();
 ?>
 
+<?php
+	$updateInRet = $conn->prepare("UPDATE inventory
+									SET inventory.inRetQty = (SELECT SUM(returns.returnQty) 
+									FROM returns WHERE inventory.prodID = returns.prodID
+									GROUP BY returns.prodID)");
+	$updateInRet->execute();
+?>
+
+<?php 
+	$updateTotalIn = $conn->prepare("UPDATE inventory
+									SET inventory.totalIn = (SELECT SUM(inQty + IFNULL(inRetQty.0))
+									FROM inventory
+									GROUP BY inventory.prodID)");
+	$updateTotalIn->execute();
+?>
+
 <?php 
 	$updateQty = $conn->prepare("UPDATE inventory
 								SET inventory.qty = (SELECT SUM((inventory.beginningQty + IFNULL(inventory.inQty,0)) - IFNULL(inventory.outQty,0)) 
@@ -41,31 +57,31 @@
 	$None = null;
 	
 	if (!empty($sortByBrand)) {
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.totalIn, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
 									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 									WHERE product.status = 'Active' AND product.brandID = '$sortByBrand'
-									GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
+									GROUP BY prodID, inventory.beginningQty, qty, inventory.outQty, inventory.totalIn, inventory.physicalQty");	
 		$query->execute();
 		$result = $query->fetchAll();
 	} else if (!empty($sortByCategory)) {
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.totalIn, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
 									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 									WHERE product.status = 'Active' AND product.categoryID = '$sortByCategory'
-									GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
+									GROUP BY prodID, inventory.beginningQty, qty, inventory.outQty, inventory.totalIn, inventory.physicalQty");	
 		$query->execute();
 		$result = $query->fetchAll();
 	} else if (!empty($sortByCategory)&&!empty($sortByBrand)){
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.totalIn, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
 									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 									WHERE product.status = 'Active' AND product.brandID = '$sortByBrand' AND product.categoryID = '$sortByCategory'
-									GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
+									GROUP BY prodID, inventory.beginningQty, qty,  inventory.outQty, inventory.totalIn, inventory.physicalQty");	
 		$query->execute();
 		$result = $query->fetchAll();
 	} else {
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.totalIn, inventory.beginningQty, inventory.physicalQty, inventory.qty, inventory.inQty, inventory.outQty
 									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 									WHERE product.status = 'Active' 
-									GROUP BY prodID, inventory.beginningQty, qty, inventory.inQty, inventory.outQty, inventory.physicalQty");	
+									GROUP BY prodID, inventory.beginningQty, qty, inventory.outQty, inventory.totalIn, inventory.physicalQty");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}

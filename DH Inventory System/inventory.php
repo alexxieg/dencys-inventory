@@ -293,7 +293,7 @@
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 										<td><?php echo $item["prodName"]; ?></td>
 										<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-										<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+										<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
 										<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
 										<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
 										<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
@@ -315,7 +315,7 @@
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 										<td><?php echo $item["prodName"]; ?></td>
 										<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-										<td data-title="IN"><?php echo $item["inQty"]; ?></td>
+										<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
 										<td data-title="OUT"><?php echo $item["outQty"]; ?></td>
 										<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
 										<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
