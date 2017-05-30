@@ -53,7 +53,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="user") {
+			if (!isset($_SESSION['id']) || $role!="user") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -238,7 +238,7 @@
 										<br>
 										<br>
 										<span>
-											<a href="../prodDeliveries.php">
+											<a href="../userproductdeliveries.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>
@@ -331,7 +331,11 @@
 													</span>
 													<br>
 													<br>
-													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
+													<span>
+													<a href="../userpurchaseOrders.php">
+													<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+													</a>
+													</span>
 													<span><input type="submit" name="addEditProducts" value="Add Products" class="btn btn-success" id="sucBtn"></span>
 												</div>
 											</form> 	
