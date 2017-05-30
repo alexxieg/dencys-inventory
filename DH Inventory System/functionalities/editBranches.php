@@ -7,6 +7,21 @@
 		
 		<title>Edit Branches</title>
 
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+			
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) && $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>	
+
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
@@ -22,20 +37,6 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 	
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
-			
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>	
 	</head>
   
 	<body>
@@ -115,6 +116,7 @@
 								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 							</ul>
 						</li>
+						<li><a href="backup.php"><i class="glyphicon glyphicon-cog"></i> System Settings</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->

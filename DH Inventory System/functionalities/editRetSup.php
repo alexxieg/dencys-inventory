@@ -92,8 +92,8 @@
 					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
-				<li id="adminhead"><a href="#">Admin |</a></li>
-				<li><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+					<li id="adminhead"><a href="#">Admin |</a></li>
+					<li><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 				</ul>
 				</div>
 			</div>
@@ -142,6 +142,7 @@
 								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 							</ul>
 						</li>
+						<li><a href="backup.php"><i class="glyphicon glyphicon-cog"></i> System Settings</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
