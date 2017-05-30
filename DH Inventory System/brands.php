@@ -181,11 +181,11 @@
 									<h1 id="headers">PRODUCT BRANDS</h1>
 									<table class="table">	
 								   		<tr>
-									 	<td>
-									  	<br>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Brand</button>							
-										</td>
+											<td>
+												<br>
+												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Brand</button>							
+											</td>
 										</tr>
 									</table>
 								</table>

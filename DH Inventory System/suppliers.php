@@ -288,6 +288,9 @@
 															<th>
 																<div id="tabHead">Supplier Name</div>
 															</th>
+															<th>
+																<div id="tabHead">Restore Supplier</div>
+															</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -303,7 +306,7 @@
 															<td>										
 																<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
 																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this supplier?');">
-																		<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+																		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																	</button>
 																</a>
 															</td>		

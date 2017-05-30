@@ -220,15 +220,15 @@
 					<div class="pages no-more-tables">
 						<div id="tableHeader">
 								<table class="table table-striped table-bordered">
-								<h1 id="headers">Add Physical Count</h1>
-								
-								<?php 
-									$location =  $_SERVER['REQUEST_URI']; 
-								?>
+									<h1 id="headers">Add Physical Count</h1>
+									
+									<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
 
 									<tr>
 										<td>
-											Filter By Brand
+											View by Brand
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="brand_Name">
 													<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
@@ -241,7 +241,7 @@
 										</td>	
 										
 										<td>
-											Filter By Category <br>
+											View by Category
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="category_Name">
 													<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
@@ -252,16 +252,23 @@
 												<input type="submit" value="Filter" class="btn btn-success" name="submit">
 											</form>
 										</td>
-										
 									</tr>
 								</table>
 								
+								<button type="submit" name="adjust" class="btn btn-default" id="backButton">
+									UPDATE
+								</button>
+								
+								<hr>
+								<br>
+								<br>
 								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 									<div id="myTable_length" class="dataTables_length">
 										<div id="myTable_filter" class="dataTables_filter">
 										</div>
 									</div>
 								</div>
+								
 								
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 									<thead>
@@ -292,11 +299,9 @@
 											</th>	
 										</tr>
 									</thead>
+									
 									<tbody>
 										<form action="" method="POST">
-											<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
-												UPDATE
-											</button>
 										
 											<?php
 												foreach ($result3 as $item):
@@ -367,7 +372,5 @@
 			}
 		?>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	</body>
 </html>

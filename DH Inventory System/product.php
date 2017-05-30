@@ -197,7 +197,7 @@
 											?>
 											<td>
 												<form action="<?php echo $location; ?>" method="POST">
-													<label>Filter By Brand / Category</label>
+													<label>View by Brand/Category</label>
 													
 													<select name="brand_Name">
 														<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
@@ -246,7 +246,7 @@
 											<div id="tabHead">Category</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Unit
+											<div id="tabHead">Unit</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Price</div>
@@ -423,7 +423,7 @@
 															<td>
 																<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
 																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
-																		Restore
+																		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																	</button>
 																</a>
 															</td>				

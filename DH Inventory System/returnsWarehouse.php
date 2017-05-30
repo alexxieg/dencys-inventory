@@ -245,6 +245,8 @@
 							</table>
 						</div>
 							
+						<hr>
+						
 						<div class="pages no-more-tables">
 							<!-- Table for Returns -->
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -320,7 +322,6 @@
 													<?php endforeach ?>
 												</select> 
 												
-												<br>
 												
 												<h3>Received By</h3>
 												<?php
