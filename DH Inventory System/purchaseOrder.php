@@ -314,7 +314,7 @@
 												
 												<h3>Supplier</h3>  
 													<div class="ui-widget">
-														<input id="supplier" name="supplier" placeholder="Supplier">
+														<input id="addSupplier" name="supplier" placeholder="Supplier">
 													</div>
 												<br>
 														

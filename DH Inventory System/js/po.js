@@ -23,6 +23,18 @@ function validateForm() {
 	}else{
         document.getElementById('addQty').style.borderColor = "blue";
 	}
+	if (document.getElementById('prod').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Product.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('prod').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addQty').style.borderColor = "blue";
+	}
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		
 	}
