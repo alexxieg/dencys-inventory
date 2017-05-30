@@ -166,11 +166,10 @@
 									</div>
 										
 									<h5>Product/s</h5>
-									<table class="table table-striped" id="dataTable" name="chk">	
+									<table class="table table-striped" id="dataTable2" name="chk">	
 										<?php foreach ($result as $row): ?>
 											<tbody>
 												<tr>
-													<td><input type="checkbox" name="chk"></TD>
 													<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
 													<td>	
 														<div class="ui-widget">
@@ -189,7 +188,7 @@
 									<br>
 									
 									<div class="modFoot">
-										<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+										<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
 										<br>
 										<br>
 										<span>
@@ -205,7 +204,72 @@
 									<div class="modal-footer">
 									</div>	
 								</form>  								
-							</div>								
+							</div>
+
+							<!-- Modal for Adding Items Form -->
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Add Incoming Product</h4>
+										</div>
+										<form action="" method="POST" onsubmit="return validateForm()"><td>
+											<td>
+											<h3>User</h3>
+											<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID2" readonly>
+											</td>	
+
+											<h3>Purchase No</h3> 
+											<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum2" readonly>		
+											
+											<h3>Supplier</h3> 
+											<div class="ui-widget">
+												<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier2" readonly>
+											</div>
+												
+											<h5>Product/s</h5>
+											<table class="table table-striped" id="dataTable" name="chk">	
+												<tbody>
+													<tr>
+														<td><input type="checkbox" name="chk"></TD>
+														<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
+														<td>	
+															<div class="ui-widget">
+																<input class="thisProduct" name="prodItem2[]" placeholder="Product Name">
+															</div>		
+														</td>
+																
+														<td>
+															<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty2[]">
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											
+											<br>
+											
+											<div class="modFoot">
+												<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+												<br>
+												<br>
+												<span>
+													<a href="../purchaseOrder.php">
+														<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+													</a>
+												</span>
+												
+												<span>
+													<input type="submit" name="addItems" value="Add Items" class="btn btn-success" id="sucBtn">
+												</span>
+											</div>
+											<div class="modal-footer">
+											</div>	
+										</form>
+									</div>
+								</div>
+							</div> 
+							<!-- End of Modal -->
 						</div>
 					</div>
 				</div>
@@ -242,9 +306,10 @@
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-
+			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			if (isset($_POST["editPO"])){
-				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+				for ($index = 0; $index2 < count($prodTem); $index2++) {		
 					$prodItem = $_POST['prodItem'][$index2];
 					$inQty = $_POST['qty'][$index2];
 					$userID = $_POST['userID'];
@@ -263,6 +328,33 @@
 							WHERE poNumber = '$incID' AND prodID = '$prod3'";
 						$conn->exec($sql);
 				}
+				$url="viewPO.php?incId=$incID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+				
+			}
+			
+			if (isset($_POST["addItems"])){
+				for ($index3 = 0; $index3 < count($prodTem2); $index3++) {		
+					$prodItem2 = $_POST['prodItem2'][$index3];
+					$inQty2 = $_POST['qty2'][$index3];
+					$userID2 = $_POST['userID2'];
+					$poNum2 = $_POST['poNum2'];
+					$sup2 = $_POST['supplier2'];
+					
+					$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$sup2'");
+					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+					$sup3 = $sup2['supA'];
+
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem2'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+
+					$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supID, prodID, userID, status)
+							VALUES ($inQty2,CURDATE(),'$poNum2','$sup3','$prod3','$userID2', 'Incomplete')";
+					$conn->exec($sql);
+				}
+				$url="viewPO.php?incId=$incID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 				
 			}
 		?>
