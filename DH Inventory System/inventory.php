@@ -393,6 +393,39 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- Modal for the Product Stock Card/Ledger -->
+						<div class="modal fade" id="ledger" role="dialog">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+										<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Stock Card</h4>
+									</div>
+									<div class="modal-body">
+									<h5>Product Name: </h5>
+										<table class="table table-bordered" id="tables">
+											<tr>
+												<th>Date</th>
+												<th>In</th>
+												<th>Out</th>
+												<th>Balance</th>
+											</tr>
+											
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>									
+												<td></td>
+											</tr>
+										</table>
+									</div>
+										
+									<div class="modal-footer">	
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- End of Main Container -->

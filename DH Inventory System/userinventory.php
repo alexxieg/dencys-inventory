@@ -205,6 +205,33 @@
 													</button>
 												</a>
 											</td>
+											<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
+										
+									<td>
+										<form action="<?php echo $location; ?>" method="POST">
+											<label>View by Brand / Category</label>
+										
+											<select name="brand_Name">
+												<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
+												<option value="<?php echo $None?>">--None--</option>
+												<?php foreach ($brandType as $row): ?>
+													<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+												<?php endforeach ?>
+											</select>
+										
+											<select name="category_Name">
+												<option value="<?php echo $selectedCategory?>" SELECTED>Category: <?php echo $filterCategory?></option>
+												<option value="<?php echo $None?>">--None--</option>
+												<?php foreach ($categoryType as $row2): ?>
+													<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+												<?php endforeach ?>
+											</select>	
+										
+											<input type="submit" value="View" class="btn btn-success" name="submit">
+										</form>
+									</td>
 										</tr>	
 									</table>											
 								</table>

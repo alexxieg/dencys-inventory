@@ -204,6 +204,7 @@
 								<tr>
 									<td>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
 									</td>
 									<td>
 										<div class="col-sm-7 pull-right">
@@ -365,6 +366,85 @@
 											</div>								
 										</div>
 									</div>
+								</div>
+							</div>
+							
+									<!-- Modal - Activity Log -->
+							<div class="modal fade" id="activityLog" role="dialog">
+								<div class="modal-dialog modal-xl">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Edit Activity Log</h4>
+										</div>
+										<div class="modal-body">
+											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+											
+												<!-- Retrieve Category Data -->
+												<?php
+													$query = $conn->prepare("SELECT editReturn.returnEditDate, editReturn.receiptNo, editReturn.returnDate, editReturn.returnQty, editReturn.returnType, editReturn.returnRemark, product.prodName, editReturn.userID from editreturn INNER JOIN product ON editreturn.prodID = product.prodID");
+													$query->execute();
+													$result1 = $query->fetchAll();
+												?>
+												
+												<thead>
+													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Edited</div>
+														</th>
+														<th>
+															<div id="tabHead">Receipt No</div>
+														</th>
+														<th>
+															<div id="tabHead">Return Date</div>
+														</th>
+														<th>
+															<div id="tabHead">Return Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Return Type</div>
+														</th>
+														<th>
+															<div id="tabHead">Return Remarks</div>
+														</th>
+														<th>
+															<div id="tabHead">Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited By</div>
+														</th>
+													</tr>
+												</thead>
+												
+												<tbody>						
+														
+													<?php
+														foreach ($result1 as $item):
+														$retID = $item["receiptNo"];
+													?>
+													<tr id="centerData">	
+														<td data-title="Edit Date"><?php echo $item["returnEditDate"]; ?></td>
+														<td data-title="Receipt No"><?php echo $item["receiptNo"]; ?></td>
+														<td data-title="Return Date"><?php echo $item["returnDate"]; ?></td>
+														<td data-title="Return Quantity"><?php echo $item["returnQty"]; ?></td>
+														<td data-title="Return Type"><?php echo $item["returnType"]; ?></td>
+														<td data-title="Return Remarks"><?php echo $item["returnRemark"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+													</tr>
+													<?php
+														endforeach;
+													?>
+												
+												</tbody>
+											</table>
+											
+										</div>
+									</div>
+										
+									<div class="modal-footer">
+									</div>
+										
 								</div>
 							</div>
 						</div>
