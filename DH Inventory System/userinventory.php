@@ -205,7 +205,7 @@
 													</button>
 												</a>
 											</td>
-									<?php 
+											<?php 
 										$location =  $_SERVER['REQUEST_URI']; 
 									?>
 										
@@ -232,7 +232,7 @@
 											<input type="submit" value="View" class="btn btn-success" name="submit">
 										</form>
 									</td>
-									</tr>	
+										</tr>	
 									</table>											
 								</table>
 							</div>
