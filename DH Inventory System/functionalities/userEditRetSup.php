@@ -23,8 +23,32 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script>
 		
 		<!-- Login Session -->
 		<?php 
@@ -43,14 +67,14 @@
 		<!-- Retrieved Selected Entry Details -->
 		<?php
 			$retID= $_GET['retId'];
-			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID  
-					FROM returns INNER JOIN product ON returns.prodID = product.prodID");
+			$query = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID, returns.receiptNo, branch.branchID, branch.location
+					FROM returns INNER JOIN product ON returns.prodID = product.prodID JOIN branch ON branch.branchID = returns.branchID  ");
 			$query->execute();
 			$res = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID  
-					FROM returns INNER JOIN product ON returns.prodID = product.prodID 
-					WHERE returnID = $retID ");
+			$query2 = $conn->prepare("SELECT product.prodID, returns.returnDate, returns.returnID, product.prodName, returns.returnQty, returns.returnRemark, returns.userID, returns.receiptNo, branch.branchID, branch.location
+					FROM returns INNER JOIN product ON returns.prodID = product.prodID JOIN branch ON branch.branchID = returns.branchID  
+					WHERE receiptNo = '$retID' ");
 			$query2->execute();
 			$resul = $query2->fetchAll();
 		?>
@@ -65,7 +89,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="../userinventory">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -86,7 +110,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 					<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -115,45 +139,68 @@
 			</div>
 		<!-- End of Sidebar -->	
 				
-				<div class="addInv">
-					<h1 id="headers">Edit Supplier Return Entry</h1>
-					<br>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<form action="" method="POST" class="editPgs">
-							<td>
-							<h3> User </h3>	
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-							</td>		
-							<h3>Item</h3>
-							<select class="form-control" id="addEntry" name="prodItem">
-								<?php foreach ($resul as $item): ?>
-									<option selected><?php echo $item["prodName"]; ?></option>
-								<?php endforeach; ?>
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["prodName"]?></option>
-								<?php endforeach ?>
-							</select>  
+						<div class="pages no-more-tables">
+							<h1 id="headers">Edit Supplier Return Entry</h1>
 							<br>
-							
-							<h3>Quantity</h3>
-								<input type="text" class="form-control" id ="addEntry" value="<?php echo $item["returnQty"]; ?>" placeholder="<?php echo $item["returnQty"]; ?>" name="retQty"> <br>
-							
-							<h3>Remarks</h3>
-							<input type="text" class="form-control" id="addEntry" value="<?php echo $row["returnRemark"]; ?>" placeholder="<?php echo $row["returnRemark"]; ?>"  name="retRemarks">
-								
-							<br>
-							
-							<div class="modFoot">
-								<span>
-									<a href="../userReturnsWarehouse.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="editReturns" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
-							</div>	
-						</form> 
+							<div id="contents">
+								<form action="" method="POST" onsubmit="return validateForm2()">
+									<h3>User</h3>
+									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>" placeholder="User" name="userID" readonly>
+									
+									<h3>Receipt No.</h3>
+									<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>"placeholder="User" name="recID" readonly>
+									
+									<br>
+									
+									<h5 id="multipleProd">Product/s</h5>
+									<table class="table table-striped" id="dataTable" name="chk">
+										<tbody>
+											<?php foreach ($resul as $row2): ?>
+											<tr>
+												<td><input type="checkbox" name="chk"></TD>
+												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+												<td>	
+													<div class="ui-widget">
+														<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>">
+													</div>		
+												</td>
+														
+												<td>
+													<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]">
+												</td>
+																								
+												<td>
+													<input type="text" class="form-control" id="addEntry" placeholder="<?php echo $row2["returnRemark"]; ?>" value="<?php echo $row2["returnRemark"]; ?>" name="retRemarks[]">
+												</td>
+											</tr>
+											<?php endforeach ?>
+										</tbody>
+									</table>
+											
+									<div class="modFoot">
+										<span>
+											<button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">
+												Add Product
+											</button>
+										</span>
+										<br>
+										<br>
+										<span>
+											<a href="../userreturnSupplier.php">
+												<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+											</a>
+										</span>
+										<span>
+											<input type="submit" value="Update" class="btn btn-success" name="addRet" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>	
+								</form> 
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -22,8 +22,32 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+				<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script> 
 		
 		<!-- Login Session -->
 		<?php 
@@ -41,7 +65,7 @@
 	<body>
 		<?php
 			$incID= $_GET['incId']; 
-			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supplier, product.unitType, product.prodName, purchaseorders.userID
+			$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supID, product.unitType, product.prodName, purchaseorders.userID
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID
 									WHERE poNumber = '$incID'
 									ORDER BY poID DESC");
@@ -49,7 +73,9 @@
 			$result = $query->fetchAll();
 			
 			$supID = current($conn->query("SELECT supID FROM purchaseorders WHERE poNumber = '$incID'")->fetch());
+			$supName = current($conn->query("SELECT supplier_name FROM suppliers WHERE supID = $supID")->fetch());
 		?>
+
 
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -82,7 +108,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -110,108 +136,110 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
-					<h1 id="headers">Edit Product Order Entry</h1>
-					<br>
-					<div id="content">
-						<form action="" method="POST" onsubmit="return validateForm()"><td>
-							<td>
-							<h5> User </h5>
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-							</td>	
-
-							<h5>Purchase No</h5> 
-							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
-							
-							<h5>Supplier</h5> 
-							<input type="text" class="form-control" id ="addSupplier" value = "<?php echo $supID; ?>" placeholder="<?php echo $supID; ?>" name="supplier"><br>
-									
-							<h5>Product/s</h5>
-							<table class="table table-striped" id="dataTable" name="chk">	
-								<?php foreach ($result as $row): ?>
-									<tbody>
-										<tr>
-											<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-											<td>	
-												<?php
-													$query = $conn->prepare("SELECT prodName FROM product ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-										
-												<select class="form-control" id="addItem" name="prodItem[]">
-														<option><?=$row["prodName"]?></option>
-													<?php foreach ($res as $row2): ?>
-														<option><?=$row2["prodName"]?></option>
-													<?php endforeach ?>
-												</select> 
-											</td>
-													
-											<td>
-												<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row["qtyOrder"]?>" placeholder="<?php echo $row["qtyOrder"]?>" name="qty[]">
-											</td>
-										</tr>
-									</tbody>
-								<?php endforeach ?>
-							</table>
-							
+							<h1 id="headers">Edit Product Order Entry</h1>
 							<br>
-							
-							<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-								<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-								<br>
-								<br>
-								<a href="../userpurchaseOrders.php">
-								<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-								<span><input type="submit" name="editPO" value="Update" class="btn btn-success" id="sucBtn"></span>
-							</div>
-						</form>  								
-					</div>								
-				</div>
-				</div>
+							<div id="content">
+								<form action="" method="POST" onsubmit="return validateForm()"><td>
+									<td>
+									<h3>User</h3>
+									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+									</td>	
+
+									<h3>Purchase No</h3> 
+									<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
+									
+									<h3>Supplier</h3> 
+									<div class="ui-widget">
+										<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier">
+									</div>
+										
+									<h5>Product/s</h5>
+									<table class="table table-striped" id="dataTable" name="chk">	
+										<?php foreach ($result as $row): ?>
+											<tbody>
+												<tr>
+													<td><input type="checkbox" name="chk"></TD>
+													<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
+													<td>	
+														<div class="ui-widget">
+															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+														</div>		
+													</td>
+															
+													<td>
+														<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row["qtyOrder"]?>" placeholder="<?php echo $row["qtyOrder"]?>" name="qty[]">
+													</td>
+												</tr>
+											</tbody>
+										<?php endforeach ?>
+									</table>
+									
+									<br>
+									
+									<div class="modFoot">
+										<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+										<br>
+										<br>
+										<span>
+											<a href="../purchaseOrder.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										
+										<span>
+											<input type="submit" name="editPO" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>	
+								</form>  								
+							</div>								
+						</div>
+					</div>
 				</div>
 			</div>	
 		</div>
-		<?php
-		require_once 'dbcon.php';
-		$incID= $_GET['incId'];
-		if (isset($_POST["editPO"])){
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
-				SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poNumber = '$incID'";
-		$conn->exec($sql);
-		}
-		?>
 		
+		<?php
+			require_once 'dbcon.php';
+			$incID= $_GET['incId'];
+			if (isset($_POST["editPO"])){
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
+					SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poNumber = '$incID'";
+			$conn->exec($sql);
+			}
+		?>
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-
-			if (isset($_POST["editPO"])){
-				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
-					$inRemarks = $_POST['inRemarks'][$index2];
-					$prodItem = $_POST['prodItem'][$index2];
-					$inQty = $_POST['qty'][$index2];
-					$userID = $_POST['userID'];
-					$poNum = $_POST['poNum'];
-					$thisSup = $_POST['supplier'];
-
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
-					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-					$prod3 = $prod2['prodA'];
+				if (isset($_POST["editPO"])){
+					for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+						$prodItem = $_POST['prodItem'][$index2];
+						$inQty = $_POST['qty'][$index2];
+						$userID = $_POST['userID'];
+						$poNum = $_POST['poNum'];
+						$sup = $_POST['supplier'];
 						
-					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supplier = '$thisSup', prodID = '$prod3', userID = '$userID'
-							WHERE poNumber = '$incID' AND prodID = '$prod3'";
-						$conn->exec($sql);
+						$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$sup'");
+						$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+						$sup3 = $sup2['supA'];
+
+						$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+						$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+						$prod3 = $prod2['prodA'];
+							
+						$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supID = $sup3, prodID = '$prod3', userID = '$userID'
+								WHERE poNumber = '$incID' AND prodID = '$prod3'";
+							$conn->exec($sql);
+					}
+					$url='../purchaseOrder.php';
+					echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';	
 				}
-				echo "<meta http-equiv='refresh' content='0'>";
-			}
-			
 		?>
-	
-  </body>
+		
+	</body>
 </html>

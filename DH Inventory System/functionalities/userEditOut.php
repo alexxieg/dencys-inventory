@@ -26,9 +26,34 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+				
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 			
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script> 
+		
+		<script>
+		  $(function() {
+			$('#supplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
 		<!-- Login Session -->
 		<?php 
 			session_start();
@@ -53,7 +78,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="../userinventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -72,13 +97,13 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
-								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
+								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="../userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -98,15 +123,16 @@
 								<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
+						<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
 						<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
 
-				<!-- Retrieve Selected Entry's Details -->
+			<!-- Retrieve Selected Entry's Details -->
 				<?php
-					$outid= $_GET['outsId'];
-					$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID
+					$outid= $_GET['outId'];
+					$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, outgoing.receiptNo, outgoing.outID, outgoing.outQty, outgoing.outQty, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID 
 											FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID");
 					$query->execute();
 					$res = $query->fetchAll();
@@ -121,195 +147,110 @@
 					$employ = current($conn->query("SELECT DISTINCT employee.empFirstName FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
 					$branch = current($conn->query("SELECT DISTINCT location FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
 				?>
-	
-				<div class="addInv">
-					<h1 id="headers">Edit Product Issuance Entry </h1>
-					<br>
+				
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
-						<form action="" method="POST" onsubmit="return validateForm()" class="editPgs">
-							<h5> User </h5>
-							<td>
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-							</td>
-							<h5>Receipt No.</h5> 
-							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno" Readonly><br>
-									
-							<h5>Handled By</h5>
-							<?php
-								$query = $conn->prepare("SELECT empFirstName FROM employee ");
-								$query->execute();
-								$result = $query->fetchAll();
-								?>
-											
-							<select class="form-control" id="addEmpl" name="emp">
-								<?php foreach ($result as $row): ?>
-									<option><?=$row["empFirstName"]?></option>
-								<?php endforeach ?>
-									<option SELECTED><?=$employ?></option>
-							</select> 
-								
+						<div class="pages no-more-tables">	
+							<h1 id="headers">Edit Product Issuance Entry</h1>
 							<br>
-								
-							<h5>Branch</h5>
-							<?php
-								$query = $conn->prepare("SELECT location FROM branch");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-								
-							<select class="form-control" id="addEntry" name="branch">
-								<?php foreach ($res as $row): ?>
-									<option><?=$row["location"]?></option>
-								<?php endforeach ?>
-									<option SELECTED><?=$branch?></option>
-							</select> 
-							<br>
-									
-							<h5>Product/s</h5>
-							<table class="table table-striped" name="chk">
-								<tbody>
-									<?php foreach ($resul as $row): ?>
-									<tr>
-										<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+							<div id="content">
+								<form action="" method="POST" onsubmit="return validateForm()">
+									<h3>Receipt No.</h3> 
+									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno" Readonly>
 											
-										<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />
-												
-										<td>	
-											<?php
-												$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
-												$query->execute();
-												$res = $query->fetchAll();
-											?>
-											<select class="form-control" id="addItem" name="prodItem[]">
-												<option><?=$row["prodName"]?></option>
-												<?php foreach ($res as $row3): ?>
-													<option><?=$row3["prodName"]?></option>
-												<?php endforeach ?>		
-											</select> 
-										</td>
+									<h3>Handled By</h3>
+									<?php
+										$query = $conn->prepare("SELECT empFirstName FROM employee ");
+										$query->execute();
+										$result = $query->fetchAll();
+										?>
+													
+									<select class="form-control" id="addEmpl" name="emp">
+										<?php foreach ($result as $row): ?>
+											<option><?=$row["empFirstName"]?></option>
+										<?php endforeach ?>
+											<option SELECTED><?=$employ?></option>
+									</select> 
+																		
+									<h3>Branch</h3>
+									<?php
+										$query = $conn->prepare("SELECT location FROM branch");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+										
+									<select class="form-control" id="addEntry" name="branch">
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["location"]?></option>
+										<?php endforeach ?>
+											<option SELECTED><?=$branch?></option>
+									</select> 
+									<br>
+											
+									<h5>Product/s</h5>
+									<table class="table table-striped" name="chk">
+										<tbody>
+											<?php foreach ($resul as $row): ?>
+											<tr>
+												<td><input type="checkbox" name="chk"></TD>
+													<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+													
+												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />
 														
-										<td>
-											<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
-										</td>
-										<td>
-											<a href="removeOutgoingProduct.php?outID=<?php echo $row["outID"];?>">
-												<button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">ReMoVe</button>
-											</a>
-										</td>
-									</tr>
-									<?php endforeach ?>
-								</tbody>
-							</table>
-											
-							<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-								<br>
-								<br>
-									<span>
-										<a href="../useroutgoing.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="updateOut" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
-							</div>
-						</form>																		
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Modal - Add Outgoing Entry Form -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add Outgoing Product</h4>
-					</div>
-					<div class="modal-body">
-						<form action="" method="POST" onsubmit="return validateForm()">
-							<h5> User </h5>
-							<td>
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-							</td>
-							<h5>Handled By</h5>
-							<?php
-								$query = $conn->prepare("SELECT empFirstName FROM employee ");
-								$query->execute();
-								$result = $query->fetchAll();
-							?>
-											
-							<select class="form-control" id="addEmpl" name="emp" Readonly>
-								<option SELECTED><?=$employ?></option>
-							</select> 
-							
-							<br>
-							
-							<h5>Branch</h5>
-							<?php
-								$query = $conn->prepare("SELECT location FROM branch");
-								$query->execute();
-								$res = $query->fetchAll();
-								?>
-							
-							<select class="form-control" id="addEntry" name="branch" Readonly>
-								<option SELECTED><?=$branch?></option>
-							</select> 
-							<br>
-									
-							<h5>Product/s</h5>
-							<table class="table table-striped" id="dataTable" name="chk">
-								<tbody>
-									<tr>
-										<td><input type="checkbox" name="chk"></TD>
-										<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-										<td>	
-											<?php
-												$query = $conn->prepare("SELECT prodName FROM product INNER JOIN inventory ON product.prodID = inventory.prodID WHERE inventory.qty != 0 OR NOT NULL");
-												$query->execute();
-												$res = $query->fetchAll();
-											?>
-											<select class="form-control" id="addItem" name="prodItem[]">
-											<?php foreach ($res as $row): ?>
-												<option><?=$row["prodName"]?></option>
+												<td>	
+													<div class="ui-widget">
+														<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+													</div>
+												</td>
+																
+												<td>
+													<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
+												</td>
+												<td>
+													<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+												</td> 
+											</tr>
 											<?php endforeach ?>
-										</select> 
-										</td>
-												
-										<td>
-											<input type="number" min="1" class="form-control" id ="addQty" placeholder="Item Quantity" name="outQty[]">
-										</td>
-									</tr>
-								</tbody>
-							</table>
-								
-							<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-								<span> <button type="button" value="Delete Row" class="btn btn-default">Remove from List</button></span>
-								<br>
-								<br>
-								<span>
-									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-								</span>
-								<span>
-									<input type="submit" name="editAddOutgoing" value="Issue Products" class="btn btn-success" id="sucBtn">
-								</span>
+										</tbody>
+									</table>
+													
+									<div class="modFoot">
+										<span><button type="button" class="btn btn-default" value="Add Row" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
+										<br>
+										<br>
+											<span>
+												<a href="../prodissuance.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										<span>
+											<input type="submit" name="updateOut" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>
+								</form>																		
 							</div>
-						</form>																		
-			 
-						<div class="modal-footer">
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
+		<?php
+		require_once 'dbcon.php';
+		$outid = $_GET['outId'];
+		if (isset($_POST["updateOut"])){
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
+				SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE receiptNo = '$outid'";
+		$conn->exec($sql);
+		}
+		?>
+		
 		<!-- Update Function -->
 		<?php
-			$outid= $_GET['outsId'];
+			$outid= $_GET['outId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
@@ -336,13 +277,15 @@
 					$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
 					$branch3 = $branch2['branchA'];
 					
-					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, empID = '$emp3', prodID = '$prod3', userID = '$userID'
+					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, empID = '$emp3', prodID = '$prod3', userID = '$userID' 
 							WHERE outID = $outgoingID";
 					$conn->exec($sql);				
 					
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 						WHERE outID = '$outid'"; */
 				}
+				$url='../prodIssuance.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 
 			if (isset($_POST["editAddOutgoing"])){
@@ -352,7 +295,6 @@
 					$userID = $_POST['userID'];
 					$emp = $_POST['emp'];
 					$branch = $_POST['branch'];
-					$userID = $_POST['userID'];
 
 					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
 					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
@@ -371,9 +313,9 @@
 					$result = $conn->query($sql); 
 				}
 				echo "<meta http-equiv='refresh' content='0'>";
-			}
-					
+			}			
 		?>
+	
 	
   </body>
 </html>
