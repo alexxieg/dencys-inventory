@@ -244,6 +244,17 @@
 			</div>
 		</div>
 		
+		<?php
+		require_once 'dbcon.php';
+		$outid = $_GET['outId'];
+		if (isset($_POST["updateOut"])){
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
+				SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE receiptNo = '$outid'";
+		$conn->exec($sql);
+		}
+		?>
+		
 		<!-- Update Function -->
 		<?php
 			$outid= $_GET['outId'];
