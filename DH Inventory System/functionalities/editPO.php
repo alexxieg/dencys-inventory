@@ -213,13 +213,30 @@
 		</div>
 		
 		<?php
-		require_once 'dbcon.php';
 		$incID= $_GET['incId'];
+		$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
 		if (isset($_POST["editPO"])){
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
-				SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poNumber = '$incID'";
-		$conn->exec($sql);
+			for ($index3 = 0; $index3 < count($prodTem);) {		
+				$prodItem = $_POST['prodItem'][$index3];
+				$inQty = $_POST['qty'][$index3];
+				$checkProd1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+				$checkProd2 = $checkProd1->fetch(PDO::FETCH_ASSOC);
+				$checkProdItemID = $checkProd2['prodA'];
+				
+				foreach ($result as $checkRow) {
+					if (!($checkRow['prodName'] == $prodItem)) {
+						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
+								SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders 
+								WHERE poNumber = '$incID' AND prodID = '$checkProdItemID'";
+						$conn->exec($sql);
+						$index3++;	
+					} else {
+						//Do Nothing
+						$index3++;						
+					}	
+				}
+			}
 		}
 		?>
 		<?php
@@ -246,8 +263,7 @@
 							WHERE poNumber = '$incID' AND prodID = '$prod3'";
 						$conn->exec($sql);
 				}
-				$url='../purchaseOrder.php';
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';	
+				
 			}
 		?>
 	
