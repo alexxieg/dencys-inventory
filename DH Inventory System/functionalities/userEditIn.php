@@ -22,8 +22,32 @@
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="../css/jquery-ui.css">
+		<script src="../js/jquery-1.9.1.js"></script>
+		<script src="../js/jquery-ui.js"></script>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
+		
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "../search.php"
+			});
+		  });
+		</script> 
 		
 		<!-- Login Session -->
 		<?php 
@@ -39,15 +63,15 @@
 	</head>
 	
 	<body>
-		<?php
+	<?php
 			$incID= $_GET['incId'];
-			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID 
+			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supID, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									ORDER BY inID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks, incoming.userID
+			$query2 = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supID, incoming.status, incoming.inRemarks, incoming.userID 
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
 									WHERE incoming.receiptNo = '$incID'
 									ORDER BY inID DESC;");
@@ -56,7 +80,8 @@
 			
 			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
-			$supplier = current($conn->query("SELECT incoming.supplier FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$supplierID = current($conn->query("SELECT incoming.supID FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$supplierName = current($conn->query("SELECT supplier_name FROM suppliers WHERE supID = $supplierID")->fetch());
 			$employ = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 		?>
 
@@ -70,11 +95,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="../userinventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-					<li id="adminhead"><a href="#">User |</a></li>
+				<ul class="nav navbar-nav navbar-right">
+					<li id="adminhead"><a href="#">Admin |</a></li>
 						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>
@@ -84,233 +109,257 @@
 
 		<div class="container-fluid" >
 			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
-					<!-- Sidebar -->
-					<ul class="nav nav-sidebar">
-						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="incoming">
-								<li><a href="../userincoming.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
-							</ul>
-						</li>
-						<li><a href="../outgoing.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="returns">
-								<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
-								<li><a href="../userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
-							</ul>
-						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="reports">
-								<li><a href="../userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-								<li><a href="../usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
-								<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
-							</ul>
-						</li>
-						<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-					</ul>
-					</ul>
-				</div>
+					<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<ul class="list-unstyled collapse" id="incoming">
+							<li><a href="../userpurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+							<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+						</ul>
+					</li>
+					<li><a href="../userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<ul class="list-unstyled collapse" id="returns">
+							<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+							<li><a href="../userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+						</ul>
+					</li>
+					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<ul class="list-unstyled collapse" id="reports">
+							<li><a href="../userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+							<li><a href="../usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+							<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
+						</ul>
+					</li>
+					<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
+					<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+				</ul>
+			</div>
 				<!-- End of Sidebar -->
-  
-				<div class="addInv">
-					<h1 id="headers">Edit Product Delivery Entry</h1>
-					<br>
-					<div id="content">
-						<form action="" method="POST" class="editPgs">
-							<h5>User</h5> 
-							<td>
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-							</td>
-							<h5>Receipt No.</h5> 
-							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno"><br>
-									
-							<h5>Receipt Date</h5> 
-							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate"><br>
-								
-							<h5>Supplier</h5> 
-							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplier;?>" value="<?php echo $supplier;?>" name="supplier"><br>
-							
-							<h5>Received By</h5>				
-							<select class="form-control" id="addEmpl" name="emp">
-								<?php
-									$query = $conn->prepare("SELECT empFirstName FROM employee ");
-									$query->execute();
-									$res = $query->fetchAll();
-								?>
-								<?php foreach ($res as $row): ?>
-										<option><?=$row["empFirstName"]?></option>
-								<?php endforeach ?>
-									<option SELECTED><?=$employ?></option>
-							</select> 
-								
+				
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+					<div id="contents">
+						<div class="pages no-more-tables">
+							<h1 id="headers">Edit Product Delivery Entry</h1>
 							<br>
-									
-							<h5>Product/s</h5>
-							<table class="table table-striped" name="chk">				
-								<tbody>
-									<?php foreach ($result2 as $row): ?>
-										<tr>
-											<td><input type="checkbox" name="chk"></td>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
-												
-											<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
+							<div id="content">
+								<form action="" method="POST">
+									<h3>User</h3>
+									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+								
+									<h3>Receipt No.</h3> 
+									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno">
 											
-											<td>	
-												<?php
-													$query = $conn->prepare("SELECT prodName FROM product ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-													
-												<select class="form-control" id="addItem" name="prodItem[]">
-													<option><?=$row["prodName"]?></option>
-													<?php foreach ($res as $row3): ?>
-														<option><?=$row3["prodName"]?></option>
-													<?php endforeach ?>
-												</select> 
-											</td>
-													
-											<td>
-												<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]">
-											</td>
-											
-											<td>
-												<select class="form-control" id="addInStatus" name="inStatus[]">
-													<option>Complete</option>
-													<option>Partial</option>
-												</select> 
-											</td>
-												
-											<td>
-												<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["inRemarks"]; ?>" value="<?php echo $row["inRemarks"]; ?>" name="inRemarks[]">
-											</td>
-											<td>
-												<a href="removeIncomingProduct.php?incID=<?php echo $row["inID"];?>"> 
-													<button type="button" value="Delete Row" class="btn btn-default" name="RemoveThis">ReMoVe</button>
-												</a>
-											</td>
-										</tr>
-									<?php endforeach ?>
-								</tbody>
-							</table>
-								
-							<br>
-							
-							<div class="modFoot">
-								<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-								<br>
-								<br>
-								<span>
-									<a href="../userincoming.php">
-										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="updateIn" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
-							</div>
-						</form> 								
-					</div>								
-				</div>
-			</div>	
-		</div>
-
-		<!-- Modal for New Incoming Entry Form -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add Incoming Product</h4>
-					</div>
-					<div class="modal-body">
-					<h5>User</h5> 
-					<td>
-					<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-					</td>
-						<form action="" method="POST" onsubmit="return validateForm()">
-							<h5>Receipt No.</h5> 
-							<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcnoEdit" readonly><br>
-							
-							<h5>Receipt Date</h5> 
-							<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdateEdit" readonly><br>
-							
-							<h5>Supplier</h5> 
-							<input type="text" class="form-control" id ="addSupplier" placeholder="<?php echo $supplier;?>" value="<?php echo $supplier;?>" name="supplierEdit" readonly><br>
-													
-							<h5>Received By</h5>
-							<select class="form-control" id="addEmpl" name="empEdit" READONLY>
-									<option SELECTED><?=$employ?></option>
-							</select>  
-							
-							<br>
-								
-							<h5>Product/s</h5>
-							
-							<table class="table table-striped" id="dataTable" name="chk">				
-								<tbody>
-									<tr>
-										<td><input type="checkbox" name="chk"></td>
-										<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-										<td>	
-											<?php
-												$query = $conn->prepare("SELECT prodName FROM product ");
-												$query->execute();
-												$res = $query->fetchAll();
-											?>
-									
-											<select class="form-control" id="addItem" name="prodItem[]">
-												<?php foreach ($res as $row): ?>
-														<option><?=$row["prodName"]?></option>
-											<?php endforeach ?>
-											</select> 
-										</td>
-												
-										<td>
-											<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="incQty[]">
-										</td>
+									<h3>Receipt Date</h3> 
+									<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate">
 										
-										<td>
-											<select class="form-control" id="addInStatus" name="inStatus[]">
-												<option>Complete</option>
-												<option>Partial</option>
-											</select> 
-										</td>
+									<h3>Supplier</h3>				
+									<select class="form-control" id="addEmpl" name="thisSupplier">
+										<?php
+											$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers ");
+											$query->execute();
+											$suppRes = $query->fetchAll();
+										?>
+										<?php foreach ($suppRes as $suppRow): ?>
+											<option value=<?=$suppRow["supID"]?>><?=$suppRow["supplier_name"]?></option>
+										<?php endforeach ?>
+											<option value=<?=$supplierID?> SELECTED><?=$supplierName?></option>
+									</select>
+									
+									<h3>Received By</h3>				
+									<select class="form-control" id="addEmpl" name="emp">
+										<?php
+											$query = $conn->prepare("SELECT empFirstName FROM employee ");
+											$query->execute();
+											$res = $query->fetchAll();
+										?>
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["empFirstName"]?></option>
+										<?php endforeach ?>
+											<option SELECTED><?=$employ?></option>
+									</select> 
+										
+									<br>
 											
-										<td>
-											<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							
-							<br>
-							
-							<div class="modFoot">
-								<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-								<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-								<br>
-								<br>
-								<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-								<span><input type="submit" name="addEditProducts" value="Add Products" class="btn btn-success" id="sucBtn"></span>
-							</div>
-						</form> 	
-					
-						<div class="modal-footer">
-						</div>								
+									<h5>Product/s</h5>
+									<table class="table table-striped" id="dataTable" name="chk">				
+										<tbody>
+											<?php foreach ($result2 as $row): ?>
+												<tr>
+													<td><input type="checkbox" name="chk"></td>
+													<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
+														
+													<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
+													
+													<td>	
+														<div class="ui-widget">
+															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+														</div>		
+													</td>
+															
+													<td>
+														<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]">
+													</td>
+													
+													<td>
+														<?php
+															$query3 = $conn->prepare("SELECT DISTINCT status FROM incoming;");
+															$query3->execute();
+															$res3 = $query3->fetchAll();
+														?>
+														<select class="form-control" id="addInStatus" name="inStatus[]">
+																<option value="<?=$row["status"]?>">Selected: <?=$row["status"]?></option>
+															<?php foreach ($res3 as $row3): ?>
+																<option><?=$row3["status"]?></option>
+															<?php endforeach ?>
+																
+														</select>  
+													</td>
+														
+													<td>
+														<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["inRemarks"]; ?>" value="<?php echo $row["inRemarks"]; ?>" name="inRemarks[]">
+													</td>
+												</tr>
+											<?php endforeach ?>
+										</tbody>
+									</table>
+										
+									<br>
+									
+									<div class="modFoot">
+										<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
+										<br>
+										<br>
+										<span>
+											<a href="../prodDeliveries.php">
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</a>
+										</span>
+										<span>
+											<input type="submit" name="updateIn" value="Update" class="btn btn-success" id="sucBtn">
+										</span>
+									</div>
+									<div class="modal-footer">
+									</div>	
+								</form> 								
+							</div>								
+				
+								<!-- Modal for New Incoming Entry Form -->
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Add Incoming Product</h4>
+										</div>
+										<div class="modal-body">
+											<form action="" method="POST" onsubmit="return validateForm()">
+												<h5>User</h5>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+											
+												<h5>Receipt No.</h5> 
+												<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcnoEdit" readonly><br>
+												
+												<h5>Receipt Date</h5> 
+												<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdateEdit" readonly><br>
+																		
+												<h5>Received By</h5>
+												<select class="form-control" id="addEmpl" name="empEdit" READONLY>
+													<option SELECTED><?=$employ?></option>
+												</select>  
+												
+												<br>
+													
+												<h5>Product/s</h5>
+													
+												<table class="table table-striped" id="dataTable" name="chk">				
+													<tbody>
+														<tr>
+															<td><input type="checkbox" name="chk"></td>
+															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+															<td>	
+																<div class="ui-widget">
+																	<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+																</div>		
+															</td>
+																	
+															<td>
+																<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="incQty[]">
+															</td>
+															
+															<td>
+																<?php
+																	$query3 = $conn->prepare("SELECT DISTINCT status FROM incoming;");
+																	$query3->execute();
+																	$res3 = $query3->fetchAll();
+																?>
+																
+																<select class="form-control" id="addInStatus" name="inStatus[]">
+																	<?php foreach ($res3 as $row3): ?>
+																			<option><?=$row3["status"]?></option>
+																	<?php endforeach ?>
+																</select> 
+															</td>
+																
+															<td>
+																<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												
+												<br>
+												
+												<div class="modFoot">
+													<span>
+														<button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">
+															Add Product
+														</button>
+													</span>
+													
+													<span>
+														<button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">
+															Remove from List
+														</button>
+													</span>
+													<br>
+													<br>
+													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
+													<span><input type="submit" name="addEditProducts" value="Add Products" class="btn btn-success" id="sucBtn"></span>
+												</div>
+											</form> 	
+											
+											<div class="modal-footer">
+											</div>								
+										</div>
+									</div>
+								</div>
+							</div> 
+							<!-- End of Modal -->
+
+						</div>
 					</div>
 				</div>
 			</div>
-		</div> 
-		<!-- End of Modal -->
+		</div>
+
+		<?php
+			require_once 'dbcon.php';
+			$incID= $_GET['incId'];
+			if (isset($_POST["updateIn"])){
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql = "INSERT INTO editincoming (inEditDate, inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID)
+					SELECT CURDATE(), inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID from incoming WHERE receiptNo = '$incID'";
+			$conn->exec($sql);
+			}
+		?>
 		
 		<?php
 			$incID= $_GET['incId'];
@@ -326,9 +375,9 @@
 					$inStat = $_POST['inStatus'][$index];
 					$rcpNo = $_POST['rcno'];
 					$recDate = $_POST['rcdate'];
-					$sup = $_POST['supplier'];
 					$incomingID = $_POST['productInID'][$index];
 					$userID = $_POST['userID'];
+					$sup = $_POST['thisSupplier'];
 					
 					$emp = $_POST['emp'];
 					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
@@ -340,18 +389,20 @@
 					$prod3 = $prod2['prodA'];
 					
 					if (isset($_POST["addProduct"])) {
-						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
-						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."','".$_POST['supplier']."','$inStat','$inRemarks','$emp3','$prod3','$userID')";
+						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inRemarks, empID, prodID, userID)
+						VALUES ('$inQty',CURDATE(),'$rcpNo','".$_POST['rcdate']."',$sup,'$inStat','$inRemarks','$emp3','$prod3','$userID')";
 						$result = $conn->query($sql); 	
 					} else {
-						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supplier = '$sup', status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
+						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supID = $sup, status = '$inStat', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
 							WHERE inID = $incomingID";
 						$conn->exec($sql);
 					}						
 					
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 					WHERE outID = '$outid'"; */
-					  echo "<meta http-equiv='refresh' content='0'>";
+					echo '<script>
+					  window.location = "../userproddeliveries.php"
+					</script>';
 				}
 			}
 
@@ -372,13 +423,12 @@
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 						
-					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID)
-						VALUES ('$inQty',CURDATE(),'$reciptNum','$reciptDate','$supplier','$inStat','$inRemarks','$emp3','$prod3')";
+					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, status, inRemarks, empID, prodID, userID)
+						VALUES ('$inQty',CURDATE(),'$reciptNum','$reciptDate','$supplier','$inStat','$inRemarks','$emp3','$prod3','$userID')";
 						$result = $conn->query($sql);
 				}
 				echo "<meta http-equiv='refresh' content='0'>";
-			}
-			
+			}	
 		?>
 	
   </body>
