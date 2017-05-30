@@ -167,8 +167,8 @@
 									$query->execute();
 									$res = $query->fetchAll();
 								?>
-								<select class="form-control" id="addItem" name="branchItem[]">
-									<option value=<?=$branchLocation?>>Selected: <?=$branchLocation?></option>
+								<select class="form-control" id="addItem" name="branchItem">
+									<option value="<?=$branch?>">Selected: <?=$branchLocation?></option>
 								<?php foreach ($res as $row): ?>
 									<option value=<?=$row["branchID"]?>><?=$row["location"]?></option>
 								<?php endforeach ?>
@@ -222,6 +222,16 @@
 				</div>
 			</div>
 		</div>
+		<?php
+		require_once 'dbcon.php';
+		$retID= $_GET['retId'];
+		if (isset($_POST["addRet"])){
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID)
+				SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID from returns WHERE receiptNo = '$retID'";
+		$conn->exec($sql);
+		}
+		?>
 			
 		<?php
 			$retID= $_GET['retId'];	
@@ -235,13 +245,13 @@
 					$quant = $_POST['retQty'][$index];
 					$rem = $_POST['retRemarks'][$index];
 					$quant = $_POST['retQty'][$index];
-					$branch = $_POST['branchItem'][$index];
+					$Branch = $_POST['branchItem'];
 					
 					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 					
-					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', branchID = $branch WHERE receiptNo = '$retID' AND prodID = '$prod3'";
+					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', branchID = $Branch WHERE receiptNo = '$retID' AND prodID = '$prod3'";
 					$conn->exec($sql);
 				}
 				echo "<meta http-equiv='refresh' content='0'>";
