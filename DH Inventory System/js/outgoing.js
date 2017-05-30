@@ -1,4 +1,16 @@
 function validateForm() {
+	if (document.getElementById('prod').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Product.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('prod').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('prod').style.borderColor = "blue";
+	}
 	if (document.getElementById('addOutQty').value == "") {
 		swal({
 		title: "Warning!",
