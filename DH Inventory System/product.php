@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+	
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
+		
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,20 +98,6 @@
             } );		
 		</script>
 			
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
-	
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
  
 	<body>
@@ -197,7 +198,7 @@
 											?>
 											<td>
 												<form action="<?php echo $location; ?>" method="POST">
-													<label>View by Brand/Category</label>
+													<label>Filter By Brand / Category</label>
 													
 													<select name="brand_Name">
 														<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
@@ -246,7 +247,7 @@
 											<div id="tabHead">Category</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Unit</div>
+											Unit
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Price</div>
@@ -423,7 +424,7 @@
 															<td>
 																<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
 																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
-																		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+																		Restore
 																	</button>
 																</a>
 															</td>				
