@@ -11,8 +11,14 @@
 	$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
 	
 	$None = null;
-	
-	if (!empty($sortByBrand)) {
+	if (!empty($sortByCategory)&&!empty($sortByBrand)){
+		$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
+								FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
+								WHERE product.status = 'Active' AND product.brandID = '$sortByBrand' AND product.categoryID = '$sortByCategory'
+								ORDER BY prodID");	
+		$query->execute();
+		$result = $query->fetchAll();
+	} else if (!empty($sortByBrand)) {
 		$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
 								FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
 								WHERE product.status = 'Active' AND product.brandID = '$sortByBrand'
@@ -23,13 +29,6 @@
 		$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
 								FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
 								WHERE product.status = 'Active' AND product.categoryID = '$sortByCategory'
-								ORDER BY prodID");	
-		$query->execute();
-		$result = $query->fetchAll();
-	} else if (!empty($sortByCategory)&&!empty($sortByBrand)){
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
-								FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
-								WHERE product.status = 'Active' AND product.brandID = '$sortByBrand' AND product.categoryID = '$sortByCategory'
 								ORDER BY prodID");	
 		$query->execute();
 		$result = $query->fetchAll();
