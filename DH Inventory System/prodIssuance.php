@@ -22,7 +22,6 @@
 			$user_row = $session_query->fetch();
 		?>
 		
-		
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
@@ -195,6 +194,7 @@
 								<li><a href="category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 							</ul>
 						</li>
+						<li><a href="backup.php"><i class="glyphicon glyphicon-cog"></i> System Settings</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	

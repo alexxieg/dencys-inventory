@@ -28,7 +28,6 @@
 */	
 ?>
 
-
 <?php
 	$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
     if (isset($_POST['submit'])) {
@@ -62,7 +61,6 @@
 			echo '</script>';
 		} else {
 			// Do Something If name Doesn't Exist
-		
 
         for ($index = 0; $index < count($prodTem); $index++) {
             $prodItem = $_POST['prodItem'][$index];

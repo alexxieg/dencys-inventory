@@ -26,7 +26,7 @@ function validateForm() {
 	}
 	else {
 		swal({
-		title: "Adding of Entry Canceled",
+		title: "Adding of Entry Cancelled",
 		type: "success"
 		});
 		return false;		

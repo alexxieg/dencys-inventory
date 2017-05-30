@@ -5,7 +5,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Login</title>
+		<title>Welcome</title>
+		
+		<!-- Database Connection -->
+		<?php require('dbcon.php'); ?>
 		
 		<link rel="shortcut icon" href="logo.jpg">
 
@@ -16,8 +19,6 @@
 		<script src="sweetalert2/dist/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
 		
-		<!-- Database Connection -->
-		<?php require('dbcon.php'); ?>
 	</head>
   
 	<body class="inBack">
