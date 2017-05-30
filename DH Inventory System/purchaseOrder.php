@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Purchase Orders</title>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 	
@@ -16,12 +22,6 @@
 			$user_row = $session_query->fetch();
 		?>
 		
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<title>Purchase Orders</title>
-
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
@@ -127,11 +127,14 @@
 	<body>
 		<!-- Retrieve Incoming Data -->
 		<?php include('functionalities/fetchPurchaseOrders.php');?>
+		
+		<!-- Sorting Function -->
 		<?php 
 			$sortMonth = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
 			$sortYear = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
 			$location =  $_SERVER['REQUEST_URI']; 
 		?>
+		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -142,7 +145,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
+					<a class="navbar-brand" href="inventory.php">DENCY'S HARDWARE AND GENERAL MERCHANDISE</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -160,7 +163,7 @@
 				<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
@@ -218,31 +221,30 @@
 								<table class="table">	
 									<tr>
 										<td>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add PO</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Incomplete PO</button>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 										</td>
 										<td>
 											<form class="form-inline" action="<?php echo $location; ?>" method="post">
 												<label>View Previous Entries</label>
 												<div class="form-group">
 													<select name="dateMonthName" class="form-control">
-														<option value="<?php echo $sortMonth;?>">SELECTED: <?php echo $sortMonth;?></option>
 														<?php foreach ($result2 as $row): ?>
 															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-															<?php endforeach ?>
+														<?php endforeach ?>
 													</select>
 												</div>
 												<div class="form-group">
 													<select name="dateYearName" class="form-control">
-														<option value="<?php echo $sortYear;?>">SELECTED: <?php echo $sortYear;?></option>
+
 														<?php foreach ($result3 as $row): ?>
 															<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
 														<?php endforeach ?>
 													</select>
 												</div>	
 												<div class="form-group">
-													<input type="submit" value="View" class="btn btn-success" name="filter">
+													<input type="submit" value="View" class="btn btn-success" id="viewButton" name="filter">
 												</div>
 											</form>		
 										</td>
@@ -259,7 +261,7 @@
 								</div>
 								<br> 
 								
-								<!-- Table Display for Incoming -->
+								<!-- Table Display for Purchase Orders -->
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 									<thead>	
 										<tr>
@@ -295,8 +297,7 @@
 										?>
 									</tbody>	
 								</table>
-					
-						
+									
 								<!-- Modal for New Purchase Order -->
 								<div class="modal fade" id="myModal" role="dialog">
 									<div class="modal-dialog modal-lg">
@@ -308,7 +309,7 @@
 											<div class="modal-body">
 												<form action="" method="POST" onsubmit="return validateForm()"><td>
 												<td>
-												<h3> User </h3>
+												<h3>User</h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 												</td>																									
 												
@@ -363,7 +364,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">Edit Activity Log</h4>
+												<h4 class="modal-title">Activity Log - Edits</h4>
 											</div>
 											<div class="modal-body">
 												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">

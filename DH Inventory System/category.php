@@ -7,14 +7,26 @@
 
 		<title>Product Categories</title>
 		
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
+		
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/responsive.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="css/custom.css" rel="stylesheet">
@@ -60,21 +72,6 @@
 				} );
 			} );		
 		</script>
-		
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
-		
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
   
 	<body>
@@ -112,13 +109,13 @@
 				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -138,7 +135,7 @@
 								<li><a href="monthlyOutgoing.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage  <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="manage">
 								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
@@ -171,11 +168,11 @@
 									<h1 id="headers">PRODUCT CATEGORIES</h1>
 									<table class="table">	
 								   		<tr>
-									 	<td>
-									  	<br>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Category</button>							
-										</td>
+											<td>
+												<br>
+												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Category</button>							
+											</td>
 										</tr>
 									</table>
 								</table>
@@ -191,11 +188,11 @@
 							<!-- Table Display for Category -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>
-										<tr id="centerData">
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category ID</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category</th>
-											<th>Action</th>
-										</tr>
+									<tr id="centerData">
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category ID</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Category</th>
+										<th>Action</th>
+									</tr>
 								</thead>
 								
 								<tbody>
@@ -214,7 +211,7 @@
 												</button>
 											</a>
 											<a href="functionalities/removeCategory.php?categoryID=<?php echo $categRemoveID; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn"onclick="return confirm('Are you sure you want to remove this entry?');">
+												<button type="button" class="btn btn-default" id="edBtn"onclick="return confirm('Are you sure you want to archive this category?');">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -236,27 +233,26 @@
 											<h4 class="modal-title">Add New Brand</h4>
 										</div>
 										<div class="modal-body">
-												<form action="" method="POST" onsubmit="return validateForm()">		
+											<form action="" method="POST" onsubmit="return validateForm()">		
 												<h3>Category ID</h3>
-												<input type="text" class="form-control" id="addCategoryID" placeholder="Category ID" name="categoryID"> <br>
+												<input type="text" class="form-control" id="addCategoryID" placeholder="Category ID" name="categoryID"> 
+												
 												<h3>Category Name</h3>
-												<input type="text" class="form-control" id ="addCategoryName" placeholder="Category" name="categoryName"> <br>
-												<br>
+												<input type="text" class="form-control" id ="addCategoryName" placeholder="Category" name="categoryName"> 
 												
 												<div class="modFoot">
-												<span>
-													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn">Cancel</button>
-												</span>
-												<span>
-													<input type="submit" value="Submit" class="btn btn-success" name="addCategory" id="sucBtn">
-												</span>
+													<span>
+														<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn">Cancel</button>
+													</span>
+													<span>
+														<input type="submit" value="Submit" class="btn btn-success" name="addCategory" id="sucBtn">
+													</span>
+												</div>
 											</form> 
-										</div>
 										</div>
 										
 										<div class="modal-footer">
 										</div>
-										
 									</div>
 								</div>
 							</div>
@@ -314,8 +310,7 @@
 														endforeach;
 													?>
 												</tbody>	
-											</table>
-															
+											</table>				
 										</div>
 									</div>
 										

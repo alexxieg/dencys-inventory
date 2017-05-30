@@ -7,6 +7,21 @@
 		
 		<title>Edit Purchase Order Entry</title>
 
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) && $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
+
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
@@ -27,8 +42,6 @@
 		<script src="../js/jquery-1.9.1.js"></script>
 		<script src="../js/jquery-ui.js"></script>
 		
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
 
 		<script>
 		  $(function() {
@@ -49,17 +62,6 @@
 		  });
 		</script> 
 		
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
 	
 	<body>
@@ -276,6 +278,7 @@
 			</div>	
 		</div>
 		
+		<!-- Archive Edit Function -->
 		<?php
 		$incID= $_GET['incId'];
 		$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
@@ -303,6 +306,8 @@
 			}
 		}
 		?>
+		
+		<!-- Edit PO Function -->
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
@@ -359,5 +364,5 @@
 			}
 		?>
 	
-  </body>
+	</body>
 </html>

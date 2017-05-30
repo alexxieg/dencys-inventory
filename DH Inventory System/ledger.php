@@ -7,28 +7,10 @@
 
 		<title>Ledger</title>
 
-		<!-- Bootstrap core CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css" rel="stylesheet">
-		<link href="css/responsive.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-		<!-- Custom styles for this template -->
-		<link href="css/custom.css" rel="stylesheet">
-		<link href="css/sidebar.css" rel="stylesheet">
-
-		<!-- Javascript Files -->
-		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="alertboxes/sweetalert2.min.js"></script>
-		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
-
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
-				
+		
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
@@ -39,6 +21,23 @@
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
 		?>
+		
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/responsive.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+
+		<!-- Custom styles for this template -->
+		<link href="css/custom.css" rel="stylesheet">
+		<link href="css/sidebar.css" rel="stylesheet">
+
+		<!-- Javascript Files -->
+		<script src="js/bootstrap.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 	</head>
 	  
 	<body>
@@ -76,7 +75,7 @@
 								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -124,7 +123,7 @@
 									$location =  $_SERVER['REQUEST_URI']; 
 								?>
 								
-								Filter By Date <br>
+								View by Date
 								<form action="<?php echo $location; ?>" method="POST">
 									<select name="startDate">
 										<option value="" SELECTED></option>
@@ -138,7 +137,7 @@
 											<option value="<?=$row["endDate"]?>"><?=$row["endDate"]?></option>
 										<?php endforeach ?>
 									</select>
-									<input type="submit" value="Filter By Date" class="btn btn-success" name="submit">
+									<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
 								</form>
 									
 								<br>
@@ -151,12 +150,11 @@
 											<?php echo $incID;?>
 										</td>
 										<td>
-										Product Name: 
+											Product Name: 
 											<?php foreach ($result3 as $row): ?>
 												<?php echo $row["prodName"]; break;?>
 											<?php endforeach ?>
 										</td>
-										
 										<td>
 											Beginning Quantity: 
 											<?php echo $request ?>
@@ -174,6 +172,7 @@
 										<th>
 											Receipt No.
 										</th>
+										
 										<th>
 											Date
 										</th>									
@@ -217,8 +216,8 @@
 										<th>
 											Supplier Returns
 										</th>
+										
 										<th>
-							
 										</th>
 									</tr>
 									<?php

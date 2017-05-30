@@ -7648,7 +7648,7 @@ border: none;
   float: left;
   font-family: monospace;
   margin-bottom: 5%;
-  margin-top: -1%;
+  font-size: 12px;
 }
 
 .btnmod:hover{
@@ -7670,4 +7670,8 @@ border: none;
 
 #backButton{
 	float:right;
+}
+
+#viewButton{
+	font-size: 12px;
 }

@@ -6,15 +6,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<title>Employees</title>
+
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
 				
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/responsive.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="css/custom.css" rel="stylesheet">
@@ -61,20 +73,6 @@
 			} );		
 		</script>
 		
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
-		
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
   
 	<body>
@@ -112,13 +110,13 @@
 				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -170,11 +168,10 @@
 									<h1 id="headers">EMPLOYEES</h1>
 									<table class="table">	
 								   	  <tr>
-									  <td>
-									  <br>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
-									<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
-									  </td>
+										<td>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add New Employee</button>							
+										</td>
 									  </tr>
 									</table>
 								</table>
@@ -190,45 +187,45 @@
 							<!-- Table Display for Employees -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>
-										<tr id="centerData">
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Employee ID</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">First Name</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Middle Name</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Name</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Extension Name</th>
-											<th>Action</th>
-										</tr>
+									<tr id="centerData">
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Employee ID</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">First Name</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Middle Name</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Name</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Extension Name</th>
+										<th>Action</th>
+									</tr>
 								</thead>
 								<tbody>
-										<?php
-											foreach ($result as $item):
-											$employID = $item["empID"];
-											?>
-											
-										<tr id="centerData">
-											<td data-title="Employee ID"><?php echo $item["empID"]; ?></td>
-											<td data-title="First Name"><?php echo $item["empFirstName"]; ?></td>
-											<td data-title="Middle Name"><?php echo $item["empMidName"]; ?></td>
-											<td data-title="Last Name"><?php echo $item["empLastName"]; ?></td>
-											<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
-											<td>
-												<a href="functionalities/editEmployees.php?emplId=<?php echo $employID; ?>" target="_self">
+									<?php
+										foreach ($result as $item):
+										$employID = $item["empID"];
+									?>
+										
+									<tr id="centerData">
+										<td data-title="Employee ID"><?php echo $item["empID"]; ?></td>
+										<td data-title="First Name"><?php echo $item["empFirstName"]; ?></td>
+										<td data-title="Middle Name"><?php echo $item["empMidName"]; ?></td>
+										<td data-title="Last Name"><?php echo $item["empLastName"]; ?></td>
+										<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
+										<td>
+											<a href="functionalities/editEmployees.php?emplId=<?php echo $employID; ?>" target="_self">
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
-												</a>	
-											
-												<a href="functionalities/removeEmployee.php?emplId=<?php echo $employID; ?>"> 
-													<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
-														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-													</button>
-												</a>
-											</td>		
-										</tr>
-											
-										<?php
-											endforeach;
-										?>
+											</a>	
+										
+											<a href="functionalities/removeEmployee.php?emplId=<?php echo $employID; ?>"> 
+												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this employee?');">
+													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+												</button>
+											</a>
+										</td>		
+									</tr>
+										
+									<?php
+										endforeach;
+									?>
 								</tbody>	
 							</table>
 								
@@ -243,20 +240,16 @@
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">									
 												<h3>First Name</h3>
-												<input type="text" class="form-control" id ="addFName" placeholder="First Name" name="empFName"> <br>
-												<br>
+												<input type="text" class="form-control" id ="addFName" placeholder="First Name" name="empFName">
 												
 												<h3>Middle Name</h3>
-												<input type="text" class="form-control" id ="addMName" placeholder="Middle Name" name="empMName"> <br>
-												<br>
+												<input type="text" class="form-control" id ="addMName" placeholder="Middle Name" name="empMName">
 																			
 												<h3>Last Name</h3>
-												<input type="text" class="form-control" id ="addLName" placeholder="Last Name" name="empLName"> <br>
-												<br>
+												<input type="text" class="form-control" id ="addLName" placeholder="Last Name" name="empLName">
 												
 												<h3>Extension Name</h3>
-												<input type="text" class="form-control" id ="addEName" placeholder="Extension/Nickname" name="empEName"> <br>
-												<br>
+												<input type="text" class="form-control" id ="addEName" placeholder="Extension/Nickname" name="empEName"> 
 												
 												<div class="modFoot">
 												<span>

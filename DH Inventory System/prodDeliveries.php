@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Product Deliveries</title>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 	
@@ -16,11 +22,6 @@
 			$user_row = $session_query->fetch();
 		?>
 		
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<title>Product Deliveries</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -220,28 +221,26 @@
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
 									</td>
 									<td>
-										
-											<form class="form-inline" action="" method="post">
-												<label>View Previous Deliveries</label>
-												<div class="form-group">
-													<select name="dateMonthName" class="form-control">
-														<?php foreach ($result2 as $row): ?>
-															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>
-												<div class="form-group">
-													<select name="dateYearName" class="form-control">
-														<?php foreach ($result3 as $row): ?>
-															<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>	
-												<div class="form-group">
-													<input type="submit" value="View" class="btn btn-success" name="submit">
-												</div>
-											</form>	
-											
+										<form class="form-inline" action="" method="post">
+											<label>View Previous Deliveries</label>
+											<div class="form-group">
+												<select name="dateMonthName" class="form-control">
+													<?php foreach ($result2 as $row): ?>
+														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>
+											<div class="form-group">
+												<select name="dateYearName" class="form-control">
+													<?php foreach ($result3 as $row): ?>
+														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>	
+											<div class="form-group">
+												<input type="submit" value="View" class="btn btn-success" name="submit">
+											</div>
+										</form>			
 									</td>
 								</tr>
 							</table>

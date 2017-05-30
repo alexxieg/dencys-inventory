@@ -1,5 +1,4 @@
 <?php
-
 	include("dbcon.php"); /* ESTABLISH CONNECTION IN THIS FILE; MAKE SURE THAT IT IS mysqli_* */
 
 	$stmt = $conn->prepare('SELECT supplier_name FROM suppliers WHERE supplier_name LIKE :term'); /* START PREPARED STATEMENT */
@@ -19,5 +18,4 @@
 	
 	/* Toss back results as json encoded array. */
 	echo json_encode($return_arr);
-
 ?>

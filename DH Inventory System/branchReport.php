@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Product Issuance Report</title>
+		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -16,19 +22,11 @@
 			$user_row = $session_query->fetch();
 		?>
 	
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Product Issuance Report</title>
-		
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/responsive.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 		
 		<!-- Custom styles for this template -->
 		<link href="css/custom.css" rel="stylesheet">
@@ -493,13 +491,13 @@
 				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>	
-						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="incoming">
 								<li><a href="purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
 								<li><a href="prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
@@ -581,12 +579,12 @@
 					<div id="contents">
 						<div class="pages no-more-tables">							
 							<div class="container">	
-								<h2 id="outheader">Summary of Products Issued per Branch for the Month</h2>
+								<h2 id="outheader">Summary of Products Issued per Branch</h2>
 
 								<ul class="nav nav-pills" id="navjust">
 									<li>
 										<a href="#mainOutSummary" data-toggle="tab">
-											<span>Outgoing</span>
+											<span>Issuance</span>
 										</a>
 									</li>
 									<li>

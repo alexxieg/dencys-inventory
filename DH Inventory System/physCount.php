@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,13 +7,25 @@
 
 		<title>Add Physical Count</title>
 
+		<!-- Database connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session-->		
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
+
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="logo.jpg">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="css/custom.css" rel="stylesheet">
@@ -22,8 +33,8 @@
 
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
@@ -59,84 +70,69 @@
 				} );
 			} );		
 		</script>
-
-		<!-- Database connection -->
-		<?php include('dbcon.php'); ?>
-		
-		<!-- Login Session-->		
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
 	  
 	<body>
-	  		<!-- Retrieve Ledger Data -->
-			<?php
-				$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
-				$query->execute();
-				$result = $query->fetchAll();
-				
-				$query2 = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
-				$query2->execute();
-				$result2 = $query2->fetchAll();
-				
-				$sortByBrand = (isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
-				$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
-				
-				if (!empty($sortByBrand)) { 
-					$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
-											FROM product 
-											INNER JOIN brand ON product.brandID = brand.brandID 
-											INNER JOIN category ON product.categoryID = category.categoryID 
-											INNER JOIN inventory ON product.prodID = inventory.prodID
-											WHERE product.status = 'Active' AND product.brandID = '$sortByBrand'
-											ORDER BY prodID");
-					$query3->execute();
-					$result3 = $query3->fetchAll();
-				} else if (!empty($sortByCategory)) {
-					$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
-											FROM product 
-											INNER JOIN brand ON product.brandID = brand.brandID 
-											INNER JOIN category ON product.categoryID = category.categoryID 
-											INNER JOIN inventory ON product.prodID = inventory.prodID
-											WHERE product.status = 'Active' AND product.categoryID = '$sortByCategory'
-											ORDER BY prodID");
-					$query3->execute();
-					$result3 = $query3->fetchAll();
-				} else {
-					$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
-											FROM product 
-											INNER JOIN brand ON product.brandID = brand.brandID 
-											INNER JOIN category ON product.categoryID = category.categoryID 
-											INNER JOIN inventory ON product.prodID = inventory.prodID
-											WHERE product.status = 'Active'
-											ORDER BY prodID");
-					$query3->execute();
-					$result3 = $query3->fetchAll();
-				}
-				
-				$selectedBrand =(isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
-				if (!empty($selectedBrand)) {
-					$filterBrand = current($conn->query("SELECT brandName FROM brand WHERE brandID = '$selectedBrand'")->fetch());
-				} else {
-					$filterBrand = "None";
-				}
-				
-				$selectedCategory =(isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
-				if (!empty($selectedCategory)) {
-					$filterCategory = current($conn->query("SELECT categoryName FROM category WHERE categoryID = '$selectedCategory'")->fetch());
-				} else {
-					$filterCategory = "None";
-				}
-			?>
-	  
+		<!-- Retrieve Ledger Data -->
+		<?php
+			$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
+			$query->execute();
+			$result = $query->fetchAll();
+			
+			$query2 = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
+			$query2->execute();
+			$result2 = $query2->fetchAll();
+			
+			$sortByBrand = (isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
+			$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
+			
+			if (!empty($sortByBrand)) { 
+				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+										FROM product 
+										INNER JOIN brand ON product.brandID = brand.brandID 
+										INNER JOIN category ON product.categoryID = category.categoryID 
+										INNER JOIN inventory ON product.prodID = inventory.prodID
+										WHERE product.status = 'Active' AND product.brandID = '$sortByBrand'
+										ORDER BY prodID");
+				$query3->execute();
+				$result3 = $query3->fetchAll();
+			} else if (!empty($sortByCategory)) {
+				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+										FROM product 
+										INNER JOIN brand ON product.brandID = brand.brandID 
+										INNER JOIN category ON product.categoryID = category.categoryID 
+										INNER JOIN inventory ON product.prodID = inventory.prodID
+										WHERE product.status = 'Active' AND product.categoryID = '$sortByCategory'
+										ORDER BY prodID");
+				$query3->execute();
+				$result3 = $query3->fetchAll();
+			} else {
+				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+										FROM product 
+										INNER JOIN brand ON product.brandID = brand.brandID 
+										INNER JOIN category ON product.categoryID = category.categoryID 
+										INNER JOIN inventory ON product.prodID = inventory.prodID
+										WHERE product.status = 'Active'
+										ORDER BY prodID");
+				$query3->execute();
+				$result3 = $query3->fetchAll();
+			}
+			
+			$selectedBrand =(isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
+			if (!empty($selectedBrand)) {
+				$filterBrand = current($conn->query("SELECT brandName FROM brand WHERE brandID = '$selectedBrand'")->fetch());
+			} else {
+				$filterBrand = "None";
+			}
+			
+			$selectedCategory =(isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
+			if (!empty($selectedCategory)) {
+				$filterCategory = current($conn->query("SELECT categoryName FROM category WHERE categoryID = '$selectedCategory'")->fetch());
+			} else {
+				$filterCategory = "None";
+			}
+		?>
+  
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -161,7 +157,6 @@
 
 		<div class="container-fluid">
 			<div class="row">
-			
 				<!-- Sidebar -->
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
@@ -215,10 +210,10 @@
 					endforeach;
 				?>
 				
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
-				<div id="contents">
-					<div class="pages no-more-tables">
-						<div id="tableHeader">
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
+					<div id="contents">
+						<div class="pages no-more-tables">
+							<div id="tableHeader">
 								<table class="table table-striped table-bordered">
 									<h1 id="headers">Add Physical Count</h1>
 									
@@ -236,7 +231,7 @@
 														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
 													<?php endforeach ?>
 												</select>
-												<input type="submit" value="Filter" class="btn btn-success" name="submit">
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
 											</form>
 										</td>	
 										
@@ -249,7 +244,7 @@
 														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
 													<?php endforeach ?>
 												</select>
-												<input type="submit" value="Filter" class="btn btn-success" name="submit">
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
 											</form>
 										</td>
 									</tr>
@@ -262,13 +257,13 @@
 								<hr>
 								<br>
 								<br>
+								
 								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 									<div id="myTable_length" class="dataTables_length">
 										<div id="myTable_filter" class="dataTables_filter">
 										</div>
 									</div>
 								</div>
-								
 								
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 									<thead>
@@ -286,10 +281,10 @@
 												<div id="tabHead">Category</div>
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												Unit
+												<div id="tabHead">Unit</div>
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Last physical Qty</div>
+												<div id="tabHead">Last Physical Qty</div>
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												<div id="tabHead">Remarks</div>

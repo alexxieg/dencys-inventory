@@ -1,5 +1,4 @@
 <?php
-
 	include("dbcon.php"); /* ESTABLISH CONNECTION IN THIS FILE; MAKE SURE THAT IT IS mysqli_* */
 
 	$stmt = $conn->prepare('SELECT prodName FROM product WHERE prodName LIKE :term'); /* START PREPARED STATEMENT */
