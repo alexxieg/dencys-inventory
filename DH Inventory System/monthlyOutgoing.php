@@ -240,6 +240,7 @@
 								<div class="tab-pane active" id="mainOutSummary">
 									<h2 id="inheaders">Outcoming Product Summary for the Month </h2>
 								
+								<hr>
 									<div class="pages no-more-tables">
 										<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 											<div id="myTable_length" class="dataTables_length">
