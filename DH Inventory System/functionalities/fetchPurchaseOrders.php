@@ -5,7 +5,7 @@
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 			$query = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID
-									HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
+									WHERE MONTHNAME(poDate) = '$sortByMonthDate' AND YEAR(poDate) = $sortByYearDate
 									GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name");
 			$query->execute();
 			$result = $query->fetchAll();
