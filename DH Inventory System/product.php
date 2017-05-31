@@ -249,7 +249,7 @@
 											<div id="tabHead">Category</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Unit
+											<div id="tabHead">Unit</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Price</div>
@@ -380,7 +380,7 @@
 												
 													<!-- Retrieve Product Data -->
 													<?php
-														$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
+														$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, product.archiveDate
 																					FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
 																					WHERE product.status = 'Inactive'
 																					ORDER BY prodID");
@@ -390,6 +390,9 @@
 													
 													<thead>
 														<tr id="centerData">
+															<th>
+																<div id="tabHead">Date Archived</div>
+															</th>
 															<th>
 																<div id="tabHead">Product ID</div>
 															</th>
@@ -417,6 +420,7 @@
 															$proID = $item["prodID"];
 														?>	
 														<tr id="centerData">
+															<td data-title="Date Archived"><?php echo $item["archiveDate"]; ?></td>
 															<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 															<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 															<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
@@ -425,8 +429,8 @@
 															<td data-title="Price"><?php echo $item["price"]; ?></td>
 															<td>
 																<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
-																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
-																		Restore
+																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this product?');" id="delBtn1">
+																		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																	</button>
 																</a>
 															</td>				

@@ -271,13 +271,16 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Inactive' ");
+													$query = $conn->prepare("SELECT categoryID, categoryName, archiveDate FROM category WHERE status = 'Inactive' ");
 													$query->execute();
 													$result = $query->fetchAll();
 												?>
 												
 												<thead>
 													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Archived</div>
+														</th>
 														<th>
 															<div id="tabHead">Category ID</div>
 														</th>
@@ -301,7 +304,7 @@
 														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 														<td>	
 															<a href="functionalities/restoreCategory.php?useId=<?php echo $categEditID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this category?');">
 																	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>

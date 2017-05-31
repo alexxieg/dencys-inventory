@@ -237,7 +237,7 @@
 									</tbody>	
 								</table>
 									
-								<!-- Modal - Add Employee Form -->
+								<!-- Modal - Add Supplier Form -->
 								<div class="modal fade" id="myModal" role="dialog">
 									<div class="modal-dialog modal-lg">
 										<div class="modal-content">
@@ -380,7 +380,7 @@
 															<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
 															<td>										
 																<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
-																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to return this supplier from the blacklist?');">
+																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this supplier from the blacklist?');">
 																		<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 																	</button>
 																</a>

@@ -316,7 +316,7 @@
 																	$query->execute();
 																	$res = $query->fetchAll();
 																?>
-																<select class="form-control" id="addItem" name="prodItem[]">
+																<select class="form-control" id="prod" name="prodItem[]">
 																<?php foreach ($res as $row): ?>
 																	<option><?=$row["prodName"]?></option>
 																<?php endforeach ?>
