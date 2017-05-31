@@ -7599,7 +7599,8 @@ border: none;
 #addReorderLvl, #userID, #addItem, #addProdQty,
 #addPO, #addBranch, #addLName, #addFName,
 #addMName, #addEName, #addBrandID, #addBrandName,
-#addCategoryID, #addCategoryName{
+#addCategoryID, #addCategoryName, #supName, #supContact,
+#supLoc{
   width: 50%;
   margin-left: auto;
   margin-right: auto;

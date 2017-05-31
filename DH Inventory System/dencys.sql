@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2017 at 07:33 AM
+-- Generation Time: May 31, 2017 at 05:16 AM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -1291,7 +1291,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty`, `inQty`, `inRetQty`, `totalIn`, `outQty`, `outRetQty`, `totalOut`, `endingQty`, `remarks`, `prodID`, `invPeriodStart`) VALUES
-(1, '2017-04-12', 60, 0, 0, 175, 25, 200, 130, 10, 140, NULL, NULL, 'AFR-ACC-0001', NULL),
+(1, '2017-04-12', 50, 0, 0, 175, 5, 180, 130, NULL, 130, NULL, NULL, 'AFR-ACC-0001', NULL),
 (2, '2017-04-12', 70, 0, 0, 175, NULL, 175, 105, NULL, 105, NULL, NULL, 'AFR-ACC-0002', NULL),
 (3, '2017-04-12', 85, 0, 0, 175, NULL, 175, 90, NULL, 90, NULL, NULL, 'AFR-ACC-0003', NULL),
 (4, '2017-04-12', 125, 0, 0, 175, NULL, 175, 50, NULL, 50, NULL, NULL, 'AFR-ACC-0004', NULL),
@@ -3426,75 +3426,77 @@ INSERT INTO `returns` (`returnID`, `receiptNo`, `returnDate`, `returnQty`, `retu
 
 DROP TABLE IF EXISTS `suppliers`;
 CREATE TABLE IF NOT EXISTS `suppliers` (
-  `supID` int(5) NOT NULL,
+  `supID` int(5) NOT NULL AUTO_INCREMENT,
   `supplier_name` varchar(50) NOT NULL,
+  `contactNo` varchar(45) DEFAULT NULL,
+  `location` varchar(300) DEFAULT NULL,
   `status` varchar(45) NOT NULL DEFAULT 'Active',
   PRIMARY KEY (`supID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `suppliers`
 --
 
-INSERT INTO `suppliers` (`supID`, `supplier_name`, `status`) VALUES
-(1, 'Alphine', 'Active'),
-(2, 'Amesco Trade', 'Active'),
-(3, 'Amity', 'Active'),
-(4, 'ASCD/ Harrows', 'Active'),
-(5, 'Atlas Copco/ Hilti', 'Active'),
-(6, 'Avenue', 'Active'),
-(7, 'Beesin', 'Active'),
-(8, 'Ben/ Alex Uy', 'Active'),
-(9, 'Black and Decker', 'Active'),
-(10, 'Bosch', 'Active'),
-(11, 'Brixton/Anonas', 'Inactive'),
-(12, 'Century Trace', 'Active'),
-(13, 'Dangguan MKTG', 'Inactive'),
-(14, 'Elcabo Trading', 'Active'),
-(15, 'Elektrower/Metabo', 'Active'),
-(16, 'EPMS/Iris Commercial', 'Inactive'),
-(17, 'Fine Thing/ Master Wealth', 'Blacklisted'),
-(18, 'GAMC', 'Active'),
-(19, 'Golden Field', 'Active'),
-(20, 'Great Power', 'Active'),
-(21, 'Guan Yiac Hardware', 'Active'),
-(22, 'Hans Corp/ Golden Hit Corp', 'Active'),
-(23, 'Hexagon/MCM', 'Active'),
-(24, 'Jimmy Ng', 'Active'),
-(25, 'Jopay Exim', 'Active'),
-(26, 'JSX', 'Active'),
-(27, 'Justino', 'Active'),
-(28, 'Kimgolo/Bachelor Industrial', 'Inactive'),
-(29, 'Sim Bengko', 'Active'),
-(30, 'Grind Master', 'Active'),
-(31, 'MSW Dist. Comp. Inc', 'Active'),
-(32, 'Mapex Hardware', 'Active'),
-(33, 'Marswin MKTG', 'Active'),
-(34, 'New Royal', 'Active'),
-(35, 'NKD/Cobankiat', 'Inactive'),
-(36, 'Ohayo', 'Active'),
-(37, 'Panpisco', 'Active'),
-(38, 'Petts', 'Active'),
-(39, 'Phil Oi', 'Active'),
-(40, 'Philman', 'Active'),
-(41, 'Prominent', 'Active'),
-(42, 'Quantech', 'Active'),
-(43, 'Seaking', 'Active'),
-(44, 'SKA', 'Active'),
-(45, 'Susing', 'Active'),
-(46, 'Tavaris/Keylargo', 'Active'),
-(47, 'Tomita Industrial', 'Active'),
-(48, 'Tool Wind Parts', 'Active'),
-(49, 'Tramat Enterprises', 'Active'),
-(50, 'Ultimate Exim', 'Active'),
-(51, 'Vanity', 'Active'),
-(52, 'VCSC/VICS', 'Active'),
-(53, 'VDH', 'Active'),
-(54, 'Visayan', 'Active'),
-(55, 'Weld', 'Active'),
-(56, 'Egyril', 'Blacklisted'),
-(57, 'Robin William', 'Blacklisted'),
-(58, 'Dagpen', 'Blacklisted');
+INSERT INTO `suppliers` (`supID`, `supplier_name`, `contactNo`, `location`, `status`) VALUES
+(1, 'Alphine', '0904-5669-315', 'La Union', 'Active'),
+(2, 'Amesco Trade', '02-244 6089', 'Manila', 'Active'),
+(3, 'Amity', '02-521-7775', '2300 L Guinto St, Malate, Manila', 'Active'),
+(4, 'ASCD/ Harrows', '3670012 ', '339 9th Ave. 062 Caloocan City Metro Manila', 'Active'),
+(5, 'Atlas Copco/ Hilti', '02-584-4757', 'North Main Avenue, Lot 12 Block 2, Laguna Technopark, Binan, 4024 Laguna', 'Active'),
+(6, 'Avenue', '0917-1235-465', 'Bulacan', 'Active'),
+(7, 'Beesin', '0912-1354-451', 'Bulacan', 'Active'),
+(8, 'Ben/ Alex Uy', '0905-4681-466', 'Metro Manila', 'Active'),
+(9, 'Black and Decker', '02-533-9694', 'VSK Corporate Circle, Acacia Lane cor. Shaw Blvd., Brgy Hagdang Bato, Mandaluyong, 1552 Metro Manila', 'Active'),
+(10, 'Bosch', '02-870-3888', 'Fort Legend Towers, 31st Street, Taguig, 1634 Metro Manila', 'Active'),
+(11, 'Brixton/Anonas', '02-292-9955', 'Quezon City, Philippines', 'Inactive'),
+(12, 'Century Trace', '0925-4564-488', 'Pampanga', 'Active'),
+(13, 'Dangguan MKTG', '0925-1358-989', 'Pampanga', 'Inactive'),
+(14, 'Elcabo Trading', '3320020', 'Lot 1 BLK 11, Molave St., Caloocan City Metro Manila', 'Active'),
+(15, 'Elektrower/Metabo', '0916-4568-444', 'Manila', 'Active'),
+(16, 'EPMS/Iris Commercial', '+63(2)7334638', '667 T Alonzo St, Bgy 299, Zone 029 STA Cruz, Manila', 'Inactive'),
+(17, 'Fine Thing/ Master Wealth', '0915-4689-331', 'Caloocan, Manila', 'Blacklisted'),
+(18, 'GAMC', '0906-4444-455', 'Bulacan', 'Active'),
+(19, 'Golden Field', '0906-4687-646', 'Metro Manila', 'Active'),
+(20, 'Great Power', '0915-8888-165', 'Metro Manila', 'Active'),
+(21, 'Guan Yiac Hardware', '0927-5689-488', 'Metro Manila', 'Active'),
+(22, 'Hans Corp/ Golden Hit Corp', '0927-3694-135', 'Bulacan', 'Active'),
+(23, 'Hexagon/MCM', '0927-4567-548', 'La Union', 'Active'),
+(24, 'Jimmy Ng', '02-548-4564', 'Bulacan', 'Active'),
+(25, 'Jopay Exim', '0915-1579-487', 'La Union', 'Active'),
+(26, 'JSX', '0905-4587-444', 'La Union', 'Active'),
+(27, 'Justino', '0917-7897-777', 'La Union', 'Active'),
+(28, 'Kimgolo/Bachelor Industrial', '0906-6615-458', 'La Union', 'Inactive'),
+(29, 'Sim Bengko', '0911-4879-225', 'Metro Manila', 'Active'),
+(30, 'Grind Master', '0924-1487-416', 'La Union', 'Active'),
+(31, 'MSW Dist. Comp. Inc', '0915-2246-664', 'Metro Manila', 'Active'),
+(32, 'Mapex Hardware', '0907-4153-789', 'La Union', 'Active'),
+(33, 'Marswin MKTG', '0927-8674-456', 'La Union', 'Active'),
+(34, 'New Royal', '02-994-1688', 'La Union', 'Active'),
+(35, 'NKD/Cobankiat', '02-187-4783', 'La Union', 'Inactive'),
+(36, 'Ohayo', '02-158-4187', 'Pampanga', 'Active'),
+(37, 'Panpisco', '0911-7981-112', 'La Union', 'Active'),
+(38, 'Petts', '0919-4684-154', 'Caloocan, Manila', 'Active'),
+(39, 'Phil Oi', '0905-4578-416', 'Metro Manila', 'Active'),
+(40, 'Philman', '0904-4873-133', 'La Union', 'Active'),
+(41, 'Prominent', '0905-1685-399', 'La Union', 'Active'),
+(42, 'Quantech', '02-687-3486', 'La Union', 'Active'),
+(43, 'Seaking', '02-186-6481', 'La Union', 'Active'),
+(44, 'SKA', '0917-1564-458', 'La Union', 'Active'),
+(45, 'Susing', '0915-6487-158', 'La Union', 'Active'),
+(46, 'Tavaris/Keylargo', '0925-1657-116', 'Pampanga', 'Active'),
+(47, 'Tomita Industrial', '0928-4657-889', 'Pampanga', 'Active'),
+(48, 'Tool Wind Parts', '0927-1687-018', 'La Union', 'Active'),
+(49, 'Tramat Enterprises', '02-157-1166', 'La Union', 'Active'),
+(50, 'Ultimate Exim', '02-238-5541', 'La Union', 'Active'),
+(51, 'Vanity', '02-668-4489', 'La Union', 'Active'),
+(52, 'VCSC/VICS', '0927-4867-165', 'Metro Manila', 'Active'),
+(53, 'VDH', '0916-4873-146', 'La Union', 'Active'),
+(54, 'Visayan', '0905-5856-157', 'Pampanga', 'Active'),
+(55, 'Weld', '0905-4678-799', 'Metro Manila', 'Active'),
+(56, 'Egyril', '0901-7888-891', 'Baguio City', 'Blacklisted'),
+(57, 'Robin William', '02-154-1564', 'Baguio City', 'Blacklisted'),
+(58, 'Dagpen', '02-418-4871', 'Baguio City', 'Blacklisted');
 
 -- --------------------------------------------------------
 

@@ -78,7 +78,7 @@
 	<body>
 		<!-- Retrieve Employee Data -->
 		<?php
-			$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Active'");
+			$query = $conn->prepare("SELECT supID, supplier_name, contactNo, location FROM suppliers WHERE status = 'Active'");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -194,6 +194,8 @@
 										<tr>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier ID</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Contact Number</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -205,7 +207,9 @@
 											
 										<tr id="centerData">
 											<td data-title="Supplier ID"><?php echo $item["supID"]; ?></td>
-											<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
+											<td data-title="Supplier Name"><?php echo $item["supplier_name"]; ?></td>
+											<td data-title="Contact Number"><?php echo $item["contactNo"]; ?></td>
+											<td data-title="Contact Number"><?php echo $item["location"]; ?></td>
 											<td>
 												<a href="functionalities/editSupplier.php?supID=<?php echo $supID; ?>" target="_self">
 													<button type="button" class="btn btn-default" id="edBtn">
@@ -244,8 +248,13 @@
 											<div class="modal-body">
 												<form action="" method="POST" onsubmit="return validateForm()">									
 													<h3>Supplier Name</h3>
-													<input type="text" class="form-control" id ="addFName" placeholder="First Name" name="supName"> <br>
-													<br>
+													<input type="text" class="form-control" id="supName" placeholder="First Name" name="supName">
+
+													<h3>Contact Number</h3>
+													<input type="text" class="form-control" id="supContact" placeholder="Contact Number" name="supContact">
+													
+													<h3>Location</h3>
+													<input type="text" class="form-control" id="supLoc" placeholder="Location" name="supLoc">
 													
 													<div class="modFoot">
 														<span>

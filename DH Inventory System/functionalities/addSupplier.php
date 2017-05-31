@@ -4,6 +4,8 @@
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
 		$supName = $_POST['supName'];
+		$supContact = $_POST['supContact'];
+		$supLoc = $_POST['supLoc'];
 
 		$query = $conn->prepare("Select * FROM suppliers WHERE supplier_name = '$supName'");
 		$count = $query->execute();
@@ -20,8 +22,8 @@
 			echo '</script>';
 		} else {
 				 
-				$sql = "INSERT INTO suppliers (supplier_name)
-				VALUES ('$supName')";
+				$sql = "INSERT INTO suppliers (supplier_name, contactNo, location)
+				VALUES ('$supName','$supContact','$supLoc')";
 				$conn->exec($sql);
 			echo "<meta http-equiv='refresh' content='0'>";
 		}
