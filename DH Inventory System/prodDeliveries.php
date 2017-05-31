@@ -129,6 +129,13 @@
 		<!-- Retrieve Incoming Data -->
 		<?php include('functionalities/fetchIncoming.php'); ?>
 		
+		<!-- Sorting Function -->
+		<?php 
+			$sortMonth = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
+			$sortYear = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
+			$location =  $_SERVER['REQUEST_URI']; 
+		?>
+		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -221,10 +228,11 @@
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
 									</td>
 									<td>
-										<form class="form-inline" action="" method="post">
-											<label>View Previous Deliveries</label>
+										<form class="form-inline" action="<?php echo $location; ?>" method="post">
+											<label>View Previous Entries</label>
 											<div class="form-group">
 												<select name="dateMonthName" class="form-control">
+													<option value="<?php echo $sortMonth; ?>" SELECTED>SELECTED: <?php echo $sortMonth; ?></option>
 													<?php foreach ($result2 as $row): ?>
 														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
 													<?php endforeach ?>
@@ -232,13 +240,14 @@
 											</div>
 											<div class="form-group">
 												<select name="dateYearName" class="form-control">
+													<option value="<?php echo $sortYear; ?>" SELECTED>SELECTED: <?php echo $sortYear; ?></option>
 													<?php foreach ($result3 as $row): ?>
 														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
 													<?php endforeach ?>
 												</select>
 											</div>	
 											<div class="form-group">
-												<input type="submit" value="View" class="btn btn-success" name="submit">
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="filter">
 											</div>
 										</form>			
 									</td>

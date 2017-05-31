@@ -5,7 +5,7 @@
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 		$query = $conn->prepare("SELECT incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.inType, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.userID, purchaseorders.poNumber  
 									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID INNER JOIN suppliers ON incoming.supID = suppliers.supID INNER JOIN purchaseorders ON incoming.poNumber = purchaseorders.poNumber
-									HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
+									WHERE MONTHNAME(incoming.inDate) = '$sortByMonthDate' AND YEAR(inDate) = $sortByYearDate
 									GROUP BY incoming.receiptNo, incoming.inDate, empName, suppliers.supplier_name, incoming.inType, incoming.receiptDate, incoming.userID, purchaseorders.poNumber");
 		$query->execute();
 		$result = $query->fetchAll();
