@@ -333,7 +333,7 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<div class="ui-widget">
-																	<input class="thisProduct" name="prodItem">
+																	<input class="thisProduct" id="prod" name="prodItem">
 																</div>
 															</td>
 																	
