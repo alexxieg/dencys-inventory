@@ -41,8 +41,7 @@
 	<body>
 		<?php
 			$supID = $_GET['supID'];
-		
-			$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE supID = $supID ");
+			$query = $conn->prepare("SELECT supID, supplier_name, contactNo, location FROM suppliers WHERE supID = $supID ");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>

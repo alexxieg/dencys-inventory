@@ -292,13 +292,16 @@
 											
 												<!-- Retrieve Brand Data -->
 												<?php
-													$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Inactive' ");
+													$query = $conn->prepare("SELECT brandID, brandName, archiveDate FROM brand WHERE status = 'Inactive' ");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
 												
 												<thead>
 													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Archived</div>
+														</th>
 														<th>
 															<div id="tabHead">Brand ID</div>
 														</th>
@@ -317,6 +320,7 @@
 														$useThisID = $item["brandID"];
 													?>
 													<tr id="centerData">
+														<td data-title="Date Archived"><?php echo $item["archiveDate"]; ?></td>
 														<td data-title="Brand ID"><?php echo $item["brandID"]; ?></td>
 														<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 														<td>											
