@@ -321,11 +321,25 @@
 												<br>
 														
 												<h5>Product/s</h5>
+												<table class="table table-striped">
+													<tr>
+														<td>
+														</td>
+														<td>
+														</td>
+														<td>
+															Product Name
+														</td>
+														<td>
+															Quantity
+														</td>
+													</tr>
+												</table>
 												<table class="table table-striped" id="dataTable" name="chk">				
 													<tbody>
 														<tr>
 															<td><input type="checkbox" name="chk"></TD>
-																<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<div class="ui-widget">
 																	<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name">
