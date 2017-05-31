@@ -5,7 +5,7 @@
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 		$query = $conn->prepare("SELECT outgoing.receiptNo, outgoing.outDate, MONTHNAME(outgoing.outDate) AS nowMonthDate, YEAR(outDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, branch.location, outgoing.userID   
 									FROM outgoing INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID 
-									HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
+									WHERE MONTHNAME(outgoing.outDate) = '$sortByMonthDate' AND YEAR(outDate) = $sortByYearDate
 									GROUP BY outgoing.receiptNo, outgoing.outDate, empName, branch.location, outgoing.userID
 									ORDER BY outgoing.outDate DESC;");
 		$query->execute();
