@@ -33,7 +33,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="returns.js"></script>
+		<script src="js/returnSupplier.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>
@@ -279,7 +279,7 @@
 													$res = $query->fetchAll();
 												?>
 													
-												<select class="form-control" id="addEntry" name="prodItem">
+												<select class="form-control" id="prod" name="prodItem">
 													<?php foreach ($res as $row): ?>
 													<option><?=$row["prodName"]?></option>
 													<?php endforeach ?>
