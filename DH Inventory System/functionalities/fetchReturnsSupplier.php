@@ -5,7 +5,7 @@
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
 		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, suppliers.supplier_name, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, returns.userID
 								FROM returns INNER JOIN suppliers ON returns.supID = suppliers.supID INNER JOIN employee ON returns.empID = employee.empID
-						        WHERE returns.returnType = 'Supplier Return'  AND nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate 
+						        WHERE returns.returnType = 'Supplier Return'  AND MONTHNAME(returns.returnDate) = '$sortByMonthDate' AND YEAR(returnDate) = $sortByYearDate 
                                 GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, suppliers.supplier_name, empName returns.userID;");	
 		$query->execute();
 		$result = $query->fetchAll();

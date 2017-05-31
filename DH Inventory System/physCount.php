@@ -73,7 +73,7 @@
 	</head>
 	  
 	<body>
-		<!-- Retrieve Ledger Data -->
+		<!-- Retrieve Data -->
 		<?php
 			$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
 			$query->execute();

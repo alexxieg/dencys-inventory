@@ -115,6 +115,7 @@
 			$result2 = $query2->fetchAll();
 			
 			$receiptNum = current($conn->query("SELECT returns.receiptNo FROM returns WHERE returns.receiptNo = '$retID'")->fetch());
+			$date = current($conn->query("SELECT returns.returnDate FROM returns WHERE returns.receiptNo = '$retID'")->fetch());
 			$branch = current($conn->query("SELECT location FROM returns Join branch ON returns.branchID = branch.branchID WHERE returns.receiptNo = '$retID'")->fetch());
 			$employee = current($conn->query("SELECT CONCAT(empFirstName, ' ', empLastName) AS empName FROM returns INNER JOIN employee ON returns.empID = employee.empID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
@@ -214,6 +215,10 @@
 									<td>
 										Reference No:
 										<?php echo $receiptNum;?>
+									</td>
+									<td>
+										Return Date:
+										<?php echo $date; ?>
 									</td>
 									<td>
 										Branch:

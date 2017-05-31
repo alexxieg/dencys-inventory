@@ -193,12 +193,11 @@
 									<table class="table">	
 										<tr>
 											<td>
-												<br>
 												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">
 													Products for Reorder
 												</button>
 
-												<a href="userHistory.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">View Previous Inventory</button></a>
+												<a href="userHistory.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">Previous Inventory</button></a>
 												
 												<a href="userPhyCount.php"> 
 													<button type="button" class="btn btn-info btn-md btnmod" id="modButt">

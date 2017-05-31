@@ -115,6 +115,7 @@
 			$resul = $query2->fetchAll();
 			
 			$receiptNum = current($conn->query("SELECT returns.receiptNo FROM returns WHERE returns.receiptNo = '$retID'")->fetch());
+			$date = current($conn->query("SELECT returns.returnDate FROM returns WHERE returns.receiptNo = '$retID'")->fetch());
 			$supplier = current($conn->query("SELECT supplier_name FROM returns INNER JOIN suppliers ON returns.supID = suppliers.supID WHERE returns.receiptNo = '$retID'")->fetch());
 			$employee = current($conn->query("SELECT CONCAT(empFirstName, ' ', empLastName) AS empName FROM returns INNER JOIN employee ON returns.empID = employee.empID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
@@ -211,6 +212,10 @@
 									<td>
 										Reference No:
 										<?php echo $receiptNum;?>
+									</td>
+									<td>
+										Return Date:
+										<?php echo $date; ?>
 									</td>
 									<td>
 										Supplier: 

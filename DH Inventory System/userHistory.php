@@ -5,14 +5,26 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Inventory</title>
+		<title>Previous Inventory</title>
+
+		<!-- Database connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session-->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="user") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/bootstrap.css" rel="stylesheet">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="css/custom.css" rel="stylesheet">
@@ -20,8 +32,8 @@
 		
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../js/jquery-3.2.0.min.js"></script>	
+		<script src="../js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 			
@@ -83,20 +95,6 @@
             } );		
 		</script>
 			
-		<!-- Database connection -->
-		<?php include('dbcon.php'); ?>
-		
-		<!-- Login Session-->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="user") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
     
   	<body>
@@ -195,9 +193,7 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">	
 									<h1 id="headers">PREVIOUS INVENTORY</h1>	
-									<select>
-										<option>March 2017</option>
-									</select>
+
 								</table>
 							</div>
 							
@@ -213,17 +209,7 @@
 							<!-- Table for Inventory Data-->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
-									<tr>
-										<td colspan="13" style="font-size: 35px;">
-											<?php
-											$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
-											$month->execute();
-											$monthres = $month->fetchAll();
-											foreach ($monthres as $monthshow)
-											echo $monthshow["month"];
-											?>	
-										</td>
-									</tr>
+
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Product ID</div>
@@ -274,8 +260,8 @@
 											Stock Card
 										</th>
 									</tr>
-							</thead>
-							<tbody>	
+								</thead>
+								<tbody>	
 									
 									<?php
 										foreach ($result as $item):
@@ -334,11 +320,12 @@
 									<?php
 										endforeach;
 									?>
-							</tbody>	
-						</table>
-					</div>	
+								</tbody>	
+							</table>
+						</div>	
+					</div>
 				</div>
-			</div>
-		</div> 
+			</div> 
+		</div>
 	</body>
 </html>

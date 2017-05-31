@@ -128,6 +128,13 @@
 	<body>
 		<!-- PHP code for fetching the data-->
 		<?php include('functionalities/fetchReturnsWarehouse.php'); ?>
+			
+		<!-- Sorting Function -->
+		<?php 
+			$sortMonth = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
+			$sortYear = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
+			$location =  $_SERVER['REQUEST_URI']; 
+		?>
 		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -219,11 +226,12 @@
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 									</td>
-									<td>								
-										<form class="form-inline" action="" method="post">
+									<td>		
+										<form class="form-inline" action="<?php echo $location; ?>" method="post">
 											<label>View Previous Entries</label>
 											<div class="form-group">
-													<select name="dateMonthName" class="form-control">
+												<select name="dateMonthName" class="form-control">
+													<option value="<?php echo $sortMonth; ?>" SELECTED>MONTH: <?php echo $sortMonth; ?></option>
 													<?php foreach ($result2 as $row): ?>
 														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
 													<?php endforeach ?>
@@ -231,15 +239,16 @@
 											</div>
 											<div class="form-group">
 												<select name="dateYearName" class="form-control">
-														<?php foreach ($result3 as $row): ?>
+													<option value="<?php echo $sortYear; ?>" SELECTED>YEAR: <?php echo $sortYear; ?></option>
+													<?php foreach ($result3 as $row): ?>
 														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
 													<?php endforeach ?>
 												</select>
 											</div>	
 											<div class="form-group">
-												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="filter">
 											</div>
-										</form>	
+										</form>		
 									</td>
 								</tr>
 							</table>
@@ -304,7 +313,7 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-												<h3> User </h3>
+												<h3>User</h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 												
 												<h3>Branch</h3>
@@ -335,10 +344,9 @@
 													<?php endforeach ?>
 												</select> 
 													
-
 												<br>
 												
-											<h5 id="multipleProd">Product/s</h5>
+												<h5 id="prodHeader">Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>
 														<tr>
@@ -390,13 +398,13 @@
 								</div>
 							</div>
 							
-									<!-- Modal - Activity Log -->
+							<!-- Modal - Activity Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Edit Activity Log</h4>
+											<h4 class="modal-title">Edit Log - Previous Entries</h4>
 										</div>
 										<div class="modal-body">
 											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
@@ -468,7 +476,6 @@
 										
 								</div>
 							</div>
-						
 						</div>
 					</div>
 				</div>

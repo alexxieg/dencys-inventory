@@ -119,7 +119,6 @@
 				source: "searchSup.php"
 			});
 		  });
-
 		</script>
 			
 	</head>

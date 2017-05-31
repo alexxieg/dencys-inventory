@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>Add Physical Count</title>
+	
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="user") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,8 +33,8 @@
 
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
@@ -56,23 +70,10 @@
 				} );
 			} );		
 		</script>
-		
-		<?php include('dbcon.php'); ?>
-				
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="user") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
 	  
 	<body>
-	  	<!-- Retrieve Ledger Data -->
+	  	<!-- Retrieve Data -->
 		<?php
 			$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
 			$query->execute();
@@ -81,7 +82,7 @@
 			$query2 = $conn->prepare("SELECT categoryID, categoryName FROM category WHERE status = 'Active' ");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
-				
+			
 			$sortByBrand = (isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
 			$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
 			
@@ -115,14 +116,15 @@
 										ORDER BY prodID");
 				$query3->execute();
 				$result3 = $query3->fetchAll();
-			}		
+			}
+			
 			$selectedBrand =(isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
 			if (!empty($selectedBrand)) {
 				$filterBrand = current($conn->query("SELECT brandName FROM brand WHERE brandID = '$selectedBrand'")->fetch());
 			} else {
 				$filterBrand = "None";
 			}
-				
+			
 			$selectedCategory =(isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
 			if (!empty($selectedCategory)) {
 				$filterCategory = current($conn->query("SELECT categoryName FROM category WHERE categoryID = '$selectedCategory'")->fetch());
@@ -201,150 +203,169 @@
 					endforeach;
 				?>	
 										
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
-				<div id="contents">
-					<div class="pages no-more-tables">
-						<div id="tableHeader">
-							<table class="table table-striped table-bordered">
-								<h1 id="headers">Add Physical Count</h1>
-								
-								<?php 
-									$location =  $_SERVER['REQUEST_URI']; 
-								?>
+				<?php
+					foreach ($result3 as $item):
+					$proID = $item["prodID"];
+				?>
+				<?php
+					endforeach;
+				?>
+				
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
+					<div id="contents">
+						<div class="pages no-more-tables">
+							<div id="tableHeader">
+								<table class="table table-striped table-bordered">
+									<h1 id="headers">Add Physical Count</h1>
+									
+									<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
 
-								<tr>
-									<td>
-										View by Brand / Category
-										<form action="<?php echo $location; ?>" method="POST">
-											<select name="brand_Name">
-												<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
-												<?php foreach ($result as $row): ?>
-													<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-												<?php endforeach ?>
-											</select>
-											<input type="submit" value="Filter" class="btn btn-success" name="submit">
-										</form>
-
-										<form action="<?php echo $location; ?>" method="POST">
-											<select name="category_Name">
-												<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
-												<?php foreach ($result2 as $row2): ?>
-													<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
-												<?php endforeach ?>
-											</select>
-											<input type="submit" value="Filter" class="btn btn-success" name="submit">
-										</form>
-									</td>		
-								</tr>
-							</table>
+									<tr>
+										<td>
+											View by Brand
+											<form action="<?php echo $location; ?>" method="POST">
+												<select name="brand_Name">
+													<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
+													<?php foreach ($result as $row): ?>
+														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+													<?php endforeach ?>
+												</select>
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+											</form>
+										</td>	
+										
+										<td>
+											View by Category
+											<form action="<?php echo $location; ?>" method="POST">
+												<select name="category_Name">
+													<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
+													<?php foreach ($result2 as $row2): ?>
+														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+													<?php endforeach ?>
+												</select>
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+											</form>
+										</td>
+									</tr>
+								</table>
 								
-							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<button type="submit" name="adjust" class="btn btn-default" id="backButton">
+									UPDATE
+								</button>
+								
+								<hr>
+								<br>
+								<br>
+								
+								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 									<div id="myTable_length" class="dataTables_length">
 										<div id="myTable_filter" class="dataTables_filter">
 										</div>
 									</div>
 								</div>
 								
-							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>
-									<tr id="centerData">
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Product ID</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Product Description</div>							
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Brand</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Category</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Unit</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Last physical Qty</div>
-										</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Remarks</div>
-										</th>		
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Physical Count</div>
-										</th>	
-									</tr>
-								</thead>
-								<tbody>
-									<form action="" method="POST">
-										<button type="submit" name="adjust" class="btn btn-default" id="edBtn">
-											UPDATE
-										</button>
-										
-										<?php
-											foreach ($result3 as $item):
-											$proID = $item["prodID"];
-										?>				
-											
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+									<thead>
 										<tr id="centerData">
-											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-											<td data-title="Unit"><?php echo $item["unitType"];?></td>
-											<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
-											<td data-title="Remarks">
-												<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
-											</td>
-											<td>
-												<input type="text" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-												<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
-											</td>				
-										</tr>	
-										<?php
-											endforeach;
-										?>
-									</form>
-								</tbody>	
-							</table>	
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Product ID</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Product Description</div>							
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Brand</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Category</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Unit</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Last Physical Qty</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Remarks</div>
+											</th>		
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Physical Count</div>
+											</th>	
+										</tr>
+									</thead>
+									
+									<tbody>
+										<form action="" method="POST">
+										
+											<?php
+												foreach ($result3 as $item):
+												$proID = $item["prodID"];
+											?>
+												
+											<tr id="centerData">
+												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+												<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+												<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+												<td data-title="Unit"><?php echo $item["unitType"];?></td>
+												<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
+												
+												<td data-title="Remarks">
+													<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
+												</td>
+												<td>
+													<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
+													<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
+												</td>
+													
+											</tr>	
+											<?php
+												endforeach;
+											?>
+										</form>
+									</tbody>	
+								</table>	
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-					
-	<?php 
-		$productCounter=(isset($_REQUEST['thisProductID']) ? $_REQUEST['thisProductID'] : null);
-		
-		for ($index = 0; $index < count($productCounter); $index++) {
-			$quant=(isset($_REQUEST['adjustUpdate'][$index]) ? $_REQUEST['adjustUpdate'][$index] : null);
-			$thisProdID=(isset($_REQUEST['thisProductID'][$index]) ? $_REQUEST['thisProductID'][$index] : null);
-			$thisRemarks=(isset($_REQUEST['updateRemarks'][$index]) ? $_REQUEST['updateRemarks'][$index] : null);
+						
+		<?php 
+			$productCounter=(isset($_REQUEST['thisProductID']) ? $_REQUEST['thisProductID'] : null);
 			
-			if (isset($_POST["adjust"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-				$sql1 = "INSERT INTO archive(archiveDate, qty, totalIn, totalOut, beginningQty, endingQty, physicalQty, remarks, prodID)
-						SELECT invDate, qty, inQty, outQty, beginningQty, physicalQty, physicalQty, remarks, prodID FROM inventory
-						WHERE prodID = '$thisProdID'";
-				$conn->exec($sql1);
-			
-				$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE(), remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
-				$conn->exec($sql2);
-
-				$sql3 = "UPDATE inventory SET beginningQty=physicalQty WHERE prodID = '$thisProdID'";
-				$conn->exec($sql3);
-				$sql4 = "UPDATE archive SET endingQty=$quant WHERE prodID = '$thisProdID'";
-				$conn->exec($sql4);
-				$sql5 = "UPDATE archive SET physicalQty=$quant WHERE prodID = '$thisProdID'";
-				$conn->exec($sql5);
-				$sql6 = "UPDATE archive SET remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
-				$conn->exec($sql6);
+			for ($index = 0; $index < count($productCounter); $index++) {
+				$quant=(isset($_REQUEST['adjustUpdate'][$index]) ? $_REQUEST['adjustUpdate'][$index] : null);
+				$thisProdID=(isset($_REQUEST['thisProductID'][$index]) ? $_REQUEST['thisProductID'][$index] : null);
+				$thisRemarks=(isset($_REQUEST['updateRemarks'][$index]) ? $_REQUEST['updateRemarks'][$index] : null);
 				
-				echo "<meta http-equiv='refresh' content='0'>";
+				if (isset($_POST["adjust"])){
+				
+					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				
+					$sql1 = "INSERT INTO archive(archiveDate, qty, totalIn, totalOut, beginningQty, endingQty, physicalQty, remarks, prodID)
+							SELECT invDate, qty, inQty, outQty, beginningQty, physicalQty, physicalQty, remarks, prodID FROM inventory
+							WHERE prodID = '$thisProdID'";
+					$conn->exec($sql1);
+				
+					$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE(), remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
+					$conn->exec($sql2);
+
+					$sql3 = "UPDATE inventory SET beginningQty=physicalQty WHERE prodID = '$thisProdID'";
+					$conn->exec($sql3);
+					$sql4 = "UPDATE archive SET endingQty=$quant WHERE prodID = '$thisProdID'";
+					$conn->exec($sql4);
+					$sql5 = "UPDATE archive SET physicalQty=$quant WHERE prodID = '$thisProdID'";
+					$conn->exec($sql5);
+					$sql6 = "UPDATE archive SET remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
+					$conn->exec($sql6);
+					
+					echo "<meta http-equiv='refresh' content='0'>";
+				}
 			}
-		}
-	?>
+		?>
 	</body>
 </html>
