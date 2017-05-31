@@ -92,8 +92,7 @@
 			$supplierID = current($conn->query("SELECT purchaseorders.supID FROM purchaseorders INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.poNumber = '$varPO'")->fetch());
 			$supplierName = current($conn->query("SELECT supplier_name FROM suppliers WHERE supID = $supplierID")->fetch());
 		?>
-		
-<<<<<<< HEAD
+
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -201,87 +200,10 @@
 									<?php foreach ($res as $row): ?>
 										<option><?=$row["empFirstName"]?></option>
 									<?php endforeach ?>
-=======
-		<!-- Modal for New Incoming Entry Form -->
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Add Incoming Product</h4>
-		</div>
-		<div class="modal-body">
-			<form action="" method="POST">
-				<h3> User </h3>
-				<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-				
-				<h3>Product Order Number</h3>				
-				<input type="text" class="form-control" id="poNum" value="<?php echo $varPO; ?>" name="po" readonly>
-				
-				<h3>Receipt No.</h3> 
-				<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno">
-				
-				<h3>Receipt Date</h3> 
-				<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
-				
-				<h3>Supplier</h3> 
-					<div class="ui-widget">
-						<input id="supplier" name="supplier">
-					</div>
-										
-				<h3>Received By</h3>
-				<?php
-					$query = $conn->prepare("SELECT empFirstName FROM employee ");
-					$query->execute();
-					$res = $query->fetchAll();
-				?>
-									
-				<select class="form-control" id="addEmpl" name="emp">
-					<?php foreach ($res as $row): ?>
-						<option><?=$row["empFirstName"]?></option>
-					<?php endforeach ?>
-				</select> 
-				
-				<br>
-					
-				<h5>Product/s</h5>
-				<table class="table table-striped" id="dataTable" name="chk">				
-					<tbody>
-						<tr>
-							<td>
-								Product Name
-							</td>
-							<td>
-								Quantity
-							</td>
-							<td>
-								Status
-							</td>
-							<td>
-								Type
-							</td>
-							<td>
-								Remarks
-							</td>
-						</tr>
-						<?php foreach ($result as $row): ?>
-						<tr id="thisRow">
-							<td>	
-								<div class="ui-widget">
-									<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
-								</div>
-							</td>
-									
-							<td>
-								<input type="number" min="1" class="form-control" id="addIncQty" value="<?php echo $row["qtyOrder"]; ?>" placeholder="<?php echo $row["qtyOrder"]; ?>" name="incQty[]">
-							</td>
-							
-							<td>
-								<select class="form-control"  name="inStatus[]">
-									<option>Complete</option>
-									<option>Partial</option>
->>>>>>> 8a454d6125fb3ee1b507f916cacd923083719f38
 								</select> 
-								
-								<br>
 									
+								<br>
+
 								<h5>Product/s</h5>
 								<table class="table table-striped" id="dataTable" name="chk">				
 									<tbody>
@@ -329,9 +251,10 @@
 									<br>
 									<br>
 									<span>
-									<a href="../prodDeliveries.php">
-									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a></span>
+										<a href="../prodDeliveries.php">
+											<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+										</a>
+									</span>
 									<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
 								</div>
 							</form> 								
