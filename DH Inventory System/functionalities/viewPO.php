@@ -7,6 +7,21 @@
 		
 		<title>View Purchase Order</title>
 
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) && $role!="admin") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
+
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
@@ -82,20 +97,6 @@
             } );		
 		</script>
 		
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
-		
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
 	
 	<body>
@@ -107,8 +108,10 @@
 									WHERE poNumber = '$incID'
 									ORDER BY poID DESC");
 			$query->execute();
-			$result = $query->fetchAll();	
+			$result = $query->fetchAll();
+
 			$receiptNum = current($conn->query("SELECT purchaseorders.poNumber FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
+			$date = current($conn->query("SELECT purchaseorders.poDate FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
 			$supplier = current($conn->query("SELECT DISTINCT suppliers.supplier_name FROM purchaseorders INNER JOIN product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.poNumber = '$incID'")->fetch());
 		?>
 
@@ -177,6 +180,7 @@
 								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 							</ul>
 						</li>
+						<li><a href="../backup.php"><i class="glyphicon glyphicon-cog"></i> System Settings</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
@@ -222,12 +226,16 @@
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td>
-										Receipt No:
+										Purchase Order No:
 										<?php echo $receiptNum;?>
 									</td>
 									<td>
+										Purchase Order Date:
+										<?php echo $date;?>
+									</td>
+									<td>
 										Supplier: 
-										<?php echo $supplier ?>
+										<?php echo $supplier; ?>
 									</td>
 								</tr>									
 							</table>
@@ -238,8 +246,6 @@
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
 									</tr>
@@ -251,9 +257,7 @@
 											$po = $item["poID"];
 									?>
 									
-									<tr id="centerData">
-										<td data-title="PO Number"><?php echo $item["poNumber"];?></td>
-										<td data-title="PO Date"><?php echo $item["poDate"]; ?></td>	
+									<tr id="centerData">	
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
 									</tr>	

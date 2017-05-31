@@ -7600,7 +7600,7 @@ border: none;
 #addPO, #addBranch, #addLName, #addFName,
 #addMName, #addEName, #addBrandID, #addBrandName,
 #addCategoryID, #addCategoryName, #supName, #supContact,
-#supLoc{
+#supLoc, #poNum{
   width: 50%;
   margin-left: auto;
   margin-right: auto;
@@ -7620,6 +7620,15 @@ border: none;
 	width:50%;
 	margin-left: 25%;
 	margin-right: auto;
+}
+
+#addInQty{
+	width: 30%;
+margin-left: 60%;
+}
+
+#addInProd{
+	width: 150%;
 }
 
 #addEmpl{

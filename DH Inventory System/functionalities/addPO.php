@@ -32,9 +32,7 @@
 				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supID, prodID, userID, status)
 				VALUES ('$qty',CURDATE(),'$prod','$sup3','$prod3','$userID', 'Incomplete')";
 				$result = $conn->query($sql); 
-
 			}
-
 		$url='purchaseOrder.php';
 
 		echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
