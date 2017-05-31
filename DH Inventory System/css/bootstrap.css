@@ -7625,13 +7625,13 @@ border: none;
 	margin-right: auto;
 }
 
-#addInQty{
-	width: 30%;
-margin-left: 60%;
+#addIncQty{
+	width: 10%;
+
 }
 
 #addInProd{
-	width: 150%;
+	width: 100%;
 }
 
 #addEmpl{

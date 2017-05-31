@@ -222,8 +222,8 @@
 								<table class="table">	
 									<tr>
 										<td>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Undelivered/Incomplete PO</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add PO</button>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Incomplete PO</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 										</td>
 										<td>
@@ -231,7 +231,7 @@
 												<label>View Previous Entries</label>
 												<div class="form-group">
 													<select name="dateMonthName" class="form-control">
-														<option value="<?php echo $sortMonth; ?>" SELECTED>SELECTED: <?php echo $sortMonth; ?></option>
+														<option value="<?php echo $sortMonth; ?>" SELECTED>MONTH: <?php echo $sortMonth; ?></option>
 														<?php foreach ($result2 as $row): ?>
 															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
 														<?php endforeach ?>
@@ -239,7 +239,7 @@
 												</div>
 												<div class="form-group">
 													<select name="dateYearName" class="form-control">
-														<option value="<?php echo $sortYear; ?>" SELECTED>SELECTED: <?php echo $sortYear; ?></option>
+														<option value="<?php echo $sortYear; ?>" SELECTED>YEAR: <?php echo $sortYear; ?></option>
 														<?php foreach ($result3 as $row): ?>
 															<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
 														<?php endforeach ?>
@@ -370,7 +370,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">Activity Log - Edits</h4>
+												<h4 class="modal-title">Edit Log - Previous Content</h4>
 											</div>
 											<div class="modal-body">
 												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
@@ -441,7 +441,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">Edit Activity Log</h4>
+												<h4 class="modal-title">Undelivered/Incomplete PO</h4>
 											</div>
 											<div class="modal-body">
 												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">

@@ -223,14 +223,14 @@
 								<tr>
 									<td>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Issued Products</button>
-										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>										
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>										
 									</td>
 									<td>	
 										<form class="form-inline" action="<?php echo $location; ?>" method="post">
 											<label>View Previous Entries</label>
 											<div class="form-group">
 												<select name="dateMonthName" class="form-control">
-													<option value="<?php echo $sortMonth; ?>" SELECTED>SELECTED: <?php echo $sortMonth; ?></option>
+													<option value="<?php echo $sortMonth; ?>" SELECTED>MONTH: <?php echo $sortMonth; ?></option>
 													<?php foreach ($result2 as $row): ?>
 														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
 													<?php endforeach ?>
@@ -238,7 +238,7 @@
 											</div>
 											<div class="form-group">
 												<select name="dateYearName" class="form-control">
-													<option value="<?php echo $sortYear; ?>" SELECTED>SELECTED: <?php echo $sortYear; ?></option>
+													<option value="<?php echo $sortYear; ?>" SELECTED>YEAR: <?php echo $sortYear; ?></option>
 													<?php foreach ($result3 as $row): ?>
 														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
 													<?php endforeach ?>
@@ -341,7 +341,7 @@
 												</select> 
 												<br>
 														
-												<h5 id="multipleProd">Product/s</h5>
+												<h5 id="prodHeader">Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>
 														<tr>
@@ -400,14 +400,14 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Edit Activity Log</h4>
+											<h4 class="modal-title">Edit Log - Previous Entries</h4>
 										</div>
 										<div class="modal-body">
 											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editOutgoing.outEditDate, editOutgoing.outQty, editOutgoing.outDate, editOutgoing.receiptNo, product.prodName, editOutgoing.userID from editoutgoing INNER JOIN product ON editoutgoing.prodID = product.prodID");
+													$query = $conn->prepare("SELECT editOutgoing.outEditDate, editOutgoing.outQty, editOutgoing.receiptNo, product.prodName, editOutgoing.userID from editoutgoing INNER JOIN product ON editoutgoing.prodID = product.prodID");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -418,16 +418,13 @@
 															<div id="tabHead">Date Edited</div>
 														</th>
 														<th>
-															<div id="tabHead">Quantity</div>
-														</th>
-														<th>
-															<div id="tabHead">Outgoing Date</div>
-														</th>
-														<th>
 															<div id="tabHead">Receipt No</div>
 														</th>
 														<th>
 															<div id="tabHead">Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Quantity</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -443,10 +440,9 @@
 													?>
 													<tr id="centerData">	
 														<td data-title="Edit Date"><?php echo $item["outEditDate"]; ?></td>
-														<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
-														<td data-title="Outgoing Date"><?php echo $item["outDate"]; ?></td>
 														<td data-title="Receipt No"><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
 													</tr>
 													<?php

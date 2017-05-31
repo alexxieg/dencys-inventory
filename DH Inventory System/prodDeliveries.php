@@ -232,7 +232,7 @@
 											<label>View Previous Entries</label>
 											<div class="form-group">
 												<select name="dateMonthName" class="form-control">
-													<option value="<?php echo $sortMonth; ?>" SELECTED>SELECTED: <?php echo $sortMonth; ?></option>
+													<option value="<?php echo $sortMonth; ?>" SELECTED>MONTH: <?php echo $sortMonth; ?></option>
 													<?php foreach ($result2 as $row): ?>
 														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
 													<?php endforeach ?>
@@ -240,7 +240,7 @@
 											</div>
 											<div class="form-group">
 												<select name="dateYearName" class="form-control">
-													<option value="<?php echo $sortYear; ?>" SELECTED>SELECTED: <?php echo $sortYear; ?></option>
+													<option value="<?php echo $sortYear; ?>" SELECTED>YEAR: <?php echo $sortYear; ?></option>
 													<?php foreach ($result3 as $row): ?>
 														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
 													<?php endforeach ?>
@@ -264,7 +264,7 @@
 							</div>
 							<br> 
 							
-							<!-- Table Display for Incoming -->
+							<!-- Table Display for Product Deliveries -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
@@ -308,7 +308,7 @@
 								</tbody>	
 							</table>
 
-							<!-- Modal for New Incoming Entry Form -->
+							<!-- Modal for New Product Delivery Form -->
 							<div class="modal fade" id="myModal" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -318,7 +318,7 @@
 										</div>
 										<div class="modal-body">
 											<form action="functionalities/addProdDeliveries.php" method="GET" onsubmit="return validateForm()">
-												<h3>Product Order Number</h3>
+												<h3>Purchase Order Number</h3>
 												<?php
 													$query = $conn->prepare("SELECT DISTINCT poNumber, poDate, suppliers.supplier_name FROM purchaseorders
 																			JOIN suppliers ON suppliers.supID = purchaseorders.supID WHERE purchaseorders.status!='Complete'");
@@ -329,7 +329,7 @@
 																	
 												<select class="form-control" id="addEmpl" name="po">
 													<?php foreach ($res as $row): ?>
-														<option value="<?=$row["poNumber"]?>">Product Number: <?=$row["poNumber"]?> - <?=$row["poDate"]?> - <?=$row["supplier_name"]?></option>
+														<option value="<?=$row["poNumber"]?>">Purchase Order Number: <?=$row["poNumber"]?> - <?=$row["poDate"]?> - <?=$row["supplier_name"]?></option>
 													<?php endforeach ?>
 												</select>
 												
@@ -441,20 +441,20 @@
 							</div> 
 							<!-- End of Modal -->
 
-									<!-- Modal - Activity Log -->
+							<!-- Modal - Activity Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Edit Activity Log</h4>
+											<h4 class="modal-title">Edit Log - Previous Content</h4>
 										</div>
 										<div class="modal-body">
 											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editIncoming.inEditDate, editIncoming.inQty, editIncoming.inDate, editIncoming.receiptNo, editIncoming.receiptDate, editIncoming.inRemarks, editIncoming.status, editIncoming.poNumber, product.prodName, editIncoming.userID from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
+													$query = $conn->prepare("SELECT editIncoming.inEditDate, editIncoming.inQty, editIncoming.receiptNo, editIncoming.receiptDate, editIncoming.inRemarks, editIncoming.status, editIncoming.poNumber, product.prodName, editIncoming.userID from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -465,10 +465,7 @@
 															<div id="tabHead">Date Edited</div>
 														</th>
 														<th>
-															<div id="tabHead">Incoming Quantity</div>
-														</th>
-														<th>
-															<div id="tabHead">Incoming Date</div>
+															<div id="tabHead">PO Number</div>
 														</th>
 														<th>
 															<div id="tabHead">Receipt No</div>
@@ -477,16 +474,16 @@
 															<div id="tabHead">Receipt Date</div>
 														</th>
 														<th>
+															<div id="tabHead">Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Incoming Quantity</div>
+														</th>
+														<th>
 															<div id="tabHead">Remarks</div>
 														</th>
 														<th>
 															<div id="tabHead">Status</div>
-														</th>
-														<th>
-															<div id="tabHead">PO Number</div>
-														</th>
-														<th>
-															<div id="tabHead">Product Description</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -502,14 +499,13 @@
 													?>
 													<tr id="centerData">
 														<td data-title="Edit Date"><?php echo $item["inEditDate"]; ?></td>
-														<td data-title="Edit Date"><?php echo $item["inQty"]; ?></td>
-														<td data-title="Incoming Date"><?php echo $item["inDate"]; ?></td>
+														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
 														<td data-title="Receipt Number"><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
 														<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 														<td data-title="Status"><?php echo $item["status"]; ?></td>
-														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
-														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
 													</tr>
 													<?php
@@ -527,6 +523,7 @@
 										
 								</div>
 							</div>
+							<!-- End of Modal -->
 								
 						</div>
 					</div>		  

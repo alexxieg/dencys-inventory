@@ -104,6 +104,13 @@
 		<!-- Retrieve Incoming Data -->
 		<?php include('functionalities/fetchIncoming.php'); ?>
 		
+		<!-- Sorting Function -->
+		<?php 
+			$sortMonth = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
+			$sortYear = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
+			$location =  $_SERVER['REQUEST_URI']; 
+		?>
+		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -184,31 +191,32 @@
 										<td>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product Delivery</button>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 										</td>
 										<td>
-											<div class="col-sm-7 pull-right filter">
-												<form class="form-inline" action="" method="post">
-													<label>View Previous Entries</label>
-													<div class="form-group">
-														<select name="dateMonthName" class="form-control">
-															<?php foreach ($result2 as $row): ?>
-																<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>
-													<div class="form-group">
-														<select name="dateYearName" class="form-control">
-															<?php foreach ($result3 as $row): ?>
-																<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-															<?php endforeach ?>
-														</select>
-													</div>	
-													<div class="form-group">
-														<input type="submit" value="View" class="btn btn-success" name="submit">
-													</div>
-												</form>	
+										<form class="form-inline" action="<?php echo $location; ?>" method="post">
+											<label>View Previous Entries</label>
+											<div class="form-group">
+												<select name="dateMonthName" class="form-control">
+													<option value="<?php echo $sortMonth; ?>" SELECTED>MONTH: <?php echo $sortMonth; ?></option>
+													<?php foreach ($result2 as $row): ?>
+														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>
+											<div class="form-group">
+												<select name="dateYearName" class="form-control">
+													<option value="<?php echo $sortYear; ?>" SELECTED>YEAR: <?php echo $sortYear; ?></option>
+													<?php foreach ($result3 as $row): ?>
+														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+													<?php endforeach ?>
+												</select>
 											</div>	
-										</td>
+											<div class="form-group">
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="filter">
+											</div>
+										</form>			
+									</td>
 									</tr>
 								</table>
 							</div>
@@ -221,7 +229,7 @@
 							</div>
 							<br> 
 							
-							<!-- Table Display for Incoming -->
+							<!-- Table Display for Product Deliveries -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
@@ -263,101 +271,34 @@
 								</tbody>	
 							</table>
 
-							<!-- Modal for New Incoming Entry Form -->
+							<!-- Modal for New Product Delivery Form -->
 							<div class="modal fade" id="myModal" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add Incoming Product</h4>
+											<h4 class="modal-title">Add Product Delivery</h4>
 										</div>
 										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()">
-												<h3>User</h3>
-												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												
-												<h3>Receipt No.</h3> 
-												<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno"><br>
-												
-												<h3>Receipt Date</h3> 
-												<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate"><br>
-												
-												<h3>Supplier</h3> 
+											<form action="functionalities/userAddProdDeliveries.php" method="GET" onsubmit="return validateForm()">
+												<h3>Purchase Order Number</h3>
 												<?php
-													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
+													$query = $conn->prepare("SELECT DISTINCT poNumber, poDate, suppliers.supplier_name FROM purchaseorders
+																			JOIN suppliers ON suppliers.supID = purchaseorders.supID WHERE purchaseorders.status!='Complete'");
 													$query->execute();
-													$res = $query->fetchAll();
-												?>
-											
-												<select class="form-control" id="addSupplier" name="supplier">
-													<?php foreach ($res as $row): ?>
-														<option><?=$row["supplier_name"]?></option>
-													<?php endforeach ?>
-												</select> 
-												<br>
-																		
-												<h3>Received By</h3>
-												<?php
-													$query = $conn->prepare("SELECT empFirstName FROM employee ");
 													$query->execute();
 													$res = $query->fetchAll();
 												?>
 																	
-												<select class="form-control" id="addEmpl" name="emp">
+												<select class="form-control" id="addEmpl" name="po">
 													<?php foreach ($res as $row): ?>
-														<option><?=$row["empFirstName"]?></option>
+														<option value="<?=$row["poNumber"]?>">Purchase Order Number: <?=$row["poNumber"]?> - <?=$row["poDate"]?> - <?=$row["supplier_name"]?></option>
 													<?php endforeach ?>
-												</select> 
-												
-												<br>
-													
-												<h5>Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
-													<tbody>
-														<tr>
-															<td><input type="checkbox" name="chk"></TD>
-															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-															<td>	
-																<?php
-																	$query = $conn->prepare("SELECT prodName FROM product ");
-																	$query->execute();
-																	$res = $query->fetchAll();
-																?>
-														
-																<select class="form-control" id="addItem" name="prodItem[]">
-																	<?php foreach ($res as $row): ?>
-																			<option><?=$row["prodName"]?></option>
-																<?php endforeach ?>
-																</select> 
-															</td>
-																	
-															<td>
-																<input type="number" min="1" class="form-control" id ="addIncQty" placeholder="Quantity" name="incQty[]">
-															</td>
-															
-															<td>
-																<select class="form-control" id="addInStatus" name="inStatus[]">
-																	<option>Complete</option>
-																	<option>Partial</option>
-																</select> 
-															</td>
-																
-															<td>
-																<input type="text" class="form-control" id="addRem" placeholder="Remarks" name="inRemarks[]">
-															</td>
-														</tr>
-													</tbody>
-												</table>
-												
-												<br>
+												</select>
 												
 												<div class="modFoot">
-													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-													<br>
-													<br>
 													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-													<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
+													<span><input type="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
 												</div>
 											</form> 	
 										
@@ -461,7 +402,91 @@
 									</div>
 								</div>
 							</div> 
-							<!-- End of Modal -->			
+							<!-- End of Modal -->	
+
+							<!-- Modal - Activity Log -->
+							<div class="modal fade" id="activityLog" role="dialog">
+								<div class="modal-dialog modal-xl">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Edit Log - Previous Content</h4>
+										</div>
+										<div class="modal-body">
+											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+											
+												<!-- Retrieve Category Data -->
+												<?php
+													$query = $conn->prepare("SELECT editIncoming.inEditDate, editIncoming.inQty, editIncoming.inDate, editIncoming.receiptNo, editIncoming.receiptDate, editIncoming.inRemarks, editIncoming.status, editIncoming.poNumber, product.prodName, editIncoming.userID from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
+													$query->execute();
+													$result1 = $query->fetchAll();
+												?>
+												
+												<thead>
+													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Edited</div>
+														</th>
+														<th>
+															<div id="tabHead">PO Number</div>
+														</th>
+														<th>
+															<div id="tabHead">Receipt No</div>
+														</th>
+														<th>
+															<div id="tabHead">Receipt Date</div>
+														</th>
+														<th>
+															<div id="tabHead">Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Incoming Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Remarks</div>
+														</th>
+														<th>
+															<div id="tabHead">Status</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited By</div>
+														</th>
+													</tr>
+												</thead>
+												
+												<tbody>						
+														
+													<?php
+														foreach ($result1 as $item):
+														$incID = $item["receiptNo"];
+													?>
+													<tr id="centerData">
+														<td data-title="Edit Date"><?php echo $item["inEditDate"]; ?></td>
+														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
+														<td data-title="Receipt Number"><?php echo $item["receiptNo"]; ?></td>
+														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Edit Date"><?php echo $item["inQty"]; ?></td>
+														<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
+														<td data-title="Status"><?php echo $item["status"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+													</tr>
+													<?php
+														endforeach;
+													?>
+												
+												</tbody>
+											</table>
+											
+										</div>
+									</div>
+										
+									<div class="modal-footer">
+									</div>
+										
+								</div>
+							</div>
+							<!-- End of Modal -->							
 								
 						</div>
 					</div>		  
