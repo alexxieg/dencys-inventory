@@ -159,6 +159,9 @@
 							<br>
 							<div id="content">
 								<form action="" method="POST" onsubmit="return validateForm()">
+									<h3>User</h3>
+									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+									
 									<h3>Receipt No.</h3> 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno" Readonly>
 											
@@ -194,12 +197,13 @@
 									<h5>Product/s</h5>
 									<table class="table table-striped" name="chk">
 										<tbody>
-											<?php foreach ($resul as $row): ?>
 											<tr>
-												<td><input type="checkbox" name="chk"></TD>
-													<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-													
-												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />
+												<td>Product Description</td>
+												<td>Quantity</td>
+											</tr>
+											<?php foreach ($resul as $row): ?>
+											
+											<tr>												
 														
 												<td>	
 													<div class="ui-widget">
@@ -210,9 +214,6 @@
 												<td>
 													<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
 												</td>
-												<td>
-													<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												</td> 
 											</tr>
 											<?php endforeach ?>
 										</tbody>
