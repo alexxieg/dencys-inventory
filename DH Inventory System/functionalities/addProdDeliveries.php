@@ -186,7 +186,7 @@
 								
 								<h3>Supplier</h3> 
 									<div class="ui-widget">
-										<input id="supplierName" name="supplier">
+										<input id="supplierName" name="supplier" value="<?php echo $supplierName;?>">
 									</div>
 														
 								<h3>Received By</h3>
