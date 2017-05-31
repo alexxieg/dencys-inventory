@@ -276,7 +276,7 @@
 											
 												<!-- Retrieve Branch Data -->
 												<?php
-													$query = $conn->prepare("SELECT branchID, branchName, location FROM branch WHERE status = 'Inactive' ");
+													$query = $conn->prepare("SELECT branchID, branchName, location, archiveDate FROM branch WHERE status = 'Inactive' ");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>

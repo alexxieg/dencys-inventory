@@ -286,7 +286,7 @@
 												
 													<!-- Retrieve Supplier Data -->
 													<?php
-														$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Inactive'");
+														$query = $conn->prepare("SELECT supID, supplier_name, archiveDate FROM suppliers WHERE status = 'Inactive'");
 														$query->execute();
 														$result1 = $query->fetchAll();
 													?>
@@ -294,7 +294,7 @@
 													<thead>
 														<tr id="centerData">
 															<th>
-																<div id="tabHead">Supplier ID</div>
+																<div id="tabHead">Date Archived</div>
 															</th>
 															<th>
 																<div id="tabHead">Supplier Name</div>
@@ -312,7 +312,7 @@
 														?>
 														
 														<tr id="centerData">
-															<td data-title="Employee ID"><?php echo $item["supID"]; ?></td>
+															<td data-title="Date Archived"><?php echo $item["archiveDate"]; ?></td>
 															<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
 															<td>										
 																<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
@@ -350,7 +350,7 @@
 												
 													<!-- Retrieve Supplier Data -->
 													<?php
-														$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Blacklisted'");
+														$query = $conn->prepare("SELECT supID, supplier_name, archiveDate FROM suppliers WHERE status = 'Blacklisted'");
 														$query->execute();
 														$result1 = $query->fetchAll();
 													?>
@@ -358,7 +358,7 @@
 													<thead>
 														<tr id="centerData">
 															<th>
-																<div id="tabHead">Supplier ID</div>
+																<div id="tabHead">Date Blacklisted</div>
 															</th>
 															<th>
 																<div id="tabHead">Supplier Name</div>
@@ -376,7 +376,7 @@
 														?>
 														
 														<tr id="centerData">
-															<td data-title="Employee ID"><?php echo $item["supID"]; ?></td>
+															<td data-title="Date Blacklisted"><?php echo $item["archiveDate"]; ?></td>
 															<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
 															<td>										
 																<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
