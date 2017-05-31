@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Purchase Orders</title>
+
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 	
@@ -16,11 +22,6 @@
 			$user_row = $session_query->fetch();
 		?>
 		
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<title>Purchase Orders</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,6 +41,11 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui.js"></script>
+
 		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
@@ -96,6 +102,25 @@
                 } );
             } );		
 		</script>
+
+		<script>
+		  $(function() {
+			$('.prodItem').autocomplete({
+				minLength:2,
+				source: "search.php"
+			});
+		  });
+		</script>
+		
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "searchSup.php"
+			});
+		  });
+
+		</script>
 			
 	</head>
 
@@ -103,6 +128,13 @@
 		<!-- Retrieve Incoming Data -->
 		<?php include('functionalities/fetchPurchaseOrders.php');?>
 		
+		<!-- Sorting Function -->
+		<?php 
+			$sortMonth = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
+			$sortYear = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
+			$location =  $_SERVER['REQUEST_URI']; 
+		?>
+
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -175,41 +207,43 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
-						<h1 id="headers">PURCHASE ORDERS</h1>
+							<h1 id="headers">PURCHASE ORDERS</h1>
 							<table class="table">	
-									<tr>
-										<td>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
-										</td>
-										<td>
-										<div class="col-sm-7 pull-right POfilter">
-											<form class="form-inline" action="" method="post">
-												<label>View Previous Entries</label>
-												<div class="form-group">
-													<select name="dateMonthName" class="form-control">
-														<?php foreach ($result2 as $row): ?>
-															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
-														<?php endforeach ?>
-														</select>
-												</div>
-												<div class="form-group">
-													<select name="dateYearName" class="form-control">
-														<?php foreach ($result3 as $row): ?>
-															<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>	
-												<div class="form-group">
-													<input type="submit" value="View" class="btn btn-success" name="submit">
-												</div>
-											</form>	
-										</div>	
-									 </td>
-									</tr>												
-								  </table>
-								</div>
+								<tr>
+									<td>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Incomplete PO</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
+									</td>
+									<td>		
+										<form class="form-inline" action="<?php echo $location; ?>" method="post">
+											<label>View Previous Entries</label>
+											<div class="form-group">
+												<select name="dateMonthName" class="form-control">
+													<option value="<?php echo $sortMonth; ?>" SELECTED>SELECTED: <?php echo $sortMonth; ?></option>
+													<?php foreach ($result2 as $row): ?>
+														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>
+											<div class="form-group">
+												<select name="dateYearName" class="form-control">
+													<option value="<?php echo $sortYear; ?>" SELECTED>SELECTED: <?php echo $sortYear; ?></option>
+													<?php foreach ($result3 as $row): ?>
+														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>	
+											<div class="form-group">
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="filter">
+											</div>
+										</form>		
+									</td>
+								</tr>												
+							</table>
+						</div>
 							
+						<div class="pages">
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
@@ -265,55 +299,45 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-												<h5> User </h5>
+												<h3>User</h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												
-												<h5>Supplier</h5> 
-												<?php
-													$query = $conn->prepare("SELECT supplier_name FROM suppliers");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-											
-												<select class="form-control" id="addSupplier" name="supplier">
-													<?php foreach ($res as $row): ?>
-														<option><?=$row["supplier_name"]?></option>
-													<?php endforeach ?>
-												</select> 
+																																					
+												<h3>Supplier</h3>  
+												<div class="ui-widget">
+													<input id="addSupplier" name="supplier" placeholder="Supplier">
+												</div>
+		
 												<br>
-													
-												<h5>Product/s</h5>
+
+												<h5 id="prodHeader">Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">				
 													<tbody>
 														<tr>
-															<td><input type="checkbox" name="chk"></TD>
-															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-															<td>	
-																<?php
-																	$query = $conn->prepare("SELECT prodName FROM product ");
-																	$query->execute();
-																	$res = $query->fetchAll();
-																?>
-														
-																<select class="form-control" id="addItem" name="prodItem[]">
-																	<?php foreach ($res as $row): ?>
-																			<option><?=$row["prodName"]?></option>
-																<?php endforeach ?>
-																</select> 
+															<td>
+																Product Name
 															</td>
-																	
+															<td>
+																Quantity
+															</td>
+														</tr>
+														<tr>
+															<td>	
+																<div class="ui-widget">
+																	<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name">
+																</div>
+															</td>
+																		
 															<td>
 																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
-															</td>															
+															</td>
 														</tr>
 													</tbody>
 												</table>
-												
+														
 												<br>
-												
+													
 												<div class="modFoot">
 													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 													<br>
 													<br>
 													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
@@ -329,76 +353,76 @@
 							</div> 
 							<!-- End of Modal -->
 
-								<!-- Modal - Activity Log -->
-								<div class="modal fade" id="activityLog" role="dialog">
-									<div class="modal-dialog modal-xl">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">Edit Activity Log</h4>
-											</div>
-											<div class="modal-body">
-												<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+							<!-- Modal - Activity Log -->
+							<div class="modal fade" id="activityLog" role="dialog">
+								<div class="modal-dialog modal-xl">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Edit Activity Log</h4>
+										</div>
+										<div class="modal-body">
+											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+											
+												<!-- Retrieve Category Data -->
+												<?php
+													$query = $conn->prepare("SELECT editPO.poEditDate, editPO.poNumber, editPO.poDate, editPO.qtyOrder, product.prodName, editPO.userID from editpo INNER JOIN product ON editpo.prodID = product.prodID");
+													$query->execute();
+													$result1 = $query->fetchAll();
+												?>
 												
-													<!-- Retrieve Category Data -->
+												<thead>
+													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Edited</div>
+														</th>
+														<th>
+															<div id="tabHead">PO Number</div>
+														</th>
+														<th>
+															<div id="tabHead">PO Date</div>
+														</th>
+														<th>
+															<div id="tabHead">Quantity Order</div>
+														</th>
+														<th>
+															<div id="tabHead">Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited By</div>
+														</th>
+													</tr>
+												</thead>
+												
+												<tbody>						
+														
 													<?php
-														$query = $conn->prepare("SELECT editPO.poEditDate, editPO.poNumber, editPO.poDate, editPO.qtyOrder, product.prodName, editPO.userID from editpo INNER JOIN product ON editpo.prodID = product.prodID");
-														$query->execute();
-														$result1 = $query->fetchAll();
+														foreach ($result1 as $item):
+														$incID = $item["poNumber"];
 													?>
-													
-													<thead>
-														<tr id="centerData">
-															<th>
-																<div id="tabHead">Date Edited</div>
-															</th>
-															<th>
-																<div id="tabHead">PO Number</div>
-															</th>
-															<th>
-																<div id="tabHead">PO Date</div>
-															</th>
-															<th>
-																<div id="tabHead">Quantity Order</div>
-															</th>
-															<th>
-																<div id="tabHead">Product Description</div>
-															</th>
-															<th>
-																<div id="tabHead">Edited By</div>
-															</th>
-														</tr>
-													</thead>
-													
-													<tbody>						
-															
-														<?php
-															foreach ($result1 as $item):
-															$incID = $item["poNumber"];
-														?>
-														<tr id="centerData">	
-															<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
-															<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
-															<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
-															<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
-															<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
-															<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
-														</tr>
-														<?php
-															endforeach;
-														?>
-													
-													</tbody>
-												</table>
+													<tr id="centerData">	
+														<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
+														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
+														<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
+														<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+													</tr>
+													<?php
+														endforeach;
+													?>
 												
-											</div>
-										</div>
+												</tbody>
+											</table>
 											
-										<div class="modal-footer">
 										</div>
-											
 									</div>
+										
+									<div class="modal-footer">
+									</div>
+										
 								</div>
+							</div>
 							
 						</div>
 					</div>		  

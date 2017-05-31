@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head>		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>View Purchase Order</title>
+
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 		
@@ -15,12 +21,6 @@
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
 		?>
-		
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<title>View Purchase Order</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -107,7 +107,9 @@
 									WHERE poNumber = '$incID'
 									ORDER BY poID DESC");
 			$query->execute();
-			$result = $query->fetchAll();	
+			$result = $query->fetchAll();
+
+			$date = current($conn->query("SELECT purchaseorders.poDate FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
 			$receiptNum = current($conn->query("SELECT purchaseorders.poNumber FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
 			$supplier = current($conn->query("SELECT DISTINCT suppliers.supplier_name FROM purchaseorders INNER JOIN product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.poNumber = '$incID'")->fetch());
 		?>
@@ -206,8 +208,12 @@
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td>
-										Receipt No:
+										Purchase Order No:
 										<?php echo $receiptNum;?>
+									</td>
+									<td>
+										Purchase Order Date:
+										<?php echo $date;?>
 									</td>
 									<td>
 										Supplier: 
@@ -230,8 +236,6 @@
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 								<thead>	
 									<tr>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Quantity Ordered</th>
 									</tr>
@@ -243,9 +247,7 @@
 											$po = $item["poID"];
 									?>
 										
-									<tr id="centerData">
-										<td data-title="Product ID"><?php echo $item["poNumber"];?></td>
-										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
+									<tr id="centerData">	
 										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 										<td data-title="Quantity"><?php echo $item["qtyOrder"]; ?></td>
 									</tr>	
