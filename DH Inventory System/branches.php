@@ -242,11 +242,11 @@
 											<form action="" method="POST" onsubmit="return validateForm()">		
 									
 												<h3>Location</h3>
-												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="location"> <br>
-												<h3>Branch Name</h3>
-												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="branchName"> <br>
-												<br>
+												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="location">
 												
+												<h3>Branch Name</h3>
+												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="branchName">
+																								
 												<div class="modFoot">
 													<span>
 														<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
@@ -284,6 +284,9 @@
 												<thead>
 													<tr id="centerData">
 														<th>
+															<div id="tabHead">Date Archived</div>
+														</th>
+														<th>
 															<div id="tabHead">Branch ID</div>
 														</th>
 														<th>
@@ -302,13 +305,14 @@
 														$useThisID = $item["branchID"];
 													?>	
 													<tr id="centerData">
+														<td data-title="Date Archived"><?php echo $item["archiveDate"]; ?></td>
 														<td data-title="Brand ID"><?php echo $item["branchID"]; ?></td>
 														<td data-title="Brand Name"><?php echo $item["branchName"]; ?></td>
 														<td data-title="Location"><?php echo $item["location"]; ?></td>
 														<td>
 															<a href="functionalities/restoreBranch.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this account?');">
-																	Restore
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this branch?');">
+																	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
 														</td>	

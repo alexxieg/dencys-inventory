@@ -232,7 +232,7 @@
 											</a>
 											
 											<a href="functionalities/removeBrand.php?brandID=<?php echo $brandRemoveID; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
+												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to archive this brand?');">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
