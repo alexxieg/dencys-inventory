@@ -231,6 +231,7 @@
 												<label>View Previous Entries</label>
 												<div class="form-group">
 													<select name="dateMonthName" class="form-control">
+														<option value="<?php echo $sortMonth; ?>" SELECTED>SELECTED: <?php echo $sortMonth; ?></option>
 														<?php foreach ($result2 as $row): ?>
 															<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
 														<?php endforeach ?>
@@ -238,7 +239,7 @@
 												</div>
 												<div class="form-group">
 													<select name="dateYearName" class="form-control">
-
+														<option value="<?php echo $sortYear; ?>" SELECTED>SELECTED: <?php echo $sortYear; ?></option>
 														<?php foreach ($result3 as $row): ?>
 															<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
 														<?php endforeach ?>
