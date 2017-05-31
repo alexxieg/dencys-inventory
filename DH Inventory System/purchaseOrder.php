@@ -114,7 +114,7 @@
 		
 		<script>
 		  $(function() {
-			$('#supplier').autocomplete({
+			$('#addSupplier').autocomplete({
 				minLength:2,
 				source: "searchSup.php"
 			});
