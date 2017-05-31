@@ -171,7 +171,7 @@
 								</table>
 							</div>
 		
-							<form action="" method="POST">
+							<form action="" method="POST" onsubmit="return validateForm()">
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								

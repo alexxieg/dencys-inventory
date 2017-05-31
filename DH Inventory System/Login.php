@@ -11,7 +11,7 @@ include('dbcon.php');
 if (isset($_POST['username'])) {	
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	$query = $conn->prepare("Select * FROM users WHERE userName = '$username' AND status = 'Active'");
+	$query = $conn->prepare("Select * FROM users WHERE BINARY userName = BINARY '$username' AND status = 'Active'");
 	$count = $query->execute();
 	$row = $query->fetch();
 	if (password_verify($password, $row['password'])) {
