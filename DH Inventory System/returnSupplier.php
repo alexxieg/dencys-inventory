@@ -328,6 +328,21 @@
 												<table class="table table-striped" id="dataTable" name="chk">
 													<tbody>
 														<tr>
+															<td>
+															</td>
+															<td>
+															</td>
+															<td>
+																Product Name
+															</td>
+															<td>
+																Quantity
+															</td>
+															<td>
+																Remarks
+															</td>
+														</tr>
+														<tr>
 															<td><input type="checkbox" name="chk"></TD>
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	

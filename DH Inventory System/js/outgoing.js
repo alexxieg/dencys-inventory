@@ -67,14 +67,14 @@ function addRow(tableID) {
 	var table = document.getElementById(tableID);
 	var rowCount = table.rows.length;
 	var row = table.insertRow(rowCount);
-	var colCount = table.rows[0].cells.length;
+	var colCount = table.rows[1].cells.length;
 	for(var i=0; i<colCount; i++) {
 		var newcell = row.insertCell(i);
 		if(i==1){
-			newcell.innerHTML = (rowCount+1)
+			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
 		}
 		else{
-			newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
 		}
 		switch(newcell.childNodes[0].type) {
 			case "text":
