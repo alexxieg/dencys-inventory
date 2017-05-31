@@ -156,6 +156,11 @@
 											<td>
 												<button class="btn btn-success" id="backUpButton">BACKUP SYSTEM</button>
 												<button class="btn btn-success" id="backUpButton">RESTORE SYSTEM</button>
+												<form action="restoreBackup.php" method="post" enctype="multipart/form-data">
+												    Select image to upload:
+												    <input type="file" name="fileToUpload" id="fileToUpload">
+												    <input type="submit" value="Select Restore File" name="submit">
+												</form>
 											</td>
 										</tr>
 									</table>
