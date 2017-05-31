@@ -23,17 +23,29 @@ function validateForm() {
 	}else{
         document.getElementById('addRcptDate').style.borderColor = "blue";
 	}
-	if (document.getElementById('addIncQty').value == "") {
+	if (document.getElementById('supplierName').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Supplier.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('supplierName').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('supplierName').style.borderColor = "blue";
+	}
+	if (document.getElementById('addInQty').value == "") {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
-		document.getElementById('addIncQty').style.borderColor = "red";
+		document.getElementById('addInQty').style.borderColor = "red";
 		return false;
 	}else{
-        document.getElementById('addIncQty').style.borderColor = "blue";
+        document.getElementById('addInQty').style.borderColor = "blue";
 	}
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		
