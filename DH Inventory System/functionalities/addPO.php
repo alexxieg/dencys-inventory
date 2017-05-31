@@ -21,7 +21,7 @@
 				$userID = $_POST['userID'];		
 				$supName = $_POST['supplier'];			
 
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'");
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
@@ -32,7 +32,9 @@
 				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supID, prodID, userID, status)
 				VALUES ('$qty',CURDATE(),'$prod','$sup3','$prod3','$userID', 'Incomplete')";
 				$result = $conn->query($sql); 
+
 			}
+
 		$url='purchaseOrder.php';
 
 		echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
