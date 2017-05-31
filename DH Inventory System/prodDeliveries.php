@@ -218,7 +218,7 @@
 									<td>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product Delivery</button>
-										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Activity Log</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 									</td>
 									<td>
 										<form class="form-inline" action="" method="post">

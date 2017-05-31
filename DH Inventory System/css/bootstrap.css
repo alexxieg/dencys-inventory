@@ -7045,7 +7045,6 @@ border: none;
     margin-left: -6px;
 }
 
-
 #logout {
     margin-right: -1px;
     font-size: 18px;
@@ -7556,7 +7555,6 @@ border: none;
 }
 
 
-
 #sidebar ul > li > a,
 #sidebar:hover ul > li > a {
   color: white;
@@ -7614,6 +7612,11 @@ border: none;
 .modal-body #supplier{
 	width:50%;
 	margin-left:25%;
+}
+
+.modal-body #addSupplier{
+	width: 50%;
+	margin-left: 25%;
 }
 
 #supplierName{
@@ -7688,4 +7691,8 @@ margin-left: 60%;
 
 #backUpButton{
 	font-size: 35px;
+}
+
+#prodHeader{
+	font-size: 18px;
 }

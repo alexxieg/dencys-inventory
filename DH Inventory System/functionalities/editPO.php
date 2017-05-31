@@ -167,7 +167,7 @@
 										<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier">
 									</div>
 										
-									<h5>Product/s</h5>
+									<h5 id="prodHeader">Product/s</h5>
 									<table class="table table-striped" id="dataTable2" name="chk">	
 										<?php foreach ($result as $row): ?>
 											<tbody>

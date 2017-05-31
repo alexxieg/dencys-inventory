@@ -309,42 +309,42 @@
 											</div>
 											<div class="modal-body">
 												<form action="" method="POST" onsubmit="return validateForm()"><td>
-												<td>
-												<h3>User</h3>
-												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												</td>																									
+								
+													<h3>User</h3>
+													<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+																																					
 												
-												<h3>Supplier</h3>  
-													<div class="ui-widget">
-														<input id="addSupplier" name="supplier" placeholder="Supplier">
-													</div>
-												<br>
+													<h3>Supplier</h3>  
+														<div class="ui-widget">
+															<input id="addSupplier" name="supplier" placeholder="Supplier">
+														</div>
+													<br>
+															
+													<h5 id="prodHeader">Product/s</h5>
+													<table class="table table-striped" id="dataTable" name="chk">				
+														<tbody>
+															<tr>
+																<td>
+																	Product Name
+																</td>
+																<td>
+																	Quantity
+																</td>
+															</tr>
+															<tr>
+																<td>	
+																	<div class="ui-widget">
+																		<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name">
+																	</div>
+																</td>
+																			
+																<td>
+																	<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
+																</td>
+															</tr>
+														</tbody>
+													</table>
 														
-												<h5>Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
-													<tbody>
-														<tr>
-															<td>
-																Product Name
-															</td>
-															<td>
-																Quantity
-															</td>
-														</tr>
-														<tr>
-															<td>	
-																<div class="ui-widget">
-																	<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name">
-																</div>
-															</td>
-																		
-															<td>
-																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
-															</td>
-														</tr>
-													</tbody>
-												</table>
-													
 													<br>
 													
 													<div class="modFoot">
