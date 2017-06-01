@@ -77,7 +77,7 @@
 	<body>
 		<!-- Retrieve Employee Data -->
 		<?php
-			$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers WHERE status = 'Active'");
+			$query = $conn->prepare("SELECT supID, supplier_name, contactNo, location FROM suppliers WHERE status = 'Active'");
 			$query->execute();
 			$result = $query->fetchAll();
 		?>
@@ -159,7 +159,6 @@
 									<table class="table">	
 										<tr>
 											<td>
-												<br>
 												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive" id="modbutt">View Archive</button>
 												<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#blacklist" id="modbutt">View Blacklist</button>						
 											</td>
@@ -182,6 +181,8 @@
 										<tr>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier ID</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Contact Number</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -193,6 +194,8 @@
 										<tr id="centerData">
 											<td data-title="Supplier ID"><?php echo $item["supID"]; ?></td>
 											<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
+											<td data-title="Contact Number"><?php echo $item["contactNo"]; ?></td>
+											<td data-title="Contact Number"><?php echo $item["location"]; ?></td>
 										</tr>
 											
 										<?php

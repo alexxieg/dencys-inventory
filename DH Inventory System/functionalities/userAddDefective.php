@@ -128,8 +128,6 @@
 								<option value = "<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
 							<?php endforeach ?>
 							</select> 
-										
-							<br>
 							
 							<h3>Quantity Moved</h3>
 							<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">

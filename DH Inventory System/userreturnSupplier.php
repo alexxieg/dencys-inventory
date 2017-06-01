@@ -189,7 +189,6 @@
 								<table class="table">	
 									<tr>
 										<td>
-											<br>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 										</td>
