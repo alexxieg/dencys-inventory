@@ -240,8 +240,8 @@
 					<div id="contents">
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
+									<h1 id="headers">Physical Count</h1>
 								<table class="table table-striped table-bordered">
-									<h1 id="headers">Add Physical Count</h1>
 									
 									<?php 
 										$location =  $_SERVER['REQUEST_URI']; 

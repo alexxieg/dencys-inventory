@@ -199,9 +199,9 @@
 
 												<a href="userHistory.php"><button type="button" class="btn btn-info btn-md btnmod" id="modButt">Previous Inventory</button></a>
 												
-												<a href="userPhyCount.php"> 
+												<a href="userPhyCountForm.php"> 
 													<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
-														Add Physical Count
+														Physical Count
 													</button>
 												</a>
 											</td>

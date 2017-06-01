@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Add Physical Count</title>
+		<title>Physical Count</title>
 	
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -233,7 +233,7 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">
-									<h1 id="headers">Add Physical Count</h1>
+									<h1 id="headers">Physical Count</h1>
 									
 									<?php 
 										$location =  $_SERVER['REQUEST_URI']; 

@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Physical Count</title>
+		<title>Add Physical Count</title>
 	
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -223,7 +223,7 @@
 									?>
 
 									<tr>
-										<td>
+										<td width="50%">
 											View by Brand
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="brand_Name">
@@ -236,7 +236,7 @@
 											</form>
 										</td>	
 										
-										<td>
+										<td width="50%">
 											View by Category
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="category_Name">
@@ -250,14 +250,15 @@
 										</td>
 									</tr>
 								</table>
-								
-								<button type="submit" name="adjust" class="btn btn-default" id="backButton">
-									UPDATE
-								</button>
-								
-								<hr>
-								<br>
-								<br>
+							</div>
+							<hr>
+							<button type="submit" name="adjust" class="btn btn-success" id="phyCountButton">
+								Update Physical Count
+							</button>
+							<br>
+							<br>
+							
+							<hr>
 								
 								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 									<div id="myTable_length" class="dataTables_length">
@@ -288,11 +289,11 @@
 												<div id="tabHead">Last Physical Qty</div>
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Remarks</div>
-											</th>		
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												<div id="tabHead">Physical Count</div>
 											</th>	
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Remarks</div>
+											</th>		
 										</tr>
 									</thead>
 									
@@ -312,12 +313,12 @@
 												<td data-title="Unit"><?php echo $item["unitType"];?></td>
 												<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
 												
-												<td data-title="Remarks">
-													<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
-												</td>
 												<td>
 													<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
 													<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
+												</td>
+												<td data-title="Remarks">
+													<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
 												</td>
 													
 											</tr>	
