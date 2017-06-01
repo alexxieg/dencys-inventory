@@ -234,8 +234,14 @@
 											<table class="table table-striped" id="dataTable" name="chk">	
 												<tbody>
 													<tr>
-														<td><input type="checkbox" name="chk"></TD>
-														<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
+														<td>
+															Product Name
+														</td>
+														<td>
+															Quantity
+														</td>
+													</tr>
+													<tr>
 														<td>	
 															<div class="ui-widget">
 																<input class="thisProduct" name="prodItem2[]" placeholder="Product Name">
