@@ -204,11 +204,25 @@
 									<h5>Product/s</h5>
 									<table class="table table-striped" id="dataTable2" name="chk">				
 										<tbody>
+											<tr>
+												<td>
+													Product Name
+												</td>
+												<td>
+													Quantity
+												</td>
+												<td>
+													Status
+												</td>
+												<td>
+													Type
+												</td>
+												<td>
+													Remarks
+												</td>
+											</tr>
 											<?php foreach ($result2 as $row): ?>
 												<tr>
-													<td><input type="checkbox" name="chk"></td>
-													<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
-														
 													<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
 													
 													<td>	
@@ -316,9 +330,24 @@
 												<h5>Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">				
 													<tbody>
+														<tr>
+															<td>
+																Product Name
+															</td>
+															<td>
+																Quantity
+															</td>
+															<td>
+																Status
+															</td>
+															<td>
+																Type
+															</td>
+															<td>
+																Remarks
+															</td>
+														</tr>
 														<tr id="thisRow">
-															<td><input type="checkbox" name="chk"></TD>
-															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<div class="ui-widget">
 																	<input class="thisProduct" name="prodItem[]" placeholder="Product Name">
