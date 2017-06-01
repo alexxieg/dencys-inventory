@@ -81,7 +81,7 @@
 		
 		<script>
 		  $(function() {
-			$('#supplier').autocomplete({
+			$('#addSupplier').autocomplete({
 				minLength:2,
 				source: "../searchSup.php"
 			});
@@ -200,7 +200,7 @@
 								
 								<h3>Supplier</h3>  
 									<div class="ui-widget">
-										<input id="supplierName" name="supplier" placeholder="Supplier">
+										<input id="addSupplier" name="supplier" placeholder="Supplier">
 									</div>
 								<br>
 										
@@ -220,7 +220,6 @@
 											<?php foreach ($reorderResult as $row): ?>
 												<tr>
 													<td><input type="checkbox" name="chk"></td>
-														<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
 													<td>	
 														<div class="ui-widget">
 															<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
