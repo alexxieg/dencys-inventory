@@ -111,7 +111,18 @@
 			$sortByBrand = (isset($_REQUEST['brand_Name']) ? $_REQUEST['brand_Name'] : null);
 			$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
 			
-			if (!empty($sortByBrand)) { 
+			
+			if (!empty($sortByBrand) && !empty($sortByCategory)) { 
+				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+										FROM product 
+										INNER JOIN brand ON product.brandID = brand.brandID 
+										INNER JOIN category ON product.categoryID = category.categoryID 
+										INNER JOIN inventory ON product.prodID = inventory.prodID
+										WHERE product.status = 'Active' AND product.brandID = '$sortByBrand' AND product.categoryID = '$sortByCategory'
+										ORDER BY prodID");
+				$query3->execute();
+				$result3 = $query3->fetchAll();
+			} else if (!empty($sortByBrand)) { 
 				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
 										FROM product 
 										INNER JOIN brand ON product.brandID = brand.brandID 
@@ -248,31 +259,31 @@
 									?>
 
 									<tr>
-										<td width="50%">
-											View by Brand
-											<form action="<?php echo $location; ?>" method="POST">
-												<select name="brand_Name">
-													<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
-													<?php foreach ($result as $row): ?>
-														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-													<?php endforeach ?>
-												</select>
-												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
-											</form>
-										</td>	
-										
-										<td width="50%">
-											View by Category
-											<form action="<?php echo $location; ?>" method="POST">
-												<select name="category_Name">
-													<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
-													<?php foreach ($result2 as $row2): ?>
-														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
-													<?php endforeach ?>
-												</select>
-												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
-											</form>
-										</td>
+										<form action="<?php echo $location; ?>" method="POST">
+											<td width="50%">
+												View by Brand
+												
+													<select name="brand_Name">
+														<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
+														<?php foreach ($result as $row): ?>
+															<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+														<?php endforeach ?>
+													</select>
+												
+											</td>	
+											
+											<td width="50%">
+												View by Category
+													<select name="category_Name">
+														<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
+														<?php foreach ($result2 as $row2): ?>
+															<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+														<?php endforeach ?>
+													</select>
+													
+											</td>
+											<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+										</form>
 									</tr>
 								</table>
 								<hr>
