@@ -119,36 +119,39 @@
 						<div class="pages no-more-tables">
 							<div id="tableHeader">		
 								<h1 id="headers">Stock Card</h1>
+								<table class="table">	
+									<tr>
+										<?php 
+											$location =  $_SERVER['REQUEST_URI']; 
+										?>
+										<td style="float:left;">
+											<form action="<?php echo $location; ?>" method="POST">
+												<label>View by Date</label>
+												<select name="startDate">
+													<option value="" SELECTED></option>
+													<?php foreach ($result4 as $row): ?>
+														<option value="<?=$row["startDate"]?>"><?=$row["startDate"]?></option>
+													<?php endforeach ?>
+												</select>
+												<select name="endDate">
+													<option value="" SELECTED></option>
+													<?php foreach ($result5 as $row): ?>
+														<option value="<?=$row["endDate"]?>"><?=$row["endDate"]?></option>
+													<?php endforeach ?>
+												</select>
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+											</form>
+										</td>
+										<td>
+											<span>
+												<a href="inventory.php">
+												<input type="button" class="btn btn-danger" value="Back" id="backButton" data-dismiss="modal" onclick="this.form.reset()">
+												</a>
+											</span>
+										</td>
+									</tr>
+								</table>
 								
-								<?php 
-									$location =  $_SERVER['REQUEST_URI']; 
-								?>
-								
-								View by Date
-								<form action="<?php echo $location; ?>" method="POST">
-									<select name="startDate">
-										<option value="" SELECTED></option>
-										<?php foreach ($result4 as $row): ?>
-											<option value="<?=$row["startDate"]?>"><?=$row["startDate"]?></option>
-										<?php endforeach ?>
-									</select>
-									<select name="endDate">
-										<option value="" SELECTED></option>
-										<?php foreach ($result5 as $row): ?>
-											<option value="<?=$row["endDate"]?>"><?=$row["endDate"]?></option>
-										<?php endforeach ?>
-									</select>
-									<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
-								</form>
-									
-								<span>
-									<a href="inventory.php">
-									<input type="button" class="btn btn-danger" value="Back" id="backButton" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								
-								<br>
-								<br>
 								<hr>
 								
 								<!-- Stockcard Information -->
@@ -170,6 +173,7 @@
 										</td>
 										<td> 
 											Physical Count:
+											<?php echo $req ?>
 										</td>
 									</tr>									
 								</table>

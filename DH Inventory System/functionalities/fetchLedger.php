@@ -64,6 +64,8 @@
 			$base = $request;
 			$loop = True;
 			
+			$req = current($conn->query("SELECT physicalQty FROM inventory WHERE prodID = '$incID'")->fetch());
+			
 			$query3 = $conn->prepare("SELECT prodName FROM product WHERE prodID = '$incID'");										
 			$query3->execute();
 			$result3 = $query3->fetchAll();
