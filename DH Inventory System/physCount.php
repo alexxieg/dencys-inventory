@@ -87,7 +87,7 @@
 			$sortByCategory = (isset($_REQUEST['category_Name']) ? $_REQUEST['category_Name'] : null);
 			
 			if (!empty($sortByBrand)) { 
-				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, inventory.qty, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
 										FROM product 
 										INNER JOIN brand ON product.brandID = brand.brandID 
 										INNER JOIN category ON product.categoryID = category.categoryID 
@@ -97,7 +97,7 @@
 				$query3->execute();
 				$result3 = $query3->fetchAll();
 			} else if (!empty($sortByCategory)) {
-				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, inventory.qty, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
 										FROM product 
 										INNER JOIN brand ON product.brandID = brand.brandID 
 										INNER JOIN category ON product.categoryID = category.categoryID 
@@ -107,7 +107,7 @@
 				$query3->execute();
 				$result3 = $query3->fetchAll();
 			} else {
-				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
+				$query3 = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, inventory.qty, product.unitType, product.reorderLevel, inventory.physicalQty, inventory.remarks
 										FROM product 
 										INNER JOIN brand ON product.brandID = brand.brandID 
 										INNER JOIN category ON product.categoryID = category.categoryID 
@@ -252,9 +252,8 @@
 								</table>
 							</div>
 							<hr>
-							<button type="submit" name="adjust" class="btn btn-success" id="phyCountButton">
-								Update Physical Count
-							</button>
+						
+							<input type="submit" name="adjust" value ="Update Physical Quantity" id="phyCountButton">
 							<br>
 							<br>
 							
@@ -283,7 +282,7 @@
 											<div id="tabHead">Category</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Unit</div>
+											<div id="tabHead">Current Quantity</div>
 										</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Last Physical Qty</div>
@@ -310,7 +309,7 @@
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-											<td data-title="Unit"><?php echo $item["unitType"];?></td>
+											<td data-title="Category"><?php echo $item["qty"]; ?></td>
 											<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
 											<td>
 												<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">

@@ -141,7 +141,15 @@
 									<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
 								</form>
 									
+								<span>
+									<a href="inventory.php">
+									<input type="button" class="btn btn-danger" value="Back" id="backButton" data-dismiss="modal" onclick="this.form.reset()">
+									</a>
+								</span>
+								
 								<br>
+								<br>
+								<hr>
 								
 								<!-- Stockcard Information -->
 								<table class="table table-striped table-bordered">
@@ -247,11 +255,7 @@
 										endforeach;
 									?>
 								</table>
-								<span>
-									<a href="inventory.php">
-									<input type="button" class="btn btn-danger" id="canBtn" value="Back" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
+
 							</div>
 						</div>
 					</div>
