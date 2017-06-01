@@ -356,7 +356,7 @@
 					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
 					$sup3 = $sup2['supA'];
 
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem2'");
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem2'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 

@@ -20,7 +20,7 @@
 				$userID = $_POST['userID'];		
 				$supName = $_POST['supplier'];			
 
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'");
 				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 				$prod3 = $prod2['prodA'];
 				
