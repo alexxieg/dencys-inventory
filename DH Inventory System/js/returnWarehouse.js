@@ -90,7 +90,6 @@ function addRow(dataTable) {
 		minLength:2,
 		source: "search.php"
 	});
-	
 }
 			
 function regroup(i,rc,ti){
