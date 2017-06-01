@@ -89,8 +89,8 @@ function deleteRow(tableID) {
 	}
 }
 
-function addRow(tableID) {
-	var table = document.getElementById(tableID);
+function addRow(dataTable) {
+	var table = document.getElementById(dataTable);
 	var rowCount = table.rows.length;
 	var row = table.insertRow(rowCount);
 	var colCount = table.rows[1].cells.length;
