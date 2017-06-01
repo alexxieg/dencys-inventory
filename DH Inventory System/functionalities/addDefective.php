@@ -139,7 +139,7 @@
 							<?php endforeach ?>
 							</select> 
 										
-							<h3>Quantity Moved</h3>
+							<h3>Quantity</h3>
 							<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
 							<br>
 							
@@ -181,7 +181,7 @@
 				$prodSQL = $conn->query("SELECT prodID from product WHERE prodName = '$prodName'");
 				$prodSQLRes = $prodSQL->fetch(PDO::FETCH_ASSOC);
 				$prodRef = $prodSQLRes['prodID'];
-				$defSQL = $conn->query("SELECT defectProdID AS defID from defectives WHERE prodID = '$prodRef'");
+				$defSQL = $conn->query("SELECT defectProdID AS defID from defectives WHERE prodID sounds like '$prodRef'");
 				$defRes = $defSQL->fetch(PDO::FETCH_ASSOC);
 				$defID = $defRes['defID'];
 				
@@ -190,8 +190,8 @@
 				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 				$emp3 = $emp2['empA'];
 				
-				$sqlIn = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, inRemarks, status, empID, prodID)
-						  VALUES ('$qty', CURDATE(), '$rec', CURDATE(), 'None', 'None', 'Complete', '$emp3', '$defID')";
+				$sqlIn = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, inRemarks, status, empID, prodID)
+						  VALUES ('$qty', CURDATE(), '$rec', CURDATE(), 'None', 'Complete', '$emp3', '$defID')";
 				$conn->exec($sqlIn);
 				
 				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID)

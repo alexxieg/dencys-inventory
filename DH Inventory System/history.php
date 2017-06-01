@@ -231,27 +231,24 @@
 									<tr>
 										<form action="<?php echo $location; ?>" method="POST">
 											<td width="50%">
-												View by Brand
-												
-													<select name="prev_Month">
-														<option value="<?php echo $sortByMonth;?>" SELECTED>Selected: <?php echo $sortByMonth; ?></option>
-														<?php foreach ($result3 as $row): ?>
-															<option value="<?=$row["thisMonth"]?>"><?=$row["thisMonth"]?></option>
-														<?php endforeach ?>
-													</select>
-											</td>	
-											
-											<td width="50%">
-												View by Category
-													<select name="prev_Year">
-														<option value="<?php echo $sortByYear; ?>" SELECTED>Selected: <?php echo $sortByYear; ?></option>
-														<?php foreach ($result2 as $row2): ?>
-															<option value="<?=$row2["thisYear"]?>"><?=$row2["thisYear"]?></option>
-														<?php endforeach ?>
-													</select>
-													
-											</td>
+												<label>Month:</label>
+												<select name="prev_Month">
+													<option value="<?php echo $sortByMonth;?>" SELECTED>Selected: <?php echo $sortByMonth; ?></option>
+													<?php foreach ($result3 as $row): ?>
+														<option value="<?=$row["thisMonth"]?>"><?=$row["thisMonth"]?></option>
+													<?php endforeach ?>
+												</select>
+							
+												<label>Year:</label>
+												<select name="prev_Year">
+													<option value="<?php echo $sortByYear; ?>" SELECTED>Selected: <?php echo $sortByYear; ?></option>
+													<?php foreach ($result2 as $row2): ?>
+														<option value="<?=$row2["thisYear"]?>"><?=$row2["thisYear"]?></option>
+													<?php endforeach ?>
+												</select>	
+									
 											<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+											</td>
 										</form>
 									</tr>
 								</table>
