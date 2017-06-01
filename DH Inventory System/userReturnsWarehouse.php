@@ -388,10 +388,10 @@
 															<div id="tabHead">Date Edited</div>
 														</th>
 														<th>
-															<div id="tabHead">Receipt No</div>
+															<div id="tabHead">Reference No.</div>
 														</th>
 														<th>
-															<div id="tabHead">Return Date</div>
+															<div id="tabHead">Product Description</div>
 														</th>
 														<th>
 															<div id="tabHead">Return Quantity</div>
@@ -401,9 +401,6 @@
 														</th>
 														<th>
 															<div id="tabHead">Return Remarks</div>
-														</th>
-														<th>
-															<div id="tabHead">Product Description</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -420,11 +417,10 @@
 													<tr id="centerData">	
 														<td data-title="Edit Date"><?php echo $item["returnEditDate"]; ?></td>
 														<td data-title="Receipt No"><?php echo $item["receiptNo"]; ?></td>
-														<td data-title="Return Date"><?php echo $item["returnDate"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Return Quantity"><?php echo $item["returnQty"]; ?></td>
 														<td data-title="Return Type"><?php echo $item["returnType"]; ?></td>
 														<td data-title="Return Remarks"><?php echo $item["returnRemark"]; ?></td>
-														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
 													</tr>
 													<?php

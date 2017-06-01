@@ -32,8 +32,8 @@
 		
 		<!-- Javascript Files -->
 		<script src="js/bootstrap.js"></script>
-		<script src="../js/jquery-3.2.0.min.js"></script>	
-		<script src="../js/bootstrap.min.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 			
@@ -282,7 +282,7 @@
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
 										<td data-title="Remarks"><?php echo $item["remarks"];?></td>
 										<td>
-											<a href="userledger.php?incId=<?php echo $incID; ?>" target="_blank"> 
+											<a href="userledger.php?incId=<?php echo $incID; ?>" target="_self"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 												</button>
