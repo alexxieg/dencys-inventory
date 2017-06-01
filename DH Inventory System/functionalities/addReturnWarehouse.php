@@ -40,6 +40,16 @@
 					VALUES (CURDATE(),$retQty,'Warehouse Return','$retRem','$productID','$recNo',$branch3,$emp3,'$userID')";
 			$conn->exec($sql);
 		} 
-		echo "<meta http-equiv='refresh' content='0'>";
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if($role == 'admin'){
+				$url='returnsWarehouse.php';
+
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+			}else{
+				$url='userRetWarehouse.php';
+
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+			}
 	}		
 ?>
