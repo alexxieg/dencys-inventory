@@ -214,10 +214,25 @@
 								<h5 id="prodHeader">Product/s</h5>
 								<table class="table table-striped" id="dataTable" name="chk">				
 									<tbody>
+										<tr>
+											<td>
+												Product Name
+											</td>
+											<td>
+												Quantity
+											</td>
+											<td>
+												Status
+											</td>
+											<td>
+												Type
+											</td>
+											<td>
+												Remarks
+											</td>
+										</tr>
 										<?php foreach ($result as $row): ?>
 										<tr id="thisRow">
-											<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 											<td>	
 												<div class="ui-widget">
 													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
@@ -265,7 +280,6 @@
 								
 								<div class="modFoot">
 									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-									<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 									<br>
 									<br>
 									<span>
