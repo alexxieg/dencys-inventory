@@ -202,6 +202,9 @@
 				
 				$sql = "UPDATE brand JOIN product SET brandName = '$itemBrand' WHERE prodID= '$proID'";
 				$conn->exec($sql);
+				
+				$url='../product.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    
 
 		?>

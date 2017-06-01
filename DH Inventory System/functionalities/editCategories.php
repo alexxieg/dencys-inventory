@@ -169,6 +169,9 @@
 			 
 				$sql = "UPDATE category SET categoryID = '$cateID', categoryName = '$cateName' WHERE categoryID = '$categEditID'";	
 				$conn->exec($sql);
+				
+				$url='../category.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    
 		?>
 	</body>

@@ -188,7 +188,9 @@
 			$sql = "UPDATE employee SET empFirstName = '$emploFirstName', empMidName = '$emploMiddleName', empLastName = '$emploLastName', empExtensionName = '$emploExtenName'
 					WHERE empID = '$employID'";
 			$conn->exec($sql);
-						
+			
+			$url='../employees.php';
+			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';		
 			}
 		?>
 	</body>

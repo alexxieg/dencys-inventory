@@ -223,6 +223,9 @@
 				
 				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', returnRemark = '$rem', userID = '$userID' WHERE returnID = $retID";
 				$conn->exec($sql);
+				
+				$url="userViewRetWarehouse.php?retId=$retID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    
 		?>
 

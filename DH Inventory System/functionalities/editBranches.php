@@ -169,6 +169,9 @@
 			 
 				$sql = "UPDATE branch SET branchID = '$braID', location = '$braName' WHERE branchID = '$branchThisID'";
 				$conn->exec($sql);
+				
+				$url='../branches.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    		
 		?>
 	</body>

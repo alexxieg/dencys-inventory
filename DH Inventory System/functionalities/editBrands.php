@@ -171,6 +171,9 @@
 				$sql = "UPDATE brand SET brandID = '$braID', brandName = '$braName' WHERE brandID = '$brandEditID'";
 			
 				$conn->exec($sql);
+
+				$url='../brands.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    
 		?>
 	</body>

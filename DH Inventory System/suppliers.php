@@ -248,7 +248,7 @@
 											<div class="modal-body">
 												<form action="" method="POST" onsubmit="return validateForm()">									
 													<h3>Supplier Name</h3>
-													<input type="text" class="form-control" id="supName" placeholder="First Name" name="supName">
+													<input type="text" class="form-control" id="supName" placeholder="Supplier Name" name="supName">
 
 													<h3>Contact Number</h3>
 													<input type="text" class="form-control" id="supContact" placeholder="Contact Number" name="supContact">

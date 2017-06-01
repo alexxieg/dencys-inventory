@@ -289,7 +289,7 @@
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 						WHERE outID = '$outid'"; */
 				}
-				$url='../prodIssuance.php';
+				$url="viewProdIssuance.php?outId=$outID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 
@@ -317,7 +317,8 @@
 					VALUES ('$outQty',CURDATE(),'$reciptNum','$branch3','$emp3','$prod3','$userID')";
 					$result = $conn->query($sql); 
 				}
-				echo "<meta http-equiv='refresh' content='0'>";
+				$url="viewProdIssuance.php?outId=$outID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}			
 		?>
 	

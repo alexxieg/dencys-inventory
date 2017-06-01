@@ -64,6 +64,5 @@
 			$url='userProdIssuance.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}
-
     }
 ?>	

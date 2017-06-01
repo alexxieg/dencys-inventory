@@ -193,8 +193,10 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			 
 				$sql = "UPDATE users SET userName = '$useName', password = '$hashPW', user_role = '$urole' WHERE userID = '$useThisID'";
-			
 				$conn->exec($sql);
+				
+				$url='../accounts.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			} 	
 		?>
 	</body>

@@ -255,7 +255,8 @@
 					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', branchID = $Branch WHERE receiptNo = '$retID' AND prodID = '$prod3'";
 					$conn->exec($sql);
 				}
-				echo "<meta http-equiv='refresh' content='0'>";
+				$url="viewRetWarehouse.php?retId=$retID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}   
 		?>
 

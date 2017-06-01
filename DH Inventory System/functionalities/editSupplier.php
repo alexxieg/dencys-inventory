@@ -41,9 +41,14 @@
 	<body>
 		<?php
 			$supID = $_GET['supID'];
-			$query = $conn->prepare("SELECT supID, supplier_name, contactNo, location FROM suppliers WHERE supID = $supID ");
+			
+			$query = $conn->prepare("SELECT supID, supplier_name, contactNo, location FROM suppliers");
 			$query->execute();
 			$result = $query->fetchAll();
+			
+			$query1 = $conn->prepare("SELECT supID, supplier_name, contactNo, location FROM suppliers WHERE supID = $supID ");
+			$query1->execute();
+			$result1 = $query1->fetchAll();
 		?>
 		
 		<!-- Top Main Header -->
@@ -124,24 +129,26 @@
 							<div id="contents">
 								<form action="" method="POST" onsubmit="return validateForm()">									
 									<h3>Supplier Name</h3>
-									<?php foreach ($result as $row): ?>
+									<?php foreach ($result1 as $row): ?>
 										<input type="text" class="form-control" id="supName" value="<?php echo $row["supplier_name"]; ?>" placeholder="<?php echo $row["supplier_name"]; ?>" name="supName">
 									<?php endforeach ?>
 									
 									<h3>Contact Number</h3>
-									<?php foreach ($result as $row): ?>
+									<?php foreach ($result1 as $row): ?>
 										<input type="text" class="form-control" id="supContactNum" value="<?php echo $row["contactNo"]; ?>" placeholder="<?php echo $row["contactNo"]; ?>" name="contactNo">
 									<?php endforeach ?>
 									
 									<h3>Location</h3>
-									<?php foreach ($result as $row): ?>
+									<?php foreach ($result1 as $row): ?>
 										<input type="text" class="form-control" id="supLoc" value="<?php echo $row["location"]; ?>" placeholder="<?php echo $row["location"]; ?>" name="location">
 									<?php endforeach ?>									
 									<br>
 									
 									<div class="modFoot">
 										<span>
-											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+											<a href="../suppliers.php">
+												<input type="button" class="btn btn-danger" data-dismiss="modal"  value="Cancel" onclick="this.form.reset()" id="canBtn">
+											</a>
 										</span>
 										<span>
 											<input type="submit" value="Update" class="btn btn-success" name="editSup" id="sucBtn">
@@ -160,14 +167,21 @@
 		<!-- Update Function -->
 		<?php
 			$suppName=(isset($_REQUEST['supName']) ? $_REQUEST['supName'] : null);
+			$conNum=(isset($_REQUEST['contactNo']) ? $_REQUEST['contactNo'] : null);
+			$supLocation=(isset($_REQUEST['location']) ? $_REQUEST['location'] : null);
+			
 			if (isset($_POST["editSup"])){
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-				$sql = "UPDATE suppliers SET supplier_name = '$suppName' WHERE supID = $supID";
+				$sql = "UPDATE suppliers SET supplier_name = '$suppName', contactNo = '$conNum', location = '$supLocation' 
+						WHERE supID = $supID";
 				$conn->exec($sql);
-				echo "<meta http-equiv='refresh' content='0'>";
+				
+				$url='../suppliers.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    
+			
 		?>
 	</body>
 </html>

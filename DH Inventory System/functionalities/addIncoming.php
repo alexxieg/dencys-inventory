@@ -61,7 +61,6 @@
 			}
 		}
 		
-		session_start();
 		$role = $_SESSION['sess_role'];
 		if($role == 'admin'){
 			$url='../prodDeliveries.php';
