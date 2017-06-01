@@ -100,12 +100,32 @@
   	<body>
 		<!-- PHP code for fetching the data-->
 		<?php
-			$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
+			$query3 = $conn->prepare("SELECT DISTINCT MONTHNAME(archiveDate) AS thisMonth FROM archive;");
+			$query3->execute();
+			$result3 = $query3->fetchAll();
+			
+			$query2 = $conn->prepare("SELECT DISTINCT YEAR(archiveDate) AS thisYear FROM archive;");
+			$query2->execute();
+			$result2 = $query2->fetchAll();
+		
+			$sortByMonth = (isset($_REQUEST['prev_Month']) ? $_REQUEST['prev_Month'] : null);
+			$sortByYear = (isset($_REQUEST['prev_Year']) ? $_REQUEST['prev_Year'] : null);
+		
+			if (!empty($sortByBrand) && !empty($sortByCategory)) { 
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
+											FROM product LEFT JOIN archive ON product.prodID = archive.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+											WHERE product.status = 'Active' AND MONTHNAME(archive.archiveDate) = '$sortByMonth' AND YEAR(archiveDate) = $sortByYear
+											GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty, archive.endingQty, archive.remarks");	
+				$query->execute();
+				$result = $query->fetchAll();
+			} else {
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
 										FROM product LEFT JOIN archive ON product.prodID = archive.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										WHERE product.status = 'Active' 
 										GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty, archive.endingQty, archive.remarks");	
-			$query->execute();
-			$result = $query->fetchAll();
+				$query->execute();
+				$result = $query->fetchAll();
+			}
 		?>	
 		
 		<!-- Top Main Header -->
@@ -201,11 +221,39 @@
 					<div id="contents">
 						<div class="pages">
 							<div id="tableHeader">
-								<table class="table table-striped table-bordered">	
-									<h1 id="headers">PREVIOUS INVENTORY</h1>	
-									<select>
-										<option>March 2017</option>
-									</select>
+								<table class="table table-striped table-bordered">
+									<h1 id="headers">View Previous Inventory</h1>
+									
+									<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
+
+									<tr>
+										<form action="<?php echo $location; ?>" method="POST">
+											<td width="50%">
+												View by Brand
+												
+													<select name="prev_Month">
+														<option value="<?php echo $sortByMonth;?>" SELECTED>Selected: <?php echo $sortByMonth; ?></option>
+														<?php foreach ($result3 as $row): ?>
+															<option value="<?=$row["thisMonth"]?>"><?=$row["thisMonth"]?></option>
+														<?php endforeach ?>
+													</select>
+											</td>	
+											
+											<td width="50%">
+												View by Category
+													<select name="prev_Year">
+														<option value="<?php echo $sortByYear; ?>" SELECTED>Selected: <?php echo $sortByYear; ?></option>
+														<?php foreach ($result2 as $row2): ?>
+															<option value="<?=$row2["thisYear"]?>"><?=$row2["thisYear"]?></option>
+														<?php endforeach ?>
+													</select>
+													
+											</td>
+											<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+										</form>
+									</tr>
 								</table>
 							</div>
 							
