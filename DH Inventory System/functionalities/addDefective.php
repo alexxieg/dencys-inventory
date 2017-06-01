@@ -7,20 +7,6 @@
 		
 		<title>Defectives</title>
 		
-		<!-- Bootstrap core CSS -->
-		<link href="../css/bootstrap.min.css" rel="stylesheet">
-		<link href="../css/bootstrap.css" rel="stylesheet">
-		<link rel="shortcut icon" href="../logo.jpg">
-
-		<!-- Custom styles for this template -->
-		<link href="../css/custom.css" rel="stylesheet">
-		<link href="../css/sidebar.css" rel="stylesheet">
-		
-		<!-- Javascript Files -->
-		<script src="../js/bootstrap.js"></script>
-		<script src="../js/jquery-3.2.0.min.js"></script>	
-		<script src="../js/bootstrap.min.js"></script>
-		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 
@@ -35,6 +21,21 @@
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
 		?>
+		
+		<!-- Bootstrap core CSS -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link rel="shortcut icon" href="../logo.jpg">
+
+		<!-- Custom styles for this template -->
+		<link href="../css/custom.css" rel="stylesheet">
+		<link href="../css/sidebar.css" rel="stylesheet">
+		
+		<!-- Javascript Files -->
+		<script src="../js/bootstrap.js"></script>
+		<script src="../js/jquery-3.2.0.min.js"></script>	
+		<script src="../js/bootstrap.min.js"></script>
+		
 	</head>
 	  
 	<body>
@@ -114,7 +115,7 @@
 						
 							<h3>Product</h3>
 							<?php
-								$query = $conn->prepare("SELECT prodName FROM product ");
+								$query = $conn->prepare("SELECT prodName FROM product");
 								$query->execute();
 								$res = $query->fetchAll();
 							?>
@@ -183,7 +184,6 @@
 				$defSQL = $conn->query("SELECT defectProdID AS defID from defectives WHERE prodID = '$prodRef'");
 				$defRes = $defSQL->fetch(PDO::FETCH_ASSOC);
 				$defID = $defRes['defID'];
-				
 				
 				$emp = $_POST['emp'];
 				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
