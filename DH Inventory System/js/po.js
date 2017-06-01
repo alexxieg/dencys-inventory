@@ -79,34 +79,33 @@ function deleteRow(tableID) {
 
 function addRow(dataTable) {
 	var table = document.getElementById(dataTable);
-
-            var rowCount = table.rows.length;
-            var row = table.insertRow(rowCount);
-
-			var cell2 = row.insertCell(0);
-            var element1 = document.createElement("input");
-            element1.type = "number";
-			element1.className = "form-control";
-            element1.name = "qty[]";
-			element1.id = "addQty";
-			element1.min = "1";
-			element1.placeholder = "Quantity";
-            cell2.appendChild(element1);
-			
-            var cell1 = row.insertCell(0);
-            var element0 = document.createElement("input");
-            element0.type = "text";
-			element0.className = "prodItem";
-            element0.name = "prodItem[]";
-			element0.id = "prod";
-			element0.placeholder = "Product Name";
-            cell1.appendChild(element0);
-	
-	$('.prodItem').autocomplete({
+	var rowCount = table.rows.length;
+	var row = table.insertRow(rowCount);
+	var colCount = table.rows[1].cells.length;
+	for(var i=0; i<colCount; i++) {
+		var newcell = row.insertCell(i);
+		if(i==1){
+			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
+		}
+		else{
+			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
+		}
+		switch(newcell.childNodes[0].type) {
+			case "text":
+			newcell.childNodes[0].value="";
+			break;
+			case "checkbox":
+			newcell.childNodes[0].checked = false;
+			break;
+			case "select-one":
+			newcell.childNodes[0].selectedIndex = 0;
+			break;
+		}
+	}
+	$('.thisProduct').autocomplete({
 		minLength:2,
 		source: "search.php"
 	});
-	
 }
 			
 function regroup(i,rc,ti){
