@@ -337,7 +337,7 @@
 										<h4 class="modal-title">Products to be reordered</h4>
 									</div>
 									<div class="modal-body">
-										<form action="functionalities/reorderPO.php" method="POST">
+										<form action="functionalities/userReorderPo.php" method="POST">
 											<?php
 												$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
 																		WHERE inventory.qty <= product.reorderLevel");

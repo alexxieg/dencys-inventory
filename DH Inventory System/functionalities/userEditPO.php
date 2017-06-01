@@ -5,7 +5,22 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Edit Product Order Entry</title>
+		<title>Edit Purchase Order</title>
+	
+	<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) && $role!="user") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -27,10 +42,8 @@
 		<script src="../js/jquery-1.9.1.js"></script>
 		<script src="../js/jquery-ui.js"></script>
 		
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
 		
-				<script>
+		<script>
 		  $(function() {
 			$('#addSupplier').autocomplete({
 				minLength:2,
@@ -49,17 +62,6 @@
 		  });
 		</script> 
 		
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="user") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
 	
 	<body>
@@ -216,29 +218,29 @@
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-				if (isset($_POST["editPO"])){
-					for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
-						$prodItem = $_POST['prodItem'][$index2];
-						$inQty = $_POST['qty'][$index2];
-						$userID = $_POST['userID'];
-						$poNum = $_POST['poNum'];
-						$sup = $_POST['supplier'];
-						
-						$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$sup'");
-						$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
-						$sup3 = $sup2['supA'];
+			if (isset($_POST["editPO"])){
+				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+					$prodItem = $_POST['prodItem'][$index2];
+					$inQty = $_POST['qty'][$index2];
+					$userID = $_POST['userID'];
+					$poNum = $_POST['poNum'];
+					$sup = $_POST['supplier'];
+					
+					$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$sup'");
+					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+					$sup3 = $sup2['supA'];
 
-						$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
-						$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-						$prod3 = $prod2['prodA'];
-							
-						$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supID = $sup3, prodID = '$prod3', userID = '$userID'
-								WHERE poNumber = '$incID' AND prodID = '$prod3'";
-							$conn->exec($sql);
-					}
-					$url='../purchaseOrder.php';
-					echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';	
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+						
+					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supID = $sup3, prodID = '$prod3', userID = '$userID'
+							WHERE poNumber = '$incID' AND prodID = '$prod3'";
+						$conn->exec($sql);
 				}
+				$url='../userpurchaseOrder.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';	
+			}
 		?>
 		
 	</body>
