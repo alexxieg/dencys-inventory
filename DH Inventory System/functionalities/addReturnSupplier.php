@@ -37,6 +37,14 @@
 					VALUES (CURDATE(),$retQty,'Supplier Return','$retRem','$recNo','$productID', 0 ,$sup3,$emp3,'$userID')";
 			$conn->exec($sql);
 		}
-		echo "<meta http-equiv='refresh' content='0'>";	
+		session_start();
+		$role = $_SESSION['sess_role'];
+		if($role == 'admin'){
+			$url='returnSupplier.php';
+			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+		}else{
+			$url='userreturnSupplier.php';
+			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+		}
 	}	
 ?>

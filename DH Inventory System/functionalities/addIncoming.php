@@ -65,11 +65,9 @@
 		$role = $_SESSION['sess_role'];
 		if($role == 'admin'){
 			$url='../prodDeliveries.php';
-
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}else{
 			$url='../userprodDeliveries.php';
-
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}
 	
