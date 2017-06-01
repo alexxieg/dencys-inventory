@@ -4124,8 +4124,8 @@ li.active > a:hover, .nav-pills > li.active > a:focus {
 
 #navjust {   
   background-color: black;
-  margin-left: -8%;
-  margin-right: 160px;   
+  margin-left: 5%;
+  margin-right: 5%;   
   padding-right: 0%;   
   margin-top: 6%;
   margin-bottom: 5%;
@@ -7668,10 +7668,6 @@ border: none;
   background-color: gray;
 }
 
-#outheader{
-  margin-left: -20%;
-}
-
 #adminhead{
   font-size: 20px; 
 }
@@ -7693,6 +7689,28 @@ border: none;
 	font-size: 35px;
 }
 
+#phyCountButton{
+	float:right;
+}
+
 #prodHeader{
 	font-size: 18px;
+}
+
+#reportHeader{
+	margin-left:10%;
+}
+
+#labelFormat{
+	padding-right: 20px;
+}
+
+#viewButtonReport{
+	margin-left: 80%;
+}
+
+#test{
+	width: 120%;
+	margin: none;
+	
 }

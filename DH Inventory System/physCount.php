@@ -223,7 +223,7 @@
 									?>
 
 									<tr>
-										<td>
+										<td width="50%">
 											View by Brand
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="brand_Name">
@@ -236,7 +236,7 @@
 											</form>
 										</td>	
 										
-										<td>
+										<td width="50%">
 											View by Category
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="category_Name">
@@ -250,84 +250,84 @@
 										</td>
 									</tr>
 								</table>
-								
-								<button type="submit" name="adjust" class="btn btn-default" id="backButton">
-									UPDATE
-								</button>
-								
-								<hr>
-								<br>
-								<br>
-								
-								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
-										</div>
+							</div>
+							<hr>
+							<button type="submit" name="adjust" class="btn btn-success" id="phyCountButton">
+								Update Physical Count
+							</button>
+							<br>
+							<br>
+							
+							<hr>
+							
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
 									</div>
 								</div>
-								
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-									<thead>
-										<tr id="centerData">
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Product ID</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Product Description</div>							
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Brand</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Category</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Unit</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Last Physical Qty</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Remarks</div>
-											</th>		
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Physical Count</div>
-											</th>	
-										</tr>
-									</thead>
-									
-									<tbody>
-										<form action="" method="POST">
-										
-											<?php
-												foreach ($result3 as $item):
-												$proID = $item["prodID"];
-											?>
-												
-											<tr id="centerData">
-												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-												<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-												<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-												<td data-title="Unit"><?php echo $item["unitType"];?></td>
-												<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
-												
-												<td data-title="Remarks">
-													<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
-												</td>
-												<td>
-													<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-													<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
-												</td>
-													
-											</tr>	
-											<?php
-												endforeach;
-											?>
-										</form>
-									</tbody>	
-								</table>	
 							</div>
+							
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr id="centerData">
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product ID</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product Description</div>							
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Brand</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Category</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Unit</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Last Physical Qty</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Physical Count</div>
+										</th>	
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Remarks</div>
+										</th>		
+									</tr>
+								</thead>
+								
+								<tbody>
+									<form action="" method="POST">
+									
+										<?php
+											foreach ($result3 as $item):
+											$proID = $item["prodID"];
+										?>
+											
+										<tr id="centerData">
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"];?></td>
+											<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
+											<td>
+												<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
+												<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
+											</td>
+											
+											<td data-title="Remarks">
+												<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
+											</td>
+												
+										</tr>	
+										<?php
+											endforeach;
+										?>
+									</form>
+								</tbody>	
+							</table>	
 						</div>
 					</div>
 				</div>

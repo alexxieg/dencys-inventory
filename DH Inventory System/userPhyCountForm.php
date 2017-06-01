@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Physical Count</title>
+		<title>Add Physical Count</title>
 	
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -58,22 +58,47 @@
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-				$('#myTable').DataTable( {
-					dom: 'Bfrtip',
+                $('#myTable').DataTable( {
+                    dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
-						[ '10 rows', '25 rows', '50 rows', '100 rows','Show all' ]
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
 					],
-					buttons: [
-						'pageLength'
-					]
-				} );
-			} );		
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Physical Count', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							{extend:'colvis', text: 'Select Column'},'pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );		
 		</script>
 	</head>
 	  
 	<body>
-	  	<!-- Retrieve Data -->
+		<!-- Retrieve Data -->
 		<?php
 			$query = $conn->prepare("SELECT brandID, brandName FROM brand WHERE status = 'Active' ");
 			$query->execute();
@@ -132,7 +157,7 @@
 				$filterCategory = "None";
 			}
 		?>
-	  
+  
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -198,14 +223,6 @@
 				<?php
 					foreach ($result3 as $item):
 					$proID = $item["prodID"];
-				?>	
-				<?php
-					endforeach;
-				?>	
-										
-				<?php
-					foreach ($result3 as $item):
-					$proID = $item["prodID"];
 				?>
 				<?php
 					endforeach;
@@ -223,7 +240,7 @@
 									?>
 
 									<tr>
-										<td>
+										<td width="50%">
 											View by Brand
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="brand_Name">
@@ -236,7 +253,7 @@
 											</form>
 										</td>	
 										
-										<td>
+										<td width="50%">
 											View by Category
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="category_Name">
@@ -250,122 +267,81 @@
 										</td>
 									</tr>
 								</table>
-								
-								<button type="submit" name="adjust" class="btn btn-default" id="backButton">
-									UPDATE
-								</button>
-								
 								<hr>
-								<br>
-								<br>
-								
-								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
-										</div>
+								<a href="userPhyCount.php">
+									 <button type="button" class="btn btn-success" id="phyCountButton">
+										Enter Physical Count
+									</button>
+								</a>
+							</div>
+			
+							<br>
+							<br>		
+							<hr>
+
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
 									</div>
 								</div>
-								
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-									<thead>
-										<tr id="centerData">
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Product ID</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Product Description</div>							
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Brand</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Category</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Unit</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Last Physical Qty</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Remarks</div>
-											</th>		
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Physical Count</div>
-											</th>	
-										</tr>
-									</thead>
-									
-									<tbody>
-										<form action="" method="POST">
-										
-											<?php
-												foreach ($result3 as $item):
-												$proID = $item["prodID"];
-											?>
-												
-											<tr id="centerData">
-												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-												<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-												<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-												<td data-title="Unit"><?php echo $item["unitType"];?></td>
-												<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
-												
-												<td data-title="Remarks">
-													<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
-												</td>
-												<td>
-													<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-													<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
-												</td>
-													
-											</tr>	
-											<?php
-												endforeach;
-											?>
-										</form>
-									</tbody>	
-								</table>	
 							</div>
+							
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr id="centerData">
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product ID</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product Description</div>							
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Brand</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Category</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Physical Count</div>
+										</th>	
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Remarks</div>
+										</th>		
+									</tr>
+								</thead>
+								
+								<tbody>
+									<form action="" method="POST">
+									
+										<?php
+											foreach ($result3 as $item):
+											$proID = $item["prodID"];
+										?>
+											
+										<tr id="centerData">
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+											
+											<td>
+											
+											</td>
+												
+											<td data-title="Remarks">
+												
+											</td>
+										</tr>	
+										<?php
+											endforeach;
+										?>
+									</form>
+								</tbody>	
+							</table>	
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-						
-		<?php 
-			$productCounter=(isset($_REQUEST['thisProductID']) ? $_REQUEST['thisProductID'] : null);
-			
-			for ($index = 0; $index < count($productCounter); $index++) {
-				$quant=(isset($_REQUEST['adjustUpdate'][$index]) ? $_REQUEST['adjustUpdate'][$index] : null);
-				$thisProdID=(isset($_REQUEST['thisProductID'][$index]) ? $_REQUEST['thisProductID'][$index] : null);
-				$thisRemarks=(isset($_REQUEST['updateRemarks'][$index]) ? $_REQUEST['updateRemarks'][$index] : null);
-				
-				if (isset($_POST["adjust"])){
-				
-					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-					$sql1 = "INSERT INTO archive(archiveDate, qty, totalIn, totalOut, beginningQty, endingQty, physicalQty, remarks, prodID)
-							SELECT invDate, qty, inQty, outQty, beginningQty, physicalQty, physicalQty, remarks, prodID FROM inventory
-							WHERE prodID = '$thisProdID'";
-					$conn->exec($sql1);
-				
-					$sql2 = "UPDATE inventory SET physicalQty=$quant, invDate=CURDATE(), remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
-					$conn->exec($sql2);
-
-					$sql3 = "UPDATE inventory SET beginningQty=physicalQty WHERE prodID = '$thisProdID'";
-					$conn->exec($sql3);
-					$sql4 = "UPDATE archive SET endingQty=$quant WHERE prodID = '$thisProdID'";
-					$conn->exec($sql4);
-					$sql5 = "UPDATE archive SET physicalQty=$quant WHERE prodID = '$thisProdID'";
-					$conn->exec($sql5);
-					$sql6 = "UPDATE archive SET remarks='$thisRemarks' WHERE prodID = '$thisProdID'";
-					$conn->exec($sql6);
-					
-					echo "<meta http-equiv='refresh' content='0'>";
-				}
-			}
-		?>
 	</body>
 </html>

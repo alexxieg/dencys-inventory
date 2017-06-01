@@ -461,7 +461,6 @@
 			$resultYear = $queryYear->fetchAll();
 		?>
 		
-	
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -532,6 +531,7 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
+				
 		 		<!-- PHP code for the datatables data -->
 				<?php
 					foreach ($result6 as $item6):
@@ -623,81 +623,90 @@
 								</div>
 							</div>
 							
-							<label>View Previous Reports</label>
-								<form class="form-inline" action="" method="post">
-									<table>
-										<th>
-											FROM
-										</th>
-										<th>
-											TO
-										</th>
-										<tr>
-											<td>
-												<div class="form-group">
-													<select name="firstDateMonthName" class="form-control">
-														<option value="<?php echo $firstSelectedMonth ?>" SELECTED>Month: <?php echo $firstSelectedMonth ?></option>
-														<?php foreach ($resultMonth as $rowMonth): ?>
-															<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>
-												<div class="form-group">
-													<select name="firstDateDayName" class="form-control">
-														<option value="<?php echo $firstSelectedDay ?>" SELECTED>Day: <?php echo $firstSelectedDay ?></option>
-														<?php foreach ($resultDay as $rowDay): ?>
-															<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>
-												<div class="form-group">
-													<select name="firstDateYearName" class="form-control">
-														<option value="<?php echo $firstSelectedYear ?>">Year: <?php echo $firstSelectedYear ?></option>
-														<?php foreach ($resultYear as $rowYear): ?>
-															<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>	
-											</td>
-											
-											<td>
-												<div class="form-group">
-													<select name="secondDateMonthName" class="form-control">
-														<option value="<?php echo $secondSelectedMonth ?>" SELECTED>Month: <?php echo $secondSelectedMonth ?></option>
-														<?php foreach ($resultMonth as $rowMonth): ?>
-															<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>
-												<div class="form-group">
-													<select name="secondDateDayName" class="form-control">
-														<option value="<?php echo $secondSelectedDay ?>" SELECTED>Day: <?php echo $secondSelectedDay ?></option>
-														<?php foreach ($resultDay as $rowDay): ?>
-															<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>
-												<div class="form-group">
-													<select name="secondDateYearName" class="form-control">
-														<option value="<?php echo $secondSelectedYear ?>">Year: <?php echo $secondSelectedYear ?></option>
-														<?php foreach ($resultYear as $rowYear): ?>
-															<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
-														<?php endforeach ?>
-													</select>
-												</div>	
-												
-											</td>
-										</tr>
-									</table>
-									<div class="form-group">
-										<input type="submit" value="View" class="btn btn-success" name="submit">
-									</div>
-								</form>		
-								
-								<hr>
-							
-								<div class="tab-content clearfix">
-							<div class="tab-pane active" id="mainOutSummary">
+							<h3 id="reportHeader">View Previous Reports</h3>
+							<form class="form-inline" action="" method="post">
+								<table>
+									<tr>
+										<td>
+											<label id="labelFormat">FROM</label>     
+										</td>
+										<td>
+											<div class="form-group">
+												<select name="firstDateMonthName" class="form-control">
+													<option value="<?php echo $firstSelectedMonth ?>" SELECTED>Month: <?php echo $firstSelectedMonth ?></option>
+													<?php foreach ($resultMonth as $rowMonth): ?>
+														<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>
+										</td>	
+										<td><div class="form-group">
+												<select name="firstDateDayName" class="form-control">
+													<option value="<?php echo $firstSelectedDay ?>" SELECTED>Day: <?php echo $firstSelectedDay ?></option>
+													<?php foreach ($resultDay as $rowDay): ?>
+														<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>
+										</td>
+										<td>
+										<div class="form-group">
+												<select name="firstDateYearName" class="form-control">
+													<option value="<?php echo $firstSelectedYear ?>">Year: <?php echo $firstSelectedYear ?></option>
+													<?php foreach ($resultYear as $rowYear): ?>
+														<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>	
+										</td>
+									</tr>
+									<tr>	
+										<td>
+											<label id="labelFormat">TO</label>
+										</td>
+										<td>
+											<div class="form-group">
+												<select name="secondDateMonthName" class="form-control">
+													<option value="<?php echo $secondSelectedMonth ?>" SELECTED>Month: <?php echo $secondSelectedMonth ?></option>
+													<?php foreach ($resultMonth as $rowMonth): ?>
+														<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>
+										</td>
+										<td>
+											<div class="form-group">
+												<select name="secondDateDayName" class="form-control">
+													<option value="<?php echo $secondSelectedDay ?>" SELECTED>Day: <?php echo $secondSelectedDay ?></option>
+													<?php foreach ($resultDay as $rowDay): ?>
+														<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>
+										</td>
+										<td>	
+											<div class="form-group">
+												<select name="secondDateYearName" class="form-control">
+													<option value="<?php echo $secondSelectedYear ?>">Year: <?php echo $secondSelectedYear ?></option>
+													<?php foreach ($resultYear as $rowYear): ?>
+														<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>	
+										</td>
+									</tr>
+								</table>
+							<div class="form-group">
+								<input type="submit" value="View" id="viewButtonReport" class="btn btn-success" name="submit">
+							</div>
+							</form>		
+						
+							<br>
+							<br>
+							<hr>
+						
+							<div class="tab-content clearfix" id="test">
+								<div class="tab-pane active" id="mainOutSummary">
 									<!-- Overall Outgoing Branch -->
 									
 										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		

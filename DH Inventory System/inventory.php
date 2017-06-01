@@ -224,13 +224,13 @@
 
 											<a href="history.php">
 												<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
-													View Previous Inventory
+													Previous Inventory
 												</button>
 											</a>
 												
-											<a href="physCount.php"> 
+											<a href="phyCountForm.php"> 
 												<button type="button" class="btn btn-info btn-md btnmod" id="modButt">
-													Add Physical Count
+													Physical Count
 												</button>
 											</a>
 										</td>
@@ -242,7 +242,6 @@
 										<td>
 											<form action="<?php echo $location; ?>" method="POST">
 												<label>View by Brand/Category</label>
-												<br>
 												<select name="brand_Name">
 													<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
 													<option value="<?php echo $None?>">--None--</option>

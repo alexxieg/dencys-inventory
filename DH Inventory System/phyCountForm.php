@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Add Physical Count</title>
+		<title>Physical Count</title>
 
 		<!-- Database connection -->
 		<?php include('dbcon.php'); ?>
@@ -58,18 +58,43 @@
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-				$('#myTable').DataTable( {
-					dom: 'Bfrtip',
+                $('#myTable').DataTable( {
+                    dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
-						[ '10 rows', '25 rows', '50 rows', '100 rows','Show all' ]
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
 					],
-					buttons: [
-						'pageLength'
-					]
-				} );
-			} );		
-		</script>
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'Physical Count', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                                extend: 'print',
+                                exportOptions: {
+                                columns: ':visible'
+                                }
+                        },
+							{extend:'colvis', text: 'Select Column'},'pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );		
+		</script>	
 	</head>
 	  
 	<body>
@@ -223,7 +248,7 @@
 									?>
 
 									<tr>
-										<td>
+										<td width="50%">
 											View by Brand
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="brand_Name">
@@ -236,7 +261,7 @@
 											</form>
 										</td>	
 										
-										<td>
+										<td width="50%">
 											View by Category
 											<form action="<?php echo $location; ?>" method="POST">
 												<select name="category_Name">
@@ -250,77 +275,81 @@
 										</td>
 									</tr>
 								</table>
-					
-								
 								<hr>
-								<br>
-								<br>
-								
-								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
-										</div>
+								<a href="physCount.php">
+									 <button type="button" class="btn btn-success" id="phyCountButton">
+										Enter Physical Count
+									</button>
+								</a>
+							</div>
+			
+							<br>
+							<br>		
+							<hr>
+
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
 									</div>
 								</div>
-								
-								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-									<thead>
-										<tr id="centerData">
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Product ID</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Product Description</div>							
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Brand</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Category</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Physical Count</div>
-											</th>	
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Remarks</div>
-											</th>		
-										</tr>
-									</thead>
-									
-									<tbody>
-										<form action="" method="POST">
-										
-											<?php
-												foreach ($result3 as $item):
-												$proID = $item["prodID"];
-											?>
-												
-											<tr id="centerData">
-												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-												<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-												<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-												
-												<td>
-												
-												</td>
-													
-												<td data-title="Remarks">
-													
-												</td>
-											</tr>	
-											<?php
-												endforeach;
-											?>
-										</form>
-									</tbody>	
-								</table>	
 							</div>
+							
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr id="centerData">
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product ID</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product Description</div>							
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Brand</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Category</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Physical Count</div>
+										</th>	
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Remarks</div>
+										</th>		
+									</tr>
+								</thead>
+								
+								<tbody>
+									<form action="" method="POST">
+									
+										<?php
+											foreach ($result3 as $item):
+											$proID = $item["prodID"];
+										?>
+											
+										<tr id="centerData">
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+											
+											<td>
+											
+											</td>
+												
+											<td data-title="Remarks">
+												
+											</td>
+										</tr>	
+										<?php
+											endforeach;
+										?>
+									</form>
+								</tbody>	
+							</table>	
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
-
+		</div>
 	</body>
 </html>
