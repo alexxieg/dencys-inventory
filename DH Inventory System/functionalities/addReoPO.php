@@ -33,9 +33,14 @@
 				$result = $conn->query($sql); 
 				
 			}
-
-		$url='../purchaseOrder.php';
-
-		echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+		
+		$role = $_SESSION['sess_role'];
+		if($role == 'admin'){
+			$url='../purchaseOrder.php';
+			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+		}else{
+			$url='../userPurchaseOrders.php';
+			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+		}
 	}	
 ?>	
