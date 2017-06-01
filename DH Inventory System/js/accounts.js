@@ -8,6 +8,15 @@ function validateForm() {
 		});
 		document.getElementById('adduser').style.borderColor = "red";
 		return false;
+	} else if (document.getElementById('adduser').value == " "){
+		swal({
+		title: "Warning!",
+		text: "Please Enter Username.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('adduser').style.borderColor = "red";
+		return false;
 	}
 	if (document.getElementById('addpass').value == "") {
 		swal({
@@ -18,6 +27,26 @@ function validateForm() {
 		});
 		document.getElementById('addpass').style.borderColor = "red";
 		return false;
+	} else if (document.getElementById('addpass').value == " ") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Password.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addpass').style.borderColor = "red";
+		return false;
+		
+	} else if (document.getElementById('addpass').value.length < 6) {
+		swal({
+		title: "Warning!",
+		text: "The Password length should at least be 6.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addpass').style.borderColor = "red";
+		return false;
+		
 	}
 	if (document.getElementById('addpassconf').value == "") {
 		swal({
