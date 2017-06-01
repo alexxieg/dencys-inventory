@@ -57,7 +57,6 @@
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
 
-
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {

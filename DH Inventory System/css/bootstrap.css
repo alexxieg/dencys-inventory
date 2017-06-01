@@ -7625,9 +7625,14 @@ border: none;
 	margin-right: auto;
 }
 
+#supContactNum{
+	width:50%;
+	margin-left: 25%;
+	margin-right: auto;
+}
+
 #addIncQty{
 	width: 50%;
-
 }
 
 #addInProd{

@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-		<title>Edit Products</title>
+		<title>Edit Supplier</title>
 			
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -125,8 +125,18 @@
 								<form action="" method="POST" onsubmit="return validateForm()">									
 									<h3>Supplier Name</h3>
 									<?php foreach ($result as $row): ?>
-										<input type="text" class="form-control" id="editSName" value="<?php echo $row["supplier_name"]; ?>" placeholder="<?php echo $row["supplier_name"]; ?>" name="supName"> <br>
+										<input type="text" class="form-control" id="supName" value="<?php echo $row["supplier_name"]; ?>" placeholder="<?php echo $row["supplier_name"]; ?>" name="supName">
 									<?php endforeach ?>
+									
+									<h3>Contact Number</h3>
+									<?php foreach ($result as $row): ?>
+										<input type="text" class="form-control" id="supContactNum" value="<?php echo $row["contactNo"]; ?>" placeholder="<?php echo $row["contactNo"]; ?>" name="contactNo">
+									<?php endforeach ?>
+									
+									<h3>Location</h3>
+									<?php foreach ($result as $row): ?>
+										<input type="text" class="form-control" id="supLoc" value="<?php echo $row["location"]; ?>" placeholder="<?php echo $row["location"]; ?>" name="location">
+									<?php endforeach ?>									
 									<br>
 									
 									<div class="modFoot">
