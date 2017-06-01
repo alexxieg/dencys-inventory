@@ -336,14 +336,14 @@
 		</div>
 		
 		<?php
-		require_once 'dbcon.php';
-		$outid = $_GET['outId'];
-		if (isset($_POST["updateOut"])){
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
-				SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE receiptNo = '$outid'";
-		$conn->exec($sql);
-		}
+			require_once 'dbcon.php';
+			$outid = $_GET['outId'];
+			if (isset($_POST["updateOut"])){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
+						SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE receiptNo = '$outid'";
+				$conn->exec($sql);
+			}
 		?>
 		
 		<!-- Update Function -->
@@ -411,11 +411,8 @@
 					VALUES ('$outQty2',CURDATE(),'$outid','$newbranch3','$newemp3','$newprod3','$userID2')";
 					$result = $conn->query($sql); 
 				}
-<<<<<<< HEAD
+
 				$url="viewProdIssuance.php?outId=$outID";
-=======
-				$url='../prodIssuance.php';
->>>>>>> 259f0655e9dde2ce1e90bc4f11b79bba4fcb347c
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}			
 		?>
