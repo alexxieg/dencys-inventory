@@ -154,14 +154,14 @@
 									<table class="table">	
 										<tr>
 											<td>
-												<button class="btn btn-success" id="backUpButton">BACKUP SYSTEM</button>
+												<a href = "functionalities/createBackup.php"><button class="btn btn-success" id="backUpButton">BACKUP SYSTEM</button></a>
 												<button class="btn btn-success" id="backUpButton">RESTORE SYSTEM</button>
-												<form action="restoreBackup.php" method="post" enctype="multipart/form-data">
-												    Select image to upload:
+												<form action="functionalities/restoreBackup.php" method="post" enctype="multipart/form-data">
+												    Select .sql file to restore
 												    <input type="file" name="fileToUpload" id="fileToUpload">
 												    <input type="submit" value="Select Restore File" name="submit">
 												</form>
-											</td>
+											</td>	
 										</tr>
 									</table>
 								</table>
