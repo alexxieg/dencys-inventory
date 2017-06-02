@@ -43,16 +43,10 @@
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
 		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
-		
-		<script src="datatables/build/pdfmake.min.js"></script>
-		<script src="datatables/build/vfs_fonts.js"></script>
-		
 		<script src="datatables/Buttons/js/buttons.bootstrap.min.js"></script>
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
-		<script src="datatables/Buttons/js/buttons.flash.min.js"></script>
-		
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
@@ -91,18 +85,8 @@
                                 }
 									
                         },
-							{extend:'colvis', text: 'Select Column'},
-								{extend: 'pdf', pageMargins: [ 40, 60, 40, 60 ],
-								text: 'Save PDF',
-								download: 'open',
-									exportOptions: {
-										columns: ':visible',
-										
-										modifier: {
-											page: 'current'
-										},
-									},
-							},'pageLength', 
+							{extend:'colvis', text: 'Select Column'},'pageLength', 
+							
                     ],
                         columnDefs: [{
                             targets: -1,
