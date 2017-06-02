@@ -42,11 +42,11 @@
 	<body>
 		<?php
 			$branchThisID = $_GET['useID'];
-			$query = $conn->prepare("SELECT branchID, location FROM branch");
+			$query = $conn->prepare("SELECT branchID, location, branchName FROM branch");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT branchID, location FROM branch WHERE branchID='$branchThisID'");
+			$query2 = $conn->prepare("SELECT branchID, location, branchName FROM branch WHERE branchID = '$branchThisID'");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 		?>
@@ -82,7 +82,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="../functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="../defectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -127,17 +127,16 @@
 							<h1 id="headers">Edit Branch Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST">
+								<form action="" method="POST">							
 									<?php foreach ($result2 as $row): ?>
-									<h3>Branch ID</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["branchID"]; ?>" value="<?php echo $row["branchID"]; ?>" name="branID"> <br>
+									<h3>Branch Name</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["branchName"]; ?>" value="<?php echo $row["branchName"]; ?>" name="branName">
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
-									<h3>Branch Name</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["location"]; ?>" value="<?php echo $row["location"]; ?>" name="branName"> <br>
-									<?php endforeach ?>
-									<br>
+									<h3>Location</h3>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["location"]; ?>" value="<?php echo $row["location"]; ?>" name="location">
+									<?php endforeach ?>									
 									
 									<div class="modFoot">
 										<span>
@@ -161,13 +160,13 @@
 		
 		<!-- Update Function -->
 		<?php
-			$braID=(isset($_REQUEST['branID']) ? $_REQUEST['branID'] : null);
+			$loc=(isset($_REQUEST['location']) ? $_REQUEST['location'] : null);
 			$braName=(isset($_REQUEST['branName']) ? $_REQUEST['branName'] : null);
 			if (isset($_POST["editBranch"])){
 			
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			 
-				$sql = "UPDATE branch SET branchID = '$braID', location = '$braName' WHERE branchID = '$branchThisID'";
+				$sql = "UPDATE branch SET branchName = '$braName', location = '$loc' WHERE branchID = '$branchThisID'";
 				$conn->exec($sql);
 				
 				$url='../branches.php';

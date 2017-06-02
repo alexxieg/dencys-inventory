@@ -179,7 +179,7 @@
 							<h1 id="headers">ADD PRODUCT DELIVERY</h1>		
 							
 							<form action="" method="POST">
-								<h3> User </h3>
+								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
 								<h3>Product Order Number</h3>				
@@ -193,7 +193,7 @@
 								
 								<h3>Supplier</h3> 
 									<div class="ui-widget">
-										<input id="supplierName" name="supplier" value="<?php echo $supplierName;?>">
+										<input id="addSupplier" name="supplier" value="<?php echo $supplierName;?>">
 									</div>
 														
 								<h3>Received By</h3>

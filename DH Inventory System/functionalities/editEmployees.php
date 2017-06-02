@@ -42,14 +42,11 @@
 	<body>
 		<?php
 			$employID= $_GET['emplId'];
-			$query = $conn->prepare("SELECT empID, empFirstName, empLastName, empMidName, empExtensionName 
-									FROM employee");
+			$query = $conn->prepare("SELECT empID, empFirstName, empLastName, empMidName, empExtensionName FROM employee");
 			$query->execute();
 			$result = $query->fetchAll();
 			
-			$query2 = $conn->prepare("SELECT empID, empFirstName, empLastName, empMidName, empExtensionName 
-									FROM employee
-									WHERE empID = $employID");
+			$query2 = $conn->prepare("SELECT empID, empFirstName, empLastName, empMidName, empExtensionName FROM employee WHERE empID = $employID");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 		?>
@@ -85,7 +82,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="../defectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -182,15 +179,14 @@
 			
 			if (isset($_POST["editEmp"])){
 					
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					 
-							 
-			$sql = "UPDATE employee SET empFirstName = '$emploFirstName', empMidName = '$emploMiddleName', empLastName = '$emploLastName', empExtensionName = '$emploExtenName'
-					WHERE empID = '$employID'";
-			$conn->exec($sql);
-			
-			$url='../employees.php';
-			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';		
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		 
+								 
+				$sql = "UPDATE employee SET empFirstName = '$emploFirstName', empMidName = '$emploMiddleName', empLastName = '$emploLastName', empExtensionName = '$emploExtenName'
+						WHERE empID = '$employID'";
+				$conn->exec($sql);
+				
+				$url='../employees.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';			
 			}
 		?>
 	</body>

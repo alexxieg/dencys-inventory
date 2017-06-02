@@ -37,7 +37,7 @@
 					VALUES (CURDATE(),$retQty,'Supplier Return','$retRem','$recNo','$productID', 0 ,$sup3,$emp3,'$userID')";
 			$conn->exec($sql);
 		}
-		session_start();
+
 		$role = $_SESSION['sess_role'];
 		if($role == 'admin'){
 			$url='returnSupplier.php';
