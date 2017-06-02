@@ -64,16 +64,16 @@
 		
 		$qty = $_POST['prodQty'];
 		
-		$sql1 = "INSERT INTO inventory (initialQty, date, qty, inQty, outQty, phyCount, endingQty, prodID)
-				 VALUES ('$qty',CURDATE(),'$qty',NULL,NULL,NULL,NULL,'$prod')";
+		$sql1 = "INSERT INTO inventory (beginningQty, invDate, qty, inQty, inRetQty, totalIn, outQty, outRetQty, totalOut, physicalQty, endingQty, prodID, invPeriodStart)
+				 VALUES ('$qty', CURDATE(), '$qty', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '$prod', NULL)";
 		$conn->exec($sql1);
 		
 		$sql2 = "INSERT INTO defectives (defectProdID, prodName, categoryID, brandID, unitType, status, prodID)
 				 VALUES ('$defect', '$defectName', '$fincateg', '$finbrand', '$unitType','Inactive', '$prod')";
 		$conn->exec($sql2);
 		
-		$sql3 = "INSERT INTO inventory (initialQty, date, qty, inQty, outQty, phyCount, endingQty, prodID)
-				 VALUES ('$qty', CURDATE(), '$qty', NULL, NULL, NULL, NULL, '$defect')";
+		$sql3 = "INSERT INTO inventorydefectives (defectBeginQty, invDefectDate, defectQty, defectInQty, defectInRetQty, defectTotalIn, defectOutQty, defectOutRetQty, defectTotalOut, defectPhyQty, defectEndQty, defectProdID, invPeriodStart)
+				 VALUES ('$qty', CURDATE(), '$qty', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '$defect', NULL)";
 		$conn->exec($sql3);
 		
 		echo "<meta http-equiv='refresh' content='0'>";
