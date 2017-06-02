@@ -14,7 +14,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) || $role!="admin") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -262,7 +262,7 @@
 										<br>
 										<br>
 										<span>
-											<a href="../userproductdeliveries.php">
+											<a href="../prodDeliveries.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>
@@ -379,7 +379,8 @@
 													<span>
 													<a href="../prodDeliveries.php">
 													<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-													</a></span>
+													</a>
+													</span>
 													<span><input type="submit" name="addItems" value="Submit" class="btn btn-success" id="sucBtn"></span>
 												</div>
 											</form> 	
@@ -441,7 +442,7 @@
 					$conn->exec($sql);					
 					
 				}
-				$url="userViewProdDelivery.php?incId=$incID";
+				$url="viewProdDelivery.php?incId=$incID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 
@@ -477,7 +478,7 @@
 					WHERE incoming.receiptNo = '$incID'";
 					$conn->exec($sql);		
 				}
-				$url="userViewProdDelivery.php?incId=$incID";
+				$url="viewProdDelivery.php?incId=$incID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}	
 		?>
