@@ -235,25 +235,23 @@
 									<tr>
 										<form action="<?php echo $location; ?>" method="POST">
 											<td width="50%">
-												View by Brand
-												
-													<select name="brand_Name">
-														<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
-														<?php foreach ($result as $row): ?>
-															<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-														<?php endforeach ?>
-													</select>
+											View by Brand
+												<select name="brand_Name">
+													<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
+													<?php foreach ($result as $row): ?>
+														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+													<?php endforeach ?>
+												</select>
 											</td>	
 											
 											<td width="50%">
 												View by Category
-													<select name="category_Name">
-														<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
-														<?php foreach ($result2 as $row2): ?>
-															<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
-														<?php endforeach ?>
-													</select>
-													
+												<select name="category_Name">
+													<option value="<?php echo $selectedCategory?>" SELECTED>Selected: <?php echo $filterCategory?></option>
+													<?php foreach ($result2 as $row2): ?>
+														<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
+													<?php endforeach ?>
+												</select>	
 											</td>
 											<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
 										</form>
@@ -262,18 +260,13 @@
 							</div>
 							<hr>
 						
-							
-							<br>
-							<br>
-							
-							<hr>
-							
 							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 								<div id="myTable_length" class="dataTables_length">
 									<div id="myTable_filter" class="dataTables_filter">
 									</div>
 								</div>
 							</div>
+							
 							<form action="" method="POST">
 								<input type="submit" name="adjust" value ="Update Physical Quantity" id="phyCountButton">	
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
@@ -307,32 +300,31 @@
 									</thead>
 									
 									<tbody>
-										
-											<?php
-												foreach ($result3 as $item):
-												$proID = $item["prodID"];
-											?>
+										<?php
+											foreach ($result3 as $item):
+											$proID = $item["prodID"];
+										?>
+											
+										<tr id="centerData">
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+											<td data-title="Category"><?php echo $item["qty"]; ?></td>
+											<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
+											<td>
+												<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
+												<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
+											</td>
+											
+											<td data-title="Remarks">
+												<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
+											</td>
 												
-											<tr id="centerData">
-												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-												<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-												<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-												<td data-title="Category"><?php echo $item["qty"]; ?></td>
-												<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
-												<td>
-													<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-													<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
-												</td>
-												
-												<td data-title="Remarks">
-													<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
-												</td>
-													
-											</tr>	
-											<?php
-												endforeach;
-											?>
+										</tr>	
+										<?php
+											endforeach;
+										?>
 											
 									</tbody>	
 								</table>

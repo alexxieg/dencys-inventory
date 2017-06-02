@@ -260,14 +260,12 @@
 										<form action="<?php echo $location; ?>" method="POST">
 											<td width="50%">
 												View by Brand
-												
-													<select name="brand_Name">
-														<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
-														<?php foreach ($result as $row): ?>
-															<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
-														<?php endforeach ?>
-													</select>
-												
+												<select name="brand_Name">
+													<option value="<?php echo $selectedBrand?>" SELECTED>Selected: <?php echo $filterBrand?></option>
+													<?php foreach ($result as $row): ?>
+														<option value="<?=$row["brandID"]?>"><?=$row["brandName"]?></option>
+													<?php endforeach ?>
+												</select>
 											</td>	
 											
 											<td width="50%">

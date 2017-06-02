@@ -165,7 +165,7 @@
 						<li class="active"><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -251,21 +251,17 @@
 									</tr>
 								</table>
 							</div>
-							<hr>
-							<button type="submit" name="adjust" class="btn btn-success" id="phyCountButton">
-								Update Physical Count
-							</button>
-							<br>
-							<br>
-							
-							<hr>
+							<hr>	
 								
-								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
-										</div>
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
 									</div>
 								</div>
+							</div>
+							
+							<form action="" method="POST">
+								<input type="submit" name="adjust" value ="Update Physical Quantity" id="phyCountButton">
 								
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 									<thead>
@@ -297,38 +293,35 @@
 										</tr>
 									</thead>
 									
-									<tbody>
-										<form action="" method="POST">
-										
-											<?php
-												foreach ($result3 as $item):
-												$proID = $item["prodID"];
-											?>
+									<tbody>	
+										<?php
+											foreach ($result3 as $item):
+											$proID = $item["prodID"];
+										?>
+											
+										<tr id="centerData">
+											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+											<td data-title="Unit"><?php echo $item["unitType"];?></td>
+											<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
+											
+											<td>
+												<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
+												<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
+											</td>
+											<td data-title="Remarks">
+												<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
+											</td>
 												
-											<tr id="centerData">
-												<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-												<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-												<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-												<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-												<td data-title="Unit"><?php echo $item["unitType"];?></td>
-												<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
-												
-												<td>
-													<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
-													<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />
-												</td>
-												<td data-title="Remarks">
-													<input type="text" id="adjustment" name="updateRemarks[]" value="<?php echo $item["remarks"]; ?>" placeholder="<?php echo $item["remarks"]; ?>">
-												</td>
-													
-											</tr>	
-											<?php
-												endforeach;
-											?>
-										</form>
+										</tr>	
+										<?php
+											endforeach;
+										?>
 									</tbody>	
 								</table>	
-							</div>
+							</form>
 						</div>
 					</div>
 				</div>
