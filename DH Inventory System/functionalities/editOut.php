@@ -14,7 +14,7 @@
 		<?php 
 			session_start();
 			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) && $role!="admin") {
+			if (!isset($_SESSION['id']) || $role!="admin") {
 				header('Location: index.php');
 			}
 			$session_id = $_SESSION['id'];
@@ -224,7 +224,7 @@
 										<br>
 										<br>
 										<span>
-											<a href="../userProdIssuance.php">
+											<a href="../ProdIssuance.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>
