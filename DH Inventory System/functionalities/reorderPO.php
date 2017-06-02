@@ -141,7 +141,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="defectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
 							</ul>
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -193,14 +193,12 @@
 						<div class="pages no-more-tables">
 							<h1 id="headers">Add Purchase Order</h1>
 							<form action="" method="POST" onsubmit="return validateForm()"><td>
-								<td>
-									<h3> User </h3>
-									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-								</td>																									
-								
+								<h3> User </h3>
+								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+																												
 								<h3>Supplier</h3>  
 									<div class="ui-widget">
-										<input id="addSupplier" name="supplier" placeholder="Supplier">
+										<input name="supplier" id="supplierName" placeholder="Supplier">
 									</div>
 								<br>
 										
