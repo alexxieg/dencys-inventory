@@ -250,7 +250,7 @@
 												<input type="text" class="form-control" id ="addLName" placeholder="Last Name" name="empLName">
 												
 												<h3>Extension Name</h3>
-												<input type="text" class="form-control" id ="addEName" placeholder="Extension/Nickname" name="empEName"> 
+												<input type="text" class="form-control" id ="addEName" placeholder="Extension/Nickname" name="empEName"> 										
 												
 												<div class="modFoot">
 												<span>
@@ -304,6 +304,9 @@
 														<th>	
 															<div id="tabHead">Extension Name</div>
 														</th>
+														<th>
+															<div id="tabHead">Restore</div>
+														</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -320,8 +323,8 @@
 														<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
 														<td>										
 															<a href="functionalities/restoreEmployee.php?emplId=<?php echo $employID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this entry?');">
-																	<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this employee?');">
+																	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
 														</td>		
