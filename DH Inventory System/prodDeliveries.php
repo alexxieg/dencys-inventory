@@ -220,12 +220,12 @@
 							<h1 id="headers">PRODUCT DELIVERIES</h1>
 							<table class="table">	
 								<tr>
-									<td>
+									<td width="50%">
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#partial" id="modbutt">View Partial Deliveries</button>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product Delivery</button>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 									</td>
-									<td>
+									<td width="50%">
 										<form class="form-inline" action="<?php echo $location; ?>" method="post">
 											<label>View Previous Entries</label>
 											<div class="form-group">
