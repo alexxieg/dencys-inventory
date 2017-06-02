@@ -112,7 +112,9 @@
 					<h1 id="headers">Add Defective Items</h1>
 					<div>
 						<form action="" method="POST" class="editPgs">
-						
+							<h3>User</h3>
+							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+							
 							<h3>Product</h3>
 							<?php
 								$query = $conn->prepare("SELECT prodName FROM product");
@@ -176,13 +178,14 @@
 				
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$qty = $_POST['qty'];
+				$userID = $_POST['userID'];
 				
 				$prodName = $_POST['prodItem'];
-				$prodSQL = $conn->query("SELECT prodID from product WHERE prodName = '$prodName'");
+				$prodSQL = $conn->query("SELECT prodID from product WHERE prodName sounds like '$prodName'");
 				$prodSQLRes = $prodSQL->fetch(PDO::FETCH_ASSOC);
 				$prodRef = $prodSQLRes['prodID'];
 				
-				$defSQL = $conn->query("SELECT defectProdID AS defID from defectives WHERE prodID sounds like '$prodRef'");
+				$defSQL = $conn->query("SELECT defectProdID AS defID from defectives WHERE prodID = '$prodRef'");
 				$defRes = $defSQL->fetch(PDO::FETCH_ASSOC);
 				$defID = $defRes['defID'];
 				
@@ -191,14 +194,19 @@
 				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 				$emp3 = $emp2['empA'];
 				
-				$sqlIn = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, inRemarks, status, empID, prodID)
-						  VALUES ('$qty', CURDATE(), '$rec', CURDATE(), 'None', 'Complete', '$emp3', '$defID')";
+				$sqlIn = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, inRemarks, supID, status, inType, empID, prodID, userID, poNumber)
+							VALUES ('$qty', CURDATE(), '$rec', CURDATE(), 'None', 999, 'Defective', 'Defective', '$emp3', '$defID', '$userID', 'None')";
 				$conn->exec($sqlIn);
 				
-				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID)
-						   VALUES ('$qty', CURDATE(), '$rec', 0, '$emp3', '$defID')";
+				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID, userID)
+						   VALUES ('$qty', CURDATE(), '$rec', 0, '$emp3', '$defID', '$userID')";
 				$conn->exec($sqlOut);
+				
+				$activate = "UPDATE defectives SET status = 'Active' WHERE prodID = '$prodRef'";
+				$conn->exec($activate);
 			}    
+			
+			
 		?>
 	</body>
 </html>
