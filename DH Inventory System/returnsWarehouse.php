@@ -276,7 +276,7 @@
 								<tbody>				
 									<?php
 										foreach ($result as $item):
-										$retID = $item["receiptNo"];
+										$returnID = $item["receiptNo"];
 									?>
 									
 									<tr id="centerData">
@@ -287,7 +287,7 @@
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 											
 										<td>
-											<a href="functionalities/viewRetWarehouse.php?retId=<?php echo $retID; ?>">
+											<a href="functionalities/viewRetWarehouse.php?retId=<?php echo $returnID; ?>">
 												<button type="button" class="btn btn-default">
 												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 												</button>
@@ -447,7 +447,7 @@
 														
 													<?php
 														foreach ($result1 as $item):
-														$retID = $item["receiptNo"];
+														$returnID = $item["receiptNo"];
 													?>
 													<tr id="centerData">	
 														<td data-title="Edit Date"><?php echo $item["returnEditDate"]; ?></td>
