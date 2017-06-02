@@ -24,7 +24,7 @@
 <?php
 	$updateOut = $conn->prepare("UPDATE inventorydefects
 								SET inventorydefects.defectOutQty = (SELECT SUM(outgoing.outQty) 
-								FROM outgoing WHERE inventorydefects.defectProdID = outgoing.prodID 
+								FROM outgoing join inventorydefects WHERE outgoing.defectProdID = inventorydefects.defectProdID 
 								GROUP BY outgoing.prodID)");
 	$updateOut->execute();
 ?>
