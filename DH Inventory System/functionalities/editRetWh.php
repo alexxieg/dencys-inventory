@@ -22,6 +22,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 		<!-- Autocomplete Script -->
 		<link rel="stylesheet" href="../css/jquery-ui.css">
@@ -155,7 +157,7 @@
 					<div id="contents">
 						<div class="pages no-more-tables">
 							<h1 id="headers">Edit Warehouse Return Entry</h1>
-							<form action="" method="POST" onsubmit="return validateForm()">
+							<form action="" method="POST">
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
@@ -306,7 +308,7 @@
 												</td>
 														
 												<td>
-													<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Quantity" name="retQty2[]">
+													<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="retQty2[]" required>
 												</td>
 												
 												<td>
