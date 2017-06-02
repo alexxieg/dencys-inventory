@@ -204,7 +204,7 @@
 											<?php foreach ($resul as $row): ?>
 											
 											<tr>												
-														
+												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />		
 												<td>	
 													<div class="ui-widget">
 														<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
