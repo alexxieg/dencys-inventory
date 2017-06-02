@@ -190,7 +190,7 @@
 				
 				<?php
 					foreach ($result2 as $item):
-					$retID = $item["receiptNo"];
+					$returnID = $item["receiptNo"];
 				?>
 				
 				<?php
@@ -264,7 +264,7 @@
 								<tbody>
 									<?php
 										foreach ($result as $item):
-										$retID = $item["returnID"];
+										$returnID = $item["returnID"];
 									?>
 										
 									<tr id="centerData">

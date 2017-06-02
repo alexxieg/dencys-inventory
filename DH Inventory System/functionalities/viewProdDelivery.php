@@ -116,9 +116,9 @@
 			$result2 = $query2->fetchAll();
 			
 			$receiptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
-			$receiptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$receiptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$supplier = current($conn->query("SELECT suppliers.supplier_name FROM incoming INNER JOIN suppliers ON incoming.supID = suppliers.supID WHERE incoming.receiptNo = '$incID'")->fetch());
-			$employee = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$employee = current($conn->query("SELECT employee.empFirstName FROM incoming JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 		?>
 
 		<!-- Top Main Header -->
@@ -212,7 +212,7 @@
 							<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
 						</a>
 						
-						<a href="editIn.php?incId=<?php echo $incRec; ?>"> 
+						<a href="editIn.php?incId=<?php echo $incID; ?>"> 
 							<button type="button" class="btn btn-default">
 								EDIT ENTRY
 							</button>

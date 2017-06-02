@@ -165,7 +165,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="defectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -219,11 +219,11 @@
 							<h1 id="headers">PRODUCT ISSUANCE</h1>
 							<table class="table">	
 								<tr>
-									<td>
+									<td width="50%">
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modbutt">Add Issued Products</button>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>										
 									</td>
-									<td>	
+									<td width="50%">	
 										<form class="form-inline" action="<?php echo $location; ?>" method="post">
 											<label>View Previous Entries</label>
 											<div class="form-group">

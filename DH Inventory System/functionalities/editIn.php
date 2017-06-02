@@ -65,10 +65,10 @@
 	</head>
 	
 	<body>
-		<?php
+	<?php
 			$incID= $_GET['incId'];
 			$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, employee.empFirstName, incoming.receiptNo, incoming.receiptDate, incoming.supID, incoming.status, incoming.inRemarks, incoming.userID 
-									FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+									FROM incoming JOIN product ON incoming.prodID = product.prodID JOIN employee ON incoming.empID = employee.empID
 									ORDER BY inID DESC;");
 			$query->execute();
 			$result = $query->fetchAll();
@@ -80,11 +80,12 @@
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 			
+			$updateDate = current($conn->query("SELECT incoming.inDate FROM dencys.incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
-			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
-			$supplierID = current($conn->query("SELECT incoming.supID FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
+			$supplierID = current($conn->query("SELECT incoming.supID FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$supplierName = current($conn->query("SELECT supplier_name FROM suppliers WHERE supID = $supplierID")->fetch());
-			$employ = current($conn->query("SELECT employee.empFirstName FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
+			$employ = current($conn->query("SELECT employee.empFirstName FROM incoming JOIN employee ON incoming.empID = employee.empID WHERE incoming.receiptNo = '$incID'")->fetch());
 		?>
 
 		<!-- Top Main Header -->
@@ -97,7 +98,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../userinventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -111,50 +112,39 @@
 
 		<div class="container-fluid" >
 			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
-					<!-- Sidebar -->
-					<ul class="nav nav-sidebar">
-						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
-								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
+								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="incoming">
-								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
-							</ul>
-						</li>
-						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="returns">
-								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
-								<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
-							</ul>
-						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="reports">
-								<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-								<li><a href="../monthlyIncoming.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
-								<li><a href="../monthlyOutgoing.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
-							</ul>
-						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="manage">
-								<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
-								<li><a href="../branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
-								<li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
-								<li><a href="../suppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
-								<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-								<li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
-								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
-							</ul>
-						</li>
-						<li><a href="backup.php"><i class="glyphicon glyphicon-cog"></i> System Settings</a></li>
-					</ul>
-				</div>
+					<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<ul class="list-unstyled collapse" id="incoming">
+							<li><a href="../userpurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+							<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+						</ul>
+					</li>
+					<li><a href="../userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<ul class="list-unstyled collapse" id="returns">
+							<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+							<li><a href="../userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+						</ul>
+					</li>
+					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<ul class="list-unstyled collapse" id="reports">
+							<li><a href="../userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+							<li><a href="../usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+							<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
+						</ul>
+					</li>
+					<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
+					<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+				</ul>
+			</div>
 				<!-- End of Sidebar -->
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
@@ -272,7 +262,7 @@
 										<br>
 										<br>
 										<span>
-											<a href="../prodDeliveries.php">
+											<a href="../userproductdeliveries.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>
@@ -285,7 +275,7 @@
 								</form> 								
 							</div>								
 				
-								<!-- Modal for New Incoming Entry Form -->
+							<!-- Modal for New Incoming Entry Form -->
 							<div class="modal fade" id="myModal" role="dialog">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -299,7 +289,7 @@
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 												
 												<h3>Product Order Number</h3>				
-												<input type="text" class="form-control" id="poNum" value="<?php echo $incID; ?>" name="po" readonly>
+												<input type="text" class="form-control" id="poNum" value="<?php echo $incID; ?>" name="po2" readonly>
 												
 												<h3>Receipt No.</h3> 
 												<input type="text" class="form-control" id ="addRcpt" value="<?php echo $reciptNum; ?>" placeholder="Receipt Number" name="rcno">
@@ -309,7 +299,7 @@
 												
 												<h3>Supplier</h3> 
 													<div class="ui-widget">
-														<input id="addSupplier" name="supplier">
+														<input id="addSupplier" name="supplier2" value="<?php echo $supplierName; ?>">
 													</div>
 																		
 												<h3>Received By</h3>
@@ -319,7 +309,7 @@
 													$res = $query->fetchAll();
 												?>
 																	
-												<select class="form-control" id="addEmpl" name="emp">
+												<select class="form-control" id="addEmpl" name="emp2">
 													<?php foreach ($res as $row): ?>
 														<option><?=$row["empFirstName"]?></option>
 													<?php endforeach ?>
@@ -350,30 +340,30 @@
 														<tr id="thisRow">
 															<td>	
 																<div class="ui-widget">
-																	<input class="thisProduct" name="prodItem[]" placeholder="Product Name">
+																	<input class="thisProduct" name="prodItem2[]" placeholder="Product Name">
 																</div>
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id="addIncQty" placeholder="Quantity" name="incQty[]">
+																<input type="number" min="1" class="form-control" id="addIncQty" placeholder="Quantity" name="incQty2[]">
 															</td>
 															
 															<td>
-																<select class="form-control"  name="inStatus[]">
+																<select class="form-control"  name="inStatus2[]">
 																	<option>Complete</option>
 																	<option>Partial</option>
 																</select> 
 															</td>
 																
 															<td>
-																<select class="form-control" name="inType[]">
+																<select class="form-control" name="inType2[]">
 																	<option>Ordered</option>
 																	<option>Freebie</option>
 																</select>
 															</td>	
 																
 															<td>
-																<input type="text" class="form-control" id="addRem" value="None" placeholder="Remarks" name="inRemarks[]">
+																<input type="text" class="form-control" id="addRem" value="None" placeholder="Remarks" name="inRemarks2[]">
 															</td>
 														</tr>
 													</tbody>
@@ -422,73 +412,74 @@
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-				if (isset($_POST["updateIn"])) {
-				
+			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
+			if (isset($_POST["updateIn"])){
+			
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+				for ($index = 0; $index < count($prodTem); $index++) {	
+					$inRemarks = $_POST['inRemarks'][$index];
+					$prodItem = $_POST['prodItem'][$index];
+					$inQty = $_POST['incQty'][$index];
+					$inStat = $_POST['inStatus'][$index];
+					$inType = $_POST['inType'][$index];
+					$rcpNo = $_POST['rcno'];
+					$recDate = $_POST['rcdate'];
+					$incomingID = $_POST['productInID'][$index];
+					$userID = $_POST['userID'];
+					$sup = $_POST['thisSupplier'];
 					
-					for ($index = 0; $index < count($prodTem); $index++) {	
-						$inRemarks = $_POST['inRemarks'][$index];
-						$prodItem = $_POST['prodItem'][$index];
-						$inQty = $_POST['incQty'][$index];
-						$inStat = $_POST['inStatus'][$index];
-						$inType = $_POST['inType'][$index];
-						$rcpNo = $_POST['rcno'];
-						$recDate = $_POST['rcdate'];
-						$incomingID = $_POST['productInID'][$index];
-						$userID = $_POST['userID'];
-						$sup = $_POST['thisSupplier'];
-						
-						$emp = $_POST['emp'];
-						$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
-						$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-						$emp3 = $emp2['empA'];
+					$emp = $_POST['emp'];
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
 
-						$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
-						$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-						$prod3 = $prod2['prodA'];
-						
-						$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supID = $sup, status = '$inStat', inType = '$inType', inRemarks = '$inRemarks', empID = '$emp3', prodID = '$prod3', userID = '$userID'
-							WHERE inID = $incomingID";
-						$conn->exec($sql);					
-						
-					}
-					$url="viewProdDelivery.php?incId=$incID";
-					echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'")->fetch());
+					
+					$sql = "UPDATE incoming SET inQty = $inQty, inDate = CURDATE(), receiptNo = '$rcpNo', receiptDate = '$recDate', supID = $sup, status = '$inStat', inType = '$inType', inRemarks = '$inRemarks', empID = $emp3, prodID = '$productID', userID = '$userID'
+						WHERE inID = $incomingID";
+					$conn->exec($sql);					
+					
 				}
+				$url="userViewProdDelivery.php?incId=$incID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+			}
 
-				if (isset($_POST["addItems"])) {
-				
-					for ($index = 0; $index < count($prodTem); $index++) {
+			if (isset($_POST["addItems"])){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {
 
-						$inRemarks = $_POST['inRemarks'][$index];
-						$prodItem = $_POST['prodItem'][$index];
-						$inQty = $_POST['incQty'][$index];
-						$inStat = $_POST['inStatus'][$index];
-						$inType = $_POST['inType'][$index];
-						$emp = $_POST['emp'];
-						$userID = $_POST['userID'];
-						$supName = $_POST['supplier'];	
-						$poNum = $_POST['po'];
+					$inRemarks = $_POST['inRemarks2'][$index2];
+					$prodItem = $_POST['prodItem2'][$index2];
+					$inQty = $_POST['incQty2'][$index2];
+					$inStat = $_POST['inStatus2'][$index2];
+					$inType = $_POST['inType2'][$index2];
+					$emp = $_POST['emp2'];
+					$userID = $_POST['userID'];
+					$supName = $_POST['supplier2'];	
+					$poNum = $_POST['po2'];
 
-						$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
-						$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-						$emp3 = $emp2['empA'];
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
 
-						$sup1 = $conn->query("SELECT supID as supA FROM suppliers WHERE supplier_name = '$supName'");
-						$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
-						$sup3 = $sup2['supA'];
-						
-						$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
-						$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-						$prod3 = $prod2['prodA'];
-						$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
-						VALUES ('$inQty',CURDATE(),'$incID','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$prod3','$userID','$poNum')";
-						$result = $conn->query($sql); 
-					}
-					$url="viewProdDelivery.php?incId=$incID";
-					echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-				}	
+					$sup1 = $conn->query("SELECT supID as supA FROM suppliers WHERE supplier_name = '$supName'");
+					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+					$sup3 = $sup2['supA'];
+					
+					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'")->fetch());
+					
+					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
+					VALUES ('$inQty',CURDATE(),'$incID','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$productID','$userID','$poNum')";
+					$result = $conn->query($sql);
+					
+					$sql = "UPDATE incoming SET inDate = $updateDate
+					WHERE incoming.receiptNo = '$incID'";
+					$conn->exec($sql);		
+				}
+				$url="userViewProdDelivery.php?incId=$incID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+			}	
 		?>
 	
   </body>

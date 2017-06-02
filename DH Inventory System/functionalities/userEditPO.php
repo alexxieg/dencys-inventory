@@ -182,7 +182,6 @@
 									<br>
 									
 									<div class="modFoot">
-										<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
 										<br>
 										<br>
 										<span>
@@ -238,8 +237,8 @@
 							WHERE poNumber = '$incID' AND prodID = '$prod3'";
 						$conn->exec($sql);
 				}
-				$url='../userpurchaseOrder.php';
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';	
+				$url="userViewPO.php?incId=$incID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 		?>
 		

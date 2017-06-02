@@ -148,8 +148,8 @@
 					$resul = $query2->fetchAll();
 					
 					$reciptNum = current($conn->query("SELECT outgoing.receiptNo FROM outgoing WHERE outgoing.receiptNo = '$outid'")->fetch());
-					$employ = current($conn->query("SELECT DISTINCT employee.empFirstName FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
-					$branch = current($conn->query("SELECT DISTINCT location FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
+					$employ = current($conn->query("SELECT DISTINCT employee.empFirstName FROM outgoing JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
+					$branch = current($conn->query("SELECT DISTINCT location FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID WHERE outgoing.receiptNo = '$outid'")->fetch());
 				?>
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
@@ -204,7 +204,7 @@
 											<?php foreach ($resul as $row): ?>
 											
 											<tr>												
-														
+												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />		
 												<td>	
 													<div class="ui-widget">
 														<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
@@ -290,7 +290,7 @@
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 						WHERE outID = '$outid'"; */
 				}
-				$url="viewProdIssuance.php?outId=$outID";
+				$url="viewProdIssuance.php?outId=$outid";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 
@@ -319,7 +319,7 @@
 					$result = $conn->query($sql); 
 				}
 
-				$url="viewProdIssuance.php?outId=$outID";
+				$url="viewProdIssuance.php?outId=$outid";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}			
 		?>

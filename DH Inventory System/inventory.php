@@ -134,7 +134,7 @@
 						<li class="active"><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="functionalities/addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="defectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#"data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -200,7 +200,7 @@
 								<h1 id="headers">INVENTORY</h1>	
 								<table class="table">	
 									<tr>
-										<td>	
+										<td width="50%">	
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">
 												Products for Reorder
 											</button>
@@ -222,7 +222,7 @@
 											$location =  $_SERVER['REQUEST_URI']; 
 										?>
 											
-										<td>
+										<td width="50%">
 											<form action="<?php echo $location; ?>" method="POST">
 												<label>View by Brand/Category</label>
 												<select name="brand_Name">
