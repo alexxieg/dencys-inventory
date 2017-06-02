@@ -46,14 +46,9 @@
 		<script src="../datatables/media/js/buttons.html5.min.js"></script>
 		<script src="../datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="../datatables/Buttons/js/buttons.colVis.min.js"></script>
-
 		<link href="../datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
-		<link href="../datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
 		<link href="../datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
-
         <link href="../datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
-        <script src="../datatables/Buttons/js/buttons.print.min.js"></script>
-		<script src="../datatables/Buttons/js/buttons.colVis.min.js"></script>
 
 		<!-- Datatables Script -->
 		<script>
@@ -81,7 +76,10 @@
                             },
                                 extend: 'print',
                                 exportOptions: {
-                                columns: ':visible'
+                                columns: ':visible',
+									modifier: {
+											page: 'current'
+										}
                                 }
                         },
 							{extend:'colvis', text: 'Select Column'},'pageLength',
