@@ -16,20 +16,18 @@
 	exec($cmd);
 
 	$backupcontents = file($finalpath);
-	foreach($backupcontents as $lineNumber => &$lineContent) { //Loop through the array (the "lines")
-    if($lineNumber == 19) { //Remember we start at line 0.
-        $lineContent .= $writethis . PHP_EOL; //Modify the line. (We're adding another line by using PHP_EOL)
+	foreach($backupcontents as $lineNumber => &$lineContent) { 
+    if($lineNumber == 19) { 
+        $lineContent .= $writethis . PHP_EOL; 
         }
     }
-    $allContent = implode("", $backupcontents); //Put the array back into one string
+    $allContent = implode("", $backupcontents);
 	file_put_contents($finalpath, $allContent);
 
 
-	$target_dir = "../datastorage";
+	$target_dir = "D:\\";
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
-	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-	// Check if image file is a actual image or fake image
 	if(isset($_POST["submit"])) {
 	    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 	    if($check !== false) {
@@ -39,5 +37,5 @@
 	        echo "File is not an image.";
 	        $uploadOk = 0;
 	    }
-	}
+	}	
 ?>
