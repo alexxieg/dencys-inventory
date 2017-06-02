@@ -174,7 +174,20 @@
 									<option value=<?=$row["branchID"]?>><?=$row["location"]?></option>
 								<?php endforeach ?>
 								</select>
-								
+
+								<h3>Received By</h3>
+								<?php
+									$query = $conn->prepare("SELECT empFirstName FROM employee ");
+									$query->execute();
+									$res = $query->fetchAll();
+								?>
+													
+								<select class="form-control" id="addEmpl" name="emp">
+									<?php foreach ($res as $row): ?>
+										<option value="<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
+									<?php endforeach ?>
+								</select> 
+									
 								<br>
 								
 								<h5 id="multipleProd">Product/s</h5>
@@ -352,12 +365,17 @@
 					$rem = $_POST['retRemarks'][$index];
 					$quant = $_POST['retQty'][$index];
 					$Branch = $_POST['branchItem'];
+					$emp = $_POST['emp'];
+					
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
 					
 					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 					
-					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', branchID = $Branch WHERE receiptNo = '$retID' AND prodID = '$prod3'";
+					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', branchID = $Branch, empID = '$emp3' WHERE receiptNo = '$retID' AND prodID = '$prod3'";
 					$conn->exec($sql);
 				}
 				$url="viewRetWarehouse.php?retId=$retID";
