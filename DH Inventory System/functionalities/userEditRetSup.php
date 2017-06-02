@@ -18,7 +18,7 @@
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="../js/returns.js"></script>
+		<script src="../js/returnSupplier.js"></script>
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
@@ -123,7 +123,7 @@
 					<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
 							<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
-							<li><a href="../userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							<li><a href="../userReturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 						</ul>
 					</li>
 					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -155,7 +155,7 @@
 									<br>
 									
 									<h5 id="multipleProd">Product/s</h5>
-									<table class="table table-striped" id="dataTable" name="chk">
+									<table class="table table-striped" id="dataTable2" name="chk">
 										<tbody>
 											<?php foreach ($resul as $row2): ?>
 											<tr>
@@ -180,11 +180,7 @@
 									</table>
 											
 									<div class="modFoot">
-										<span>
-											<button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">
-												Add Product
-											</button>
-										</span>
+										<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
 										<br>
 										<br>
 										<span>
@@ -202,31 +198,154 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- Modal for Returned Product Entry Form -->
+					<div class="modal fade" id="myModal" role="dialog">
+						 <div class="modal-dialog modal-lg">
+							 <div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Add Returned Product</h4>
+								</div>
+								<div class="modal-body">
+									<form action="" method="POST" onsubmit="return validateForm()">
+										<h3> User </h3>
+										<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID2" readonly>
+											
+										<h3>Supplier</h3>  
+										<div class="ui-widget">
+											<input id="addSupplier" name="supplier2" placeholder="Supplier">
+										</div>
+									
+										<br>
+											
+										<h3>Handled By</h3>
+										<?php
+											$query = $conn->prepare("SELECT empFirstName FROM employee ");
+											$query->execute();
+											$res = $query->fetchAll();
+										?>
+															
+										<select class="form-control" id="addEmpl" name="emp2">
+											<?php foreach ($res as $row): ?>
+												<option><?=$row["empFirstName"]?></option>
+											<?php endforeach ?>
+										</select> 
+										
+										<h5 id="prodHeader">Product/s</h5>
+										<table class="table table-striped" id="dataTable" name="chk">
+											<tbody>
+												<tr>
+													<td>
+													</td>
+													<td>
+													</td>
+													<td>
+														Product Name
+													</td>
+													<td>
+														Quantity
+													</td>
+													<td>
+														Remarks
+													</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" name="chk"></TD>
+													<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+													<td>	
+														<div class="ui-widget">
+															<input class="thisProduct" id="prod" name="prodItem2[]">
+														</div>
+													</td>
+															
+													<td>
+														<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Quantity" name="retQty2[]">
+													</td>
+													
+													<td>
+														<input type="text" class="form-control" id="addEntry" placeholder="Remarks" name="retRemarks2[]">
+													</td>
+												</tr>
+											</tbody>
+										</table>
+												
+										<div class="modFoot">
+											<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+											<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+											<br>
+											<br>
+											<span>
+												<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
+											</span>
+											<span>
+												<input type="submit" value="Submit" class="btn btn-success" name="addItems" id="sucBtn">
+											</span>
+										</div>
+									</form> 	
+
+									<div class="modal-footer">
+									</div>								
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		
 		<?php
-			$retID= $_GET['retId'];
-			$quant=(isset($_REQUEST['retQty']) ? $_REQUEST['retQty'] : null);
-			$rem=(isset($_REQUEST['retRemarks']) ? $_REQUEST['retRemarks'] : null);
-			if (isset($_POST["editReturns"])){
+			$retID= $_GET['retId'];	
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			if (isset($_POST["addRet"])){
 				
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-							
-				$prod = $_POST['prodItem'];
-				$userID = $_POST['userID'];
-						
-				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
-				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-				$prod3 = $prod2['prodA'];
+				for ($index = 0; $index < count($prodTem); $index++) {			
+					$prod = $_POST['prodItem'][$index];
+					$userID = $_POST['userID'];
+					$quant = $_POST['retQty'][$index];
+					$rem = $_POST['retRemarks'][$index];
+					$quant = $_POST['retQty'][$index];
+					
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];	
+					
+					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID' WHERE receiptNo = '$retID' AND prodID = '$prod3'";
+					$conn->exec($sql);
+				}
+				$url="userViewRetSupplier.php?retId=$retID";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+			}    
+			
+			if (isset($_POST["addItems"])) {
 				
-				$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = '$quant', returnRemark = '$rem', userID = '$userID' WHERE returnID = $retID";
-				$conn->exec($sql);
+				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {
+					$prod2 = $_POST['prodItem2'][$index2];
+					$retQty2 = $_POST['retQty2'][$index2];
+					$retRem2 = $_POST['retRemarks2'][$index2];
+					$branch2 = $_POST['branchRet2'];
+					$userID2 = $_POST['userID2'];
+					$emp2 = $_POST['emp2'];
+										
+					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prod2'")->fetch());
+					
+					$newemp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp2'");
+					$newemp2 = $newemp1->fetch(PDO::FETCH_ASSOC);
+					$newemp3 = $newemp2['empA'];
+					
+					$newbranch1 = $conn->query("SELECT branchID AS branchA FROM branch WHERE location = '$branch2'");
+					$newbranch2 = $newbranch1->fetch(PDO::FETCH_ASSOC);
+					$newbranch3 = $newbranch2['branchA'];
+								
+					$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, prodID, receiptNo ,branchID, empID, userID)
+							VALUES (CURDATE(),$retQty2,'Warehouse Return','$retRem2','$productID','$retID',$newbranch3,$newemp3,'$userID2')";
+					$conn->exec($sql);
+				}
 				
 				$url="userViewRetWarehouse.php?retId=$retID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}    
+			}
 		?>
 
 	</body>
