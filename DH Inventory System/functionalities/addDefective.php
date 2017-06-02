@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Defectives</title>
+		<title>Add Defectives</title>
 		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -70,7 +70,7 @@
 						<li class="active"><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="../defectives.php"><i class="glyphicon glyphicon-list"></i>Defectives</a></li>
 							</ul>
 						</li>
 						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -181,6 +181,7 @@
 				$prodSQL = $conn->query("SELECT prodID from product WHERE prodName = '$prodName'");
 				$prodSQLRes = $prodSQL->fetch(PDO::FETCH_ASSOC);
 				$prodRef = $prodSQLRes['prodID'];
+				
 				$defSQL = $conn->query("SELECT defectProdID AS defID from defectives WHERE prodID sounds like '$prodRef'");
 				$defRes = $defSQL->fetch(PDO::FETCH_ASSOC);
 				$defID = $defRes['defID'];

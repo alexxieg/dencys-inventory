@@ -74,31 +74,31 @@
 	$None = null;
 	
 	if (!empty($sortByBrand)) {
-		$query = $conn->prepare("SELECT defectives.defectProdID, product.prodName, product.unitType, product.reorderLevel, inventory.totalIn, inventory.totalOut, inventory.beginningQty, inventory.physicalQty, inventory.qty
-									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-									WHERE product.status = 'Active' AND product.brandID = '$sortByBrand'
-									GROUP BY prodID, inventory.beginningQty, qty, inventory.totalOut, inventory.totalIn, inventory.physicalQty");	
+		$query = $conn->prepare("SELECT defectives.defectProdID, defectives.prodName, defectives.unitType, inventorydefects.defectTotalIn, inventorydefects.defectTotalOut, inventorydefects.defectBeginQty, inventorydefects.defectPhyQty, inventorydefects.defectQty
+									FROM defectives LEFT JOIN inventorydefects ON defectives.defectProdID = inventorydefects.defectProdID LEFT JOIN incoming ON defectives.defectProdID = incoming.prodID LEFT JOIN outgoing ON defectives.defectProdID = outgoing.prodID
+									WHERE defectives.status = 'Active' AND defectives.brandID = '$sortByBrand'
+									GROUP BY defectProdID, inventorydefects.defectBeginQty, inventorydefects.defectQty, inventorydefects.defectTotalOut, inventorydefects.defectTotalIn, inventorydefects.defectPhyQty");	
 		$query->execute();
 		$result = $query->fetchAll();
 	} else if (!empty($sortByCategory)) {
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.totalIn, inventory.totalOut, inventory.beginningQty, inventory.physicalQty, inventory.qty
-									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-									WHERE product.status = 'Active' AND product.categoryID = '$sortByCategory'
-									GROUP BY prodID, inventory.beginningQty, qty, inventory.totalOut, inventory.totalIn, inventory.physicalQty");	
+		$query = $conn->prepare("SELECT defectives.defectProdID, defectives.prodName, defectives.unitType, inventorydefects.defectTotalIn, inventorydefects.defectTotalOut, inventorydefects.defectBeginQty, inventorydefects.defectPhyQty, inventorydefects.defectQty
+									FROM defectives LEFT JOIN inventorydefects ON defectives.defectProdID = inventorydefects.defectProdID LEFT JOIN incoming ON defectives.defectProdID = incoming.prodID LEFT JOIN outgoing ON defectives.defectProdID = outgoing.prodID
+									WHERE defectives.status = 'Active' AND defectives.categoryID = '$sortByCategory'
+									GROUP BY defectProdID, inventorydefects.defectBeginQty, inventorydefects.defectQty, inventorydefects.defectTotalOut, inventorydefects.defectTotalIn, inventorydefects.defectPhyQty");	
 		$query->execute();
 		$result = $query->fetchAll();
 	} else if (!empty($sortByCategory)&&!empty($sortByBrand)){
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.totalIn, inventory.totalOut, inventory.beginningQty, inventory.physicalQty, inventory.qty
-									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-									WHERE product.status = 'Active' AND product.brandID = '$sortByBrand' AND product.categoryID = '$sortByCategory'
-									GROUP BY prodID, inventory.beginningQty, qty,  inventory.totalOut, inventory.totalIn, inventory.physicalQty");	
+		$query = $conn->prepare("SELECT defectives.defectProdID, defectives.prodName, defectives.unitType, inventorydefects.defectTotalIn, inventorydefects.defectTotalOut, inventorydefects.defectBeginQty, inventorydefects.defectPhyQty, inventorydefects.defectQty
+									FROM defectives LEFT JOIN inventorydefects ON defectives.defectProdID = inventorydefects.defectProdID LEFT JOIN incoming ON defectives.defectProdID = incoming.prodID LEFT JOIN outgoing ON defectives.defectProdID = outgoing.prodID
+									WHERE defectives.status = 'Active' AND product.brandID = '$sortByBrand' AND product.categoryID = '$sortByCategory'
+									GROUP BY defectProdID, inventorydefects.defectBeginQty, inventorydefects.defectQty, inventorydefects.defectTotalOut, inventorydefects.defectTotalIn, inventorydefects.defectPhyQty");	
 		$query->execute();
 		$result = $query->fetchAll();
 	} else {
-		$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, inventory.totalIn, inventory.totalOut, inventory.beginningQty, inventory.physicalQty, inventory.qty
-									FROM product LEFT JOIN inventory ON product.prodID = inventory.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
-									WHERE product.status = 'Active' 
-									GROUP BY prodID, inventory.beginningQty, qty, inventory.totalOut, inventory.totalIn, inventory.physicalQty");	
+		$query = $conn->prepare("SELECT defectives.defectProdID, defectives.prodName, defectives.unitType, inventorydefects.defectTotalIn, inventorydefects.defectTotalOut, inventorydefects.defectBeginQty, inventorydefects.defectPhyQty, inventorydefects.defectQty
+									FROM defectives LEFT JOIN inventorydefects ON defectives.defectProdID = inventorydefects.defectProdID LEFT JOIN incoming ON defectives.defectProdID = incoming.prodID LEFT JOIN outgoing ON defectives.defectProdID = outgoing.prodID
+									WHERE defectives.status = 'Active' 
+									GROUP BY defectProdID, inventorydefects.defectBeginQty, inventorydefects.defectQty, inventorydefects.defectTotalOut, inventorydefects.defectTotalIn, inventorydefects.defectPhyQty");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}

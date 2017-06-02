@@ -200,7 +200,7 @@
 								<h1 id="headers">INVENTORY</h1>	
 								<table class="table">	
 									<tr>
-										<td>	
+										<td width="50%">	
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal">
 												Products for Reorder
 											</button>
@@ -222,7 +222,7 @@
 											$location =  $_SERVER['REQUEST_URI']; 
 										?>
 											
-										<td>
+										<td width="50%">
 											<form action="<?php echo $location; ?>" method="POST">
 												<label>View by Brand/Category</label>
 												<select name="brand_Name">

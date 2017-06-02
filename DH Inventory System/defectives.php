@@ -192,7 +192,7 @@
 				<?php
 					foreach ($result as $item):
 						$currQty = $item["defectBeginQty"] + $item["defectTotalIn"] - $item["defectTotalOut"];
-						$incID = $item["prodID"];
+						$incID = $item["defectProdID"];
 				?>				
 				<?php
 					endforeach;
@@ -211,7 +211,15 @@
 											$location =  $_SERVER['REQUEST_URI']; 
 										?>
 											
-										<td>
+										<td width="50%">
+											<a href="functionalities/addDefective.php">
+												<button type="button" class="btn btn-info btn-md btnmod"  id="modButt">
+													Add Defective Products
+												</button>
+											</a>
+										</td>
+										
+										<td width="50%">
 											<form action="<?php echo $location; ?>" method="POST">
 												<label>View by Brand/Category</label>
 												<select name="brand_Name">
@@ -236,6 +244,8 @@
 									</tr>
 								</table>
 							</div>
+							
+							<hr>
 								
 							<div class="pages">
 								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -267,7 +277,6 @@
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">OUT</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Current Quantity</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Unit</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Stock Card</th>
 										</tr>
 									</thead>
 									<tbody>		
@@ -277,22 +286,14 @@
 				
 										?> 										
 										<tr id="centerData">
-											<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+											<td data-title="Product ID"><?php echo $item["defectProdID"]; ?></td>
 											<td><?php echo $item["prodName"]; ?></td>
-											<td data-title="Beg. Quantity"><?php echo $item["beginningQty"]; ?></td>
-											<td data-title="IN"><?php echo $item["totalIn"]; ?></td>
-											<td data-title="OUT"><?php echo $item["totalOut"]; ?></td>
-											<td data-title="Current Quantity"><?php echo $item["qty"] ?></td>
-											<td data-title="Physical Count"><?php echo $item["physicalQty"]; ?></td>
-											<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+											<td data-title="Beg. Quantity"><?php echo $item["defectBeginQty"]; ?></td>
+											<td data-title="IN"><?php echo $item["defectTotalIn"]; ?></td>
+											<td data-title="OUT"><?php echo $item["defectTotalOut"]; ?></td>
+											<td data-title="Current Quantity"><?php echo $item["defectQty"] ?></td>
+											<td data-title="Physical Count"><?php echo $item["defectPhyQty"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"];?></td>
-											<td data-title="Stock Card">
-												<a href="ledger.php?incId=<?php echo $incID; ?>" target="_self"> 
-													<button type="button" class="btn btn-default" id="edBtn">
-														<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-													</button>
-												</a>	
-											</td>	
 										</tr>
 											
 										<?php
@@ -301,60 +302,7 @@
 									</tbody>	
 								</table>
 							</div>	
-										
-							<!-- Modal for Reorder Products Summary -->
-							<div class="modal fade" id="myModal" role="dialog">
-								<div class="modal-dialog modal-xl">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Products to be reordered</h4>
-										</div>
-										<div class="modal-body">
-											<form action="functionalities/reorderPO.php" method="POST">
-												<?php
-													$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
-																			WHERE inventory.qty <= product.reorderLevel");
-													$query->execute();
-													$result = $query->fetchAll();
-												?>	
-												
-												<table class="table table-bordered" id="tables">
-													<tr>
-														<th>Product ID</th>
-														<th>Product Description</th>						
-														<th>Current Quantity</th>
-														<th>Reorder Level</th>
-														<th>Unit</th>
-														<th>Select for Reorder</th>
-													</tr>
-														
-													<?php
-														foreach ($result as $item):
-													?>
-														<tr>
-														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
-														<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-														<td data-title="Unit"><?php echo $item["unitType"];?></td>
-														<td data-title="Reorder Check"><input type="checkbox" name="chkbox[]" value="<?php echo $item["prodID"]; ?>"></td>	
-														</tr>	
-													<?php
-														endforeach;
-														?>
-												</table>
-												<div class="form-group">
-													<input type="submit" value="Reorder" class="btn btn-success">
-												</div>
-											</form>
-										</div>
-												
-										<div class="modal-footer">
-										</div>
-									</div>
-								</div>
-							</div>
+									
 							
 						</div>
 					</div>
