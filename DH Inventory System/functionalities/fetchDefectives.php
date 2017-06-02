@@ -1,7 +1,7 @@
 <?php
 	$updateIN = $conn->prepare("UPDATE inventorydefects
 								SET inventorydefects.defectInQty = (SELECT SUM(incoming.inQty) 
-								FROM incoming WHERE inventorydefects.defectProdID = incoming.prodID 
+								FROM incoming join inventorydefects WHERE incoming.prodID = inventorydefects.defectProdID 
 								GROUP BY incoming.prodID)");
 	$updateIN->execute();
 ?>
