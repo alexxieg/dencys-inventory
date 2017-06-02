@@ -242,8 +242,8 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">
-												<h3>Username</h3>
-												<input type="text" class="form-control" id ="adduser" placeholder="Name" name="userName">
+												<h3>Username (max. of 25 characters)</h3>
+												<input type="text" class="form-control" id ="adduser" placeholder="Name" name="userName" maxlength="25">
 												
 												<h3>Password</h3>
 												<input type="password" class="form-control" id ="addpass" placeholder="User Password" name="psw">
