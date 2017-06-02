@@ -181,7 +181,7 @@
 				$userID = $_POST['userID'];
 				
 				$prodName = $_POST['prodItem'];
-				$prodSQL = $conn->query("SELECT prodID from product WHERE prodName sounds like '$prodName'");
+				$prodSQL = $conn->query("SELECT prodID from product WHERE prodName = '$prodName'");
 				$prodSQLRes = $prodSQL->fetch(PDO::FETCH_ASSOC);
 				$prodRef = $prodSQLRes['prodID'];
 				
@@ -199,7 +199,7 @@
 				$conn->exec($sqlIn);
 				
 				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID, userID)
-						   VALUES ('$qty', CURDATE(), '$rec', 0, '$emp3', '$defID', '$userID')";
+						   VALUES ('$qty', CURDATE(), '$rec', 0, '$emp3', '$prodRef', '$userID')";
 				$conn->exec($sqlOut);
 				
 				$activate = "UPDATE defectives SET status = 'Active' WHERE prodID = '$prodRef'";

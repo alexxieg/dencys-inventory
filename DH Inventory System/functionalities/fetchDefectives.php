@@ -1,55 +1,55 @@
 <?php
-	$updateIN = $conn->prepare("UPDATE inventorydefects
+	$updateDefectIN = $conn->prepare("UPDATE inventorydefects
 								SET inventorydefects.defectInQty = (SELECT SUM(incoming.inQty) 
-								FROM incoming join inventorydefects WHERE incoming.prodID = inventorydefects.defectProdID 
+								FROM incoming WHERE incoming.prodID = inventorydefects.defectProdID 
 								GROUP BY incoming.prodID)");
-	$updateIN->execute();
+	$updateDefectIN->execute();
 ?>
 
 <?php
-	$updateInRet = $conn->prepare("UPDATE inventorydefects
+	$updateDefectInRet = $conn->prepare("UPDATE inventorydefects
 									SET inventorydefects.defectInRetQty = (SELECT SUM(returns.returnQty) 
 									FROM returns WHERE inventorydefects.defectProdID = returns.prodID AND returns.returnType = 'Warehouse Return'
 									GROUP BY returns.prodID)");
-	$updateInRet->execute();
+	$updateDefectInRet->execute();
 ?>
 
 <?php
-	$updateTotalIn = $conn->prepare("UPDATE inventorydefects
+	$updateDefectTotalIn = $conn->prepare("UPDATE inventorydefects
 									SET inventorydefects.defectTotalIn = (SELECT SUM(IFNULL(inventorydefects.defectInQty,0) + IFNULL(inventorydefects.defectInRetQty,0))
 									GROUP BY inventorydefects.defectProdID)");
-	$updateTotalIn->execute();
+	$updateDefectTotalIn->execute();
 ?>
 
 <?php
-	$updateOut = $conn->prepare("UPDATE inventorydefects
+	$updateDefectOut = $conn->prepare("UPDATE inventorydefects
 								SET inventorydefects.defectOutQty = (SELECT SUM(outgoing.outQty) 
 								FROM outgoing join inventorydefects WHERE outgoing.defectProdID = inventorydefects.defectProdID 
 								GROUP BY outgoing.prodID)");
-	$updateOut->execute();
+	$updateDefectOut->execute();
 ?>
 
 <?php
-	$updateOutRet = $conn->prepare("UPDATE inventorydefects
+	$updateDefectOutRet = $conn->prepare("UPDATE inventorydefects
 									SET inventorydefects.defectOutRetQty = (SELECT SUM(returns.returnQty)
 									FROM returns WHERE inventorydefects.defectProdID = returns.prodID AND returns.returnType = 'Supplier Return'
 									GROUP BY returns.prodID)");
-	$updateOutRet->execute();
+	$updateDefectOutRet->execute();
 
 ?>
 
 <?php
-	$updateTotalOut = $conn->prepare("UPDATE inventorydefects
+	$updateDefectTotalOut = $conn->prepare("UPDATE inventorydefects
 									SET inventorydefects.defectTotalOut = (SELECT SUM(IFNULL(inventorydefects.defectOutQty,0) + IFNULL(inventorydefects.defectOutRetQty,0))
 									GROUP BY inventorydefects.defectProdID)");
-	$updateTotalOut->execute();
+	$updateDefectTotalOut->execute();
 ?>
 
 <?php 
-	$updateQty = $conn->prepare("UPDATE inventorydefects
+	$updateDefectQty = $conn->prepare("UPDATE inventorydefects
 								SET inventorydefects.defectQty = (SELECT (inventorydefects.defectBeginQty + IFNULL(inventorydefects.defectTotalIn,0) - IFNULL(inventorydefects.defectTotalOut,0))
 								GROUP BY inventorydefects.defectProdID)");
-	$updateQty->execute();
+	$updateDefectQty->execute();
 ?>
 	
 <?php
