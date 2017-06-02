@@ -144,8 +144,8 @@
 					$resul = $query2->fetchAll();
 					
 					$reciptNum = current($conn->query("SELECT outgoing.receiptNo FROM outgoing WHERE outgoing.receiptNo = '$outid'")->fetch());
-					$employ = current($conn->query("SELECT DISTINCT employee.empFirstName FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
-					$branch = current($conn->query("SELECT DISTINCT location FROM outgoing INNER JOIN product ON outgoing.prodID = product.prodID INNER JOIN branch ON outgoing.branchID = branch.branchID INNER JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
+					$employ = current($conn->query("SELECT DISTINCT employee.empFirstName FROM outgoing JOIN employee ON outgoing.empID = employee.empID WHERE outgoing.receiptNo = '$outid'")->fetch());
+					$branch = current($conn->query("SELECT DISTINCT location FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID WHERE outgoing.receiptNo = '$outid'")->fetch());
 				?>
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
@@ -269,7 +269,7 @@
 					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 					$emp3 = $emp2['empA'];
 					
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 						
@@ -280,11 +280,8 @@
 					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, empID = '$emp3', prodID = '$prod3', userID = '$userID' 
 							WHERE outID = $outgoingID";
 					$conn->exec($sql);				
-					
-					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
-						WHERE outID = '$outid'"; */
 				}
-				$url='../prodIssuance.php';
+				$url="userViewProdIssuance.php?outId=$outid";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 
@@ -300,7 +297,7 @@
 					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 					$emp3 = $emp2['empA'];
 					
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 						
@@ -312,7 +309,8 @@
 					VALUES ('$outQty',CURDATE(),'$reciptNum','$branch3','$emp3','$prod3','$userID')";
 					$result = $conn->query($sql); 
 				}
-				echo "<meta http-equiv='refresh' content='0'>";
+				$url="userViewProdIssuance.php?outId=$outid";
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}			
 		?>
 	
