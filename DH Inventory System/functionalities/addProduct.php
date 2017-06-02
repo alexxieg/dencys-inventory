@@ -72,8 +72,8 @@
 				 VALUES ('$defect', '$defectName', '$fincateg', '$finbrand', '$unitType','Inactive', '$prod')";
 		$conn->exec($sql2);
 		
-		$sql3 = "INSERT INTO inventorydefectives (defectBeginQty, invDefectDate, defectQty, defectInQty, defectInRetQty, defectTotalIn, defectOutQty, defectOutRetQty, defectTotalOut, defectPhyQty, defectEndQty, defectProdID, invPeriodStart)
-				 VALUES ('$qty', CURDATE(), '$qty', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '$defect', NULL)";
+		$sql3 = "INSERT INTO inventorydefects (defectBeginQty, invDefectDate, defectQty, defectInQty, defectInRetQty, defectTotalIn, defectOutQty, defectOutRetQty, defectTotalOut, defectPhyQty, defectEndQty, defectProdID, remarks, invPeriodStart)
+				 VALUES ('$qty', CURDATE(), '$qty', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '$defect', remarks, NULL)";
 		$conn->exec($sql3);
 		
 		echo "<meta http-equiv='refresh' content='0'>";
