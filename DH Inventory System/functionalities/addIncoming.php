@@ -20,12 +20,7 @@
 				echo 'document.getElementById("addRcpt").style.borderColor = "red";';
 				echo '</script>';
 			} else {
-
-				// Do Something If name Doesn't Exist
-				
-				for ($index = 0; $index < count($prodTem); $index++) {
-
-				
+				for ($index = 0; $index < count($prodTem); $index++) {	
 					$inRemarks = $_POST['inRemarks'][$index];
 					$prodItem = $_POST['prodItem'][$index];
 					$inQty = $_POST['incQty'][$index];
@@ -50,7 +45,6 @@
 					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
 					VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$prod3','$userID','$poNum')";
 					$result = $conn->query($sql); 
-		
 				}			
 			}
 			$inState = $_POST['inStatus'];
@@ -69,8 +63,5 @@
 			$url='../userprodDeliveries.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}
-	
 	}
-	
-
 ?>	
