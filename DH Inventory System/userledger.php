@@ -7,27 +7,10 @@
 
 		<title>Product Stock Card</title>
 
-		<!-- Bootstrap core CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css" rel="stylesheet">
-		<link rel="shortcut icon" href="logo.jpg">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-		<!-- Custom styles for this template -->
-		<link href="css/custom.css" rel="stylesheet">
-		<link href="css/sidebar.css" rel="stylesheet">
-
-		<!-- Javascript Files -->
-		<script src="js/bootstrap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="alertboxes/sweetalert2.min.js"></script>
-		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
-
+		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 				
+		<!-- Login Session -->
 		<?php 
 			session_start();
 			if (isset($_SESSION['id'])){
@@ -40,6 +23,23 @@
 				}
 			}
 		?>
+		
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link rel="shortcut icon" href="logo.jpg">
+
+		<!-- Custom styles for this template -->
+		<link href="css/custom.css" rel="stylesheet">
+		<link href="css/sidebar.css" rel="stylesheet">
+
+		<!-- Javascript Files -->
+		<script src="js/bootstrap.js"></script>
+		<script src="js/jquery-3.2.0.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>
+		<script src="alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
+
 	</head>
 	  
 	<body>
@@ -110,30 +110,40 @@
 					<div id="contents">
 						<div class="pages no-more-tables">
 							<div id="tableHeader">		
-								<h1 id="headers">Stock Card</h1>
-								
-								<?php 
-									$location =  $_SERVER['REQUEST_URI']; 
-								?>
-								
-								View Previous Stock Card <br>
-								<form action="<?php echo $location; ?>" method="POST">
-									<select name="startDate">
-										<option value="" SELECTED></option>
-										<?php foreach ($result4 as $row): ?>
-											<option value="<?=$row["startDate"]?>"><?=$row["startDate"]?></option>
-										<?php endforeach ?>
-									</select>
-									<select name="endDate">
-										<option value="" SELECTED></option>
-										<?php foreach ($result5 as $row): ?>
-											<option value="<?=$row["endDate"]?>"><?=$row["endDate"]?></option>
-										<?php endforeach ?>
-									</select>
-									<input type="submit" value="View" class="btn btn-success" name="submit">
-								</form>
+							<table class="table">	
+									<tr>
+										<?php 
+											$location =  $_SERVER['REQUEST_URI']; 
+										?>
+										<td style="float:left;">
+											<form action="<?php echo $location; ?>" method="POST">
+												<label>View by Date</label>
+												<select name="startDate">
+													<option value="" SELECTED></option>
+													<?php foreach ($result4 as $row): ?>
+														<option value="<?=$row["startDate"]?>"><?=$row["startDate"]?></option>
+													<?php endforeach ?>
+												</select>
+												<select name="endDate">
+													<option value="" SELECTED></option>
+													<?php foreach ($result5 as $row): ?>
+														<option value="<?=$row["endDate"]?>"><?=$row["endDate"]?></option>
+													<?php endforeach ?>
+												</select>
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+											</form>
+										</td>
+										<td>
+											<span>
+												<a href="userinventory.php">
+												<input type="button" class="btn btn-danger" value="Back" id="backButton" data-dismiss="modal" onclick="this.form.reset()">
+												</a>
+											</span>
+										</td>
+									</tr>
+								</table>
 									
-								<br>
+								<hr>
 								
 								<!-- Stockcard Information -->
 								<table class="table table-striped table-bordered">
@@ -155,6 +165,7 @@
 										</td>
 										<td> 
 											Physical Count:
+											<?php echo $req ?>
 										</td>
 									</tr>									
 								</table>
@@ -166,11 +177,12 @@
 										<th>
 											Receipt No.
 										</th>
+										
 										<th>
 											Date
 										</th>									
 										
-										<th colspan="2">
+										<th colspan="3">
 											IN
 										</th>
 										
@@ -195,9 +207,13 @@
 										</th>
 						
 										<th>
+											Freebies
+										</th>
+									
+										<th>
 											Warehouse Returns
 										</th>
-						
+																		
 										<th>
 											Issuance
 										</th>
@@ -205,19 +221,20 @@
 										<th>
 											Supplier Returns
 										</th>
+										
 										<th>
-							
 										</th>
 									</tr>
+									
 									<?php
 										foreach ($res as $item):
 										
 										if ($request == $base && $loop == True){
-											$currQty = $request + ($item["plus"] + $item["plus2"]) - ($item["minus"] + $item["minus2"]);
+											$currQty = $request + ($item["plus"] + $item["plus2"] + $item["plus3"]) - ($item["minus"] + $item["minus2"]);
 											$loop = False;
 										}
 										else {
-											$currQty = $currQty + ($item["plus"] + $item["plus2"]) - ($item["minus"] + $item["minus2"]);
+											$currQty = $currQty + ($item["plus"] + $item["plus2"] + $item["plus3"]) - ($item["minus"] + $item["minus2"]);
 										}
 									?>
 									
@@ -225,9 +242,10 @@
 										<td data-title="Receipt"><?php echo $item["receiptNos"]; ?></td>
 										<td data-title="Date"><?php echo $item["dates"]; ?></td>	
 										<td data-title="IN"><?php echo $item["plus"];?></td>
-																				<td data-title="IN"><?php echo $item["plus2"];?></td>
+										<td data-title=""><?php echo $item["plus3"];?></td>
+										<td data-title="IN"><?php echo $item["plus2"];?></td>
 										<td data-title="OUT"><?php echo $item["minus"]; ?></td>
-																				<td data-title="OUT"><?php echo $item["minus2"]; ?></td>
+										<td data-title="OUT"><?php echo $item["minus2"]; ?></td>
 										<td data-title="BALANCE"><?php echo $currQty ?></td>
 									</tr>
 									<?php

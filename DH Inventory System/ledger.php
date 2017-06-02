@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Ledger</title>
+		<title>Product Stock Card</title>
 
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -233,6 +233,7 @@
 										<th>
 										</th>
 									</tr>
+									
 									<?php
 										foreach ($res as $item):
 										
@@ -259,7 +260,6 @@
 										endforeach;
 									?>
 								</table>
-
 							</div>
 						</div>
 					</div>

@@ -63,8 +63,8 @@
 
 		<div class="container-fluid" >
 			<div class="row">
+				<!-- Sidebar -->
 				<div class="col-sm-3 col-md-2 sidebar">
-					<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
 						<li class="active"><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -99,52 +99,59 @@
 				</div>
 				<!-- End of Sidebar -->	
 				
-				<div class="addInv">
-					<h1 id="headers">Transfer Defective Items</h1>
-					<div>
-						<form action="" method="POST" class="editPgs">
-						
-							<h3>Product</h3>
-							<?php
-								$query = $conn->prepare("SELECT prodName FROM product ");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-														
-							<select class="form-control" id="addItem" name="prodItem">
-								<?php foreach ($res as $row): ?>
-									<option value = "<?=$row["prodName"]?>"><?=$row["prodName"]?></option>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					<div id="contents">
+						<div class="pages no-more-tables">
+							<div id="tableHeader">
+								<h1 id="headers">ADD DEFECTIVE ITEMS</h1>
+							<div>
+							
+							<form action="" method="POST" class="editPgs">
+								<h3>User</h3>
+								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+								
+								<h3>Product</h3>
+								<?php
+									$query = $conn->prepare("SELECT prodName FROM product");
+									$query->execute();
+									$res = $query->fetchAll();
+								?>
+															
+								<select class="form-control" id="addItem" name="prodItem">
+									<?php foreach ($res as $row): ?>
+										<option value = "<?=$row["prodName"]?>"><?=$row["prodName"]?></option>
+									<?php endforeach ?>
+								</select> 
+								
+								<h3>Handled By</h3>
+								<?php
+									$query = $conn->prepare("SELECT empFirstName FROM employee ");
+									$query->execute();
+									$result = $query->fetchAll();
+								?>
+																	
+								<select class="form-control" id="addEmpl" name="emp">
+								<?php foreach ($result as $row): ?>
+									<option value = "<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
 								<?php endforeach ?>
-							</select> 
-							
-							<h3>Handled By</h3>
-							<?php
-								$query = $conn->prepare("SELECT empFirstName FROM employee ");
-								$query->execute();
-								$result = $query->fetchAll();
-							?>
-																
-							<select class="form-control" id="addEmpl" name="emp">
-							<?php foreach ($result as $row): ?>
-								<option value = "<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
-							<?php endforeach ?>
-							</select> 
-							
-							<h3>Quantity Moved</h3>
-							<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
-							<br>
-							
-							<div class="modFoot">
-								<span>
-									<a>
+								</select> 
+											
+								<h3>Quantity</h3>
+								<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
+								<br>
+								
+								<div class="modFoot">
+									<span>
+										<a href="../userinventory.php">
 										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="addDefect" value="Update" class="btn btn-success" id="sucBtn">
-								</span>
-							</div>
-						</form> 
+										</a>
+									</span>
+									<span>
+										<input type="submit" name="addDefect" value="Add Item" class="btn btn-success" id="sucBtn">
+									</span>
+								</div>
+							</form> 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -167,32 +174,33 @@
 				
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$qty = $_POST['qty'];
+				$userID = $_POST['userID'];
 				
 				$prodName = $_POST['prodItem'];
 				$prodSQL = $conn->query("SELECT prodID from product WHERE prodName = '$prodName'");
 				$prodSQLRes = $prodSQL->fetch(PDO::FETCH_ASSOC);
 				$prodRef = $prodSQLRes['prodID'];
+				
 				$defSQL = $conn->query("SELECT defectProdID AS defID from defectives WHERE prodID = '$prodRef'");
 				$defRes = $defSQL->fetch(PDO::FETCH_ASSOC);
 				$defID = $defRes['defID'];
-				
-				$branchSQL = $conn->query("SELECT branchID from branch WHERE branchName = 'Defective'");
-				$branchRes = $branchSQL->fetch(PDO::FETCH_ASSOC);
-				$branchID = $branchRes['branchID'];
 				
 				$emp = $_POST['emp'];
 				$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
 				$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 				$emp3 = $emp2['empA'];
 				
-				$sqlIn = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supplier, inRemarks, status, empID, prodID)
-						  VALUES ('$qty', CURDATE(), '$rec', CURDATE(), 'None', 'None', 'Complete', '$emp3', '$defID')";
+				$sqlIn = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, inRemarks, supID, status, inType, empID, prodID, userID, poNumber)
+							VALUES ('$qty', CURDATE(), '$rec', CURDATE(), 'None', 999, 'Defective', 'Defective', '$emp3', '$defID', '$userID', 'None')";
 				$conn->exec($sqlIn);
 				
-				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID)
-						   VALUES ('$qty', CURDATE(), '$rec', '$branchID', '$emp3', '$defID')";
+				$sqlOut = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID, userID)
+						   VALUES ('$qty', CURDATE(), '$rec', 0, '$emp3', '$prodRef', '$userID')";
 				$conn->exec($sqlOut);
-			}    
+				
+				$activate = "UPDATE defectives SET status = 'Active' WHERE prodID = '$prodRef'";
+				$conn->exec($activate);
+			}    			
 		?>
 	</body>
 </html>

@@ -108,54 +108,59 @@
 				</div>
 				<!-- End of Sidebar -->	
 				
-				<div class="addInv">
-					<h1 id="headers">Add Defective Items</h1>
-					<div>
-						<form action="" method="POST" class="editPgs">
-							<h3>User</h3>
-							<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					<div id="contents">
+						<div class="pages no-more-tables">
+							<div id="tableHeader">
+								<h1 id="headers">ADD DEFECTIVE ITEMS</h1>
+							<div>
 							
-							<h3>Product</h3>
-							<?php
-								$query = $conn->prepare("SELECT prodName FROM product");
-								$query->execute();
-								$res = $query->fetchAll();
-							?>
-														
-							<select class="form-control" id="addItem" name="prodItem">
-								<?php foreach ($res as $row): ?>
-									<option value = "<?=$row["prodName"]?>"><?=$row["prodName"]?></option>
+							<form action="" method="POST" class="editPgs">
+								<h3>User</h3>
+								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+								
+								<h3>Product</h3>
+								<?php
+									$query = $conn->prepare("SELECT prodName FROM product");
+									$query->execute();
+									$res = $query->fetchAll();
+								?>
+															
+								<select class="form-control" id="addItem" name="prodItem">
+									<?php foreach ($res as $row): ?>
+										<option value = "<?=$row["prodName"]?>"><?=$row["prodName"]?></option>
+									<?php endforeach ?>
+								</select> 
+								
+								<h3>Handled By</h3>
+								<?php
+									$query = $conn->prepare("SELECT empFirstName FROM employee ");
+									$query->execute();
+									$result = $query->fetchAll();
+								?>
+																	
+								<select class="form-control" id="addEmpl" name="emp">
+								<?php foreach ($result as $row): ?>
+									<option value = "<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
 								<?php endforeach ?>
-							</select> 
-							
-							<h3>Handled By</h3>
-							<?php
-								$query = $conn->prepare("SELECT empFirstName FROM employee ");
-								$query->execute();
-								$result = $query->fetchAll();
-							?>
-																
-							<select class="form-control" id="addEmpl" name="emp">
-							<?php foreach ($result as $row): ?>
-								<option value = "<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
-							<?php endforeach ?>
-							</select> 
-										
-							<h3>Quantity</h3>
-							<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
-							<br>
-							
-							<div class="modFoot">
-								<span>
-									<a href="../inventory.php">
-									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-									</a>
-								</span>
-								<span>
-									<input type="submit" name="addDefect" value="Add Item" class="btn btn-success" id="sucBtn">
-								</span>
-							</div>
-						</form> 
+								</select> 
+											
+								<h3>Quantity</h3>
+								<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
+								<br>
+								
+								<div class="modFoot">
+									<span>
+										<a href="../inventory.php">
+										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+										</a>
+									</span>
+									<span>
+										<input type="submit" name="addDefect" value="Add Item" class="btn btn-success" id="sucBtn">
+									</span>
+								</div>
+							</form> 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -204,9 +209,7 @@
 				
 				$activate = "UPDATE defectives SET status = 'Active' WHERE prodID = '$prodRef'";
 				$conn->exec($activate);
-			}    
-			
-			
+			}    		
 		?>
 	</body>
 </html>
