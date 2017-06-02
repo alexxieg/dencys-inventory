@@ -135,7 +135,7 @@
 								<form action="" method="POST">
 									<?php foreach ($result2 as $row): ?>
 									<h3>Product ID</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodID"]; ?>" value="<?php echo $row["prodID"]; ?>" name="prodCode"> <br>
+									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodID"]; ?>" value="<?php echo $row["prodID"]; ?>" name="prodCode" readonly> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
@@ -155,12 +155,12 @@
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Price</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["price"]; ?>" value="<?php echo $row["price"]; ?>" name="prodPrice"> <br>
+									<input type="number" min="1" class="form-control" id ="addEntry" placeholder="<?php echo $row["price"]; ?>" value="<?php echo $row["price"]; ?>" name="prodPrice"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Reorder Level</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["reorderLevel"]; ?>" value="<?php echo $row["reorderLevel"]; ?>" name="prodRO"> <br>
+									<input type="number" min="1" class="form-control" id ="addEntry" placeholder="<?php echo $row["reorderLevel"]; ?>" value="<?php echo $row["reorderLevel"]; ?>" name="prodRO"> <br>
 									<?php endforeach ?>	
 										
 									<br>

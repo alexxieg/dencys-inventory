@@ -5,6 +5,10 @@
     $categRemoveID= $_GET['categoryID'];
     $result = $conn->prepare("UPDATE category SET status = 'Inactive' WHERE categoryID = '$categRemoveID'");
     $result->execute();
-    header("location: ../category.php");
+	
+	$result2 = $conn->prepare("UPDATE category SET archiveDate = CURDATE() WHERE categoryID = '$categRemoveID'");
+	$result2->execute();
+    
+	header("location: ../category.php");
 
 ?>

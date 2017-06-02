@@ -236,7 +236,7 @@
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">		
 												<h3>Category ID</h3>
-												<input type="text" class="form-control" id="addCategoryID" placeholder="Category ID" name="categoryID"> 
+												<input type="text" class="form-control" id="addCategoryID" placeholder="Category ID" name="categoryID" maxlength="3"> 
 												
 												<h3>Category Name</h3>
 												<input type="text" class="form-control" id ="addCategoryName" placeholder="Category" name="categoryName"> 
@@ -300,6 +300,7 @@
 														$categEditID = $item["categoryID"];
 													?>	
 													<tr id="centerData">
+														<td data-title="Archive Date"><?php echo $item["archiveDate"]; ?></td>
 														<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
 														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 														<td>	
