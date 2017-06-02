@@ -36,6 +36,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 		<!-- Autocomplete Script -->
 		<link rel="stylesheet" href="../css/jquery-ui.css">
@@ -117,32 +119,32 @@
 					<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
-								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
+								<li><a href="AddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 					<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="incoming">
-							<li><a href="../userpurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-							<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+							<li><a href="../purchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+							<li><a href="../productdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 						</ul>
 					</li>
-					<li><a href="../userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+					<li><a href="../ProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
 					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
-							<li><a href="../userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							<li><a href="../ReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+							<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 						</ul>
 					</li>
 					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 						<ul class="list-unstyled collapse" id="reports">
-							<li><a href="../userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-							<li><a href="../usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
-							<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
+							<li><a href="../branchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+							<li><a href="../monthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+							<li><a href="../monthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 						</ul>
 					</li>
-					<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
-					<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+					<li><a href="../suppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
+					<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
 				</ul>
 			</div>
 				<!-- End of Sidebar -->
@@ -284,7 +286,7 @@
 											<h4 class="modal-title">Add Incoming Product</h4>
 										</div>
 										<div class="modal-body">
-											<form action="" method="POST">
+											<form action="" method="POST" onsubmit="return validateForm()">
 												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 												
@@ -340,7 +342,7 @@
 														<tr id="thisRow">
 															<td>	
 																<div class="ui-widget">
-																	<input class="thisProduct" name="prodItem2[]" placeholder="Product Name">
+																	<input class="thisProduct" id="addProduct" name="prodItem2[]" placeholder="Product Name">
 																</div>
 															</td>
 																	
@@ -377,7 +379,6 @@
 													<br>
 													<br>
 													<span>
-													<a href="../prodDeliveries.php">
 													<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 													</a>
 													</span>
