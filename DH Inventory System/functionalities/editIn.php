@@ -100,7 +100,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="../userinventory.php">Dency's Hardware and General Merchandise</a>
+					<a class="navbar-brand" href="../inventory.php">Dency's Hardware and General Merchandise</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -114,40 +114,52 @@
 
 		<div class="container-fluid" >
 			<div class="row">
-			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
+				<!-- Sidebar -->
+					<ul class="nav nav-sidebar">
+						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
+						<li><a href="#" data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../inventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="AddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
+								<li><a href="addDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
-					<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="incoming">
-							<li><a href="../purchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-							<li><a href="../productdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
-						</ul>
-					</li>
-					<li><a href="../ProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-					<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="../ReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
-							<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="reports">
-							<li><a href="../branchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-							<li><a href="../monthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
-							<li><a href="../monthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
-						</ul>
-					</li>
-					<li><a href="../suppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
-					<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-				</ul>
-			</div>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="../purchaseOrder.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="../prodDeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
+							</ul>
+						</li>
+						<li><a href="../prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="../returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="../returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="reports">
+								<li><a href="../branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="../monthlyIncoming.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="../monthlyOutgoing.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="manage">
+								<li><a href="../accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
+								<li><a href="../branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
+								<li><a href="../employees.php"><i class="glyphicon glyphicon-user"></i> Employees</a></li>
+								<li><a href="../suppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
+								<li><a href="../product.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+								<li><a href="../brands.php"><i class="glyphicon glyphicon-sort-by-attributes"></i> Product Brands</a></li>
+								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
+							</ul>
+						</li>
+						<li><a href="../backup.php"><i class="glyphicon glyphicon-cog"></i> System Settings</a></li>
+					</ul>
+				</div>
 				<!-- End of Sidebar -->
+		
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
