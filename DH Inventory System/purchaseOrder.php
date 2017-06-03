@@ -331,12 +331,12 @@
 															<tr>
 																<td>	
 																	<div class="ui-widget">
-																		<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="Product Name">
+																		<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="Product Name" required>
 																	</div>
 																</td>
 																			
 																<td>
-																	<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
+																	<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]" required>
 																</td>
 															</tr>
 														</tbody>
