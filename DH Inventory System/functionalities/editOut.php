@@ -209,7 +209,7 @@
 												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />		
 												<td>	
 													<div class="ui-widget">
-														<input class="thisProduct" id="prod" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+														<input class="thisProduct" id="prod" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
 													</div>
 												</td>
 																
