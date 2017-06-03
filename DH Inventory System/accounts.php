@@ -246,10 +246,10 @@
 												<input type="text" class="form-control" id ="adduser" placeholder="Name" name="userName" maxlength="25">
 												
 												<h3>Password</h3>
-												<input type="password" class="form-control" id ="addpass" placeholder="User Password" name="psw">
+												<input type="password" class="form-control" id ="addpass" placeholder="User Password" name="psw" maxlength="25">
 											
 												<h3>Confirm Password</h3>
-												<input type="password" class="form-control" id ="addpassconf" placeholder="Confirm Password" name="confpsw">
+												<input type="password" class="form-control" id ="addpassconf" placeholder="Confirm Password" name="confpsw" maxlength="25">
 												
 												<div class="form-group">
 													<h3>User Role</h3>
