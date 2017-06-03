@@ -306,7 +306,7 @@
 												<h4 class="modal-title">Add Purchase Order</h4>
 											</div>
 											<div class="modal-body">
-												<form action="" method="POST" onsubmit="return validateForm()">
+												<form action="" method="POST" onsubmit="return validateForm2()">
 													<h3>User</h3>
 													<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>																																				
 												
@@ -331,12 +331,12 @@
 															<tr>
 																<td>	
 																	<div class="ui-widget">
-																		<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="Product Name">
+																		<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="Product Name" required>
 																	</div>
 																</td>
 																			
 																<td>
-																	<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]">
+																	<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]" required>
 																</td>
 															</tr>
 														</tbody>

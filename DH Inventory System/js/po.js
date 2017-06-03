@@ -1,4 +1,16 @@
-function validateForm() {
+function validateForm() {	
+	if (document.getElementById('addPO').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter PO Number.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addPO').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addPO').style.borderColor = "lightblue";
+	}
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
@@ -12,30 +24,30 @@ function validateForm() {
         document.getElementById('addSupplier').style.borderColor = "lightblue";
 	}
 	
-	if (document.getElementById('prod').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Product.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('prod').style.borderColor = "red";
-		return false;
-	}else{
-        document.getElementById('prod').style.borderColor = "lightblue";
+	if(confirm('Are you sure you want to update this entry?')) {
+		return true;		
 	}
-	
-	if (document.getElementById('addQty').value == "") {
+	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
+		return false;		
+	}
+}
+
+function validateForm2() {	
+	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please Enter Supplier.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
-		document.getElementById('addQty').style.borderColor = "red";
+		document.getElementById('addSupplier').style.borderColor = "red";
 		return false;
 	}else{
-        document.getElementById('addQty').style.borderColor = "lightblue";
+        document.getElementById('addSupplier').style.borderColor = "lightblue";
 	}
 	
 }
