@@ -1,15 +1,15 @@
 function validateForm() {
-	if (document.getElementById('prod').value == "") {
+	if (document.getElementById('prods').value == "") {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Product.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
-		document.getElementById('prod').style.borderColor = "red";
+		document.getElementById('prods').style.borderColor = "red";
 		return false;
 	}else{
-        document.getElementById('prod').style.borderColor = "blue";
+        document.getElementById('prods').style.borderColor = "blue";
 	}
 	
 	if (document.getElementById('addOutQty').value == "") {
@@ -24,6 +24,43 @@ function validateForm() {
 	}
 	
 	if(confirm('Are you sure you want to add this entry?')) {
+		return true;		
+	}
+	else {
+		swal({
+		title: "Adding of Entry Cancelled",
+		type: "success"
+		});
+		return false;		
+	}
+}
+
+function validateForm2() {
+	if (document.getElementById('prod').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Product.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('prod').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('prod').style.borderColor = "blue";
+	}
+	
+	if (document.getElementById('addQty').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Quantity.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addQty').style.borderColor = "red";
+		return false;
+	}
+	
+	if(confirm('Are you sure you want to update this entry?')) {
 		return true;		
 	}
 	else {

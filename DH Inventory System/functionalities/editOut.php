@@ -37,6 +37,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 		<!-- Autocomplete Script -->
 		<link rel="stylesheet" href="../css/jquery-ui.css">
@@ -158,7 +160,7 @@
 							<h1 id="headers">Edit Product Issuance Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST" onsubmit="return validateForm()">
+								<form action="" method="POST" onsubmit="return validateForm2()">
 									<h3>User</h3>
 									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 									
@@ -207,12 +209,12 @@
 												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />		
 												<td>	
 													<div class="ui-widget">
-														<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+														<input class="thisProduct" id="prod" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
 													</div>
 												</td>
 																
 												<td>
-													<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
+													<input type="number" min="1" id ="addQty" class="form-control" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
 												</td>
 											</tr>
 											<?php endforeach ?>
@@ -299,7 +301,7 @@
 													<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 													<td>	
 														<div class="ui-widget">
-															<input class="thisProduct" id="prod" name="prodItem2[]" placeholder="Product Name">
+															<input class="thisProduct" id="prods" name="prodItem2[]" placeholder="Product Name">
 														</div>
 													</td>
 															
