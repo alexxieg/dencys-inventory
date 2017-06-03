@@ -358,7 +358,7 @@
 											<?php 
 												$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.status, incoming.inRemarks 
 																		FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID INNER JOIN suppliers ON suppliers.supID = incoming.supID
-																		WHERE incoming.status = 'Partial' AND MONTH(inDate) = MONTH(CURRENT_DATE())");
+																		WHERE incoming.status != 'Complete' AND MONTH(inDate) = MONTH(CURRENT_DATE())");
 												$query->execute();
 												$result1 = $query->fetchAll();
 											?>
