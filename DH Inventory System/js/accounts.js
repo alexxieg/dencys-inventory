@@ -17,6 +17,15 @@ function validateForm() {
 		});
 		document.getElementById('adduser').style.borderColor = "red";
 		return false;
+	}   else if (document.getElementById('adduser').value.length < 6){
+		swal({
+		title: "Warning!",
+		text: "The Username should have more than 5 characters",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('adduser').style.borderColor = "red";
+		return false;
 	}
 	if (document.getElementById('addpass').value == "") {
 		swal({
