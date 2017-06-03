@@ -285,13 +285,13 @@
 												<div id="tabHead">Category</div>
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+												<div id="tabHead">Last Physical Count</div>
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												<div id="tabHead">Current Quantity</div>
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Last Physical Qty</div>
-											</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-												<div id="tabHead">Physical Count</div>
+												<div id="tabHead">New Physical Count</div>
 											</th>	
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												<div id="tabHead">Remarks</div>
@@ -310,8 +310,8 @@
 											<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 											<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 											<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-											<td data-title="Category"><?php echo $item["qty"]; ?></td>
 											<td data-title="Price"><?php echo $item["physicalQty"]; ?></td>
+											<td data-title="Category"><?php echo $item["qty"]; ?></td>
 											<td>
 												<input type="number" min="0" id="adjustment" name="adjustUpdate[]" value="<?php echo $item["physicalQty"]; ?>" placeholder="<?php echo $item["physicalQty"]; ?>">
 												<input type="hidden" name="thisProductID[]" value="<?php echo $item["prodID"]; ?>" />

@@ -98,13 +98,33 @@
   	<body>
 		<!-- PHP code for fetching the data-->
 		<?php
-			$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
+			$query3 = $conn->prepare("SELECT DISTINCT MONTHNAME(archiveDate) AS thisMonth FROM archive;");
+			$query3->execute();
+			$result3 = $query3->fetchAll();
+			
+			$query2 = $conn->prepare("SELECT DISTINCT YEAR(archiveDate) AS thisYear FROM archive;");
+			$query2->execute();
+			$result2 = $query2->fetchAll();
+		
+			$sortByMonth = (isset($_REQUEST['prev_Month']) ? $_REQUEST['prev_Month'] : null);
+			$sortByYear = (isset($_REQUEST['prev_Year']) ? $_REQUEST['prev_Year'] : null);
+		
+			if (!empty($sortByBrand) && !empty($sortByCategory)) { 
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
+											FROM product LEFT JOIN archive ON product.prodID = archive.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
+											WHERE product.status = 'Active' AND MONTHNAME(archive.archiveDate) = '$sortByMonth' AND YEAR(archiveDate) = $sortByYear
+											GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty, archive.endingQty, archive.remarks");	
+				$query->execute();
+				$result = $query->fetchAll();
+			} else {
+				$query = $conn->prepare("SELECT product.prodID, product.prodName, product.unitType, product.reorderLevel, archive.beginningQty, archive.endingQty, archive.physicalQty, archive.qty, archive.totalIn, archive.totalOut, archive.remarks
 										FROM product LEFT JOIN archive ON product.prodID = archive.prodID LEFT JOIN incoming ON product.prodID = incoming.prodID LEFT JOIN outgoing ON product.prodID = outgoing.prodID
 										WHERE product.status = 'Active' 
 										GROUP BY prodID, archive.beginningQty, qty, archive.totalIn, archive.totalOut, archive.physicalQty, archive.endingQty, archive.remarks");	
-			$query->execute();
-			$result = $query->fetchAll();
-		?>	
+				$query->execute();
+				$result = $query->fetchAll();
+			}
+		?>
 		
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -189,9 +209,36 @@
 					<div id="contents">
 						<div class="pages">
 							<div id="tableHeader">
-								<table class="table table-striped table-bordered">	
-									<h1 id="headers">PREVIOUS INVENTORY</h1>	
+								<table class="table table-striped table-bordered">
+									<h1 id="headers">View Previous Inventory</h1>
+									
+									<?php 
+										$location =  $_SERVER['REQUEST_URI']; 
+									?>
 
+									<tr>
+										<form action="<?php echo $location; ?>" method="POST">
+											<td width="50%">
+												<label>Month:</label>
+												<select name="prev_Month">
+													<option value="<?php echo $sortByMonth;?>" SELECTED>Selected: <?php echo $sortByMonth; ?></option>
+													<?php foreach ($result3 as $row): ?>
+														<option value="<?=$row["thisMonth"]?>"><?=$row["thisMonth"]?></option>
+													<?php endforeach ?>
+												</select>
+							
+												<label>Year:</label>
+												<select name="prev_Year">
+													<option value="<?php echo $sortByYear; ?>" SELECTED>Selected: <?php echo $sortByYear; ?></option>
+													<?php foreach ($result2 as $row2): ?>
+														<option value="<?=$row2["thisYear"]?>"><?=$row2["thisYear"]?></option>
+													<?php endforeach ?>
+												</select>	
+									
+											<input type="submit" value="View" class="btn btn-success" id="viewButton" name="submit">
+											</td>
+										</form>
+									</tr>
 								</table>
 							</div>
 							
@@ -207,55 +254,65 @@
 							<!-- Table for Inventory Data-->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
-
+									<tr>
+										<td colspan="13" style="font-size: 35px;">
+											<?php
+											$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
+											$month->execute();
+											$monthres = $month->fetchAll();
+											foreach ($monthres as $monthshow)
+											echo $monthshow["month"];
+											?>	
+										</td>
+									</tr>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Product ID</div>
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											<div id="tabHead">Product Description</div>
+											<div id="tabHead">Product Name</div>
 										</th>	
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Beginning Quantity
+											<div id="tabHead">Beginning Quantity</div>
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Ending Quantity
+											<div id="tabHead">Ending Quantity</div>
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											IN
+											<div id="tabHead">IN</div>
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											OUT
+											<div id="tabHead">OUT</div>
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Current Quantity
+											<div id="tabHead">Current Quantity</div>
 											
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Physical Count
+											<div id="tabHead">Physical Count</div>
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Reorder Level
+											<div id="tabHead">Reorder Level</div>
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Unit
+											<div id="tabHead">Unit</div>
 										</th>
 						
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Remarks
+											<div id="tabHead">Remarks</div>
 										</th>
 										
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-											Stock Card
+											<div id="tabHead">Stock Card</div>
 										</th>
 									</tr>
 								</thead>
@@ -280,7 +337,7 @@
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
 										<td data-title="Remarks"><?php echo $item["remarks"];?></td>
 										<td>
-											<a href="userledger.php?incId=<?php echo $incID; ?>" target="_self"> 
+											<a href="ledger.php?incId=<?php echo $incID; ?>"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 												</button>
