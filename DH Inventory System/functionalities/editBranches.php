@@ -36,6 +36,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 	
 	</head>
   
@@ -127,7 +129,7 @@
 							<h1 id="headers">Edit Branch Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST">							
+								<form action="" method="POST" onsubmit="return validateForm2()">							
 									<?php foreach ($result2 as $row): ?>
 									<h3>Branch Name</h3>
 									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["branchName"]; ?>" value="<?php echo $row["branchName"]; ?>" name="branName">
@@ -135,7 +137,7 @@
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Location</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["location"]; ?>" value="<?php echo $row["location"]; ?>" name="location">
+									<input type="text" class="form-control" id ="addEntrys" placeholder="<?php echo $row["location"]; ?>" value="<?php echo $row["location"]; ?>" name="location">
 									<?php endforeach ?>									
 									
 									<div class="modFoot">
