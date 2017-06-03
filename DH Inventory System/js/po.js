@@ -24,7 +24,7 @@ function validateForm() {
         document.getElementById('addSupplier').style.borderColor = "lightblue";
 	}
 	
-	if(confirm('Are you sure you want to add this entry?')) {
+	if(confirm('Are you sure you want to update this entry?')) {
 		return true;		
 	}
 	else {
