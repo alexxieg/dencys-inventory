@@ -446,7 +446,7 @@
 													<!-- Retrieve Category Data -->
 													<?php
 														$thisPOQuery = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
-																				FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.status = 'Incomplete'
+																				FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.status = 'Incomplete' OR purchaseorders.status = 'Undelivered'
 																				GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name");
 														$thisPOQuery->execute();
 														$thisPOResult = $thisPOQuery->fetchAll();

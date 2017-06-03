@@ -11,6 +11,7 @@ function validateForm() {
 	}else{
         document.getElementById('addRcpt').style.borderColor = "blue";
 	}
+	
 	if (document.getElementById('addRcptDate').value == "") {
 		swal({
 		title: "Warning!",
@@ -23,6 +24,7 @@ function validateForm() {
 	}else{
         document.getElementById('addRcptDate').style.borderColor = "blue";
 	}
+	
 	if (document.getElementById('supplierName').value == "") {
 		swal({
 		title: "Warning!",
@@ -35,6 +37,7 @@ function validateForm() {
 	}else{
         document.getElementById('supplierName').style.borderColor = "blue";
 	}
+	
 	if (document.getElementById('addInQty').value == "") {
 		swal({
 		title: "Warning!",
@@ -47,6 +50,7 @@ function validateForm() {
 	}else{
         document.getElementById('addInQty').style.borderColor = "blue";
 	}
+	
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		
 	}

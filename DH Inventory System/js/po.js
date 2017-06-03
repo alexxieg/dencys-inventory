@@ -11,6 +11,7 @@ function validateForm() {
 	}else{
         document.getElementById('addSupplier').style.borderColor = "lightblue";
 	}
+	
 	if (document.getElementById('prod').value == "") {
 		swal({
 		title: "Warning!",
@@ -23,6 +24,7 @@ function validateForm() {
 	}else{
         document.getElementById('prod').style.borderColor = "lightblue";
 	}
+	
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
@@ -35,6 +37,7 @@ function validateForm() {
 	}else{
         document.getElementById('addQty').style.borderColor = "lightblue";
 	}
+	
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		
 	}

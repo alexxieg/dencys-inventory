@@ -11,6 +11,7 @@ function validateForm() {
 	}else{
         document.getElementById('prod').style.borderColor = "blue";
 	}
+	
 	if (document.getElementById('addOutQty').value == "") {
 		swal({
 		title: "Warning!",
@@ -21,6 +22,7 @@ function validateForm() {
 		document.getElementById('addOutQty').style.borderColor = "red";
 		return false;
 	}
+	
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		
 	}
