@@ -35,6 +35,19 @@ function validateForm() {
 	}
 }
 
+function validateForm2() {
+	if(confirm('Are you sure you want to update this entry?')) {
+		return true;			
+	}
+	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
+		return false;		
+	}
+}
+
 function deleteRow(tableID) {
 	try {
 		var table = document.getElementById(tableID);

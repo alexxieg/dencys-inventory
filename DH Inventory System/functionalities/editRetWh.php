@@ -157,7 +157,7 @@
 					<div id="contents">
 						<div class="pages no-more-tables">
 							<h1 id="headers">Edit Warehouse Return Entry</h1>
-							<form action="" method="POST">
+							<form action="" method="POST" onsubmit="return validateForm2()">
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
@@ -208,12 +208,12 @@
 											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 											<td>	
 												<div class="ui-widget">
-													<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>">
+													<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
 												</div>		
 											</td>
 													
 											<td>
-												<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]">
+												<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]" required>
 											</td>
 
 											<td>
