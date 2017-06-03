@@ -91,6 +91,19 @@ function validateForm2() {
         document.getElementById('addRcptDate').style.borderColor = "blue";
 	}
 	
+	if (document.getElementById('addSupplier').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Receipt Date.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addSupplier').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addSupplier').style.borderColor = "blue";
+	}
+	
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		
 	}
