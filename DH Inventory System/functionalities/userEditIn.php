@@ -7,6 +7,24 @@
 		
 		<title>Edit Product Delivery Entry</title>
 
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+		
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="user") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+			
+			ini_set('display_errors', 1); 
+			error_reporting(E_ALL);
+		?>
+
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
@@ -27,9 +45,6 @@
 		<script src="../js/jquery-1.9.1.js"></script>
 		<script src="../js/jquery-ui.js"></script>
 		
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
-		
 		<script>
 		  $(function() {
 			$('#addSupplier').autocomplete({
@@ -49,20 +64,6 @@
 		  });
 		</script> 
 		
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="user") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-			
-			ini_set('display_errors', 1); 
-			error_reporting(E_ALL);
-		?>
 	</head>
 	
 	<body>
@@ -118,7 +119,7 @@
 					<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
-								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
+								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="../userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
 							</ul>
 						</li>
@@ -251,9 +252,7 @@
 									<br>
 									
 									<div class="modFoot">
-										<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-										<br>
-										<br>
+									
 										<span>
 											<a href="../userproductdeliveries.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
@@ -267,124 +266,7 @@
 									</div>	
 								</form> 								
 							</div>								
-				
-							<!-- Modal for New Incoming Entry Form -->
-							<div class="modal fade" id="myModal" role="dialog">
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add Incoming Product</h4>
-										</div>
-										<div class="modal-body">
-											<form action="" method="POST">
-												<h3> User </h3>
-												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												
-												<h3>Product Order Number</h3>				
-												<input type="text" class="form-control" id="poNum" value="<?php echo $incID; ?>" name="po2" readonly>
-												
-												<h3>Receipt No.</h3> 
-												<input type="text" class="form-control" id ="addRcpt" value="<?php echo $reciptNum; ?>" placeholder="Receipt Number" name="rcno">
-												
-												<h3>Receipt Date</h3> 
-												<input type="date" class="form-control" id ="addRcptDate" value="<?php echo $reciptDate;?>" name="rcdate">
-												
-												<h3>Supplier</h3> 
-													<div class="ui-widget">
-														<input id="addSupplier" name="supplier2" value="<?php echo $supplierName; ?>">
-													</div>
-																		
-												<h3>Received By</h3>
-												<?php
-													$query = $conn->prepare("SELECT empFirstName FROM employee ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-																	
-												<select class="form-control" id="addEmpl" name="emp2">
-													<?php foreach ($res as $row): ?>
-														<option><?=$row["empFirstName"]?></option>
-													<?php endforeach ?>
-												</select> 
-												
-												<br>
-													
-												<h5>Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
-													<tbody>
-														<tr>
-															<td>
-																Product Name
-															</td>
-															<td>
-																Quantity
-															</td>
-															<td>
-																Status
-															</td>
-															<td>
-																Type
-															</td>
-															<td>
-																Remarks
-															</td>
-														</tr>
-														<tr id="thisRow">
-															<td>	
-																<div class="ui-widget">
-																	<input class="thisProduct" name="prodItem2[]" placeholder="Product Name">
-																</div>
-															</td>
-																	
-															<td>
-																<input type="number" min="1" class="form-control" id="addIncQty" placeholder="Quantity" name="incQty2[]">
-															</td>
-															
-															<td>
-																<select class="form-control"  name="inStatus2[]">
-																	<option>Complete</option>
-																	<option>Partial</option>
-																</select> 
-															</td>
-																
-															<td>
-																<select class="form-control" name="inType2[]">
-																	<option>Ordered</option>
-																	<option>Freebie</option>
-																</select>
-															</td>	
-																
-															<td>
-																<input type="text" class="form-control" id="addRem" value="None" placeholder="Remarks" name="inRemarks2[]">
-															</td>
-														</tr>
-													</tbody>
-												</table>
-												
-												<br>
-												
-												<div class="modFoot">
-													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-													<br>
-													<br>
-													<span>
-													<a href="../prodDeliveries.php">
-													<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-													</a></span>
-													<span><input type="submit" name="addItems" value="Submit" class="btn btn-success" id="sucBtn"></span>
-												</div>
-											</form> 	
-											
-											<div class="modal-footer">
-											</div>								
-										</div>
-									</div>
-								</div>
-							</div> 
-							<!-- End of Modal -->
-
+			
 						</div>
 					</div>
 				</div>
@@ -437,42 +319,6 @@
 				$url="userViewProdDelivery.php?incId=$incID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
-
-			if (isset($_POST["addItems"])){
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {
-
-					$inRemarks = $_POST['inRemarks2'][$index2];
-					$prodItem = $_POST['prodItem2'][$index2];
-					$inQty = $_POST['incQty2'][$index2];
-					$inStat = $_POST['inStatus2'][$index2];
-					$inType = $_POST['inType2'][$index2];
-					$emp = $_POST['emp2'];
-					$userID = $_POST['userID'];
-					$supName = $_POST['supplier2'];	
-					$poNum = $_POST['po2'];
-
-					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
-					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-					$emp3 = $emp2['empA'];
-
-					$sup1 = $conn->query("SELECT supID as supA FROM suppliers WHERE supplier_name = '$supName'");
-					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
-					$sup3 = $sup2['supA'];
-					
-					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'")->fetch());
-					
-					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
-					VALUES ('$inQty',CURDATE(),'$incID','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$productID','$userID','$poNum')";
-					$result = $conn->query($sql);
-					
-					$sql = "UPDATE incoming SET inDate = $updateDate
-					WHERE incoming.receiptNo = '$incID'";
-					$conn->exec($sql);		
-				}
-				$url="userViewProdDelivery.php?incId=$incID";
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}	
 		?>
 	
   </body>

@@ -8,13 +8,25 @@
 	
 		<title>Edit Product Issuance Entry</title>
 			
+		<!-- Database Connection -->
+		<?php include('dbcon.php'); ?>
+			
+		<!-- Login Session -->
+		<?php 
+			session_start();
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="user") {
+				header('Location: index.php');
+			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
+		?>
+
 		<!-- Bootstrap core CSS -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../css/bootstrap.css" rel="stylesheet">
 		<link rel="shortcut icon" href="../logo.jpg">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="../css/custom.css" rel="stylesheet">
@@ -25,16 +37,13 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
-		
-				
+					
 		<!-- Autocomplete Script -->
 		<link rel="stylesheet" href="../css/jquery-ui.css">
 		<script src="../js/jquery-1.9.1.js"></script>
 		<script src="../js/jquery-ui.js"></script>
 		
-		<!-- Database Connection -->
-		<?php include('dbcon.php'); ?>
-			
+		
 		<script>
 		  $(function() {
 			$('.thisProduct').autocomplete({
@@ -54,17 +63,6 @@
 
 		</script>
 		
-		<!-- Login Session -->
-		<?php 
-			session_start();
-			$role = $_SESSION['sess_role'];
-			if (!isset($_SESSION['id']) || $role!="user") {
-				header('Location: index.php');
-			}
-			$session_id = $_SESSION['id'];
-			$session_query = $conn->query("select * from users where userName = '$session_id'");
-			$user_row = $session_query->fetch();
-		?>
 	</head>
 	
 	<body>
@@ -220,7 +218,7 @@
 										<br>
 										<br>
 										<span>
-											<a href="../ProdIssuance.php">
+											<a href="../userProdIssuance.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>
@@ -234,96 +232,6 @@
 							</div>
 						</div>
 					</div>
-					
-					<!-- Modal - Add Outgoing Entry Form -->
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog modal-lg">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Add Product Issuance</h4>
-								</div>
-								<div class="modal-body">
-									<form action="" method="POST" onsubmit="return validateForm()">
-										<h3>User</h3>
-										<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID2" readonly>
-											
-										<h3>Handled By</h3>
-										<?php
-											$query = $conn->prepare("SELECT empFirstName FROM employee ");
-											$query->execute();
-											$result = $query->fetchAll();
-										?>
-														
-										<select class="form-control" id="addEmpl" name="emp2">
-											<?php foreach ($result as $row): ?>
-												<option><?=$row["empFirstName"]?></option>
-											<?php endforeach ?>
-										</select> 
-										
-										<h3>Branch</h3>
-										<?php
-											$query = $conn->prepare("SELECT location FROM branch WHERE branchID > 0");
-											$query->execute();
-											$res = $query->fetchAll();
-											?>
-										
-										<select class="form-control" id="addEntry" name="branch2">
-											<?php foreach ($res as $row): ?>
-												<option><?=$row["location"]?></option>
-											<?php endforeach ?>
-										</select> 
-										<br>
-												
-										<h5 id="prodHeader">Product/s</h5>
-										<table class="table table-striped" id="dataTable" name="chk">
-											<tbody>
-												<tr>
-													<td>
-													</td>
-													<td>
-														 Product Name
-													</td>
-													<td>
-														Quantity
-													</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" name="chk"></TD>
-													<td>	
-														<div class="ui-widget">
-															<input class="thisProduct" id="prods" name="prodItem2[]" placeholder="Product Name">
-														</div>
-													</td>
-															
-													<td>
-														<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Quantity" name="outQty2[]">
-													</td>
-												</tr>
-											</tbody>
-										</table>
-											
-										<div class="modFoot">
-											<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-											<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-											<br>
-											<br>
-											<span>
-												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-											</span>
-											<span>
-												<input type="submit" name="addItems" value="Submit" class="btn btn-success" id="sucBtn">
-											</span>
-										</div>
-									</form>																		
-						 
-									<div class="modal-footer">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End of modal -->
 				</div>
 			</div>
 		</div>
@@ -379,35 +287,6 @@
 				$url="viewProdIssuance.php?outId=$outid";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
-
-			if (isset($_POST["addItems"])) {
-				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {
-					$prodItem2 = $_POST['prodItem2'][$index2];
-					$outQty2 = $_POST['outQty2'][$index2];
-					$emp2 = $_POST['emp2'];
-					$branch2 = $_POST['branch2'];
-					$userID2 = $_POST['userID2'];
-
-					$newemp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp2'");
-					$newemp2 = $newemp1->fetch(PDO::FETCH_ASSOC);
-					$newemp3 = $newemp2['empA'];
-					
-					$newprod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem2'");
-					$newprod2 = $newprod1->fetch(PDO::FETCH_ASSOC);
-					$newprod3 = $newprod2['prodA'];
-					
-					$newbranch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch2'");
-					$newbranch2 = $newbranch1->fetch(PDO::FETCH_ASSOC);
-					$newbranch3 = $newbranch2['branchA'];
-					
-					$sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID, userID)
-					VALUES ('$outQty2',CURDATE(),'$outid','$newbranch3','$newemp3','$newprod3','$userID2')";
-					$result = $conn->query($sql); 
-				}
-
-				$url="viewProdIssuance.php?outId=$outid";
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}			
 		?>
 	
 	
