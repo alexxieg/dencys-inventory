@@ -40,6 +40,11 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		
 		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
@@ -94,6 +99,26 @@
                         }]
                 } );
             } );		
+		</script>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "search.php"
+			});
+		  });
+	
+		</script>
+		
+		<script>
+		  $(function() {
+			$('#supplier').autocomplete({
+				minLength:2,
+				source: "searchSup.php"
+			});
+		  });
+
 		</script>
 		
 	</head>
@@ -291,7 +316,7 @@
 													<option><?=$row["location"]?></option>
 													<?php endforeach ?>
 												</select> 
-												
+													
 												<h3>Received By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");
@@ -304,8 +329,6 @@
 														<option><?=$row["empFirstName"]?></option>
 													<?php endforeach ?>
 												</select> 
-													
-												<br>
 												
 												<h5 id="prodHeader">Product/s</h5>
 												<table class="table table-striped" id="dataTable" name="chk">
@@ -317,7 +340,7 @@
 															<td>Remarks</td>
 														</tr>
 														<tr>
-															<td><input type="checkbox" name="chk"></td>
+															<td><input type="checkbox" name="chk"></TD>
 															<td>	
 																<div class="ui-widget">
 																	<input class="thisProduct" id="prod" name="prodItem[]" placeholder="Product Name">
@@ -356,8 +379,8 @@
 									</div>
 								</div>
 							</div>
-							<!-- End of modal -->
-														<!-- Modal - Activity Log -->
+							
+							<!-- Modal - Activity Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">

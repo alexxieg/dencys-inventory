@@ -154,10 +154,10 @@
 							<h1 id="headers">Edit Product Issuance Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST" onsubmit="return validateForm()">
+								<form action="" method="POST" onsubmit="return validateForm2()">
 									<h3>User</h3>
 									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-								
+									
 									<h3>Receipt No.</h3> 
 									<input type="text" class="form-control" id ="addRcpt" placeholder="<?php echo $reciptNum; ?>" value="<?php echo $reciptNum; ?>" name="rcno" Readonly>
 											
@@ -194,26 +194,21 @@
 									<table class="table table-striped" name="chk">
 										<tbody>
 											<tr>
-												<td>
-													Product Name
-												</td>
-												<td>
-													Quantity
-												</td>
+												<td>Product Description</td>
+												<td>Quantity</td>
 											</tr>
-											
 											<?php foreach ($resul as $row): ?>
-											<tr>
-												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />
-														
+											
+											<tr>												
+												<input type="hidden" name="productOutID[]" value="<?php echo $row["outID"]; ?>" />		
 												<td>	
 													<div class="ui-widget">
-														<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+														<input class="thisProduct" id="prod" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
 													</div>
 												</td>
 																
 												<td>
-													<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]">
+													<input type="number" min="1" id ="addQty" class="form-control" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]" required>
 												</td>
 											</tr>
 											<?php endforeach ?>
@@ -224,8 +219,8 @@
 										<span><button type="button" class="btn btn-default" value="Add Row" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
 										<br>
 										<br>
-											<span>
-												<a href="../userProdIssuance.php">
+										<span>
+											<a href="../ProdIssuance.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>
@@ -239,25 +234,116 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- Modal - Add Outgoing Entry Form -->
+					<div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Add Product Issuance</h4>
+								</div>
+								<div class="modal-body">
+									<form action="" method="POST" onsubmit="return validateForm()">
+										<h3>User</h3>
+										<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID2" readonly>
+											
+										<h3>Handled By</h3>
+										<?php
+											$query = $conn->prepare("SELECT empFirstName FROM employee ");
+											$query->execute();
+											$result = $query->fetchAll();
+										?>
+														
+										<select class="form-control" id="addEmpl" name="emp2">
+											<?php foreach ($result as $row): ?>
+												<option><?=$row["empFirstName"]?></option>
+											<?php endforeach ?>
+										</select> 
+										
+										<h3>Branch</h3>
+										<?php
+											$query = $conn->prepare("SELECT location FROM branch WHERE branchID > 0");
+											$query->execute();
+											$res = $query->fetchAll();
+											?>
+										
+										<select class="form-control" id="addEntry" name="branch2">
+											<?php foreach ($res as $row): ?>
+												<option><?=$row["location"]?></option>
+											<?php endforeach ?>
+										</select> 
+										<br>
+												
+										<h5 id="prodHeader">Product/s</h5>
+										<table class="table table-striped" id="dataTable" name="chk">
+											<tbody>
+												<tr>
+													<td>
+													</td>
+													<td>
+														 Product Name
+													</td>
+													<td>
+														Quantity
+													</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" name="chk"></TD>
+													<td>	
+														<div class="ui-widget">
+															<input class="thisProduct" id="prods" name="prodItem2[]" placeholder="Product Name">
+														</div>
+													</td>
+															
+													<td>
+														<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Quantity" name="outQty2[]">
+													</td>
+												</tr>
+											</tbody>
+										</table>
+											
+										<div class="modFoot">
+											<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+											<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
+											<br>
+											<br>
+											<span>
+												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
+											</span>
+											<span>
+												<input type="submit" name="addItems" value="Submit" class="btn btn-success" id="sucBtn">
+											</span>
+										</div>
+									</form>																		
+						 
+									<div class="modal-footer">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End of modal -->
 				</div>
 			</div>
 		</div>
 		
 		<?php
-		require_once 'dbcon.php';
-		$outid = $_GET['outId'];
-		if (isset($_POST["updateOut"])){
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
-				SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE receiptNo = '$outid'";
-		$conn->exec($sql);
-		}
+			require_once 'dbcon.php';
+			$outid = $_GET['outId'];
+			if (isset($_POST["updateOut"])){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
+						SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE receiptNo = '$outid'";
+				$conn->exec($sql);
+			}
 		?>
 		
 		<!-- Update Function -->
 		<?php
 			$outid= $_GET['outId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			
 			if (isset($_POST["updateOut"])){
@@ -275,7 +361,7 @@
 					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 					$emp3 = $emp2['empA'];
 					
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'");
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 						
@@ -286,36 +372,40 @@
 					$sql = "UPDATE outgoing SET outQty = $outQty, outDate = CURDATE(), receiptNo = '$rcpNo', branchID = $branch3, empID = '$emp3', prodID = '$prod3', userID = '$userID' 
 							WHERE outID = $outgoingID";
 					$conn->exec($sql);				
+					
+					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
+						WHERE outID = '$outid'"; */
 				}
-				$url="userViewProdIssuance.php?outId=$outid";
+				$url="viewProdIssuance.php?outId=$outid";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 
-			if (isset($_POST["editAddOutgoing"])){
-				for ($index2 = 0; $index2 < count($prodTem); $index2++) {
-					$prodItem = $_POST['prodItem'][$index2];
-					$outQty = $_POST['outQty'][$index2];
-					$userID = $_POST['userID'];
-					$emp = $_POST['emp'];
-					$branch = $_POST['branch'];
+			if (isset($_POST["addItems"])) {
+				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {
+					$prodItem2 = $_POST['prodItem2'][$index2];
+					$outQty2 = $_POST['outQty2'][$index2];
+					$emp2 = $_POST['emp2'];
+					$branch2 = $_POST['branch2'];
+					$userID2 = $_POST['userID2'];
 
-					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
-					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-					$emp3 = $emp2['empA'];
+					$newemp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp2'");
+					$newemp2 = $newemp1->fetch(PDO::FETCH_ASSOC);
+					$newemp3 = $newemp2['empA'];
 					
-					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'");
-					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-					$prod3 = $prod2['prodA'];
-						
-					$branch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch'");
-					$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
-					$branch3 = $branch2['branchA'];
+					$newprod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem2'");
+					$newprod2 = $newprod1->fetch(PDO::FETCH_ASSOC);
+					$newprod3 = $newprod2['prodA'];
+					
+					$newbranch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch2'");
+					$newbranch2 = $newbranch1->fetch(PDO::FETCH_ASSOC);
+					$newbranch3 = $newbranch2['branchA'];
 					
 					$sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID, userID)
-					VALUES ('$outQty',CURDATE(),'$reciptNum','$branch3','$emp3','$prod3','$userID')";
+					VALUES ('$outQty2',CURDATE(),'$outid','$newbranch3','$newemp3','$newprod3','$userID2')";
 					$result = $conn->query($sql); 
 				}
-				$url="userViewProdIssuance.php?outId=$outid";
+
+				$url="viewProdIssuance.php?outId=$outid";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}			
 		?>
