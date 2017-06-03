@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2017 at 08:00 AM
+-- Generation Time: Jun 03, 2017 at 08:35 AM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -43,23 +43,7 @@ CREATE TABLE IF NOT EXISTS `archive` (
   `prodID` varchar(45) NOT NULL,
   PRIMARY KEY (`archiveID`),
   KEY `FKARCPROD_idx` (`prodID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `archive`
---
-
-INSERT INTO `archive` (`archiveID`, `archiveDate`, `archPeriodStart`, `qty`, `totalIn`, `totalOut`, `beginningQty`, `endingQty`, `physicalQty`, `remarks`, `prodID`) VALUES
-(8, '2017-04-12', NULL, 40, 175, 140, 0, 40, 40, '', 'AFR-ACC-0001'),
-(9, '2017-04-12', NULL, 60, 175, 115, 0, 60, 60, '', 'AFR-ACC-0002'),
-(10, '2017-04-12', NULL, 85, 175, 90, 0, 0, 0, '', 'AFR-ACC-0003'),
-(11, '2017-04-12', NULL, 125, 175, 50, 0, 0, 0, '', 'AFR-ACC-0004'),
-(12, '2017-04-12', NULL, 125, 175, 50, 0, 0, 0, '', 'AFR-ACC-0005'),
-(13, '2017-03-31', NULL, 105, 175, 70, 0, 0, 0, '', 'AFR-ACC-0006'),
-(14, '2017-03-31', NULL, 80, 150, 70, 0, 0, 0, '', 'AFR-ACC-0007'),
-(15, '2017-03-31', NULL, 100, 150, 50, 0, 0, 0, '', 'AFR-ACC-0008'),
-(16, '2017-03-31', NULL, 80, 150, 70, 0, 0, 0, '', 'AFR-ACC-0009'),
-(17, '2017-03-31', NULL, 250, 300, 50, 0, 0, 0, '', 'AFR-ACC-0010');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -657,33 +641,7 @@ CREATE TABLE IF NOT EXISTS `editincoming` (
   `userID` varchar(45) NOT NULL,
   `poNumber` varchar(45) NOT NULL,
   PRIMARY KEY (`inEditID`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `editincoming`
---
-
-INSERT INTO `editincoming` (`inEditID`, `inEditDate`, `inID`, `inQty`, `inDate`, `receiptNo`, `receiptDate`, `inRemarks`, `status`, `partialRcptNo`, `partialRcptDate`, `empID`, `prodID`, `supID`, `userID`, `poNumber`) VALUES
-(1, '2017-06-03', '291', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0001', '1', 'denne', 'PO-00032'),
-(2, '2017-06-03', '292', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0002', '1', 'denne', 'PO-00032'),
-(3, '2017-06-03', '293', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0003', '1', 'denne', 'PO-00032'),
-(4, '2017-06-03', '294', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0004', '1', 'denne', 'PO-00032'),
-(5, '2017-06-03', '295', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0005', '1', 'denne', 'PO-00032'),
-(6, '2017-06-03', '296', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0006', '1', 'denne', 'PO-00032'),
-(7, '2017-06-03', '297', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0007', '1', 'denne', 'PO-00032'),
-(8, '2017-06-03', '298', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0008', '1', 'denne', 'PO-00032'),
-(9, '2017-06-03', '299', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0009', '1', 'denne', 'PO-00032'),
-(10, '2017-06-03', '300', '50', '2017-03-29', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0010', '1', 'denne', 'PO-00032'),
-(16, '2017-06-03', '291', '55', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0001', '1', 'kharol', 'PO-00032'),
-(17, '2017-06-03', '292', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0002', '1', 'kharol', 'PO-00032'),
-(18, '2017-06-03', '293', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0002', '1', 'kharol', 'PO-00032'),
-(19, '2017-06-03', '294', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0002', '1', 'kharol', 'PO-00032'),
-(20, '2017-06-03', '295', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0002', '1', 'kharol', 'PO-00032'),
-(21, '2017-06-03', '296', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0006', '1', 'kharol', 'PO-00032'),
-(22, '2017-06-03', '297', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0006', '1', 'kharol', 'PO-00032'),
-(23, '2017-06-03', '298', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0006', '1', 'kharol', 'PO-00032'),
-(24, '2017-06-03', '299', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0006', '1', 'kharol', 'PO-00032'),
-(25, '2017-06-03', '300', '50', '2017-06-03', 'K087W', '2017-03-29', 'None', 'Complete', NULL, NULL, '2', 'KBL-WLD-0006', '1', 'kharol', 'PO-00032');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -704,41 +662,7 @@ CREATE TABLE IF NOT EXISTS `editoutgoing` (
   `prodID` varchar(45) NOT NULL,
   `userID` varchar(45) NOT NULL,
   PRIMARY KEY (`outEditID`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `editoutgoing`
---
-
-INSERT INTO `editoutgoing` (`outEditID`, `outEditDate`, `outID`, `outQty`, `outDate`, `receiptNo`, `branchID`, `empID`, `prodID`, `userID`) VALUES
-(1, '2017-06-03', '1', '20', '2017-05-25', 'OUT-00001', '1', '15', 'AFR-ACC-0001', 'denne'),
-(2, '2017-06-03', '2', '20', '2017-05-25', 'OUT-00001', '1', '15', 'AFR-ACC-0002', 'denne'),
-(3, '2017-06-03', '3', '20', '2017-05-25', 'OUT-00001', '1', '15', 'AFR-ACC-0003', 'denne'),
-(4, '2017-06-03', '4', '30', '2017-05-25', 'OUT-00001', '1', '15', 'AFR-ACC-0006', 'denne'),
-(5, '2017-06-03', '5', '30', '2017-05-25', 'OUT-00001', '1', '15', 'AFR-ACC-0007', 'denne'),
-(8, '2017-06-03', '1', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0001', 'denne'),
-(9, '2017-06-03', '2', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0002', 'denne'),
-(10, '2017-06-03', '3', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0003', 'denne'),
-(11, '2017-06-03', '4', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0006', 'denne'),
-(12, '2017-06-03', '5', '30', '2017-05-25', 'OUT-00001', '1', '15', 'AFR-ACC-0007', 'denne'),
-(15, '2017-06-03', '1', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0001', 'denne'),
-(16, '2017-06-03', '2', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0002', 'denne'),
-(17, '2017-06-03', '3', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0003', 'denne'),
-(18, '2017-06-03', '4', '30', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0006', 'denne'),
-(19, '2017-06-03', '5', '30', '2017-05-25', 'OUT-00001', '1', '15', 'AFR-ACC-0007', 'denne'),
-(22, '2017-06-03', '1', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0001', 'denne'),
-(23, '2017-06-03', '2', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0002', 'denne'),
-(24, '2017-06-03', '3', '20', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0003', 'denne'),
-(25, '2017-06-03', '4', '30', '2017-06-03', 'OUT-00001', '1', '15', 'AFR-ACC-0006', 'denne'),
-(26, '2017-06-03', '5', '30', '2017-05-25', 'OUT-00001', '1', '15', 'AFR-ACC-0007', 'denne'),
-(29, '2017-06-03', '374', '5', '2017-06-03', 'OUT-00050', '1', '1', 'AFR-ACC-0001', 'kharol'),
-(30, '2017-06-03', '375', '5', '2017-06-03', 'OUT-00050', '1', '1', 'TKU-ACC-0003', 'kharol'),
-(32, '2017-06-03', '374', '5', '2017-06-03', 'OUT-00050', '1', '1', 'AFR-ACC-0001', 'kharol'),
-(33, '2017-06-03', '375', '5', '2017-06-03', 'OUT-00050', '1', '1', 'TKU-ACC-0003', 'kharol'),
-(35, '2017-06-03', '374', '5', '2017-06-03', 'OUT-00050', '1', '1', 'AFR-ACC-0001', 'kharol'),
-(36, '2017-06-03', '375', '5', '2017-06-03', 'OUT-00050', '1', '1', 'TKU-ACC-0003', 'kharol'),
-(38, '2017-06-03', '374', '5', '2017-06-03', 'OUT-00050', '1', '1', 'AFR-ACC-0001', 'kharol'),
-(39, '2017-06-03', '375', '5', '2017-06-03', 'OUT-00050', '1', '1', 'TKU-ACC-0003', 'kharol');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -782,17 +706,7 @@ CREATE TABLE IF NOT EXISTS `editreturn` (
   `supID` varchar(45) DEFAULT NULL,
   `empID` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`returnEditID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `editreturn`
---
-
-INSERT INTO `editreturn` (`returnEditID`, `returnEditDate`, `returnID`, `receiptNo`, `returnDate`, `returnQty`, `returnType`, `returnRemark`, `prodID`, `branchID`, `userID`, `supID`, `empID`) VALUES
-(1, '2017-06-03', '4', 'RET-WHS-00001', '2017-03-08', '5', 'Warehouse Return', 'Not Sold', 'AFR-ACC-0001', '1', 'dennielle', '0', NULL),
-(2, '2017-06-03', '5', 'RET-WHS-00001', '2017-03-08', '10', 'Warehouse Return', 'Not Sold', 'DCA-PWT-0009', '1', 'dennielle', '0', NULL),
-(3, '2017-06-03', '6', 'RET-WHS-00001', '2017-03-08', '15', 'Warehouse Return', 'Not Sold', 'TFM-ACC-0010', '1', 'dennielle', '0', NULL),
-(4, '2017-06-03', '41', 'RET-WHS-00001', '2017-06-03', '5', 'Warehouse Return', '', 'AFR-ACC-0001', '1', 'kharol', '0', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1272,16 +1186,16 @@ INSERT INTO `incoming` (`inID`, `inQty`, `inDate`, `inType`, `receiptNo`, `recei
 (378, 50, '2017-04-04', 'Ordered', '9041C', '2017-04-04', 'None', 'Complete', 'None', NULL, 7, 'HTC-PWT-0018', '40', 'haney', 'PO-00039'),
 (379, 50, '2017-04-04', 'Ordered', '9041C', '2017-04-04', 'None', 'Complete', 'None', NULL, 7, 'HTC-PWT-0019', '40', 'haney', 'PO-00039'),
 (380, 50, '2017-04-04', 'Ordered', '9041C', '2017-04-04', 'None', 'Complete', 'None', NULL, 7, 'HTC-PWT-0020', '40', 'haney', 'PO-00039'),
-(381, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0011', '14', 'haney', 'PO-00040'),
-(382, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0012', '14', 'haney', 'PO-00040'),
-(383, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0013', '14', 'haney', 'PO-00040'),
-(384, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0014', '14', 'haney', 'PO-00040'),
-(385, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0015', '14', 'haney', 'PO-00040'),
-(386, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0016', '14', 'haney', 'PO-00040'),
-(387, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0017', '14', 'haney', 'PO-00040'),
-(388, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0018', '14', 'haney', 'PO-00040'),
-(389, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0019', '14', 'haney', 'PO-00040'),
-(390, 40, '2017-04-04', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0020', '14', 'haney', 'PO-00040'),
+(381, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0011', '14', 'denne', 'PO-00040'),
+(382, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0012', '14', 'denne', 'PO-00040'),
+(383, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0013', '14', 'denne', 'PO-00040'),
+(384, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0014', '14', 'denne', 'PO-00040'),
+(385, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0015', '14', 'denne', 'PO-00040'),
+(386, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0016', '14', 'denne', 'PO-00040'),
+(387, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0017', '14', 'denne', 'PO-00040'),
+(388, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0018', '14', 'denne', 'PO-00040'),
+(389, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0019', '14', 'denne', 'PO-00040'),
+(390, 40, '2017-06-03', 'Ordered', '389E2', '2017-04-04', 'None', 'Complete', 'None', NULL, 4, 'JEK-PWT-0020', '14', 'denne', 'PO-00040'),
 (391, 40, '2017-04-05', 'Ordered', '883BL', '2017-04-05', 'None', 'Complete', 'None', NULL, 14, 'KBL-WLD-0011', '34', 'kharol', 'PO-00041'),
 (392, 40, '2017-04-05', 'Ordered', '883BL', '2017-04-05', 'None', 'Complete', 'None', NULL, 14, 'KBL-WLD-0012', '34', 'kharol', 'PO-00041'),
 (393, 40, '2017-04-05', 'Ordered', '883BL', '2017-04-05', 'None', 'Complete', 'None', NULL, 14, 'KBL-WLD-0013', '34', 'kharol', 'PO-00041'),
@@ -1415,12 +1329,12 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty`, `inQty`, `inRetQty`, `totalIn`, `outQty`, `outRetQty`, `totalOut`, `endingQty`, `remarks`, `prodID`, `invPeriodStart`) VALUES
-(1, '2017-06-03', 88, 40, 40, 175, 10, 185, 137, NULL, 137, NULL, '', 'AFR-ACC-0001', NULL),
+(1, '2017-06-03', 90, 40, 40, 175, 5, 180, 130, NULL, 130, NULL, '', 'AFR-ACC-0001', NULL),
 (2, '2017-06-03', 130, 60, 60, 175, NULL, 175, 105, NULL, 105, NULL, '', 'AFR-ACC-0002', NULL),
 (3, '2017-06-03', 85, 0, 0, 175, NULL, 175, 90, NULL, 90, NULL, '', 'AFR-ACC-0003', NULL),
 (4, '2017-06-03', 125, 0, 0, 175, NULL, 175, 50, NULL, 50, NULL, '', 'AFR-ACC-0004', NULL),
 (5, '2017-06-03', 125, 0, 0, 175, NULL, 175, 50, NULL, 50, NULL, '', 'AFR-ACC-0005', NULL),
-(6, '2017-06-03', 95, 0, 0, 175, NULL, 175, 80, NULL, 80, NULL, '', 'AFR-ACC-0006', NULL),
+(6, '2017-06-03', 105, 0, 0, 175, NULL, 175, 70, NULL, 70, NULL, '', 'AFR-ACC-0006', NULL),
 (7, '2017-06-03', 80, 0, 0, 150, NULL, 150, 70, NULL, 70, NULL, '', 'AFR-ACC-0007', NULL),
 (8, '2017-06-03', 100, 0, 0, 150, NULL, 150, 50, NULL, 50, NULL, '', 'AFR-ACC-0008', NULL),
 (9, '2017-06-03', 80, 0, 0, 150, NULL, 150, 70, NULL, 70, NULL, '', 'AFR-ACC-0009', NULL),
@@ -1441,7 +1355,7 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (24, '2017-03-31', 30, 0, 0, 40, NULL, 40, 10, NULL, 10, NULL, NULL, 'DCA-PWT-0004', NULL),
 (25, '2017-03-31', 30, 0, 0, 40, NULL, 40, 10, NULL, 10, NULL, NULL, 'DCA-PWT-0005', NULL),
 (26, '2017-03-31', 25, 0, 0, 40, NULL, 40, 15, NULL, 15, NULL, NULL, 'DCA-PWT-0006', NULL),
-(27, '2017-03-31', 129, 0, 0, 144, NULL, 144, 15, NULL, 15, NULL, NULL, 'DCA-PWT-0007', NULL),
+(27, '2017-03-31', 25, 0, 0, 40, NULL, 40, 15, NULL, 15, NULL, NULL, 'DCA-PWT-0007', NULL),
 (28, '2017-03-31', 25, 0, 0, 40, NULL, 40, 15, NULL, 15, NULL, NULL, 'DCA-PWT-0008', NULL),
 (29, '2017-03-31', 25, 0, 0, 40, 10, 50, 25, NULL, 25, NULL, NULL, 'DCA-PWT-0009', NULL),
 (30, '2017-03-31', 25, 0, 0, 40, NULL, 40, 15, NULL, 15, NULL, NULL, 'DCA-PWT-0010', NULL),
@@ -1455,7 +1369,7 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (38, '2017-03-31', 30, 0, 0, 40, NULL, 40, 10, NULL, 10, NULL, NULL, 'DCA-PWT-0018', NULL),
 (39, '2017-03-31', 30, 0, 0, 40, NULL, 40, 10, NULL, 10, NULL, NULL, 'DCA-PWT-0019', NULL),
 (40, '2017-03-31', 30, 0, 0, 40, NULL, 40, 10, NULL, 10, NULL, NULL, 'DCA-PWT-0020', NULL),
-(41, '2017-03-31', 91, 0, 0, 212, NULL, 212, 115, 6, 121, NULL, NULL, 'DGR-ACC-0001', NULL),
+(41, '2017-03-31', 69, 0, 0, 190, NULL, 190, 115, 6, 121, NULL, NULL, 'DGR-ACC-0001', NULL),
 (42, '2017-03-31', 120, 0, 0, 190, NULL, 190, 65, 5, 70, NULL, NULL, 'DGR-ACC-0002', NULL),
 (43, '2017-03-31', 108, 0, 0, 180, NULL, 180, 65, 7, 72, NULL, NULL, 'DGR-ACC-0003', NULL),
 (44, '2017-03-31', 115, 0, 0, 180, NULL, 180, 65, NULL, 65, NULL, NULL, 'DGR-ACC-0004', NULL),
@@ -1480,7 +1394,7 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (63, '2017-03-31', 90, 0, 0, 90, NULL, 90, NULL, NULL, 0, NULL, NULL, 'LTS-ACC-0003', NULL),
 (64, '2017-03-31', 90, 0, 0, 90, NULL, 90, NULL, NULL, 0, NULL, NULL, 'LTS-ACC-0004', NULL),
 (65, '2017-03-31', 65, 0, 0, 90, NULL, 90, 25, NULL, 25, NULL, NULL, 'LTS-ACC-0005', NULL),
-(66, '2017-03-31', 140, 0, 0, 140, NULL, 140, NULL, NULL, 0, NULL, NULL, 'LTS-ACC-0006', NULL),
+(66, '2017-03-31', 90, 0, 0, 90, NULL, 90, NULL, NULL, 0, NULL, NULL, 'LTS-ACC-0006', NULL),
 (67, '2017-03-31', 75, 0, 0, 90, NULL, 90, 15, NULL, 15, NULL, NULL, 'LTS-ACC-0007', NULL),
 (68, '2017-03-31', 75, 0, 0, 90, NULL, 90, 15, NULL, 15, NULL, NULL, 'LTS-ACC-0008', NULL),
 (69, '2017-03-31', 75, 0, 0, 90, NULL, 90, 15, NULL, 15, NULL, NULL, 'LTS-ACC-0009', NULL),
@@ -1577,7 +1491,7 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (160, '2017-03-31', 90, 0, 0, 100, NULL, 100, 10, NULL, 10, NULL, NULL, 'TFM-ACC-0020', NULL),
 (161, '2017-03-31', 90, 0, 0, 110, NULL, 110, 20, NULL, 20, NULL, NULL, 'TKU-ACC-0001', NULL),
 (162, '2017-03-31', 90, 0, 0, 110, NULL, 110, 20, NULL, 20, NULL, NULL, 'TKU-ACC-0002', NULL),
-(163, '2017-03-31', 54, 0, 0, 110, NULL, 110, 55, 1, 56, NULL, NULL, 'TKU-ACC-0003', NULL),
+(163, '2017-03-31', 59, 0, 0, 110, NULL, 110, 50, 1, 51, NULL, NULL, 'TKU-ACC-0003', NULL),
 (164, '2017-03-31', 90, 0, 0, 110, NULL, 110, 20, NULL, 20, NULL, NULL, 'TKU-ACC-0004', NULL),
 (165, '2017-03-31', 90, 0, 0, 110, NULL, 110, 20, NULL, 20, NULL, NULL, 'TKU-ACC-0005', NULL),
 (166, '2017-03-31', 65, 0, 0, 100, NULL, 100, 35, NULL, 35, NULL, NULL, 'TKU-ACC-0006', NULL),
@@ -1595,7 +1509,7 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (178, '2017-03-31', 40, 0, 0, 50, NULL, 50, 10, NULL, 10, NULL, NULL, 'TKU-HDT-0008', NULL),
 (179, '2017-03-31', 40, 0, 0, 50, NULL, 50, 10, NULL, 10, NULL, NULL, 'TKU-HDT-0009', NULL),
 (180, '2017-03-31', 50, 0, 0, 50, NULL, 50, NULL, NULL, 0, NULL, NULL, 'TKU-HDT-0010', NULL),
-(181, '2017-03-31', 35, 0, 0, 55, NULL, 55, 20, NULL, 20, NULL, NULL, 'BSH-PWT-0001', NULL),
+(181, '2017-03-31', 30, 0, 0, 50, NULL, 50, 20, NULL, 20, NULL, NULL, 'BSH-PWT-0001', NULL),
 (182, '2017-03-31', 30, 0, 0, 50, NULL, 50, 20, NULL, 20, NULL, NULL, 'BSH-PWT-0002', NULL),
 (183, '2017-03-31', 30, 0, 0, 50, NULL, 50, 20, NULL, 20, NULL, NULL, 'BSH-PWT-0003', NULL),
 (184, '2017-03-31', 30, 0, 0, 50, NULL, 50, 20, NULL, 20, NULL, NULL, 'BSH-PWT-0004', NULL),
@@ -1827,12 +1741,12 @@ CREATE TABLE IF NOT EXISTS `inventorydefects` (
 --
 
 INSERT INTO `inventorydefects` (`invDefectID`, `invDefectDate`, `defectQty`, `defectPhyQty`, `defectBeginQty`, `defectInQty`, `defectInRetQty`, `defectTotalIn`, `defectOutQty`, `defectOutRetQty`, `defectTotalOut`, `defectEndQty`, `remarks`, `defectProdID`, `invPeriodStart`) VALUES
-(1, '2017-03-31', 12, 0, 0, 12, NULL, 12, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0001D', NULL),
-(2, '2017-03-31', 10, 0, 0, 10, NULL, 10, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0002D', NULL),
+(1, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0001D', NULL),
+(2, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0002D', NULL),
 (3, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0003D', NULL),
 (4, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0004D', NULL),
 (5, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0005D', NULL),
-(6, '2017-03-31', 10, 0, 0, 10, NULL, 10, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0006D', NULL),
+(6, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0006D', NULL),
 (7, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0007D', NULL),
 (8, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0008D', NULL),
 (9, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0009D', NULL),
@@ -3610,7 +3524,7 @@ CREATE TABLE IF NOT EXISTS `suppliers` (
   `archiveDate` date DEFAULT NULL,
   `restoreDate` date DEFAULT NULL,
   PRIMARY KEY (`supID`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `suppliers`
@@ -3674,7 +3588,8 @@ INSERT INTO `suppliers` (`supID`, `supplier_name`, `contactNo`, `location`, `sta
 (55, 'Weld', '0905168745', 'Metro Manila', 'Active', NULL, NULL),
 (56, 'Egyril', '0901-7888-891', 'Baguio City', 'Blacklisted', '2017-05-31', NULL),
 (57, 'Robin William', '02-154-1564', 'Baguio City', 'Blacklisted', '2017-05-31', NULL),
-(58, 'Dagpen', '02-418-4871', 'Baguio City', 'Blacklisted', '2017-05-31', NULL);
+(58, 'Dagpen', '02-418-4871', 'Baguio City', 'Blacklisted', '2017-05-31', NULL),
+(999, 'Defective', '-', '-', 'Active', NULL, NULL);
 
 -- --------------------------------------------------------
 
