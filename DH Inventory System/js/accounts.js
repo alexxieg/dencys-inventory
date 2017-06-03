@@ -102,3 +102,56 @@ function validateForm() {
 	return false;		
 	}
 }
+
+function validateForm2() {
+	if(document.getElementById('addEntry').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Username.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addEntry').style.borderColor = "red";
+		return false;
+	}   
+	if (document.getElementById('addEntry').value.length < 6){
+		swal({
+		title: "Warning!",
+		text: "The Username should have more than 5 characters",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addEntry').style.borderColor = "red";
+		return false;
+	}
+	if (document.getElementById('addEntrys').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Password.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addEntrys').style.borderColor = "red";
+		return false;	
+	} 
+	if (document.getElementById('addEntrys').value.length < 6) {
+		swal({
+		title: "Warning!",
+		text: "The Password length should at least be 6.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addEntrys').style.borderColor = "red";
+		return false;
+	}
+	if(confirm('Are you sure you want to add this account?')) {
+		return true;	
+	}
+	else {
+		swal({
+		title: "Editing of User Canceled",
+		type: "success"
+		});
+	return false;		
+	}
+}
