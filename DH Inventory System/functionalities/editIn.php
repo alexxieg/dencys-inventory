@@ -351,7 +351,7 @@
 																Remarks
 															</td>
 														</tr>
-														<tr id="thisRow">
+														<tr>
 															<td>	
 																<div class="ui-widget">
 																	<input class="thisProduct" id="addProduct" name="prodItem2[]" placeholder="Product Name">

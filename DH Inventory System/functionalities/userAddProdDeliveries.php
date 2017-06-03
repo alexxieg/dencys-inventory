@@ -130,7 +130,7 @@
 				
 				<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
-						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
+						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
@@ -172,20 +172,20 @@
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
-								<h3>Product Order Number</h3>				
+								<h3>Purchase Order Number</h3>				
 								<input type="text" class="form-control" id="poNum" value="<?php echo $varPO; ?>" name="po" readonly>
 								
+								<h3>Supplier</h3> 
+								<div class="ui-widget">
+									<input id="addSupplier" name="supplier" value="<?php echo $supplierName;?>" readonly>
+								</div>
+
 								<h3>Receipt No.</h3> 
 								<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno">
 								
 								<h3>Receipt Date</h3> 
 								<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
-								
-								<h3>Supplier</h3> 
-									<div class="ui-widget">
-										<input id="supplierName" name="supplier" value="<?php echo $supplierName;?>">
-									</div>
-														
+																
 								<h3>Received By</h3>
 								<?php
 									$query = $conn->prepare("SELECT empFirstName FROM employee ");
@@ -259,7 +259,7 @@
 									<br>
 									<br>
 									<span>
-									<a href="../userproddeliveries.php">
+									<a href="../userproductdeliveries.php">
 									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 									</a></span>
 									<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>

@@ -248,19 +248,8 @@
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
 									<thead>	
 										<tr>
-											<td colspan="13" style="font-size: 35px;">
-												<?php
-												$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
-												$month->execute();
-												$monthres = $month->fetchAll();
-												foreach ($monthres as $monthshow)
-												echo $monthshow["month"];									
-												?>	
-											</td>
-										</tr>
-										<tr>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Defect Product ID</th>
-											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>	
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Name</th>	
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Beginning Quantity</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">IN</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">OUT</th>
@@ -281,7 +270,6 @@
 											<td data-title="IN"><?php echo $item["defectTotalIn"]; ?></td>
 											<td data-title="OUT"><?php echo $item["defectTotalOut"]; ?></td>
 											<td data-title="Current Quantity"><?php echo $item["defectQty"] ?></td>
-											<td data-title="Physical Count"><?php echo $item["defectPhyQty"]; ?></td>
 											<td data-title="Unit"><?php echo $item["unitType"];?></td>
 										</tr>
 											

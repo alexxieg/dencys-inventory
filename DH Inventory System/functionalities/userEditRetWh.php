@@ -99,6 +99,7 @@
 					<li id="adminhead"><a href="#">User |</a></li>
 						<li id="loghead"><a href="../Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
+				</div>
 			</div>
 		</nav>
 		<!-- End of Top Main Header -->
@@ -172,15 +173,13 @@
 									<tbody>
 										<tr>
 											<td></td>
-											<td></td>
 											<td>Product Name</td>
 											<td>Quantity</td>
 											<td>Remarks</td>
 										</tr>
 										<?php foreach ($result2 as $row2): ?>
 										<tr>
-											<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+											<td><input type="checkbox" name="chk"></td>
 											<td>	
 												<div class="ui-widget">
 													<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>">
@@ -200,11 +199,9 @@
 								</table>
 										
 								<div class="modFoot">
-									<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-									<br>
-									<br>
+									
 									<span>
-										<a href="../returnswarehouse.php">
+										<a href="../userReturnsWarehouse.php">
 										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 										</a>
 									</span>
@@ -219,104 +216,9 @@
 						</div>
 					</div>
 				</div>
-				
-				<!-- Modal for Returned Product Entry Form -->
-				<div class="modal fade" id="myModal" role="dialog">
-					 <div class="modal-dialog modal-lg">
-						 <div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Add Returned Product</h4>
-							</div>
-							<div class="modal-body">
-								<form action="" method="POST" onsubmit="return validateForm()">
-									<h3>User</h3>
-									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID2" readonly>
-									
-									<h3>Branch</h3>
-									<?php
-										$query = $conn->prepare("SELECT location FROM branch WHERE branchID > 0 ");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
-
-									<select class="form-control" id="addEntry" name="branchRet2">
-										<?php foreach ($res as $row): ?>
-										<option><?=$row["location"]?></option>
-										<?php endforeach ?>
-									</select> 
-									
-									<br>
-									
-									<h3>Received By</h3>
-									<?php
-										$query = $conn->prepare("SELECT empFirstName FROM employee ");
-										$query->execute();
-										$res = $query->fetchAll();
-									?>
-														
-									<select class="form-control" id="addEmpl" name="emp2">
-										<?php foreach ($res as $row): ?>
-											<option><?=$row["empFirstName"]?></option>
-										<?php endforeach ?>
-									</select> 
-										
-									<br>
-									
-									<h5 id="prodHeader">Product/s</h5>
-									<table class="table table-striped" id="dataTable" name="chk">
-										<tbody>
-											<tr>
-												<td></td>
-												<td></td>
-												<td>Product Name</td>
-												<td>Quantity</td>
-												<td>Remarks</td>
-											</tr>
-											<tr>
-												<td><input type="checkbox" name="chk"></TD>
-												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-												<td>	
-													<div class="ui-widget">
-														<input class="thisProduct" id="prod" name="prodItem2[]" placeholder="Product Name">
-													</div>
-												</td>
-														
-												<td>
-													<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Quantity" name="retQty2[]">
-												</td>
-												
-												<td>
-													<input type="text" class="form-control" id="addEntry" placeholder="Remarks" name="retRemarks2[]">
-												</td>
-											</tr>
-										</tbody>
-									</table>
-									<br>
-									
-									<div class="modFoot">
-										<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-										<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-										<br>
-										<br>
-										<span>
-											<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-										</span>
-										<span>
-											<input type="submit" value="Submit" class="btn btn-success" name="addItems" id="sucBtn">
-										</span>
-									</div>
-								</form> 	
-
-								<div class="modal-footer">
-								</div>								
-							</div>
-						</div>
-					</div>
-				</div>
-				
 			</div>
 		</div>
+	
 		<?php
 		require_once 'dbcon.php';
 		$retID= $_GET['retId'];
@@ -354,35 +256,6 @@
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}  
 
-			if (isset($_POST["addItems"])) {
-				
-				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {
-		
-					$prod2 = $_POST['prodItem2'][$index2];
-					$retQty2 = $_POST['retQty2'][$index2];
-					$retRem2 = $_POST['retRemarks2'][$index2];
-					$branch2 = $_POST['branchRet2'];
-					$userID2 = $_POST['userID2'];
-					$emp2 = $_POST['emp2'];
-										
-					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prod2'")->fetch());
-					
-					$newemp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp2'");
-					$newemp2 = $newemp1->fetch(PDO::FETCH_ASSOC);
-					$newemp3 = $newemp2['empA'];
-					
-					$newbranch1 = $conn->query("SELECT branchID AS branchA FROM branch WHERE location = '$branch2'");
-					$newbranch2 = $newbranch1->fetch(PDO::FETCH_ASSOC);
-					$newbranch3 = $newbranch2['branchA'];
-								
-					$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, prodID, receiptNo ,branchID, empID, userID)
-							VALUES (CURDATE(),$retQty2,'Warehouse Return','$retRem2','$productID','$retID',$newbranch3,$newemp3,'$userID2')";
-					$conn->exec($sql);
-				}
-				
-				$url="userViewRetWarehouse.php?retId=$retID";
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}
 		?>
 
 	</body>

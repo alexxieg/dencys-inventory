@@ -267,7 +267,6 @@
 							<!-- End of table display -->
 								
 							<!-- Modal for Returned Product Entry Form -->
-							<!-- Modal for Returned Product Entry Form -->
 							<div class="modal fade" id="myModal" role="dialog">
 								 <div class="modal-dialog modal-lg">
 									 <div class="modal-content">
@@ -293,8 +292,6 @@
 													<?php endforeach ?>
 												</select> 
 												
-												<br>
-												
 												<h3>Received By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");
@@ -315,14 +312,12 @@
 													<tbody>
 														<tr>
 															<td></td>
-															<td></td>
 															<td>Product Name</td>
 															<td>Quantity</td>
 															<td>Remarks</td>
 														</tr>
 														<tr>
-															<td><input type="checkbox" name="chk"></TD>
-															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+															<td><input type="checkbox" name="chk"></td>
 															<td>	
 																<div class="ui-widget">
 																	<input class="thisProduct" id="prod" name="prodItem[]" placeholder="Product Name">

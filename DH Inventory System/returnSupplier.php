@@ -317,8 +317,6 @@
 													<input id="addSupplier" name="supplier" placeholder="Supplier">
 												</div>
 											
-												<br>
-													
 												<h3>Handled By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");

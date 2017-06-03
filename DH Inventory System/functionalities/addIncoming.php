@@ -60,7 +60,7 @@
 			$url='../prodDeliveries.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}else{
-			$url='../userprodDeliveries.php';
+			$url='../userproductdeliveries.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}
 	}

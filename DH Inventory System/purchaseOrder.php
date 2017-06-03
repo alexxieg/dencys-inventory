@@ -284,9 +284,9 @@
 											<td data-title="User"><?php echo $item["userID"]; ?></td>
 											<td data-title="Purchase Order">
 												<a href="functionalities/viewPO.php?incId=<?php echo $po; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn">
-													<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-												</button>
+													<button type="button" class="btn btn-default" id="edBtn">
+														<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+													</button>
 												</a>
 											</td>
 										</tr>	
@@ -412,7 +412,7 @@
 															<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
 															<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
 															<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
-															<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+															<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
 															<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
 															<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
 														</tr>

@@ -209,7 +209,7 @@
 								<tr>
 									<td>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Undelivered/Incomplete PO</button>
-										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add PO</button>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 									</td>
 									<td>		
@@ -249,15 +249,15 @@
 							</div>
 							<br> 
 							
-							<!-- Table Display for Incoming -->
+							<!-- Table Display for Purchase Orders -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
 									</tr>
 								</thead>
 								<tbody>					
@@ -271,11 +271,11 @@
 										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
 										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
-										<td data-title="User">
+										<td data-title="Purchase Order">
 											<a href="functionalities/userViewPO.php?incId=<?php echo $po; ?>"> 
-											<button type="button" class="btn btn-default" id="edBtn">
-												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-											</button>
+												<button type="button" class="btn btn-default" id="edBtn">
+													<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+												</button>
 											</a>
 										</td>
 									</tr>	
@@ -380,10 +380,10 @@
 															<div id="tabHead">PO Date</div>
 														</th>
 														<th>
-															<div id="tabHead">Quantity Order</div>
+															<div id="tabHead">Product Name</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Description</div>
+															<div id="tabHead">Quantity Order</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -401,8 +401,8 @@
 														<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
 														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
 														<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
+														<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
-														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
 													</tr>
 													<?php
@@ -410,8 +410,7 @@
 													?>
 												
 												</tbody>
-											</table>
-											
+											</table>											
 										</div>
 									</div>
 										
@@ -420,7 +419,7 @@
 										
 								</div>
 							</div>
-							
+						
 							<!-- Modal - Incomplete PO -->
 							<div class="modal fade" id="incPOModal" role="dialog">
 								<div class="modal-dialog modal-xl">
@@ -435,7 +434,7 @@
 												<!-- Retrieve Category Data -->
 												<?php
 													$thisPOQuery = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
-																			FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.status = 'Incomplete'
+																			FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.status = 'Incomplete' OR purchaseorders.status = 'Undelivered'
 																			GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name");
 													$thisPOQuery->execute();
 													$thisPOResult = $thisPOQuery->fetchAll();
@@ -473,7 +472,7 @@
 														<td data-title="Supplier"><?php echo $poItem["supplier_name"]; ?></td>
 														<td data-title="User"><?php echo $poItem["userID"]; ?></td>
 														<td data-title="Purchase Order">
-															<a href="functionalities/viewPO.php?incId=<?php echo $poIncID; ?>"> 
+															<a href="functionalities/userViewPO.php?incId=<?php echo $poIncID; ?>"> 
 															<button type="button" class="btn btn-default" id="edBtn">
 																<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 															</button>
