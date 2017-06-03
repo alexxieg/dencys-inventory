@@ -32,9 +32,12 @@
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
+		<script src="../js/defectives.js"></script>
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 	</head>
 	  
@@ -116,7 +119,11 @@
 								<h1 id="headers">ADD DEFECTIVE ITEMS</h1>
 							<div>
 							
+<<<<<<< HEAD
 							<form action="" method="POST">
+=======
+							<form action="" method="POST" class="editPgs" onsubmit="return validateForm()">
+>>>>>>> 0be24f73a4cf349749dff667cef0137ffaab9dbe
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
@@ -147,7 +154,7 @@
 								</select> 
 											
 								<h3>Quantity</h3>
-								<input type="text" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
+								<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty">
 								<br>
 								
 								<div class="modFoot">
