@@ -20,6 +20,7 @@
 			$session_id = $_SESSION['id'];
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
+			error_reporting(0);
 		?>
 
 		<!-- Bootstrap core CSS -->
@@ -204,10 +205,25 @@
 								<h5 id="prodHeader">Product/s</h5>
 								<table class="table table-striped" id="dataTable" name="chk">				
 									<tbody>
+										<tr>
+											<td>
+												Product Name
+											</td>
+											<td>
+												Quantity
+											</td>
+											<td>
+												Status
+											</td>
+											<td>
+												Type
+											</td>
+											<td>
+												Remarks
+											</td>
+										</tr>
 										<?php foreach ($result as $row): ?>
 										<tr id="thisRow">
-											<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 											<td>	
 												<div class="ui-widget">
 													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
