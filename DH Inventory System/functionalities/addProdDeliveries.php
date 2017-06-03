@@ -182,7 +182,7 @@
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
-								<h3>Product Order Number</h3>				
+								<h3>Purchase Order Number</h3>				
 								<input type="text" class="form-control" id="poNum" value="<?php echo $varPO; ?>" name="po" readonly>
 								
 								<h3>Receipt No.</h3> 

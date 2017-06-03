@@ -395,7 +395,7 @@
 																<div id="tabHead">Product ID</div>
 															</th>
 															<th>
-																<div id="tabHead">Product Description</div>							
+																<div id="tabHead">Product Name</div>							
 															</th>
 															<th>
 																<div id="tabHead">Brand</div>

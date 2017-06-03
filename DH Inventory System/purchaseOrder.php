@@ -391,10 +391,10 @@
 																<div id="tabHead">PO Date</div>
 															</th>
 															<th>
-																<div id="tabHead">Quantity Order</div>
+																<div id="tabHead">Product Name</div>
 															</th>
 															<th>
-																<div id="tabHead">Product Description</div>
+																<div id="tabHead">Quantity Order</div>
 															</th>
 															<th>
 																<div id="tabHead">Edited By</div>
@@ -412,8 +412,8 @@
 															<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
 															<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
 															<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
-															<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
 															<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+															<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
 															<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
 														</tr>
 														<?php
@@ -421,8 +421,7 @@
 														?>
 													
 													</tbody>
-												</table>
-												
+												</table>											
 											</div>
 										</div>
 											
