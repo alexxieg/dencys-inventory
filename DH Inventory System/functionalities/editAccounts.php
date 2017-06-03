@@ -37,6 +37,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 	</head>
   
@@ -129,7 +131,7 @@
 						<div class="pages no-more-tables">	
 							<h1 id="headers">Edit Account</h1>
 							<div id="contents">
-								<form action="" method="POST" class="editPgs">
+								<form action="" method="POST" class="editPgs" onsubmit="return validateForm2()">
 									<?php foreach ($result2 as $row): ?>
 									<h3>Username</h3>
 									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["userName"]; ?>" value="<?php echo $row["userName"]; ?>" name="userName"> <br>
@@ -137,7 +139,7 @@
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Password</h3>
-									<input type="password" class="form-control" id ="addEntry" placeholder="<?php echo $row["password"]; ?>" value="<?php echo $row["password"]; ?>" name="psw"> <br>
+									<input type="password" class="form-control" id ="addEntrys" placeholder="<?php echo $row["password"]; ?>" value="<?php echo $row["password"]; ?>" name="psw"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
