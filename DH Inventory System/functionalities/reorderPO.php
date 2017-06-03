@@ -205,6 +205,16 @@
 								<h5>Product/s</h5>
 								<table class="table table-striped" id="dataTable" name="chk">				
 									<tbody>
+										<tr>
+											<td>
+											</td>
+											<td>
+												Product Description
+											</td>
+											<td>
+												Quantity
+											</td>
+										</tr>
 										<?php
 											$useThisID = $_POST["chkbox"];
 											$countChkBox = count($useThisID);

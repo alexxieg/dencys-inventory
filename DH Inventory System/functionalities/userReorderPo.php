@@ -87,7 +87,7 @@
 		
 		<script>
 		  $(function() {
-			$('.prodItem').autocomplete({
+			$('.thisProduct').autocomplete({
 				minLength:2,
 				source: "../search.php"
 			});
@@ -96,7 +96,7 @@
 		
 		<script>
 		  $(function() {
-			$('#supplier').autocomplete({
+			$('#addSupplier').autocomplete({
 				minLength:2,
 				source: "../searchSup.php"
 			});
@@ -198,7 +198,18 @@
 								<h5>Product/s</h5>
 								<table class="table table-striped" id="dataTable" name="chk">				
 									<tbody>
+										<tr>
+											<td>
+											</td>
+											<td>
+												Product Description
+											</td>
+											<td>
+												Quantity
+											</td>
+										</tr>
 										<?php
+
 											$useThisID = $_POST["chkbox"];
 											$countChkBox = count($useThisID);
 											for ($index = 0; $index < $countChkBox; $index++) {
@@ -211,10 +222,9 @@
 											<?php foreach ($reorderResult as $row): ?>
 												<tr>
 													<td><input type="checkbox" name="chk"></td>
-														<td><input type="hidden" value="1" name="num" id="orderdata">1</td>
 													<td>	
 														<div class="ui-widget">
-															<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
+															<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
 														</div>
 													</td>
 																
