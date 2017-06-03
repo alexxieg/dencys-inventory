@@ -20,7 +20,7 @@ function validateForm() {
 	}   else if (document.getElementById('adduser').value.length < 6){
 		swal({
 		title: "Warning!",
-		text: "The Username should have more then 5 characters",
+		text: "The Username should have more than 5 characters",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
