@@ -106,7 +106,7 @@
 								<h1 id="headers">ADD DEFECTIVE ITEMS</h1>
 							<div>
 							
-							<form action="" method="POST" class="editPgs">
+							<form action="" method="POST">
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								

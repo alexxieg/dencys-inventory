@@ -104,6 +104,7 @@
 								<li><a href="../category.php"><i class="glyphicon glyphicon-book"></i> Product Categories</a></li>
 							</ul>
 						</li>
+						<li><a href="../backup.php"><i class="glyphicon glyphicon-cog"></i> System Settings</a></li>
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
@@ -115,7 +116,7 @@
 								<h1 id="headers">ADD DEFECTIVE ITEMS</h1>
 							<div>
 							
-							<form action="" method="POST" class="editPgs">
+							<form action="" method="POST">
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
@@ -151,7 +152,7 @@
 								
 								<div class="modFoot">
 									<span>
-										<a href="../inventory.php">
+										<a href="../defectives.php">
 										<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 										</a>
 									</span>
