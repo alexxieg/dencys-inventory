@@ -1,4 +1,70 @@
 function validateForm() {
+	if(document.getElementById('addRcptX').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Receipt no.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addRcptX').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addRcptX').style.borderColor = "blue";
+	}
+	
+	if (document.getElementById('addSupplier').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Supplier.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addSupplier').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addSupplier').style.borderColor = "blue";
+	}
+	
+	if (document.getElementById('addRcptDateX').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Receipt Date.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addRcptDateX').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addRcptDateX').style.borderColor = "blue";
+	}
+	
+	
+	if (document.getElementById('addInQty').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Quantity.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addInQty').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addInQty').style.borderColor = "blue";
+	}
+	
+	if(confirm('Are you sure you want to add this entry?')) {
+		return true;		
+	}
+	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
+		return false;		
+	}
+}
+
+function validateForm2() {
 	if(document.getElementById('addRcpt').value == "") {
 		swal({
 		title: "Warning!",
@@ -23,32 +89,6 @@ function validateForm() {
 		return false;
 	}else{
         document.getElementById('addRcptDate').style.borderColor = "blue";
-	}
-	
-	if (document.getElementById('supplierName').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Supplier.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('supplierName').style.borderColor = "red";
-		return false;
-	}else{
-        document.getElementById('supplierName').style.borderColor = "blue";
-	}
-	
-	if (document.getElementById('addInQty').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Quantity.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addInQty').style.borderColor = "red";
-		return false;
-	}else{
-        document.getElementById('addInQty').style.borderColor = "blue";
 	}
 	
 	if(confirm('Are you sure you want to add this entry?')) {
