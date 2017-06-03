@@ -36,8 +36,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
-		<script src="alertboxes/sweetalert2.min.js"></script>
-		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 		<!-- Autocomplete Script -->
 		<link rel="stylesheet" href="../css/jquery-ui.css">
@@ -224,7 +224,7 @@
 											</td>	
 
 											<h3>Purchase No</h3> 
-											<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum2" readonly>		
+											<input type="text" class="form-control" id ="addPOs" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum2" readonly>		
 											
 											<h3>Supplier</h3> 
 											<div class="ui-widget">
@@ -321,7 +321,7 @@
 			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			if (isset($_POST["editPO"])){
-				for ($index = 0; $index2 < count($prodTem); $index2++) {		
+				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
 					$prodItem = $_POST['prodItem'][$index2];
 					$inQty = $_POST['qty'][$index2];
 					$userID = $_POST['userID'];
