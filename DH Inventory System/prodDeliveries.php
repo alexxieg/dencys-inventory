@@ -356,8 +356,8 @@
 										<div class="modal-body">
 										
 											<?php 
-												$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, incoming.supplier, incoming.status, incoming.inRemarks 
-																		FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID
+												$query = $conn->prepare("SELECT product.prodName, product.prodID, product.unitType, incoming.inID, incoming.inQty, incoming.inDate, MONTHNAME(incoming.inDate) AS nowMonthDate, YEAR(inDate) AS nowYearDate, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, incoming.receiptNo, incoming.receiptDate, suppliers.supplier_name, incoming.status, incoming.inRemarks 
+																		FROM incoming INNER JOIN product ON incoming.prodID = product.prodID INNER JOIN employee ON incoming.empID = employee.empID INNER JOIN suppliers ON suppliers.supID = incoming.supID
 																		WHERE incoming.status = 'Partial' AND MONTH(inDate) = MONTH(CURRENT_DATE())");
 												$query->execute();
 												$result1 = $query->fetchAll();
@@ -414,7 +414,7 @@
 														<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 														<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
-														<td data-title="Supplier"><?php echo $item["supplier"]; ?></td>
+														<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 														<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 														<td>
 															<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 

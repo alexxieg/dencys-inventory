@@ -178,7 +178,7 @@
 						<div id="tableHeader">
 							<h1 id="headers">ADD PRODUCT DELIVERY</h1>		
 							
-							<form action="" method="POST">
+							<form action="" method="POST" onsubmit="return validateForm()">
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
