@@ -2,7 +2,7 @@ function validateForm() {
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter PO Number.",
+		text: "Please Enter Quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});

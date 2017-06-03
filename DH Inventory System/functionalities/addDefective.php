@@ -119,11 +119,8 @@
 								<h1 id="headers">ADD DEFECTIVE ITEMS</h1>
 							<div>
 							
-<<<<<<< HEAD
-							<form action="" method="POST">
-=======
-							<form action="" method="POST" class="editPgs" onsubmit="return validateForm()">
->>>>>>> 0be24f73a4cf349749dff667cef0137ffaab9dbe
+							<form action="" method="POST" onsubmit="return validateForm()">
+
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
