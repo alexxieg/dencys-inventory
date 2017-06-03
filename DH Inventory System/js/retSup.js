@@ -1,4 +1,14 @@
 function validateForm() {
+	if (document.getElementById('addSupplierX').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Supplier.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addSupplierX').style.borderColor = "red";
+		return false;
+	}
 	if (document.getElementById('prod').value == "") {
 		swal({
 		title: "Warning!",
@@ -17,6 +27,29 @@ function validateForm() {
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addQty').style.borderColor = "red";
+		return false;
+	}
+	if(confirm('Are you sure you want to add this entry?')) {
+		return true;			
+	}
+	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
+		return false;		
+	}
+}
+
+function validateForm2() {
+	if (document.getElementById('addSupplier').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please Enter Supplier.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addSupplier').style.borderColor = "red";
 		return false;
 	}
 	if(confirm('Are you sure you want to add this entry?')) {

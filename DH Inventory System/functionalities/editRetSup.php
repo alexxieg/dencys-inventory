@@ -35,6 +35,16 @@
 		
 		<script>
 		  $(function() {
+			$('#addSupplierX').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
+		<script>
+		  $(function() {
 			$('#addSupplier').autocomplete({
 				minLength:2,
 				source: "../searchSup.php"
@@ -210,12 +220,12 @@
 												<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 												<td>	
 													<div class="ui-widget">
-														<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>">
+														<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
 													</div>		
 												</td>
 														
 												<td>
-													<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]">
+													<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]" required>
 												</td>
 																								
 												<td>
@@ -264,7 +274,7 @@
 										
 										<h3>Supplier</h3>  
 										<div class="ui-widget">
-											<input id="addSupplier" name="supplier2" placeholder="Supplier" value = "<?php echo $supplierName; ?>">
+											<input id="addSupplierX" name="supplier2" placeholder="Supplier" value = "<?php echo $supplierName; ?>">
 										</div>
 									
 										<h3>Handled By</h3>
@@ -296,7 +306,7 @@
 													<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 													<td>	
 														<div class="ui-widget">
-															<input class="thisProduct" id="prod" name="prodItem2[]">
+															<input class="thisProduct" id="prod" name="prodItem2[]" required>
 														</div>
 													</td>
 															
