@@ -343,7 +343,7 @@
 					$conn->exec($sql);
 				}
 				
-				$url="userViewRetWarehouse.php?retId=$retID";
+				$url="userViewRetSupplier.php?retId=$retID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 		?>

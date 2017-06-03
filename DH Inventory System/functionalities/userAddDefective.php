@@ -202,13 +202,8 @@
 				$conn->exec($activate);
 				
 				$role = $_SESSION['sess_role'];
-				if($role == 'admin'){
-					$url='../defectives.php';
-					echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-				}else{
-					$url='../userDefectives.php';
-					echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-				}
+				$url='../userDefectives.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    			
 		?>
 	</body>

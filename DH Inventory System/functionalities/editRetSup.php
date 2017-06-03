@@ -379,7 +379,7 @@
 					$conn->exec($sql);
 				}
 				
-				$url="viewRetWarehouse.php?retId=$retID";
+				$url="viewRetSupplier.php?retId=$retID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 		?>
