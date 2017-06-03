@@ -103,7 +103,7 @@
 		
 		<script>
 		  $(function() {
-			$('.prodItem').autocomplete({
+			$('.thisProduct').autocomplete({
 				minLength:2,
 				source: "search.php"
 			});
@@ -331,7 +331,7 @@
 															<tr>
 																<td>	
 																	<div class="ui-widget">
-																		<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name">
+																		<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="Product Name">
 																	</div>
 																</td>
 																			
