@@ -167,7 +167,7 @@
 							<h1 id="headers">Edit Product Delivery Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST">
+								<form action="" method="POST" onsubmit="return validateForm2()">
 									<h3>User</h3>
 									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
@@ -231,12 +231,12 @@
 													
 													<td>	
 														<div class="ui-widget">
-															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
 														</div>		
 													</td>
 															
 													<td>
-														<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]">
+														<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]" required>
 													</td>
 													
 													<td>
@@ -306,10 +306,10 @@
 												<input type="text" class="form-control" id="poNum" value="<?php echo $incID; ?>" name="po2" readonly>
 												
 												<h3>Receipt No.</h3> 
-												<input type="text" class="form-control" id ="addRcpt" value="<?php echo $reciptNum; ?>" placeholder="Receipt Number" name="rcno">
+												<input type="text" class="form-control" id ="addRcptX" value="<?php echo $reciptNum; ?>" placeholder="Receipt Number" name="rcno">
 												
 												<h3>Receipt Date</h3> 
-												<input type="date" class="form-control" id ="addRcptDate" value="<?php echo $reciptDate;?>" name="rcdate">
+												<input type="date" class="form-control" id ="addRcptDateX" value="<?php echo $reciptDate;?>" name="rcdate">
 												
 												<h3>Supplier</h3> 
 													<div class="ui-widget">
@@ -353,13 +353,13 @@
 														</tr>
 														<tr id="thisRow">
 															<td>	
-																<div class="ui-widget">
-																	<input class="thisProduct" id="addProduct" name="prodItem2[]" placeholder="Product Name">
+																<div class="ui-widget"> 
+																	<input class="thisProduct" id="addProduct" name="prodItem2[]" placeholder="Product Name" required>
 																</div>
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id="addIncQty" placeholder="Quantity" name="incQty2[]">
+																<input type="number" min="1" class="form-control" id="addIncQty" placeholder="Quantity" name="incQty2[]" required>
 															</td>
 															
 															<td>
