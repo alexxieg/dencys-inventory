@@ -79,6 +79,9 @@
 					WHERE receiptNo = '$retID' ");
 			$query2->execute();
 			$resul = $query2->fetchAll();
+			
+			$supplierName = current($conn->query("SELECT supplier_name FROM suppliers JOIN returns ON suppliers.supID = returns.supID WHERE returns.receiptNo = '$retID'")->fetch());
+			$employName = current($conn->query("SELECT empFirstName FROM employee JOIN returns ON employee.empID = returns.empID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
 		
 		<!-- Top Main Header -->
@@ -162,6 +165,25 @@
 									<h3>Receipt No.</h3>
 									<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>"placeholder="User" name="recID" readonly>
 									
+									<h3>Supplier</h3>  
+									<div class="ui-widget">
+										<input id="addSupplier" name="supplier" placeholder="Supplier" value = "<?php echo $supplierName; ?>">
+									</div>
+								
+									<h3>Handled By</h3>
+									<?php
+										$query = $conn->prepare("SELECT empFirstName FROM employee ");
+										$query->execute();
+										$res = $query->fetchAll();
+									?>
+														
+									<select class="form-control" id="addEmpl" name="emp">
+										<option SELECTED><?=$employName?></option>
+										<?php foreach ($res as $row): ?>
+											<option><?=$row["empFirstName"]?></option>
+										<?php endforeach ?>
+									</select> 
+									
 									<br>
 									
 									<h5 id="multipleProd">Product/s</h5>
@@ -236,25 +258,19 @@
 									<form action="" method="POST" onsubmit="return validateForm()">
 										<h3> User </h3>
 										<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID2" readonly>
-											
+										
+										<h3>Receipt No.</h3>
+										<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>" placeholder="User" name="recID" readonly>
+										
 										<h3>Supplier</h3>  
 										<div class="ui-widget">
-											<input id="addSupplier" name="supplier2" placeholder="Supplier">
+											<input id="addSupplier" name="supplier2" placeholder="Supplier" value = "<?php echo $supplierName; ?>">
 										</div>
 									
-										<br>
-											
 										<h3>Handled By</h3>
-										<?php
-											$query = $conn->prepare("SELECT empFirstName FROM employee ");
-											$query->execute();
-											$res = $query->fetchAll();
-										?>
 															
 										<select class="form-control" id="addEmpl" name="emp2">
-											<?php foreach ($res as $row): ?>
-												<option><?=$row["empFirstName"]?></option>
-											<?php endforeach ?>
+											<option SELECTED><?=$employName?></option>
 										</select> 
 										
 										<h5 id="prodHeader">Product/s</h5>
@@ -333,21 +349,27 @@
 		<?php
 			$retID= $_GET['retId'];	
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
 			if (isset($_POST["addRet"])){
 				
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				for ($index = 0; $index < count($prodTem); $index++) {			
 					$prod = $_POST['prodItem'][$index];
 					$userID = $_POST['userID'];
+					$employ = $_POST['emp'];
 					$quant = $_POST['retQty'][$index];
 					$rem = $_POST['retRemarks'][$index];
 					$quant = $_POST['retQty'][$index];
+					$supp = $_POST['supplier'];
 					
 					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];	
 					
-					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID' WHERE receiptNo = '$retID' AND prodID = '$prod3'";
+					$suppID = current($conn->query("SELECT supID FROM suppliers WHERE supplier_name = '$supp'")->fetch());
+					$employID = current($conn->query("SELECT empID FROM employee WHERE empFirstName = '$employ'")->fetch());
+					
+					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', supID = $suppID, empID = $employID WHERE receiptNo = '$retID' AND prodID = '$prod3'";
 					$conn->exec($sql);
 				}
 				$url="viewRetSupplier.php?retId=$retID";
@@ -360,25 +382,21 @@
 					$prod2 = $_POST['prodItem2'][$index2];
 					$retQty2 = $_POST['retQty2'][$index2];
 					$retRem2 = $_POST['retRemarks2'][$index2];
-					$branch2 = $_POST['branchRet2'];
 					$userID2 = $_POST['userID2'];
 					$emp2 = $_POST['emp2'];
-										
+					$supp = $_POST['supplier2'];
+					
+					$suppID = current($conn->query("SELECT supID FROM suppliers WHERE supplier_name = '$supp'")->fetch());					
 					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prod2'")->fetch());
 					
 					$newemp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp2'");
 					$newemp2 = $newemp1->fetch(PDO::FETCH_ASSOC);
 					$newemp3 = $newemp2['empA'];
-					
-					$newbranch1 = $conn->query("SELECT branchID AS branchA FROM branch WHERE location = '$branch2'");
-					$newbranch2 = $newbranch1->fetch(PDO::FETCH_ASSOC);
-					$newbranch3 = $newbranch2['branchA'];
 								
-					$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, prodID, receiptNo ,branchID, empID, userID)
-							VALUES (CURDATE(),$retQty2,'Warehouse Return','$retRem2','$productID','$retID',$newbranch3,$newemp3,'$userID2')";
+					$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, prodID, receiptNo, empID, userID, supID)
+							VALUES (CURDATE(),$retQty2,'Supplier Return','$retRem2','$productID','$retID',$newemp3,'$userID2',$suppID)";
 					$conn->exec($sql);
 				}
-				
 				$url="viewRetSupplier.php?retId=$retID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
