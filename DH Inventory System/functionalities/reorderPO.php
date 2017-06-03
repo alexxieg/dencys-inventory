@@ -72,7 +72,7 @@
 		
 		<script>
 		  $(function() {
-			$('.prodItem').autocomplete({
+			$('.thisProduct').autocomplete({
 				minLength:2,
 				source: "../search.php"
 			});
@@ -220,7 +220,7 @@
 													<td><input type="checkbox" name="chk"></td>
 													<td>	
 														<div class="ui-widget">
-															<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
+															<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
 														</div>
 													</td>
 																
