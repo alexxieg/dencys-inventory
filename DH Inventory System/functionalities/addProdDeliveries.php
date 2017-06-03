@@ -54,6 +54,16 @@
 
 		</script>
 		
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "../searchSup.php"
+			});
+		  });
+
+		</script>
+		
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function(){
@@ -178,7 +188,7 @@
 						<div id="tableHeader">
 							<h1 id="headers">ADD PRODUCT DELIVERY</h1>		
 							
-							<form action="" method="POST" onsubmit="return validateForm()">
+							<form action="" method="POST" onsubmit="return validateForm2()">
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
@@ -235,7 +245,7 @@
 										<tr id="thisRow">
 											<td>	
 												<div class="ui-widget">
-													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
 												</div>
 											</td>
 													
@@ -250,7 +260,7 @@
 															echo $row["inQty"]; 
 															} else {
 															echo $row["qtyOrder"];
-															} ?>" name="incQty[]">
+															} ?>" name="incQty[]" required>
 											</td>
 											
 											<td>
