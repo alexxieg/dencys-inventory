@@ -300,9 +300,6 @@
 															<div id="tabHead">Username</div>
 														</th>
 														<th>
-															<div id="tabHead">Password</div>
-														</th>
-														<th>
 															<div id="tabHead">User Role</div>
 														</th>
 														<th>
@@ -322,7 +319,6 @@
 													?>
 													<tr id="centerData">	
 														<td data-title="Username"><?php echo $item["userName"]; ?></td>
-														<td data-title="Password"><?php echo $item["password"]; ?></td>
 														<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 														<td data-title="Status"><?php echo $item["status"]; ?></td>
 														<td>
