@@ -352,7 +352,7 @@
 																Quantity
 															</td>
 														</tr>
-														<tr>
+														<tr id ="prods">
 															<td><input type="checkbox" name="chk"></TD>
 															<td>	
 																<div class="ui-widget">
