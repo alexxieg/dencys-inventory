@@ -184,7 +184,7 @@
 											
 									<div class="modFoot">
 										<span>
-											<a href="../userreturnSupplier.php">
+											<a href="userViewRetSupplier.php?retId=<?php echo $retID; ?>">
 												<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 											</a>
 										</span>

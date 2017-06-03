@@ -308,7 +308,7 @@
 											<h4 class="modal-title">Add Product Issuance</h4>
 										</div>
 										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()">
+											<form action="" method="POST" onsubmit="return validateForm3()">
 												<h3>User</h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
@@ -352,16 +352,16 @@
 																Quantity
 															</td>
 														</tr>
-														<tr>
+														<tr id ="prods">
 															<td><input type="checkbox" name="chk"></TD>
 															<td>	
 																<div class="ui-widget">
-																	<input class="thisProduct" id="prod" name="prodItem[]" placeholder="Product Name">
+																	<input class="thisProduct" id="prod" name="prodItem[]" placeholder="Product Name" required>
 																</div>
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Quantity" name="outQty[]">
+																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Quantity" name="outQty[]" required>
 															</td>
 														</tr>
 													</tbody>

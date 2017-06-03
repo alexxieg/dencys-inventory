@@ -165,16 +165,8 @@
 									<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate">
 										
 									<h3>Supplier</h3>				
-									<select class="form-control" id="addEmpl" name="thisSupplier">
-										<?php
-											$query = $conn->prepare("SELECT supID, supplier_name FROM suppliers ");
-											$query->execute();
-											$suppRes = $query->fetchAll();
-										?>
-										<?php foreach ($suppRes as $suppRow): ?>
-											<option value=<?=$suppRow["supID"]?>><?=$suppRow["supplier_name"]?></option>
-										<?php endforeach ?>
-											<option value=<?=$supplierID?> SELECTED><?=$supplierName?></option>
+									<select class="form-control" id="addEmpl" name="thisSupplier" readonly>
+										<option value=<?=$supplierID?> SELECTED><?=$supplierName?></option>
 									</select>
 									
 									<h3>Received By</h3>				

@@ -40,6 +40,11 @@
 		<script src="alertboxes/sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="alertboxes/sweetalert2.min.css">
 		
+		<!-- Autocomplete Script -->
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		
 		<!-- Datatables CSS and JS Files -->
 		<script src="datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="datatables/media/js/dataTables.bootstrap.min.js"></script>
@@ -94,6 +99,24 @@
                         }]
                 } );
             } );		
+		</script>
+		
+		<script>
+		  $(function() {
+			$('.thisProduct').autocomplete({
+				minLength:2,
+				source: "search.php"
+			});
+		  });
+		</script>
+		
+		<script>
+		  $(function() {
+			$('#addSupplier').autocomplete({
+				minLength:2,
+				source: "searchSup.php"
+			});
+		  });
 		</script>
 
 	</head>
@@ -281,7 +304,7 @@
 												<div class="ui-widget">
 													<input id="addSupplier" name="supplier" placeholder="Supplier">
 												</div>
-													
+											
 												<h3>Handled By</h3>
 												<?php
 													$query = $conn->prepare("SELECT empFirstName FROM employee ");
