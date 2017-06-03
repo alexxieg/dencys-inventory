@@ -264,9 +264,6 @@
 									<br>
 									
 									<div class="modFoot">
-										<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-										<br>
-										<br>
 										<span>
 											<a href="../prodDeliveries.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
@@ -280,124 +277,6 @@
 									</div>	
 								</form> 								
 							</div>								
-				
-							<!-- Modal for New Incoming Entry Form -->
-							<div class="modal fade" id="myModal" role="dialog">
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add Incoming Product</h4>
-										</div>
-										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()">
-												<h3> User </h3>
-												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-												
-												<h3>Product Order Number</h3>				
-												<input type="text" class="form-control" id="poNum" value="<?php echo $incID; ?>" name="po2" readonly>
-												
-												<h3>Receipt No.</h3> 
-												<input type="text" class="form-control" id ="addRcptX" value="<?php echo $reciptNum; ?>" placeholder="Receipt Number" name="rcno">
-												
-												<h3>Receipt Date</h3> 
-												<input type="date" class="form-control" id ="addRcptDateX" value="<?php echo $reciptDate;?>" name="rcdate">
-												
-												<h3>Supplier</h3> 
-													<div class="ui-widget">
-														<input id="addSupplier" name="supplier2" value="<?php echo $supplierName; ?>">
-													</div>
-																		
-												<h3>Received By</h3>
-												<?php
-													$query = $conn->prepare("SELECT empFirstName FROM employee ");
-													$query->execute();
-													$res = $query->fetchAll();
-												?>
-																	
-												<select class="form-control" id="addEmpl" name="emp2">
-													<?php foreach ($res as $row): ?>
-														<option><?=$row["empFirstName"]?></option>
-													<?php endforeach ?>
-												</select> 
-												
-												<br>
-													
-												<h5>Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
-													<tbody>
-														<tr>
-															<td>
-																Product Name
-															</td>
-															<td>
-																Quantity
-															</td>
-															<td>
-																Status
-															</td>
-															<td>
-																Type
-															</td>
-															<td>
-																Remarks
-															</td>
-														</tr>
-														<tr>
-															<td>	
-																<div class="ui-widget"> 
-																	<input class="thisProduct" id="addProduct" name="prodItem2[]" placeholder="Product Name" required>
-																</div>
-															</td>
-																	
-															<td>
-																<input type="number" min="1" class="form-control" id="addIncQty" placeholder="Quantity" name="incQty2[]" required>
-															</td>
-															
-															<td>
-																<select class="form-control"  name="inStatus2[]">
-																	<option>Complete</option>
-																	<option>Partial</option>
-																</select> 
-															</td>
-																
-															<td>
-																<select class="form-control" name="inType2[]">
-																	<option>Ordered</option>
-																	<option>Freebie</option>
-																</select>
-															</td>	
-																
-															<td>
-																<input type="text" class="form-control" id="addRem" value="None" placeholder="Remarks" name="inRemarks2[]">
-															</td>
-														</tr>
-													</tbody>
-												</table>
-												
-												<br>
-												
-												<div class="modFoot">
-													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-													<br>
-													<br>
-													<span>
-													<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
-													</a>
-													</span>
-													<span><input type="submit" name="addItems" value="Submit" class="btn btn-success" id="sucBtn"></span>
-												</div>
-											</form> 	
-											
-											<div class="modal-footer">
-											</div>								
-										</div>
-									</div>
-								</div>
-							</div> 
-							<!-- End of Modal -->
-
 						</div>
 					</div>
 				</div>
