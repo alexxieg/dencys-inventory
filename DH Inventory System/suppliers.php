@@ -33,7 +33,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="js/supplier.js"></script>
+		<script src="js/suppliers.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>

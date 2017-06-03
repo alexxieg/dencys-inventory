@@ -236,17 +236,19 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add New Brand</h4>
+											<h4 class="modal-title">Add New Branch</h4>
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">		
-									
-												<h3>Location</h3>
-												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="location">
-												
+																				
 												<h3>Branch Name</h3>
-												<input type="text" class="form-control" id ="addBranch" placeholder="Branch" name="branchName">
+												<input type="text" class="form-control" id ="addBranchName" placeholder="Branch" name="branchName">
 																								
+												<h3>Location</h3>
+												<input type="text" class="form-control" id ="addBranchLoc" placeholder="Branch" name="location">
+
+												<br>
+												
 												<div class="modFoot">
 													<span>
 														<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
@@ -255,10 +257,11 @@
 														<input type="submit" value="Submit" class="btn btn-success" name="addBranch" id="sucBtn">
 													</span>
 												</div>
-												<div class="modal-footer">
-												</div>	
+												
 											</form>
 										</div>
+										<div class="modal-footer">
+										</div>	
 									</div>
 								</div>
 							</div>

@@ -7595,7 +7595,7 @@ border: none;
 #addpass, #addpassconf,
 #addProdName, #addPrice,
 #addReorderLvl, #userID, #addItem, #addProdQty,
-#addPO, #addBranch, #addLName, #addFName,
+#addPO, #addBranchName, #addBranchLoc, #addLName, #addFName,
 #addMName, #addEName, #addBrandID, #addBrandName,
 #addCategoryID, #addCategoryName, #supName, #supContact,
 #supLoc, #poNum{

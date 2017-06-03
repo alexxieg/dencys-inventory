@@ -24,7 +24,7 @@ function validateForm() {
 	}
 	else {
 		swal({
-		title: "Adding of Brand Canceled",
+		title: "Adding of Brand Cancelled",
 		type: "success"
 		});
 		return false;		
