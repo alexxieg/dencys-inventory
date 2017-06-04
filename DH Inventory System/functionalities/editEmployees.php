@@ -36,6 +36,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 	</head>
   
@@ -127,26 +129,26 @@
 							<h1 id="headers">Edit Employee Entry</h1>
 							<br>
 							<div class="content">
-								<form action="" method="POST">
+								<form action="" method="POST" onsubmit="return validateForm2()">
 																							
 									<h3>First Name</h3>
 									<?php foreach ($result2 as $row): ?>
-										<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empFirstName"]; ?>" value="<?php echo $row["empFirstName"]; ?>" name="empFName"> <br>
+										<input type="text" class="form-control" id ="addEntry1" placeholder="<?php echo $row["empFirstName"]; ?>" value="<?php echo $row["empFirstName"]; ?>" name="empFName"> <br>
 									<?php endforeach ?>
 										
 									<h3>Middle Name</h3>
 									<?php foreach ($result2 as $row): ?>
-										<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empMidName"]; ?>" value="<?php echo $row["empMidName"]; ?>" name="empMName"> <br>
+										<input type="text" class="form-control" id ="addEntry2" placeholder="<?php echo $row["empMidName"]; ?>" value="<?php echo $row["empMidName"]; ?>" name="empMName"> <br>
 									<?php endforeach ?>
 									
 									<h3>Last Name</h3>
 									<?php foreach ($result2 as $row): ?>
-										<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empLastName"]; ?>" value="<?php echo $row["empLastName"]; ?>" name="empLName"> <br>
+										<input type="text" class="form-control" id ="addEntry3" placeholder="<?php echo $row["empLastName"]; ?>" value="<?php echo $row["empLastName"]; ?>" name="empLName"> <br>
 									<?php endforeach ?>
 
 									<h3>Extension Name</h3>
 									<?php foreach ($result2 as $row): ?>
-										<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["empExtensionName"]; ?>" value="<?php echo $row["empExtensionName"]; ?>" name="empEName"> <br>
+										<input type="text" class="form-control" id ="addEntry4" placeholder="<?php echo $row["empExtensionName"]; ?>" value="<?php echo $row["empExtensionName"]; ?>" name="empEName"> <br>
 									<?php endforeach ?>					
 									<br>
 												

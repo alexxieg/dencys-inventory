@@ -18,7 +18,9 @@
 				  "Employee Already Exists, New Employee Has Not been Added",
 				  "error");';
 			echo '$("#myModal").modal("show");';
-			echo 'document.getElementById("adduser").style.borderColor = "red";';
+			echo 'document.getElementById("addFName").style.borderColor = "red";';
+			echo 'document.getElementById("addLName").style.borderColor = "red";';
+			echo 'document.getElementById("addMName").style.borderColor = "red";';
 			echo '</script>';
 		} else {
 				 
