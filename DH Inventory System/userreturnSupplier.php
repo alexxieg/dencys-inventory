@@ -296,7 +296,7 @@
 											<h4 class="modal-title">Add Returned Product</h4>
 										</div>
 										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm()">
+											<form action="" method="POST" onsubmit="return validateForm3()">
 												<h3> User </h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
@@ -341,12 +341,12 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<div class="ui-widget">
-																	<input class="thisProduct" id="prod" name="prodItem[]">
+																	<input class="thisProduct" id="prod" name="prodItem[]" required>
 																</div>
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Quantity" name="retQty[]">
+																<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Quantity" name="retQty[]" required>
 															</td>
 															
 															<td>
