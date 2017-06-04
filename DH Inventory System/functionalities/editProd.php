@@ -36,6 +36,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 
 	</head>
   
@@ -132,7 +134,7 @@
 						<div class="pages no-more-tables">	
 							<h1 id="headers">Edit Product Information</h1>
 							<div id="content">
-								<form action="" method="POST">
+								<form action="" method="POST" onsubmit="return validateForm2()">
 									<?php foreach ($result2 as $row): ?>
 									<h3>Product ID</h3>
 									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodID"]; ?>" value="<?php echo $row["prodID"]; ?>" name="prodCode" readonly> <br>
@@ -140,27 +142,27 @@
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Product Name</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>" name="prodItem"> <br>
+									<input type="text" class="form-control" id ="addProdName" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>" name="prodItem"> <br>
 									<?php endforeach ?>
 										
 									<?php foreach ($result2 as $row): ?>	
 									<h3>Product Type</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["unitType"]; ?>" value="<?php echo $row["unitType"]; ?>" name="prodType"> <br>
+									<input type="text" class="form-control" id ="addProductType" placeholder="<?php echo $row["unitType"]; ?>" value="<?php echo $row["unitType"]; ?>" name="prodType"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Brand</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["brandName"]; ?>" value="<?php echo $row["brandName"]; ?>" name="prodBrand"> <br>
+									<input type="text" class="form-control" id ="addBrand" placeholder="<?php echo $row["brandName"]; ?>" value="<?php echo $row["brandName"]; ?>" name="prodBrand"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Price</h3>
-									<input type="number" min="1" class="form-control" id ="addEntry" placeholder="<?php echo $row["price"]; ?>" value="<?php echo $row["price"]; ?>" name="prodPrice"> <br>
+									<input type="number" min="1" class="form-control" id ="addPrice" placeholder="<?php echo $row["price"]; ?>" value="<?php echo $row["price"]; ?>" name="prodPrice"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Reorder Level</h3>
-									<input type="number" min="1" class="form-control" id ="addEntry" placeholder="<?php echo $row["reorderLevel"]; ?>" value="<?php echo $row["reorderLevel"]; ?>" name="prodRO"> <br>
+									<input type="number" min="1" class="form-control" id ="addReorderLvl" placeholder="<?php echo $row["reorderLevel"]; ?>" value="<?php echo $row["reorderLevel"]; ?>" name="prodRO"> <br>
 									<?php endforeach ?>	
 										
 									<br>
@@ -171,7 +173,7 @@
 											</a>
 										</span>
 										<span>
-											<input type="submit" value="Update" class="btn btn-success" id="sucBtn" name="addProd" data-dismiss="modal" onclick="alert('New Product Successfully Added');">
+											<input type="submit" value="Update" class="btn btn-success" id="sucBtn" name="addProd" data-dismiss="modal">
 										</span>
 									</div>
 									<div class="modal-footer">
