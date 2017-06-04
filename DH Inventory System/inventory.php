@@ -175,7 +175,7 @@
 		
 				<?php
 					foreach ($result as $item):
-						$currQty = $item["beginningQty"] + $item["totalIn"] - $item["totalOut"];
+						$currQty = $item["qty"];
 						$incID = $item["prodID"];
 						if ($currQty <= $item["reorderLevel"]){
 				?> 

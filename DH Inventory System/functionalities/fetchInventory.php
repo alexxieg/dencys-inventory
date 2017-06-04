@@ -47,7 +47,7 @@
 
 <?php 
 	$updateQty = $conn->prepare("UPDATE inventory
-								SET inventory.qty = (SELECT (inventory.beginningQty + IFNULL(inventory.totalIN,0) - IFNULL(inventory.totalOut,0))
+								SET inventory.qty = (SELECT (IFNULL(inventory.totalIN,0) - IFNULL(inventory.totalOut,0))
 								GROUP BY inventory.prodID)");
 	$updateQty->execute();
 ?>
