@@ -241,16 +241,16 @@
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">									
 												<h3>First Name</h3>
-												<input type="text" class="form-control" id ="addFName" placeholder="First Name" name="empFName">
+												<input type="text" class="form-control" id ="addFName" placeholder="First Name" name="empFName" maxlength="25">
 												
 												<h3>Middle Name</h3>
-												<input type="text" class="form-control" id ="addMName" placeholder="Middle Name" name="empMName">
+												<input type="text" class="form-control" id ="addMName" placeholder="Middle Name" name="empMName" maxlength="25">
 																			
 												<h3>Last Name</h3>
-												<input type="text" class="form-control" id ="addLName" placeholder="Last Name" name="empLName">
+												<input type="text" class="form-control" id ="addLName" placeholder="Last Name" name="empLName" maxlength="25">
 												
 												<h3>Extension Name</h3>
-												<input type="text" class="form-control" id ="addEName" placeholder="Extension/Nickname" name="empEName"> 										
+												<input type="text" class="form-control" id ="addEName" placeholder="Extension/Nickname" name="empEName" maxlength="15"> 										
 												
 												<div class="modFoot">
 												<span>
