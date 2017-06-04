@@ -36,6 +36,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 	</head>
 	  
@@ -127,15 +129,15 @@
 						<div class="pages no-more-tables">	
 							<h1 id="headers">Edit Category</h1>
 							<div>
-								<form action="" method="POST">
+								<form action="" method="POST" onsubmit="return validateForm2()">
 									<?php foreach ($result2 as $row): ?>
 									<h3>Category ID</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["categoryID"]; ?>" value="<?php echo $row["categoryID"]; ?>" name="catID"> <br>
+									<input type="text" class="form-control" id ="addCategoryID" placeholder="<?php echo $row["categoryID"]; ?>" value="<?php echo $row["categoryID"]; ?>" name="catID" maxlength="3"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Category Name</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["categoryName"]; ?>" value="<?php echo $row["categoryName"]; ?>" name="catName"> <br>
+									<input type="text" class="form-control" id ="addCategoryName" placeholder="<?php echo $row["categoryName"]; ?>" value="<?php echo $row["categoryName"]; ?>" name="catName"> <br>
 									<?php endforeach ?>
 									<br>
 									
