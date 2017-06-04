@@ -15,10 +15,10 @@
 			echo '<script language="javascript">';
 			echo 'swal(
 				  "Error!",
-				  "Supplier Already Exists, New Employee Has Not been Added",
+				  "Supplier Already Exists, New Supplier Has Not been Added",
 				  "error");';
 			echo '$("#myModal").modal("show");';
-			echo 'document.getElementById("adduser").style.borderColor = "red";';
+			echo 'document.getElementById("supName").style.borderColor = "red";';
 			echo '</script>';
 		} else {
 				 

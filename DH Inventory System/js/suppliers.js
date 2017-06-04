@@ -10,6 +10,17 @@ function validateForm() {
 		return false;
 	}
 	
+	if (document.getElementById('supName').value.length < 3){
+		swal({
+		title: "Warning!",
+		text: "The Supplier Name should have more than 2 characters",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('supName').style.borderColor = "red";
+		return false;
+	}
+	
 	if (document.getElementById('supContact').value == "") {
 		swal({
 		title: "Warning!",
@@ -21,10 +32,32 @@ function validateForm() {
 		return false;
 	}
 	
+	if (document.getElementById('supContact').value.length < 7){
+		swal({
+		title: "Warning!",
+		text: "The Supplier Contact Number should have more than 6 characters",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('supContact').style.borderColor = "red";
+		return false;
+	}
+	
 	if (document.getElementById('supLoc').value == "") {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Location.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('supLoc').style.borderColor = "red";
+		return false;
+	}
+	
+	if (document.getElementById('supLoc').value.length < 3){
+		swal({
+		title: "Warning!",
+		text: "The Supplier Location should have more than 2 characters",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
