@@ -9,10 +9,30 @@ function validateForm() {
 		document.getElementById('addBrandID').style.borderColor = "red";
 		return false;
 	}
+	if (document.getElementById('addBrandID').value.length < 3){
+		swal({
+		title: "Warning!",
+		text: "The Brand ID should atleast have 3 characters",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addBrandID').style.borderColor = "red";
+		return false;
+	}
 	if (document.getElementById('addBrandName').value == "") {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Brand Name.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addBrandName').style.borderColor = "red";
+		return false;
+	}
+	if (document.getElementById('addBrandName').value.length < 3){
+		swal({
+		title: "Warning!",
+		text: "The Brand Name should atleast have more than 2 characters",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});

@@ -5,7 +5,7 @@
 		
 		$brandID = $_POST['brandID'];
 	    $brandName = $_POST['brandName'];
-		$query = $conn->prepare("Select * FROM brand WHERE brandID = '$brandID' OR brandName = '$brandName'");
+		$query = $conn->prepare("Select * FROM brand WHERE brandID = '$brandID' AND brandName = '$brandName'");
 		$count = $query->execute();
 		$row = $query->fetch();
 
@@ -17,6 +17,7 @@
 				  "error");';
 			echo '$("#myModal").modal("show");';
 			echo 'document.getElementById("addBrandID").style.borderColor = "red";';
+			echo 'document.getElementById("addBrandName").style.borderColor = "red";';
 			echo '</script>';
 		} else {
 			 
