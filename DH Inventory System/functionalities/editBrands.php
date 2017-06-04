@@ -32,10 +32,12 @@
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="../js/category.js"></script>
+		<script src="../js/brand.js"></script>
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 			
 	</head>
   
@@ -128,15 +130,15 @@
 							<h1 id="headers">Edit Brand Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST">
+								<form action="" method="POST" onsubmit="return validateForm2()">
 									<?php foreach ($result2 as $row): ?>
 									<h3>Brand ID</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["brandID"]; ?>" value="<?php echo $row["brandID"]; ?>" name="branID"> <br>
+									<input type="text" class="form-control" id ="addBrandID" placeholder="<?php echo $row["brandID"]; ?>" value="<?php echo $row["brandID"]; ?>" name="branID"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Brand Name</h3>
-									<input type="text" class="form-control" id ="addEntry" placeholder="<?php echo $row["brandName"]; ?>" value="<?php echo $row["brandName"]; ?>" name="branName"> <br>
+									<input type="text" class="form-control" id ="addBrandName" placeholder="<?php echo $row["brandName"]; ?>" value="<?php echo $row["brandName"]; ?>" name="branName"> <br>
 									<?php endforeach ?>
 									<br>
 														
