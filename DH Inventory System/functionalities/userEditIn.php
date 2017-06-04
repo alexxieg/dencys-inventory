@@ -39,6 +39,8 @@
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 		
 		<!-- Autocomplete Script -->
 		<link rel="stylesheet" href="../css/jquery-ui.css">
@@ -155,7 +157,7 @@
 							<h1 id="headers">Edit Product Delivery Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST">
+								<form action="" method="POST" onsubmit="return validateForm2()">
 									<h3>User</h3>
 									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
@@ -211,12 +213,12 @@
 													
 													<td>	
 														<div class="ui-widget">
-															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>">
+															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
 														</div>		
 													</td>
 															
 													<td>
-														<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]">
+														<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]" required>
 													</td>
 													
 													<td>

@@ -115,6 +115,8 @@ function validateForm2() {
 		return false;		
 	}
 }
+	
+	
 			
 function deleteRow(tableID) {
 	try {
