@@ -50,6 +50,17 @@ function validateForm2() {
         document.getElementById('addSupplier').style.borderColor = "lightblue";
 	}
 	
+	if(confirm('Are you sure you want to add this entry?')) {
+		return true;
+	}
+	else {
+		swal({
+		title: "Adding of Entry Canceled",
+		type: "success"
+		});
+		return false;		
+	}
+	
 }
 			
 function deleteRow(tableID) {

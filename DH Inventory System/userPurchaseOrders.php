@@ -102,7 +102,7 @@
 
 		<script>
 		  $(function() {
-			$('.thisProduct').autocomplete({
+			$('.prodItem').autocomplete({
 				minLength:2,
 				source: "search.php"
 			});
@@ -163,7 +163,7 @@
 						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
+								<li><a href="functionalities/userAddDefective.php"><i class="glyphicon glyphicon-list"></i> Add Defectives</a></li>
 							</ul>
 						</li>
 						<li class="active"><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
@@ -209,7 +209,7 @@
 								<tr>
 									<td>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Undelivered/Incomplete PO</button>
-										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add PO</button>
+										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add Purchase Order</button>
 										<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 									</td>
 									<td>		
@@ -249,15 +249,15 @@
 							</div>
 							<br> 
 							
-							<!-- Table Display for Purchase Orders -->
+							<!-- Table Display for Incoming -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
 									</tr>
 								</thead>
 								<tbody>					
@@ -271,11 +271,11 @@
 										<td data-title="Date"><?php echo $item["poDate"]; ?></td>	
 										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
-										<td data-title="Purchase Order">
+										<td data-title="User">
 											<a href="functionalities/userViewPO.php?incId=<?php echo $po; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn">
-													<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-												</button>
+											<button type="button" class="btn btn-default" id="edBtn">
+												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+											</button>
 											</a>
 										</td>
 									</tr>	
@@ -287,68 +287,68 @@
 							</table>
 
 							<!-- Modal for New Purchase Order -->
-								<div class="modal fade" id="myModal" role="dialog">
-									<div class="modal-dialog modal-lg">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">Add Purchase Order</h4>
-											</div>
-											<div class="modal-body">
-												<form action="" method="POST" onsubmit="return validateForm2()">
-													<h3>User</h3>
-													<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>																																				
-												
-													<h3>Supplier</h3>  
-													<div class="ui-widget">
-														<input id="addSupplier" name="supplier" placeholder="Supplier">
-													</div>
-														
-													<br>
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Add Purchase Order</h4>
+										</div>
+										<div class="modal-body">
+											<form action="" method="POST" onsubmit="return validateForm2()">
+												<h3>User</h3>
+												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
+																																					
+												<h3>Supplier</h3>  
+												<div class="ui-widget">
+													<input id="addSupplier" name="supplier" placeholder="Supplier">
+												</div>
+		
+												<br>
 
-													<h5 id="prodHeader">Product/s</h5>
-													<table class="table table-striped" id="dataTable" name="chk">				
-														<tbody>
-															<tr>
-																<td>
-																	Product Name
-																</td>
-																<td>
-																	Quantity
-																</td>
-															</tr>
-															<tr>
-																<td>	
-																	<div class="ui-widget">
-																		<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="Product Name" required>
-																	</div>
-																</td>
-																			
-																<td>
-																	<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]" required>
-																</td>
-															</tr>
-														</tbody>
-													</table>
+												<h5 id="prodHeader">Product/s</h5>
+												<table class="table table-striped" id="dataTable" name="chk">				
+													<tbody>
+														<tr>
+															<td>
+																Product Name
+															</td>
+															<td>
+																Quantity
+															</td>
+														</tr>
+														<tr>
+															<td>	
+																<div class="ui-widget">
+																	<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name" required>
+																</div>
+															</td>
+																		
+															<td>
+																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]" required>
+															</td>
+														</tr>
+													</tbody>
+												</table>
 														
-													<br>
+												<br>
 													
-													<div class="modFoot">
-														<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-														<br>
-														<br>
-														<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-														<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
-													</div>
-												</form> 	
-											
-												<div class="modal-footer">
-												</div>								
-											</div>
+												<div class="modFoot">
+													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+													<br>
+													<br>
+													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
+													<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
+												</div>
+											</form> 	
+										
+											<div class="modal-footer">
+											</div>								
 										</div>
 									</div>
-								</div> 
-								<!-- End of Modal -->
+								</div>
+							</div> 
+							<!-- End of Modal -->
 
 							<!-- Modal - Activity Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
@@ -380,10 +380,10 @@
 															<div id="tabHead">PO Date</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Name</div>
+															<div id="tabHead">Quantity Order</div>
 														</th>
 														<th>
-															<div id="tabHead">Quantity Order</div>
+															<div id="tabHead">Product Description</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -401,8 +401,8 @@
 														<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
 														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
 														<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
-														<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
 													</tr>
 													<?php
@@ -410,7 +410,8 @@
 													?>
 												
 												</tbody>
-											</table>											
+											</table>
+											
 										</div>
 									</div>
 										
@@ -419,7 +420,7 @@
 										
 								</div>
 							</div>
-						
+							
 							<!-- Modal - Incomplete PO -->
 							<div class="modal fade" id="incPOModal" role="dialog">
 								<div class="modal-dialog modal-xl">
@@ -434,7 +435,7 @@
 												<!-- Retrieve Category Data -->
 												<?php
 													$thisPOQuery = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
-																			FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.status = 'Incomplete' OR purchaseorders.status = 'Undelivered'
+																			FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.status = 'Incomplete'
 																			GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name");
 													$thisPOQuery->execute();
 													$thisPOResult = $thisPOQuery->fetchAll();
@@ -472,7 +473,7 @@
 														<td data-title="Supplier"><?php echo $poItem["supplier_name"]; ?></td>
 														<td data-title="User"><?php echo $poItem["userID"]; ?></td>
 														<td data-title="Purchase Order">
-															<a href="functionalities/userViewPO.php?incId=<?php echo $poIncID; ?>"> 
+															<a href="functionalities/viewPO.php?incId=<?php echo $poIncID; ?>"> 
 															<button type="button" class="btn btn-default" id="edBtn">
 																<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 															</button>
