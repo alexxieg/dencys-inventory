@@ -74,6 +74,19 @@ function validateForm2() {
 	}
 }
 
+function validateForm3() {
+	if(confirm('Are you sure you want to update this entry?')) {
+		return true;			
+	}
+	else {
+		swal({
+		title: "Updating of Entry Canceled",
+		type: "success"
+		});
+		return false;		
+	}
+}
+
 function deleteRow(tableID) {
 	try {
 		var table = document.getElementById(tableID);

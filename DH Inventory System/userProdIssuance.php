@@ -350,12 +350,12 @@
 															<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
 															<td>	
 																<div class="ui-widget">
-																	<input class="thisProduct" id="prod" name="prodItem[]" placeholder="Product Name">
+																	<input class="thisProduct" id="prod" name="prodItem[]" placeholder="Product Name" required>
 																</div>
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Quantity" name="outQty[]">
+																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Quantity" name="outQty[]" required>
 															</td>
 														</tr>
 													</tbody>
