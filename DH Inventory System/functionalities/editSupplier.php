@@ -17,10 +17,12 @@
 		<link href="../css/sidebar.css" rel="stylesheet">
 		
 		<!-- Javascript Files -->
-		<script src="../js/product.js"></script>
+		<script src="../js/suppliers.js"></script>
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../alertboxes/sweetalert2.min.js"></script>
+		<link rel="stylesheet" href="../alertboxes/sweetalert2.min.css">
 
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -127,7 +129,7 @@
 						<div class="pages no-more-tables">	
 							<h1 id="headers">Edit Supplier Information</h1>
 							<div id="contents">
-								<form action="" method="POST" onsubmit="return validateForm()">									
+								<form action="" method="POST" onsubmit="return validateForm2()">									
 									<h3>Supplier Name</h3>
 									<?php foreach ($result1 as $row): ?>
 										<input type="text" class="form-control" id="supName" value="<?php echo $row["supplier_name"]; ?>" placeholder="<?php echo $row["supplier_name"]; ?>" name="supName">
