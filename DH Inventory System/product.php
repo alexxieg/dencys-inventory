@@ -325,7 +325,7 @@
 													$res = $query->fetchAll();
 												?>
 															
-												<select class="form-control" id="addEntry" name="prodBrand">
+												<select class="form-control" id="addBrand" name="prodBrand">
 													<?php foreach ($res as $row): ?>
 														<option value = "<?=$row["brandName"]?>"><?=$row["brandName"]?></option>
 													<?php endforeach ?>
