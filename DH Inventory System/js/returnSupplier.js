@@ -75,22 +75,12 @@ function validateForm2() {
 }
 
 function validateForm3() {
-	if (document.getElementById('addSupplier').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Supplier.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addSupplier').style.borderColor = "red";
-		return false;
-	}
-	if(confirm('Are you sure you want to add this entry?')) {
+	if(confirm('Are you sure you want to update this entry?')) {
 		return true;			
 	}
 	else {
 		swal({
-		title: "Adding of Entry Canceled",
+		title: "Updating of Entry Canceled",
 		type: "success"
 		});
 		return false;		
