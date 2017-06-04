@@ -265,17 +265,6 @@
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
-										<td colspan="13" style="font-size: 35px;">
-											<?php
-											$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
-											$month->execute();
-											$monthres = $month->fetchAll();
-											foreach ($monthres as $monthshow)
-											echo $monthshow["month"];
-											?>	
-										</td>
-									</tr>
-									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Product ID</div>
 										</th>

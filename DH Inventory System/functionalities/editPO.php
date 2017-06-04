@@ -341,8 +341,7 @@
 						$conn->exec($sql);
 				}
 				$url="viewPO.php?incId=$incID";
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-				
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';			
 			}
 			
 			if (isset($_POST["addItems"])){
