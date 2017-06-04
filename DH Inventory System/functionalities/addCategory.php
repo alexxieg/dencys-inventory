@@ -5,7 +5,7 @@
 		
 		$categoryID = $_POST['categoryID'];
 	    $categoryName = $_POST['categoryName'];
-		$query = $conn->prepare("Select * FROM category WHERE categoryID = '$categoryID' OR categoryName = '$categoryName'");
+		$query = $conn->prepare("Select * FROM category WHERE categoryID = '$categoryID' AND categoryName = '$categoryName'");
 		$count = $query->execute();
 		$row = $query->fetch();
 
@@ -13,10 +13,11 @@
 			echo '<script language="javascript">';
 			echo 'swal(
 				  "Error!",
-				  "Employee Already Exists, New Employee Has Not been Added",
+				  "Category Already Exists, New Category Has Not been Added",
 				  "error");';
 			echo '$("#myModal").modal("show");';
 			echo 'document.getElementById("addCategoryID").style.borderColor = "red";';
+			echo 'document.getElementById("addCategoryName").style.borderColor = "red";';
 			echo '</script>';
 		} else {
 			 
