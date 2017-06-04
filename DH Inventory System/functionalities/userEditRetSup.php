@@ -203,6 +203,17 @@
 				</div>
 			</div>
 		</div>
+		
+		<?php
+		require_once 'dbcon.php';
+		$retID= $_GET['retId'];
+		if (isset($_POST["addRet"])){
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID)
+				SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID from returns WHERE receiptNo = '$retID'";
+		$conn->exec($sql);
+		}
+		?>
 
 		
 		<?php

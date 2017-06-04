@@ -223,6 +223,7 @@
 											</a>
 										</span>
 										<span>
+											<a href="userViewProdIssuance.php">
 											<input type="submit" name="updateOut" value="Update" class="btn btn-success" id="sucBtn">
 										</span>
 									</div>
@@ -284,7 +285,7 @@
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 						WHERE outID = '$outid'"; */
 				}
-				$url="viewProdIssuance.php?outId=$outid";
+				$url="userviewProdIssuance.php?outId=$outid";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 		?>
