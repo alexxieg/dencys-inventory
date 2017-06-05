@@ -192,7 +192,7 @@
 										<tbody>
 											<tr>
 												<td>
-													Product Name
+													Product Description
 												</td>
 												<td>
 													Quantity
