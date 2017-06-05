@@ -5,7 +5,7 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 		for ($index = 0; $index < count($prodTem); $index++) {
-		$idretrieve = $conn->prepare("SELECT receiptNo FROM outgoing");
+		$idretrieve = $conn->prepare("SELECT receiptNo FROM outgoing ORDER BY receiptNo");
 		$idretrieve->execute();
 		$ids = $idretrieve->fetchAll();
 		$idBase = 00001;
@@ -15,7 +15,7 @@
 				$idBase = $idBase + 1;
 				$prod = 'OUT-' . str_pad((string)$idBase,5,0,STR_PAD_LEFT);
 			}
-			endforeach;
+		endforeach;
 			$query = $conn->prepare("Select * FROM outgoing WHERE receiptNo = '$prod'");
 			$count = $query->execute();
 			$row = $query->fetch();
@@ -39,16 +39,6 @@
 					$retrieveItemQty = $conn->prepare("SELECT qty FROM inventory i INNER JOIN product p ON i.prodID = p.prodID WHERE p.prodName = '$prodItem'");
 					$retrieveItemQty->execute();
 					$itemQty = $retrieveItemQty->fetch();
-					if ($outQty < $itemQty){
-						echo '<script language="javascript">';
-						echo 'swal(
-							  "Error!",
-							  "Unable to process request: Not enough product quantity.",
-							  "error");';
-						echo '$("#myModal").modal("show");';
-						echo 'document.getElementById("prods").style.borderColor = "red";';
-						echo '</script>';
-					}else{
 						$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
 						$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 						$emp3 = $emp2['empA'];
@@ -64,8 +54,6 @@
 						$sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID, userID)
 						VALUES ('$outQty',CURDATE(),'$prod','$branch3','$emp3','$prod3','$userID')";
 						$result = $conn->query($sql); 
-					}
-					
 				}
 			}
         }
