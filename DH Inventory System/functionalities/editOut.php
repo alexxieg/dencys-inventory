@@ -211,11 +211,13 @@
 												<td>	
 													<div class="ui-widget">
 														<input class="thisProduct" id="prod" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+														<input type="hidden" name="editProdItem[]" value="<?php echo $row["prodName"]; ?>" />		
 													</div>
 												</td>
 																
 												<td>
 													<input type="number" min="1" id ="addQty" class="form-control" placeholder="<?php echo $row["outQty"]; ?>" value="<?php echo $row["outQty"]; ?>"  name="outQty[]" required>
+													<input type="hidden" name="editOutQty[]" value="<?php echo $row["outQty"]; ?>" />	
 												</td>
 											</tr>
 											<?php endforeach ?>
@@ -338,11 +340,26 @@
 		<?php
 			require_once 'dbcon.php';
 			$outid = $_GET['outId'];
-			if (isset($_POST["updateOut"])){
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
-						SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE receiptNo = '$outid'";
-				$conn->exec($sql);
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			for ($index2 = 0; $index2 < count($prodTem); $index2++) {
+				if (isset($_POST["updateOut"])){
+					$outgoingID = $_POST['productOutID'][$index2];
+					$prodItem = $_POST['prodItem'][$index2];
+					$outQty = $_POST['outQty'][$index2];
+					
+					$editProdItem = $_POST['editProdItem'][$index2];
+					$editOutQty = $_POST['editOutQty'][$index2];
+					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					
+					if ($prodItem != $editProdItem || $outQty != $editOutQty) {
+						$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
+								SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE outID = $outgoingID";
+						$conn->exec($sql);						
+					} else {
+						//Do Nothing
+					}
+					
+				}
 			}
 		?>
 		

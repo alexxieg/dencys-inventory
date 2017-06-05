@@ -174,15 +174,20 @@
 										<?php foreach ($result as $row): ?>
 											<tbody>
 												<tr>
-													<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
+													<td>
+														<input type="hidden" value="1" name="num" id="orderdata">
+														<input type="hidden" class="form-control" name="editPOID[]" value="<?php echo $row["poID"]; ?>">
+													</TD>
 													<td>	
 														<div class="ui-widget">
-															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+															<input class="thisProduct" name="prodItem[]" value="<?php echo stripslashes($row["prodName"]); ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+															<input type="hidden" class="thisProduct" name="editProdItem[]" value="<?php echo $row["prodName"]; ?>">
 														</div>		
 													</td>
 															
 													<td>
 														<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row["qtyOrder"]?>" placeholder="<?php echo $row["qtyOrder"]?>" name="qty[]" required>
+														<input type="hidden" class="form-control" name="editQuantity[]" value="<?php echo $row["qtyOrder"]; ?>">
 													</td>
 												</tr>
 											</tbody>
@@ -288,12 +293,25 @@
 		<!-- Archive Edit Function -->
 		<?php
 		require_once 'dbcon.php';
-		$incID= $_GET['incId'];
-		if (isset($_POST["editPO"])){
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
-				SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poNumber = '$incID'";
-		$conn->exec($sql);
+		if (isset($_POST["editPO"])) {
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			for ($index3 = 0; $index3 < count($prodTem); $index3++) {
+				$PurOrID = $_POST['editPOID'][$index3];
+				$prodItem = $_POST['prodItem'][$index3];
+				$inQty = $_POST['qty'][$index3];
+				$hiddenProdItem = $_POST['editProdItem'][$index3];
+				$hiddenInQty = $_POST['editQuantity'][$index3];
+	
+				if ($prodItem != $hiddenProdItem || $inQty != $hiddenInQty) {
+					$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
+						SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poID = $PurOrID";
+					$conn->exec($sql);
+				} else {
+					//Do Nothing
+				}
+				
+			}
 		}
 		?>
 		
@@ -304,7 +322,8 @@
 			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			if (isset($_POST["editPO"])){
-				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+				for ($index2 = 0; $index2 < count($prodTem); $index2++) {
+					$PurOrID = $_POST['editPOID'][$index2];
 					$prodItem = $_POST['prodItem'][$index2];
 					$inQty = $_POST['qty'][$index2];
 					$userID = $_POST['userID'];
@@ -320,11 +339,11 @@
 					$prod3 = $prod2['prodA'];
 						
 					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supID = $sup3, prodID = '$prod3', userID = '$userID'
-							WHERE poNumber = '$incID' AND prodID = '$prod3'";
-						$conn->exec($sql);
+							WHERE poNumber = '$incID' AND poID = $PurOrID";
+					$conn->exec($sql);
 				}
 				$url="viewPO.php?incId=$incID";
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';			
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 			
 			if (isset($_POST["addItems"])){
