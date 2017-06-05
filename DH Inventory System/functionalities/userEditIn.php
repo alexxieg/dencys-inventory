@@ -168,7 +168,7 @@
 									<input type="date" class="form-control" id ="addRcptDate" placeholder="<?php echo $reciptDate;?>" value="<?php echo $reciptDate;?>" name="rcdate">
 										
 									<h3>Supplier</h3>				
-									<select class="form-control" id="addEmpl" name="thisSupplier" readonly>
+									<select class="form-control" id="addEmpl" name="thisSupplier">
 										<option value=<?=$supplierID?> SELECTED><?=$supplierName?></option>
 									</select>
 									
@@ -192,7 +192,7 @@
 										<tbody>
 											<tr>
 												<td>
-													Product Description
+													Product Name
 												</td>
 												<td>
 													Quantity
@@ -210,15 +210,16 @@
 											<?php foreach ($result2 as $row): ?>
 												<tr>
 													<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
-													
 													<td>	
 														<div class="ui-widget">
 															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+															<input type="hidden" name="editProdItem[]" value="<?php echo $row["prodName"]; ?>" />
 														</div>		
 													</td>
 															
 													<td>
 														<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]" required>
+														<input type="hidden" name="editIncQty[]" value="<?php echo $row["inQty"]; ?>" />
 													</td>
 													
 													<td>
@@ -228,12 +229,13 @@
 															$res3 = $query3->fetchAll();
 														?>
 														<select class="form-control" id="addInStatus" name="inStatus[]">
-																<option value="<?=$row["status"]?>">Selected: <?=$row["status"]?></option>
+															<option value="<?=$row["status"]?>">Selected: <?=$row["status"]?></option>
 															<?php foreach ($res3 as $row3): ?>
 																<option><?=$row3["status"]?></option>
 															<?php endforeach ?>
-																
 														</select>  
+														<input type="hidden" name="editInStatus[]" value="<?php echo $row["status"]; ?>" />	
+														
 													</td>
 													
 													<td>
@@ -245,6 +247,7 @@
 														
 													<td>
 														<input type="text" class="form-control" id="addRem" placeholder="<?php echo $row["inRemarks"]; ?>" value="<?php echo $row["inRemarks"]; ?>" name="inRemarks[]">
+														<input type="hidden" name="editInRemarks[]" value="<?php echo $row["inRemarks"]; ?>" />	
 													</td>
 												</tr>
 											<?php endforeach ?>
@@ -254,9 +257,8 @@
 									<br>
 									
 									<div class="modFoot">
-									
 										<span>
-											<a href="../userproductdeliveries.php">
+											<a href="../prodDeliveries.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>
@@ -278,11 +280,31 @@
 		<?php
 			require_once 'dbcon.php';
 			$incID= $_GET['incId'];
-			if (isset($_POST["updateIn"])){
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO editincoming (inEditDate, inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID)
-					SELECT CURDATE(), inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID from incoming WHERE receiptNo = '$incID'";
-			$conn->exec($sql);
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			for ($index2 = 0; $index2 < count($prodTem); $index2++) {	
+				if (isset($_POST["updateIn"])) {
+					$incomingID = $_POST['productInID'][$index2];
+					
+					$inRemarks = $_POST['inRemarks'][$index2];
+					$prodItem = $_POST['prodItem'][$index2];
+					$inQty = $_POST['incQty'][$index2];
+					$inStat = $_POST['inStatus'][$index2];
+					
+					$editRemarks = $_POST['editInRemarks'][$index2];
+					$editProdItem = $_POST['editProdItem'][$index2];
+					$editInQty = $_POST['editIncQty'][$index2];
+					$editInStat = $_POST['editInStatus'][$index2];
+				
+					if ($inRemarks != $editRemarks || $prodItem != $editProdItem || $inQty != $editInQty || $inStat != $editInStat) {
+						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						$sql = "INSERT INTO editincoming (inEditDate, inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID)
+								SELECT CURDATE(), inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID from incoming WHERE inID = $incomingID";
+						$conn->exec($sql);
+					} else {
+						// Do Nothing	
+					}
+					
+				}
 			}
 		?>
 		

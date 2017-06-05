@@ -91,18 +91,7 @@
                                 }
 									
                         },
-							{extend:'colvis', text: 'Select Column'},
-								{extend: 'pdf', pageMargins: [ 40, 60, 40, 60 ],
-								text: 'Save PDF',
-								download: 'open',
-									exportOptions: {
-										columns: ':visible',
-										
-										modifier: {
-											page: 'current'
-										},
-									},
-							},'pageLength', 
+							{extend:'colvis', text: 'Select Column'},'pageLength', 
                     ],
                         columnDefs: [{
                             targets: -1,
@@ -133,7 +122,7 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li id="adminhead"><a href="#">Admin |</a></li>
+						<li id="adminhead"><a href="#">User |</a></li>
 						<li><a href="Logout.php"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
 					</ul>
 				</div>

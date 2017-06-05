@@ -160,28 +160,25 @@
 										<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier">
 									</div>
 										
-									<h5>Product/s</h5>
-									<table class="table table-striped" id="dataTable" name="chk">
-										<tbody>
-											<tr>
-												<td>
-													Product Description
-												</td>
-												<td>
-													Quantity
-												</td>
-											</tr>
+									<h5 id="prodHeader">Product/s</h5>
+									<table class="table table-striped" id="dataTable2" name="chk">	
 										<?php foreach ($result as $row): ?>
 											<tbody>
 												<tr>
+													<td>
+														<input type="hidden" value="1" name="num" id="orderdata">
+														<input type="hidden" class="form-control" name="editPOID[]" value="<?php echo $row["poID"]; ?>">
+													</TD>
 													<td>	
 														<div class="ui-widget">
-															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+															<input class="thisProduct" name="prodItem[]" value="<?php echo stripslashes($row["prodName"]); ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+															<input type="hidden" class="thisProduct" name="editProdItem[]" value="<?php echo $row["prodName"]; ?>">
 														</div>		
 													</td>
 															
 													<td>
 														<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row["qtyOrder"]?>" placeholder="<?php echo $row["qtyOrder"]?>" name="qty[]" required>
+														<input type="hidden" class="form-control" name="editQuantity[]" value="<?php echo $row["qtyOrder"]; ?>">
 													</td>
 												</tr>
 											</tbody>
@@ -194,7 +191,7 @@
 										<br>
 										<br>
 										<span>
-											<a href="../userpurchaseOrders.php">
+											<a href="../purchaseOrder.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>
@@ -205,7 +202,7 @@
 									</div>
 									<div class="modal-footer">
 									</div>	
-								</form>  								
+								</form>    								
 							</div>								
 						</div>
 					</div>
@@ -215,12 +212,25 @@
 		
 		<?php
 			require_once 'dbcon.php';
-			$incID= $_GET['incId'];
-			if (isset($_POST["editPO"])){
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
-					SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poNumber = '$incID'";
-			$conn->exec($sql);
+			if (isset($_POST["editPO"])) {
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+				for ($index3 = 0; $index3 < count($prodTem); $index3++) {
+					$PurOrID = $_POST['editPOID'][$index3];
+					$prodItem = $_POST['prodItem'][$index3];
+					$inQty = $_POST['qty'][$index3];
+					$hiddenProdItem = $_POST['editProdItem'][$index3];
+					$hiddenInQty = $_POST['editQuantity'][$index3];
+		
+					if ($prodItem != $hiddenProdItem || $inQty != $hiddenInQty) {
+						$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
+							SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poID = $PurOrID";
+						$conn->exec($sql);
+					} else {
+						//Do Nothing
+					}
+					
+				}
 			}
 		?>
 		
