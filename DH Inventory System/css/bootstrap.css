@@ -118,6 +118,13 @@ textarea {
   margin: 3px;
   font: inherit;
   color: inherit;
+    border: 1px solid #ccc;
+    color: #444;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 10px 12px;
+    width: auto;
+	
 }
 button {
   overflow: visible;
@@ -2533,7 +2540,8 @@ input[type="checkbox"] {
   line-height: normal;
 }
 input[type="file"] {
-  display: block;
+  display: inline-block;
+  left: 43%;
 }
 input[type="range"] {
   display: block;
@@ -7691,7 +7699,10 @@ border: none;
 }
 
 #backUpButton{
-	font-size: 35px;
+	font-size: 20px;
+}
+#fileUpload{
+	position: inherit;
 }
 
 #phyCountButton{

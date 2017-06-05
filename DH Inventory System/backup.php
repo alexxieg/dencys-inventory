@@ -151,15 +151,32 @@
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">		
 									<h1 id="headers">SYSTEM SETTINGS</h1>
+									<h2>BACKUP</h2>
 									<table class="table">	
 										<tr>
 											<td>
-												<a href = "functionalities/createBackup.php"><button class="btn btn-success" id="backUpButton">BACKUP SYSTEM</button></a>
-												<button class="btn btn-success" id="backUpButton">RESTORE SYSTEM</button>
+												<a href = "functionalities/createBackup.php"><button class="btn btn-success" id="backUpButton">BACKUP DATABSE</button></a>
+											</td>	
+										</tr>
+									</table>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					<div id="contents">
+						<div class="pages">
+							<div id="tableHeader">
+								<table class="table table-striped table-bordered">		
+									<h2>RESTORE</h2>
+									<table class="table">	
+										<tr>
+											<td>
 												<form action="functionalities/restoreBackup.php" method="post" enctype="multipart/form-data">
-												    Select .sql file to restore
-												    <input type="file" name="fileToUpload" id="fileToUpload">
-												    <input type="submit" value="Select Restore File" name="submit">
+												    <label form="fileUpload">Select .sql file to restore:</label>
+													<input type="file" name="fileUpload" value="fileUpload" id="fileUpload">
+												    <input type="submit" value="Restore File" class="btn btn-success" name="submit">
 												</form>
 											</td>	
 										</tr>
