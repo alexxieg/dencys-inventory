@@ -91,18 +91,7 @@
                                 }
 									
                         },
-							{extend:'colvis', text: 'Select Column'},
-								{extend: 'pdf', pageMargins: [ 40, 60, 40, 60 ],
-								text: 'Save PDF',
-								download: 'open',
-									exportOptions: {
-										columns: ':visible',
-										
-										modifier: {
-											page: 'current'
-										},
-									},
-							},'pageLength', 
+							{extend:'colvis', text: 'Select Column'},'pageLength', 
                     ],
                         columnDefs: [{
                             targets: -1,
