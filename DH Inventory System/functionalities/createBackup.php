@@ -1,12 +1,13 @@
 <?php
 	
-	$backup_dir		= "..\\datastorage";
+	$backup_dir		= "D:";
 	$server_name   	= "localhost";
 	$username      	= "root";
 	$password      	= "";
 	$database_name 	= "dencys";
 	$date_string   	= date("Ymd");
-	$filename		= $database_name . "_" . $date_string . ".sql";
+	$time_string	= date("h-i-sa");
+	$filename		= $database_name . "_" . $date_string . "_" . $time_string . ".sql";
 	$finalpath 		= $backup_dir . "\\" . $filename;
 
 	$cmd = "cd C:\wamp64\bin\mysql\mysql5.7.9\bin && mysqldump.exe -h {$server_name} -u {$username}  {$database_name} > {$finalpath}";

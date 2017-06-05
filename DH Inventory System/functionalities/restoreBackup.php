@@ -6,7 +6,8 @@
 	$password      	= "";
 	$database_name 	= "dencys";
 	$date_string   	= date("Ymd");
-	$filename		= $database_name . "_" . $date_string . ".sql";
+	$time_string	= date("h-i-sa");
+	$filename		= $database_name . "_" . $date_string . "_" . $time_string . ".sql";
 	$finalpath 		= $backup_dir . "\\" . $filename;
 	$writethis 		= "CREATE DATABASE IF NOT EXISTS `dencys` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci; USE `dencys`;";
 
