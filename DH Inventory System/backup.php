@@ -155,7 +155,7 @@
 									<table class="table">	
 										<tr>
 											<td>
-												<a href = "functionalities/createBackup.php"><button class="btn btn-success" id="backUpButton">BACKUP DATABSE</button></a>
+												<a href = "functionalities/createBackup.php"><button class="btn btn-success" id="backUpButton">BACKUP DATABASE</button></a>
 											</td>	
 										</tr>
 									</table>
@@ -175,7 +175,7 @@
 											<td>
 												<form action="functionalities/restoreBackup.php" method="post" enctype="multipart/form-data">
 												    <label form="fileUpload">Select .sql file to restore:</label>
-													<input type="file" name="fileUpload" value="fileUpload" id="fileUpload">
+													<input type="file" name="fileToUpload" value="fileUpload" id="fileUpload">
 												    <input type="submit" value="Restore File" class="btn btn-success" name="submit">
 												</form>
 											</td>	

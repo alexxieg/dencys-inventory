@@ -27,15 +27,17 @@
 
 	$target_dir = "D:\\";
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-	$uploadOk = 1;
 	if(isset($_POST["submit"])) {
-	    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-	    if($check !== false) {
-	        echo "File is an image - " . $check["mime"] . ".";
-	        $uploadOk = 1;
+	    $check = $_FILES["fileToUpload"]["type"];
+	    if($check == 'application/sql') {
+	        echo "File is not a valid sql database.";
 	    } else {
-	        echo "File is not an image.";
-	        $uploadOk = 0;
+	    	$db = new PDO('mysql:host=localhost', 'root', '');
+	    	$res = file_get_contents($target_file);
+	    	$qr = $db->exec($res);
+	    	echo 'Backup Restored';
+			$url='..\\backup.php';
+			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 	    }
 	}	
 ?>
