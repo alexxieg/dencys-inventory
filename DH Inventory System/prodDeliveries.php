@@ -370,18 +370,6 @@
 															<div id="tabHead">Date</div>
 														</th>
 														<th>
-															<div id="tabHead">Product ID</div>
-														</th>
-														<th>
-															<div id="tabHead">Product Description</div>
-														</th>
-														<th>
-															<div id="tabHead">Quantity</div>
-														</th>
-														<th>
-															<div id="tabHead">Unit</div>
-														</th>
-														<th>
 															<div id="tabHead">Received By</div>
 														</th>
 														<th>
@@ -394,7 +382,7 @@
 															<div id="tabHead">Supplier</div>
 														</th>										
 														<th>	
-															<div id="tabHead">Remarks</div>
+															<div id="tabHead">View</div>
 														</th>
 													</tr>
 												</thead>
@@ -402,24 +390,19 @@
 												<tbody>					
 													<?php
 														foreach ($result1 as $item):
-														$incID = $item["inID"];
+														$incID = $item["receiptNo"];
 													?>
 																											
 													<tr id="centerData">
 														<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-														<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-														<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 														<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 														<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 														<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
-														<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 														<td>
-															<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+															<a href="functionalities/viewProdDelivery.php?incId=<?php echo $incID; ?>"> 
 															<button type="button" class="btn btn-default" id="edBtn">
-																<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+																<span class="glyphicon glyphicon-th-list aria-hidden="true"></span>
 															</button>
 															</a>
 														</td>	
