@@ -337,7 +337,7 @@
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
 										<td data-title="Remarks"><?php echo $item["remarks"];?></td>
 										<td>
-											<a href="ledger.php?incId=<?php echo $incID; ?>"> 
+											<a href="userledger.php?incId=<?php echo $incID; ?>"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 												</button>
@@ -361,7 +361,7 @@
 										<td data-title="Unit"><?php echo $item["unitType"];?></td>
 										<td data-title="Remarks"><?php echo $item["remarks"];?></td>
 										<td>
-											<a href="ledger.php?incId=<?php echo $incID; ?>" target="_self"> 
+											<a href="userledger.php?incId=<?php echo $incID; ?>" target="_self"> 
 												<button type="button" class="btn btn-default" id="edBtn">
 													<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 												</button>

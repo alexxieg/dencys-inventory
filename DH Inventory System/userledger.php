@@ -109,7 +109,8 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
 					<div id="contents">
 						<div class="pages no-more-tables">
-							<div id="tableHeader">		
+							<div id="tableHeader">
+							<h1 id="headers">Stock Card</h1>
 							<table class="table">	
 									<tr>
 										<?php 
