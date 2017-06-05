@@ -161,12 +161,19 @@
 									</div>
 										
 									<h5>Product/s</h5>
-									<table class="table table-striped" id="dataTable" name="chk">	
+									<table class="table table-striped" id="dataTable" name="chk">
+										<tbody>
+											<tr>
+												<td>
+													Product Description
+												</td>
+												<td>
+													Quantity
+												</td>
+											</tr>
 										<?php foreach ($result as $row): ?>
 											<tbody>
 												<tr>
-													<td><input type="checkbox" name="chk"></TD>
-													<td><input type="hidden" value="1" name="num" id="orderdata"></TD>
 													<td>	
 														<div class="ui-widget">
 															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
