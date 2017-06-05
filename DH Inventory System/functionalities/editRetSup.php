@@ -243,7 +243,6 @@
 									</table>
 											
 									<div class="modFoot">
-										<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
 										<br>
 										<br>
 										<span>
