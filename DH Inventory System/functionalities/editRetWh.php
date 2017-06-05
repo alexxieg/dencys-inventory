@@ -205,19 +205,25 @@
 										<?php foreach ($result2 as $row2): ?>
 										<tr>
 											<td><input type="checkbox" name="chk"></TD>
-											<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
+											<td>
+												<input type="hidden" value="1" name="num" id="orderdata">1
+												<input type="hidden" name="returnID[]" value="<?php echo $row2["returnID"]; ?>" />
+											</TD>
 											<td>	
 												<div class="ui-widget">
-													<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
+													<input class="thisProduct" name="prodItem[]" value="<?php echo stripslashes($row2["prodName"]); ?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
+													<input type="hidden" name="editProdItem[]" value="<?php echo $row2["prodName"]; ?>" />
 												</div>		
 											</td>
 													
 											<td>
 												<input type="number" min="1" class="form-control" id ="addQty" value="<?php echo $row2["returnQty"]; ?>" placeholder="<?php echo $row2["returnQty"]; ?>" name="retQty[]" required>
+												<input type="hidden" name="editRetQty[]" value="<?php echo $row2["returnQty"]; ?>" />
 											</td>
 
 											<td>
 												<input type="text" class="form-control" id="addEntry" placeholder="<?php echo $row2["returnRemark"]; ?>" value="<?php echo $row2["returnRemark"]; ?>" name="retRemarks[]">
+												<input type="hidden" name="editRetRemarks[]" value="<?php echo $row2["returnRemark"]; ?>" />
 											</td>
 										</tr>
 										<?php endforeach ?>
@@ -345,11 +351,31 @@
 		<?php
 		require_once 'dbcon.php';
 		$retID= $_GET['retId'];
+		$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
 		if (isset($_POST["addRet"])){
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID)
-				SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID from returns WHERE receiptNo = '$retID'";
-		$conn->exec($sql);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+				$returnID = $_POST['returnID'][$index2];
+			
+				$prod = $_POST['prodItem'][$index2];
+				$quant = $_POST['retQty'][$index2];
+				$rem = $_POST['retRemarks'][$index2];
+				$quant = $_POST['retQty'][$index2];
+				
+				$editProd = $_POST['editProdItem'][$index2];
+				$editQuant = $_POST['editRetQty'][$index2];
+				$editRem = $_POST['editRetRemarks'][$index2];
+				$editQuant = $_POST['editRetQty'][$index2];
+				
+				if ($prod != $editProd || $quant != $editQuant || $rem != $editRem || $quant != $editQuant) {
+					$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID)
+						SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID from returns WHERE returnID = $returnID";
+					$conn->exec($sql);
+				} else {
+					//Do Nothing
+				}
+				
+			}
 		}
 		?>
 			
