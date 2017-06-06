@@ -29,16 +29,6 @@ function validateForm() {
 		document.getElementById('addBrandName').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addBrandName').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Brand Name should atleast have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addBrandName').style.borderColor = "red";
-		return false;
-	}
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;
 	}
@@ -76,16 +66,6 @@ function validateForm2() {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Brand Name.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addBrandName').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addBrandName').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Brand Name should atleast have more than 2 characters",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
