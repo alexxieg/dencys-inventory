@@ -62,6 +62,7 @@
 			$(document).ready(function() {
                 $('#myTable').DataTable( {
                     dom: 'Bfrtip',
+					"order": [[1, "desc"]],
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
 						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
