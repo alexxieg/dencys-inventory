@@ -207,7 +207,7 @@
 							</a>
 							<?php 
 								if ($status != 'Complete') {
-									echo '<a href="editPO.php?incId=<?php echo '.$incID.'; ?>"> 
+									echo '<a href="editPO.php?incId='.$incID.'"> 
 											<button type="button" class="btn btn-default">
 												EDIT ENTRY
 											</button>
