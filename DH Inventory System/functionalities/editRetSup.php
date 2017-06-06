@@ -203,8 +203,6 @@
 												<td>
 												</td>
 												<td>
-												</td>
-												<td>
 													Product Name
 												</td>
 												<td>
@@ -216,9 +214,8 @@
 											</tr>
 											<?php foreach ($resul as $row2): ?>
 											<tr>
-												<td><input type="checkbox" name="chk"></TD>
+
 												<td>
-													<input type="hidden" value="1" name="num" id="orderdata">1
 													<input type="hidden" name="returnID[]" value="<?php echo $row2["returnID"]; ?>" />
 												</TD>
 												<td>	
@@ -243,8 +240,6 @@
 									</table>
 											
 									<div class="modFoot">
-										<br>
-										<br>
 										<span>
 											<a href="../returnSupplier.php">
 												<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
@@ -260,93 +255,6 @@
 							</div>
 						</div>
 					</div>
-					
-					<!-- Modal for Returned Product Entry Form -->
-					<div class="modal fade" id="myModal" role="dialog">
-						 <div class="modal-dialog modal-lg">
-							 <div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Add Returned Product</h4>
-								</div>
-								<div class="modal-body">
-									<form action="" method="POST" onsubmit="return validateForm()">
-										<h3> User </h3>
-										<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID2" readonly>
-										
-										<h3>Receipt No.</h3>
-										<input type="text" class="form-control" id="userID" value = "<?php echo $retID; ?>" placeholder="User" name="recID" readonly>
-										
-										<h3>Supplier</h3>  
-										<div class="ui-widget">
-											<input id="addSupplierX" name="supplier2" placeholder="Supplier" value = "<?php echo $supplierName; ?>">
-										</div>
-									
-										<h3>Handled By</h3>
-															
-										<select class="form-control" id="addEmpl" name="emp2">
-											<option SELECTED><?=$employName?></option>
-										</select> 
-										
-										<h5 id="prodHeader">Product/s</h5>
-										<table class="table table-striped" id="dataTable" name="chk">
-											<tbody>
-												<tr>
-													<td>
-													</td>
-													<td>
-													</td>
-													<td>
-														Product Name
-													</td>
-													<td>
-														Quantity
-													</td>
-													<td>
-														Remarks
-													</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" name="chk"></TD>
-													<td><input type="hidden" value="1" name="num" id="orderdata">1</TD>
-													<td>	
-														<div class="ui-widget">
-															<input class="thisProduct" id="prod" name="prodItem2[]" required>
-														</div>
-													</td>
-															
-													<td>
-														<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Quantity" name="retQty2[]" required>
-													</td>
-													
-													<td>
-														<input type="text" class="form-control" id="addEntry" placeholder="Remarks" name="retRemarks2[]">
-													</td>
-												</tr>
-											</tbody>
-										</table>
-												
-										<div class="modFoot">
-											<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-											<span> <button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
-											<br>
-											<br>
-											<span>
-												<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-											</span>
-											<span>
-												<input type="submit" value="Submit" class="btn btn-success" name="addItems" id="sucBtn">
-											</span>
-										</div>
-									</form> 	
-
-									<div class="modal-footer">
-									</div>								
-								</div>
-							</div>
-						</div>
-					</div>
-					
 				</div>
 			</div>
 		</div>

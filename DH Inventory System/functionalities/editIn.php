@@ -194,10 +194,9 @@
 										<?php endforeach ?>
 											<option SELECTED><?=$employ?></option>
 									</select> 
-										
 									<br>
 											
-									<h5>Product/s</h5>
+									<h5 id="prodHeader">Product/s</h5>
 									<table class="table table-striped" id="dataTable2" name="chk">				
 										<tbody>
 											<tr>
@@ -286,6 +285,7 @@
 			</div>
 		</div>
 
+		<!-- Edit Log -->
 		<?php
 			require_once 'dbcon.php';
 			$incID= $_GET['incId'];
@@ -316,7 +316,8 @@
 				}
 			}
 		?>
-		
+	
+		<!-- Update -->
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
@@ -352,42 +353,6 @@
 				$url="viewProdDelivery.php?incId=$incID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
-
-			if (isset($_POST["addItems"])){
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {
-
-					$inRemarks = $_POST['inRemarks2'][$index2];
-					$prodItem = $_POST['prodItem2'][$index2];
-					$inQty = $_POST['incQty2'][$index2];
-					$inStat = $_POST['inStatus2'][$index2];
-					$inType = $_POST['inType2'][$index2];
-					$emp = $_POST['emp2'];
-					$userID = $_POST['userID'];
-					$supName = $_POST['supplier2'];	
-					$poNum = $_POST['po2'];
-
-					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
-					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
-					$emp3 = $emp2['empA'];
-
-					$sup1 = $conn->query("SELECT supID as supA FROM suppliers WHERE supplier_name = '$supName'");
-					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
-					$sup3 = $sup2['supA'];
-					
-					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'")->fetch());
-					
-					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
-					VALUES ('$inQty',CURDATE(),'$incID','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$productID','$userID','$poNum')";
-					$result = $conn->query($sql);
-					
-					$sql = "UPDATE incoming SET inDate = $updateDate
-					WHERE incoming.receiptNo = '$incID'";
-					$conn->exec($sql);		
-				}
-				$url="viewProdDelivery.php?incId=$incID";
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}	
 		?>
 	
   </body>
