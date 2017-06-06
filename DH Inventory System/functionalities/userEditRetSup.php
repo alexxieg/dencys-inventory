@@ -106,44 +106,43 @@
 		</nav>
 		<!-- End of Top Main Header -->
 
-
-    <div class="container-fluid">
-		<div class="row navbar-collapse">
-			<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-							<ul class="list-unstyled collapse" id="inventory">
-								<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
-								<li><a href="../userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
+		<div class="container-fluid">
+			<div class="row navbar-collapse">
+				<div id="sidebarCol" class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<div id="sidebarLogo"><img src="../logo.png" alt=""/></div>
+							<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+								<ul class="list-unstyled collapse" id="inventory">
+									<li><a href="../userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
+									<li><a href="../userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
+								</ul>
+							</li>
+						<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="incoming">
+								<li><a href="../userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
+								<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
 							</ul>
 						</li>
-					<li><a href="#" data-toggle="collapse" data-target="#incoming"><i class="glyphicon glyphicon-import"></i> Product Deliveries<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="incoming">
-							<li><a href="../userPurchaseOrders.php"><i class="glyphicon glyphicon-list"></i> Purchase Orders</a></li>
-							<li><a href="../userproductdeliveries.php"><i class="glyphicon glyphicon-list"></i> Delivered Products</a></li>
-						</ul>
-					</li>
-					<li><a href="../userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-					<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="returns">
-							<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
-							<li><a href="../userReturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
-						</ul>
-					</li>
-					<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
-						<ul class="list-unstyled collapse" id="reports">
-							<li><a href="../userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
-							<li><a href="../usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
-							<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
-						</ul>
-					</li>
-					<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
-					<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
-				</ul>
-			</div>
-		<!-- End of Sidebar -->	
-				
+						<li><a href="../userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
+						<li class="active"><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <span class="sr-only">(current)</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="returns">
+								<li><a href="../userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
+								<li><a href="../userReturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
+							</ul>
+						</li>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+							<ul class="list-unstyled collapse" id="reports">
+								<li><a href="../userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
+								<li><a href="../usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
+								<li><a href="../usermonthlyout.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
+							</ul>
+						</li>
+						<li><a href="../usersuppliers.php"><i class="glyphicon glyphicon-user"></i> Suppliers</a></li>
+						<li><a href="../userproduct.php"><i class="glyphicon glyphicon-folder-open"></i> Products</a></li>
+					</ul>
+				</div>
+				<!-- End of Sidebar -->	
+					
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
@@ -175,7 +174,6 @@
 											<option><?=$row["empFirstName"]?></option>
 										<?php endforeach ?>
 									</select> 
-									
 									<br>
 									
 									<h5 id="multipleProd">Product/s</h5>
@@ -222,7 +220,7 @@
 											
 									<div class="modFoot">
 										<span>
-											<a href="../returnSupplier.php">
+											<a href="../userreturnSupplier.php">
 												<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 											</a>
 										</span>
@@ -236,42 +234,38 @@
 							</div>
 						</div>
 					</div>
-					
-
 				</div>
 			</div>
 		</div>
-		
-		
+			
 		<!-- Edit Log -->
 		<?php
-		require_once 'dbcon.php';
-		$retID= $_GET['retId'];
-		$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-		if (isset($_POST["addRet"])){
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
-				$returnID = $_POST['returnID'][$index2];
-			
-				$prod = $_POST['prodItem'][$index2];
-				$quant = $_POST['retQty'][$index2];
-				$rem = $_POST['retRemarks'][$index2];
-				$quant = $_POST['retQty'][$index2];
+			require_once 'dbcon.php';
+			$retID= $_GET['retId'];
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			if (isset($_POST["addRet"])){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+					$returnID = $_POST['returnID'][$index2];
 				
-				$editProd = $_POST['editProdItem'][$index2];
-				$editQuant = $_POST['editRetQty'][$index2];
-				$editRem = $_POST['editRetRemarks'][$index2];
-				$editQuant = $_POST['editRetQty'][$index2];
-				if ($prod != $editProd || $quant != $editQuant || $rem != $editRem || $quant != $editQuant) {
-					$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID)
-						SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID from returns WHERE returnID = $returnID";
-					$conn->exec($sql);
-				} else {
-					//Do Nothing
+					$prod = $_POST['prodItem'][$index2];
+					$quant = $_POST['retQty'][$index2];
+					$rem = $_POST['retRemarks'][$index2];
+					$quant = $_POST['retQty'][$index2];
+					
+					$editProd = $_POST['editProdItem'][$index2];
+					$editQuant = $_POST['editRetQty'][$index2];
+					$editRem = $_POST['editRetRemarks'][$index2];
+					$editQuant = $_POST['editRetQty'][$index2];
+					if ($prod != $editProd || $quant != $editQuant || $rem != $editRem || $quant != $editQuant) {
+						$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID)
+							SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID from returns WHERE returnID = $returnID";
+						$conn->exec($sql);
+					} else {
+						//Do Nothing
+					}		
 				}
-				
 			}
-		}
 		?>
 
 		<!-- Update -->
@@ -298,7 +292,6 @@
 				$url="userViewRetSupplier.php?retId=$retID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    
-			
 		?>
 
 	</body>

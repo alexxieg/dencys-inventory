@@ -8,7 +8,7 @@
 				
 				$brandID = $_POST['branID'];
 				$brandName = $_POST['branName'];
-				$query = $conn->prepare("Select * FROM brand WHERE brandID = '$brandID' AND brandName = '$brandName'");
+				$query = $conn->prepare("Select * FROM brand WHERE brandID = '$brandID' OR brandName = '$brandName'");
 				$count = $query->execute();
 				$row = $query->fetch();
 
