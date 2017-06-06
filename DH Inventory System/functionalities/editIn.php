@@ -244,7 +244,6 @@
 															<?php endforeach ?>
 														</select>  
 														<input type="hidden" name="editInStatus[]" value="<?php echo $row["status"]; ?>" />	
-														
 													</td>
 													
 													<td>

@@ -188,8 +188,7 @@
 									<?php foreach ($res as $row): ?>
 										<option value="<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
 									<?php endforeach ?>
-								</select> 
-									
+								</select> 				
 								<br>
 								
 								<h5 id="multipleProd">Product/s</h5>
