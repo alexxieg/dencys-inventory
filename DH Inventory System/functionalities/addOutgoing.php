@@ -43,7 +43,7 @@
 						$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
 						$emp3 = $emp2['empA'];
 						
-						$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'");
+						$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
 						$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 						$prod3 = $prod2['prodA'];
 						

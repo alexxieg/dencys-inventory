@@ -26,7 +26,7 @@
 			$userID = $_POST['userID'];
 			$emp = $_POST['emp'];
 								
-			$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prod'")->fetch());
+			$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'")->fetch());
 			
 			$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
 			$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
