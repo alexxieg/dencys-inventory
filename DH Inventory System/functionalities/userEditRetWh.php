@@ -180,7 +180,6 @@
 										<option value="<?=$row["empFirstName"]?>"><?=$row["empFirstName"]?></option>
 									<?php endforeach ?>
 								</select> 
-									
 								<br>
 								
 								<h5 id="multipleProd">Product/s</h5>

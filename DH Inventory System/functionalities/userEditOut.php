@@ -189,7 +189,7 @@
 									</select> 
 									<br>
 											
-									<h5>Product/s</h5>
+									<h5 id="prodHeader">Product/s</h5>
 									<table class="table table-striped" name="chk">
 										<tbody>
 											<tr>

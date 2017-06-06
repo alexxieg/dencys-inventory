@@ -140,7 +140,8 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->
-					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+				
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
 					<div id="contents">
 						<div class="pages no-more-tables">
 							<h1 id="headers">Edit Product Order Entry</h1>
@@ -159,6 +160,7 @@
 									<div class="ui-widget">
 										<input class="form-control" id ="addSupplier" value = "<?php echo $supName; ?>" placeholder="<?php echo $supName; ?>" name="supplier">
 									</div>
+									<br>
 										
 									<h5 id="prodHeader">Product/s</h5>
 									<table class="table table-striped" id="dataTable2" name="chk">	
