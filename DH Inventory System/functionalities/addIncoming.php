@@ -4,8 +4,8 @@
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
-		for ($index = 0; $index < count($prodTem); $index++) {
-			$rcno = $_POST['rcno'];
+		/**for ($index = 0; $index < count($prodTem); $index++) {
+			
 			$query = $conn->prepare("Select * FROM incoming WHERE receiptNo = '$rcno'");
 			$count = $query->execute();
 			$row = $query->fetch();
@@ -19,8 +19,27 @@
 				echo '$("#myModal").modal("show");';
 				echo 'document.getElementById("addRcpt").style.borderColor = "red";';
 				echo '</script>';
+			} else {*/
+			if (isset($checkDatabase) ? $checkDatabase : null) {
+				for ($index = 0; $index < count($prodTem); $index++) {
+					$rcno = $_POST['rcno'];
+					$prodItem = $_POST['prodItem'][$index];
+					$inQty = $_POST['incQty'][$index];
+					$inStat = $_POST['inStatus'][$index];
+					$inType = $_POST['inType'][$index];
+					$inRemarks = $_POST['inRemarks'][$index];
+					
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prodItem'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+					
+					$sql = "UPDATE incoming SET inQty = $inQty, status = '$inStat', inType = '$inType', inRemarks = '$inRemarks', prodID = '$productID'
+						WHERE prodID = '$prodItem' AND PONumber = '$varPO' AND reciptNo = '$rcpNo'";
+					$conn->exec($sql);
+				}
 			} else {
-				for ($index = 0; $index < count($prodTem); $index++) {	
+				for ($index = 0; $index < count($prodTem); $index++) {
+					$rcno = $_POST['rcno'];		
 					$inRemarks = $_POST['inRemarks'][$index];
 					$prodItem = $_POST['prodItem'][$index];
 					$inQty = $_POST['incQty'][$index];
@@ -45,16 +64,18 @@
 					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
 					VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$prod3','$userID','$poNum')";
 					$result = $conn->query($sql); 
-				}			
+				}
 			}
-			$inState = $_POST['inStatus'];
-			$poNum = $_POST['po'];
-			if (count(array_unique($inState)) === 1 && end($inState) === 'Complete') {
-				$sql = "UPDATE purchaseorders SET status = 'Complete' WHERE poNumber = '$poNum'";
-				$result = $conn->query($sql); 
-			}
-		}
-		
+							
+			/**}*/
+				$inState = $_POST['inStatus'];
+				$poNum = $_POST['po'];
+				if (count(array_unique($inState)) === 1 && end($inState) === 'Complete') {
+					$sql = "UPDATE purchaseorders SET status = 'Complete' WHERE poNumber = '$poNum'";
+					$result = $conn->query($sql); 
+				}
+		/**}*/
+		/**
 		$role = $_SESSION['sess_role'];
 		if($role == 'admin'){
 			$url='../prodDeliveries.php';
@@ -62,6 +83,6 @@
 		}else{
 			$url='../userproductdeliveries.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-		}
+		}*/
 	}
 ?>	

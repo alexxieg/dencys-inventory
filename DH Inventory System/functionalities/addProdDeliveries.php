@@ -84,7 +84,7 @@
 			$session_id = $_SESSION['id'];
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
-			error_reporting(0);
+			/**error_reporting(0);*/
 		?>
 	</head>
 
@@ -110,6 +110,10 @@
 									ORDER BY poID DESC;");
 				$query->execute();
 				$result = $query->fetchAll();
+				
+				$receiptNum = '';
+				$receiptDate = current($conn->query("SELECT CURDATE()")->fetch());
+				$readOnly = '';
 			}
 			
 			$supplierID = current($conn->query("SELECT purchaseorders.supID FROM purchaseorders INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.poNumber = '$varPO'")->fetch());
