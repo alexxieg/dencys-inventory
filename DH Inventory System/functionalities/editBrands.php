@@ -161,22 +161,9 @@
 				</div>
 			</div>
 		</div>
-				
-		<!-- PHP Code - Update Brand -->
-		<?php
-			$braID=(isset($_REQUEST['branID']) ? $_REQUEST['branID'] : null);
-			$braName=(isset($_REQUEST['branName']) ? $_REQUEST['branName'] : null);
-			if (isset($_POST["editBrand"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			 
-				$sql = "UPDATE brand SET brandID = '$braID', brandName = '$braName' WHERE brandID = '$brandEditID'";
-			
-				$conn->exec($sql);
-
-				$url='../brands.php';
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}    
-		?>
+		
+		<!-- Add New Brand -->
+		<?php include('updateBrand.php'); ?>
+		
 	</body>
 </html>
