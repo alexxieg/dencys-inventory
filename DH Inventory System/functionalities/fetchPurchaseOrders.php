@@ -3,17 +3,17 @@
 	$sortByYearDate = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
 	
 	if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) { 
-			$query = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
+			$query = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name, purchaseorders.status
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID
 									WHERE MONTHNAME(poDate) = '$sortByMonthDate' AND YEAR(poDate) = $sortByYearDate
-									GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
+									GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name, purchaseorders.status
 									ORDER BY purchaseorders.poNumber DESC");
 			$query->execute();
 			$result = $query->fetchAll();
 	} else {
-			$query = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
+			$query = $conn->prepare("SELECT purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name, purchaseorders.status
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID
-									GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name
+									GROUP BY purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.userID, suppliers.supplier_name, purchaseorders.status
 									ORDER BY purchaseorders.poNumber DESC");
 			$query->execute();
 			$result = $query->fetchAll();

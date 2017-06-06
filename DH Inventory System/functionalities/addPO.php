@@ -30,7 +30,7 @@
 			$sup3 = $sup2['supA'];
 			
 			$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supID, prodID, userID, status)
-			VALUES ('$qty',CURDATE(),'$prod','$sup3','$prod3','$userID', 'Incomplete')";
+			VALUES ('$qty',CURDATE(),'$prod','$sup3','$prod3','$userID', 'Undelivered')";
 			$result = $conn->query($sql); 
 		}
 			

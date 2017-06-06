@@ -6,14 +6,14 @@
 		$query = $conn->prepare("SELECT product.prodID, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, CONCAT(returns.returnQty,' ', product.unitType) AS returnQty, returns.returnType,  returns.receiptNo, returns.returnRemark, branch.location, returns.userID
 								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN product ON returns.prodID = product.prodID
 								WHERE returns.returnType = 'Warehouse Return' HAVING nowMonthDate = '$sortByMonthDate' AND nowYearDate = $sortByYearDate
-								ORDER BY returnID DESC;");	
+								ORDER BY returns.returnDate DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}else{
 		$query = $conn->prepare("SELECT product.prodID, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnID, product.prodName, CONCAT(returns.returnQty,' ', product.unitType) AS returnQty, returns.returnType, returns.receiptNo, returns.returnRemark, branch.location, returns.userID
 							FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN product ON returns.prodID = product.prodID 
 							WHERE returns.returnType = 'Warehouse Return' AND MONTH(returnDate) = MONTH(CURRENT_DATE())
-							ORDER BY returnID DESC;");	
+							ORDER BY returns.returnDate DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}

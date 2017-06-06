@@ -62,13 +62,14 @@
 			$(document).ready(function() {
                 $('#myTable').DataTable( {
                     dom: 'Bfrtip',
+					"order": [[1, "desc"]],
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
 						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
 					],
                     buttons: [
                         {
-                            title: 'Dencys Hardware and General Merchandise', 
+							title: 'Dencys Hardware and General Merchandise', 
 							message: 'Product Issuance', 
 							customize: function ( win ) {
                                 $(win.document.body)
@@ -81,22 +82,21 @@
                                     .addClass( 'compact' )
                                     .css( 'font-size', 'inherit' );
                             },
-                                extend: 'print',
-                                exportOptions: {
-                                columns: ':visible',
-									modifier: {
-											page: 'current'
-										}
-                                }
-                        },
-							{extend:'colvis', text: 'Select Column'},'pageLength',
-
-                    ],
-                        columnDefs: [{
-                            targets: -1,
-                            visible: true
                             
-                        }]
+							extend: 'print',
+                            exportOptions: {
+								columns: ':visible',
+								modifier: {
+									page: 'current'
+								}
+                            }
+                        },
+						{extend:'colvis', text: 'Select Column'},'pageLength',
+                    ],
+                    columnDefs: [{
+                        targets: -1,
+                        visible: true 
+                    }]
                 } );
             } );		
 		</script>
