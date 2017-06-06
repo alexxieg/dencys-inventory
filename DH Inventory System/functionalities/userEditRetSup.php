@@ -79,6 +79,9 @@
 					WHERE receiptNo = '$retID' ");
 			$query2->execute();
 			$resul = $query2->fetchAll();
+			
+			$supplierName = current($conn->query("SELECT supplier_name FROM suppliers JOIN returns ON suppliers.supID = returns.supID WHERE returns.receiptNo = '$retID'")->fetch());
+			$employName = current($conn->query("SELECT empFirstName FROM employee JOIN returns ON employee.empID = returns.empID WHERE returns.receiptNo = '$retID'")->fetch());
 		?>
 		
 		<!-- Top Main Header -->
@@ -182,8 +185,6 @@
 												<td>
 												</td>
 												<td>
-												</td>
-												<td>
 													Product Name
 												</td>
 												<td>
@@ -195,11 +196,9 @@
 											</tr>
 											<?php foreach ($resul as $row2): ?>
 											<tr>
-												<td><input type="checkbox" name="chk"></TD>
 												<td>
-													<input type="hidden" value="1" name="num" id="orderdata">1
 													<input type="hidden" name="returnID[]" value="<?php echo $row2["returnID"]; ?>" />
-												</TD>
+												</td>
 												<td>	
 													<div class="ui-widget">
 														<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
@@ -222,9 +221,6 @@
 									</table>
 											
 									<div class="modFoot">
-										<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-										<br>
-										<br>
 										<span>
 											<a href="../returnSupplier.php">
 												<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
@@ -246,6 +242,8 @@
 			</div>
 		</div>
 		
+		
+		<!-- Edit Log -->
 		<?php
 		require_once 'dbcon.php';
 		$retID= $_GET['retId'];
@@ -276,7 +274,7 @@
 		}
 		?>
 
-		
+		<!-- Update -->
 		<?php
 			$retID= $_GET['retId'];	
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);

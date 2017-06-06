@@ -350,6 +350,8 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- Edit Log -->
 		<?php
 		require_once 'dbcon.php';
 		$retID= $_GET['retId'];
@@ -374,12 +376,12 @@
 					$conn->exec($sql);
 				} else {
 					//Do Nothing
-				}
-				
+				}		
 			}
 		}
 		?>
 		
+		<!-- Update -->
 		<?php
 			$retID= $_GET['retId'];	
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
@@ -409,31 +411,6 @@
 				$url="viewRetSupplier.php?retId=$retID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}    
-			
-			if (isset($_POST["addItems"])) {
-				
-				for ($index2 = 0; $index2 < count($prodTem2); $index2++) {
-					$prod2 = $_POST['prodItem2'][$index2];
-					$retQty2 = $_POST['retQty2'][$index2];
-					$retRem2 = $_POST['retRemarks2'][$index2];
-					$userID2 = $_POST['userID2'];
-					$emp2 = $_POST['emp2'];
-					$supp = $_POST['supplier2'];
-					
-					$suppID = current($conn->query("SELECT supID FROM suppliers WHERE supplier_name = '$supp'")->fetch());					
-					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$prod2'")->fetch());
-					
-					$newemp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp2'");
-					$newemp2 = $newemp1->fetch(PDO::FETCH_ASSOC);
-					$newemp3 = $newemp2['empA'];
-								
-					$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, prodID, receiptNo, empID, userID, supID)
-							VALUES (CURDATE(),$retQty2,'Supplier Return','$retRem2','$productID','$retID',$newemp3,'$userID2',$suppID)";
-					$conn->exec($sql);
-				}
-				$url="viewRetSupplier.php?retId=$retID";
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}
 		?>
 
 	</body>

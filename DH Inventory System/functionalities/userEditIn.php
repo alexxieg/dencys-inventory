@@ -277,6 +277,8 @@
 			</div>
 		</div>
 
+		
+		<!-- Edit Log -->
 		<?php
 			require_once 'dbcon.php';
 			$incID= $_GET['incId'];
@@ -308,6 +310,7 @@
 			}
 		?>
 		
+		<!-- Update -->
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
