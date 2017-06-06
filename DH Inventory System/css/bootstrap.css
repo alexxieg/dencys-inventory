@@ -7660,6 +7660,12 @@ border: none;
 	margin-left: 25%;
 }
 
+#addEntrys, #addEntry1, #addEntry2, #addEntry3,
+#addEntry4, #addProductType, #addBrand{
+	width: 50%;
+	margin-left: 25%;
+}
+
 .modal-body #prod{
 	width:100%;
 }
