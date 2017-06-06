@@ -6,14 +6,16 @@
 		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, branch.location, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, returns.userID
 								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN employee ON returns.empID = employee.empID
 								WHERE returns.returnType = 'Warehouse Return' AND MONTHNAME(returns.returnDate) = '$sortByMonthDate' AND YEAR(returnDate) = $sortByYearDate 
-                                GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, branch.location, empName, returns.userID;");	
+                                GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, branch.location, empName, returns.userID
+								ORDER BY returns.returnDate DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}else{
 		$query = $conn->prepare("SELECT returns.receiptNo, returns.returnDate, MONTHNAME(returns.returnDate) AS nowMonthDate, YEAR(returnDate) AS nowYearDate, returns.returnType, branch.location, CONCAT(employee.empLastName,', ',employee.empFirstName) AS empName, returns.userID
 								FROM branch INNER JOIN returns ON branch.branchID = returns.branchID INNER JOIN employee ON returns.empID = employee.empID
 						        WHERE returns.returnType = 'Warehouse Return' 								
-								GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, branch.location, empName, returns.userID;");	
+								GROUP BY returns.returnType, returns.returnDate, returns.receiptNo, branch.location, empName, returns.userID
+								ORDER BY returns.returnDate DESC;");	
 		$query->execute();
 		$result = $query->fetchAll();
 	}
