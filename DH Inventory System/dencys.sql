@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2017 at 06:13 AM
+-- Generation Time: Jun 06, 2017 at 07:01 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -747,6 +747,13 @@ CREATE TABLE `editreturn` (
   `prodNew` varchar(45) DEFAULT NULL,
   `qtyNew` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `editreturn`
+--
+
+INSERT INTO `editreturn` (`returnEditID`, `returnEditDate`, `returnID`, `receiptNo`, `returnDate`, `returnQty`, `returnType`, `returnRemark`, `prodID`, `branchID`, `userID`, `supID`, `empID`, `prodNew`, `qtyNew`) VALUES
+(1, '2017-06-06', '30', 'RET-SUP-00006', '2017-05-03', '2', 'Supplier Return', 'Damaged upon Delivery', 'KBL-WLD-0004', NULL, 'kharol', '30', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1508,7 +1515,7 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (88, '2017-03-31', 60, 0, 0, 70, NULL, 70, 10, NULL, 10, NULL, NULL, 'MXS-PWT-0008', NULL),
 (89, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'MXS-PWT-0009', NULL),
 (90, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'MXS-PWT-0010', NULL),
-(91, '2017-03-31', 80, 0, 0, 80, NULL, 80, NULL, NULL, 0, NULL, NULL, 'MXS-PWT-0011', NULL),
+(91, '2017-03-31', 110, 0, 0, 110, NULL, 110, NULL, NULL, 0, NULL, NULL, 'MXS-PWT-0011', NULL),
 (92, '2017-03-31', 20, 0, 0, 80, NULL, 80, 60, NULL, 60, NULL, NULL, 'MXS-PWT-0012', NULL),
 (93, '2017-03-31', 80, 0, 0, 80, NULL, 80, NULL, NULL, 0, NULL, NULL, 'MXS-PWT-0013', NULL),
 (94, '2017-03-31', 80, 0, 0, 80, NULL, 80, NULL, NULL, 0, NULL, NULL, 'MXS-PWT-0014', NULL),
@@ -1529,9 +1536,9 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (109, '2017-03-31', 100, 0, 0, 100, NULL, 100, NULL, NULL, 0, NULL, NULL, 'MXT-ACC-0009', NULL),
 (110, '2017-03-31', 100, 0, 0, 100, NULL, 100, NULL, NULL, 0, NULL, NULL, 'MXT-ACC-0010', NULL),
 (111, '2017-03-31', 200, 0, 0, 200, NULL, 200, NULL, NULL, 0, NULL, NULL, 'MXT-ACC-0011', NULL),
-(112, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'MXT-PWT-0001', NULL),
-(113, '2017-03-31', 30, 0, 0, 30, NULL, 30, NULL, NULL, 0, NULL, NULL, 'MXT-PWT-0002', NULL),
-(114, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'MXT-PWT-0003', NULL),
+(112, '2017-03-31', 35, 0, 0, 45, NULL, 45, 10, NULL, 10, NULL, NULL, 'MXT-PWT-0001', NULL),
+(113, '2017-03-31', 45, 0, 0, 45, NULL, 45, NULL, NULL, 0, NULL, NULL, 'MXT-PWT-0002', NULL),
+(114, '2017-03-31', 35, 0, 0, 45, NULL, 45, 10, NULL, 10, NULL, NULL, 'MXT-PWT-0003', NULL),
 (115, '2017-03-31', 30, 0, 0, 30, NULL, 30, NULL, NULL, 0, NULL, NULL, 'MXT-PWT-0004', NULL),
 (116, '2017-03-31', 60, 0, 0, 70, NULL, 70, 10, NULL, 10, NULL, NULL, 'MXT-PWT-0005', NULL),
 (117, '2017-03-31', 30, 0, 0, 30, NULL, 30, NULL, NULL, 0, NULL, NULL, 'MXT-PWT-0006', NULL),
@@ -1721,7 +1728,7 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (301, '2017-03-31', 100, 0, 0, 115, NULL, 115, 15, NULL, 15, NULL, NULL, 'KBL-WLD-0001', NULL),
 (302, '2017-03-31', 244, 0, 0, 260, NULL, 260, 15, 1, 16, NULL, NULL, 'KBL-WLD-0002', NULL),
 (303, '2017-03-31', 45, 0, 0, 60, NULL, 60, 15, NULL, 15, NULL, NULL, 'KBL-WLD-0003', NULL),
-(304, '2017-03-31', 43, 0, 0, 60, NULL, 60, 15, 2, 17, NULL, NULL, 'KBL-WLD-0004', NULL),
+(304, '2017-03-31', 40, 0, 0, 60, NULL, 60, 15, 5, 20, NULL, NULL, 'KBL-WLD-0004', NULL),
 (305, '2017-03-31', 45, 0, 0, 60, NULL, 60, 15, NULL, 15, NULL, NULL, 'KBL-WLD-0005', NULL),
 (306, '2017-03-31', 295, 0, 0, 310, NULL, 310, 15, NULL, 15, NULL, NULL, 'KBL-WLD-0006', NULL),
 (307, '2017-03-31', 45, 0, 0, 60, NULL, 60, 15, NULL, 15, NULL, NULL, 'KBL-WLD-0007', NULL),
@@ -1738,10 +1745,10 @@ INSERT INTO `inventory` (`invID`, `invDate`, `qty`, `physicalQty`, `beginningQty
 (318, '2017-03-31', 30, 0, 0, 40, NULL, 40, 10, NULL, 10, NULL, NULL, 'KBL-WLD-0018', NULL),
 (319, '2017-03-31', 30, 0, 0, 40, NULL, 40, 10, NULL, 10, NULL, NULL, 'KBL-WLD-0019', NULL),
 (320, '2017-03-31', 30, 0, 0, 40, NULL, 40, 10, NULL, 10, NULL, NULL, 'KBL-WLD-0020', NULL),
-(321, '2017-03-31', 30, 0, 0, 30, 10, 40, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0001', NULL),
+(321, '2017-03-31', 60, 0, 0, 60, 10, 70, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0001', NULL),
 (322, '2017-03-31', 30, 0, 0, 30, 10, 40, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0002', NULL),
-(323, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0003', NULL),
-(324, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0004', NULL),
+(323, '2017-03-31', 35, 0, 0, 45, NULL, 45, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0003', NULL),
+(324, '2017-03-31', 60, 0, 0, 70, NULL, 70, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0004', NULL),
 (325, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0005', NULL),
 (326, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0006', NULL),
 (327, '2017-03-31', 20, 0, 0, 30, NULL, 30, 10, NULL, 10, NULL, NULL, 'KWK-LTE-0007', NULL),
@@ -1828,7 +1835,7 @@ CREATE TABLE `inventorydefects` (
 --
 
 INSERT INTO `inventorydefects` (`invDefectID`, `invDefectDate`, `defectQty`, `defectPhyQty`, `defectBeginQty`, `defectInQty`, `defectInRetQty`, `defectTotalIn`, `defectOutQty`, `defectOutRetQty`, `defectTotalOut`, `defectEndQty`, `remarks`, `defectProdID`, `invPeriodStart`) VALUES
-(1, '2017-03-31', 5, 0, 0, 5, NULL, 5, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0001D', NULL),
+(1, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0001D', NULL),
 (2, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0002D', NULL),
 (3, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0003D', NULL),
 (4, '2017-03-31', 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 'AFR-ACC-0004D', NULL),
@@ -3689,7 +3696,7 @@ INSERT INTO `returns` (`returnID`, `receiptNo`, `returnDate`, `returnQty`, `retu
 (27, 'RET-WHS-00006', '2017-04-18', 10, 'Warehouse Return', 'Not Sold', 'SKL-PWT-0005', '1', 'kharol', '0', '5'),
 (28, 'RET-WHS-00006', '2017-04-18', 10, 'Warehouse Return', 'Not Sold', 'KWK-LTE-0001', '1', 'kharol', '0', '5'),
 (29, 'RET-WHS-00006', '2017-04-18', 10, 'Warehouse Return', 'Not Sold', 'SKL-PWT-0003', '1', 'kharol', '0', '5'),
-(30, 'RET-SUP-00006', '2017-05-03', 2, 'Supplier Return', 'Damaged upon Delivery', 'KBL-WLD-0004', '6', 'kharol', '30', '11'),
+(30, 'RET-SUP-00006', '2017-06-06', 5, 'Supplier Return', 'Damaged upon Delivery', 'KBL-WLD-0004', '6', 'kharol', '30', '11'),
 (31, 'RET-SUP-00004', '2017-04-22', 6, 'Supplier Return', 'Damaged upon Delivery', 'SKL-PWT-0006', '6', 'haney', '15', '10'),
 (32, 'RET-SUP-00004', '2017-04-22', 2, 'Supplier Return', 'Damaged upon Delivery', 'ZKK-PWT-0007', '6', 'haney', '15', '10'),
 (33, 'RET-SUP-00004', '2017-04-22', 1, 'Supplier Return', 'Damaged upon Delivery', 'KBL-WLD-0002', '6', 'haney', '15', '10'),
@@ -3699,7 +3706,7 @@ INSERT INTO `returns` (`returnID`, `receiptNo`, `returnDate`, `returnQty`, `retu
 (37, 'RET-WHS-00007', '2017-05-01', 20, 'Warehouse Return', 'Not Sold', 'AFR-ACC-0002', '2', 'kharol', '0', '5'),
 (38, 'RET-WHS-00007', '2017-05-01', 20, 'Warehouse Return', 'Not Sold', 'AFR-ACC-0003', '2', 'kharol', '0', '5'),
 (39, 'RET-SUP-00005', '2017-05-01', 5, 'Supplier Return', 'Damaged upon Delivery', 'TKU-ACC-0003', '6', 'kharol', '2', '11'),
-(40, 'RET-SUP-00006', '2017-05-03', 5, 'Supplier Return', 'Damaged upon Delivery', 'MXS-PWT-0005', '6', 'kharol', '30', '11');
+(40, 'RET-SUP-00006', '2017-06-06', 5, 'Supplier Return', 'Damaged upon Delivery', 'MXS-PWT-0005', '6', 'kharol', '30', '11');
 
 -- --------------------------------------------------------
 
@@ -3970,7 +3977,7 @@ ALTER TABLE `editpo`
 -- AUTO_INCREMENT for table `editreturn`
 --
 ALTER TABLE `editreturn`
-  MODIFY `returnEditID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `returnEditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `edituser`
 --
