@@ -306,177 +306,9 @@
 	</head>
 	  
 	<body>
-		<!-- PHP code for fetching the data-->
+		<!-- Fetch Branch Report Data -->
 		<?php include('functionalities/fetchInventory.php'); ?>
-		
-		<!-- Fetch Outgoing Data per Branch -->
-		<?php 
-			$firstSortByMonthDate = (isset($_REQUEST['firstDateMonthName']) ? $_REQUEST['firstDateMonthName'] : null);
-			if (!empty($firstSortByMonthDate)) { 
-				$firstSelectedMonth = $firstSortByMonthDate;
-			} else {
-				$firstSelectedMonth = "none";
-			}
-			
-			$firstSortByDayDate = (isset($_REQUEST['firstDateDayName']) ? $_REQUEST['firstDateDayName'] : null);
-			if (!empty($firstSortByDayDate)) { 
-				$firstSelectedDay = $firstSortByDayDate;
-			} else {
-				$firstSelectedDay = "none";
-			}
-			
-			$firstSortByYearDate = (isset($_REQUEST['firstDateYearName']) ? $_REQUEST['firstDateYearName'] : null);
-			if (!empty($firstSortByYearDate)) { 
-				$firstSelectedYear = $firstSortByYearDate;
-			} else {
-				$firstSelectedYear = "none";
-			}
-			
-			$secondSortByMonthDate = (isset($_REQUEST['secondDateMonthName']) ? $_REQUEST['secondDateMonthName'] : null);
-			if (!empty($secondSortByMonthDate)) { 
-				$secondSelectedMonth = $secondSortByMonthDate;
-			} else {
-				$secondSelectedMonth = "none";
-			}
-			
-			$secondSortByDayDate = (isset($_REQUEST['secondDateDayName']) ? $_REQUEST['secondDateDayName'] : null);
-			if (!empty($secondSortByDayDate)) { 
-				$secondSelectedDay = $secondSortByDayDate;
-			} else {
-				$secondSelectedDay = "none";
-			}
-			
-			$secondSortByYearDate = (isset($_REQUEST['secondDateYearName']) ? $_REQUEST['secondDateYearName'] : null);
-			if (!empty($secondSortByYearDate)) { 
-				$secondSelectedYear = $secondSortByYearDate;
-			} else {
-				$secondSelectedYear = "none";
-			}
-			
-			/* For Camdas Query */
-			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) { 
-				$query = $conn->prepare("SELECT prodName, outQty, outDate
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas'
-										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
-										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
-				$query->execute();
-				$result1 = $query->fetchAll();
-			} else {
-				$query = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Camdas' 
-										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
-				$query->execute();
-				$result1 = $query->fetchAll();
-			}
-			
-			/* For Hilltop Query */
-			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
-				$query2 = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop'
-										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
-										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
-				$query2->execute();
-				$result2 = $query2->fetchAll();
-			} else {
-				$query2 = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='Hilltop'
-										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
-				$query2->execute();
-				$result2 = $query2->fetchAll();
-			}
-			
-			/* For KM 4 Query */
-			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
-				$query3 = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4'
-										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
-										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
-				$query3->execute();
-				$result3 = $query3->fetchAll();
-			} else {
-				$query3 = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 4'
-										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
-				$query3->execute();
-				$result3 = $query3->fetchAll();
-			}
-			
-			/* For KM 5 Query */
-			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
-				$query4 = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5'
-										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
-										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
-				$query4->execute();
-				$result4 = $query4->fetchAll();
-			} else {
-				$query4 = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='KM 5'
-										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
-				$query4->execute();
-				$result4 = $query4->fetchAll();
-			}
-			
-			/* For San Fernando Query */
-			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
-				$query5 = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando'
-										AND (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
-										AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d'));");
-				$query5->execute();
-				$result5 = $query5->fetchAll();
-			} else {
-				$query5 = $conn->prepare("SELECT prodName, outQty 
-										FROM outgoing JOIN product ON outgoing.prodID = product.prodID 
-										JOIN branch ON branch.branchID = outgoing.branchID WHERE location='San Fernando'
-										AND MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE());");
-				$query5->execute();
-				$result5 = $query5->fetchAll();
-			}
-			
-			/* For Branch Overall Query */
-			if (!empty($firstSortByMonthDate) AND !empty($firstSortByYearDate)) {
-				$query6 = $conn->prepare("SELECT SUM(outQty) AS 'TOTAL_QUANTITY', location 
-											FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID 
-											WHERE (outDate BETWEEN STR_TO_DATE(CONCAT($firstSelectedYear,'-','$firstSelectedMonth','-',$firstSelectedDay),'%Y-%M-%d') 
-											AND STR_TO_DATE(CONCAT($secondSelectedYear,'-','$secondSelectedMonth','-',$secondSelectedDay),'%Y-%M-%d')) 
-											GROUP BY location
-											ORDER BY TOTAL_QUANTITY DESC;");
-				$query6->execute();
-				$result6 = $query6->fetchAll();
-			} else {
-				$query6 = $conn->prepare("SELECT SUM(outQty) AS 'TOTAL_QUANTITY', location 
-											FROM outgoing JOIN branch ON outgoing.branchID = branch.branchID 
-											WHERE MONTHNAME(outDate) = MONTHNAME(CURDATE()) AND YEAR(outDate) = YEAR(CURDATE())
-											GROUP BY location ORDER BY TOTAL_QUANTITY DESC;");
-				$query6->execute();
-				$result6 = $query6->fetchAll();
-			}
-			
-			/* For Date */
-			$queryMonth = $conn->prepare("SELECT DISTINCT MONTHNAME(outDate) AS nowMonthDate, (SELECT DISTINCT YEAR(outDate) FROM outgoing) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
-								FROM outgoing;");
-			$queryMonth->execute();
-			$resultMonth = $queryMonth->fetchAll();
-			
-			$queryDay = $conn->prepare("SELECT DISTINCT DAY(outDate) AS nowDayDate FROM outgoing ORDER BY nowDayDate ASC");
-			$queryDay->execute();
-			$resultDay = $queryDay->fetchAll();
-			
-			$queryYear = $conn->prepare("SELECT DISTINCT YEAR(outDate) AS nowYearDate FROM outgoing");
-			$queryYear->execute();
-			$resultYear = $queryYear->fetchAll();
-		?>
-		
+		<?php include('functionalities/fetchBranchReport.php'); ?>		
 	
 		<!-- Top Main Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -502,7 +334,6 @@
 
 		<div class="container-fluid">
 			<div class="row navbar-collapse">
-				<!-- Sidebar -->
 				<div class="col-sm-3 col-md-2 sidebar">
 					<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
@@ -538,6 +369,7 @@
 					</ul>
 				</div>
 				<!-- End of Sidebar -->	
+				
 		 		<!-- PHP code for the datatables data -->
 				<?php
 					foreach ($result6 as $item6):
@@ -621,293 +453,299 @@
 									</li>
 								</ul>
 				
-					
-						
-						<div class="pages">
-							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-								<div id="myTable_length" class="dataTables_length">
-									<div id="myTable_filter" class="dataTables_filter">
-									</div>
-								</div>
-							</div>
-							
-								<h3 id="reportHeader">View Previous Reports</h3>
-							<form class="form-inline" action="" method="post">
-								<table>
-									<tr>
-										<td>
-											<label id="labelFormat">FROM</label>     
-										</td>
-										<td>
-											<div class="form-group">
-												<select name="firstDateMonthName" class="form-control">
-													<option value="<?php echo $firstSelectedMonth ?>" SELECTED>Month: <?php echo $firstSelectedMonth ?></option>
-													<?php foreach ($resultMonth as $rowMonth): ?>
-														<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
-													<?php endforeach ?>
-												</select>
-											</div>
-										</td>	
-										<td><div class="form-group">
-												<select name="firstDateDayName" class="form-control">
-													<option value="<?php echo $firstSelectedDay ?>" SELECTED>Day: <?php echo $firstSelectedDay ?></option>
-													<?php foreach ($resultDay as $rowDay): ?>
-														<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
-													<?php endforeach ?>
-												</select>
-											</div>
-										</td>
-										<td>
-										<div class="form-group">
-												<select name="firstDateYearName" class="form-control">
-													<option value="<?php echo $firstSelectedYear ?>">Year: <?php echo $firstSelectedYear ?></option>
-													<?php foreach ($resultYear as $rowYear): ?>
-														<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
-													<?php endforeach ?>
-												</select>
-											</div>	
-										</td>
-									</tr>
-									<tr>	
-										<td>
-											<label id="labelFormat">TO</label>
-										</td>
-										<td>
-											<div class="form-group">
-												<select name="secondDateMonthName" class="form-control">
-													<option value="<?php echo $secondSelectedMonth ?>" SELECTED>Month: <?php echo $secondSelectedMonth ?></option>
-													<?php foreach ($resultMonth as $rowMonth): ?>
-														<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
-													<?php endforeach ?>
-												</select>
-											</div>
-										</td>
-										<td>
-											<div class="form-group">
-												<select name="secondDateDayName" class="form-control">
-													<option value="<?php echo $secondSelectedDay ?>" SELECTED>Day: <?php echo $secondSelectedDay ?></option>
-													<?php foreach ($resultDay as $rowDay): ?>
-														<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
-													<?php endforeach ?>
-												</select>
-											</div>
-										</td>
-										<td>	
-											<div class="form-group">
-												<select name="secondDateYearName" class="form-control">
-													<option value="<?php echo $secondSelectedYear ?>">Year: <?php echo $secondSelectedYear ?></option>
-													<?php foreach ($resultYear as $rowYear): ?>
-														<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
-													<?php endforeach ?>
-												</select>
-											</div>	
-										</td>
-									</tr>
-								</table>
-							<div class="form-group">
-								<input type="submit" value="View" id="viewButtonReport" class="btn btn-success" name="submit">
-							</div>
-							</form>		
-						
-							<br>
-							<br>
-							<hr>
-							
-							<div class="tab-content clearfix">
-								<div class="tab-pane active" id="mainOutSummary">
-									<!-- Overall Outgoing Branch -->
-									<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
-										<thead>
-											<tr id="centerData">
-												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
-												<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-												foreach ($result6 as $item6):
-											?>
-											<tr id="centerData">
-												<td data-title="Location"><?php echo $item6["location"]; ?></td>
-												<td data-title="Total Quantity"><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
-											</tr>	
-											<?php
-												endforeach;
-											?>
-										</tbody>
-									</table>
-								</div>
-													
-								<div class="tab-pane" id="outSummaryCamdas">
-									<!-- Camdas Outgoing Summary -->
+								<div class="pages">
 									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 										<div id="myTable_length" class="dataTables_length">
 											<div id="myTable_filter" class="dataTables_filter">
 											</div>
 										</div>
-											<h3>Outgoing Products in Camdas:</h3>
-											<table id="myTable1" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
+									</div>
+									
+										<h3 id="reportHeader">View Previous Reports</h3>
+									<form class="form-inline" action="" method="post">
+										<table>
+											<tr>
+												<td>
+													<label id="labelFormat">FROM</label>     
+												</td>
+												<td>
+													<div class="form-group">
+														<select name="firstDateMonthName" class="form-control">
+															<option value="<?php echo $firstSelectedMonth ?>" SELECTED>Month: <?php echo $firstSelectedMonth ?></option>
+															<?php foreach ($resultMonth as $rowMonth): ?>
+																<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
+															<?php endforeach ?>
+														</select>
+													</div>
+												</td>	
+												<td><div class="form-group">
+														<select name="firstDateDayName" class="form-control">
+															<option value="<?php echo $firstSelectedDay ?>" SELECTED>Day: <?php echo $firstSelectedDay ?></option>
+															<?php foreach ($resultDay as $rowDay): ?>
+																<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
+															<?php endforeach ?>
+														</select>
+													</div>
+												</td>
+												<td>
+												<div class="form-group">
+														<select name="firstDateYearName" class="form-control">
+															<option value="<?php echo $firstSelectedYear ?>">Year: <?php echo $firstSelectedYear ?></option>
+															<?php foreach ($resultYear as $rowYear): ?>
+																<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
+															<?php endforeach ?>
+														</select>
+													</div>	
+												</td>
+											</tr>
+											<tr>	
+												<td>
+													<label id="labelFormat">TO</label>
+												</td>
+												<td>
+													<div class="form-group">
+														<select name="secondDateMonthName" class="form-control">
+															<option value="<?php echo $secondSelectedMonth ?>" SELECTED>Month: <?php echo $secondSelectedMonth ?></option>
+															<?php foreach ($resultMonth as $rowMonth): ?>
+																<option value="<?=$rowMonth["nowMonthDate"]?>"><?=$rowMonth["nowMonthDate"]?></option>
+															<?php endforeach ?>
+														</select>
+													</div>
+												</td>
+												<td>
+													<div class="form-group">
+														<select name="secondDateDayName" class="form-control">
+															<option value="<?php echo $secondSelectedDay ?>" SELECTED>Day: <?php echo $secondSelectedDay ?></option>
+															<?php foreach ($resultDay as $rowDay): ?>
+																<option value="<?=$rowDay["nowDayDate"]?>"><?=$rowDay["nowDayDate"]?></option>
+															<?php endforeach ?>
+														</select>
+													</div>
+												</td>
+												<td>	
+													<div class="form-group">
+														<select name="secondDateYearName" class="form-control">
+															<option value="<?php echo $secondSelectedYear ?>">Year: <?php echo $secondSelectedYear ?></option>
+															<?php foreach ($resultYear as $rowYear): ?>
+																<option value="<?=$rowYear["nowYearDate"]?>"><?=$rowYear["nowYearDate"]?></option>
+															<?php endforeach ?>
+														</select>
+													</div>	
+												</td>
+											</tr>
+										</table>
+									<div class="form-group">
+										<input type="submit" value="View" id="viewButtonReport" class="btn btn-success" name="submit">
+									</div>
+									</form>		
+								
+									<br>
+									<br>
+									<hr>
+									
+									<div class="tab-content clearfix">
+										<div class="tab-pane active" id="mainOutSummary">
+											<!-- Overall Outgoing Branch -->
+											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
 												<thead>
 													<tr id="centerData">
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Location</th>
 														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
 													</tr>
 												</thead>
 												<tbody>
 													<?php
-														foreach ($result1 as $item):
+														foreach ($result6 as $item6):
 													?>
 													<tr id="centerData">
-														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Total Quantity"><?php echo $item["outQty"]; ?></td>
-													</tr>
+														<td data-title="Location"><?php echo $item6["location"]; ?></td>
+														<td data-title="Total Quantity"><?php echo $item6["TOTAL_QUANTITY"]; ?></td>
+													</tr>	
 													<?php
 														endforeach;
 													?>
 												</tbody>
 											</table>
 										</div>
-									</div>
-			
-									<div class="tab-pane" id="outSummaryHilltop">
-									<!-- Hilltop Outgoing Summary -->
-									
-									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
+															
+										<!-- Camdas Outgoing Summary -->
+										<div class="tab-pane" id="outSummaryCamdas">
+											<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+												<div id="myTable_length" class="dataTables_length">
+													<div id="myTable_filter" class="dataTables_filter">
+													</div>
+												</div>
+												
+												<h3>Outgoing Products in Camdas:</h3>
+												<table id="myTable1" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">		
+													<thead>
+														<tr id="centerData">
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Issued</th>	
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+															foreach ($result1 as $item):
+														?>
+														<tr id="centerData">
+															<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item["outQty"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item["outDate"]; ?></td>
+														</tr>
+														<?php
+															endforeach;
+														?>
+													</tbody>
+												</table>
+											</div>
 										</div>
-									</div>
-										<h3>Outgoing Products in Hilltop:</h3>
-										<table id="myTable2" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result2 as $item2):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item2["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item2["outQty"]; ?></td>
-												</tr>
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									 </div>
-									</div> 
-									
-									<div class="tab-pane" id="outSummaryKM4">
-									 <!-- KM 4 Outgoing Summary-->
-									
-									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
+											
+										<!-- Hilltop Outgoing Summary -->
+										<div class="tab-pane" id="outSummaryHilltop">
+											<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+												<div id="myTable_length" class="dataTables_length">
+													<div id="myTable_filter" class="dataTables_filter">
+													</div>
+												</div>
+												
+												<h3>Outgoing Products in Hilltop:</h3>
+												<table id="myTable2" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+													<thead>
+														<tr id="centerData">
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Issued</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+															foreach ($result2 as $item2):
+														?>
+														<tr id="centerData">
+															<td data-title="Product Description"><?php echo $item2["prodName"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item2["outQty"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item2["outDate"]; ?></td>
+														</tr>
+														<?php
+															endforeach;
+														?>
+													</tbody>
+												</table>
+											</div>
+										</div> 
+																		
+										<!-- KM 4 Outgoing Summary-->
+										<div class="tab-pane" id="outSummaryKM4">
+											<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+												<div id="myTable_length" class="dataTables_length">
+													<div id="myTable_filter" class="dataTables_filter">
+													</div>
+												</div>
+												
+												<h3>Outgoing Products in KM4:</h3>
+												<table id="myTable3" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+													<thead>
+														<tr id="centerData">
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Issued</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+															foreach ($result3 as $item3):
+														?>
+														<tr id="centerData">
+															<td data-title="Product Description"><?php echo $item3["prodName"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item3["outQty"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item3["outDate"]; ?></td>
+														</tr>	
+														<?php
+															endforeach;
+														?>
+													</tbody>
+												</table>
+											</div>
 										</div>
-									</div>
-										<h3>Outgoing Products in KM4:</h3>
-										<table id="myTable3" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result3 as $item3):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item3["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item3["outQty"]; ?></td>
-												</tr>
-													
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
-									</div>
 									
-									<div class="tab-pane" id="outSummaryKM5">
-									<!-- KM5 Outgoing Summary-->
-									
-									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
+										<!-- KM5 Outgoing Summary-->
+										<div class="tab-pane" id="outSummaryKM5">
+											<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+												<div id="myTable_length" class="dataTables_length">
+													<div id="myTable_filter" class="dataTables_filter">
+													</div>
+												</div>
+												
+												<h3>Outgoing Products in KM5:</h3>
+												<table id="myTable4" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+													<thead>
+														<tr id="centerData">
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Isssued</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+															foreach ($result4 as $item4):
+														?>
+														<tr id="centerData">
+															<td data-title="Product Description"><?php echo $item4["prodName"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item4["outQty"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item4["outDate"]; ?></td>
+														</tr>
+															
+														<?php
+															endforeach;
+														?>
+													</tbody>
+												</table>
+											</div>
 										</div>
-									</div>
-									<h3>Outgoing Products in KM5:</h3>
-									  <table id="myTable4" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result4 as $item4):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item4["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item4["outQty"]; ?></td>
-												</tr>
-													
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
-									</div>
-									
-									<div class="tab-pane" id="outSummarySF">
-									<!-- San Fernando Outgoing Summary -->
-									
-									<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-									<div id="myTable_length" class="dataTables_length">
-										<div id="myTable_filter" class="dataTables_filter">
+										
+										<!-- San Fernando Outgoing Summary -->
+										<div class="tab-pane" id="outSummarySF">
+											<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+												<div id="myTable_length" class="dataTables_length">
+													<div id="myTable_filter" class="dataTables_filter">
+													</div>
+												</div>
+												
+												<h3>Outgoing Products in San Fernando, La Union:</h3>
+												<table id="myTable5" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
+													<thead>
+														<tr id="centerData">
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+															<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Issued</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+															foreach ($result5 as $item5):
+														?>
+														<tr id="centerData">
+															<td data-title="Product Description"><?php echo $item5["prodName"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item5["outQty"]; ?></td>
+															<td data-title="Total Quantity"><?php echo $item5["outDate"]; ?></td>
+														</tr>
+															
+														<?php
+															endforeach;
+														?>
+													</tbody>
+												</table>
+											</div>
 										</div>
-									</div>
-									<h3>Outgoing Products in San Fernando, La Union:</h3>
-									  <table id="myTable5" class="table table-hover table-bordered dataTable" cellspacing="0" role="grid" aria-describedby="myTable_info">
-											<thead>
-												<tr id="centerData">
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Description</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result5 as $item5):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Description"><?php echo $item5["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item5["outQty"]; ?></td>
-												</tr>
-													
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-
-									
+			</div>	
+		</div>	
 	</body>
 </html>

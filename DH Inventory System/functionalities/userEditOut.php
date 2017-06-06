@@ -218,7 +218,7 @@
 													
 									<div class="modFoot">
 										<span>
-											<a href="../ProdIssuance.php">
+											<a href="../userProductIssuance.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>

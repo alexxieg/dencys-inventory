@@ -222,7 +222,7 @@
 											
 									<div class="modFoot">
 										<span>
-											<a href="../returnSupplier.php">
+											<a href="../userreturnSupplier.php">
 												<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 											</a>
 										</span>

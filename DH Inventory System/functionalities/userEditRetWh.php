@@ -226,7 +226,7 @@
 									<br>
 									<br>
 									<span>
-										<a href="../returnswarehouse.php">
+										<a href="../userReturnsWarehouse.php">
 										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
 										</a>
 									</span>
