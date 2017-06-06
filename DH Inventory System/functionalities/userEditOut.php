@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -194,7 +193,7 @@
 									<table class="table table-striped" name="chk">
 										<tbody>
 											<tr>
-												<td>Product Description</td>
+												<td>Product Name</td>
 												<td>Quantity</td>
 											</tr>
 											<?php foreach ($resul as $row): ?>
@@ -218,9 +217,6 @@
 									</table>
 													
 									<div class="modFoot">
-										<span><button type="button" class="btn btn-default" value="Add Row" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-										<br>
-										<br>
 										<span>
 											<a href="../ProdIssuance.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
@@ -240,6 +236,7 @@
 			</div>
 		</div>
 		
+		<!-- Edit Log -->
 		<?php
 			require_once 'dbcon.php';
 			$outid = $_GET['outId'];

@@ -162,8 +162,14 @@
 										
 									<h5 id="prodHeader">Product/s</h5>
 									<table class="table table-striped" id="dataTable2" name="chk">	
-										<?php foreach ($result as $row): ?>
 											<tbody>
+												<tr>
+													<td>
+													</td>
+													<td>Product Name</td>
+													<td>Quantity</td>
+												</tr>
+												<?php foreach ($result as $row): ?>
 												<tr>
 													<td>
 														<input type="hidden" value="1" name="num" id="orderdata">
@@ -191,7 +197,7 @@
 										<br>
 										<br>
 										<span>
-											<a href="../purchaseOrder.php">
+											<a href="../userPurchaseOrders.php">
 												<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 											</a>
 										</span>

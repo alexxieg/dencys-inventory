@@ -231,7 +231,7 @@
 											</td>
 													
 											<td>
-												<input type="number" min="1" class="form-control" id="addIncQty" 
+												<input type="number" min="1" class="form-control" id="addQty" 
 													value="<?php if (isset($checkDatabase) ? $checkDatabase : null) { 
 															echo $row["inQty"]; 
 															} else {

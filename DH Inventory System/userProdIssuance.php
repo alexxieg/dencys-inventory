@@ -356,7 +356,7 @@
 															</td>
 																	
 															<td>
-																<input type="number" min="1" class="form-control" id ="addOutQty"  placeholder="Quantity" name="outQty[]" required>
+																<input type="number" min="1" class="form-control" id ="addQty"  placeholder="Quantity" name="outQty[]" required>
 															</td>
 														</tr>
 													</tbody>
