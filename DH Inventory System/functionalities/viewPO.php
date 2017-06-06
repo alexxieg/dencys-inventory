@@ -111,6 +111,7 @@
 			$receiptNum = current($conn->query("SELECT purchaseorders.poNumber FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
 			$date = current($conn->query("SELECT purchaseorders.poDate FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
 			$supplier = current($conn->query("SELECT DISTINCT suppliers.supplier_name FROM purchaseorders INNER JOIN product ON purchaseorders.prodID = product.prodID INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.poNumber = '$incID'")->fetch());
+			$status = current($conn->query("SELECT DISTINCT status FROM purchaseorders WHERE purchaseorders.poNumber = '$incID'")->fetch());
 		?>
 
 		<!-- Top Main Header -->
@@ -204,12 +205,20 @@
 							<a href="../purchaseorder.php">
 								<input type="button" class="btn btn-danger" id="backButton" value="GO BACK" data-dismiss="modal" onclick="this.form.reset()">
 							</a>
+							<?php 
+								if ($status != 'Complete') {
+									echo '<a href="editPO.php?incId=<?php echo '.$incID.'; ?>"> 
+											<button type="button" class="btn btn-default">
+												EDIT ENTRY
+											</button>
+										</a>';
+								} else {
+									echo '<button type="button" class="btn btn-default">
+												EDIT UNAVAILABLE
+										</button>';
+								}
+							?>
 							
-							<a href="editPO.php?incId=<?php echo $incID; ?>"> 
-								<button type="button" class="btn btn-default">
-									EDIT ENTRY
-								</button>
-							</a>
 												
 							<hr>
 							

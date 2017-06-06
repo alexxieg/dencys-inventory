@@ -180,8 +180,8 @@
 													</TD>
 													<td>	
 														<div class="ui-widget">
-															<input class="thisProduct" name="prodItem[]" value="<?php echo stripslashes($row["prodName"]); ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
-															<input type="hidden" class="thisProduct" name="editProdItem[]" value="<?php echo $row["prodName"]; ?>">
+															<input class="thisProduct" name="prodItem[]" value="<?php echo htmlspecialchars($row["prodName"]);?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+															<input type="hidden" class="thisProduct" name="editProdItem[]" value="<?php echo htmlspecialchars($row["prodName"]); ?>">
 														</div>		
 													</td>
 															

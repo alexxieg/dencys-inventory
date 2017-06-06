@@ -222,8 +222,8 @@
 													<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
 													<td>	
 														<div class="ui-widget">
-															<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
-															<input type="hidden" name="editProdItem[]" value="<?php echo $row["prodName"]; ?>" />
+															<input class="thisProduct" name="prodItem[]" value="<?php echo htmlspecialchars($row["prodName"]);?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+															<input type="hidden" name="editProdItem[]" value="<?php echo htmlspecialchars($row["prodName"]);?>" />
 														</div>		
 													</td>
 															

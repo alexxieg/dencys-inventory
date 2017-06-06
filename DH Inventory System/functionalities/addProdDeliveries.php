@@ -96,9 +96,13 @@
 			$checkDatabase = current($conn->query("SELECT incoming.inID FROM incoming WHERE PONumber = '$varPO'")->fetch());
 			
 			if (isset($checkDatabase) ? $checkDatabase : null) {
-				$query = $conn->prepare("SELECT * FROM incoming join product ON incoming.prodID = product.prodID WHERE poNumber = '$varPO' AND incoming.status = 'Partial'");
+				$query = $conn->prepare("SELECT *, ABS(qtyOrder - inQty) AS qtyOrdered FROM incoming join product ON incoming.prodID = product.prodID join purchaseorders 
+										ON incoming.PONumber = purchaseorders.poNumber AND incoming.prodID = purchaseorders.prodID WHERE incoming.PONumber = '$varPO' AND incoming.status = 'Partial'");
 				$query->execute();
 				$result = $query->fetchAll();
+				$receiptNum = current($conn->query("SELECT receiptNo FROM incoming WHERE PONumber = '$varPO'")->fetch());
+				$receiptDate = current($conn->query("SELECT receiptDate FROM incoming WHERE PONumber = '$varPO'")->fetch());
+				$readOnly = 'readonly';
 			} else {
 				$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supID, product.unitType, product.prodName, purchaseorders.userID
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID
@@ -196,10 +200,10 @@
 								<input type="text" class="form-control" id="poNum" value="<?php echo $varPO; ?>" name="po" readonly>
 								
 								<h3>Receipt No.</h3> 
-								<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno">
+								<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" value="<?php echo $receiptNum; ?>" name="rcno" <?php echo $readOnly; ?>>
 								
 								<h3>Receipt Date</h3> 
-								<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
+								<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate" value="<?php echo $receiptDate;?>" <?php echo $readOnly; ?>>
 								
 								<h3>Supplier</h3> 
 									<div class="ui-widget">
@@ -252,12 +256,7 @@
 											<td>
 												<input type="number" min="1" class="form-control" id="addIncQty" 
 													value="<?php if (isset($checkDatabase) ? $checkDatabase : null) { 
-															echo $row["inQty"]; 
-															} else {
-															echo $row["qtyOrder"];
-															} ?>" 
-															placeholder="<?php if (isset($checkDatabase) ? $checkDatabase : null) { 
-															echo $row["inQty"]; 
+															echo $row["qtyOrdered"]; 
 															} else {
 															echo $row["qtyOrder"];
 															} ?>" name="incQty[]" required>

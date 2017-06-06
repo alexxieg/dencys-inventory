@@ -211,8 +211,8 @@
 											</TD>
 											<td>	
 												<div class="ui-widget">
-													<input class="thisProduct" name="prodItem[]" value="<?php echo stripslashes($row2["prodName"]); ?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
-													<input type="hidden" name="editProdItem[]" value="<?php echo $row2["prodName"]; ?>" />
+													<input class="thisProduct" name="prodItem[]" value="<?php echo htmlspecialchars($row2["prodName"]);?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
+													<input type="hidden" name="editProdItem[]" value="<?php echo htmlspecialchars($row2["prodName"]);?>" />
 												</div>		
 											</td>
 													
