@@ -9,16 +9,6 @@ function validateForm() {
 		document.getElementById('addProdName').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addProdName').value.length < 8){
-		swal({
-		title: "Warning!",
-		text: "The Product Name should have more than 7 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addProdName').style.borderColor = "red";
-		return false;
-	}
 	if(document.getElementById('addProdQty').value == "") {
 		swal({
 		title: "Warning!",
@@ -43,16 +33,6 @@ function validateForm() {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Unit Price.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addPrice').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addPrice').value.length < 4){
-		swal({
-		title: "Warning!",
-		text: "The Price should have more than 3 characters",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -86,16 +66,6 @@ function validateForm2() {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Product Name.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addProdName').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addProdName').value.length < 8){
-		swal({
-		title: "Warning!",
-		text: "The Product Name should have more than 7 characters",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -136,16 +106,6 @@ function validateForm2() {
 		swal({
 		title: "Warning!",
 		text: "Please Enter Unit Price.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addPrice').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addPrice').value.length < 4){
-		swal({
-		title: "Warning!",
-		text: "The Price should have more than 3 characters",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
