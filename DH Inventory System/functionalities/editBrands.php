@@ -133,7 +133,7 @@
 								<form action="" method="POST" onsubmit="return validateForm2()">
 									<?php foreach ($result2 as $row): ?>
 									<h3>Brand ID</h3>
-									<input type="text" class="form-control" id ="addBrandID" placeholder="<?php echo $row["brandID"]; ?>" value="<?php echo $row["brandID"]; ?>" name="branID"> <br>
+									<input type="text" class="form-control" id ="addBrandID" placeholder="<?php echo $row["brandID"]; ?>" value="<?php echo $row["brandID"]; ?>" name="branID" maxlength="3"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>
