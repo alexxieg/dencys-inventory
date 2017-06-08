@@ -28,6 +28,9 @@
 				$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
 				$sup3 = $sup2['supA'];
 				
+				$sql = "UPDATE inventory SET reorderStatus = 'True' WHERE prodID = '$prod3'";
+				$conn->exec($sql);
+
 				$sql = "INSERT INTO purchaseorders (qtyOrder, poDate, poNumber, supID, prodID, userID, status)
 				VALUES ($qty,CURDATE(),'$prod','$sup3','$prod3','$userID', 'Incomplete')";
 				$result = $conn->query($sql); 
