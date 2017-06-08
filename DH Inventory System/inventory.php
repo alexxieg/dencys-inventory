@@ -61,7 +61,10 @@
 		<script>
 			$(document).ready(function() {
                 var table = $('#myTable').DataTable( {
-					fixedHeader: true,
+					fixedHeader: {
+							header: true,
+							headerOffset: 50
+						},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
