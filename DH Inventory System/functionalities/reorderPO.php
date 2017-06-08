@@ -18,7 +18,7 @@
 		<link href="../css/sidebar.css" rel="stylesheet">
 			
 		<!-- Javascript Files -->
-		<script src="../js/po.js"></script>
+		<script src="../js/reorder.js"></script>
 		<script src="../js/bootstrap.js"></script>
 		<script src="../js/jquery-3.2.0.min.js"></script>	
 		<script src="../js/bootstrap.min.js"></script>
@@ -192,7 +192,7 @@
 					<div id="contents">
 						<div class="pages no-more-tables">
 							<h1 id="headers">Add Purchase Order</h1>
-							<form action="" method="POST" onsubmit="return validateForm()"><td>
+							<form action="" method="POST" onsubmit="return validateForm2()"><td>
 								<h3> User </h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 																												
@@ -230,7 +230,7 @@
 													<td><input type="checkbox" name="chk"></td>
 													<td>	
 														<div class="ui-widget">
-															<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>">
+															<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>" required>
 														</div>
 													</td>
 																
@@ -244,7 +244,7 @@
 														} else {
 															echo $row["reorderLevel"];
 														}
-														?>" name="qty[]">
+														?>" name="qty[]" required>
 													</td>
 												</tr>
 											<?php endforeach ?>
