@@ -209,6 +209,7 @@
 												<div class="ui-widget">
 													<input class="thisProduct" name="prodItem[]" value="<?php echo htmlspecialchars($row2["prodName"]);?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
 													<input type="hidden" name="editProdItem[]" value="<?php echo htmlspecialchars($row2["prodName"]);?>" />
+													<input type="hidden" name="iniDate[]" value="<?php echo $row2["returnDate"];?>" />
 												</div>		
 											</td>
 													
@@ -255,20 +256,32 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
 					$returnID = $_POST['returnID'][$index2];
-				
+					$iniDate = $_POST['iniDate'][$index2];
 					$prod = $_POST['prodItem'][$index2];
 					$quant = $_POST['retQty'][$index2];
 					$rem = $_POST['retRemarks'][$index2];
 					$quant = $_POST['retQty'][$index2];
+					$userID = $_POST['userID'];
 					
 					$editProd = $_POST['editProdItem'][$index2];
 					$editQuant = $_POST['editRetQty'][$index2];
 					$editRem = $_POST['editRetRemarks'][$index2];
 					$editQuant = $_POST['editRetQty'][$index2];
 					
+					$Branch = $_POST['branchItem'];
+					$emp = $_POST['emp'];
+					
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
+					
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$editProd'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+					
 					if ($prod != $editProd || $quant != $editQuant || $rem != $editRem || $quant != $editQuant) {
-						$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID)
-							SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID from returns WHERE returnID = $returnID";
+						$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, prodID, branchID, userID, returnID, prodNew, qtyNew, userNew)
+							VALUES (CURDATE(),'$retID','$iniDate',$editQuant,'Warehouse Return','$rem','$prod3',$Branch,'$userID',$returnID,'$prod',$quant,'$userID')";
 						$conn->exec($sql);
 					} else {
 						//Do Nothing
