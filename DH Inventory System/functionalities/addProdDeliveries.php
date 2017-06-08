@@ -253,14 +253,14 @@
 										<tr id="thisRow">
 											<td>	
 												<div class="ui-widget">
-													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+													<input class="thisProduct" name="prodItem[]" value="<?php echo htmlspecialchars($row["prodName"]); ?>" placeholder="Product Name" required>
 												</div>
 											</td>
 													
 											<td>
 												<input type="number" min="1" class="form-control" id="addIncQty" 
 													value="<?php if (isset($checkDatabase) ? $checkDatabase : null) { 
-															echo $row["qtyOrdered"]; 
+															echo $row["qtyOrder"] - $row["qtyOrdered"]; 
 															} else {
 															echo $row["qtyOrder"];
 															} ?>" name="incQty[]" required>
