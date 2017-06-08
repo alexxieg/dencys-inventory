@@ -33,6 +33,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 
 		<!-- Javascript Files -->
+		<script src="js/reorder.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>
@@ -335,7 +336,7 @@
 										<h4 class="modal-title">Products to be reordered</h4>
 									</div>
 									<div class="modal-body">
-										<form action="functionalities/userReorderPo.php" method="POST">
+										<form action="functionalities/userReorderPo.php" method="POST" onsubmit="return validateForm()">
 											<?php
 												$query = $conn->prepare("SELECT * FROM inventory LEFT JOIN product ON inventory.prodID = product.prodID
 																		WHERE inventory.qty <= product.reorderLevel");
@@ -362,7 +363,7 @@
 													<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
 													<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 													<td data-title="Unit"><?php echo $item["unitType"];?></td>
-													<td data-title="Reorder Check"><input type="checkbox" name="chkbox[]" value="<?php echo $item["prodID"]; ?>"></td>	
+													<td data-title="Reorder Check"><input type="checkbox" class="chixbox" name="chkbox[]" value="<?php echo $item["prodID"]; ?>"></td>	
 													</tr>	
 												<?php
 													endforeach;
