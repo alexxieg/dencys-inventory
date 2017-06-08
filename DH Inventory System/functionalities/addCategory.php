@@ -5,7 +5,7 @@
 		
 		$categoryID = $_POST['categoryID'];
 	    $categoryName = $_POST['categoryName'];
-		$query = $conn->prepare("Select * FROM category WHERE categoryID = '$categoryID' AND categoryName = '$categoryName'");
+		$query = $conn->prepare("Select * FROM category WHERE categoryID = '$categoryID'");
 		$count = $query->execute();
 		$row = $query->fetch();
 
@@ -13,10 +13,27 @@
 			echo '<script language="javascript">';
 			echo 'swal(
 				  "Error!",
-				  "Category Already Exists, New Category Has Not been Added",
+				  "Category ID Already Exists, New Category Has Not been Added",
 				  "error");';
 			echo '$("#myModal").modal("show");';
 			echo 'document.getElementById("addCategoryID").style.borderColor = "red";';
+			echo '</script>';
+			return false;
+		} 
+		
+		$categoryID = $_POST['categoryID'];
+	    $categoryName = $_POST['categoryName'];
+		$query = $conn->prepare("Select * FROM category WHERE categoryName = '$categoryName'");
+		$count = $query->execute();
+		$row = $query->fetch();
+
+		if ($query->rowCount() > 0){
+			echo '<script language="javascript">';
+			echo 'swal(
+				  "Error!",
+				  "Category Name Already Exists, New Category Has Not been Added",
+				  "error");';
+			echo '$("#myModal").modal("show");';
 			echo 'document.getElementById("addCategoryName").style.borderColor = "red";';
 			echo '</script>';
 		} else {
