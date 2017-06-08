@@ -5,7 +5,7 @@
 		
 		$branchName = $_POST['branchName'];
 	    $location = $_POST['location'];
-		$query = $conn->prepare("Select * FROM branch WHERE branchName = '$branchName' AND location = '$location'");
+		$query = $conn->prepare("Select * FROM branch WHERE branchName = '$branchName' OR location = '$location'");
 		$count = $query->execute();
 		$row = $query->fetch();
 
@@ -17,6 +17,7 @@
 				  "error");';
 			echo '$("#myModal").modal("show");';
 			echo 'document.getElementById("addBranchName").style.borderColor = "red";';
+			echo 'document.getElementById("addBranchLoc").style.borderColor = "red";';
 			echo '</script>';
 		} else {
 			 
