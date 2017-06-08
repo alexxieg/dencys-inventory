@@ -69,7 +69,7 @@ function deleteRow(tableID) {
 			var row = table.rows[i];
 			var chkbox = row.cells[0].childNodes[0];
 			if(null != chkbox && true == chkbox.checked) {
-				if(rowCount <= 1) {
+				if(rowCount <= 2) {
 					swal({
 						title: "Error!",
 						text: "Cannot delete all rows.",
@@ -97,7 +97,7 @@ function addRow(dataTable) {
 	var colCount = table.rows[1].cells.length;
 	for(var i=0; i<colCount; i++) {
 		var newcell = row.insertCell(i);
-		if(i==1){
+		if(i==3){
 			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
 		}
 		else{
@@ -126,18 +126,3 @@ function regroup(i,rc,ti){
 		document.getElementById(ti).rows[j].cells[1].innerHTML = j+1;
 	}
 }
-		 
-function test(){
-	BootstrapDialog.show({
-				title: 'Sign In',
-				message: 'Your sign-in form goes here.',
-				cssClass: 'login-dialog',
-				buttons: [{
-					label: 'Sign In Now!',
-					cssClass: 'btn-primary',
-					action: function(dialog){
-						dialog.close();
-					}
-				}]
-			});
-	}
