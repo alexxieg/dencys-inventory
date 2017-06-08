@@ -60,12 +60,13 @@ function validateForm2() {
 		  confirmButtonText:
 			'<button id="thisButton">YES</button>',
 		  cancelButtonText:
-			'<button></button>'
+			'<button>CANCEL SHYTHEAD</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
-			validateForm2();
+			document.getElementById('sucBtn').click();
 		});
+		
 	} else {
 		return true;
 	}
