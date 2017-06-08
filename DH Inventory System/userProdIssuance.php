@@ -163,7 +163,7 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
@@ -176,13 +176,13 @@
 							</ul>
 						</li>
 						<li class="active"><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance<span class="sr-only">(current)</span></a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 								<li><a href="usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
@@ -252,8 +252,7 @@
 				
 							<!-- Table Display for Outgoing Entries -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-								<thead>
-								
+								<thead>		
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Reference No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Entered</th>
@@ -384,7 +383,7 @@
 							</div>
 							<!-- End of modal -->
 							
-							<!-- Modal - Activity Log -->
+							<!-- Modal - Edit Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
@@ -397,7 +396,7 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editOutgoing.outEditDate, editOutgoing.outQty, editOutgoing.receiptNo, product.prodName, editOutgoing.userID from editoutgoing INNER JOIN product ON editoutgoing.prodID = product.prodID");
+													$query = $conn->prepare("SELECT * from editoutgoing INNER JOIN product ON editoutgoing.prodID = product.prodID");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -405,16 +404,28 @@
 												<thead>
 													<tr id="centerData">
 														<th>
+															<div id="tabHead">Date Added</div>
+														</th>
+														<th>
 															<div id="tabHead">Date Edited</div>
 														</th>
 														<th>
 															<div id="tabHead">Receipt No</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Description</div>
+															<div id="tabHead">Initial Product Description</div>
 														</th>
 														<th>
-															<div id="tabHead">Quantity</div>
+															<div id="tabHead">Edited Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Initial Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Added By</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -429,11 +440,15 @@
 														$outid = $item["receiptNo"];
 													?>
 													<tr id="centerData">	
+														<td data-title="Edit Date"><?php echo $item["outDate"]; ?></td>
 														<td data-title="Edit Date"><?php echo $item["outEditDate"]; ?></td>
 														<td data-title="Receipt No"><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodNew"]; ?></td>
 														<td data-title="Quantity"><?php echo $item["outQty"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["qtyNew"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userNew"]; ?></td>
 													</tr>
 													<?php
 														endforeach;

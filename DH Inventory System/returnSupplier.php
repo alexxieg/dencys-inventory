@@ -310,7 +310,7 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm2()">
-												<h3> User </h3>
+												<h3>User</h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
 												<h3>Supplier</h3>  
@@ -390,7 +390,7 @@
 								</div>
 							</div>
 							
-							<!-- Modal - Activity Log -->
+							<!-- Modal - Edit Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
@@ -480,6 +480,8 @@
 										
 								</div>
 							</div>
+							<!-- End of modal -->
+							
 						</div>
 					</div>
 				</div>
