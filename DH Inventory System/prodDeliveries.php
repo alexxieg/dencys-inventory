@@ -294,9 +294,9 @@
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
 											<a href="functionalities/viewProdDelivery.php?incId=<?php echo $incRec; ?>"> 
-											<button type="button" class="btn btn-default" id="edBtn">
-												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-											</button>
+												<button type="button" class="btn btn-default" id="edBtn">
+													<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+												</button>
 											</a>
 										</td>
 									</tr>	
@@ -381,7 +381,7 @@
 														</th>
 														<th>
 															<div id="tabHead">Supplier</div>
-														</th>										
+														</th>												
 														<th>	
 															<div id="tabHead">View</div>
 														</th>
@@ -400,6 +400,7 @@
 														<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 														<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
+														
 														<td>
 															<a href="functionalities/viewProdDelivery.php?incId=<?php echo $incID; ?>"> 
 															<button type="button" class="btn btn-default" id="edBtn">
