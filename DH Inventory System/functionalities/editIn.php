@@ -219,6 +219,7 @@
 											<?php foreach ($result2 as $row): ?>
 												<tr>
 													<input type="hidden" name="productInID[]" value="<?php echo $row["inID"]; ?>" />
+													<input type="hidden" name="iniDate[]" value="<?php echo $row["inDate"]; ?>" />
 													<td>	
 														<div class="ui-widget">
 															<input class="thisProduct" name="prodItem[]" value="<?php echo htmlspecialchars($row["prodName"]);?>" placeholder="<?php echo $row["prodName"]; ?>" required>
@@ -291,22 +292,32 @@
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
 			for ($index2 = 0; $index2 < count($prodTem); $index2++) {	
 				if (isset($_POST["updateIn"])) {
+					$iniDate = $_POST['iniDate'][$index2];
 					$incomingID = $_POST['productInID'][$index2];
-					
+					$rcpNo = $_POST['rcno'];
 					$inRemarks = $_POST['inRemarks'][$index2];
 					$prodItem = $_POST['prodItem'][$index2];
 					$inQty = $_POST['incQty'][$index2];
 					$inStat = $_POST['inStatus'][$index2];
+					$userID = $_POST['userID'];
+					$sup = $_POST['thisSupplier'];
+					
+					$emp = $_POST['emp'];
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
 					
 					$editRemarks = $_POST['editInRemarks'][$index2];
 					$editProdItem = $_POST['editProdItem'][$index2];
 					$editInQty = $_POST['editIncQty'][$index2];
 					$editInStat = $_POST['editInStatus'][$index2];
+					
+					$productID = current($conn->query("SELECT prodID AS prodA FROM product WHERE prodName sounds like '$editProdItem'")->fetch());
 				
 					if ($inRemarks != $editRemarks || $prodItem != $editProdItem || $inQty != $editInQty || $inStat != $editInStat) {
 						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-						$sql = "INSERT INTO editincoming (inEditDate, inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID)
-								SELECT CURDATE(), inQty, inDate, receiptNo, receiptDate, inRemarks, status, poNumber, empID, prodID, supID, userID, inID from incoming WHERE inID = $incomingID";
+						$sql = "INSERT INTO editincoming (inEditDate, inDate, inQty, qtyNew, receiptNo, receiptDate, inRemarks, status, empID, prodID, prodNew, supID, userID, inID)
+								VALUES (CURDATE(),'$iniDate',$editInQty,$inQty,'$rcpNo','".$_POST['rcdate']."','$inRemarks','$inStat','$emp3','$productID','$prodItem','$sup','$userID',$incomingID)";
 						$conn->exec($sql);
 					} else {
 						// Do Nothing	
