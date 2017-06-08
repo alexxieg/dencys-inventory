@@ -217,7 +217,7 @@
 													</td>
 															
 													<td>
-														<input type="text" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]" required>
+														<input type="number" min="1" class="form-control" id ="addQty" placeholder="<?php echo $row["inQty"]; ?>" value="<?php echo $row["inQty"]; ?>" name="incQty[]" required>
 														<input type="hidden" name="editIncQty[]" value="<?php echo $row["inQty"]; ?>" />
 													</td>
 													
