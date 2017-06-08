@@ -162,7 +162,7 @@
 									</td>	
 
 									<h3>Purchase No</h3> 
-									<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum">		
+									<input type="text" class="form-control" id ="addPO" value = "<?php echo $incID; ?>" placeholder="<?php echo $incID; ?>" name="poNum" readonly>		
 									
 									<h3>Supplier</h3> 
 									<div class="ui-widget">
