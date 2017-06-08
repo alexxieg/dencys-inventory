@@ -160,20 +160,8 @@
 			</div>
 		</div>	
 		
-		<!-- Update Function -->
-		<?php
-			$loc=(isset($_REQUEST['location']) ? $_REQUEST['location'] : null);
-			$braName=(isset($_REQUEST['branName']) ? $_REQUEST['branName'] : null);
-			if (isset($_POST["editBranch"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			 
-				$sql = "UPDATE branch SET branchName = '$braName', location = '$loc' WHERE branchID = '$branchThisID'";
-				$conn->exec($sql);
-				
-				$url='../branches.php';
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}    		
-		?>
+		<!-- Update Branch -->
+		<?php include('updateBranch.php'); ?>
+		
 	</body>
 </html>
