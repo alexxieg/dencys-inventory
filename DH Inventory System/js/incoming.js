@@ -63,7 +63,7 @@ function validateForm() {
 		return false;		
 	}
 }
-
+var check;
 function validateForm2() {
 	if(document.getElementById('addRcpt').value == "") {
 		swal({
@@ -104,15 +104,26 @@ function validateForm2() {
         document.getElementById('addSupplier').style.borderColor = "blue";
 	}
 	
-	if(confirm('Are you sure you want to add this entry?')) {
-		return true;		
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of Entry Canceled",
-		type: "success"
+		  title: '<i>HTML</i> <u>example</u>',
+		  type: 'info',
+		  text: "Are you sure you want to add the entry?.",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'<button id="thisButton">YES</button>',
+		  cancelButtonText:
+			'<button>CANCEL SHYTHEAD</button>'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 	
