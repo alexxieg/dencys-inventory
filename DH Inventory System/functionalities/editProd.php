@@ -186,29 +186,8 @@
 			</div>
 		</div>
 			
-		<!-- Update Function -->
-		<?php
-			$proID = $_GET['proId'];
-			$itemName=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-			$itemNType=(isset($_REQUEST['prodType']) ? $_REQUEST['prodType'] : null);
-			$itemBrand=(isset($_REQUEST['prodBrand']) ? $_REQUEST['prodBrand'] : null);
-			$itemPrice=(isset($_REQUEST['prodPrice']) ? $_REQUEST['prodPrice'] : null);
-			$itemRL=(isset($_REQUEST['prodRO']) ? $_REQUEST['prodRO'] : null);
-			
-			if (isset($_POST["addProd"])){
-			
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-				$sql = "UPDATE product SET prodName = '$itemName', unitType = '$itemNType', price = $itemPrice, reorderLevel = $itemRL WHERE prodID= '$proID'";
-				$conn->exec($sql);
-				
-				$sql = "UPDATE brand JOIN product SET brandName = '$itemBrand' WHERE prodID= '$proID'";
-				$conn->exec($sql);
-				
-				$url='../product.php';
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}    
-
-		?>
+		<!-- Update Product -->
+		<?php include('updateProd.php'); ?>
+		
 	</body>
 </html>
