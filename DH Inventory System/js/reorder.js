@@ -3,17 +3,13 @@ function validateForm() {
 		event.preventDefault(); 
 		swal({
 		title: "Warning!",
-		text: "FU.",
+		text: "No item was selected. Please select an item to be reordered.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		return false;
 
 	} else {
-		swal({
-		title: "OK",
-		type: "success"
-		});
 		return true;	
 	}
 }
