@@ -21,9 +21,9 @@ function validateForm2() {
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'YES',
+			'<button id="thisButton" class="btn-success">YES</button>',
 		  cancelButtonText:
-			'CANCEL'
+			'<button class="btn-danger">CANCEL</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
