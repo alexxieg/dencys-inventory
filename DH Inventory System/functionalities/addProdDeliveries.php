@@ -94,6 +94,7 @@
 			$varPO = $_GET['po'];
 			
 			$checkDatabase = current($conn->query("SELECT incoming.inID FROM incoming WHERE PONumber = '$varPO'")->fetch());
+			$poDate = current($conn->query("SELECT purchaseorders.poDate FROM purchaseorders WHERE purchaseorders.poNumber = '$varPO'")->fetch());
 			
 			if (isset($checkDatabase) ? $checkDatabase : null) {
 				$query = $conn->prepare("SELECT *, ABS(qtyOrder - inQty) AS qtyOrdered FROM incoming join product ON incoming.prodID = product.prodID join purchaseorders 
@@ -197,6 +198,8 @@
 							<h1 id="headers">ADD PRODUCT DELIVERY</h1>		
 							
 							<form action="" method="POST" onsubmit="return validateForm2()">
+								<input type="hidden" id="thisPODate" value="<?php echo $poDate; ?>" />
+								
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								

@@ -65,6 +65,20 @@ function validateForm() {
 }
 var check;
 function validateForm2() {
+	var compDate = document.getElementById('thisPODate').value; 
+	var compDate2 = document.getElementById('addRcptDate').value;
+	if(compDate2 < compDate) {
+		swal({
+		title: "Warning!",
+		text: "Time Travelling is not Allowed",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addRcptDate').style.borderColor = "red";
+		return false;
+	} else {
+		document.getElementById('addRcptDate').style.borderColor = "blue";
+	}
 	if(document.getElementById('addRcpt').value == "") {
 		swal({
 		title: "Warning!",
