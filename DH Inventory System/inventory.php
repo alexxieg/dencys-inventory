@@ -53,8 +53,8 @@
 		
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
-                <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
-		
+        <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+		<link href="datatables/media/css/bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/FixedHeader/css/fixedHeader.bootstrap.min.css"rel="stylesheet">
 
 		<!-- Datatables Script -->
