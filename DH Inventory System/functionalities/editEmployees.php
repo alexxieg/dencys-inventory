@@ -172,24 +172,8 @@
 			</div>
 		</div>
 
-		<!-- Update Function -->
-		<?php
-			$emploFirstName=(isset($_REQUEST['empFName']) ? $_REQUEST['empFName'] : null);
-			$emploMiddleName=(isset($_REQUEST['empMName']) ? $_REQUEST['empMName'] : null);
-			$emploLastName=(isset($_REQUEST['empLName']) ? $_REQUEST['empLName'] : null);
-			$emploExtenName=(isset($_REQUEST['empEName']) ? $_REQUEST['empEName'] : null);
-			
-			if (isset($_POST["editEmp"])){
-					
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		 
-								 
-				$sql = "UPDATE employee SET empFirstName = '$emploFirstName', empMidName = '$emploMiddleName', empLastName = '$emploLastName', empExtensionName = '$emploExtenName'
-						WHERE empID = '$employID'";
-				$conn->exec($sql);
-				
-				$url='../employees.php';
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';			
-			}
-		?>
+		<!-- Update Employee -->
+		<?php include('updateEmployee.php'); ?>
+		
 	</body>
 </html>
