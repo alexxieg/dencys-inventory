@@ -48,6 +48,9 @@
 					$sql = "UPDATE incoming SET status = 'Complete' WHERE prodID = '$prod3' AND PONumber = '$varPO'";
 					$conn->exec($sql);
 					
+					$sql = "UPDATE inventory SET reorderStatus = 'False' WHERE prodID = '$prod3'";
+					$result = $conn->query($sql);
+					
 					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
 					VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$prod3','$userID','$poNum')";
 					$result = $conn->query($sql);
@@ -77,9 +80,12 @@
 					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prodItem'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
+					
+					$sql = "UPDATE inventory SET reorderStatus = 'False' WHERE prodID = '$prod3'";
+					$result = $conn->query($sql);
 					$sql = "INSERT INTO incoming (inQty, inDate, receiptNo, receiptDate, supID, status, inType, inRemarks, empID, prodID, userID, poNumber)
 					VALUES ('$inQty',CURDATE(),'$rcno','".$_POST['rcdate']."','$sup3','$inStat','$inType','$inRemarks','$emp3','$prod3','$userID','$poNum')";
-					$result = $conn->query($sql); 
+					$result = $conn->query($sql);					
 				}
 			}
 							
