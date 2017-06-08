@@ -161,20 +161,8 @@
 			</div>
 		</div>
 			
-		<!-- Update Function -->
-		<?php
-			$cateID=(isset($_REQUEST['catID']) ? $_REQUEST['catID'] : null);
-			$cateName=(isset($_REQUEST['catName']) ? $_REQUEST['catName'] : null);
-			if (isset($_POST["editCat"])){
-				
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			 
-				$sql = "UPDATE category SET categoryID = '$cateID', categoryName = '$cateName' WHERE categoryID = '$categEditID'";	
-				$conn->exec($sql);
-				
-				$url='../category.php';
-				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-			}    
-		?>
+		<!-- Update Category -->
+		<?php include('updateCategory.php'); ?>
+		
 	</body>
 </html>
