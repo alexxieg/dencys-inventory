@@ -6,8 +6,7 @@
 		$supName = $_POST['supName'];
 		$supContact = $_POST['supContact'];
 		$supLoc = $_POST['supLoc'];
-
-		$query = $conn->prepare("Select * FROM suppliers WHERE supplier_name = '$supName'");
+		$query = $conn->prepare("Select * FROM suppliers WHERE supplier_name = '$supName' OR contactNo = '$supContact' OR location = '$supLoc'");
 		$count = $query->execute();
 		$row = $query->fetch();
 
