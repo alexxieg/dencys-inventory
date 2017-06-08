@@ -83,6 +83,7 @@
 			$result2 = $query2->fetchAll();
 			
 			$updateDate = current($conn->query("SELECT incoming.inDate FROM dencys.incoming WHERE incoming.receiptNo = '$incID'")->fetch());
+			$poNumb = current($conn->query("SELECT incoming.PONumber FROM dencys.incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$supplierID = current($conn->query("SELECT incoming.supID FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
@@ -316,8 +317,8 @@
 				
 					if ($inRemarks != $editRemarks || $prodItem != $editProdItem || $inQty != $editInQty || $inStat != $editInStat) {
 						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-						$sql = "INSERT INTO editincoming (inEditDate, inDate, inQty, qtyNew, receiptNo, receiptDate, inRemarks, status, empID, prodID, prodNew, supID, userID, inID)
-								VALUES (CURDATE(),'$iniDate',$editInQty,$inQty,'$rcpNo','".$_POST['rcdate']."','$inRemarks','$inStat','$emp3','$productID','$prodItem','$sup','$userID',$incomingID)";
+						$sql = "INSERT INTO editincoming (inEditDate, inDate, inQty, qtyNew, receiptNo, receiptDate, inRemarks, status, empID, prodID, prodNew, supID, userID, inID, poNumber)
+								VALUES (CURDATE(),'$iniDate',$editInQty,$inQty,'$rcpNo','".$_POST['rcdate']."','$inRemarks','$inStat','$emp3','$productID','$prodItem','$sup','$userID',$incomingID,'$poNumb')";
 						$conn->exec($sql);
 					} else {
 						// Do Nothing	

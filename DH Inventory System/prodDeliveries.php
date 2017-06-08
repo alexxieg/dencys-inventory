@@ -436,13 +436,16 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editIncoming.inEditDate, editIncoming.inQty, editIncoming.receiptNo, editIncoming.receiptDate, editIncoming.inRemarks, editIncoming.status, editIncoming.poNumber, product.prodName, editIncoming.userID from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
+													$query = $conn->prepare("SELECT * from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
 												
 												<thead>
 													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Added</div>
+														</th>
 														<th>
 															<div id="tabHead">Date Edited</div>
 														</th>
@@ -456,10 +459,16 @@
 															<div id="tabHead">Receipt Date</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Description</div>
+															<div id="tabHead">Initial Product Description</div>
 														</th>
 														<th>
-															<div id="tabHead">Incoming Quantity</div>
+															<div id="tabHead">Edited Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Initial Incoming Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited Incoming Quantity</div>
 														</th>
 														<th>
 															<div id="tabHead">Remarks</div>
@@ -480,12 +489,15 @@
 														$incID = $item["receiptNo"];
 													?>
 													<tr id="centerData">
+														<td data-title="Edit Date"><?php echo $item["inDate"]; ?></td>
 														<td data-title="Edit Date"><?php echo $item["inEditDate"]; ?></td>
 														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
 														<td data-title="Receipt Number"><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodNew"]; ?></td>
 														<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["qtyNew"]; ?></td>
 														<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 														<td data-title="Status"><?php echo $item["status"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
