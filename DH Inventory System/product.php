@@ -378,8 +378,8 @@
 												
 													<!-- Retrieve Product Data -->
 													<?php
-														$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, product.archiveDate
-																					FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
+														$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, product.archiveDate, inventory.qty
+																					FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID INNER JOIN inventory ON product.prodID = inventory.prodID
 																					WHERE product.status = 'Inactive'
 																					ORDER BY prodID");
 														$query->execute();
@@ -408,7 +408,13 @@
 															</th>
 															<th>
 																<div id="tabHead">Price</div>
-															</th>					
+															</th>
+															<th>
+																<div id="tabHead">Quantity Left</div>
+															</th>	
+															<th>
+																<div id="tabHead">Restore</div>
+															</th>															
 														</tr>
 													</thead>
 													<tbody>
@@ -425,6 +431,7 @@
 															<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 															<td data-title="Unit"><?php echo $item["unitType"];?></td>
 															<td data-title="Price"><?php echo $item["price"]; ?></td>
+															<td data-title="Quantity"><?php echo $item["qty"]; ?></td>
 															<td>
 																<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
 																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this product?');" id="delBtn1">
