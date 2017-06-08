@@ -16,7 +16,7 @@
 					echo '<script language="javascript">';
 					echo 'swal(
 						  "Error!",
-						  "Brand Already Exists, New Brand Has Not been Added",
+						  "Brand Already Exists, Brand Has Not been Updated",
 						  "error");';
 					echo '$("#myModal").modal("show");';
 					echo 'document.getElementById("addBrandID").style.borderColor = "red";';
