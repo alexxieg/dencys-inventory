@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2017 at 06:40 AM
+-- Generation Time: Jun 08, 2017 at 07:54 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -680,8 +680,9 @@ CREATE TABLE `editincoming` (
   `supID` varchar(45) NOT NULL,
   `userID` varchar(45) NOT NULL,
   `poNumber` varchar(45) NOT NULL,
-  `prodNew` varchar(45) DEFAULT NULL,
-  `qtyNew` int(11) DEFAULT NULL
+  `prodNew` varchar(255) DEFAULT NULL,
+  `qtyNew` int(11) DEFAULT NULL,
+  `userNew` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -701,8 +702,9 @@ CREATE TABLE `editoutgoing` (
   `empID` varchar(45) NOT NULL,
   `prodID` varchar(45) NOT NULL,
   `userID` varchar(45) NOT NULL,
-  `prodNew` varchar(45) DEFAULT NULL,
-  `qtyNew` int(11) DEFAULT NULL
+  `prodNew` varchar(255) DEFAULT NULL,
+  `qtyNew` int(11) DEFAULT NULL,
+  `userNew` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -721,8 +723,9 @@ CREATE TABLE `editpo` (
   `supID` varchar(45) NOT NULL,
   `prodID` varchar(45) NOT NULL,
   `userID` varchar(45) NOT NULL,
-  `prodNew` varchar(45) DEFAULT NULL,
-  `qtyNew` int(11) DEFAULT NULL
+  `prodNew` varchar(255) DEFAULT NULL,
+  `qtyNew` int(11) DEFAULT NULL,
+  `userNew` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -745,16 +748,10 @@ CREATE TABLE `editreturn` (
   `userID` varchar(45) DEFAULT NULL,
   `supID` varchar(45) DEFAULT NULL,
   `empID` varchar(45) DEFAULT NULL,
-  `prodNew` varchar(45) DEFAULT NULL,
-  `qtyNew` varchar(45) DEFAULT NULL
+  `prodNew` varchar(255) DEFAULT NULL,
+  `qtyNew` varchar(45) DEFAULT NULL,
+  `userNew` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `editreturn`
---
-
-INSERT INTO `editreturn` (`returnEditID`, `returnEditDate`, `returnID`, `receiptNo`, `returnDate`, `returnQty`, `returnType`, `returnRemark`, `prodID`, `branchID`, `userID`, `supID`, `empID`, `prodNew`, `qtyNew`) VALUES
-(1, '2017-06-06', '30', 'RET-SUP-00006', '2017-05-03', '2', 'Supplier Return', 'Damaged upon Delivery', 'KBL-WLD-0004', NULL, 'kharol', '30', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
