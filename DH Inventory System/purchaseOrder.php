@@ -376,7 +376,7 @@
 												
 													<!-- Retrieve Category Data -->
 													<?php
-														$query = $conn->prepare("SELECT editPO.poEditDate, editPO.poNumber, editPO.poDate, editPO.qtyOrder, product.prodName, editPO.userID from editpo INNER JOIN product ON editpo.prodID = product.prodID");
+														$query = $conn->prepare("SELECT poEditID, qtyOrder, poEditDate, poID, poNumber, poDate, qtyOrder, supID, userID, prodNew, qtyNew, editpo.prodID, prodName from editpo INNER JOIN product ON editpo.prodID = product.prodID");
 														$query->execute();
 														$result1 = $query->fetchAll();
 													?>
@@ -384,19 +384,25 @@
 													<thead>
 														<tr id="centerData">
 															<th>
+																<div id="tabHead">Date Added</div>
+															</th>
+															<th>
 																<div id="tabHead">Date Edited</div>
 															</th>
 															<th>
 																<div id="tabHead">PO Number</div>
 															</th>
 															<th>
-																<div id="tabHead">PO Date</div>
+																<div id="tabHead">Initial Product Name</div>
 															</th>
 															<th>
-																<div id="tabHead">Product Name</div>
+																<div id="tabHead">Edited Product Name</div>
 															</th>
 															<th>
-																<div id="tabHead">Quantity Order</div>
+																<div id="tabHead">Initial Quantity Order</div>
+															</th>
+															<th>
+																<div id="tabHead">Edited Quantity Order</div>
 															</th>
 															<th>
 																<div id="tabHead">Edited By</div>
@@ -407,16 +413,18 @@
 													<tbody>						
 															
 														<?php
-															foreach ($result1 as $item):
+															foreach ($result1 as $item2):
 															$incID = $item["poNumber"];
 														?>
 														<tr id="centerData">	
-															<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
-															<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
-															<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
-															<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
-															<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
-															<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+															<td data-title="Add Date"><?php echo $item2["poDate"]; ?></td>
+															<td data-title="Edit Date"><?php echo $item2["poEditDate"]; ?></td>
+															<td data-title="PO Number"><?php echo $item2["poNumber"]; ?></td>
+															<td data-title="Product Name"><?php echo $item2["prodName"]; ?></td>
+															<td data-title="Product Name 2"><?php echo $item2["prodNew"]; ?></td>
+															<td data-title="Quantity Order"><?php echo $item2["qtyOrder"]; ?></td>
+															<td data-title="Quantity Order 2"><?php echo $item2["qtyNew"]; ?></td>
+															<td data-title="Edited By"><?php echo $item2["userID"]; ?></td>
 														</tr>
 														<?php
 															endforeach;

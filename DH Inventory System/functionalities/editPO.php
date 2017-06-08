@@ -177,6 +177,7 @@
 													<td>
 														<input type="hidden" value="1" name="num" id="orderdata">
 														<input type="hidden" class="form-control" name="editPOID[]" value="<?php echo $row["poID"]; ?>">
+														<input type="hidden" class="form-control" name="iniDate[]" value="<?php echo $row["poDate"]; ?>">
 													</TD>
 													<td>	
 														<div class="ui-widget">
@@ -228,13 +229,29 @@
 			for ($index3 = 0; $index3 < count($prodTem); $index3++) {
 				$PurOrID = $_POST['editPOID'][$index3];
 				$prodItem = $_POST['prodItem'][$index3];
+				$iniDate = $_POST['iniDate'][$index3];
 				$inQty = $_POST['qty'][$index3];
 				$hiddenProdItem = $_POST['editProdItem'][$index3];
 				$hiddenInQty = $_POST['editQuantity'][$index3];
+				$sup = $_POST['supplier'];
+				$userID = $_POST['userID'];
+				
+				$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$sup'");
+				$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+				$sup3 = $sup2['supA'];
 	
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$hiddenProdItem'");
+				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+				$prod3 = $prod2['prodA'];
+				
+				$newprod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$hiddenProdItem'");
+				$newprod2 = $newprod1->fetch(PDO::FETCH_ASSOC);
+				$newprod3 = $newprod2['prodA'];
+				
 				if ($prodItem != $hiddenProdItem || $inQty != $hiddenInQty) {
-					$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
-						SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poID = $PurOrID";
+					$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID, prodNew, qtyNew)
+						VALUES (CURDATE(),'$incID','$iniDate',$hiddenInQty,$sup3,'$prod3','$userID',$PurOrID,'$prodItem',$inQty)";
+						
 					$conn->exec($sql);
 				} else {
 					//Do Nothing
