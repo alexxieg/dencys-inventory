@@ -76,9 +76,15 @@ function validateForm3() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
+<<<<<<< HEAD
 		  title: '<b>Confirm New Entry</b>',
 		  type: 'info',
 		  text: "Are you sure you want to add this entry?",
+=======
+		  title: '<b>Product Issuance</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add the entry/s?",
+>>>>>>> e7318dbcbba806349bf65058229fab7b840d3d9c
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
