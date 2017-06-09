@@ -3,75 +3,48 @@ function validateForm() {
 	if (document.getElementById('addFName').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter First Name.",
+		text: "Please enter first name.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addFName').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addFName').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The First Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addFName').style.borderColor = "red";
-		return false;
-	}
+
 	if (document.getElementById('addMName').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Middle Name.",
+		text: "Please enter middle name.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addMName').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addMName').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Middle Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addMName').style.borderColor = "red";
-		return false;
-	}
+		
 	if (document.getElementById('addLName').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Last Name.",
+		text: "Please enter last name.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addLName').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addLName').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Last Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addLName').style.borderColor = "red";
-		return false;
-	}
+
 	if(check != true) {
 		event.preventDefault();
 		swal({
 		  title: '<b>Confirm New Employee</b>',
 		  type: 'info',
-		  text: "Are you sure you want to add the entry?",
+		  text: "Are you sure you want to add this employee?",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton">YES</button>',
+			'<button id="thisButton" class="btn-success">YES</button>',
 		  cancelButtonText:
-			'<button>Cancel</button>'
+			'<button class="btn-danger">CANCEL</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
@@ -87,69 +60,42 @@ function validateForm2() {
 	if (document.getElementById('addEntry1').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter First Name.",
+		text: "Please enter first name.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addEntry1').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addEntry1').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The First Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEntry1').style.borderColor = "red";
-		return false;
-	}
+
 	if (document.getElementById('addEntry2').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Middle Name.",
+		text: "Please enter middle name.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addEntry2').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addEntry2').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Middle Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEntry2').style.borderColor = "red";
-		return false;
-	}
+	
 	if (document.getElementById('addEntry3').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Last Name.",
+		text: "Please enter last name.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addEntry3').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addEntry3').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Last Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEntry3').style.borderColor = "red";
-		return false;
-	}
-	if(confirm('Are you sure you want to update this entry?')) {
+
+	if(confirm('Are you sure you want to update this employee?')) {
 		return true;			
 	}
 	else {
 		swal({
-		title: "Updating of Employee Canceled",
+		title: "Updating of employee cancelled.",
 		type: "success"
 		});
 		return false;		

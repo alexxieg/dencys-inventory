@@ -2,7 +2,7 @@ function validateForm() {
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please enter quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -12,12 +12,12 @@ function validateForm() {
         document.getElementById('addQty').style.borderColor = "lightblue";
 	}
 	
-	if(confirm('Are you sure you want to add this entry?')) {
+	if(confirm('Are you sure you want to add this product?')) {
 		return true;		
 	}
 	else {
 		swal({
-		title: "Adding of Entry Canceled",
+		title: "Adding of product cancelled.",
 		type: "success"
 		});
 		return false;		
