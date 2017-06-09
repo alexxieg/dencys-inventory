@@ -381,20 +381,20 @@
 								</div>
 							</div>
 							
-							<!-- Modal - Activity Log -->
+							<!-- Modal - Edit Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Edit Log - Previous Content</h4>
+											<h4 class="modal-title">Edit Log - Previous Entries</h4>
 										</div>
 										<div class="modal-body">
 											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editReturn.returnEditDate, editReturn.receiptNo, editReturn.returnDate, editReturn.returnQty, editReturn.returnType, editReturn.returnRemark, product.prodName, editReturn.userID from editreturn INNER JOIN product ON editreturn.prodID = product.prodID");
+													$query = $conn->prepare("SELECT * from editreturn INNER JOIN product ON editreturn.prodID = product.prodID AND returnType = 'Warehouse Return'");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -402,22 +402,37 @@
 												<thead>
 													<tr id="centerData">
 														<th>
+															<div id="tabHead">Date Added</div>
+														</th>
+														<th>
 															<div id="tabHead">Date Edited</div>
 														</th>
 														<th>
-															<div id="tabHead">Reference No.</div>
+															<div id="tabHead">Receipt No</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Description</div>
+															<div id="tabHead">Return Date</div>
 														</th>
 														<th>
-															<div id="tabHead">Return Quantity</div>
+															<div id="tabHead">Initial Return Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited Return Quantity</div>
 														</th>
 														<th>
 															<div id="tabHead">Return Type</div>
 														</th>
 														<th>
 															<div id="tabHead">Return Remarks</div>
+														</th>
+														<th>
+															<div id="tabHead">Initial Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Added By</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -429,16 +444,21 @@
 														
 													<?php
 														foreach ($result1 as $item):
-														$retID = $item["receiptNo"];
+														$returnID = $item["receiptNo"];
 													?>
 													<tr id="centerData">	
+														<td data-title="Edit Date"><?php echo $item["returnDate"]; ?></td>
 														<td data-title="Edit Date"><?php echo $item["returnEditDate"]; ?></td>
 														<td data-title="Receipt No"><?php echo $item["receiptNo"]; ?></td>
-														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Return Date"><?php echo $item["returnDate"]; ?></td>
 														<td data-title="Return Quantity"><?php echo $item["returnQty"]; ?></td>
+														<td data-title="Return Quantity"><?php echo $item["qtyNew"]; ?></td>
 														<td data-title="Return Type"><?php echo $item["returnType"]; ?></td>
 														<td data-title="Return Remarks"><?php echo $item["returnRemark"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodNew"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userNew"]; ?></td>
 													</tr>
 													<?php
 														endforeach;
@@ -454,7 +474,8 @@
 									</div>
 										
 								</div>
-							</div>						
+							</div>
+							<!-- End of Modal -->
 							
 						</div>
 					</div>

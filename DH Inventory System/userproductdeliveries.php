@@ -281,7 +281,7 @@
 											<h4 class="modal-title">Add Product Delivery</h4>
 										</div>
 										<div class="modal-body">
-											<form action="functionalities/addProdDeliveries.php" method="GET" onsubmit="return validateForm()">
+											<form action="functionalities/userAddProdDeliveries.php" method="GET" onsubmit="return validateForm()">
 												<h3>Purchase Order Number</h3>
 												<?php
 													$query = $conn->prepare("SELECT DISTINCT poNumber, poDate, suppliers.supplier_name FROM purchaseorders
