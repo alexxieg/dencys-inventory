@@ -1,3 +1,42 @@
+var check;
+function validateForm2() {
+	if (document.getElementById('addSupplier').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please enter supplier.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addSupplier').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addSupplier').style.borderColor = "lightblue";
+	}
+	if(check != true) {
+		event.preventDefault();
+		swal({
+		  title: '<b>Confirm New Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this entry?.",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'<button id="thisButton" class="btn-success">YES</button>',
+		  cancelButtonText:
+			'<button class="btn-danger">CANCEL</button>'
+		});
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
+	}
+	
+}
+
+
 function validateForm() {	
 	if (document.getElementById('addPO').value == "") {
 		swal({
@@ -36,43 +75,6 @@ function validateForm() {
 	}
 }
 
-var check;
-function validateForm2() {
-	if (document.getElementById('addSupplier').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please enter supplier.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addSupplier').style.borderColor = "red";
-		return false;
-	}else{
-        document.getElementById('addSupplier').style.borderColor = "lightblue";
-	}
-	if(check != true) {
-		event.preventDefault();
-		swal({
-		  title: '<b>Confirm New Entry</b>',
-		  type: 'info',
-		  text: "Are you sure you want to add this entry?.",
-		  showCloseButton: true,
-		  showCancelButton: true,
-		  confirmButtonText:
-			'<button id="thisButton" class="btn-success">YES</button>',
-		  cancelButtonText:
-			'<button class="btn-danger">CANCEL</button>'
-		});
-		$('#thisButton').click(function(){
-			check = true;
-			document.getElementById('sucBtn').click();
-		});
-		
-	} else {
-		return true;
-	}
-	
-}
 			
 function deleteRow(tableID) {
 	try {
