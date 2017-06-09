@@ -1,3 +1,4 @@
+var check;
 function validateForm() {
 	if(document.getElementById('addBranchName').value == "") {
 		swal({
@@ -39,16 +40,26 @@ function validateForm() {
 		document.getElementById('addBranchLoc').style.borderColor = "red";
 		return false;
 	}
-	if(confirm('Are you sure you want to add this entry?')) {
-		alert("New Branch Successfully Added");
-		return true;	
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of Branch Canceled",
-		type: "success"
+		  title: '<i>Add New Branch</u>',
+		  type: 'info',
+		  text: "Are you sure you want to add the entry/s?.",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'<button id="thisButton">YES</button>',
+		  cancelButtonText:
+			'<button>Cancel</button>'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 
