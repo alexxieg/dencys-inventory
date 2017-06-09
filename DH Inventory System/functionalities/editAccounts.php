@@ -139,7 +139,7 @@
 									
 									<?php foreach ($result2 as $row): ?>
 									<h3>Password</h3>
-									<input type="password" class="form-control" id ="addEntrys" placeholder="<?php echo $row["password"]; ?>" value="<?php echo $row["password"]; ?>" name="psw"> <br>
+									<input type="password" class="form-control" id ="addEntrys" value="<?php echo $row["password"]; ?>" name="psw"> <br>
 									<?php endforeach ?>
 									
 									<?php foreach ($result2 as $row): ?>

@@ -11,7 +11,7 @@
 				
 				$userName = $_POST['userName'];
 				$psw = $_POST['psw'];
-				$query = $conn->prepare("Select * FROM users WHERE userName = '$userName'");
+				$query = $conn->prepare("Select * FROM users WHERE userName = '$userName' AND userID != '$useThisID'");
 				$count = $query->execute();
 				$row = $query->fetch();
 

@@ -6,7 +6,7 @@
 	$password      	= "";
 	$database_name 	= "dencys";
 	$date_string   	= date("Ymd");
-	$time_string	= date("h-i-sa");
+	$time_string	= date("h-ia");
 	$filename		= $database_name . "_" . $date_string . "_" . $time_string . ".sql";
 	$finalpath 		= $backup_dir . "\\" . $filename;
 
