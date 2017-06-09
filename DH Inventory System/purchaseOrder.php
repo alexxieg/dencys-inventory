@@ -34,7 +34,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 			
 		<!-- Javascript Files -->
-		<script src="js/poTempo.js"></script>
+		<script src="js/po.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>
