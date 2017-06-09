@@ -30,7 +30,7 @@ function validateForm() {
 		return false;		
 	}
 }
-
+var check;
 function validateForm2() {
 	if (document.getElementById('prod').value == "") {
 		swal({
@@ -62,17 +62,30 @@ function validateForm2() {
 		document.getElementById('addSupplier').style.borderColor = "red";
 		return false;
 	}
-	if(confirm('Are you sure you want to add this entry?')) {
-		return true;			
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of Entry Canceled",
-		type: "success"
+		  title: '<i>Supplier Returns</u>',
+		  type: 'info',
+		  text: "Are you sure you want to add the entry/s?.",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'<button id="thisButton">YES</button>',
+		  cancelButtonText:
+			'<button>Cancel</button>'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
+
+
 
 function validateForm3() {
 	if(confirm('Are you sure you want to update this entry?')) {
