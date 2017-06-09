@@ -1,3 +1,4 @@
+var check;
 function validateForm() {
 	if(document.getElementById('adduser').value == "") {
 		swal({
@@ -94,15 +95,26 @@ function validateForm() {
 		return false;
 	}
 	
-	if(confirm('Are you sure you want to add this account?')) {
-		return true;	
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of account cancelled",
-		type: "success"
+		  title: '<b>Confirm New Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'<button id="thisButton" class="btn-success">YES</button>',
+		  cancelButtonText:
+			'<button class="btn-danger">Cancel</button>'
 		});
-	return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 
@@ -151,7 +163,7 @@ function validateForm2() {
 		return false;
 	}
 	
-	if(confirm('Are you sure you want to add this account?')) {
+	if(confirm('Are you sure you want to update this account?')) {
 		return true;	
 	}
 	else {
