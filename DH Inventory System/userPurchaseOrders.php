@@ -161,7 +161,7 @@
 				<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
@@ -180,7 +180,7 @@
 								<li><a href="userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 								<li><a href="usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
@@ -353,7 +353,7 @@
 							</div> 
 							<!-- End of Modal -->
 
-							<!-- Modal - Activity Log -->
+							<!-- Modal - Edit Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
@@ -366,7 +366,7 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editPO.poEditDate, editPO.poNumber, editPO.poDate, editPO.qtyOrder, product.prodName, editPO.userID from editpo INNER JOIN product ON editpo.prodID = product.prodID");
+													$query = $conn->prepare("SELECT poEditID, qtyOrder, poEditDate, poID, poNumber, poDate, qtyOrder, supID, userID, prodNew, qtyNew, editpo.prodID, prodName from editpo INNER JOIN product ON editpo.prodID = product.prodID");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -374,19 +374,25 @@
 												<thead>
 													<tr id="centerData">
 														<th>
+															<div id="tabHead">Date Added</div>
+														</th>
+														<th>
 															<div id="tabHead">Date Edited</div>
 														</th>
 														<th>
 															<div id="tabHead">PO Number</div>
 														</th>
 														<th>
-															<div id="tabHead">PO Date</div>
+															<div id="tabHead">Initial Product Name</div>
 														</th>
 														<th>
-															<div id="tabHead">Quantity Order</div>
+															<div id="tabHead">Edited Product Name</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Description</div>
+															<div id="tabHead">Initial Quantity Order</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited Quantity Order</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -394,27 +400,26 @@
 													</tr>
 												</thead>
 												
-												<tbody>						
-														
+												<tbody>								
 													<?php
-														foreach ($result1 as $item):
+														foreach ($result1 as $item2):
 														$incID = $item["poNumber"];
 													?>
 													<tr id="centerData">	
-														<td data-title="Edit Date"><?php echo $item["poEditDate"]; ?></td>
-														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
-														<td data-title="PO Date<"><?php echo $item["poDate"]; ?></td>
-														<td data-title="Quantity Order"><?php echo $item["qtyOrder"]; ?></td>
-														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+														<td data-title="Add Date"><?php echo $item2["poDate"]; ?></td>
+														<td data-title="Edit Date"><?php echo $item2["poEditDate"]; ?></td>
+														<td data-title="PO Number"><?php echo $item2["poNumber"]; ?></td>
+														<td data-title="Product Name"><?php echo $item2["prodName"]; ?></td>
+														<td data-title="Product Name 2"><?php echo $item2["prodNew"]; ?></td>
+														<td data-title="Quantity Order"><?php echo $item2["qtyOrder"]; ?></td>
+														<td data-title="Quantity Order 2"><?php echo $item2["qtyNew"]; ?></td>
+														<td data-title="Edited By"><?php echo $item2["userID"]; ?></td>
 													</tr>
 													<?php
 														endforeach;
 													?>
-												
 												</tbody>
-											</table>
-											
+											</table>					
 										</div>
 									</div>
 										
