@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2017 at 07:54 AM
+-- Generation Time: Jun 09, 2017 at 04:39 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -128,13 +128,12 @@ CREATE TABLE `branch` (
 --
 
 INSERT INTO `branch` (`branchID`, `location`, `branchName`, `status`, `archiveDate`, `restoreDate`) VALUES
-(1, 'adasdasa', '21312323', 'Active', NULL, NULL),
+(1, 'Camdas', 'Dency\'s Hardware', 'Active', NULL, NULL),
 (2, 'Hilltop', 'Enrico', 'Active', NULL, NULL),
 (3, 'KM 4', 'Tayabas', 'Active', NULL, NULL),
 (4, 'KM 5', 'KM5', 'Active', NULL, NULL),
 (5, 'San Fernando', 'Denne Hardware', 'Active', NULL, NULL),
-(6, 'Warehouse', 'Warehouse', 'Active', NULL, NULL),
-(23, 'asdsadsadsa', 'Dencys Hardware', 'Inactive', '2017-06-08', NULL);
+(6, 'Warehouse', 'Warehouse', 'Active', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -766,7 +765,11 @@ CREATE TABLE `edituser` (
   `userName` varchar(25) NOT NULL,
   `password` varchar(255) NOT NULL,
   `user_role` text CHARACTER SET big5 NOT NULL,
-  `status` varchar(45) NOT NULL
+  `status` varchar(45) NOT NULL,
+  `userNameNew` varchar(45) DEFAULT NULL,
+  `passwordNew` varchar(45) DEFAULT NULL,
+  `userRoleNew` varchar(45) DEFAULT NULL,
+  `userEdited` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2654,8 +2657,7 @@ INSERT INTO `outgoing` (`outID`, `outQty`, `outDate`, `receiptNo`, `branchID`, `
 (417, 10, '2017-05-26', 'OUT-00055', 3, 14, 'SKL-PWT-0012', 'haney'),
 (418, 10, '2017-05-26', 'OUT-00055', 3, 14, 'SKL-PWT-0013', 'haney'),
 (419, 10, '2017-05-26', 'OUT-00055', 3, 14, 'SKL-PWT-0014', 'haney'),
-(420, 10, '2017-05-26', 'OUT-00055', 3, 14, 'SKL-PWT-0015', 'haney'),
-(421, 5, '2017-06-06', 'DEF-00001', 0, 1, 'AFR-ACC-0001', 'denne');
+(420, 10, '2017-05-26', 'OUT-00055', 3, 14, 'SKL-PWT-0015', 'haney');
 
 -- --------------------------------------------------------
 
@@ -3638,8 +3640,7 @@ INSERT INTO `purchaseorders` (`poID`, `poNumber`, `poDate`, `qtyOrder`, `supID`,
 (552, 'PO-00061', '2017-06-05', 20, '36', 'DCA-PWT-0007', 'haney', 'Incomplete'),
 (553, 'PO-00061', '2017-06-05', 20, '36', 'DCA-PWT-0008', 'haney', 'Incomplete'),
 (554, 'PO-00061', '2017-06-05', 20, '36', 'DCA-PWT-0009', 'haney', 'Incomplete'),
-(555, 'PO-00061', '2017-06-05', 20, '36', 'DCA-PWT-0010', 'haney', 'Incomplete'),
-(556, 'PO-00062', '2017-06-08', 5, '', '', 'dennielle', 'Incomplete');
+(555, 'PO-00061', '2017-06-05', 20, '36', 'DCA-PWT-0010', 'haney', 'Incomplete');
 
 -- --------------------------------------------------------
 
@@ -3728,8 +3729,8 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`supID`, `supplier_name`, `contactNo`, `location`, `status`, `archiveDate`, `restoreDate`) VALUES
-(1, 'Amity', 'asdsadqweqwasdaasdsasadsas12sadsadsd4', '2312312312dsads11231dssdsdsd4', 'Active', NULL, NULL),
-(2, 'Amity', '02-244 60892321', 'Manilaasdsa', 'Active', NULL, NULL),
+(1, 'Alphine', '090154681368', 'Manila', 'Active', NULL, NULL),
+(2, 'Amesco Trade', '02-244 60892321', 'Manila', 'Active', NULL, NULL),
 (3, 'Amity', '02-521-7775', '2300 L Guinto St, Malate, Manila', 'Active', NULL, NULL),
 (4, 'ASCD/ Harrows', '3670012 ', '339 9th Ave. 062 Caloocan City Metro Manila', 'Active', NULL, NULL),
 (5, 'Atlas Copco/ Hilti', '02-584-4757', 'North Main Avenue, Lot 12 Block 2, Laguna Technopark, Binan, 4024 Laguna', 'Active', NULL, NULL),
@@ -3961,7 +3962,7 @@ ALTER TABLE `archive`
 -- AUTO_INCREMENT for table `branch`
 --
 ALTER TABLE `branch`
-  MODIFY `branchID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `branchID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `editincoming`
 --
@@ -4011,12 +4012,12 @@ ALTER TABLE `inventorydefects`
 -- AUTO_INCREMENT for table `outgoing`
 --
 ALTER TABLE `outgoing`
-  MODIFY `outID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=422;
+  MODIFY `outID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=421;
 --
 -- AUTO_INCREMENT for table `purchaseorders`
 --
 ALTER TABLE `purchaseorders`
-  MODIFY `poID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=557;
+  MODIFY `poID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=556;
 --
 -- AUTO_INCREMENT for table `returns`
 --
