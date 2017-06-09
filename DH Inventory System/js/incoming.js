@@ -2,7 +2,7 @@ function validateForm() {
 	if(document.getElementById('addRcptX').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Receipt no.",
+		text: "Please enter the receipt number.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -15,7 +15,7 @@ function validateForm() {
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Supplier.",
+		text: "Please enter supplier.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -28,7 +28,7 @@ function validateForm() {
 	if (document.getElementById('addRcptDateX').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Receipt Date.",
+		text: "Please enter the receipt date.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -42,7 +42,7 @@ function validateForm() {
 	if (document.getElementById('addInQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please enter quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -57,7 +57,7 @@ function validateForm() {
 	}
 	else {
 		swal({
-		title: "Adding of Entry Canceled",
+		title: "Adding of entry cancelled.",
 		type: "success"
 		});
 		return false;		
@@ -69,8 +69,8 @@ function validateForm2() {
 	var compDate2 = document.getElementById('addRcptDate').value;
 	if(compDate2 < compDate) {
 		swal({
-		title: "Warning!",
-		text: "Time Travelling is not Allowed",
+		title: "Invalid Entry!",
+		text: "Receipt date entered is invalid. Please enter a valid receipt date.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -82,7 +82,7 @@ function validateForm2() {
 	if(document.getElementById('addRcpt').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Receipt no.",
+		text: "Please enter the receipt number.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -95,7 +95,7 @@ function validateForm2() {
 	if (document.getElementById('addRcptDate').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Receipt Date.",
+		text: "Please enter the receipt date.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -108,7 +108,7 @@ function validateForm2() {
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Receipt Date.",
+		text: "Please enter supplier.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -121,15 +121,15 @@ function validateForm2() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<b>Product Delivery</b>',
+		  title: '<b>Confirm New Entry</b>',
 		  type: 'info',
-		  text: "Are you sure you want to add the entry/s?",
+		  text: "Are you sure you want to add this entry?",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton">YES</button>',
+			'<button id="thisButton" class="btn-success">YES</button>',
 		  cancelButtonText:
-			'<button>Cancel</button>'
+			'<button class="btn-danger">CANCEL</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
@@ -140,9 +140,7 @@ function validateForm2() {
 		return true;
 	}
 }
-	
-	
-			
+		
 function deleteRow(tableID) {
 	try {
 		var table = document.getElementById(tableID);
@@ -154,11 +152,11 @@ function deleteRow(tableID) {
 			if(null != chkbox && true == chkbox.checked) {
 				if(rowCount <= 1) {
 					swal({
-		title: "Error!",
-		text: "Cannot delete all Rows",
-		type: "error",
-		confirmButtonText: "Ok"
-		});
+					title: "Error!",
+					text: "Cannot delete all rows.",
+					type: "error",
+					confirmButtonText: "Ok"
+					});
 					break;
 				}
 					  

@@ -2,7 +2,7 @@ function validateForm() {
 	if (document.getElementById('prods').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Product.",
+		text: "Please enter product.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -15,7 +15,7 @@ function validateForm() {
 	if (document.getElementById('addOutQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please enter quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -28,7 +28,7 @@ function validateForm() {
 	}
 	else {
 		swal({
-		title: "Adding of Entry Cancelled",
+		title: "Adding of entry cancelled.",
 		type: "success"
 		});
 		return false;		
@@ -39,7 +39,7 @@ function validateForm2() {
 	if (document.getElementById('prod').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Product.",
+		text: "Please enter product.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -52,7 +52,7 @@ function validateForm2() {
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please enter quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -65,7 +65,7 @@ function validateForm2() {
 	}
 	else {
 		swal({
-		title: "Adding of Entry Cancelled",
+		title: "Adding of entry cancelled",
 		type: "success"
 		});
 		return false;		
@@ -76,15 +76,15 @@ function validateForm3() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<i>Product Issuance</u>',
+		  title: '<b>Confirm New Entry</b>',
 		  type: 'info',
-		  text: "Are you sure you want to add the entry/s?.",
+		  text: "Are you sure you want to add this entry?",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton">YES</button>',
+			'<button id="thisButton" class="btn-success">YES</button>',
 		  cancelButtonText:
-			'<button>Cancel</button>'
+			'<button class="btn-danger">CANCEL</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
@@ -108,7 +108,7 @@ function deleteRow(tableID) {
 				if(rowCount <= 1) {
 					swal({
 					title: "Error!",
-					text: "Cannot delete all Rows",
+					text: "Cannot delete all rows.",
 					type: "error",
 					confirmButtonText: "Ok"
 					});
