@@ -346,7 +346,7 @@
 												<input type="number" min="1" class="form-control" id ="addPrice" placeholder="Unit Price" name="prodPrice"> <br>
 												
 												<h3>Reorder Level</h3>
-												<input type="number" class="form-control" id ="addReorderLvl" placeholder="Reorder Level" name="prodRO"> <br>
+												<input type="number" min="1" class="form-control" id ="addReorderLvl" placeholder="Reorder Level" name="prodRO"> <br>
 														
 												<div class="modFoot">
 													<span>
