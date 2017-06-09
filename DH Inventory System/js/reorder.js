@@ -3,7 +3,7 @@ function validateForm() {
 		event.preventDefault(); 
 		swal({
 		title: "Warning!",
-		text: "No item was selected. Please select an item to be reordered.",
+		text: "No item was selected. Please select a product to be reordered.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -18,7 +18,7 @@ function validateForm2() {
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Supplier.",
+		text: "Please enter supplier.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -28,12 +28,12 @@ function validateForm2() {
         document.getElementById('addSupplier').style.borderColor = "blue";
 	}
 	
-	if(confirm('Are you sure you want to reorder this entry/s?')) {
+	if(confirm('Are you sure you want to reorder this entry?')) {
 		return true;		
 	}
 	else {
 		swal({
-		title: "Reordering of Entry/s Canceled",
+		title: "Reordering of products cancelled.",
 		type: "success"
 		});
 		return false;		
@@ -51,11 +51,11 @@ function deleteRow(tableID) {
 			if(null != chkbox && true == chkbox.checked) {
 				if(rowCount <= 1) {
 					swal({
-		title: "Error!",
-		text: "Cannot delete all Rows",
-		type: "error",
-		confirmButtonText: "Ok"
-		});
+						title: "Error!",
+						text: "Cannot delete all rows.",
+						type: "error",
+						confirmButtonText: "Ok"
+					});
 					break;
 				}
 					  

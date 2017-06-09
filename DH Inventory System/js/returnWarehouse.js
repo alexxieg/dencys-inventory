@@ -3,7 +3,7 @@ function validateForm() {
 	if (document.getElementById('prod').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Product.",
+		text: "Please enter product.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -15,7 +15,7 @@ function validateForm() {
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please enter quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -27,15 +27,15 @@ function validateForm() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<i>Warehouse Returns</u>',
+		  title: '<b>Confirm New Entry</b>',
 		  type: 'info',
-		  text: "Are you sure you want to add the entry/s?.",
+		  text: "Are you sure you want to add this entry?",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton">YES</button>',
+			'<button class="btn-success" id="thisButton">YES</button>',
 		  cancelButtonText:
-			'<button>Cancel</button>'
+			'<button class="btn-danger">CANCEL</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
@@ -53,7 +53,7 @@ function validateForm2() {
 	}
 	else {
 		swal({
-		title: "Adding of Entry Canceled",
+		title: "Adding of entry cancelled",
 		type: "success"
 		});
 		return false;		
@@ -71,11 +71,11 @@ function deleteRow(tableID) {
 			if(null != chkbox && true == chkbox.checked) {
 				if(rowCount <= 1) {
 					swal({
-		title: "Error!",
-		text: "Cannot delete all Rows",
-		type: "error",
-		confirmButtonText: "Ok"
-		});
+						title: "Error!",
+						text: "Cannot delete all rows.",
+						type: "error",
+						confirmButtonText: "Ok"
+					});
 					break;
 				}
 					  

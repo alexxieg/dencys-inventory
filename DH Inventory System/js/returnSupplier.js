@@ -2,40 +2,43 @@ function validateForm() {
 	if (document.getElementById('prod').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Product.",
+		text: "Please enter product.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('prod').style.borderColor = "red";
 		return false;
 	}
+	
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please enter quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addQty').style.borderColor = "red";
 		return false;
 	}
+	
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;			
 	}
 	else {
 		swal({
-		title: "Adding of Entry Canceled",
+		title: "Adding of entry cancelled.",
 		type: "success"
 		});
 		return false;		
 	}
 }
+
 var check;
 function validateForm2() {
 	if (document.getElementById('prod').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Product.",
+		text: "Please enter product.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -45,7 +48,7 @@ function validateForm2() {
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please enter quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -55,7 +58,7 @@ function validateForm2() {
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Supplier.",
+		text: "Please enter supplier.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -65,15 +68,15 @@ function validateForm2() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<i>Supplier Returns</u>',
+		  title: '<i>Confirm New Entry</u>',
 		  type: 'info',
-		  text: "Are you sure you want to add the entry/s?.",
+		  text: "Are you sure you want to add this entry?.",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton">YES</button>',
+			'<button id="thisButton" class="btn-success">YES</button>',
 		  cancelButtonText:
-			'<button>Cancel</button>'
+			'<button class="btn-danger">Cancel</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
@@ -85,15 +88,13 @@ function validateForm2() {
 	}
 }
 
-
-
 function validateForm3() {
 	if(confirm('Are you sure you want to update this entry?')) {
 		return true;			
 	}
 	else {
 		swal({
-		title: "Updating of Entry Canceled",
+		title: "Updating of entry cancelled",
 		type: "success"
 		});
 		return false;		

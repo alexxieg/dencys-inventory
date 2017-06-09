@@ -74,6 +74,7 @@ function validateForm2() {
 		document.getElementById('addEntry').style.borderColor = "red";
 		return false;
 	}
+	
 	if (document.getElementById('addEntry').value.length < 3){
 		swal({
 		title: "Warning!",
@@ -84,6 +85,7 @@ function validateForm2() {
 		document.getElementById('addEntry').style.borderColor = "red";
 		return false;
 	}
+	
 	if (document.getElementById('addEntrys').value == "") {
 		swal({
 		title: "Warning!",
@@ -94,16 +96,7 @@ function validateForm2() {
 		document.getElementById('addEntrys').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addEntrys').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Branch Location should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEntrys').style.borderColor = "red";
-		return false;
-	}
+
 	if(confirm('Are you sure you want to update this entry?')) {
 		alert("New Branch Successfully Added");
 		return true;	

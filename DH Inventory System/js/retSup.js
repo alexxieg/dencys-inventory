@@ -2,7 +2,7 @@ function validateForm() {
 	if (document.getElementById('addSupplierX').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Supplier.",
+		text: "Please enter supplier.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -12,7 +12,7 @@ function validateForm() {
 	if (document.getElementById('prod').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Product.",
+		text: "Please enter product.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -22,7 +22,7 @@ function validateForm() {
 	if (document.getElementById('addQty').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Quantity.",
+		text: "Please enter quantity.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -34,7 +34,7 @@ function validateForm() {
 	}
 	else {
 		swal({
-		title: "Adding of Entry Canceled",
+		title: "Adding of entry cancelled.",
 		type: "success"
 		});
 		return false;		
@@ -45,7 +45,7 @@ function validateForm2() {
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Supplier.",
+		text: "Please enter supplier.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -57,13 +57,12 @@ function validateForm2() {
 	}
 	else {
 		swal({
-		title: "Adding of Entry Canceled",
+		title: "Adding of entry cancelled.",
 		type: "success"
 		});
 		return false;		
 	}
 }
-
 
 function deleteRow(tableID) {
 	try {
@@ -76,11 +75,11 @@ function deleteRow(tableID) {
 			if(null != chkbox && true == chkbox.checked) {
 				if(rowCount <= 1) {
 					swal({
-		title: "Error!",
-		text: "Cannot delete all Rows",
-		type: "error",
-		confirmButtonText: "Ok"
-		});
+						title: "Error!",
+						text: "Cannot delete all rows.",
+						type: "error",
+						confirmButtonText: "Ok"
+					});
 					break;
 				}
 					  
