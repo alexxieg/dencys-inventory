@@ -162,7 +162,7 @@
 					<!-- Sidebar -->
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory </span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
@@ -298,7 +298,7 @@
 										</div>
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm3()">
-												<h3> User </h3>
+												<h3>User</h3>
 												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 													
 												<h3>Supplier</h3>  
@@ -378,7 +378,7 @@
 								</div>
 							</div>
 							
-							<!-- Modal - Activity Log -->
+							<!-- Modal - Edit Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
@@ -391,7 +391,7 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editReturn.returnEditDate, editReturn.receiptNo, editReturn.returnDate, editReturn.returnQty, editReturn.returnType, editReturn.returnRemark, product.prodName, editReturn.userID from editreturn INNER JOIN product ON editreturn.prodID = product.prodID");
+													$query = $conn->prepare("SELECT * from editreturn INNER JOIN product ON editreturn.prodID = product.prodID AND returnType = 'Supplier Return'");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
@@ -399,22 +399,34 @@
 												<thead>
 													<tr id="centerData">
 														<th>
+															<div id="tabHead">Date Added</div>
+														</th>
+														<th>
 															<div id="tabHead">Date Edited</div>
 														</th>
 														<th>
-															<div id="tabHead">Reference No.</div>
+															<div id="tabHead">Receipt No</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Description</div>
+															<div id="tabHead">Initial Return Quantity</div>
 														</th>
 														<th>
-															<div id="tabHead">Return Quantity</div>
+															<div id="tabHead">Edited Return Quantity</div>
 														</th>
 														<th>
 															<div id="tabHead">Return Type</div>
 														</th>
 														<th>
 															<div id="tabHead">Return Remarks</div>
+														</th>
+														<th>
+															<div id="tabHead">Initial Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Added By</div>
 														</th>
 														<th>
 															<div id="tabHead">Edited By</div>
@@ -429,13 +441,17 @@
 														$retID = $item["receiptNo"];
 													?>
 													<tr id="centerData">	
+														<td data-title="Edit Date"><?php echo $item["returnDate"]; ?></td>	
 														<td data-title="Edit Date"><?php echo $item["returnEditDate"]; ?></td>
 														<td data-title="Receipt No"><?php echo $item["receiptNo"]; ?></td>
-														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Return Quantity"><?php echo $item["returnQty"]; ?></td>
+														<td data-title="Return Quantity"><?php echo $item["qtyNew"]; ?></td>
 														<td data-title="Return Type"><?php echo $item["returnType"]; ?></td>
 														<td data-title="Return Remarks"><?php echo $item["returnRemark"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodNew"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
+														<td data-title="Edited By"><?php echo $item["userNew"]; ?></td>
 													</tr>
 													<?php
 														endforeach;
@@ -452,6 +468,7 @@
 										
 								</div>
 							</div>
+							<!-- End of modal -->
 							
 						</div>
 					</div>
