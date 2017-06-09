@@ -228,7 +228,7 @@
 									
 									<!-- Overall Outgoing -->
 									<div class="tab-pane active" id="mainOutSummary">
-										<h2 id="headers">Outgoing Product Summary for the Month</h2>
+										<h2 id="headers">Product Issuance Summary for the Month</h2>
 								
 										<hr>
 									<div class="pages no-more-tables">
