@@ -52,15 +52,15 @@ function validateForm2() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<i>HTML</i> <u>example</u>',
+		  title: '<i>Purchase Order</u>',
 		  type: 'info',
-		  text: "Are you sure you want to add the entry?.",
+		  text: "Are you sure you want to add the entry/s?.",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
 			'<button id="thisButton">YES</button>',
 		  cancelButtonText:
-			'<button>CANCEL SHYTHEAD</button>'
+			'<button>Cancel</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
