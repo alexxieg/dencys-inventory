@@ -1,17 +1,16 @@
-function validateForm() {
-	if(document.getElementById('addRcptX').value == "") {
+function validateForm() {	
+	if (document.getElementById('addPO').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Receipt no.",
+		text: "Please Enter PO Number.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
-		document.getElementById('addRcptX').style.borderColor = "red";
+		document.getElementById('addPO').style.borderColor = "red";
 		return false;
 	}else{
-        document.getElementById('addRcptX').style.borderColor = "blue";
+        document.getElementById('addPO').style.borderColor = "lightblue";
 	}
-	
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
@@ -22,37 +21,10 @@ function validateForm() {
 		document.getElementById('addSupplier').style.borderColor = "red";
 		return false;
 	}else{
-        document.getElementById('addSupplier').style.borderColor = "blue";
+        document.getElementById('addSupplier').style.borderColor = "lightblue";
 	}
 	
-	if (document.getElementById('addRcptDateX').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Receipt Date.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addRcptDateX').style.borderColor = "red";
-		return false;
-	}else{
-        document.getElementById('addRcptDateX').style.borderColor = "blue";
-	}
-	
-	
-	if (document.getElementById('addInQty').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Quantity.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addInQty').style.borderColor = "red";
-		return false;
-	}else{
-        document.getElementById('addInQty').style.borderColor = "blue";
-	}
-	
-	if(confirm('Are you sure you want to add this entry?')) {
+	if(confirm('Are you sure you want to update this entry?')) {
 		return true;		
 	}
 	else {
@@ -65,63 +37,22 @@ function validateForm() {
 }
 var check;
 function validateForm2() {
-	var compDate = document.getElementById('thisPODate').value; 
-	var compDate2 = document.getElementById('addRcptDate').value;
-	if(compDate2 < compDate) {
-		swal({
-		title: "Warning!",
-		text: "Time Travelling is not Allowed",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addRcptDate').style.borderColor = "red";
-		return false;
-	} else {
-		document.getElementById('addRcptDate').style.borderColor = "blue";
-	}
-	if(document.getElementById('addRcpt').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Receipt no.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addRcpt').style.borderColor = "red";
-		return false;
-	}else{
-        document.getElementById('addRcpt').style.borderColor = "blue";
-	}
-	
-	if (document.getElementById('addRcptDate').value == "") {
-		swal({
-		title: "Warning!",
-		text: "Please Enter Receipt Date.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addRcptDate').style.borderColor = "red";
-		return false;
-	}else{
-        document.getElementById('addRcptDate').style.borderColor = "blue";
-	}
-	
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Receipt Date.",
+		text: "Please Enter Supplier.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addSupplier').style.borderColor = "red";
 		return false;
 	}else{
-        document.getElementById('addSupplier').style.borderColor = "blue";
+        document.getElementById('addSupplier').style.borderColor = "lightblue";
 	}
-	
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<b>Product Delivery</b>',
+		  title: '<b>Purchase Order</b>',
 		  type: 'info',
 		  text: "Are you sure you want to add the entry/s?",
 		  showCloseButton: true,
@@ -139,9 +70,8 @@ function validateForm2() {
 	} else {
 		return true;
 	}
+	
 }
-	
-	
 			
 function deleteRow(tableID) {
 	try {
