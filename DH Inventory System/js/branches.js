@@ -43,9 +43,9 @@ function validateForm() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<i>Add New Branch</u>',
+		  title: '<b>Add New Branch</b>',
 		  type: 'info',
-		  text: "Are you sure you want to add the entry/s?.",
+		  text: "Are you sure you want to add the entry/s?",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
