@@ -68,9 +68,9 @@ function validateForm2() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<i>Confirm New Entry</u>',
+		  title: '<b>Confirm New Entry</b>',
 		  type: 'info',
-		  text: "Are you sure you want to add this entry?.",
+		  text: "Are you sure you want to add this entry?",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
