@@ -3,55 +3,37 @@ function validateForm() {
 	if(document.getElementById('addBranchName').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Branch Name.",
+		text: "Please branch name.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addBranchName').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addBranchName').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Branch Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addBranchName').style.borderColor = "red";
-		return false;
-	}
+
 	if (document.getElementById('addBranchLoc').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Branch Location.",
+		text: "Please enter branch location.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addBranchLoc').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addBranchLoc').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Branch Location should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addBranchLoc').style.borderColor = "red";
-		return false;
-	}
+	
 	if(check != true) {
 		event.preventDefault();
 		swal({
 		  title: '<b>Confirm New Branch</b>',
 		  type: 'info',
-		  text: "Are you sure you want to add the entry?",
+		  text: "Are you sure you want to add this branch?",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton">YES</button>',
+			'<button id="thisButton" class="btn-success">YES</button>',
 		  cancelButtonText:
-			'<button>Cancel</button>'
+			'<button class="btn-danger">CANCEL</button>'
 		});
 		$('#thisButton').click(function(){
 			check = true;
@@ -67,18 +49,7 @@ function validateForm2() {
 	if(document.getElementById('addEntry').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Branch Name.",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEntry').style.borderColor = "red";
-		return false;
-	}
-	
-	if (document.getElementById('addEntry').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Branch Name should have more than 2 characters",
+		text: "Please enter branch name.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -89,7 +60,7 @@ function validateForm2() {
 	if (document.getElementById('addEntrys').value == "") {
 		swal({
 		title: "Warning!",
-		text: "Please Enter Branch Location.",
+		text: "Please enter branch location.",
 		type: "warning",
 		confirmButtonText: "Ok"
 		});
@@ -97,13 +68,13 @@ function validateForm2() {
 		return false;
 	}
 
-	if(confirm('Are you sure you want to update this entry?')) {
-		alert("New Branch Successfully Added");
+	if(confirm('Are you sure you want to update this branch?')) {
+		alert("Updated branch successfully!");
 		return true;	
 	}
 	else {
 		swal({
-		title: "Update Canceled",
+		title: "Update Cancelled",
 		type: "success"
 		});
 		return false;		
