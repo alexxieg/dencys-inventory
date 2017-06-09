@@ -11,7 +11,7 @@
 				$supName = $_POST['supName'];
 				$supContact = $_POST['contactNo'];
 				$supLoc = $_POST['location'];
-				$query = $conn->prepare("Select * FROM suppliers WHERE supplier_name = '$supName'");
+				$query = $conn->prepare("Select * FROM suppliers WHERE supplier_name = '$supName' AND supID != '$supID'");
 				$count = $query->execute();
 				$row = $query->fetch();
 
@@ -32,7 +32,7 @@
 				$supName = $_POST['supName'];
 				$supContact = $_POST['contactNo'];
 				$supLoc = $_POST['location'];
-				$query = $conn->prepare("Select * FROM suppliers WHERE contactNo = '$supContact'");
+				$query = $conn->prepare("Select * FROM suppliers WHERE contactNo = '$supContact' AND supID != '$supID'");
 				$count = $query->execute();
 				$row = $query->fetch();
 
@@ -48,25 +48,7 @@
 					return false;
 				}
 				
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				
-				$supName = $_POST['supName'];
-				$supContact = $_POST['contactNo'];
-				$supLoc = $_POST['location'];
-				$query = $conn->prepare("Select * FROM suppliers WHERE location = '$supLoc'");
-				$count = $query->execute();
-				$row = $query->fetch();
-
-				if ($query->rowCount() > 0){
-					echo '<script language="javascript">';
-					echo 'swal(
-						  "Error!",
-						  "Location Already Exists, Supplier Has Not been Updated",
-						  "error");';
-					echo '$("#myModal").modal("show");';
-					echo 'document.getElementById("supLoc").style.borderColor = "red";';
-					echo '</script>';
-				} else {
+				 else {
 		
 				$sql = "UPDATE suppliers SET supplier_name = '$suppName', contactNo = '$conNum', location = '$supLocation' 
 						WHERE supID = $supID";
