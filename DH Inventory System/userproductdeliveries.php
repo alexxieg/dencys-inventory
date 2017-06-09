@@ -227,19 +227,21 @@
 							</div>
 							<br> 
 							
-							<!-- Table Display for Product Deliveries -->
+						<!-- Table Display for Product Deliveries -->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt No.</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Receipt Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date</th>
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Received By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Date Entered</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>										
-										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">User</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Received By</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Details</th>
 									</tr>
 								</thead>
+								
 								<tbody>					
 									<?php
 										foreach ($result as $item):
@@ -250,17 +252,18 @@
 									<tr id="centerData">
 										<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 										<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
-										<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
+										<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
+										<td data-title="Date Entered"><?php echo $item["inDate"]; ?></td>	
 										<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
+										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/userViewProdDelivery.php?incId=<?php echo $incRec; ?>"> 
+											<a href="functionalities/viewProdDelivery.php?incId=<?php echo $incRec; ?>"> 
 											<button type="button" class="btn btn-default" id="edBtn">
 												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 											</button>
 											</a>
-										</td>	
+										</td>
 									</tr>	
 									
 									<?php
@@ -278,7 +281,7 @@
 											<h4 class="modal-title">Add Product Delivery</h4>
 										</div>
 										<div class="modal-body">
-											<form action="functionalities/userAddProdDeliveries.php" method="GET" onsubmit="return validateForm()">
+											<form action="functionalities/addProdDeliveries.php" method="GET" onsubmit="return validateForm()">
 												<h3>Purchase Order Number</h3>
 												<?php
 													$query = $conn->prepare("SELECT DISTINCT poNumber, poDate, suppliers.supplier_name FROM purchaseorders
@@ -333,18 +336,6 @@
 															<div id="tabHead">Date</div>
 														</th>
 														<th>
-															<div id="tabHead">Product ID</div>
-														</th>
-														<th>
-															<div id="tabHead">Product Description</div>
-														</th>
-														<th>
-															<div id="tabHead">Quantity</div>
-														</th>
-														<th>
-															<div id="tabHead">Unit</div>
-														</th>
-														<th>
 															<div id="tabHead">Received By</div>
 														</th>
 														<th>
@@ -357,7 +348,7 @@
 															<div id="tabHead">Supplier</div>
 														</th>										
 														<th>	
-															<div id="tabHead">Remarks</div>
+															<div id="tabHead">View</div>
 														</th>
 													</tr>
 												</thead>
@@ -365,24 +356,19 @@
 												<tbody>					
 													<?php
 														foreach ($result1 as $item):
-														$incID = $item["inID"];
+														$incID = $item["receiptNo"];
 													?>
 																											
 													<tr id="centerData">
 														<td data-title="Date"><?php echo $item["inDate"]; ?></td>	
-														<td data-title="Product ID"><?php echo $item["prodID"];?></td>
-														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
-														<td data-title="Unit"><?php echo $item["unitType"]; ?></td>
 														<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 														<td data-title="Receipt No."><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 														<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
-														<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 														<td>
-															<a href="functionalities/editIn.php?incId=<?php echo $incID; ?>"> 
+															<a href="functionalities/viewProdDelivery.php?incId=<?php echo $incID; ?>"> 
 															<button type="button" class="btn btn-default" id="edBtn">
-																<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+																<span class="glyphicon glyphicon-th-list aria-hidden="true"></span>
 															</button>
 															</a>
 														</td>	
@@ -402,7 +388,7 @@
 							</div> 
 							<!-- End of Modal -->
 							
-							<!-- Modal - Activity Log -->
+							<!-- Modal - Edit Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
 								<div class="modal-dialog modal-xl">
 									<div class="modal-content">
@@ -415,13 +401,16 @@
 											
 												<!-- Retrieve Category Data -->
 												<?php
-													$query = $conn->prepare("SELECT editIncoming.inEditDate, editIncoming.inQty, editIncoming.inDate, editIncoming.receiptNo, editIncoming.receiptDate, editIncoming.inRemarks, editIncoming.status, editIncoming.poNumber, product.prodName, editIncoming.userID from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
+													$query = $conn->prepare("SELECT * from editincoming INNER JOIN product ON editincoming.prodID = product.prodID");
 													$query->execute();
 													$result1 = $query->fetchAll();
 												?>
 												
 												<thead>
 													<tr id="centerData">
+														<th>
+															<div id="tabHead">Date Added</div>
+														</th>
 														<th>
 															<div id="tabHead">Date Edited</div>
 														</th>
@@ -435,10 +424,16 @@
 															<div id="tabHead">Receipt Date</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Description</div>
+															<div id="tabHead">Initial Product Description</div>
 														</th>
 														<th>
-															<div id="tabHead">Incoming Quantity</div>
+															<div id="tabHead">Edited Product Description</div>
+														</th>
+														<th>
+															<div id="tabHead">Initial Incoming Quantity</div>
+														</th>
+														<th>
+															<div id="tabHead">Edited Incoming Quantity</div>
 														</th>
 														<th>
 															<div id="tabHead">Remarks</div>
@@ -459,12 +454,15 @@
 														$incID = $item["receiptNo"];
 													?>
 													<tr id="centerData">
+														<td data-title="Edit Date"><?php echo $item["inDate"]; ?></td>
 														<td data-title="Edit Date"><?php echo $item["inEditDate"]; ?></td>
 														<td data-title="PO Number"><?php echo $item["poNumber"]; ?></td>
 														<td data-title="Receipt Number"><?php echo $item["receiptNo"]; ?></td>
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 														<td data-title="Product Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Edit Date"><?php echo $item["inQty"]; ?></td>
+														<td data-title="Product Description"><?php echo $item["prodNew"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["inQty"]; ?></td>
+														<td data-title="Quantity"><?php echo $item["qtyNew"]; ?></td>
 														<td data-title="Remarks"><?php echo $item["inRemarks"]; ?></td>
 														<td data-title="Status"><?php echo $item["status"]; ?></td>
 														<td data-title="Edited By"><?php echo $item["userID"]; ?></td>
@@ -484,7 +482,7 @@
 										
 								</div>
 							</div>
-							<!-- End of Modal -->							
+							<!-- End of Modal -->
 								
 						</div>
 					</div>		  
