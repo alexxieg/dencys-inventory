@@ -107,10 +107,10 @@ function deleteRow(tableID) {
 			if(null != chkbox && true == chkbox.checked) {
 				if(rowCount <= 1) {
 					swal({
-					title: "Error!",
-					text: "Cannot delete all rows.",
-					type: "error",
-					confirmButtonText: "Ok"
+						title: "Error!",
+						text: "Cannot delete all rows.",
+						type: "error",
+						confirmButtonText: "Ok"
 					});
 					break;
 				}
@@ -126,8 +126,8 @@ function deleteRow(tableID) {
 	}
 }
 
-function addRow(tableID) {
-	var table = document.getElementById(tableID);
+function addRow(dataTable) {
+	var table = document.getElementById(dataTable);
 	var rowCount = table.rows.length;
 	var row = table.insertRow(rowCount);
 	var colCount = table.rows[1].cells.length;
