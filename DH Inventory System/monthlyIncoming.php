@@ -148,6 +148,22 @@
 				$query->execute();
 				$result = $query->fetchAll();
 			}
+			
+			$query2 = $conn->prepare("SELECT DISTINCT MONTHNAME(inDate) AS nowMonthDate, (SELECT DISTINCT YEAR(inDate) FROM incoming) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
+								FROM incoming;");
+			$query2->execute();
+			$result2 = $query2->fetchAll();
+			
+			$query3 = $conn->prepare("SELECT DISTINCT YEAR(inDate) AS nowYearDate FROM incoming");
+			$query3->execute();
+			$result3 = $query3->fetchAll();
+		?>
+		
+		<!-- Sorting Function -->
+		<?php 
+			$sortMonth = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
+			$sortYear = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
+			$location =  $_SERVER['REQUEST_URI']; 
 		?>
 	
 		<!-- Top Main Header -->
@@ -223,54 +239,75 @@
 				<?php
 					foreach ($result as $item):
 				?>
+				
 				<?php
 					endforeach;
 				?>
 		
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
-						<div class="pages no-more-tables">	
-							<div class="container">
-								<div class="tab-content clearfix">
-						
-									<!-- Incoming Product Summary -->
-									<div class="tab-pane active" id="mainInSummary">
-										<h2 id="inheaders">Product Delivery Summary for the Month </h2>
-									
-										<hr>
-										<div class="pages no-more-tables">
-											<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-												<div id="myTable_length" class="dataTables_length">
-													<div id="myTable_filter" class="dataTables_filter">
-													</div>
-												</div>
+						<div id="tableHeader">
+							<h1 id="headers">Product Delivery Summary for the Month </h1>
+							<table class="table">	
+								<tr>
+									<td>
+										<form class="form-inline" action="<?php echo $location; ?>" method="post">
+											<label>View Previous Entries</label>
+											<div class="form-group">
+												<select name="dateMonthName" class="form-control">
+													<option value="<?php echo $sortMonth; ?>" SELECTED>MONTH: <?php echo $sortMonth; ?></option>
+													<?php foreach ($result2 as $row): ?>
+														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+													<?php endforeach ?>
+												</select>
 											</div>
-													
-											<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-												<thead>							
-													<tr>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Name</th>
-														<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-														foreach ($result as $item):
-													?>
-													<tr id="centerData">
-														<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Total Quantity"><?php echo $item["totInQty"]; ?></td>
-													</tr>
-														
-													<?php
-														endforeach;
-													?>
-												</tbody>
-											</table>
-										</div>							
-									</div>	
+											<div class="form-group">
+												<select name="dateYearName" class="form-control">
+													<option value="<?php echo $sortYear; ?>" SELECTED>YEAR: <?php echo $sortYear; ?></option>
+													<?php foreach ($result3 as $row): ?>
+														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>	
+											<div class="form-group">
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="filter">
+											</div>
+										</form>			
+									</td>
+								</tr>
+							</table>
+						</div>
+					
+						<div class="pages no-more-tables">	
+							<hr>						
+							<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+								<div id="myTable_length" class="dataTables_length">
+									<div id="myTable_filter" class="dataTables_filter">
+									</div>
 								</div>
 							</div>
+									
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>							
+									<tr>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Name</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										foreach ($result as $item):
+									?>
+									<tr id="centerData">
+										<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Total Quantity"><?php echo $item["totInQty"]; ?></td>
+									</tr>
+										
+									<?php
+										endforeach;
+									?>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
