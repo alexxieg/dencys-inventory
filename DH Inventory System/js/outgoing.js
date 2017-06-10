@@ -133,7 +133,7 @@ function addRow(tableID) {
 	var colCount = table.rows[1].cells.length;
 	for(var i=0; i<colCount; i++) {
 		var newcell = row.insertCell(i);
-		if(i==1){
+		if(i==3){
 			newcell.innerHTML = (rowCount+1)
 		}
 		else{
