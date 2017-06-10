@@ -48,14 +48,23 @@
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+		
+		<script src="datatables/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
+		
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+		<link href="datatables/media/css/bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/FixedHeader/css/fixedHeader.bootstrap.min.css"rel="stylesheet">
 
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-                $('#myTable').DataTable( {
+                var table = $('#myTable').DataTable( {
+					fixedHeader: {
+							header: true,
+							headerOffset: 50
+						},
                     dom: 'Bfrtip',
 					"order": [[2, "desc"]],
 					lengthMenu: [
@@ -258,7 +267,7 @@
 										<td data-title="Employee"><?php echo $item["empName"]; ?></td>
 										<td data-title="User"><?php echo $item["userID"]; ?></td>
 										<td>
-											<a href="functionalities/viewProdDelivery.php?incId=<?php echo $incRec; ?>"> 
+											<a href="functionalities/userViewProdDelivery.php?incId=<?php echo $incRec; ?>"> 
 											<button type="button" class="btn btn-default" id="edBtn">
 												<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 											</button>
@@ -366,7 +375,7 @@
 														<td data-title="Receipt Date"><?php echo $item["receiptDate"]; ?></td>
 														<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
 														<td>
-															<a href="functionalities/viewProdDelivery.php?incId=<?php echo $incID; ?>"> 
+															<a href="functionalities/userViewProdDelivery.php?incId=<?php echo $incID; ?>"> 
 															<button type="button" class="btn btn-default" id="edBtn">
 																<span class="glyphicon glyphicon-th-list aria-hidden="true"></span>
 															</button>

@@ -46,10 +46,8 @@
 		<script src="datatables/Buttons/js/dataTables.buttons.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.bootstrap.min.js"></script>
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
-
 		<script src="datatables/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
-		
 		<link href="datatables/media/css/bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/FixedHeader/css/fixedHeader.bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/FixedHeader/css/fixedHeader.dataTables.min.css"rel="stylesheet">

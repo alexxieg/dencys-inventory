@@ -45,14 +45,23 @@
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+		
+		<script src="datatables/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
+		
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+		<link href="datatables/media/css/bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/FixedHeader/css/fixedHeader.bootstrap.min.css"rel="stylesheet">
 
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-                $('#myTable').DataTable( {
+                var table = $('#myTable').DataTable( {
+					fixedHeader: {
+							header: true,
+							headerOffset: 50
+						},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
@@ -254,17 +263,6 @@
 							<!-- Table for Inventory Data-->
 							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 								<thead>	
-									<tr>
-										<td colspan="13" style="font-size: 35px;">
-											<?php
-											$month = $conn->prepare("SELECT concat( MONTHNAME(curdate()), ' ', YEAR(curdate())) as 'month';");
-											$month->execute();
-											$monthres = $month->fetchAll();
-											foreach ($monthres as $monthshow)
-											echo $monthshow["month"];
-											?>	
-										</td>
-									</tr>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 											<div id="tabHead">Product ID</div>

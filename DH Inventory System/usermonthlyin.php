@@ -48,14 +48,22 @@
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+		<script src="datatables/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
+		<link href="datatables/media/css/bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/FixedHeader/css/fixedHeader.bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/FixedHeader/css/fixedHeader.dataTables.min.css"rel="stylesheet">
 
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-                $('#myTable').DataTable( {
+               var table = $('#myTable').DataTable( {
+					fixedHeader: {
+						header: true,
+						headerOffset: 50
+					},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
