@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Incoming Products</title>
+		<title>Products</title>
 		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -129,7 +129,7 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<div id="sidebarLogo"><img src="logo.png" alt=""/></div>
-						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory</span><i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#"data-toggle="collapse" data-target="#inventory"><i class="glyphicon glyphicon-list-alt"></i> Inventory<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="inventory">
 								<li><a href="userinventory.php"><i class="glyphicon glyphicon-list"></i> Current Inventory</a></li>
 								<li><a href="userDefectives.php"><i class="glyphicon glyphicon-list"></i> Defectives</a></li>
@@ -142,13 +142,13 @@
 							</ul>
 						</li>
 						<li><a href="userProdIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="userReturnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="userreturnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="userbranchreport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 								<li><a href="usermonthlyin.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
@@ -179,12 +179,17 @@
 									<h1 id="headers">PRODUCTS</h1>
 									<table class="table">	
 								   		<tr>
+											<td width="50%">
+												<button id="modbutt" type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#archive">View Archive</button>
+											</td>
+											
 											<?php 
 												$location =  $_SERVER['REQUEST_URI']; 
 											?>
-											<td>
+											
+											<td width="50%">
 												<form action="<?php echo $location; ?>" method="POST">
-													<label>Filter By Brand / Category</label>
+													<label>View by Brand / Category</label>
 													
 													<select name="brand_Name">
 														<option value="<?php echo $selectedBrand?>" SELECTED>Brand: <?php echo $filterBrand?></option>
@@ -201,137 +206,60 @@
 															<option value="<?=$row2["categoryID"]?>"><?=$row2["categoryName"]?></option>
 														<?php endforeach ?>
 													</select>	
-												<input type="submit" value="Filter" class="btn btn-success" name="submit">
-											</form>
-										</td>
-									</tr>
+													<input type="submit" value="Filter" class="btn btn-success" name="submit">
+												</form>
+											</td>
+										</tr>
+									</table>
 								</table>
-							</table>
-						</div>
-						
-						<!-- Table Display for Products -->
-						<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-							<thead>
-								<tr id="centerData">
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Product ID</div>
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Product Description</div>							
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Brand</div>
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Category</div>
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										Unit
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
-										<div id="tabHead">Price</div>
-									</th>					
-								</tr>
-							</thead>
-							<tbody>
-
-								<?php
-									foreach ($result as $item):
-									$proID = $item["prodID"];
-								?>
-								<tr id="centerData">
-									<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-									<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-									<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-									<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-									<td data-title="Unit"><?php echo $item["unitType"];?></td>
-									<td data-title="Price"><?php echo $item["price"]; ?></td>			
-								</tr>	
-								<?php
-									endforeach;
-								?>
-							</tbody>	
-						</table>
-							
-						<!-- Modal - New Product Form -->
-						<div class="modal fade" id="myModal" role="dialog">
-							<div class="modal-dialog modal-lg">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Add New Product</h4>
-									</div>
-									<div class="modal-body">
-										<form action="" method="POST" onsubmit="return validateForm()">
-											<h3>Product Name</h3>
-											<input type="text" class="form-control" id ="addProdName" placeholder="Name" name="prodItem"> <br>
-													
-											<h3>Quantity</h3>
-											<input type="number" min = "1" class="form-control" id ="addQty" placeholder="Item Quantity" name="prodQty"> <br>
-											
-											<h3>Category</h3>
-											<?php
-												$query = $conn->prepare("SELECT categoryName FROM category ");
-												$query->execute();
-												$res = $query->fetchAll();
-											?>
-														
-											<select class="form-control" id="addEntry" name="prodCateg">
-												<?php foreach ($res as $row): ?>
-													<option><?=$row["categoryName"]?></option>
-												<?php endforeach ?>
-											</select> 
-											<br>
-													
-											<h3>Brand</h3>
-											<?php
-												$query = $conn->prepare("SELECT brandName FROM brand ");
-												$query->execute();
-												$res = $query->fetchAll();
-											?>
-														
-											<select class="form-control" id="addEntry" name="prodBrand">
-												<?php foreach ($res as $row): ?>
-													<option><?=$row["brandName"]?></option>
-												<?php endforeach ?>
-											</select> 
-											<br>
-															
-											<h3>Unit</h3>
-												<select class="form-control" id="addEntry" name="prodUnit">
-													<option>Box/es</option>
-													<option>Kilogram/s</option>
-													<option>Piece/s</option>
-													<option>Set/s</option>
-													<option>Yard/s</option>
-													<option>Roll/s</option>
-												</select> 
-														
-											<h3>Price</h3>
-											<input type="number" class="form-control" id ="addPrice" placeholder="Unit Price" name="prodPrice"> <br>
-											
-											<h3>Reorder Level</h3>
-											<input type="number" class="form-control" id ="addReorderLvl" placeholder="Reorder Level" name="prodRO"> <br>
-													
-											<br>
-													
-											<div class="modFoot">
-												<span>
-													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
-												</span>
-												<span>
-													<input type="submit" value="Submit" class="btn btn-success" name="addProd" id="sucBtn">
-												</span>
-											</div>			
-										</form>
-
-										<div class="modal-footer">
-										</div>
-										</div>
-									</div>
-								</div>
 							</div>
-								
+							
+							<hr>
+							
+							<!-- Table Display for Products -->
+							<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+								<thead>
+									<tr id="centerData">
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product ID</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Product Description</div>							
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Brand</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Category</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Unit</div>
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+											<div id="tabHead">Price</div>
+										</th>					
+									</tr>
+								</thead>
+								<tbody>
+
+									<?php
+										foreach ($result as $item):
+										$proID = $item["prodID"];
+									?>
+									<tr id="centerData">
+										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+										<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+										<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
+										<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
+										<td data-title="Unit"><?php echo $item["unitType"];?></td>
+										<td data-title="Price"><?php echo $item["price"]; ?></td>			
+									</tr>	
+									<?php
+										endforeach;
+									?>
+								</tbody>	
+							</table>
+														
 							<!-- Modal - Product Archive -->
 							<div class="modal fade" id="archive" role="dialog">
 								<div class="modal-dialog modal-xl">
@@ -345,8 +273,8 @@
 											
 												<!-- Retrieve Product Data -->
 												<?php
-													$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel
-																				FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID
+													$query = $conn->prepare("SELECT product.prodID, product.prodName, brand.brandName, category.categoryName, product.price, product.unitType, product.reorderLevel, product.archiveDate, inventory.qty
+																				FROM product INNER JOIN brand ON product.brandID = brand.brandID INNER JOIN category ON product.categoryID = category.categoryID INNER JOIN inventory ON product.prodID = inventory.prodID
 																				WHERE product.status = 'Inactive'
 																				ORDER BY prodID");
 													$query->execute();
@@ -356,10 +284,13 @@
 												<thead>
 													<tr id="centerData">
 														<th>
+															<div id="tabHead">Date Archived</div>
+														</th>
+														<th>
 															<div id="tabHead">Product ID</div>
 														</th>
 														<th>
-															<div id="tabHead">Product Description</div>							
+															<div id="tabHead">Product Name</div>							
 														</th>
 														<th>
 															<div id="tabHead">Brand</div>
@@ -372,45 +303,27 @@
 														</th>
 														<th>
 															<div id="tabHead">Price</div>
-														</th>					
-														<th></th>
+														</th>
+														<th>
+															<div id="tabHead">Quantity Left</div>
+														</th>																
 													</tr>
 												</thead>
 												<tbody>
 													
-													<tr id="centerData">
-														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-														<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
-														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
-														<td data-title="Unit"><?php echo $item["unitType"];?></td>
-														<td data-title="Price"><?php echo $item["price"]; ?></td>
-														<td>
-															<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
-																	Restore
-																</button>
-															</a>
-														</td>				
-													</tr>
 													<?php
 														foreach ($result as $item):
 														$proID = $item["prodID"];
 													?>	
 													<tr id="centerData">
+														<td data-title="Date Archived"><?php echo $item["archiveDate"]; ?></td>
 														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
 														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
 														<td data-title="Brand"><?php echo $item["brandName"]; ?></td>
 														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 														<td data-title="Unit"><?php echo $item["unitType"];?></td>
 														<td data-title="Price"><?php echo $item["price"]; ?></td>
-														<td>
-															<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this entry?');" id="delBtn1">
-																	Restore
-																</button>
-															</a>
-														</td>				
+														<td data-title="Quantity"><?php echo $item["qty"]; ?></td>				
 													</tr>
 													<?php
 														endforeach;

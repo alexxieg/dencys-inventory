@@ -1,5 +1,4 @@
 <?php
-
 	require_once 'dbcon.php';
 
     $proid= $_GET['proId'];
@@ -10,5 +9,4 @@
 	$result1->execute();
 	
     header("location: ../product.php");
-
 ?>
