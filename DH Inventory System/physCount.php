@@ -46,29 +46,60 @@
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
-
+		<script src="datatables/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
-		<link href="datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
-
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
-        <script src="datatables/Buttons/js/buttons.print.min.js"></script>
-		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+		<link href="datatables/media/css/bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/FixedHeader/css/fixedHeader.bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/FixedHeader/css/fixedHeader.dataTables.min.css"rel="stylesheet">
 		
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-				$('#myTable').DataTable( {
-					dom: 'Bfrtip',
+                var table = $('#myTable').DataTable( {
+					fixedHeader: {
+						header: true,
+						headerOffset: 50
+					},
+                    dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
-						[ '10 rows', '25 rows', '50 rows', '100 rows','Show all' ]
+						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
 					],
-					buttons: [
-						'pageLength'
-					]
-				} );
-			} );		
+                    buttons: [
+                        {
+                            title: 'Dencys Hardware and General Merchandise', 
+							message: 'PHysical Count', 
+							customize: function ( win ) {
+                                $(win.document.body)
+                                    .css( 'font-size', '10pt' )
+                                    .prepend(
+                                        '<img src="http://localhost/dencys/DH%20Inventory%20System/logo.png" style="position:relative; bottom:5%; float: right; height:120px; width:120px;" />'
+                                    );
+
+                                $(win.document.body).find( 'table' )
+                                    .addClass( 'compact' )
+                                    .css( 'font-size', 'inherit' );
+                            },
+                               extend: 'print',
+                                exportOptions: {
+                                columns: ':visible',
+									modifier: {
+											page: 'current'
+										}
+                                }
+                        },
+							{extend:'colvis', text: 'Select Column'},'pageLength',
+
+                    ],
+                        columnDefs: [{
+                            targets: -1,
+                            visible: true
+                            
+                        }]
+                } );
+            } );		
 		</script>
 	</head>
 	  
@@ -223,7 +254,7 @@
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">		
 					<div id="contents">
-						<div class="pages no-more-tables">
+					  <div class="pages">
 							<div id="tableHeader">
 								<table class="table table-striped table-bordered">
 									<h1 id="headers">Add Physical Count</h1>
@@ -269,9 +300,11 @@
 							
 							<form action="" method="POST">
 								<input type="submit" name="adjust" value ="Update Physical Quantity" id="phyCountButton">	
+							
+							<!-- Table for Physical Count Data-->	
 								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
 									<thead>
-										<tr id="centerData">
+										<tr>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
 												<div id="tabHead">Product ID</div>
 											</th>
@@ -298,7 +331,6 @@
 											</th>		
 										</tr>
 									</thead>
-									
 									<tbody>
 										<?php
 											foreach ($result3 as $item):
@@ -325,7 +357,6 @@
 										<?php
 											endforeach;
 										?>
-											
 									</tbody>	
 								</table>
 							</form>							
