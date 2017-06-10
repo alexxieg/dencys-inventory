@@ -128,7 +128,7 @@
 		?>
 		
 		<?php 
-			/* For Incoming Product Overall Query */
+			/* For Outgoing Product Overall Query */
 			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
 				$query = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
 										FROM outgoing
@@ -140,14 +140,29 @@
 				$result = $query->fetchAll();
 			} else {
 				$query = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
-									FROM outgoing
-									JOIN product ON outgoing.prodID = product.prodID 
-									WHERE MONTHNAME(outDate) = MONTHNAME(CURDATE()) 
-									AND YEAR(outDate) = YEAR(CURDATE())
-									GROUP BY prodName ORDER BY totOutQty DESC");
+										FROM outgoing
+										JOIN product ON outgoing.prodID = product.prodID 
+										WHERE MONTHNAME(outDate) = MONTHNAME(CURDATE()) 
+										AND YEAR(outDate) = YEAR(CURDATE())
+										GROUP BY prodName ORDER BY totOutQty DESC");
 				$query->execute();
 				$result = $query->fetchAll();
 			}
+			$query2 = $conn->prepare("SELECT DISTINCT MONTHNAME(outDate) AS nowMonthDate, (SELECT DISTINCT YEAR(outDate) FROM outgoing) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
+										FROM outgoing;");
+			$query2->execute();
+			$result2 = $query2->fetchAll();
+			
+			$query3 = $conn->prepare("SELECT DISTINCT YEAR(outDate) AS nowYearDate FROM outgoing");
+			$query3->execute();
+			$result3 = $query3->fetchAll();
+		?>
+		
+		<!-- Sorting Function -->
+		<?php 
+			$sortMonth = (isset($_REQUEST['dateMonthName']) ? $_REQUEST['dateMonthName'] : null);
+			$sortYear = (isset($_REQUEST['dateYearName']) ? $_REQUEST['dateYearName'] : null);
+			$location =  $_SERVER['REQUEST_URI']; 
 		?>
 	
 		<!-- Top Main Header -->
@@ -191,7 +206,7 @@
 							</ul>
 						</li>
 						<li><a href="prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-						<li ><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li ><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
@@ -204,7 +219,7 @@
 								<li><a href="monthlyOutgoing.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (OUT)</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#manage"><i class="glyphicon glyphicon-pencil"></i> Manage<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="manage">
 								<li><a href="accounts.php"><i class="glyphicon glyphicon-lock"></i> Accounts</a></li>
 								<li><a href="branches.php"><i class="glyphicon glyphicon-home"></i> Branches</a></li>
@@ -223,52 +238,76 @@
 				<?php
 					foreach ($result as $item):
 				?>
+				
 				<?php
 					endforeach;
 				?>
 				
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
-						<div class="pages no-more-tables">	
-						  <div class="container">
-							<div class="tab-content clearfix">
-							
-								<!-- Outgoing Product Summary -->
-								<div class="tab-pane active" id="mainOutSummary">
-									<h2 id="inheaders">Product Issuance Summary for the Month</h2>
-								
-									<hr>
-									<div class="pages no-more-tables">
-										<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-											<div id="myTable_length" class="dataTables_length">
-												<div id="myTable_filter" class="dataTables_filter">
-												</div>
+						<div id="tableHeader">
+							<h1 id="headers">MONTHLY PRODUCT ISSUANCE SUMMARY</h1>
+							<table class="table">	
+								<tr>
+									<td>
+										<form class="form-inline" action="<?php echo $location; ?>" method="post">
+											<label>View Previous Entries</label>
+											<div class="form-group">
+												<select name="dateMonthName" class="form-control">
+													<option value="<?php echo $sortMonth; ?>" SELECTED>MONTH: <?php echo $sortMonth; ?></option>
+													<?php foreach ($result2 as $row): ?>
+														<option value="<?=$row["nowMonthDate"]?>"><?=$row["nowMonthDate"]?></option>
+													<?php endforeach ?>
+												</select>
 											</div>
+											<div class="form-group">
+												<select name="dateYearName" class="form-control">
+													<option value="<?php echo $sortYear; ?>" SELECTED>YEAR: <?php echo $sortYear; ?></option>
+													<?php foreach ($result3 as $row): ?>
+														<option value="<?=$row["nowYearDate"]?>"><?=$row["nowYearDate"]?></option>
+													<?php endforeach ?>
+												</select>
+											</div>	
+											<div class="form-group">
+												<input type="submit" value="View" class="btn btn-success" id="viewButton" name="filter">
+											</div>
+										</form>			
+									</td>
+								</tr>
+							</table>
+						</div>
+									
+						<div class="pages no-more-tables">					
+							<hr>
+							<div class="pages no-more-tables">
+								<div id="myTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+									<div id="myTable_length" class="dataTables_length">
+										<div id="myTable_filter" class="dataTables_filter">
 										</div>
-												
-										<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
-											<thead>		
-												<tr id="centerData">
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Name</th>
-													<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													foreach ($result as $item):
-												?>
-												<tr id="centerData">
-													<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
-													<td data-title="Total Quantity"><?php echo $item["totOutQty"]; ?></td>
-												</tr>	
-												<?php
-													endforeach;
-												?>
-											</tbody>
-										</table>
-									</div>							
+									</div>
 								</div>
-							</div>
+										
+								<table id="myTable" class="table table-hover table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="myTable_info" style="width: 100%;">
+									<thead>		
+										<tr id="centerData">
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Product Name</th>
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Total Quantity</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+											foreach ($result as $item):
+										?>
+										<tr id="centerData">
+											<td data-title="Product Name"><?php echo $item["prodName"]; ?></td>
+											<td data-title="Total Quantity"><?php echo $item["totOutQty"]; ?></td>
+										</tr>	
+										<?php
+											endforeach;
+										?>
+									</tbody>
+								</table>
+							</div>							
 						</div>
 					</div>
 				</div>

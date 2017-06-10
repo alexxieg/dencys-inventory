@@ -7738,5 +7738,10 @@ border: none;
 #test{
 	width: 120%;
 	margin: none;
-	
+}
+
+#mainInSummary{
+	margin-left: 10%;
+	margin-right: 10%;
+	padding:10%;
 }

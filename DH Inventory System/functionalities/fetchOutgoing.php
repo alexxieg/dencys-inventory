@@ -26,7 +26,5 @@
 	
 	$query3 = $conn->prepare("SELECT DISTINCT YEAR(outDate) AS nowYearDate FROM outgoing");
 	$query3->execute();
-	$result3 = $query3->fetchAll();
-
-	
+	$result3 = $query3->fetchAll();	
 ?>
