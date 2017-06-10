@@ -128,7 +128,7 @@
 		?>
 		
 		<?php 
-			/* For Incoming Product Overall Query */
+			/* For Outgoing Product Overall Query */
 			if (!empty($sortByMonthDate) AND !empty($sortByYearDate)) {
 				$query = $conn->prepare("SELECT prodName, SUM(outQty) AS totOutQty
 										FROM outgoing
@@ -156,7 +156,6 @@
 			$query3 = $conn->prepare("SELECT DISTINCT YEAR(outDate) AS nowYearDate FROM outgoing");
 			$query3->execute();
 			$result3 = $query3->fetchAll();
-
 		?>
 		
 		<!-- Sorting Function -->
@@ -239,6 +238,7 @@
 				<?php
 					foreach ($result as $item):
 				?>
+				
 				<?php
 					endforeach;
 				?>
@@ -246,7 +246,7 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
 						<div id="tableHeader">
-							<h1 id="headers">Product Issuance Summary for the Month </h1>
+							<h1 id="headers">MONTHLY PRODUCT ISSUANCE SUMMARY</h1>
 							<table class="table">	
 								<tr>
 									<td>

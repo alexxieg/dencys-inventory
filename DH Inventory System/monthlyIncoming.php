@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<title>Monthly Product Deliver Summary</title>
+		<title>Monthly Product Delivery Summary</title>
 		
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
@@ -150,7 +150,7 @@
 			}
 			
 			$query2 = $conn->prepare("SELECT DISTINCT MONTHNAME(inDate) AS nowMonthDate, (SELECT DISTINCT YEAR(inDate) FROM incoming) AS nowYearDate, MONTH(curdate()) AS currentMonthDate 
-								FROM incoming;");
+										FROM incoming;");
 			$query2->execute();
 			$result2 = $query2->fetchAll();
 			
@@ -247,7 +247,7 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">	
 					<div id="contents">
 						<div id="tableHeader">
-							<h1 id="headers">Product Delivery Summary for the Month </h1>
+							<h1 id="headers">MONTHLY PRODUCT DELIVERIES SUMMARY</h1>
 							<table class="table">	
 								<tr>
 									<td>
