@@ -168,7 +168,7 @@
 							<h1 id="headers">Edit Product Delivery Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST" onsubmit="return validateForm2()">
+								<form action="" method="POST" onsubmit="return validateForm()">
 									<h3>User</h3>
 									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								

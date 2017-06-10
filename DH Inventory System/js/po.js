@@ -36,7 +36,7 @@ function validateForm2() {
 	
 }
 
-
+var edit;
 function validateForm() {	
 	if (document.getElementById('addPO').value == "") {
 		swal({
@@ -63,15 +63,26 @@ function validateForm() {
         document.getElementById('addSupplier').style.borderColor = "lightblue";
 	}
 	
-	if(confirm('Are you sure you want to update this entry?')) {
-		return true;		
-	}
-	else {
+	if(edit != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of entry cancelled.",
-		type: "success"
+		  title: '<b>Confirm New Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this entry?.",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'<button id="thisButton" class="btn-success">YES</button>',
+		  cancelButtonText:
+			'<button class="btn-danger">CANCEL</button>'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			edit = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 
