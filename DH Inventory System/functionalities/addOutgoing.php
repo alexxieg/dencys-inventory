@@ -76,13 +76,13 @@
 			}
         }
 
-		/**$role = $_SESSION['sess_role'];
+		$role = $_SESSION['sess_role'];
 		if($role == 'admin'){
 			$url='prodIssuance.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}else{
 			$url='userProdIssuance.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-		}*/
+		}
     }
 ?>	
