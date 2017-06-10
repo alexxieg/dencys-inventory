@@ -110,7 +110,7 @@ function deleteRow(tableID) {
 			var row = table.rows[i];
 			var chkbox = row.cells[0].childNodes[0];
 			if(null != chkbox && true == chkbox.checked) {
-				if(rowCount <= 1) {
+				if(rowCount <= 2) {
 					swal({
 		title: "Error!",
 		text: "Cannot delete all Rows",
