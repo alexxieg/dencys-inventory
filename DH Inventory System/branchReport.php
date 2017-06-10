@@ -47,14 +47,22 @@
 		<script src="datatables/media/js/buttons.html5.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.print.min.js"></script>
 		<script src="datatables/Buttons/js/buttons.colVis.min.js"></script>
+		<script src="datatables/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
 		<link href="datatables/media/css/dataTables.bootstrap.min.css"rel="stylesheet">
 		<link href="datatables/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet">		
         <link href="datatables/Buttons/css/buttons.dataTables.min.css"rel="stylesheet">
-		
-		<!-- Datatables Script-->
+		<link href="datatables/media/css/bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/FixedHeader/css/fixedHeader.bootstrap.min.css"rel="stylesheet">
+		<link href="datatables/FixedHeader/css/fixedHeader.dataTables.min.css"rel="stylesheet">
+
+		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-                $('#myTable').DataTable( {
+               var table = $('#myTable').DataTable( {
+					fixedHeader: {
+						header: true,
+						headerOffset: 50
+					},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
@@ -95,7 +103,11 @@
             } );		
 			
 			$(document).ready(function() {
-                $('#myTable1').DataTable( {
+                 var table = $('#myTable1').DataTable( {
+					fixedHeader: {
+						header: true,
+						headerOffset: 50
+					},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
@@ -136,7 +148,11 @@
             } );	
 
 			$(document).ready(function() {
-                $('#myTable2').DataTable( {
+                 var table = $('#myTable2').DataTable( {
+					fixedHeader: {
+						header: true,
+						headerOffset: 50
+					},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
@@ -177,7 +193,11 @@
             } );	
 
 			$(document).ready(function() {
-                $('#myTable3').DataTable( {
+                 var table = $('#myTable3').DataTable( {
+					fixedHeader: {
+						header: true,
+						headerOffset: 50
+					},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
@@ -218,7 +238,11 @@
             } );	
 
 			$(document).ready(function() {
-                $('#myTable4').DataTable( {
+                 var table = $('#myTable4').DataTable( {
+					fixedHeader: {
+						header: true,
+						headerOffset: 50
+					},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
@@ -259,7 +283,11 @@
             } );	
 
 			$(document).ready(function() {
-                $('#myTable5').DataTable( {
+                 var table = $('#myTable5').DataTable( {
+					fixedHeader: {
+						header: true,
+						headerOffset: 50
+					},
                     dom: 'Bfrtip',
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
