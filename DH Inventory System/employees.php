@@ -198,8 +198,10 @@
 								</thead>
 								<tbody>
 									<?php
+										$counter = 0;
 										foreach ($result as $item):
 										$employID = $item["empID"];
+										$counter = $counter + 1;
 									?>
 										
 									<tr id="centerData">
@@ -216,7 +218,7 @@
 											</a>	
 										
 											<a href="functionalities/removeEmployee.php?emplId=<?php echo $employID; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this employee?');">
+												<button type="button" class="btn btn-default" id="<?php echo "edBtn $counter"; ?>" onclick="return validateRemove(this.id);">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -311,9 +313,12 @@
 												<tbody>
 														
 													<?php
+														$counter = 0;
 														foreach ($result1 as $item):
 														$employID = $item["empID"];
+														$counter = $counter + 1;
 														?>
+														
 													<tr id="centerData">
 														<td data-title="Employee ID"><?php echo $item["empID"]; ?></td>
 														<td data-title="First Name"><?php echo $item["empFirstName"]; ?></td>
@@ -322,7 +327,7 @@
 														<td data-title="Extension Name"><?php echo $item["empExtensionName"]; ?></td>
 														<td>										
 															<a href="functionalities/restoreEmployee.php?emplId=<?php echo $employID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this employee?');">
+																<button type="button" class="btn btn-default" id="<?php echo "sucBttn$counter"; ?>" onclick="return validateRestore(this.id);">
 																	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
