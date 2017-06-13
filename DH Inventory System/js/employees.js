@@ -56,6 +56,7 @@ function validateForm() {
 	}
 }
 
+var check;
 function validateForm2() {
 	if (document.getElementById('addEntry1').value == "") {
 		swal({
@@ -90,14 +91,25 @@ function validateForm2() {
 		return false;
 	}
 
-	if(confirm('Are you sure you want to update this employee?')) {
-		return true;			
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Updating of employee cancelled.",
-		type: "success"
+		  title: '<b>Confirm New Employee</b>',
+		  type: 'info',
+		  text: "Are you sure you want to update this employee?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
