@@ -1,7 +1,7 @@
 <?php
 	$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
     if (isset($_POST['submit'])) {
-
+		$stop = false;
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 		for ($index = 0; $index < count($prodTem); $index++) {
@@ -67,6 +67,7 @@
 						echo '$("#myModal").modal("show");';
 						echo 'document.getElementById("addRcpt").style.borderColor = "red";';
 						echo '</script>';
+						$stop = true;
 					} else {
 						$sql = "INSERT INTO outgoing (outQty, outDate, receiptNo, branchID, empID, prodID, userID)
 						VALUES ('$outQty',CURDATE(),'$prod','$branch3','$emp3','$prod3','$userID')";
@@ -75,14 +76,20 @@
 				}
 			}
         }
-
-		$role = $_SESSION['sess_role'];
-		if($role == 'admin'){
-			$url='prodIssuance.php';
-			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
-		}else{
-			$url='userProdIssuance.php';
-			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+		
+		if($stop == false) {
+			$role = $_SESSION['sess_role'];
+			if($role == 'admin'){
+				$url='prodIssuance.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+			}else{
+				$url='userProdIssuance.php';
+				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
+			}
+		} else {
+			
+			//Stop for now
 		}
+		
     }
 ?>	
