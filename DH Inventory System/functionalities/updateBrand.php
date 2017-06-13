@@ -8,7 +8,7 @@
 				
 				$brandID = $_POST['branID'];
 				$brandName = $_POST['branName'];
-				$query = $conn->prepare("Select * FROM brand WHERE brandID = '$brandID' OR brandName = '$brandName'");
+				$query = $conn->prepare("Select * FROM brand WHERE brandID = '$brandID' AND brandID != '$brandEditID'");
 				$count = $query->execute();
 				$row = $query->fetch();
 
@@ -16,12 +16,30 @@
 					echo '<script language="javascript">';
 					echo 'swal(
 						  "Error!",
-						  "Brand Already Exists, Brand Has Not been Updated",
+						  "Brand ID Already Exists, Brand Has Not been Updated",
 						  "error");';
 					echo '$("#myModal").modal("show");';
 					echo 'document.getElementById("addBrandID").style.borderColor = "red";';
+					echo '</script>';
+					return false;
+				}
+				
+				$brandID = $_POST['branID'];
+				$brandName = $_POST['branName'];
+				$query = $conn->prepare("Select * FROM brand WHERE brandName = '$brandName' AND brandID != '$brandEditID'");
+				$count = $query->execute();
+				$row = $query->fetch();
+
+				if ($query->rowCount() > 0){
+					echo '<script language="javascript">';
+					echo 'swal(
+						  "Error!",
+						  "Brand Name Already Exists, Brand Has Not been Updated",
+						  "error");';
+					echo '$("#myModal").modal("show");';
 					echo 'document.getElementById("addBrandName").style.borderColor = "red";';
 					echo '</script>';
+					
 				} else {
 			 
 				$sql = "UPDATE brand SET brandID = '$braID', brandName = '$braName' WHERE brandID = '$brandEditID'";
