@@ -12,7 +12,7 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				
 				$prodItem = $_POST['prodItem'];
-				$query = $conn->prepare("Select * FROM product WHERE prodName = '$prodItem'");
+				$query = $conn->prepare("Select * FROM product WHERE prodName = '$prodItem' AND prodID !='$proID'");
 				$count = $query->execute();
 				$row = $query->fetch();
 
