@@ -218,7 +218,7 @@
 												</button>
 											</a>
 											<a href="functionalities/removeAccount.php?useId=<?php echo $useThisID; ?>"> 
-												<button type="button" class="btn btn-default" id="sucBttn" onclick="return validateRemove();">
+												<button type="button" class="btn btn-default" id="sucBttn" name="xdd" onclick="return validateRemove();">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -324,7 +324,7 @@
 														<td>
 															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
 																<button type="button" class="btn btn-default" id="sucBtttn" onclick="return validateRestore();">
-																	Restore
+																<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
 														</td>			
