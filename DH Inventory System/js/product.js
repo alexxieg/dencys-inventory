@@ -1,3 +1,4 @@
+var check;
 function validateForm() {
 	if (document.getElementById('addProdName').value == "") {
 		swal({
@@ -54,15 +55,26 @@ function validateForm() {
 		return false;
 	}
 	
-	if(confirm('Are you sure you want to add this entry?')) {
-		return true;	
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of product cancelled",
-		type: "success"
+		  title: '<b>Confirm New Product</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 
