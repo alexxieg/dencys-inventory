@@ -63,7 +63,7 @@ function validateForm() {
 		return false;		
 	}
 }
-var check;
+var edit;
 function validateForm2() {
 	var compDate = document.getElementById('thisPODate').value; 
 	var compDate2 = document.getElementById('addRcptDate').value;
@@ -118,21 +118,21 @@ function validateForm2() {
         document.getElementById('addSupplier').style.borderColor = "blue";
 	}
 	
-	if(check != true) {
+	if(edit != true) {
 		event.preventDefault();
 		swal({
 		  title: '<b>Confirm New Entry</b>',
 		  type: 'info',
-		  text: "Are you sure you want to add this entry?",
+		  text: "Are you sure you want to add this entry?.",
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton" class="btn-success">YES</button>',
+			'YES',
 		  cancelButtonText:
-			'<button class="btn-danger">CANCEL</button>'
+			'CANCEL'
 		});
 		$('#thisButton').click(function(){
-			check = true;
+			edit = true;
 			document.getElementById('sucBtn').click();
 		});
 		
