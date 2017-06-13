@@ -97,8 +97,8 @@ function validateRemove(clicked_id) {
 	if(remove != true) {
 		event.preventDefault();
 		swal({
-		  title: 'Confirm Remove Account',
-		  text: "Are you sure you want to remove this account?",
+		  title: 'Confirm Remove Branch',
+		  text: "Are you sure you want to remove this branch?",
 		  type: 'warning',
 		  showCancelButton: true,
 		  confirmButtonText:
@@ -118,8 +118,8 @@ function validateRestore(clicked_id) {
 	if(restore != true) {
 		event.preventDefault();
 		swal({
-		  title: 'Confirm Restore Account',
-		  text: "Are you sure you want to restore this account?",
+		  title: 'Confirm Restore Branch',
+		  text: "Are you sure you want to restore this branch?",
 		  type: 'warning',
 		  showCancelButton: true,
 		  confirmButtonText:
