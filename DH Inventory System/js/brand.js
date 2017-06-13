@@ -1,3 +1,4 @@
+var check;
 function validateForm() {
 	if(document.getElementById('addBrandID').value == "") {
 		swal({
@@ -29,15 +30,26 @@ function validateForm() {
 		document.getElementById('addBrandName').style.borderColor = "red";
 		return false;
 	}
-	if(confirm('Are you sure you want to add this brand?')) {
-		return true;
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of brand cancelled",
-		type: "success"
+		  title: '<b>Confirm New Brand</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this brand?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'CANCEL'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 

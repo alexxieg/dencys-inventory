@@ -16,7 +16,7 @@
 				  "Brand ID Already Exists, New Brand Has Not been Added",
 				  "error");';
 			echo '$("#myModal").modal("show");';
-			echo 'document.getElementById("addBrandName").style.borderColor = "red";';
+			echo 'document.getElementById("addBrandID").style.borderColor = "red";';
 			echo '</script>';
 			return false;
 		}
