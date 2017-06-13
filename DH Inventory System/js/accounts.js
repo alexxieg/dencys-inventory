@@ -192,8 +192,8 @@ function validateRemove(clicked_id) {
 	if(remove != true) {
 		event.preventDefault();
 		swal({
-		  title: 'Are you sure?',
-		  text: "You will regret this!",
+		  title: 'Confirm Remove Account',
+		  text: "Are you sure you want to remove this account?",
 		  type: 'warning',
 		  showCancelButton: true,
 		  confirmButtonText:
@@ -207,29 +207,24 @@ function validateRemove(clicked_id) {
 	}
 }
 
-var check;	
-function validateRestore() {
+var restore;	
+function validateRestore(clicked_id) {
 	
-	if(check != true) {
+	if(restore != true) {
 		event.preventDefault();
 		swal({
-		  title: '<b>Confirm Restore Entry</b>',
-		  type: 'info',
-		  text: "Are you sure you want to restore this entry?",
-		  showCloseButton: true,
+		  title: 'Confirm Restore Account',
+		  text: "Are you sure you want to restore this account?",
+		  type: 'warning',
 		  showCancelButton: true,
 		  confirmButtonText:
 			'YES',
 		  cancelButtonText:
 			'Cancel'
-		});
-		$('#thisButton').click(function(){
-			check = true;
-			document.getElementById('sucBtttn').click();
-		});
-		
-	} else {
-		return true;
+		}).then(function () {
+			restore = true;
+			document.getElementById(clicked_id).click();
+		})
 	}
 }
 

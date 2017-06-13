@@ -317,8 +317,10 @@
 												<tbody>						
 														
 													<?php
+														$counter = 0;
 														foreach ($result1 as $item):
 														$useThisID = $item["userID"];
+														$counter = $counter + 1;
 													?>
 													<tr id="centerData">	
 														<td data-title="Username"><?php echo $item["userName"]; ?></td>
@@ -326,7 +328,7 @@
 														<td data-title="Status"><?php echo $item["status"]; ?></td>
 														<td>
 															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" id="sucBtttn" onclick="return validateRestore();">
+																<button type="button" class="btn btn-default" id="<?php echo "sucBtttn$counter"; ?>" onclick="return validateRestore(this.id);">
 																<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
