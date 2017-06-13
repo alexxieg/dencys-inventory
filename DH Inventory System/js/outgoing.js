@@ -35,6 +35,7 @@ function validateForm() {
 	}
 }
 
+var check;
 function validateForm2() {
 	if (document.getElementById('prod').value == "") {
 		swal({
@@ -60,15 +61,26 @@ function validateForm2() {
 		return false;
 	}
 	
-	if(confirm('Are you sure you want to update this entry?')) {
-		return true;		
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of entry cancelled",
-		type: "success"
+		  title: '<b>Confirm New Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to update this entry/s?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'CANCEL'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 var check;
@@ -82,9 +94,9 @@ function validateForm3() {
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton" class="btn-success">YES</button>',
+			'YES',
 		  cancelButtonText:
-			'<button class="btn-danger">CANCEL</button>'
+			'CANCEL'
 		});
 		$('#thisButton').click(function(){
 			check = true;
