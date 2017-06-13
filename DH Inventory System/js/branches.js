@@ -45,6 +45,7 @@ function validateForm() {
 	}
 }
 
+var edit;
 function validateForm2() {
 	if(document.getElementById('addEntry').value == "") {
 		swal({
@@ -68,15 +69,77 @@ function validateForm2() {
 		return false;
 	}
 
-	if(confirm('Are you sure you want to update this branch?')) {
-		alert("Updated branch successfully!");
-		return true;	
-	}
-	else {
+	if(edit != true) {
+		event.preventDefault();
 		swal({
-		title: "Update Cancelled",
-		type: "success"
+		  title: '<b>Confirm Update Branch</b>',
+		  type: 'info',
+		  text: "Are you sure you want to update this branch?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			edit = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
+	}
+}
+
+var check;	
+function validateRemove() {
+	
+	if(check != true) {
+		event.preventDefault();
+		swal({
+		  title: '<b>Confirm Remove Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to remove this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
+		});
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('rem').click();
+		});
+		
+	} else {
+		return true;
+	}
+}
+
+var check;	
+function validateRestore() {
+	
+	if(check != true) {
+		event.preventDefault();
+		swal({
+		  title: '<b>Confirm Restore Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to restore this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
+		});
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('edBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
