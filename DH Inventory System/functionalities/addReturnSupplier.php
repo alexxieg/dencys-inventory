@@ -34,7 +34,7 @@
 			$sup3 = $sup2['supA'];
 						 
 			$sql = "INSERT INTO returns (returnDate, returnQty, returnType, returnRemark, receiptNo, prodID, branchID, supID, empID, userID)
-					VALUES (CURDATE(),$retQty,'Supplier Return','$retRem','$recNo','$productID', 0 ,$sup3,$emp3,'$userID')";
+					VALUES (CURDATE(),$retQty,'Supplier Return','$retRem','$recNo','$productID', 6 ,$sup3,$emp3,'$userID')";
 			$conn->exec($sql);
 		}
 
