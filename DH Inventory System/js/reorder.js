@@ -14,6 +14,7 @@ function validateForm() {
 	}
 }
 
+var edit;
 function validateForm2() {
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
@@ -28,15 +29,26 @@ function validateForm2() {
         document.getElementById('addSupplier').style.borderColor = "blue";
 	}
 	
-	if(confirm('Are you sure you want to reorder this entry?')) {
-		return true;		
-	}
-	else {
+	if(edit != true) {
+		event.preventDefault();
 		swal({
-		title: "Reordering of products cancelled.",
-		type: "success"
+		  title: '<b>Confirm New Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this entry?.",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		 confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'CANCEL'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			edit = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 
