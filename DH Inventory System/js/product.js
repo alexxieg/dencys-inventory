@@ -66,6 +66,7 @@ function validateForm() {
 	}
 }
 
+var check;
 function validateForm2() {
 	if (document.getElementById('addProdName').value == "") {
 		swal({
@@ -122,14 +123,25 @@ function validateForm2() {
 		return false;
 	}
 	
-	if(confirm('Are you sure you want to update this entry?')) {
-		return true;	
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Updating of product cancelled.",
-		type: "success"
+		  title: '<b>Confirm Update Product</b>',
+		  type: 'info',
+		  text: "Are you sure you want to update this Product?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
