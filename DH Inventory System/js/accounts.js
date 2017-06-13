@@ -104,9 +104,9 @@ function validateForm() {
 		  showCloseButton: true,
 		  showCancelButton: true,
 		  confirmButtonText:
-			'<button id="thisButton" class="btn-success">YES</button>',
+			'YES',
 		  cancelButtonText:
-			'<button class="btn-danger">Cancel</button>'
+			'Cancel'
 		});
 		$('#thisButton').click(function(){
 			check = true;
@@ -118,6 +118,7 @@ function validateForm() {
 	}
 }
 
+var check;
 function validateForm2() {
 	if(document.getElementById('addEntry').value == "") {
 		swal({
@@ -163,14 +164,25 @@ function validateForm2() {
 		return false;
 	}
 	
-	if(confirm('Are you sure you want to update this account?')) {
-		return true;	
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Editing of account cancelled",
-		type: "success"
+		  title: '<b>Confirm New Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to update this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
 		});
-	return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
