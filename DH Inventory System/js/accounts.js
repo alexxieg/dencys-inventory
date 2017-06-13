@@ -186,3 +186,29 @@ function validateForm2() {
 		return true;
 	}
 }
+
+var check;	
+function validateRemove() {
+	
+	if(check != true) {
+		event.preventDefault();
+		swal({
+		  title: '<b>Confirm Remove Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to remove this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
+		});
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBttn').click();
+		});
+		
+	} else {
+		return true;
+	}
+}
