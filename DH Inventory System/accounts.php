@@ -218,7 +218,7 @@
 												</button>
 											</a>
 											<a href="functionalities/removeAccount.php?useId=<?php echo $useThisID; ?>"> 
-												<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to remove this account?');">
+												<button type="button" class="btn btn-default" id="sucBttn" onclick="return validateRemove();">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -323,7 +323,7 @@
 														<td data-title="Status"><?php echo $item["status"]; ?></td>
 														<td>
 															<a href="functionalities/restoreAccount.php?useId=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to restore this account?');">
+																<button type="button" class="btn btn-default" id="sucBtttn" onclick="return validateRestore();">
 																	Restore
 																</button>
 															</a>

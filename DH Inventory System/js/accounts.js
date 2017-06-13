@@ -212,3 +212,30 @@ function validateRemove() {
 		return true;
 	}
 }
+
+var check;	
+function validateRestore() {
+	
+	if(check != true) {
+		event.preventDefault();
+		swal({
+		  title: '<b>Confirm Restore Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to restore this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
+		});
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtttn').click();
+		});
+		
+	} else {
+		return true;
+	}
+}
+
