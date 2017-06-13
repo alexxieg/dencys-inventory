@@ -8,7 +8,7 @@
 				
 				$categoryID = $_POST['catID'];
 				$categoryName = $_POST['catName'];
-				$query = $conn->prepare("Select * FROM category WHERE categoryID = '$categoryID'");
+				$query = $conn->prepare("Select * FROM category WHERE categoryID = '$categoryID' AND categoryID != '$categEditID'");
 				$count = $query->execute();
 				$row = $query->fetch();
 
@@ -26,7 +26,7 @@
 				
 				$categoryID = $_POST['catID'];
 				$categoryName = $_POST['catName'];
-				$query = $conn->prepare("Select * FROM category WHERE categoryName = '$categoryName'");
+				$query = $conn->prepare("Select * FROM category WHERE categoryName = '$categoryName' AND categoryID != '$categEditID'");
 				$count = $query->execute();
 				$row = $query->fetch();
 

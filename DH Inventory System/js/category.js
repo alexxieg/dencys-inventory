@@ -1,3 +1,4 @@
+var check;
 function validateForm() {
 	if(document.getElementById('addCategoryID').value == "") {
 		swal({
@@ -32,18 +33,30 @@ function validateForm() {
 		return false;
 	}
 
-	if(confirm('Are you sure you want to add this category?')) {
-		return true;	
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of category cancelled",
-		type: "success"
+		  title: '<b>Confirm New Category</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this category?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'CANCEL'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 
+var check;
 function validateForm2() {
 	if(document.getElementById('addCategoryID').value == "") {
 		swal({
@@ -78,14 +91,25 @@ function validateForm2() {
 		return false;
 	}
 	
-	if(confirm('Are you sure you want to update this category?')) {
-		return true;	
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Updating of category cancelled",
-		type: "success"
+		  title: '<b>Confirm Update Category</b>',
+		  type: 'info',
+		  text: "Are you sure you want to update this category?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'CANCEL'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
