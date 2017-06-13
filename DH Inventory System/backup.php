@@ -34,7 +34,7 @@
 		<link href="css/sidebar.css" rel="stylesheet">
 
 		<!--Javascript Files -->
-		<script src="js/accounts.js"></script>
+		<script src="js/backup.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/jquery-3.2.0.min.js"></script>	
 		<script src="js/bootstrap.min.js"></script>
@@ -173,7 +173,7 @@
 									<table class="table">	
 										<tr>
 											<td>
-												<form action="functionalities/restoreBackup.php" method="post" enctype="multipart/form-data">
+												<form action="functionalities/restoreBackup.php" method="post" enctype="multipart/form-data" onSubmit= "return valRestoreFile();">
 												    <label form="fileUpload">Select .sql file to restore:</label>
 													<input type="file" name="fileToUpload" value="fileUpload" id="fileUpload">
 												    <input type="submit" value="Restore File" class="btn btn-success" name="submit">
