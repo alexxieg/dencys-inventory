@@ -64,8 +64,6 @@
 							  "Error!",
 							  "U R issuing too much dumbass for the product: '.$prodItem.'",
 							  "error");';
-						echo '$("#myModal").modal("show");';
-						echo 'document.getElementById("addRcpt").style.borderColor = "red";';
 						echo '</script>';
 						$stop = true;
 					} else {
