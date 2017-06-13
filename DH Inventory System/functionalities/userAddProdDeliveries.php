@@ -85,11 +85,16 @@
 			$varPO = $_GET['po'];
 			
 			$checkDatabase = current($conn->query("SELECT incoming.inID FROM incoming WHERE PONumber = '$varPO'")->fetch());
+			$poDate = current($conn->query("SELECT purchaseorders.poDate FROM purchaseorders WHERE purchaseorders.poNumber = '$varPO'")->fetch());
 			
 			if (isset($checkDatabase) ? $checkDatabase : null) {
-				$query = $conn->prepare("SELECT * FROM incoming join product ON incoming.prodID = product.prodID WHERE poNumber = '$varPO' AND incoming.status = 'Partial'");
+				$query = $conn->prepare("SELECT *, ABS(qtyOrder - inQty) AS qtyOrdered FROM incoming join product ON incoming.prodID = product.prodID join purchaseorders 
+										ON incoming.PONumber = purchaseorders.poNumber AND incoming.prodID = purchaseorders.prodID WHERE incoming.PONumber = '$varPO' AND incoming.status = 'Partial'");
 				$query->execute();
 				$result = $query->fetchAll();
+				$receiptNum = current($conn->query("SELECT receiptNo FROM incoming WHERE PONumber = '$varPO'")->fetch());
+				$receiptDate = current($conn->query("SELECT receiptDate FROM incoming WHERE PONumber = '$varPO'")->fetch());
+				$readOnly = 'readonly';
 			} else {
 				$query = $conn->prepare("SELECT purchaseorders.poID, purchaseorders.poNumber, purchaseorders.poDate, purchaseorders.qtyOrder, purchaseorders.supID, product.unitType, product.prodName, purchaseorders.userID
 									FROM purchaseorders INNER join product ON purchaseorders.prodID = product.prodID
@@ -97,6 +102,10 @@
 									ORDER BY poID DESC;");
 				$query->execute();
 				$result = $query->fetchAll();
+				
+				$receiptNum = '';
+				$receiptDate = current($conn->query("SELECT CURDATE()")->fetch());
+				$readOnly = '';
 			}
 			
 			$supplierID = current($conn->query("SELECT purchaseorders.supID FROM purchaseorders INNER JOIN suppliers ON purchaseorders.supID = suppliers.supID WHERE purchaseorders.poNumber = '$varPO'")->fetch());
@@ -170,23 +179,25 @@
 							<h1 id="headers">ADD PRODUCT DELIVERY</h1>		
 							
 							<form action="" method="POST" onsubmit="return validateForm2()">
+								<input type="hidden" id="thisPODate" value="<?php echo $poDate; ?>" />
+								
 								<h3>User</h3>
 								<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								
 								<h3>Purchase Order Number</h3>				
 								<input type="text" class="form-control" id="poNum" value="<?php echo $varPO; ?>" name="po" readonly>
 								
-								<h3>Supplier</h3> 
-								<div class="ui-widget">
-									<input id="addSupplier" name="supplier" value="<?php echo $supplierName;?>" readonly>
-								</div>
-
 								<h3>Receipt No.</h3> 
-								<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" name="rcno">
+								<input type="text" class="form-control" id ="addRcpt" placeholder="Receipt Number" value="<?php echo $receiptNum; ?>" name="rcno" <?php echo $readOnly; ?>>
 								
 								<h3>Receipt Date</h3> 
-								<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate">
-																
+								<input type="date" class="form-control" id ="addRcptDate" placeholder="Receipt Date" name="rcdate" value="<?php echo $receiptDate;?>" <?php echo $readOnly; ?>>
+								
+								<h3>Supplier</h3> 
+									<div class="ui-widget">
+										<input id="addSupplier" name="supplier" value="<?php echo $supplierName;?>">
+									</div>
+														
 								<h3>Received By</h3>
 								<?php
 									$query = $conn->prepare("SELECT empFirstName FROM employee ");
@@ -226,19 +237,14 @@
 										<tr id="thisRow">
 											<td>	
 												<div class="ui-widget">
-													<input class="thisProduct" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
+													<input class="thisProduct" name="prodItem[]" value="<?php echo htmlspecialchars($row["prodName"]); ?>" placeholder="Product Name" required>
 												</div>
 											</td>
 													
 											<td>
-												<input type="number" min="1" class="form-control" id="addQty" 
+												<input type="number" min="1" class="form-control" id="addIncQty" 
 													value="<?php if (isset($checkDatabase) ? $checkDatabase : null) { 
-															echo $row["inQty"]; 
-															} else {
-															echo $row["qtyOrder"];
-															} ?>" 
-															placeholder="<?php if (isset($checkDatabase) ? $checkDatabase : null) { 
-															echo $row["inQty"]; 
+															echo $row["qtyOrder"] - $row["qtyOrdered"]; 
 															} else {
 															echo $row["qtyOrder"];
 															} ?>" name="incQty[]" required>
@@ -271,11 +277,10 @@
 								
 								<div class="modFoot">
 									<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-									<span><button type="button" value="Delete Row" class="btn btn-default" onclick="deleteRow('dataTable')">Remove from List</button></span>
 									<br>
 									<br>
 									<span>
-									<a href="../userproductdeliveries.php">
+									<a href="../prodDeliveries.php">
 									<input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()">
 									</a></span>
 									<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>

@@ -65,11 +65,11 @@
 		<!-- Datatables Script -->
 		<script>
 			$(document).ready(function() {
-                var table = $('#myTable').DataTable( {
+               var table = $('#myTable').DataTable( {
 					fixedHeader: {
-							header: true,
-							headerOffset: 50
-						},
+						header: true,
+						headerOffset: 50
+					},
                     dom: 'Bfrtip',
 					"order": [[1, "desc"]],
 					lengthMenu: [
@@ -91,28 +91,27 @@
                                     .addClass( 'compact' )
                                     .css( 'font-size', 'inherit' );
                             },
-                                extend: 'print',
-                                exportOptions: {
-                                columns: ':visible',
-									modifier: {
-											page: 'current'
-										}
-                                }
+                            extend: 'print',
+                            exportOptions: {
+								columns: ':visible',
+								modifier: {
+									page: 'current'
+								}
+                            }
                         },
-							{extend:'colvis', text: 'Select Column'},'pageLength',
+						{extend:'colvis', text: 'Select Column'},'pageLength',
                     ],
-                        columnDefs: [{
-                            targets: -1,
-                            visible: true
-                            
-                        }]
+                    columnDefs: [{
+                        targets: -1,
+                        visible: true
+					}],
                 } );
             } );		
 		</script>
-
+		
 		<script>
 		  $(function() {
-			$('.prodItem').autocomplete({
+			$('.thisProduct').autocomplete({
 				minLength:2,
 				source: "search.php"
 			});
@@ -126,7 +125,6 @@
 				source: "searchSup.php"
 			});
 		  });
-
 		</script>
 			
 	</head>
@@ -299,68 +297,68 @@
 							</table>
 
 							<!-- Modal for New Purchase Order -->
-							<div class="modal fade" id="myModal" role="dialog">
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Add Purchase Order</h4>
-										</div>
-										<div class="modal-body">
-											<form action="" method="POST" onsubmit="return validateForm2()">
-												<h3>User</h3>
-												<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
-																																					
-												<h3>Supplier</h3>  
-												<div class="ui-widget">
-													<input id="addSupplier" name="supplier" placeholder="Supplier">
-												</div>
-		
-												<br>
-
-												<h5 id="prodHeader">Product/s</h5>
-												<table class="table table-striped" id="dataTable" name="chk">				
-													<tbody>
-														<tr>
-															<td>
-																Product Name
-															</td>
-															<td>
-																Quantity
-															</td>
-														</tr>
-														<tr>
-															<td>	
-																<div class="ui-widget">
-																	<input type="text" class="prodItem" name="prodItem[]" id="prod" placeholder="Product Name" required>
-																</div>
-															</td>
-																		
-															<td>
-																<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]" required>
-															</td>
-														</tr>
-													</tbody>
-												</table>
+								<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Add Purchase Order</h4>
+											</div>
+											<div class="modal-body">
+												<form action="" method="POST" onsubmit="return validateForm2()">
+													<h3>User</h3>
+													<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>																																				
+												
+													<h3>Supplier</h3>  
+													<div class="ui-widget">
+														<input id="addSupplier" name="supplier" placeholder="Supplier">
+													</div>
 														
-												<br>
+													<br>
+
+													<h5 id="prodHeader">Product/s</h5>
+													<table class="table table-striped" id="dataTable" name="chk">				
+														<tbody>
+															<tr>
+																<td>
+																	Product Name
+																</td>
+																<td>
+																	Quantity
+																</td>
+															</tr>
+															<tr>
+																<td>	
+																	<div class="ui-widget">
+																		<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="Product Name" required>
+																	</div>
+																</td>
+																			
+																<td>
+																	<input type="number" min="1" class="form-control" id ="addQty" placeholder="Quantity" name="qty[]" required>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+														
+													<br>
 													
-												<div class="modFoot">
-													<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
-													<br>
-													<br>
-													<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
-													<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
-												</div>
-											</form> 	
-										
-											<div class="modal-footer">
-											</div>								
+													<div class="modFoot">
+														<span><button type="button" class="btn btn-default" value="Add Row" onclick="addRow('dataTable')">Add Product</button></span>
+														<br>
+														<br>
+														<span><input type="button" class="btn btn-danger" id="canBtn" value="Cancel" data-dismiss="modal" onclick="this.form.reset()"></span>
+														<span><input type="submit" name="submit" value="Submit" class="btn btn-success" id="sucBtn"></span>
+													</div>
+												</form> 	
+											
+												<div class="modal-footer">
+												</div>								
+											</div>
 										</div>
 									</div>
-								</div>
-							</div> 
-							<!-- End of Modal -->
+								</div> 
+								<!-- End of Modal -->
 
 							<!-- Modal - Edit Log -->
 							<div class="modal fade" id="activityLog" role="dialog">
