@@ -187,22 +187,24 @@ function validateForm2() {
 	}
 }
 
-var check;	
-function validateRemove() {
-	if(check != true) {
-	swal({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonText:
-	'YES',
-  cancelButtonText:
-	'Cancel'
-}).then(function () {
-	check = true;
-})
-}
+var remove;	
+function validateRemove(clicked_id) {
+	if(remove != true) {
+		event.preventDefault();
+		swal({
+		  title: 'Are you sure?',
+		  text: "You will regret this!",
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
+		}).then(function () {
+			remove = true;
+			document.getElementById(clicked_id).click();
+		})
+	}
 }
 
 var check;	

@@ -201,15 +201,18 @@
 								
 								<tbody>						
 									<?php
+										$counter = 0;
 										foreach ($result as $item):
 										$useThisID = $item["userID"];
 										$useThisPass = substr($item["password"], 0, 6);
+										$counter = $counter + 1;
 									?>
 										
 									<tr id="centerData">
 										<td data-title="Username"><?php echo $item["userName"]; ?></td>
 										<td data-title="Password">
-										<input name="viewPass" type="password" value="<?php echo $useThisPass; ?>" disabled/></td>
+											<input name="viewPass" type="password" value="<?php echo $useThisPass; ?>" disabled/>
+										</td>
 										<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 										<td>
 											<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>">
@@ -218,7 +221,7 @@
 												</button>
 											</a>
 											<a href="functionalities/removeAccount.php?useId=<?php echo $useThisID; ?>"> 
-												<button type="button" class="btn btn-default" id="sucBttn" name="xdd" onclick="return validateRemove();">
+												<button type="button" class="btn btn-default" id="<?php echo "sucBttn$counter"; ?>" name="xdd" onclick="return validateRemove(this.id);">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
