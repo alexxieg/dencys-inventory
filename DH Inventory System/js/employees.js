@@ -94,7 +94,7 @@ function validateForm2() {
 	if(check != true) {
 		event.preventDefault();
 		swal({
-		  title: '<b>Confirm New Employee</b>',
+		  title: '<b>Confirm Update Employee</b>',
 		  type: 'info',
 		  text: "Are you sure you want to update this employee?",
 		  showCloseButton: true,
