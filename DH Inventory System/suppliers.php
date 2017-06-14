@@ -252,7 +252,7 @@
 													<input type="text" class="form-control" id="supName" placeholder="Supplier Name" name="supName">
 
 													<h3>Contact Number</h3>
-													<input type="text" class="form-control" id="supContact" placeholder="Contact Number" name="supContact">
+													<input type="number" class="form-control" id="supContact" placeholder="Contact Number" name="supContact">
 													
 													<h3>Location</h3>
 													<input type="text" class="form-control" id="supLoc" placeholder="Location" name="supLoc">
