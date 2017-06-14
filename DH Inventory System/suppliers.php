@@ -200,8 +200,10 @@
 									</thead>
 									<tbody>
 										<?php
+											$counter = 0;
 											foreach ($result as $item):
 											$supID = $item["supID"];
+											$counter = $counter + 1;
 										?>
 											
 										<tr id="centerData">
@@ -217,13 +219,13 @@
 												</a>	
 												
 												<a href="functionalities/removeSupplier.php?supID=<?php echo $supID; ?>"> 
-													<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to archive this supplier?');">
+													<button type="button" class="btn btn-default" id="<?php echo "edBtns $counter"; ?>" onclick="return validateRemove(this.id);">
 														<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 													</button>
 												</a>
 												
 												<a href="functionalities/addBlacklist.php?supID=<?php echo $supID; ?>"> 
-													<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to blacklist this supplier?');">
+													<button type="button" class="btn btn-default" id="<?php echo "edBtnn $counter"; ?>" onclick="return validateAdd(this.id);">
 														<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
 													</button>
 												</a>								
@@ -306,8 +308,10 @@
 													<tbody>
 															
 														<?php
+															$counter = 0;
 															foreach ($result1 as $item):
-															$supID = $item["supID"];													
+															$supID = $item["supID"];
+															$counter = $counter + 1;															
 														?>
 														
 														<tr id="centerData">
@@ -315,7 +319,7 @@
 															<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
 															<td>										
 																<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
-																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this supplier?');">
+																	<button type="button" class="btn btn-default" id="<?php echo "edBtnx $counter"; ?>" onclick="return validateRestore(this.id);">
 																		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																	</button>
 																</a>
@@ -370,8 +374,10 @@
 													<tbody>
 															
 														<?php
+															$counter = 0;
 															foreach ($result1 as $item):
-															$supID = $item["supID"];													
+															$supID = $item["supID"];		
+															$counter = $counter + 1;															
 														?>
 														
 														<tr id="centerData">
@@ -379,7 +385,7 @@
 															<td data-title="First Name"><?php echo $item["supplier_name"]; ?></td>
 															<td>										
 																<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
-																	<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to remove this supplier from the blacklist?');">
+																	<button type="button" class="btn btn-default" id="<?php echo "edBtnd $counter"; ?>" onclick="return validateRestoreSup(this.id);">
 																		<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 																	</button>
 																</a>
