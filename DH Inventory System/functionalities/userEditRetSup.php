@@ -149,7 +149,7 @@
 							<h1 id="headers">Edit Supplier Return Entry</h1>
 							<br>
 							<div id="contents">
-								<form action="" method="POST" onsubmit="return validateForm2()">
+								<form action="" method="POST" onsubmit="return validateForm5()">
 									<h3>User</h3>
 									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>" placeholder="User" name="userID" readonly>
 									
@@ -278,15 +278,20 @@
 				for ($index = 0; $index < count($prodTem); $index++) {			
 					$prod = $_POST['prodItem'][$index];
 					$userID = $_POST['userID'];
+					$supplier = $_POST['supplier'];
 					$quant = $_POST['retQty'][$index];
 					$rem = $_POST['retRemarks'][$index];
 					$quant = $_POST['retQty'][$index];
 					
 					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-					$prod3 = $prod2['prodA'];	
+					$prod3 = $prod2['prodA'];
+
+					$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$supplier'");
+					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+					$sup3 = $sup2['supA'];	
 					
-					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID' WHERE receiptNo = '$retID' AND prodID = '$prod3'";
+					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', supID = $sup3 WHERE receiptNo = '$retID' AND prodID = '$prod3'";
 					$conn->exec($sql);
 				}
 				$url="userViewRetSupplier.php?retId=$retID";

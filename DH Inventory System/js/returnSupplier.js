@@ -137,6 +137,42 @@ function validateForm4() {
 	}
 }
 
+var check;
+function validateForm5() {
+	if (document.getElementById('addSupplier').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please enter supplier.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addSupplier').style.borderColor = "red";
+		return false;
+	}
+	
+	if(check != true) {
+		event.preventDefault();
+		swal({
+		  title: '<b>Confirm Update Supplier Returns</b>',
+		  type: 'info',
+		  text: "Are you sure you want to update this entry/s?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
+		});
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+
+	} else {
+		return true;
+	}
+}
+
 function deleteRow(tableID) {
 	try {
 		var table = document.getElementById(tableID);
