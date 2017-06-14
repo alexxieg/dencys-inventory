@@ -197,9 +197,11 @@
 								
 								<tbody>
 									<?php
+										$counter = 0;
 										foreach ($result as $item):
 										$categEditID = $item["categoryID"];
 										$categRemoveID = $item["categoryID"];
+										$counter = $counter + 1;
 									?>
 									<tr id="centerData">
 										<td data-title="Category ID"><?php echo $item["categoryID"]; ?></td>
@@ -211,7 +213,7 @@
 												</button>
 											</a>
 											<a href="functionalities/removeCategory.php?categoryID=<?php echo $categRemoveID; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn"onclick="return confirm('Are you sure you want to archive this category?');">
+												<button type="button" class="btn btn-default" id="<?php echo "edBtn $counter"; ?>" onclick="return validateRemove(this.id);">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -295,8 +297,10 @@
 												<tbody>
 													
 													<?php
+														$counter = 0;
 														foreach ($result as $item):
 														$categEditID = $item["categoryID"];
+														$counter = $counter + 1;
 													?>	
 													<tr id="centerData">
 														<td data-title="Archive Date"><?php echo $item["archiveDate"]; ?></td>
@@ -304,7 +308,7 @@
 														<td data-title="Category"><?php echo $item["categoryName"]; ?></td>
 														<td>	
 															<a href="functionalities/restoreCategory.php?useId=<?php echo $categEditID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this category?');">
+																<button type="button" class="btn btn-default" id="<?php echo "edBtnx $counter"; ?>" onclick="return validateRestore(this.id);">
 																	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
