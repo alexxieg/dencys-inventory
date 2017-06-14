@@ -270,8 +270,10 @@
 								<tbody>
 
 									<?php
+										$counter = 0;
 										foreach ($result as $item):
 										$proID = $item["prodID"];
+										$counter = $counter + 1;
 									?>
 									<tr id="centerData">
 										<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
@@ -287,7 +289,7 @@
 												</button>
 											</a>	
 											<a href="functionalities/removeProduct.php?proId=<?php echo $proID; ?>">
-												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to archive this product?');" id="delBtn1">
+												<button type="button" class="btn btn-default" id="<?php echo "delBtn1$counter"; ?>" onclick="return validateRemove(this.id);">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -431,8 +433,10 @@
 												<tbody>
 													
 													<?php
+														$counter = $counter + 1;
 														foreach ($result as $item):
 														$proID = $item["prodID"];
+														$counter = $counter + 1;
 													?>	
 													<tr id="centerData">
 														<td data-title="Date Archived"><?php echo $item["archiveDate"]; ?></td>
@@ -445,7 +449,7 @@
 														<td data-title="Quantity"><?php echo $item["qty"]; ?></td>
 														<td>
 															<a href="functionalities/restoreProduct.php?proId=<?php echo $proID; ?>">
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this product?');" id="delBtn1">
+																<button type="button" class="btn btn-default" id="<?php echo "edBtn$counter"; ?>" onclick="return validateRestore(this.id);">
 																	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
