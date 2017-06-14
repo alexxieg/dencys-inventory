@@ -20,6 +20,7 @@
 			$session_id = $_SESSION['id'];
 			$session_query = $conn->query("select * from users where userName = '$session_id'");
 			$user_row = $session_query->fetch();
+			error_reporting(0);
 		?>
 
 		<!-- Bootstrap core CSS -->

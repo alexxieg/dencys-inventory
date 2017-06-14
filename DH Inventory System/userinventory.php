@@ -375,13 +375,7 @@
 														<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
 														<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
 														<td data-title="Unit"><?php echo $item["unitType"];?></td>
-														<td data-title="Reorder Check"><input type="checkbox" class="chixbox" name="chkbox[]" value="<?php echo $item["prodID"]; ?>"></td>
-														<?php /** if($item["reorderStatus"] = 'false') {
-															echo '<td data-title="Reorder Check"></td>';
-														} else {
-															echo '<td data-title="Reorder Check">PO Already reordered</td>';
-														} */?>
-														<td data-title='Reorder Check'>
+														<td data-title="Reorder Check">
 															<?php 
 															$reordStat = $item["reorderStatus"];
 															$productID = $item["prodID"];
