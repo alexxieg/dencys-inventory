@@ -84,6 +84,7 @@
 			
 			$updateDate = current($conn->query("SELECT incoming.inDate FROM dencys.incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$poNumb = current($conn->query("SELECT incoming.PONumber FROM dencys.incoming WHERE incoming.receiptNo = '$incID'")->fetch());
+			$poDate = current($conn->query("SELECT purchaseorders.poDate FROM purchaseorders WHERE purchaseorders.poNumber = '$poNumb'")->fetch());
 			$reciptNum = current($conn->query("SELECT incoming.receiptNo FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$reciptDate = current($conn->query("SELECT incoming.receiptDate FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
 			$supplierID = current($conn->query("SELECT incoming.supID FROM incoming WHERE incoming.receiptNo = '$incID'")->fetch());
@@ -168,7 +169,8 @@
 							<h1 id="headers">Edit Product Delivery Entry</h1>
 							<br>
 							<div id="content">
-								<form action="" method="POST" onsubmit="return validateForm2()">
+								<form action="" method="POST" onsubmit="return validateForm3()">
+								<input type="hidden" id="thisPODate" value="<?php echo $poDate; ?>" />
 									<h3>User</h3>
 									<input type="text" class="form-control" id="userID" value = "<?php echo $_SESSION['id']; ?>"placeholder="User" name="userID" readonly>
 								

@@ -140,6 +140,58 @@ function validateForm2() {
 		return true;
 	}
 }
+
+var update;
+function validateForm3() {
+	var compDate = document.getElementById('thisPODate').value; 
+	var compDate2 = document.getElementById('addRcptDate').value;
+	if(compDate2 < compDate) {
+		swal({
+		title: "Invalid Entry!",
+		text: "Receipt date entered is invalid. Please enter a valid receipt date.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addRcptDate').style.borderColor = "red";
+		return false;
+	} else {
+		document.getElementById('addRcptDate').style.borderColor = "blue";
+	}
+	if(document.getElementById('addRcpt').value == "") {
+		swal({
+		title: "Warning!",
+		text: "Please enter the receipt number.",
+		type: "warning",
+		confirmButtonText: "Ok"
+		});
+		document.getElementById('addRcpt').style.borderColor = "red";
+		return false;
+	}else{
+        document.getElementById('addRcpt').style.borderColor = "blue";
+	}
+	
+	if(update != true) {
+		event.preventDefault();
+		swal({
+		  title: '<b>Confirm New Entry</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'CANCEL'
+		});
+		$('#thisButton').click(function(){
+			update = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
+	}
+}
 		
 function deleteRow(tableID) {
 	try {
