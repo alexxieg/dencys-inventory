@@ -10,18 +10,16 @@
 		<!-- Database Connection -->
 		<?php include('dbcon.php'); ?>
 				
-		<!-- Login Session -->
+		<!-- Login Session-->
 		<?php 
 			session_start();
-			if (isset($_SESSION['id'])){
-				$session_id = $_SESSION['id'];
-				$session_query = $conn->query("select * from users where userName = '$session_id'");
-				$user_row = $session_query->fetch();
-				if (!isset($_SESSION['id']) || $_SESSION['id'] == false) {
-					session_destroy();
-					header('Location: index.php');
-				}
+			$role = $_SESSION['sess_role'];
+			if (!isset($_SESSION['id']) || $role!="user") {
+				header('Location: index.php');
 			}
+			$session_id = $_SESSION['id'];
+			$session_query = $conn->query("select * from users where userName = '$session_id'");
+			$user_row = $session_query->fetch();
 		?>
 		
 		<!-- Bootstrap core CSS -->
