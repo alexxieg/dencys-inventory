@@ -386,7 +386,7 @@
 															<td>										
 																<a href="functionalities/restoreSupplier.php?supID=<?php echo $supID; ?>"> 
 																	<button type="button" class="btn btn-default" id="<?php echo "edBtnd $counter"; ?>" onclick="return validateRestoreSup(this.id);">
-																		<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+																		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																	</button>
 																</a>
 															</td>		
