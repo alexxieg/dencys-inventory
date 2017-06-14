@@ -107,3 +107,44 @@ function validateForm2() {
 		return true;
 	}
 }
+
+var remove;	
+function validateRemove(clicked_id) {
+	if(remove != true) {
+		event.preventDefault();
+		swal({
+		  title: 'Confirm Remove Brand',
+		  text: "Are you sure you want to remove this brand?",
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
+		}).then(function () {
+			remove = true;
+			document.getElementById(clicked_id).click();
+		})
+	}
+}
+
+var restore;	
+function validateRestore(clicked_id) {
+	
+	if(restore != true) {
+		event.preventDefault();
+		swal({
+		  title: 'Confirm Restore Brand',
+		  text: "Are you sure you want to restore this brand?",
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
+		}).then(function () {
+			restore = true;
+			document.getElementById(clicked_id).click();
+		})
+	}
+}

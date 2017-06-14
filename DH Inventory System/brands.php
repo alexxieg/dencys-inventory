@@ -215,9 +215,11 @@
 									?>
 										
 									<?php
+										$counter = 0;
 										foreach ($result as $item):
 										$brandEditID = $item["brandID"];
 										$brandRemoveID = $item["brandID"];
+										$counter = $counter + 1;
 									?>
 
 									<tr id="centerData">
@@ -231,7 +233,7 @@
 											</a>
 											
 											<a href="functionalities/removeBrand.php?brandID=<?php echo $brandRemoveID; ?>"> 
-												<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to archive this brand?');">
+												<button type="button" class="btn btn-default" id="<?php echo "edBtn $counter"; ?>" onclick="return validateRemove(this.id);">
 													<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 												</button>
 											</a>
@@ -315,8 +317,10 @@
 												
 												<tbody>												
 													<?php
+														$counter = 0;
 														foreach ($result1 as $item):
 														$useThisID = $item["brandID"];
+														$counter = $counter + 1;
 													?>
 													<tr id="centerData">
 														<td data-title="Date Archived"><?php echo $item["archiveDate"]; ?></td>
@@ -324,7 +328,7 @@
 														<td data-title="Brand Name"><?php echo $item["brandName"]; ?></td>
 														<td>											
 															<a href="functionalities/restoreBrand.php?brandID=<?php echo $useThisID; ?>"> 
-																<button type="button" class="btn btn-default" id="edBtn" onclick="return confirm('Are you sure you want to restore this brand?');">
+																<button type="button" class="btn btn-default" id="<?php echo "edBtnx$counter"; ?>" onclick="return validateRestore(this.id);">
 																	<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 																</button>
 															</a>
