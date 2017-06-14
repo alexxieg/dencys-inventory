@@ -367,19 +367,34 @@
 												</tr>
 													
 												<?php
-													foreach ($result as $item):
-												?>
-													<tr>
-													<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
-													<td data-title="Description"><?php echo $item["prodName"]; ?></td>
-													<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
-													<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
-													<td data-title="Unit"><?php echo $item["unitType"];?></td>
-													<td data-title="Reorder Check"><input type="checkbox" class="chixbox" name="chkbox[]" value="<?php echo $item["prodID"]; ?>"></td>	
-													</tr>	
-												<?php
-													endforeach;
+														foreach ($result as $item):
 													?>
+														<tr>
+														<td data-title="Product ID"><?php echo $item["prodID"]; ?></td>
+														<td data-title="Description"><?php echo $item["prodName"]; ?></td>
+														<td data-title="Current Quantity"><?php echo $item["qty"]; ?></td>
+														<td data-title="Reorder Level"><?php echo $item["reorderLevel"]?></td>
+														<td data-title="Unit"><?php echo $item["unitType"];?></td>
+														<td data-title="Reorder Check"><input type="checkbox" class="chixbox" name="chkbox[]" value="<?php echo $item["prodID"]; ?>"></td>
+														<?php /** if($item["reorderStatus"] = 'false') {
+															echo '<td data-title="Reorder Check"></td>';
+														} else {
+															echo '<td data-title="Reorder Check">PO Already reordered</td>';
+														} */?>
+														<td data-title='Reorder Check'>
+															<?php 
+															$reordStat = $item["reorderStatus"];
+															$productID = $item["prodID"];
+															if($reordStat == 'False') {
+																echo "<input type='checkbox' class='chixbox' name='chkbox[]' value='$productID'>";
+															} else {
+																echo "PO Already reordered";
+															} ?>
+														</td>
+														</tr>	
+													<?php
+														endforeach;
+														?>
 											</table>
 											<div class="form-group">
 												<input type="submit" value="Reorder" class="btn btn-success">

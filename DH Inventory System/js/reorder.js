@@ -14,7 +14,7 @@ function validateForm() {
 	}
 }
 
-var edit;
+var check;
 function validateForm2() {
 	if (document.getElementById('addSupplier').value == "") {
 		swal({
@@ -29,7 +29,7 @@ function validateForm2() {
         document.getElementById('addSupplier').style.borderColor = "blue";
 	}
 	
-	if(edit != true) {
+	if(check != true) {
 		event.preventDefault();
 		swal({
 		  title: '<b>Confirm New Entry</b>',
@@ -43,7 +43,7 @@ function validateForm2() {
 			'CANCEL'
 		});
 		$('#thisButton').click(function(){
-			edit = true;
+			check = true;
 			document.getElementById('sucBtn').click();
 		});
 		
