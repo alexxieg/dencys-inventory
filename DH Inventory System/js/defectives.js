@@ -1,3 +1,4 @@
+var check;
 function validateForm() {	
 	if (document.getElementById('addQty').value == "") {
 		swal({
@@ -12,15 +13,26 @@ function validateForm() {
         document.getElementById('addQty').style.borderColor = "lightblue";
 	}
 	
-	if(confirm('Are you sure you want to add this product?')) {
-		return true;		
-	}
-	else {
+	if(check != true) {
+		event.preventDefault();
 		swal({
-		title: "Adding of product cancelled.",
-		type: "success"
+		  title: '<b>Confirm Add Defective</b>',
+		  type: 'info',
+		  text: "Are you sure you want to add this entry?",
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  confirmButtonText:
+			'YES',
+		  cancelButtonText:
+			'Cancel'
 		});
-		return false;		
+		$('#thisButton').click(function(){
+			check = true;
+			document.getElementById('sucBtn').click();
+		});
+		
+	} else {
+		return true;
 	}
 }
 
