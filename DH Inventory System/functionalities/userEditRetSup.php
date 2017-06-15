@@ -201,6 +201,8 @@
 													<div class="ui-widget">
 														<input class="thisProduct" name="prodItem[]" value="<?php echo $row2["prodName"]; ?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
 														<input type="hidden" name="editProdItem[]" value="<?php echo $row2["prodName"]; ?>" />
+														<input type="hidden" name="iniDate[]" value="<?php echo $row2["returnDate"];?>" />
+														<input type="hidden" name="iniUser[]" value="<?php echo $row2["userID"];?>" />
 													</div>		
 												</td>
 														
@@ -238,60 +240,72 @@
 			</div>
 		</div>
 			
-		<!-- Edit Log -->
+	<!-- Edit Log -->
 		<?php
-			require_once 'dbcon.php';
-			$retID= $_GET['retId'];
-			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-			if (isset($_POST["addRet"])){
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
-					$returnID = $_POST['returnID'][$index2];
+		require_once 'dbcon.php';
+		$retID= $_GET['retId'];
+		$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+		if (isset($_POST["addRet"])){
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+				$returnID = $_POST['returnID'][$index2];
+				$iniDate = $_POST['iniDate'][$index2];
+				$iniUser = $_POST['iniUser'][$index2];
+				$userID = $_POST['userID'];
+				$employ = $_POST['emp'];
+				$prod = $_POST['prodItem'][$index2];
+				$supp = $_POST['supplier'];
+				$rem = $_POST['retRemarks'][$index2];
+				$quant = $_POST['retQty'][$index2];
 				
-					$prod = $_POST['prodItem'][$index2];
-					$quant = $_POST['retQty'][$index2];
-					$rem = $_POST['retRemarks'][$index2];
-					$quant = $_POST['retQty'][$index2];
-					
-					$editProd = $_POST['editProdItem'][$index2];
-					$editQuant = $_POST['editRetQty'][$index2];
-					$editRem = $_POST['editRetRemarks'][$index2];
-					$editQuant = $_POST['editRetQty'][$index2];
-					if ($prod != $editProd || $quant != $editQuant || $rem != $editRem || $quant != $editQuant) {
-						$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID)
-							SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID from returns WHERE returnID = $returnID";
-						$conn->exec($sql);
-					} else {
-						//Do Nothing
-					}		
-				}
+				$editProd = $_POST['editProdItem'][$index2];
+				$editQuant = $_POST['editRetQty'][$index2];
+				$editRem = $_POST['editRetRemarks'][$index2];
+				$editQuant = $_POST['editRetQty'][$index2];
+				
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$editProd'");
+				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+				$prod3 = $prod2['prodA'];	
+				
+				$suppID = current($conn->query("SELECT supID FROM suppliers WHERE supplier_name = '$supp'")->fetch());
+				$employID = current($conn->query("SELECT empID FROM employee WHERE empFirstName = '$employ'")->fetch());
+				
+				if ($prod != $editProd || $quant != $editQuant || $rem != $editRem || $quant != $editQuant) {
+					$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, userID, returnID, prodNew, qtyNew, userNew)
+						VALUES (CURDATE(),'$retID','$iniDate',$editQuant,'Supplier Return','$rem',$suppID,'$prod3','$iniUser',$returnID,'$prod',$quant,'$userID')";
+					$conn->exec($sql);
+				} else {
+					//Do Nothing
+				}		
 			}
+		}
 		?>
-
+		
 		<!-- Update -->
 		<?php
 			$retID= $_GET['retId'];	
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
 			if (isset($_POST["addRet"])){
 				
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				for ($index = 0; $index < count($prodTem); $index++) {			
 					$prod = $_POST['prodItem'][$index];
 					$userID = $_POST['userID'];
-					$supplier = $_POST['supplier'];
+					$employ = $_POST['emp'];
 					$quant = $_POST['retQty'][$index];
 					$rem = $_POST['retRemarks'][$index];
 					$quant = $_POST['retQty'][$index];
+					$supp = $_POST['supplier'];
 					
 					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
-					$prod3 = $prod2['prodA'];
-
-					$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$supplier'");
-					$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
-					$sup3 = $sup2['supA'];	
+					$prod3 = $prod2['prodA'];	
 					
-					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', supID = $sup3 WHERE receiptNo = '$retID' AND prodID = '$prod3'";
+					$suppID = current($conn->query("SELECT supID FROM suppliers WHERE supplier_name = '$supp'")->fetch());
+					$employID = current($conn->query("SELECT empID FROM employee WHERE empFirstName = '$employ'")->fetch());
+					
+					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', supID = $suppID, empID = $employID WHERE receiptNo = '$retID' AND prodID = '$prod3'";
 					$conn->exec($sql);
 				}
 				$url="userViewRetSupplier.php?retId=$retID";
