@@ -187,22 +187,21 @@
 									<tbody>
 										<tr>
 											<td></td>
-											<td></td>
 											<td>Product Name</td>
 											<td>Quantity</td>
 											<td>Remarks</td>
 										</tr>
 										<?php foreach ($result2 as $row2): ?>
 										<tr>
-											<td><input type="checkbox" name="chk"></TD>
 											<td>
-												<input type="hidden" value="1" name="num" id="orderdata">1
 												<input type="hidden" name="returnID[]" value="<?php echo $row2["returnID"]; ?>" />
 											</TD>
 											<td>	
 												<div class="ui-widget">
 													<input class="thisProduct" name="prodItem[]" value="<?php echo stripslashes($row2["prodName"]); ?>" placeholder="<?php echo $row2["prodName"]; ?>" required>
 													<input type="hidden" name="editProdItem[]" value="<?php echo $row2["prodName"]; ?>" />
+													<input type="hidden" name="iniDate[]" value="<?php echo $row2["returnDate"];?>" />
+													<input type="hidden" name="iniUser[]" value="<?php echo $row2["userID"];?>" />
 												</div>		
 											</td>
 													
@@ -221,9 +220,6 @@
 								</table>
 										
 								<div class="modFoot">
-									<span><button type="button" name="addProduct" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="modbutt">Add Product</button></span>
-									<br>
-									<br>
 									<span>
 										<a href="../userReturnsWarehouse.php">
 										<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="this.form.reset()" id="canBtn"> Cancel</button>
@@ -243,37 +239,51 @@
 			</div>
 		</div>
 	
+		<!-- Edit Log -->
 		<?php
-		require_once 'dbcon.php';
-		$retID= $_GET['retId'];
-		$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-		if (isset($_POST["addRet"])){
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
-				$returnID = $_POST['returnID'][$index2];
-			
-				$prod = $_POST['prodItem'][$index2];
-				$quant = $_POST['retQty'][$index2];
-				$rem = $_POST['retRemarks'][$index2];
-				$quant = $_POST['retQty'][$index2];
-				
-				$editProd = $_POST['editProdItem'][$index2];
-				$editQuant = $_POST['editRetQty'][$index2];
-				$editRem = $_POST['editRetRemarks'][$index2];
-				$editQuant = $_POST['editRetQty'][$index2];
-				
-				if ($prod != $editProd || $quant != $editQuant || $rem != $editRem || $quant != $editQuant) {
-					$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID)
-						SELECT CURDATE(), receiptNo, returnDate, returnQty, returnType, returnRemark, supID, prodID, branchID, userID, returnID from returns WHERE returnID = $returnID";
-					$conn->exec($sql);
-				} else {
-					//Do Nothing
+			require_once 'dbcon.php';
+			$retID= $_GET['retId'];
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			if (isset($_POST["addRet"])){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+					$returnID = $_POST['returnID'][$index2];
+					$iniDate = $_POST['iniDate'][$index2];
+					$iniUser = $_POST['iniUser'][$index2];
+					$prod = $_POST['prodItem'][$index2];
+					$quant = $_POST['retQty'][$index2];
+					$rem = $_POST['retRemarks'][$index2];
+					$quant = $_POST['retQty'][$index2];
+					$userID = $_POST['userID'];
+					
+					$editProd = $_POST['editProdItem'][$index2];
+					$editQuant = $_POST['editRetQty'][$index2];
+					$editRem = $_POST['editRetRemarks'][$index2];
+					$editQuant = $_POST['editRetQty'][$index2];
+					
+					$Branch = $_POST['branchItem'];
+					$emp = $_POST['emp'];
+					
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
+					
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$editProd'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+					
+					if ($prod != $editProd || $quant != $editQuant || $rem != $editRem || $quant != $editQuant) {
+						$sql = "INSERT INTO editreturn (returnEditDate, receiptNo, returnDate, returnQty, returnType, returnRemark, prodID, branchID, userID, returnID, prodNew, qtyNew, userNew)
+							VALUES (CURDATE(),'$retID','$iniDate',$editQuant,'Warehouse Return','$rem','$prod3',$Branch,'$iniUser',$returnID,'$prod',$quant,'$userID')";
+						$conn->exec($sql);
+					} else {
+						//Do Nothing
+					}			
 				}
-				
 			}
-		}
 		?>
 			
+		<!-- Update -->
 		<?php
 			$retID= $_GET['retId'];	
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
@@ -288,18 +298,22 @@
 					$rem = $_POST['retRemarks'][$index];
 					$quant = $_POST['retQty'][$index];
 					$Branch = $_POST['branchItem'];
+					$emp = $_POST['emp'];
+					
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
 					
 					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$prod'");
 					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
 					$prod3 = $prod2['prodA'];
 					
-					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', branchID = $Branch WHERE receiptNo = '$retID' AND prodID = '$prod3'";
+					$sql = "UPDATE returns SET returnDate = CURDATE(), returnQty = $quant, returnRemark = '$rem', userID = '$userID', branchID = $Branch, empID = '$emp3' WHERE receiptNo = '$retID' AND prodID = '$prod3'";
 					$conn->exec($sql);
 				}
 				$url="userViewRetWarehouse.php?retId=$retID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}  
-
 		?>
 
 	</body>
