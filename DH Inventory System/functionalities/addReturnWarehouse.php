@@ -46,7 +46,7 @@
 			$url='returnsWarehouse.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}else{
-			$url='userRetWarehouse.php';
+			$url='userReturnsWarehouse.php';
 			echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 		}
 	}		
