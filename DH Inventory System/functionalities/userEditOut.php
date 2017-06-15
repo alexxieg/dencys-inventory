@@ -203,7 +203,9 @@
 												<td>	
 													<div class="ui-widget">
 														<input class="thisProduct" id="prod" name="prodItem[]" value="<?php echo $row["prodName"]; ?>" placeholder="<?php echo $row["prodName"]; ?>" required>
-														<input type="hidden" name="editProdItem[]" value="<?php echo $row["prodName"]; ?>" />		
+														<input type="hidden" name="editProdItem[]" value="<?php echo $row["prodName"]; ?>" />
+														<input type="hidden" name="iniDate[]" value="<?php echo $row["outDate"];?>" />	
+														<input type="hidden" name="iniUser[]" value="<?php echo $row["userID"];?>" />														
 													</div>
 												</td>
 																
@@ -246,14 +248,34 @@
 					$outgoingID = $_POST['productOutID'][$index2];
 					$prodItem = $_POST['prodItem'][$index2];
 					$outQty = $_POST['outQty'][$index2];
+					$iniDate = $_POST['iniDate'][$index2];
+					$iniUser = $_POST['iniUser'][$index2];
 					
 					$editProdItem = $_POST['editProdItem'][$index2];
 					$editOutQty = $_POST['editOutQty'][$index2];
+					
+					$emp = $_POST['emp'];
+					$branch = $_POST['branch'];
+					$rcpNo = $_POST['rcno'];
+					$userID = $_POST['userID'];
+
+					$emp1 = $conn->query("SELECT empID AS empA FROM employee WHERE empFirstName = '$emp'");
+					$emp2 = $emp1->fetch(PDO::FETCH_ASSOC);
+					$emp3 = $emp2['empA'];
+					
+					$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$editProdItem'");
+					$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+					$prod3 = $prod2['prodA'];
+						
+					$branch1 = $conn->query("SELECT branchID AS branchA from branch WHERE location = '$branch'");
+					$branch2 = $branch1->fetch(PDO::FETCH_ASSOC);
+					$branch3 = $branch2['branchA'];
+					
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					
 					if ($prodItem != $editProdItem || $outQty != $editOutQty) {
-						$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID)
-								SELECT CURDATE(), outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID from outgoing WHERE outID = $outgoingID";
+						$sql = "INSERT INTO editoutgoing (outEditDate, outID, outQty, outDate, receiptNo, branchID, empID, prodID, userID, prodNew, qtyNew, userNew)
+								VALUES (CURDATE(),$outgoingID,'$editOutQty','$iniDate','$rcpNo','$branch3','$emp3','$prod3','$iniUser','$prodItem',$outQty,'$userID')";
 						$conn->exec($sql);						
 					} else {
 						//Do Nothing
@@ -300,7 +322,7 @@
 					/* $sql = "UPDATE outgoing SET outQty = ".$_POST['outQty']." , outDate = CURDATE(), outRemarks = ".$_POST['outRemarks'].", branchID = $branch3, empID = $emp3, prodID = $prod3
 						WHERE outID = '$outid'"; */
 				}
-				$url="userviewProdIssuance.php?outId=$outid";
+				$url="userViewProdIssuance.php?outId=$outid";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 			}
 		?>
