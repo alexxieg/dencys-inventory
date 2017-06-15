@@ -25,35 +25,18 @@
 					echo 'document.getElementById("addEntry").style.borderColor = "red";';
 					echo '</script>';
 				} else {
-			 
-				$sql = "UPDATE users SET userName = '$useName', password = '$hashPW', user_role = '$urole' WHERE userID = '$useThisID'";
+				
+				$sql = "INSERT INTO edituser (userName, userEditDate, password, user_role, userID, status)
+				SELECT  userName, CURDATE(), password, user_role, userID, status from users WHERE userID = '$useThisID' ORDER BY userID";
+				
 				$conn->exec($sql);
 				
+				$sql = "UPDATE users SET userName = '$useName', password = '$hashPW', user_role = '$urole' WHERE userID = '$useThisID'";
+				$conn->exec($sql);
+
 				$url='../accounts.php';
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
 				
 				}
 			} 	
 		?>
-		<?php
-		require_once 'dbcon.php';
-		$usethisid= $_GET['useID'];
-		if (isset($_POST["editAccount"])){
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		if ($query->rowCount() > 0){
-					echo '<script language="javascript">';
-					echo 'swal(
-						  "Error!",
-						  "User Already Exists, User Has Not been Updated",
-						  "error");';
-					echo '$("#myModal").modal("show");';
-					echo 'document.getElementById("addEntry").style.borderColor = "red";';
-					echo '</script>';
-				} else {
-					
-		$sql = "INSERT INTO edituser (userName, userEditDate, password, user_role, userID, status)
-				SELECT  userName, CURDATE(), password, user_role, userID, status from users WHERE userID = '$useThisID' ORDER BY userID";
-		$conn->exec($sql);
-				}
-		}
-		?>	   
