@@ -176,6 +176,7 @@
 													<td>
 														<input type="hidden" value="1" name="num" id="orderdata">
 														<input type="hidden" class="form-control" name="editPOID[]" value="<?php echo $row["poID"]; ?>">
+														<input type="hidden" class="form-control" name="iniDate[]" value="<?php echo $row["poDate"]; ?>">
 													</TD>
 													<td>	
 														<div class="ui-widget">
@@ -218,35 +219,56 @@
 			</div>	
 		</div>
 		
+		<!-- Edit Log -->
 		<?php
-			require_once 'dbcon.php';
-			if (isset($_POST["editPO"])) {
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
-				for ($index3 = 0; $index3 < count($prodTem); $index3++) {
-					$PurOrID = $_POST['editPOID'][$index3];
-					$prodItem = $_POST['prodItem'][$index3];
-					$inQty = $_POST['qty'][$index3];
-					$hiddenProdItem = $_POST['editProdItem'][$index3];
-					$hiddenInQty = $_POST['editQuantity'][$index3];
-		
-					if ($prodItem != $hiddenProdItem || $inQty != $hiddenInQty) {
-						$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID)
-							SELECT CURDATE(), poNumber, poDate, qtyOrder, supID, prodID, userID, poID from purchaseorders WHERE poID = $PurOrID";
-						$conn->exec($sql);
-					} else {
-						//Do Nothing
-					}
-					
+		require_once 'dbcon.php';
+		if (isset($_POST["editPO"])) {
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			for ($index3 = 0; $index3 < count($prodTem); $index3++) {
+				$PurOrID = $_POST['editPOID'][$index3];
+				$prodItem = $_POST['prodItem'][$index3];
+				$iniDate = $_POST['iniDate'][$index3];
+				$inQty = $_POST['qty'][$index3];
+				$hiddenProdItem = $_POST['editProdItem'][$index3];
+				$hiddenInQty = $_POST['editQuantity'][$index3];
+				$sup = $_POST['supplier'];
+				$userID = $_POST['userID'];
+				
+				$sup1 = $conn->query("SELECT supID AS supA FROM suppliers WHERE supplier_name = '$sup'");
+				$sup2 = $sup1->fetch(PDO::FETCH_ASSOC);
+				$sup3 = $sup2['supA'];
+	
+				$prod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$hiddenProdItem'");
+				$prod2 = $prod1->fetch(PDO::FETCH_ASSOC);
+				$prod3 = $prod2['prodA'];
+				
+				$newprod1 = $conn->query("SELECT prodID AS prodA FROM product WHERE prodName = '$hiddenProdItem'");
+				$newprod2 = $newprod1->fetch(PDO::FETCH_ASSOC);
+				$newprod3 = $newprod2['prodA'];
+				
+				if ($prodItem != $hiddenProdItem || $inQty != $hiddenInQty) {
+					$sql = "INSERT INTO editpo (poEditDate, poNumber, poDate, qtyOrder, supID, prodID, userID, poID, prodNew, qtyNew)
+						VALUES (CURDATE(),'$incID','$iniDate',$hiddenInQty,$sup3,'$prod3','$userID',$PurOrID,'$prodItem',$inQty)";
+						
+					$conn->exec($sql);
+				} else {
+					//Do Nothing
 				}
+				
 			}
+		}
 		?>
 		
+		<!-- Update -->
 		<?php
 			$incID= $_GET['incId'];
 			$prodTem=(isset($_REQUEST['prodItem']) ? $_REQUEST['prodItem'] : null);
+			$prodTem2=(isset($_REQUEST['prodItem2']) ? $_REQUEST['prodItem2'] : null);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			if (isset($_POST["editPO"])){
-				for ($index2 = 0; $index2 < count($prodTem); $index2++) {		
+				for ($index2 = 0; $index2 < count($prodTem); $index2++) {
+					$PurOrID = $_POST['editPOID'][$index2];
 					$prodItem = $_POST['prodItem'][$index2];
 					$inQty = $_POST['qty'][$index2];
 					$userID = $_POST['userID'];
@@ -262,8 +284,8 @@
 					$prod3 = $prod2['prodA'];
 						
 					$sql = "UPDATE purchaseorders SET qtyOrder = $inQty, poDate = CURDATE(), poNumber = '$poNum', supID = $sup3, prodID = '$prod3', userID = '$userID'
-							WHERE poNumber = '$incID' AND prodID = '$prod3'";
-						$conn->exec($sql);
+							WHERE poNumber = '$incID' AND poID = $PurOrID";
+					$conn->exec($sql);
 				}
 				$url="userViewPO.php?incId=$incID";
 				echo '<META HTTP-EQUIV=REFRESH CONTENT="1; '.$url.'">';
