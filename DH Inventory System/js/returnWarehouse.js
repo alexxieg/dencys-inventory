@@ -63,7 +63,7 @@ function validateForm2() {
 			'CANCEL'
 		});
 		$('#thisButton').click(function(){
-			check = true;
+			edit = true;
 			document.getElementById('sucBtn').click();
 		});
 		
