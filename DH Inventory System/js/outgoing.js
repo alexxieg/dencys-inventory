@@ -145,7 +145,7 @@ function addRow(tableID) {
 	var colCount = table.rows[1].cells.length;
 	for(var i=0; i<colCount; i++) {
 		var newcell = row.insertCell(i);
-		if(i==3){
+		if(i==9999999){
 			newcell.innerHTML = (rowCount+1)
 		}
 		else{
@@ -171,6 +171,6 @@ function addRow(tableID) {
 			
 function regroup(i,rc,ti){
 	for(j = (i+1);j<rc;j++){
-		document.getElementById(ti).rows[j].cells[1].innerHTML = j+1;
+//		document.getElementById(ti).rows[j].cells[1].innerHTML = j+1;
 	}
 }
