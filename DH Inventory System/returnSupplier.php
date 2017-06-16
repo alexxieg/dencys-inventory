@@ -346,6 +346,8 @@
 															<td>
 															</td>
 															<td>
+															</td>
+															<td>
 																Product Name
 															</td>
 															<td>
@@ -357,9 +359,10 @@
 														</tr>
 														<tr>
 															<td><input type="checkbox" name="chk"></TD>
+															<TD><input type="hidden" value="" name="num" id="orderdata" hidden></TD>															
 															<td>	
 																<div class="ui-widget">
-																	<input class="thisProduct" id="prod" name="prodItem[]" required>
+																	<input class="thisProduct" id="prod" name="prodItem[]" placeholder="Product Name" required>
 																</div>
 															</td>
 																	

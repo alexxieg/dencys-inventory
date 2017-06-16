@@ -210,7 +210,7 @@ function addRow(dataTable) {
 	var colCount = table.rows[1].cells.length;
 	for(var i=0; i<colCount; i++) {
 		var newcell = row.insertCell(i);
-		if(i==1){
+		if(i==99999999){
 			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
 		}
 		else{
@@ -236,7 +236,7 @@ function addRow(dataTable) {
 			
 function regroup(i,rc,ti){
 	for(j = (i+1);j<rc;j++){
-		document.getElementById(ti).rows[j].cells[1].innerHTML = j+1;
+//		document.getElementById(ti).rows[j].cells[1].innerHTML = j+1;
 	}
 }
 		 
