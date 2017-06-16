@@ -62,7 +62,7 @@
 						echo '<script language="javascript">';
 						echo 'swal(
 							  "Error!",
-							  "U R issuing too much dumbass for the product: '.$prodItem.'",
+							  "The quantity should not be greater than the current quantity of the product: '.$prodItem.'",
 							  "error");';
 						echo '</script>';
 						$stop = true;
