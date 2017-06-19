@@ -209,6 +209,8 @@
 											<td>
 											</td>
 											<td>
+											</td>
+											<td>
 												Product Description
 											</td>
 											<td>
@@ -228,6 +230,7 @@
 											<?php foreach ($reorderResult as $row): ?>
 												<tr>
 													<td><input type="checkbox" name="chk"></td>
+													<TD><input type="hidden" value="" name="num" id="orderdata" hidden></TD>
 													<td>	
 														<div class="ui-widget">
 															<input type="text" class="thisProduct" name="prodItem[]" id="prod" placeholder="<?php echo $row["prodName"]; ?>" value="<?php echo $row["prodName"]; ?>" required>

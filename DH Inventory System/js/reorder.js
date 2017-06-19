@@ -61,12 +61,12 @@ function deleteRow(tableID) {
 			var row = table.rows[i];
 			var chkbox = row.cells[0].childNodes[0];
 			if(null != chkbox && true == chkbox.checked) {
-				if(rowCount <= 1) {
+				if(rowCount <= 2) {
 					swal({
-						title: "Error!",
-						text: "Cannot delete all rows.",
-						type: "error",
-						confirmButtonText: "Ok"
+					title: "Error!",
+					text: "Cannot delete all Rows",
+					type: "error",
+					confirmButtonText: "Ok"
 					});
 					break;
 				}
@@ -82,15 +82,15 @@ function deleteRow(tableID) {
 	}
 }
 
-function addRow(dataTable) {
-	var table = document.getElementById(dataTable);
+function addRow(tableID) {
+	var table = document.getElementById(tableID);
 	var rowCount = table.rows.length;
 	var row = table.insertRow(rowCount);
 	var colCount = table.rows[1].cells.length;
 	for(var i=0; i<colCount; i++) {
 		var newcell = row.insertCell(i);
-		if(i==1){
-			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
+		if(i==9999999){
+			newcell.innerHTML = (rowCount+1)
 		}
 		else{
 			newcell.innerHTML = table.rows[1].cells[i].innerHTML;
@@ -115,6 +115,6 @@ function addRow(dataTable) {
 			
 function regroup(i,rc,ti){
 	for(j = (i+1);j<rc;j++){
-		document.getElementById(ti).rows[j].cells[1].innerHTML = j+1;
+//		document.getElementById(ti).rows[j].cells[1].innerHTML = j+1;
 	}
 }
