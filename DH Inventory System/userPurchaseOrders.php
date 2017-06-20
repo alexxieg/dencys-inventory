@@ -488,7 +488,7 @@
 														<td data-title="Supplier"><?php echo $poItem["supplier_name"]; ?></td>
 														<td data-title="User"><?php echo $poItem["userID"]; ?></td>
 														<td data-title="Purchase Order">
-															<a href="functionalities/viewPO.php?incId=<?php echo $poIncID; ?>"> 
+															<a href="functionalities/userViewPO.php?incId=<?php echo $poIncID; ?>"> 
 															<button type="button" class="btn btn-default" id="edBtn">
 																<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 															</button>
