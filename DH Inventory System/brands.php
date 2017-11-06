@@ -256,7 +256,7 @@
 										<div class="modal-body">
 											<form action="" method="POST" onsubmit="return validateForm()">		
 												<h3>Brand ID</h3>
-												<input type="text" class="form-control" id="addBrandID" placeholder="Brand ID" name="brandID"> <br>
+												<input type="text" class="form-control" id="addBrandID" placeholder="Brand ID" name="brandID" maxlength="3"> <br>
 												<h3>Brand Name</h3>
 												<input type="text" class="form-control" id ="addBrandName" placeholder="Brand Name" name="brandName"> <br>
 												<br>
