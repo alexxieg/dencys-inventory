@@ -63,6 +63,7 @@
 			$(document).ready(function() {
                 $('#myTable').DataTable( {
                     dom: 'Bfrtip',
+					"order": [[1, "desc"]],
 					lengthMenu: [
 						[ 10, 25, 50, 100, -1 ],
 						[ '10 rows', '25 rows', '50 rows', '100 rows', 'Show all' ]
@@ -82,22 +83,20 @@
                                     .addClass( 'compact' )
                                     .css( 'font-size', 'inherit' );
                             },
-                                extend: 'print',
-                                exportOptions: {
-                                columns: ':visible',
-									modifier: {
-											page: 'current'
-										}
-                                }
+                            extend: 'print',
+                            exportOptions: {
+								columns: ':visible',
+								modifier: {
+									page: 'current'
+								}
+                            }
                         },
-							{extend:'colvis', text: 'Select Column'},'pageLength',
-
+						{extend:'colvis', text: 'Select Column'},'pageLength',
                     ],
-                        columnDefs: [{
-                            targets: -1,
-                            visible: true
-                            
-                        }]
+                    columnDefs: [{
+                        targets: -1,
+                        visible: true
+					}],
                 } );
             } );		
 		</script>
@@ -174,13 +173,13 @@
 							</ul>
 						</li>
 						<li><a href="prodIssuance.php"><i class="glyphicon glyphicon-export"></i> Product Issuance</a></li>
-						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#returns"><i class="glyphicon glyphicon-retweet"></i> Returns<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="returns">
 								<li><a href="returnsWarehouse.php"><i class="glyphicon glyphicon-home"></i> Warehouse Returns</a></li>
 								<li><a href="returnSupplier.php"><i class="glyphicon glyphicon-shopping-cart"></i> Supplier Returns</a></li>
 							</ul>
 						</li>
-						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports <i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
+						<li><a href="#" data-toggle="collapse" data-target="#reports"><i class="glyphicon glyphicon-th-list"></i> Reports<i class="glyphicon glyphicon-menu-down" id="dropDownArrow"></i></a>
 							<ul class="list-unstyled collapse" id="reports">
 								<li><a href="branchReport.php"><i class="glyphicon glyphicon-list-alt"></i> Branch Report</a></li>
 								<li><a href="monthlyIncoming.php"><i class="glyphicon glyphicon-list-alt"></i> Product Summary (IN)</a></li>
@@ -220,7 +219,7 @@
 								<table class="table">	
 									<tr>
 										<td>
-											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Undelivered/Incomplete PO</button>
+											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#incPOModal" id="modbutt">Undelivered PO</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#myModal" id="modButt">Add PO</button>
 											<button type="button" class="btn btn-info btn-md btnmod" data-toggle="modal" data-target="#activityLog" id="modbutt">Edit Log</button>
 										</td>
@@ -268,6 +267,7 @@
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Number</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">PO Date</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Supplier</th>		
+											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Status</th>		
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Last Modified By</th>
 											<th class="sorting" tabindex="0" aria-controls="myTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">View Purchase Order</th>
 										</tr>
@@ -282,6 +282,7 @@
 											<td data-title="PO Number"><?php echo $item["poNumber"];?></td>
 											<td data-title="PO Date"><?php echo $item["poDate"]; ?></td>	
 											<td data-title="Supplier"><?php echo $item["supplier_name"]; ?></td>
+											<td data-title="Supplier"><?php echo $item["status"]; ?></td>
 											<td data-title="User"><?php echo $item["userID"]; ?></td>
 											<td data-title="Purchase Order">
 												<a href="functionalities/viewPO.php?incId=<?php echo $po; ?>"> 
