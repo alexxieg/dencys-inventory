@@ -59,26 +59,6 @@ function validateForm() {
 		document.getElementById('addLName').style.borderColor = "red";
 		return false;
 	}
-	if (document.getElementById('addEName').value == ""){
-		swal({
-		title: "Warning!",
-		text: "Please enter Extension/Nickname of Employee",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEName').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addEName').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Last Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEName').style.borderColor = "red";
-		return false;
-	}
 	if(confirm('Are you sure you want to add this entry?')) {
 		return true;			
 	}
@@ -150,26 +130,6 @@ function validateForm2() {
 		confirmButtonText: "Ok"
 		});
 		document.getElementById('addEntry3').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addEntry4').value == ""){
-		swal({
-		title: "Warning!",
-		text: "Please enter Extension/Nickname of Employee",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEntry4').style.borderColor = "red";
-		return false;
-	}
-	if (document.getElementById('addEntry4').value.length < 3){
-		swal({
-		title: "Warning!",
-		text: "The Last Name should have more than 2 characters",
-		type: "warning",
-		confirmButtonText: "Ok"
-		});
-		document.getElementById('addEntry4').style.borderColor = "red";
 		return false;
 	}
 	if(confirm('Are you sure you want to update this entry?')) {
