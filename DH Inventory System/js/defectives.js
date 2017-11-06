@@ -12,7 +12,7 @@ function validateForm() {
         document.getElementById('addQty').style.borderColor = "lightblue";
 	}
 	
-	if(confirm('Are you sure you want to update this entry?')) {
+	if(confirm('Are you sure you want to add this entry?')) {
 		return true;		
 	}
 	else {
