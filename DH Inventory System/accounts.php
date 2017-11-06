@@ -204,12 +204,13 @@
 									<?php
 										foreach ($result as $item):
 										$useThisID = $item["userID"];
+										$useThisPass = substr($item["password"], 0, 6);
 									?>
 										
 									<tr id="centerData">
 										<td data-title="Username"><?php echo $item["userName"]; ?></td>
 										<td data-title="Password">
-										<input name="viewPass" type="password" value="<?php echo $item["password"]; ?>" disabled/></td>
+										<input name="viewPass" type="password" value="<?php echo $useThisPass; ?>" disabled/></td>
 										<td data-title="User Role"><?php echo $item["user_role"]; ?></td>
 										<td>
 											<a href="functionalities/editAccounts.php?useID=<?php echo $useThisID; ?>">
